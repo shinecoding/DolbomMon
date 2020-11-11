@@ -22,7 +22,6 @@
 	<form method="post" id="">
 		아이디222 : <input type="text" name="userid" id="userid"/><br/>
 		비밀번호 : <input type="password" name="userpwd" id="userpwd"/><br/>
-		생일 : <input type="text" name="userid" id="userid"/><br/>
 		주소 : <input type="password" name="userpwd" id="userpwd"/><br/>
 		가입일 : <input type="text" name="userid" id="userid"/><br/>
 		추천코드 : <input type="password" name="userpwd" id="userpwd"/><br/>
