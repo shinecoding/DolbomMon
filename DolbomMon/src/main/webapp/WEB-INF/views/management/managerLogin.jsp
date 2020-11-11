@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container">
-<h1>로그인화면</h1>
+<h1>로그인화면test</h1>
 	<form method="post" id="">
 		아이디 : <input type="text" name="userid" id="userid"/><br/>
 		비밀번호 : <input type="password" name="userpwd" id="userpwd"/><br/>
