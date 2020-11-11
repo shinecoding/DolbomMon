@@ -18,13 +18,10 @@
 </head>
 <body>
 <div class="container">
-<h1>로그인화면test</h1>
+<h1>로그인화면</h1>
 	<form method="post" id="">
-		아이디222 : <input type="text" name="userid" id="userid"/><br/>
+		아이디 : <input type="text" name="userid" id="userid"/><br/>
 		비밀번호 : <input type="password" name="userpwd" id="userpwd"/><br/>
-		주소 : <input type="password" name="userpwd" id="userpwd"/><br/>
-		가입일 : <input type="text" name="userid" id="userid"/><br/>
-		추천코드 : <input type="password" name="userpwd" id="userpwd"/><br/>
 		<input type="submit" value="로그인"/>
 	</form>
 </div>
