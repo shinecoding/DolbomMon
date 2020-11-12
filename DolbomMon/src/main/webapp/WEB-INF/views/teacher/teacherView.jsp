@@ -74,7 +74,7 @@
 		<h5>활동 가능 지역</h5>
 		<li class="list-group-item">1순위 서울특별시 마포구 마포동</li>
 		
-   		
+   		<li></li>
    </li> 
    
 </div>
