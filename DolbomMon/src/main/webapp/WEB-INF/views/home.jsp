@@ -9,6 +9,6 @@
 	Hello world!  
 </h1>
 
-<P> </P>
+<P><a href="/dbmon/login">로그인</a></P>
 </body>
 </html>
