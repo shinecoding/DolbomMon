@@ -49,16 +49,25 @@
 		var email1 = document.getElementById("email1").value();
 		var email2 = document.getElementById("email2").value();
 		if(!reg.test(email1+email2)){
-			alert("이메일 형식이 잘못 되었습니다.")
+			alert("이메일 형식이 잘못 되었습니다.");
 			return false;
 		}
+		
+		reg = /^(010|02|031|032|041)[-][0-9]{3,4}[-][0-9]{4}$/;
+		var tel1 = document.getElementById("tel1_1").value()+"-"+document.getElementById("tel1_2").value()+"-"+document.getElementById("tel1_3").value();
+		if(!regtest(tel1)){
+			alert("연락처 형식이 잘못 되었습니다.");
+			return false;
+		}
+		
+		return false;
 	}
 </script>
 </head>
 <body>
-<div class="container">
+<div id="mainDiv">
 	<div id="header">회원가입</div>
-	<form method="post" action="/dbmom/regFormOk">
+	<form method="post" action="<%=request.getContextPath()%>/regFormOk" onsubmit="formCheck()">
 		<ul>
 			<li><input type="text" id="userid" name="userid" placeholder="아이디 입력" /></li>
 			<li><input type="password" name="userpwd" placeholder="비밀번호 입력" /></li>
@@ -81,17 +90,20 @@
 				<span>연락처</span><input type="text" class="tel" name="tel1_1" id="tel1_1"/><input type="text" class="tel" name="tel1_2" id="tel1_2"/><input type="text" class="tel" name="tel1_3" id="tel1_3"/>
 				<span>비상연락처</span><input type="text" class="tel" name="tel2_1" id="tel2_1"/><input type="text" class="tel" name="tel2_2" id="tel2_2"/><input type="text" class="tel" name="tel2_3" id="tel2_3"/>
 			</li>
-			<li>
+			<li id="genderLst">
 				<div id="radioDiv">
 					<input id="M" type="radio" name="gender" checked="checked"/>
 					<input id="F" type="radio" name="gender"/>
 				</div>
-				<label for="M" style="background-color:yellow; color:blue;">남</label>
-				<label for="F" style="background-color:yellow; color:blue;">여</label>
+				<label for="M">남</label>
+				<label for="F">여</label>
 			</li>
 			<li>
 				<input type="text" class="addr" name="zipcode" id="zipcode" placeholder="우편번호 입력" size="5"/><input type="button" class="addr" id="zipcodeSearch" value="우편번호 검색"/><input type="text" class="addr" name="addr" id="addr" placeholder="도로명주소 입력" />
 				<input type="text" class="addr" name="addrdetail" id="addrdetail" placeholder="상세 주소 입력"/>
+			</li>
+			<li>
+				<input type="submit" value="가입하기" />
 			</li>
 		</ul>
 	</form>

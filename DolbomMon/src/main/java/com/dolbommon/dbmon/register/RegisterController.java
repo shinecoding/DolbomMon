@@ -2,6 +2,7 @@ package com.dolbommon.dbmon.register;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RegisterController {
@@ -19,5 +20,10 @@ public class RegisterController {
 	public String zipcodeSearch() {
 		
 		return "register/zipcodeSearch";
+	}
+	
+	@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
+	public String regFormOk() {
+		return "home";
 	}
 }
