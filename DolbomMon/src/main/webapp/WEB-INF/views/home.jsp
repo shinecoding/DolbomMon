@@ -9,6 +9,8 @@
 	Hello world!  
 </h1>
 
+<a href="teacherList">선생님 페이지</a>
+
 <P> </P>
 </body>
 </html>
