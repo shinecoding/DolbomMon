@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/regFormStyle.css" type="text/css"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
@@ -16,9 +16,15 @@
 	$(function(){
 		
 		// 성별 라디오 버튼
+<<<<<<< HEAD
 		$("label").click(function(){
-			$(this).css("color", "rgb(255, 222, 89)").css("background-color", "rgb(0,74,173)");
-			$(this).siblings().css("color","rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
+			$(this).css("color", "red");
+			$(this).siblings().css("color","blue");
+=======
+		$("#genderLst>label").click(function(){
+			$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
+			$(this).siblings().css("color","black").css("background-color", "gray");
+>>>>>>> parent of 21ec109... Revert "13213"
 		});
 		
 		// 우편번호
@@ -53,7 +59,7 @@
 			return false;
 		}
 		
-		reg = /^(010|02|031)[-][0-9]{3,4}[-][0-9]{4}$/;
+		reg = /^(010|02|031|032|041)[-][0-9]{3,4}[-][0-9]{4}$/;
 		var tel1 = document.getElementById("tel1_1").value()+"-"+document.getElementById("tel1_2").value()+"-"+document.getElementById("tel1_3").value();
 		if(!regtest(tel1)){
 			alert("연락처 형식이 잘못 되었습니다.");
@@ -66,7 +72,7 @@
 </head>
 <body>
 <div id="mainDiv">
-	<div id="header"><a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>회원가입</div>
+	<div id="header">회원가입</div>
 	<form method="post" action="<%=request.getContextPath()%>/regFormOk" onsubmit="formCheck()">
 		<ul>
 			<li><input type="text" id="userid" name="userid" placeholder="아이디 입력" /></li>
