@@ -22,8 +22,14 @@ public class RegisterController {
 		return "register/zipcodeSearch";
 	}
 	
+	// 회원가입
 	@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
 	public String regFormOk() {
 		return "home";
+	}
+	
+	@RequestMapping("/dbmSearchWriteForm")
+	public String dbmSearchWriteForm() {
+		return "parents/dbmSearchWriteForm";
 	}
 }
