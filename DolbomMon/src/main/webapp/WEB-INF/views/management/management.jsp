@@ -248,7 +248,7 @@
                     <a href="#">
                         <i class="fa fa-font fa-2x"></i>
                         <span class="nav-text">
-                           Quotes
+                           추가버튼
                         </span>
                     </a>
                 </li>
@@ -256,7 +256,7 @@
                    <a href="#">
                        <i class="fa fa-table fa-2x"></i>
                         <span class="nav-text">
-                            Tables
+                            추가버튼
                         </span>
                     </a>
                 </li>
@@ -264,7 +264,7 @@
                    <a href="#">
                         <i class="fa fa-map-marker fa-2x"></i>
                         <span class="nav-text">
-                            Maps
+                            추가버튼
                         </span>
                     </a>
                 </li>

@@ -24,4 +24,9 @@ public class ManagmentController {
 	public String memberManage(){
 		return "management/memberManage";
 	}
+	
+	@RequestMapping("/managerRegister")
+	public String managerRegister(){
+		return "management/managerRegister";
+	}
 }
