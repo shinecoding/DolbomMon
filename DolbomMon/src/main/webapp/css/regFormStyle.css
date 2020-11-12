@@ -28,7 +28,7 @@ span{width:20%; height:40px; line-height:40px; text-align:center; float:left;}
 /* ===== 성별 ===== */
 #radioDiv{height:1px;overflow:hidden;}
 input[type=radio]{}
-#genderLst>label{width:20%; height:40px; line-height:40px; text-align:center; box-sizing:border-box; border:1px solid black; margin:5px 0; background-color:rgb(255, 222, 89); color:rgb(0,74,173); font-weight:bold;}
+#genderLst>label{width:20%; height:40px; line-height:40px; text-align:center; box-sizing:border-box; border:1px solid black; margin:5px 0; background-color:gray; color:black; font-weight:bold;}
 /* ===== 성별 ===== */
 
 /* ====== 주소 ======*/
