@@ -15,4 +15,19 @@ public class TeacherController {
 	public String teacherView() {
 		return "/teacher/teacherView";
 	}
+	
+	@RequestMapping("/teacherHeart")
+	public String teacherHeart() {
+		return "/teacher/teacherHeart";
+	}
+	
+	@RequestMapping("/teacherApplyHistory")
+	public String teacherApplyHistory() {
+		return "/teacher/teacherApplyHistory";
+	}
+	
+	@RequestMapping("/teacherEdit")
+	public String teacherEdit() {
+		return "/teacher/teacherEdit";
+	}
 }
