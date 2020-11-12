@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Hello world!  <a href="/dbmon/regForm">로그인 폼</a>
 </h1>
 
 <P> </P>

@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/webDbcp/css/regFormStyle.css" type="text/css"/>
-<link rel="stylesheet" href="/webDbcp/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/regFormStyle.css" type="text/css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/webDbcp/library/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script>
 	$(function(){
 		
@@ -23,7 +23,7 @@
 		
 		// 우편번호
 		$("#zipcodeSearch").click(function(){
-			window.open('/webDbcp/zipcodeSearch', 'zipcode', 'top=300,left=500,width=500,height=600');
+			window.open('<%=request.getContextPath()%>/zipcodeSearch', 'zipcode', 'top=300,left=500,width=500,height=600');
 		});
 		
 		// 포커스 제거
