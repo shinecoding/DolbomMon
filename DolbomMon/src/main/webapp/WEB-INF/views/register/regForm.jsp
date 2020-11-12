@@ -16,21 +16,19 @@
 	$(function(){
 		
 		// 성별 라디오 버튼
-<<<<<<< HEAD
-<<<<<<< HEAD
-		$("label").click(function(){
+
+		$("#genderLst>label").click(function(){
 			$(this).css("color", "red");
 			$(this).siblings().css("color","blue");
-=======
+
 		$("#genderLst>label").click(function(){
 			$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
 			$(this).siblings().css("color","black").css("background-color", "gray");
->>>>>>> parent of 47ff0fe... Revert "13213"
-=======
+
 		$("label").click(function(){
 			$(this).css("color", "rgb(255, 222, 89)").css("background-color", "rgb(0,74,173)");
 			$(this).siblings().css("color","rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
->>>>>>> parent of a19612e... 13213
+
 		});
 		
 		// 우편번호
