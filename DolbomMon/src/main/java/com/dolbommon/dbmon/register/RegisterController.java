@@ -30,11 +30,6 @@ public class RegisterController {
 	
 	@RequestMapping("/dbmSearchWriteForm")
 	public String dbmSearchWriteForm() {
-		return "parent/dbmSearchWriteForm";
-	}
-	
-	@RequestMapping("/schedule")
-	public String setSchedule() {
-		return "parent/schedule";
+		return "parents/dbmSearchWriteForm";
 	}
 }
