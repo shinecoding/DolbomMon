@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello world!  <a href="/dbmon/regForm">로그인 폼</a><a href="<%=request.getContextPath()%>/dbmSearchWriteForm">구인글쓰기</a>
+	Hello world!  <a href="/dbmon/regForm">회원가입</a><a href="<%=request.getContextPath()%>/dbmSearchWriteForm">구인글쓰기</a>
 		
 </h1>
 
