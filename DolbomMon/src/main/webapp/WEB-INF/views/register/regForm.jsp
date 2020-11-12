@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/regFormStyle.css" type="text/css"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
@@ -16,9 +16,15 @@
 	$(function(){
 		
 		// 성별 라디오 버튼
+<<<<<<< HEAD
 		$("label").click(function(){
 			$(this).css("color", "red");
 			$(this).siblings().css("color","blue");
+=======
+		$("#genderLst>label").click(function(){
+			$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
+			$(this).siblings().css("color","black").css("background-color", "gray");
+>>>>>>> parent of 47ff0fe... Revert "13213"
 		});
 		
 		// 우편번호
