@@ -14,9 +14,11 @@
 
 <div class="container" style="background-color:lightblue;">
    <img src="img/profilepic.jpeg"/>
+   
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action">홍O동 일반맘시터</li>
    		<li class="list-group-item list-group-item-action">☆☆☆☆☆ 27세 no.798521</li>
+
    </ul>
    <br/>
    <ul class="list-group list-group-horizontal-sm">

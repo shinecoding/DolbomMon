@@ -27,7 +27,8 @@
 	<div class="card-body">
 	<div class="mb-3"><i class="fas fa-circle"></i>전체 <i class="fas fa-circle"></i>구인중 일자리만
 	<span class="float-right">찜한 순<i class="fas fa-angle-down"></i></span>
-		<ul class="list-group"></div>
+		</div>
+		<ul class="list-group">
 			<li class="list-group-item">
 				<ul class="list-group list-group-horizontal">
 					<li class="list-group-item border-0 col-2">
