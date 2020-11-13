@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	<a href="/dbmon/join">회원가입</a>
 </h1>
 
 <h1><a href="/dbmon/login">로그인</a></h1>
