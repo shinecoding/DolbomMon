@@ -62,7 +62,7 @@
     .footer {
          width:100%;
          height:150px;
-         position:absolute;
+        
          bottom:0;
          background:#5eaeff;
         text-align: center;
@@ -89,7 +89,7 @@
    </ul>
 </nav>
 <div id="slider">
-<jsp:include page="bxslider.jsp"/>
+<jsp:include page="views/bxslider.jsp"/>
 </div>
  <!--  <sitemesh:write property='body'/>-->
          <footer class="footer">
