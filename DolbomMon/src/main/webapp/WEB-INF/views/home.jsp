@@ -77,8 +77,7 @@
 
 <body>
 
-
-<nav id="menu" style="background:#fff;overflow:auto;">
+<nav class="navbar navbar-light" id="menu" style="background-color: rgb(255,222,89)" overflow:auto;">
    <ul>
       <li><img src="<%=request.getContextPath()%>/img/DOL01.PNG" class="logo" alt="Logo" margin-right="50px" src="#"><li>
       <li><a href="/dbmon/freeBoard">자유게시판</a></li>
@@ -89,9 +88,21 @@
       <li><a href="#">My Menu</a></li>
    </ul>
 </nav>
+
+
 <div id="slider">
-<jsp:include page="views/bxslider.jsp"/>
+<jsp:include page="bxslider.jsp"/>
 </div>
+<h1>
+	<a href="/dbmon/join">회원가입</a>
+</h1>
+
+<h1><a href="/dbmon/login">로그인</a></h1>
+
+
+<a href="teacherList">선생님 페이지</a>
+  
+
  <!--  <sitemesh:write property='body'/>-->
          <footer class="footer">
               <div>돌봄몬</div>
@@ -107,14 +118,7 @@
             
          </footer>
 
-
-<h1><a href="/dbmon/login">로그인</a></h1>
-
-<a href="teacherList">선생님 페이지</a>
-   		
-<P> </P>
-
-
 </body>
 
 </html>
+

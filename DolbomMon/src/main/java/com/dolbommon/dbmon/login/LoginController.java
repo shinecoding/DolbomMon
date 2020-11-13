@@ -26,8 +26,7 @@ public class LoginController {
 	
 	@RequestMapping("/idInfo")
 	public ModelAndView idInfo() {
-		
-		
+	
 		return null;	
 	}
 
