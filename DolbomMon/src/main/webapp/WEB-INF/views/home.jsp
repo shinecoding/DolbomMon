@@ -91,7 +91,7 @@
 
 
 <div id="slider">
-<jsp:include page="bxslider.jsp"/>
+<jsp:include page="bxslider.jsp"/> 
 </div>
 <h1>
 	<a href="/dbmon/join">회원가입</a>
