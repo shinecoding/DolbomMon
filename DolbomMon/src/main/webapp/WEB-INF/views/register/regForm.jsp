@@ -32,7 +32,6 @@
 	
 	function formCheck(){
 		
-		// 아이디 정규식 첫번째글자 무조건 영문자 영어대소문자, 숫자, _, 8~14자리
 		reg = /^[A-Za-z]{1}\w{7,13}$/;
 		if(!reg.test(document.getElementById("userid").value())){
 			alert("아이디가 적합하지 않습니다.");

@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1><a href="<%=request.getContextPath()%>/parentStart">부모님 회원가입</a></h1><br/>
-	<h1><a href="<%=request.getContextPath()%>/dbmStart">돌봄몬 회원가입</a></h1>
+	<div>
+		
+	</div>
+	<h1><a href="<%=request.getContextPath()%>/parentJoinStart">부모님 회원가입</a></h1><br/>
+	<h1><a href="<%=request.getContextPath()%>/dbmJoinStart">돌봄몬 회원가입</a></h1>
 </body>
 </html>

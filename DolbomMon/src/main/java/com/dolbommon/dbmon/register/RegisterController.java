@@ -14,13 +14,13 @@ public class RegisterController {
 	}
 	
 	// 학부모 회원가입 시작
-	@RequestMapping("/parentStart")
+	@RequestMapping("/parentJoinStart")
 	public String joinParentStart() {
 		return "register/parent/start";
 	}
 	
 	// 돌봄몬 회원가입 시작
-	@RequestMapping("/dbmStart")
+	@RequestMapping("/dbmJoinStart")
 	public String joinDbmStart() {
 		return "register/dbm/start";
 	}
