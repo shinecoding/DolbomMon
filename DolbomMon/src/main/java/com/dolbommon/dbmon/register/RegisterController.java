@@ -12,13 +12,20 @@ public class RegisterController {
 			return "register/join";
 		}
 		
-		// 학부모 회원가입 시작
+		//////////////////////////// 학부모 회원가입 시작 /////////////////////////////////
 		@RequestMapping("/parentJoinStart")
 		public String joinParentStart() {
 			return "register/parent/regForm";
 		}
 		
-		// 돌봄몬 회원가입 시작
+		// 원하는 돌봄선택, 선생님 나이선택
+		@RequestMapping("/parent/activityAndAge")
+		public String selectActivityAndAge() {
+			return "register/parent/activityAndAge";
+		}
+		
+		
+		////////////////////////////// 돌봄몬 회원가입 시작 //////////////////////////////////
 		@RequestMapping("/dbmJoinStart")
 		public String joinDbmStart() {
 			return "register/dbm/start";

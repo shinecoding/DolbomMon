@@ -10,7 +10,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	/* ============= 초기화 ==============  */
-	*{margin:0; padding:0; list-style:none; text-decoration:none;
+	*{margin:0; padding:0; list-style:none; text-decoration:none;}
 	.container{width:600px;}
 	/* ============= 초기화 ==============  */
 	/* ============= 헤더 =============== */
@@ -19,7 +19,7 @@
 	#header span{text-align:center; font-size:3em; }
 	/* ============= 헤더 =============== */
 	/* ============= 돌봄 유형 목록 ============== */
-	.list-group>li{width:20%; height:50px; margin:5px;}
+	/* .list-group>li{width:20%; height:50px; margin:5px;} */
 	/* ============= 돌봄 유형 목록 ============== */
 </style>
 </head>
