@@ -20,7 +20,7 @@
 		},function(){
 			$("#mainPage").css("left","100");
 		});
-
+		
 	});
  
     function memberPage(url){
@@ -38,7 +38,12 @@
         });
         
     }
- 
+    function logOut(){
+		<%
+			session.setAttribute("logStatus", "N");
+		%>		
+		location.href="/dbmon/management";
+    } 
 
 
 </script>
@@ -280,7 +285,7 @@
 
             <ul class="logout">
                 <li>
-                   <a href="#">
+                   <a href="javascript:logOut()">
                          <i class="fa fa-power-off fa-2x"></i>
                         <span class="nav-text">
                             Logout

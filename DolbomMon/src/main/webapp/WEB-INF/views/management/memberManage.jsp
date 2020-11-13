@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script>
-	$(function(){
-		$("#mrBtn").click(function(){
-			memberPage("/dbmon/managerRegister");
-		});
-	})
-</script>
+
 <div style="float:right;">
 	<div class="dropdown">
 	  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
