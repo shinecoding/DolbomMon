@@ -201,8 +201,11 @@
 
 	
 </style>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4f0544714dbbcd144bd33b753d1049a3f092323e
 </head>
 <body>
 <div class="area"></div><nav class="main-menu">
