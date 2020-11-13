@@ -12,15 +12,13 @@
 <style>
 	.container{
 		width: 800px;
-	}
-	
+	}	
 	#top{
 		margin: 20px;
 		padding: 20px;
 		text-align: center;
 		font-size: 30px;
 	}
-
 	#inputBox{
 		margin-top: 30px;
 		padding: 20px;
