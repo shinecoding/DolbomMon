@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dolbommon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
-<script src="css/jquery.bxslider.js"></script>
-<link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
+<title>Dolbommon</title>
+
 </head>
 <style>
    body{
@@ -18,16 +17,8 @@
       cursor:pointer;
       font-family:"Noto Sans KR";
       text-decoration:none;
-      font-weight:bold;
       
-     
       }
-   #slider{ 
-   		margin: 0 auto;
-   		width:100%;
-   		max-width:980px;
-   		
-   	}
    ul{margin:0;padding:0px;list-style-type:none;}
 
      /*메뉴*/
@@ -36,10 +27,9 @@
        float:left;
     }
     #menu a:link, #menu a:visited {
-       font-size:18px;
+       font-size:20px;
        text-decoration:none;
        color:black;
-       font-weight:bold;
     }
     #menu a:hover{
        text-decoration:none;
@@ -68,18 +58,17 @@
         text-align: center;
         color: white;
    }
-   .logo{
-      width:180px;
-      height:62px;
+   img{
+      width:200px;
+      height:72px;
    }
    
 </style>
 
 <body>
-
 <nav id="menu" style="background:#fff;overflow:auto;">
    <ul>
-      <li><img src="<%=request.getContextPath()%>/img/DOL01.PNG" class="logo" alt="Logo" margin-right="50px" src="#"><li>
+      <li><img src="<%=request.getContextPath()%>/img/DOL01.PNG" alt="Logo" margin-right="50px" src="#"><li>
       <li><a href="#">자유게시판</a></li>
       <li><a href="#">공지</a></li>
       <li><a href="#">고객센터</a></li>
@@ -88,10 +77,14 @@
       <li><a href="#">My Menu</a></li>
    </ul>
 </nav>
+<<<<<<< HEAD:DolbomMon/src/main/webapp/WEB-INF/home.jsp
 <div id="slider">
 <jsp:include page="views/bxslider.jsp"/>
 </div>
  <!--  <sitemesh:write property='body'/>-->
+=======
+  <sitemesh:write property='body'/>
+>>>>>>> parent of 6f246ac... 1113:DolbomMon/src/main/webapp/WEB-INF/views/home.jsp
          <footer class="footer">
               <div>돌봄몬</div>
                  <div>
@@ -103,9 +96,8 @@
              <address>Contact Dolbommon for more information. 02-1234-5678</address>
 
               
-            
+                <i class="fab fa-java fa-2x"></i><i class="fab  fa-html5 fa-2x"></i><i class="fab fa-github-alt fa-2x"></i>
          </footer>
 
 </body>
-
 </html>
