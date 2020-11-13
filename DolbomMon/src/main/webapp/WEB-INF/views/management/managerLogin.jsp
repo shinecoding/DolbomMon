@@ -135,6 +135,7 @@
 </head>
 <body>
 <div class="container">
+
 	<div id="leftDiv">
 	<h1>Welcome</h1>
 	</div>
@@ -146,6 +147,7 @@
 	  <input type="password" class="pass"placeholder="password"/>
 	  <input type="submit" value="로그인"/>
 	  <input type="button" value="임시로그인" id="test"/>
+
 	</form>
 	
 	</div>
