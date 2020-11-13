@@ -14,6 +14,7 @@ public class ManagmentController {
 	public String login() {
 		return "management/managerLogin";
 	}
+
 	
 	@RequestMapping("/test")
 	public String test() {
@@ -37,5 +38,6 @@ public class ManagmentController {
 	public String managerManage(){
 		return "management/managerManage";
 	}
+
 
 }
