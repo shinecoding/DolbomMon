@@ -16,15 +16,9 @@
 	$(function(){
 		
 		// 성별 라디오 버튼
-<<<<<<< HEAD
-		$("label").click(function(){
-			$(this).css("color", "red");
-			$(this).siblings().css("color","blue");
-=======
 		$("#genderLst>label").click(function(){
 			$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
 			$(this).siblings().css("color","black").css("background-color", "gray");
->>>>>>> parent of 21ec109... Revert "13213"
 		});
 		
 		// 우편번호
