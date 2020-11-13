@@ -9,6 +9,7 @@
 	<a href="/dbmon/join">회원가입</a>
 </h1>
 
-<P> </P>
+<h1><a href="/dbmon/login">로그인</a></h1>
+<h1><a href="/dbmon/freeBoard">자유게시판</a></h1>
 </body>
 </html>
