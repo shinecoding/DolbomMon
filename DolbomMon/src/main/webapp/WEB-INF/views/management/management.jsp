@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>DolbomMon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
@@ -200,6 +201,8 @@
 
 	
 </style>
+
+
 </head>
 <body>
 <div class="area"></div><nav class="main-menu">

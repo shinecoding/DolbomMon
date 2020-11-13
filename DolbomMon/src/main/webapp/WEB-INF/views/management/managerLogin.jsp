@@ -4,6 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+</head>
+<body>
+<h1>로그인화면</h1>
 <title>DolbomMon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
@@ -152,5 +159,7 @@
 	
 	</div>
 </div>
+
+
 </body>
 </html>
