@@ -34,7 +34,6 @@
         
         $.ajax(ajaxOption).done(function(data){
             $('#mainPage').children().remove();
-            console.log(data);
             $('#mainPage').html(data);
         });
         
@@ -66,9 +65,7 @@
 		margin-top:15px;
 	}
 	
-	.fa-2x {
-		font-size: 2em;
-	}
+
 	.fa {
 		position: relative;
 		display: table-cell;
@@ -76,10 +73,8 @@
 		height: 36px;
 		text-align: center;
 		vertical-align: middle;
-		font-size:20px;
+		font-size:30px;
 	}
-	
-	
 	.main-menu:hover,nav.main-menu.expanded {
 		width:250px;
 		overflow:visible;
@@ -109,6 +104,7 @@
 		position:relative;
 		display:block;
 		width:250px;
+		margin:10px 0px;
 	}
 	#top-ul>li{
 		top:100px;
@@ -150,6 +146,9 @@
 		position:absolute;
 		left:0;
 		bottom:0;
+	}
+	.nav-text {
+		font-size:1.2em;
 	}
 	
 	.no-touch .scrollable.hover {
@@ -210,7 +209,7 @@
                   
                 </li>
                 <li class="has-subnav">
-                    <a href="javascript:memberPage('/dbmon/memberManage');">
+                    <a href="#">
                         <i class="fa fa-laptop fa-2x"></i>
                         <span class="nav-text">
                             이용자 현황
@@ -219,7 +218,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="#">
+                    <a href="javascript:memberPage('/dbmon/memberManage');">
                        <i class="fa fa-list fa-2x"></i>
                         <span class="nav-text">
                             회원 관리
@@ -228,7 +227,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="#">
+                    <a href="javascript:memberPage('/dbmon/managerManage');">
                        <i class="fa fa-folder-open fa-2x"></i>
                         <span class="nav-text">
                             매니저 관리
@@ -237,7 +236,7 @@
                    
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:memberPage('/dbmon/accountManage');">
                         <i class="fa fa-bar-chart-o fa-2x"></i>
                         <span class="nav-text">
                             회계 관리

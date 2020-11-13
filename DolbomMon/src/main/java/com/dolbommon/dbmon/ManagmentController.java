@@ -29,4 +29,12 @@ public class ManagmentController {
 	public String managerRegister(){
 		return "management/managerRegister";
 	}
+	@RequestMapping("/accountManage")
+	public String accountManage(){
+		return "management/accountManage";
+	}
+	@RequestMapping("/managerManage")
+	public String managerManage(){
+		return "management/managerManage";
+	}
 }
