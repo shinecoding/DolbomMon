@@ -77,7 +77,7 @@
 
 <body>
 
-<nav class="navbar navbar-light" id="menu" style="background-color: rgb(255,222,89)" overflow:auto;">
+<nav class="navbar navbar-light" id="menu" overflow:auto;">
    <ul>
       <li><img src="<%=request.getContextPath()%>/img/DOL01.PNG" class="logo" alt="Logo" margin-right="50px" src="#"><li>
       <li><a href="#">자유게시판</a></li>
