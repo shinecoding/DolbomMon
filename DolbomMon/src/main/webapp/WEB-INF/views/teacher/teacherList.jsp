@@ -19,7 +19,7 @@
    		<li class="list-group-item list-group-item-action"><a href="teacherHeart">찜한 일자리</a></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherView">내 프로필 보기</a></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherEdit">내 프로필 수정</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">인증 관리</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="teacherProof">인증 관리</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">활동내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">신고내역</a></li>
    </ul>

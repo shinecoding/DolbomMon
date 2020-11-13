@@ -30,4 +30,9 @@ public class TeacherController {
 	public String teacherEdit() {
 		return "/teacher/teacherEdit";
 	}
+	
+	@RequestMapping("/teacherProof")
+	public String teacherProof() {
+		return "/teacher/teacherProof";
+	}
 }
