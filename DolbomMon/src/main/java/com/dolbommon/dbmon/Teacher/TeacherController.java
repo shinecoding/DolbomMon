@@ -35,4 +35,19 @@ public class TeacherController {
 	public String teacherProof() {
 		return "/teacher/teacherProof";
 	}
+	
+	@RequestMapping("/teacherIntro")
+	public String teacherIntro() {
+		return "/teacher/teacherIntro";
+	}
+	
+	@RequestMapping("/teacherWage")
+	public String teacherWage() {
+		return "/teacher/teacherWage";
+	}
+	
+	@RequestMapping("/teacherPicture")
+	public String teacherPicture() {
+		return "/teacher/teacherPicture";
+	}
 }

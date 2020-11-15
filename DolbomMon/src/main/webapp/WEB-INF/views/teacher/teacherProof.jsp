@@ -11,6 +11,19 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
+	#title{
+		margin:20px 5px;
+		display:block;
+	width:100%;
+	}
+	#titlefont{
+		font-size: 25px;
+		font-weight: 700;
+		vertical-align: bottom;
+		text-align:center;
+	}
+	
+	.container{width:800px;}
 	h4{text-align:center; line-height:40px;}
 	.leftPanel{
 	float:none
@@ -21,7 +34,9 @@
 </head>
 <body>
 <div class="container">
-	<h4>내 인증 관리</h4>
+	<div id="title">
+   		<div id="titlefont">내 인증 관리</div>
+ 	</div>
 	<ul class="list-group-horizontal">
 		
 		<li class="list-group-item">
@@ -34,10 +49,10 @@
 						</span>
 					</div>
 					<div class="row">
-					<h9>아이돌봄<br/>인적성뱃지</h9>	
+					<h9>등초본뱃지</h9>	
 					</div>
 				</div>
-				<div class="col-8">
+				<div class="col-7">
 				
 					<div class="row">
 						<h7><b>등초본인증</b></h7>
@@ -47,8 +62,43 @@
 					- 발급일 6개월 이내만 유효
 					</div>
 				</div>
+				<div class="col-3">
+					<button class="btn btn-warning float-right">인증받기</button>
+				</div>
+				
+			</div>
+			
+		</li>
+	</ul>
+	
+	<ul class="list-group-horizontal">
+		
+		<li class="list-group-item">
+			<div class="row">
 				<div class="col-2">
-					<button class="btn btn-warning float-right mt-5">인증받기</button>
+					<div class="row">
+						<span class="fa-stack fa-2x">
+							<i class="fas fa-circle fa-stack-2x"></i>
+							<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="row">
+					<h9>학교뱃지</h9>	
+					</div>
+				</div>
+				<div class="col-7">
+				
+					<div class="row">
+						<h7><b>학교 인증</b></h7>
+					</div>
+					<div class="row">
+						재학/휴학/재적/졸업/수료 증명서
+					- 발급일 1년 이내만 유효
+					(졸업증명서 경우, 발급일 상관없음)
+					</div>
+				</div>
+				<div class="col-3">
+					<button class="btn btn-warning float-right">인증받기</button>
 				</div>
 				
 			</div>
