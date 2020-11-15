@@ -24,6 +24,12 @@ public class RegisterController {
 			return "register/parent/activityAndAge";
 		}
 		
+		// 자녀 정보 입력
+		@RequestMapping("/parent/children")
+		public String children() {
+			return "register/parent/children";
+		}
+		
 		
 		////////////////////////////// 돌봄몬 회원가입 시작 //////////////////////////////////
 		@RequestMapping("/dbmJoinStart")

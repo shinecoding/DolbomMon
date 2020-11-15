@@ -17,8 +17,17 @@
 		
 		// 성별 라디오 버튼
 		$("#genderLst>label").click(function(){
-			$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
-			$(this).siblings().css("color","black").css("background-color", "gray");
+			if($(this).attr("for")=='M'){
+				$("input[id="+$(this).attr("for")+"]").attr("checked", "checked");
+				$("input[id!="+$(this).attr("for")+"]").attr("checked", "");
+				$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
+				$(this).siblings().css("color","black").css("background-color", "gray");
+			}else{
+				$("input[id="+$(this).attr("for")+"]").attr("checked", "checked");
+				$("input[id!="+$(this).attr("for")+"]").attr("checked", "");
+				$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
+				$(this).siblings().css("color","black").css("background-color", "gray");
+			}
 		});
 		
 		// 우편번호
@@ -91,7 +100,7 @@
 			</li>
 			<li id="genderLst">
 				<div id="radioDiv">
-					<input id="M" type="radio" name="gender" checked="checked"/>
+					<input id="M" type="radio" name="gender"/>
 					<input id="F" type="radio" name="gender"/>
 				</div>
 				<label for="M">남</label>
