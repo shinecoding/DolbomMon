@@ -89,7 +89,6 @@
    </ul>
 </nav>
 
-
 <div id="slider">
 <jsp:include page="bxslider.jsp"/>
 </div>
