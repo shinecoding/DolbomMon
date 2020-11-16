@@ -16,17 +16,49 @@ public class BoardController {
 	}
 	
 	//게시판 글쓰기 폼으로 이동
-	@RequestMapping("/boardWrite")
-	public String boardWrite() {
+	@RequestMapping("/freeBoardWrite")
+	public String freeBoardWrite() {
 		
-		return "freeBoard/boardWrite";
+		return "freeBoard/freeBoardWrite";
 	}
 	
 	//게시판 글쓰기
-	@RequestMapping(value="/boardWriteOk", method=RequestMethod.POST)
-	public ModelAndView boardWriteOk() {
+	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
+	public ModelAndView freeBoardWriteOk() {
 		
 		return null;	
+	}
+	
+	//게시글 보기
+//	@RequestMapping("/freeBoardView")
+//	public ModelAndView freeBoardView() {
+		
+//		return null;
+//	}
+	@RequestMapping("/freeBoardView")
+	public String freeBoardView() {
+		
+		return "freeBoard/freeBoardView";
+	}
+	
+	//공지사항 게시판으로 이동
+	@RequestMapping("/noticeBoard")
+	public String noticeBoard() {
+		
+		return "freeBoard/noticeBoard";
+	}
+	
+	//공지사항 글쓰기 폼으로 이동
+	@RequestMapping("/noticeBoardWrite")
+	public String noticeBoardWrite() {
+		
+		return "freeBoard/noticeBoardWrite";
+	}
+	
+	@RequestMapping("/noticeBoardView")
+	public String noticeBoardView() {
+		
+		return "freeBoard/noticeBoardView";
 	}
 	
 }

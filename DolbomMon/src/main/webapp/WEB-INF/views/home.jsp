@@ -102,7 +102,7 @@
 <h1><a href="teacherList">선생님 페이지</a></h1>
 
 <h1><a href="/dbmon/freeBoard">자유게시판</a></h1>
-
+<h1><a href="/dbmon/noticeBoard">공지사항</a></h1>
  <!--  <sitemesh:write property='body'/>-->
          <footer class="footer">
               <div>돌봄몬</div>

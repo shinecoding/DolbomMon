@@ -11,7 +11,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	.container{
-		width: 800px;
+		width: 900px;
 	}
 	#loginChk{
 		margin-left: 0px;
@@ -33,7 +33,7 @@
 <body>
 <div class="container">
 	<div>
-	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/dolbomLogo.png" id="logo" align="middle"/></a>
+	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/dbLogo.png" id="logo" align="middle"/></a>
 	
 	</div>
 	<form method="post" action="loginOk">

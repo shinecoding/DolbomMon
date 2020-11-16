@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>게시판 글쓰기</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	.container{
-		width: 800px;	
+		width: 900px;	
 	}
 	#top{
 		margin: 15px;
@@ -31,7 +32,7 @@
 <body>
 <div class="container">
 <div id="top">
-<b>글쓰기</b>
+<b>게시판 글쓰기</b>
 </div>
 	<form method="post" action="#">
 		<div class="form-group">
@@ -47,10 +48,10 @@
 					<option value="3">사담</option>
 				</select>
 			</div>
-	 		<!-- <label for="title">제목</label> -->
-			<input type="text" class="form-control" id="title" placeholder="제목을 입력하세요"><br/>
+	 		<label for="title">제목</label>
+			<input type="text" maxlength="40" class="form-control" id="title" placeholder="제목을 입력하세요"><br/>
 			<div>
-			<!-- <label for="content">글내용</label><br/> -->
+			<label for="content">글내용</label><br/>
 				<textarea class="form-control" id="content" placeholder="글내용을 입력하세요"></textarea>
 			</div>
 			<br/>
