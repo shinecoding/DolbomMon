@@ -10,9 +10,10 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 </head>
 <body>
-<div class="container">
-	<div id="top"><input type="button" value="취소"/><h2>돌봄 기간/시간 변경</h2><input type="button" value="저장"/></div>
-	
-</div>
+	<h1>시간표 입력</h1>
+	<form action="<%=request.getContextPath()%>/regForm">
+		
+		<input type="submit" value="다음">
+	</form>
 </body>
 </html>

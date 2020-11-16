@@ -80,7 +80,7 @@
 			</div>
 			<div id="activityListDiv">
 				<input class="opacity" type="checkbox" id="1" alt="1" name="activity" value="실내놀이"/>		
-				<input class="opacity" type="checkbox" id="2" alt="1" name="activity" value="등하원 돕기"/>		
+				<input class="opacity" type="checkbox" id="2" alt="1" name="activity" value="등하원돕기"/>		
 				<input class="opacity" type="checkbox" id="3" alt="1" name="activity" value="영어놀이"/>	
 				<input class="opacity" type="checkbox" id="4" alt="1" name="activity" value="한글놀이"/>		
 				<input class="opacity" type="checkbox" id="5" alt="1" name="activity" value="학습지도"/>	
@@ -102,11 +102,11 @@
 				<div id="ageDivTitle">
 					어느 나이대의 돌봄몬을 원하시나요?
 				</div>
-				<input class="opacity" type="checkbox" id="20" name="age" value="20" checked="checked"/>
-				<input class="opacity" type="checkbox" id="30" name="age" value="30" checked="checked"/>
-				<input class="opacity" type="checkbox" id="40" name="age" value="40" checked="checked"/>
-				<input class="opacity" type="checkbox" id="50" name="age" value="50" />
-				<input class="opacity" type="checkbox" id="60" name="age" value="60" />
+				<input class="opacity" type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
+				<input class="opacity" type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
+				<input class="opacity" type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
+				<input class="opacity" type="checkbox" id="50" name="wish_age" value="50" />
+				<input class="opacity" type="checkbox" id="60" name="wish_age" value="60" />
 				<ul>
 					<li><label for="20">20</label></li>
 					<li><label for="30">30</label></li>
