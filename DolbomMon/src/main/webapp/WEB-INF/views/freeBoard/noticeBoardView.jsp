@@ -64,6 +64,12 @@
 					자세한 사항은 아래의 링크 주소를 클릭해 주세요.<br/><br/>
 					</td>
 				</tr>
+				<tr>
+					<th scope="col">첨부파일</th>
+					<td>
+					<a href="#" download><img src="<%=request.getContextPath()%>/img/disk.png"/></a>
+					</td>
+				</tr>
 			</tbody>
 			<tfoot>
 				<tr>

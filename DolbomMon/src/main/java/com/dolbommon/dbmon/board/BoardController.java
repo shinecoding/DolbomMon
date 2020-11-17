@@ -55,10 +55,44 @@ public class BoardController {
 		return "freeBoard/noticeBoardWrite";
 	}
 	
+	//공지사항 게시글 보기
+//	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
+//	public ModelAndView noticeBoardView() {
+		
+//		return null;
+//	}
+	
 	@RequestMapping("/noticeBoardView")
 	public String noticeBoardView() {
 		
 		return "freeBoard/noticeBoardView";
 	}
 	
+	//신고게시판으로 이동
+	@RequestMapping("/bulletinBoard")
+	public String bulletinBoard() {
+		
+		return "freeBoard/bulletinBoard";
+	}
+	
+	//신고게시글 보기
+	@RequestMapping("/bulletinBoardView")
+	public String bulletinBoardView() {
+		
+		return "freeBoard/bulletinBoardView";
+	}
+	
+	//인증게시판으로 이동
+	@RequestMapping("/confirmBoard")
+	public String confirmBoard() {
+		
+		return "freeBoard/confirmBoard";
+	}
+	
+	//인증글 보기
+	@RequestMapping("/confirmBoardView")
+	public String confirmBoardView() {
+		
+		return "freeBoard/confirmBoardView";
+	}
 }

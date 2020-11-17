@@ -11,7 +11,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	.container{
-		width: 900px;
+		width: 800px;
 	}	
 	#top{
 		margin: 15px;

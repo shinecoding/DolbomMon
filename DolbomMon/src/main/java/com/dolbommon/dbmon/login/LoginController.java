@@ -28,10 +28,17 @@ public class LoginController {
 	}
 	
 	//계정 찾기
-	@RequestMapping("/idInfo")
-	public ModelAndView idInfo() {
+//	@RequestMapping("/idInfo")
+//	public ModelAndView idInfo() {
 	
-		return null;	
+//		return null;	
+//	}
+	
+	//계정 찾기
+	@RequestMapping("/idInfo")
+	public String idInfo() {
+		
+		return "login/idInfo";
 	}
 
 }
