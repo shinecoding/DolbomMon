@@ -13,19 +13,14 @@
 	*{margin:0; padding:0;}
 	.container{width:600px; padding:0px;}
 	/* ================== 상단 =====================*/
-	#top{width:100%; overflow:hidden; height:auto; margin-top:30px; text-align:center; font-size:3em;}
+	#top{width:100%; overflow:hidden; height:auto; text-align:center; font-size:3em;}
 	/* ================== 상단 =====================*/
 	/* ==================== 라디오 버튼 ====================== */
 	#dbmTypeDiv input[type=radio]{display:none;}
-	.d1{width:100%; overflow:hidden; height:150px; margin-top:15px; border-top:1px solid black; border-bottom:1px solid black;}
+	.d1{width:100%; overflow:hidden; height:150px; margin-top:10px;}
 	.d2{width:450px; height:150px; float:right; padding:20px;}
 	
-	.dbmType{width:100%;font-size:20px;}
-	.dt{width:100%; font-size:14px; color:gray;}
-	
-	#dbmTypeDiv input[type=submit]{width:100%; hieght:60px; margin-top:20px;}
-	
-	
+	#dbmTypeDiv input[type=submit]{width:100%; hieght:40px; margin-top:20px;}
 	/* ==================== 라디오 버튼 ====================== */
 </style>
 <script>
@@ -46,14 +41,10 @@
 				<input type="radio" name="dbmType" id="m" value="엄마" />
 				<input type="radio" name="dbmType" id="d" value="대학생" />
 				<input type="radio" name="dbmType" id="n" value="일반" />
-				<div class="d1"><label for="t"><img src=http://placehold.it/150x150/></label><p class="dbmType">선생님</p><p class="dt">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는 경우</p></div>
-				<div class="d1"><label for="m"><img src=http://placehold.it/150x150/></label><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div>
-				<div class="d1"><label for="d"><img src=http://placehold.it/150x150/></label><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div>
-				<div class="d1"><label for="n"><img src=http://placehold.it/150x150/></label><p class="dbmType">일반</p><p class="dt">위 3가지 경우에 속하지 않지만 돌봄몬으로 활동하고 싶은 경우</p></div>
-<!-- 				<div class="d1"><label for="t"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">선생님</p><p class="dt">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는 경우</p></div></div>
-				<div class="d1"><label for="m"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div></div>
-				<div class="d1"><label for="d"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div></div>
-				<div class="d1"><label for="n"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">일반</p><p class="dt">위 3가지 경우에 속하지 않지만 돌봄몬으로 활동하고 싶은 경우</p></div></div> -->
+				<div class="d1"><label for="t"><img src=http://placehold.it/150x150/></label><div class="d2">선생님</div></div>
+				<div class="d1"><label for="m"><img src=http://placehold.it/150x150/></label><div class="d2">학부모</div></div>
+				<div class="d1"><label for="d"><img src=http://placehold.it/150x150/></label><div class="d2">대학생</div></div>
+				<div class="d1"><label for="n"><img src=http://placehold.it/150x150/></label><div class="d2">일반</div></div>
 				<input type="submit" value="다음" />
 			</form>
 		</div>

@@ -73,7 +73,7 @@ public class RegisterController {
 			return "register/dbm/activityAndAge";
 		}
 		
-		// 돌봄몬 - 지역(시,군,구,동) 설정 (돌봄몬은 3곳 설정) 
+		// 돌봄몬 - 지역(시,군,구,동) 설정 
 		@RequestMapping("/dbm/location")
 		public String dbmLoaction() {
 			return "register/dbm/location";

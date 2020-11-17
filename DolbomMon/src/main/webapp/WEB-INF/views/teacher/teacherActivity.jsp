@@ -62,8 +62,26 @@ input[type=submit] {
 }
 label{
 width:24%;
+
 }
+
 </style>
+
+<script>
+	$(function(){
+		
+		$("img").click(function(){
+			if( $(this).css("background-color") =="rgb(255, 255, 255)" ){
+			$(this).css("background", "orange").css("border-radius","5px");
+			}else{
+				
+				$(this).css("background", "white").css("border-radius","5px");
+			}
+			
+		});
+		
+	});
+</script>
 </head>
 <body>
 
@@ -82,10 +100,34 @@ width:24%;
 				
 			</div>
 
-			<label for="shinsaenga"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
-			<label for="younga"><img src="icon/sitter-profile-age-young-on.svg" alt="영아" /><br />영아</label>
-			<label for="yua"><img src="icon/sitter-profile-age-child-on.svg" alt="유아" /><br />유아</label>
-			<label for="chodeung"><img src="icon/sitter-profile-age-element-on.svg" alt="초등학생" /><br />초등학생</label>
+			
+			<div class="row">
+   			<label for="act1"><img id="act1" src="icon/change-join-walk-off.svg"/><br/>등하원돕기</label>
+   			<label for="act2"><img id="act2" src="icon/change-read-off.svg" /><br/>책읽기</label>
+   			<label for="act3"><img id="act3" src="icon/change-indoorplay-off.svg" /><br/>실내놀이</label>
+   			<label for="act4"><img id="act4" src="icon/change-outdooractivities-off.svg"/><br/>야외활동</label>
+   			</div>
+   			
+   			<div class="row">
+   			<label for="act5"><img id="act5" src="icon/change-korean-off.svg"/><br/>한글놀이</label>
+			<label for="act6"><img id="act6" src="icon/change-english-off.svg"/><br/>영어놀이</label>
+			<label for="act7"><img id="act7" src="icon/change-study-off.svg"/><br/>학습지도</label>
+			<label for="act8"><img id="act8" src="icon/change-pe-off.svg"/><br/>체육놀이</label>
+   			</div>
+   			
+			<div class="row">   		
+			<label for="act9"><img id="act9" src="icon/change-cleaning-off.svg"/><br/>간단 청소</label>
+			<label for="act10"><img id="act10" src="icon/change-cook-off.svg"/><br/>밥 챙겨주기</label>
+			<label for="act11"><img id="act11" src="icon/change-washing-off.svg"/><br/>간단 설거지</label><br/>
+			<label></label>
+			</div>  
+			
+			<div class="row">   		
+			<label for="act12"><img id="act12" src="icon/change-longterm-off.svg"/><br/>장기입주</label>
+			<label for="act13"><img id="act13" src="icon/change-shortperiod-off.svg"/><br/>단기입주</label><br/>
+			<label></label>
+			<label></label>
+   			</div>
 
 
 

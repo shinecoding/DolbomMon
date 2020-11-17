@@ -11,7 +11,6 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
-
 	#title{
 		margin:20px 5px;
 		display:block;
@@ -25,24 +24,21 @@
 	}
 	
 	.container{width:800px;}
-
 	h4{text-align:center; line-height:40px;}
 	.leftPanel{
 	float:none
 	}
-	h9{text-align:center;}
+	h9{position:relative;
+		display: block;
+		}
 	.row{margin:0 auto;}
 </style>
 </head>
 <body>
 <div class="container">
-
 	<div id="title">
    		<div id="titlefont">내 인증 관리</div>
  	</div>
-
-	<h4>내 인증 관리</h4>
-
 	<ul class="list-group-horizontal">
 		
 		<li class="list-group-item">
@@ -55,17 +51,10 @@
 						</span>
 					</div>
 					<div class="row">
-
-					<h9>등초본뱃지</h9>	
+					<h9>등초본</h9>	
 					</div>
 				</div>
 				<div class="col-7">
-
-					<h9>아이돌봄<br/>인적성뱃지</h9>	
-					</div>
-				</div>
-				<div class="col-8">
-
 				
 					<div class="row">
 						<h7><b>등초본인증</b></h7>
@@ -75,7 +64,6 @@
 					- 발급일 6개월 이내만 유효
 					</div>
 				</div>
-
 				<div class="col-3">
 				<form action="teacherProofIdenti">
 					<button class="btn btn-warning float-right">인증받기</button>
@@ -99,7 +87,7 @@
 						</span>
 					</div>
 					<div class="row">
-					<h9>학교뱃지</h9>	
+					<h9>학교</h9>	
 					</div>
 				</div>
 				<div class="col-7">
@@ -115,10 +103,105 @@
 				</div>
 				<div class="col-3">
 					<button class="btn btn-warning float-right">인증받기</button>
-
+				</div>
+				
+			</div>
+			
+		</li>
+	</ul>
+	
+	<ul class="list-group-horizontal">
+		
+		<li class="list-group-item">
+			<div class="row">
 				<div class="col-2">
-					<button class="btn btn-warning float-right mt-5">인증받기</button>
-
+					<div class="row">
+						<span class="fa-stack fa-2x">
+							<i class="fas fa-circle fa-stack-2x"></i>
+							<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="row">
+					<h9>선생님</h9>	
+					</div>
+				</div>
+				<div class="col-7">
+				
+					<div class="row">
+						<h7><b>선생님 인증</b></h7>
+					</div>
+					<div class="row">
+						보육교사 자격증, 유치원/특수교사/초등학교 정교사 자격증
+					</div>
+				</div>
+				<div class="col-3">
+					<button class="btn btn-warning float-right">인증받기</button>
+				</div>
+				
+			</div>
+			
+		</li>
+	</ul>
+	
+	<ul class="list-group-horizontal">
+		
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-2">
+					<div class="row">
+						<span class="fa-stack fa-2x">
+							<i class="fas fa-circle fa-stack-2x"></i>
+							<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="row">
+					<h9>성범죄조회</h9>	
+					</div>
+				</div>
+				<div class="col-7">
+				
+					<div class="row">
+						<h7><b>성범죄 경력 조회 인증</b></h7>
+					</div>
+					<div class="row">
+						성범죄 경력 기록 
+					</div>
+				</div>
+				<div class="col-3">
+					<button class="btn btn-warning float-right">인증받기</button>
+				</div>
+				
+			</div>
+			
+		</li>
+	</ul>
+	
+	<ul class="list-group-horizontal">
+		
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-2">
+					<div class="row">
+						<span class="fa-stack fa-2x">
+							<i class="fas fa-circle fa-stack-2x"></i>
+							<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="row">
+					<h9>개인정보</h9>	
+					</div>
+				</div>
+				<div class="col-7">
+				
+					<div class="row">
+						<h7><b>개인정보 동의서 인증</b></h7>
+					</div>
+					<div class="row">
+						개인정보 제공 동의서
+					</div>
+				</div>
+				<div class="col-3">
+					<button class="btn btn-warning float-right">인증받기</button>
 				</div>
 				
 			</div>
