@@ -14,9 +14,7 @@
 <style>
 .container{width:800px;}
 i{color:gray;}
-#profimg{
-	width:50%;
-}
+
 h5{
 	padding: 20px 0px 0px 0px;
 	font-weight: bold;
@@ -49,6 +47,47 @@ font-size: 40px;
 float:right;
 color:white;
 }
+#profFrame{
+	position: relative;
+	width: 500px;
+	height: 500px;
+	display:block;
+	left: calc(50% - 250px);
+	overflow:visible;
+	margin-top: 50px;
+	}
+	#profimg{
+	position:absolute;
+	width:500px;
+	height:500px;	
+	}
+	.fa-pen{
+	position: absolute;
+	width:50px;
+	height:50px;
+	right:-10px;
+	top:-10px;
+	padding-top:17px;
+	background-color:orange;
+	color:white;
+	border-radius:50%;
+	text-align:center;
+	z-index:100;
+	}
+	.editBtn{
+	opacity:0%;
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	width:100%;
+	height:100%
+	}
+	.list-group-item{
+	position:relative;
+	padding: 20px;
+	}
 
 </style>
 <script>
@@ -67,31 +106,40 @@ color:white;
 
 <div class="container">
 	<h5>내 사진</h5>
-   	<a href="teacherPicture">내 사진</a>
-   <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
-   <ul class="list-group">
-   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">홍O동</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><br/>
-   		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="ml-2">no.798521</span></li>
-   </ul>
-   <br/>
-   <ul class="list-group list-group-horizontal-sm">
-   		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>129</div></li>
-   		<li class="list-group-item col-4" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/>3일 전</li>
-   		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-video mr-2"></i>CCTV<br/>동의함</li>
-   </ul>
+
+	   	<div id="profFrame">
+				<img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
+				<i class="fas fa-pen"><a class="editBtn" href="teacherPicture"></a></i>	
+			</div>	
+   
 
    	<h5>간단 자기소개</h5>
-   	<a href="teacherIntro">자기소개</a>
-   	<li class="list-group-item p-5" style="text-align:center">아직 작성하지 않았습니다.</li>
+   	<li class="list-group-item" style="text-align:center">
+	   	<i class="fas fa-pen"><a class="editBtn" href="teacherIntro"></a></i>
+	   	아직 작성하지 않았습니다.
+   	</li>
    	<h5>선호하는 돌봄유형</h5>
-   	<li class="list-group-item p-5" style="text-align:center">"저는 <span>놀이/학습</span>돌봄을 가장 선호해요"</li>
+   	<li class="list-group-item" style="text-align:center">
+	   	<i class="fas fa-pen"><a class="editBtn" href="teacherType"></a></i>
+	   	"저는 <span>놀이/학습</span>돌봄을 가장 선호해요"
+   	</li>
    	<h5>희망 시급</h5>
-   	<a href="teacherWage">희망 시급</a>
-   	<li class="list-group-item p-5" style="text-align:center">원하는 시급을 자유롭게 작성해주세요.</li>
+   	<li class="list-group-item" style="text-align:center">
+   		<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
+   		원하는 시급을 자유롭게 작성해주세요.
+   	</li>
+   	<h5>관련 경험</h5>
+   	<li class="list-group-item" style="text-align:center">
+   		<i class="fas fa-pen"><a class="editBtn" href="teacherExp"></a></i>
+   		작성 시 부모로부터<br/>3배 더 많은 선택을 받게 됩니다!
+   	</li>
    	<h5>활동 가능 시간</h5>
-   	<li class="list-group-item">스케쥴차트</li>
+   	<li class="list-group-item">
+	   	<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
+	   	스케쥴차트</li>
    	<h5>돌봄 가능 연령</h5>
    	<li class="list-group-item">
+   	 	<i class="fas fa-pen"><a class="editBtn" href="teacherAge"></a></i>
 	   	<ul class="list-group list-group-horizontal-sm" >
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br/>신생아</li>
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-young-on.svg" alt="영아" /><br/>영아</li>
@@ -101,6 +149,7 @@ color:white;
    </li>
    <h5>가능한 활동</h5>
    <li class="list-group-item">
+   	<i class="fas fa-pen"><a class="editBtn" href="teacherActivity"></a></i>
    		<ul class="list-group list-group-horizontal-sm" >
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-indoorplay-on.svg" /><br/>실내놀이</li>
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-join-walk-off.svg"/><br/>등하원돕기</li>
@@ -126,7 +175,15 @@ color:white;
    		</ul>
    	</li>	
 		<h5>활동 가능 지역</h5>
-		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동</li>
+		
+		<li class="list-group-item">
+			<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
+			<ul class="list-group" >
+			<li class="list-group-item" style="border:none">
+				<span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동
+			</li>
+			</ul>
+		</li>
 		
 		<h5>CCTV동의 여부</h5>
 		<li id="cctvLst" class="list-group-item" >

@@ -63,7 +63,9 @@
 					</div>
 				</div>
 				<div class="col-3">
+				<form action="teacherProofIdenti">
 					<button class="btn btn-warning float-right">인증받기</button>
+				</form>
 				</div>
 				
 			</div>

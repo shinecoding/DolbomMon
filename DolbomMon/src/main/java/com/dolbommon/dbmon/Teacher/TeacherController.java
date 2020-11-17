@@ -50,4 +50,29 @@ public class TeacherController {
 	public String teacherPicture() {
 		return "/teacher/teacherPicture";
 	}
+	
+	@RequestMapping("/teacherExp")
+	public String teacherExp() {
+		return "/teacher/teacherExp";
+	}
+	
+	@RequestMapping("/teacherAge")
+	public String teacherAge() {
+		return "/teacher/teacherAge";
+	}
+	
+	@RequestMapping("/teacherActivity")
+	public String teacherActivity() {
+		return "/teacher/teacherActivity";
+	}
+	
+	@RequestMapping("/teacherProofIdenti")
+	public String teacherProofIdenti() {
+		return "/teacher/teacherProofIdenti";
+	}
+	
+	@RequestMapping("/teacherType")
+	public String teacherType() {
+		return "/teacher/teacherType";
+	}
 }

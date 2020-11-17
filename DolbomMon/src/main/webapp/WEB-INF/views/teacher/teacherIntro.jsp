@@ -28,9 +28,13 @@
 	border-color: orange;
 	
 	}
-	input[type="submit"]{
-	margin: 0 auto;
-	text-align:center;
+	
+	input[type=submit]{
+	position:relative;
+	display: block;
+	width: 80px;
+	left: calc(50% - 40px);
+	margin-top:30px;
 	}
 	#introWarning{
 		color:gray;

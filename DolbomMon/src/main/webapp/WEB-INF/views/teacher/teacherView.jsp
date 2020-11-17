@@ -103,7 +103,11 @@ h5{
 		
 		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동</li>
 		
-   	
+   		<h5>관련 경험</h5>
+   		<li class="list-group-item p-4">
+   			<b>키즈카페</b><br/>
+   			2017.01.01 ~ 2020.11.16
+   		</li>
    <br/>
 </div>
 

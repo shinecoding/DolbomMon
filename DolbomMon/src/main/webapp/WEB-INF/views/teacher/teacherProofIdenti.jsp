@@ -42,20 +42,8 @@
 	justify-content:center;
 	
 	}
-	#picWarning{
-		color:gray;
-		text-align:center;
-		margin:50px;
-	}
-	
 	#profBox{
-	position: relative;
-	width: 120px;
-	height: 120px;
-	display:block;
-	left: calc(50% - 60px);
-	overflow:visible;
-	margin-top: 50px;
+	
 	}
 	#profIcon{
 	width:120px;
@@ -71,7 +59,7 @@
 	white-space:nowrap;
 	vertical-align: middle;
 	}
-	#profFile{
+	#proofFile{
 	opacity:0%;
 	position:absolute;
 	top:0;
@@ -93,23 +81,62 @@
 	left: calc(50% - 40px);
 	margin-top:30px;
 	}
-	
+	.warning {
+	color: gray;
+	text-align: center;
+}
+	label{
+	background-color: orange;
+	width:100%;
+	height:50px;
+	text-align:center;
+	color:white;
+	border-radius:10px;
+	line-height:50px;
+	}
 </style>	
 </head>
 <body>
 	<div class="container">
 		<div id="title">
-	   		<div id="titlefont">내 사진 수정</div>
+	   		<div id="titlefont">학교 인증</div>
 	 	</div>
 		
 			<div id="profBox">
-				<img class="rounded-circle mx-auto d-block" id="profIcon" src="img/profilepic.png"/>
-				<img id="profPlus" src="icon/profile-add-bt.svg"/>
-				<input type="file" id="profFile" accept="image/*,video/*">
-			</div>		
-				<div id="picWarning">
-				“내 사진을 올리면 부모회원의 선택을<br/> <span id="teacherPicRed">5배 더 많이</span> 받을 수 있습니다.”
+				<div class="badge badge-warning">1번째</div>
+				<div>소속기관과 전공분야를 확인하기<br/>
+				위해서 아래 서류 중 1개를 사진으로<br/>
+				찍어서 올려주세요.<br/></div>
+				<div class="warning">
+				<i class="fas fa-exclamation-circle"></i>사진첨부는 최대 5장까지 가능합니다.
 				</div>
+				
+				<label for="proofFile">
+					<i class="fas fa-upload"></i>사진 추가하기
+					<input type="file" id="proofFile" accept="image/*,application/pdf">
+				</label>
+				
+				
+			</div>	
+			<div class="badge badge-warning">2번째</div>
+			<div>등(초)본에 적혀있는 현주소를
+			아래 입력칸에 똑같이 적어주세요.</div>
+			<input type="text" placeholder="여기에 똑같이 적어주세요" />
+			
+			<div class="warning">
+				<i class="fas fa-exclamation-circle"></i>
+				올리신 등(초)본 현주소와 적어주신 내용이<br/>
+				일치되어야 인증처리가 완료됩니다.<br/>
+			</div>
+			
+			<div class="badge badge-warning">3번째</div>
+			<div>등(초)본 우측 상단에 적혀있는<br/>
+				발급일자를 아래 입력칸에<br/>
+				똑같이 입력해주세요.</div>
+			<input type="text" placeholder="여기에 똑같이 적어주세요" />
+			
+			
+			
 				<input type="submit" class="btn btn-warning" value="저장" />
 			</div>
 		

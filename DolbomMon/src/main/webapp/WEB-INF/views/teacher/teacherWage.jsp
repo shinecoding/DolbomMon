@@ -10,6 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
 <style>
 	.container{width:800px;}
 	
@@ -25,10 +27,10 @@
 		text-align:center;
 	}
 	#teacherWageBox{
-	border-color: orange;
-	display: flex;
-	justify-content:center;
-	width:200px;
+	position:relative;
+	left: calc(50% - 100px);
+	margin-top:30px;
+	
 	}
 	.fa-coins{
 	font-size: 50px;
@@ -37,16 +39,60 @@
 	justify-content:center;
 	
 	}
-	input[type="submit"]{
-	display: flex;
-	justify-content:center;
+	#checkDiv{
+	position:relative;
+	left: calc(50% - 100px);
+	}
 	
+	input[type=text]{
+	border-color: orange;
+	display:inline-block;
+	width:200px;
+	text-align:right;
+	}
+	input[type=submit]{
+	position:relative;
+	display: block;
+	width: 80px;
+	left: calc(50% - 40px);
+	margin-top:30px;
 	}
 	#wageWarning{
+		margin-top:30px;
 		color:gray;
 		text-align:center;
 	}
 </style>	
+<script>
+	var regex= /[^0-9]/;
+	$(function(){
+		
+		function minCheck(){
+			if( $("#minWageChk").prop("checked") ){
+				$("#showWageBox").val("8600");
+			}
+		}
+		
+		 $("#minWageChk").change(function(){
+			minCheck();
+		});
+		 
+		 function numCheck(){
+			 var dWage = parseInt( $("#showWageBox").val() );
+				console.log(dWage);
+			 if(!regex.test(dWage)){
+				 alert("숫자만^^");
+				 $("#showWageBox").val("");
+				 return false;
+			 }
+		 }
+		 $("#showWageBox").keydown(function(){
+			numCheck();
+		 })
+		 
+		
+	});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -55,12 +101,12 @@
 	 	</div>
 	 	<i id="coinIcon" class="fas fa-coins"></i>
 		<form method="get" action="">
-			<div class="form-group">
-				<div class="row">
-				<input type="tel" class="form-control d-flex justify-content-center" id="teacherWageBox" />
-				<span>원/1시간</span>
+			<div class="form-group">		
+				<div id="teacherWageBox"><input type="text" id="showWageBox" class="form-control" />원/1시간
 				</div>
-				<input type="checkbox"/>평균시급 적용
+				
+				<div id="checkDiv"><input type="checkbox" id="minWageChk"/>평균시급 적용</div>
+				
 				<div class="m-2" id="wageWarning">
 				아이 1명을 돌보는 경우,<br/>
 				= 최저시급 8,590원 이상 필수<br/><br/>
