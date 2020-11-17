@@ -35,6 +35,7 @@ public class TeacherController {
 	public String teacherProof() {
 		return "/teacher/teacherProof";
 	}
+
 	
 	@RequestMapping("/teacherIntro")
 	public String teacherIntro() {
@@ -75,4 +76,5 @@ public class TeacherController {
 	public String teacherType() {
 		return "/teacher/teacherType";
 	}
+
 }

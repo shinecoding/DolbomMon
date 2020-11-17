@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 .container{width:800px;}
@@ -62,11 +63,42 @@ h5{
    	<li class="list-group-item p-5" style="text-align:center">아직 작성하지 않았습니다.</li>
    	<h5>선호하는 돌봄유형</h5>
    	<li class="list-group-item p-5" style="text-align:center">"저는 <span>놀이/학습</span>돌봄을 가장 선호해요"</li>
+
+</head>
+<body>
+
+<div class="container" style="background-color:lightblue;">
+   <img src="img/profilepic.jpeg"/>
+   <ul class="list-group">
+   		<li class="list-group-item list-group-item-action">홍O동 일반맘시터</li>
+   		<li class="list-group-item list-group-item-action">☆☆☆☆☆ 27세 no.798521</li>
+   </ul>
+   <br/>
+   <ul class="list-group list-group-horizontal-sm">
+   		<li class="list-group-item list-group-item-action">조회수<br/><div>129</div></li>
+   		<li class="list-group-item list-group-item-action">프로필 작성<br/>3일 전</li>
+   		<li class="list-group-item list-group-item-action">CCTV<br/>동의함</li>
+   </ul>
+   <ul class="list-group">
+   	<li class="list-group-item">
+   		본인 인증 완료
+   		돌봄몬 고객안전관리팀에서 실명 / 생년월일 /  연락처를 확인하였습니다.
+   	</li>
+   	</ul>
+   	<h5>핵심인증</h5>
+   	<li class="list-group-item">등초본 인증</li>
+   	<li class="list-group-item">등초본 인증</li>
+   	<h5>간단 자기소개</h5>
+   	<li class="list-group-item">아직 작성하지 않았습니다.</li>
+   	<h5>선호하는 돌봄유형</h5>
+   	<li class="list-group-item">"저는 <span>놀이/학습</span>돌봄을 가장 선호해요"</li>
+
    	<h5>활동 가능 시간</h5>
    	<li class="list-group-item">스케쥴차트</li>
    	<h5>돌봄 가능 연령</h5>
    	<li class="list-group-item">
 	   	<ul class="list-group list-group-horizontal-sm" >
+
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br/>신생아</li>
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-young-on.svg" alt="영아" /><br/>영아</li>
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-child-on.svg" alt="유아" /><br/>유아</li>
@@ -109,6 +141,44 @@ h5{
    			2017.01.01 ~ 2020.11.16
    		</li>
    <br/>
+
+		   	<li class="list-group-item">신생아</li>
+		   	<li class="list-group-item">영아</li>
+		   	<li class="list-group-item">유아</li>
+		   	<li class="list-group-item">초등학생</li>
+	   </ul>
+   </li>
+   <li class="list-group-item">
+   		<ul class="list-group list-group-horizontal-sm" >
+   			<li class="list-group-item">실내놀이</li>
+   			<li class="list-group-item">등하원돕기</li>
+   			<li class="list-group-item">책읽기</li>
+   			<li class="list-group-item">야외활동</li>
+   		</ul>
+   		<ul class="list-group list-group-horizontal-sm" >
+   			<li class="list-group-item">한글놀이</li>
+   			<li class="list-group-item">영어놀이</li>
+   			<li class="list-group-item">학습지도</li>
+   			<li class="list-group-item">체육놀이</li>
+   		</ul>
+   		<ul class="list-group list-group-horizontal-sm" >
+   			<li class="list-group-item">간단 청소</li>
+   			<li class="list-group-item">밥 챙겨주기</li>
+   			<li class="list-group-item">간단 설거지</li>
+   		
+   		</ul>
+   		<ul class="list-group list-group-horizontal-sm" >
+   			<li class="list-group-item">장기입주</li>
+   			<li class="list-group-item">단기입주</li>
+
+   		</ul>
+		<h5>활동 가능 지역</h5>
+		<li class="list-group-item">1순위 서울특별시 마포구 마포동</li>
+		
+   		<li></li>
+   </li> 
+   
+
 </div>
 
 </body>
