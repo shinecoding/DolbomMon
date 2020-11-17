@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RegisterController {
-
+		////////////////공통//////////////	
 		// 선생님, 부모님 회원가입 선택
 		@RequestMapping("/join")
 		public String join() {
@@ -18,15 +18,20 @@ public class RegisterController {
 			return "register/regForm";
 		}
 		
-		//////////////////////////// 학부모 회원가입 시작 /////////////////////////////////
-		@RequestMapping("/parentJoinStart")
-		public String joinParentStart() {
-			return "register/parent/regForm";
+		// 우편코드 선택창
+		@RequestMapping("/zipcodeSearch")
+		public String zipcodeSearch() {
+			return "register/zipcodeSearch";
 		}
+		
+		
+		//////////////공통//////////////
+		
+		//////////////////////////// 학부모 회원가입 시작 /////////////////////////////////
 		
 		// 원하는 돌봄선택, 선생님 나이선택
 		@RequestMapping("/parent/activityAndAge")
-		public String selectActivityAndAge() {
+		public String parentActivityAndAge() {
 			return "register/parent/activityAndAge";
 		}
 		
@@ -36,28 +41,42 @@ public class RegisterController {
 			return "register/parent/children";
 		}
 		
-		// 지역(시,군,구,동) 설정
-		@RequestMapping("/location")
-		public String loaction() {
-			return "register/location";
+		// 학부모 - 지역(시,군,구,동) 설정 
+		@RequestMapping("/parent/location")
+		public String parentLoaction() {
+			return "register/parent/location";
 		}
 		
 		// 학부모 - 원하는 시간 입력
-		@RequestMapping("/parentSchedule")
+		@RequestMapping("/parent/schedule")
 		public String parentSchedule() {
 			return "register/parent/schedule";
 		}
 		
 		////////////////////////////// 돌봄몬 회원가입 시작 //////////////////////////////////
-		@RequestMapping("/dbmJoinStart")
+		
+		// 선생님 유형 선택
+		@RequestMapping("/dbmType")
 		public String joinDbmStart() {
-			return "register/dbm/start";
+			return "register/dbm/dbmType";
 		}
 		
-		// 우편코드 선택창
-		@RequestMapping("/zipcodeSearch")
-		public String zipcodeSearch() {
-			
-			return "register/zipcodeSearch";
+		// 돌볼 수 있는 아이의 연령대와 가능한 활동
+		@RequestMapping("/dbm/activityAndAge")
+		public String dbmActivityAndAge() {
+			return "register/dbm/activityAndAge";
 		}
+		
+		// 돌봄몬 - 지역(시,군,구,동) 설정 
+		@RequestMapping("/dbm/location")
+		public String dbmLoaction() {
+			return "register/dbm/location";
+		}
+		
+		// 돌봄몬 - 원하는 시간 입력
+		@RequestMapping("/dbm/schedule")
+		public String dbmSchedule() {
+			return "register/dbm/schedule";
+		}
+		
 }

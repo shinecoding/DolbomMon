@@ -58,7 +58,7 @@
 				<input type="button" name="3" value="3명"/>
 				<input type="button" name="4" value="4명"/>
 			</div>
-			<form action="<%=request.getContextPath()%>/location">
+			<form action="<%=request.getContextPath()%>/parent/location">
 				<div id="childrenDetailDiv">
 					<ul id="childrenDetail"></ul>
 				</div>

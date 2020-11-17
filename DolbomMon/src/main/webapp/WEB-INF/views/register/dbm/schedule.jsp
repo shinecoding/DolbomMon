@@ -10,11 +10,10 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 </head>
 <body>
-	<div>
-	<form action="<%=request.getContextPath()%>/parentSchedule">
-	<h1>--시 --구 --동</h1>
-	<input type="submit" value="다음"/>
+	<h1>언제 활동할 수 있나요??</h1>
+	<form action="<%=request.getContextPath()%>/regForm">
+		
+		<input type="submit" value="다음">
 	</form>
-	</div>
 </body>
 </html>

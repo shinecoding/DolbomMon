@@ -25,7 +25,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="<%=request.getContextPath()%>/dbmJoinStart">
+			<a href="<%=request.getContextPath()%>/dbmType">
 				<img src="<%=request.getContextPath()%>/img/dbm.png"/>
 			</a>
 		</div>
