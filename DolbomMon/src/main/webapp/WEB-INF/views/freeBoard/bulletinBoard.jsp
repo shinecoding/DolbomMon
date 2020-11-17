@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>신고게시판</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -39,10 +39,7 @@
 <body>
 <div class="container">
 <div id="top">
-<b>자유게시판</b>
-</div>
-<div>
-	<a class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
+<b>신고게시판</b>
 </div>
 <div id="board">
 <br/>
@@ -52,7 +49,7 @@
 			<col>
 			<col style="width: 15%;">
 			<col style="width: 15%;">
-			<col style="width: 10%;">
+			<col style="width: 15%;">
 		</colgroup>
 		<thead>
 			<tr>
@@ -60,45 +57,45 @@
 				<th scope="col">글제목</th>
 				<th scope="col">작성자</th>
 				<th scope="col">등록일</th>
-				<th scope="col">조회수</th>
+				<th scope="col">처리상태</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<th scope="row">1</th>
 				<!-- 글제목 script로 글자수 제한하기 -->
-				<td class="subject"><a href="freeBoardView">글제목입니다1111111글제목입니다1111111</a></td>
+				<td class="subject"><a href="bulletinBoardView">글제목입니다1111111글제목입니다1111111</a></td>
 				<td>홍길동</td>
 				<td>13:11</td>
-				<td>1</td>
+				<td>처리중</td>
 			</tr>
 			<tr>
 				<th scope="row">2</th>
 				<td class="subject"><a href="#">글제목입니다2222222</a></td>
 				<td>정길동</td>
 				<td>11-11 15:11</td>
-				<td>2</td>
+				<td>처리중</td>
 			</tr>
 			<tr>
 				<th scope="row">3</th>
 				<td class="subject"><a href="#">글제목입니다3333333</a></td>
 				<td>정길동</td>
 				<td>11-10 13:51</td>
-				<td>7</td>
+				<td>처리중</td>
 			</tr>
 			<tr>
 				<th scope="row">4</th>
 				<td class="subject"><a href="#">글제목입니다4444444</a></td>
 				<td>정길동</td>
 				<td>11-10 13:51</td>
-				<td>7</td>
+				<td>처리중</td>
 			</tr>
 			<tr>
 				<th scope="row">5</th>
 				<td class="subject"><a href="#">글제목입니다5555555</a></td>
 				<td>정길동</td>
 				<td>11-10 13:51</td>
-				<td>7</td>
+				<td>완료</td>
 			</tr>
 		</tbody>
 	</table>

@@ -81,6 +81,7 @@
 	h1 {
 		font-size: 40px;
 		font-weight: 200;
+<<<<<<< HEAD
 	}
 	
 	
@@ -93,6 +94,20 @@
 	}
 	
 	
+=======
+	}
+	
+	
+	*,
+	*:before,
+	*:after {
+	  -moz-box-sizing: border-box;
+	  -webkit-box-sizing: border-box;
+	  box-sizing: border-box; 
+	}
+	
+	
+>>>>>>> 4f0544714dbbcd144bd33b753d1049a3f092323e
 	h2 {
 	  color:rgba(255,255,255,.8);
 	  margin-left:45px;

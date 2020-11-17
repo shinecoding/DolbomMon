@@ -29,6 +29,7 @@ public class ManagmentController {
 	@RequestMapping("/managerRegister")
 	public String managerRegister(){
 		return "management/managerRegister";
+
 	}
 	@RequestMapping("/accountManage")
 	public String accountManage(){
