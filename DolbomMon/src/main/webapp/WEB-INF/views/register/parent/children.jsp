@@ -19,11 +19,19 @@
 	
 	/* ===================== 자녀 세부정보 ==================== */
 	#childrenDetailDiv{width:100%; overflow:hidden; height:auto;}
+	#childrenDetail{width:100%; overflow:hidden; height:auto;}
+	#childrenDetail li{width:100%; overflow:hidden; height:auto; padding:10px; margin:10px 0; border:1px solid black; }
+	.cn{width:20%; float:left;}
+	.cntext{width:80%; padding:0 10px;}
+	.cb{width:20%; float:left; margin-top:5px;}
+	.cbtext{width:80%;margin-top:5px; padding:0 10px;}
+	/* ===================== 자녀 세부정보 ==================== */
 	
 	/* =================== 희망급여 ==================== */
 	#wageDiv{width:100%; overflow:hidden; height:auto;}
 	
 	#childrenInfo input[type=submit]{width:100%; height:50px; margin-top:30px;}
+	
 </style>
 
 <script>
@@ -38,8 +46,8 @@
 			childrenCnt = Number(childrenCnt);
 			$("#childrenDetail").html("");
 			var tag = ""
-			tag += "<li><span>자녀 이름</span><input type='text' name='child_name' /><br/>";
-			tag += "<span>자녀 생년월일</span><input type='text' name='child_birth' /></li>";
+			tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
+			tag += "<span class='cb'>자녀 생년월일</span><input class='cbtext' type='date' name='child_birth' /></li>";
 			for(var i=0;i<childrenCnt;i++){
 				$("#childrenDetail").append(tag);
 			}	 
