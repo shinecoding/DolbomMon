@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
+
 	
 	//로그인 페이지로 이동
 	@RequestMapping("/login")
@@ -41,8 +42,6 @@ public class LoginController {
 		return "login/idInfo";
 
 	}
-	
-	
 	
 
 }
