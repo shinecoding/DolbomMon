@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/74c16632e0.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
@@ -40,10 +41,7 @@
         
     }
     function logOut(){
-		<%
-			session.setAttribute("logStatus", "N");
-		%>		
-		location.href="/dbmon/management";
+		location.href="/dbmon/managerLogout";
     } 
 
 
@@ -67,9 +65,11 @@
 		height: -webkit-calc(100% - 100px);
 		
 	}
+	/*
 	button{
 		margin-top:15px;
 	}
+	*/
 	
 
 	.fa {
