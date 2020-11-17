@@ -12,6 +12,8 @@
 <body>
 	<div>
 	<form action="<%=request.getContextPath()%>/parent/schedule">
+	<!-- 돌봄몬은 지역 3개 선택 (학부모는 1개) -->
+	<h1>어디서 돌봐드릴까요?</h1>
 	<h1>--시 --구 --동</h1>
 	<input type="submit" value="다음"/>
 	</form>

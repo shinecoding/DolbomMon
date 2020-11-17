@@ -53,10 +53,16 @@ public class RegisterController {
 			return "register/parent/schedule";
 		}
 		
+		// 학부모 - 특이사항 입력
+		@RequestMapping("/parent/description")
+		public String parentDescription() {
+			return "register/parent/description";
+		}
+		
 		////////////////////////////// 돌봄몬 회원가입 시작 //////////////////////////////////
 		
-		// 선생님 유형 선택
-		@RequestMapping("/dbmType")
+		// 돌봄몬 - 유형 선택(선생님, 대학생, 엄마, 일반)
+		@RequestMapping("/dbm/dbmType")
 		public String joinDbmStart() {
 			return "register/dbm/dbmType";
 		}

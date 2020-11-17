@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>시간표 입력</h1>
-	<form action="<%=request.getContextPath()%>/regForm">
+	<form action="<%=request.getContextPath()%>/parent/description">
 		
 		<input type="submit" value="다음">
 	</form>

@@ -25,7 +25,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="<%=request.getContextPath()%>/dbmType">
+			<a href="<%=request.getContextPath()%>/dbm/dbmType">
 				<img src="<%=request.getContextPath()%>/img/dbm.png"/>
 			</a>
 		</div>

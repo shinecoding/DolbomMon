@@ -22,9 +22,12 @@
 	
 	#dbmTypeDiv input[type=submit]{width:100%; hieght:40px; margin-top:20px;}
 	/* ==================== 라디오 버튼 ====================== */
-	
 </style>
 <script>
+	$(function(){
+		$("label").click(function(){
+		});
+	});
 	
 </script>
 <body>
