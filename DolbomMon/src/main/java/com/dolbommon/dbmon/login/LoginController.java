@@ -37,9 +37,7 @@ public class LoginController {
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
 		
-		if() {
-			
-		}
+		
 		
 		
 		return null;
