@@ -83,6 +83,7 @@
 	          </tbody>
            </table>	
 		  </div>
+		  <!-- 
 		  <div class="tab-pane fade" id="accept">
 		    <p>받은쪽지</p>
 		  </div>
@@ -92,6 +93,8 @@
 		  <div class="tab-pane fade" id="spam">
 		    <p>스팸쪽지</p>
 		  </div>
+		  
+		   -->
 		  <div class="tab-pane fade" id="memberSearch">
 		    <p>회원검색</p>
 		  </div>
