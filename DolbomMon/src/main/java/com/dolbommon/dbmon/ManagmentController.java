@@ -39,5 +39,4 @@ public class ManagmentController {
 		return "management/managerManage";
 	}
 
-
 }

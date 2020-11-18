@@ -11,13 +11,41 @@
 <script src="css/jquery.bxslider.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <style>
-	#bxslider img{height: 500px; text-align:center; width:100%;}
+	*{
+        margin:0;
+        padding:0;
+    	}
+	#bxslider img{
+		height: 500px; 
+		text-align:center; width:100%;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		 border: 0;
+ 		 outline:0;
+		border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;
+	}
+  
+
+ .bx-wrapper img{
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 0;
+  outline:0;
+}
+ 
+
+
+
+
 </style>
 <script>
 $(function(){
 	$("#bxslider").bxSlider({
 		mode :'horizontal'
-		,slideWidth:800
+		,slideWidth:1200
+		,pager:false
 		,speed:1000 // 변환 속도
 		,auto:true // 자동 시작(true,false)
 		,randomStart:true //시작슬라이드 랜덤
@@ -26,6 +54,7 @@ $(function(){
 		,hideControlOnEnd: true//처음과 마지막에 컨트롤러 표시 여부 설정(true, false)
 	//easing
 		,useCSS: true//easing 사용 여부 설정(true(easing사용안함), false(easing사용));
+		
 	
 	});
 });
@@ -34,13 +63,13 @@ $(function(){
 <body>
 <div>
 	<ul id="bxslider">
-		<li><a href="#"><img src="img/act01.png" /></a></li>
-		<li><a href="#"><img src="img/act02.PNG" /></a></li>
-		<li><a href="#"><img src="img/act03.png" /></a></li>
-		<li><a href="#"><img src="img/act04.PNG" /></a></li>
-		<li><a href="#"><img src="img/act01.png" /></a></li>
-		<li><a href="#"><img src="img/act02.PNG" /></a></li>
-		<li><a href="#"><img src="img/act03.png" /></a></li>
+		<li><a href="#"><img src="img/ca01.png" /></a></li>
+		<li><a href="#"><img src="img/ca02.jpg" /></a></li>
+		<li><a href="#"><img src="img/ca03.png" /></a></li>
+		<li><a href="#"><img src="img/DOL02.PNG" /></a></li>
+		<li><a href="#"><img src="img/ca05.png" /></a></li>
+		<li><a href="#"><img src="img/22.jpg" /></a></li>
+		<li><a href="#"><img src="img/3.jpg" /></a></li>
 	</ul>
 </div>
 </body>
