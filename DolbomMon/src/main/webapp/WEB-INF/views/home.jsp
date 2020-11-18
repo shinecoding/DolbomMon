@@ -7,10 +7,16 @@
 <title>Dolbommon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
-<script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
+<%
+String manager = (String)session.getAttribute("managerStatus");
+if(manager!="Y"){
+%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%} %>
+<script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<script src="<%=request.getContextPath() %>/css/jquery.bxslider.js"></script>
+
 </head>
 <style>
    body{
@@ -88,32 +94,20 @@
       <li><a href="#">My Menu</a></li>
    </ul>
 </nav>
-
-
 <div id="slider">
-<jsp:include page="bxslider.jsp"/> 
+<%@ include file="/WEB-INF/views/bxslider.jsp" %>
 </div>
 <h1>
 	<a href="/dbmon/join">회원가입</a>
 </h1>
 
 <h1><a href="/dbmon/login">로그인</a></h1>
-
-
-
 <a href="teacherList">선생님 페이지</a>
-  
-
-
 <h1><a href="teacherList">선생님 페이지</a></h1>
-
 <h1><a href="/dbmon/noticeBoard">공지사항</a></h1>
 <h1><a href="/dbmon/freeBoard">자유게시판</a></h1>
 <h1><a href="/dbmon/bulletinBoard">신고게시판</a></h1>
 <h1><a href="/dbmon/confirmBoard">인증게시판</a></h1>
-
-
-
  <!--  <sitemesh:write property='body'/>-->
          <footer class="footer">
               <div>돌봄몬</div>

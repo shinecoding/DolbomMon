@@ -63,7 +63,31 @@ input[type=submit] {
 label{
 width:24%;
 }
+img{
+cursor:pointer;
+border-radius:5px;
+}
 </style>
+<script>
+$(function(){
+	
+	$("input:radio[name=tAge]").click(function(){
+		if($("input:radio[name=tAge]:checked").val()== "1"){
+			$("input:radio[name=tAge]").parent().css("background-color","orange");
+		}
+		
+		if( $(this).css("background-color") =="rgb(255, 255, 255)" ){
+		$(this).css("background", "orange");
+		}else{
+			
+			$(this).css("background", "white");
+		}
+		
+	});
+	
+});
+
+</script>
 </head>
 <body>
 
@@ -78,16 +102,16 @@ width:24%;
 
 
 			<div id="ageHidden">
-				<input type="radio" name="tAge" id="shinsaenga" />
+				
 				<input type="radio" name="tAge" id="younga" />
 				<input type="radio" name="tAge" id="yua" />
 				<input type="radio" name="tAge" id="chodeung" />
 			</div>
 
-			<label for="shinsaenga"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
-			<label for="younga"><img src="icon/sitter-profile-age-young-on.svg" alt="영아" /><br />영아</label>
-			<label for="yua"><img src="icon/sitter-profile-age-child-on.svg" alt="유아" /><br />유아</label>
-			<label for="chodeung"><img src="icon/sitter-profile-age-element-on.svg" alt="초등학생" /><br />초등학생</label>
+			<label for="shinsaenga"><input type="radio" name="tAge" id="shinsaenga" /><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
+			<label for="younga"><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br />영아</label>
+			<label for="yua"><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br />유아</label>
+			<label for="chodeung"><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br />초등학생</label>
 
 
 
