@@ -25,13 +25,13 @@ public class LoginController {
 	}
 
 	
-	//濡쒓렇�씤 �럹�씠吏�濡� �씠�룞
+	//로그인 폼으로 이동
 	@RequestMapping("/login")
 	public String login() {
 		return "login/loginForm";	
 	}
 	
-	//濡쒓렇�씤
+	//로그인
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
 		
@@ -45,20 +45,20 @@ public class LoginController {
 		return null;
 	}
 	
-	//怨꾩젙 李얘린 �럹�씠吏�濡� �씠�룞
+	//계정찾기 폼으로 이동
 	@RequestMapping("/searchId")
 	public String searchId() {
 		return "login/idSearch";		
 	}
 	
-	//怨꾩젙 李얘린
+	//계정 찾기
 //	@RequestMapping("/idInfo")
 //	public ModelAndView idInfo() {
 	
 //		return null;	
 //	}
 	
-	//怨꾩젙 李얘린
+	//계정 정보
 	@RequestMapping("/idInfo")
 	public String idInfo() {
 		
