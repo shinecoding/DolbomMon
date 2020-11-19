@@ -78,7 +78,7 @@
 		</table>
 		<div>
 			<a class="btn btn-warning" href="/dbmon/freeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
-			<a class="btn btn-warning" href="/dbmon/freeBoardEdit" role="button">수정</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoardEdit?no=${vo.no}" role="button">수정</a>
 			<a class="btn btn-warning" href="#" role="button">답변</a>
 			<a class="btn btn-warning" href="/dbmon/freeBoard" role="button">목록</a>
 		</div>
