@@ -13,49 +13,31 @@
 	$(function(){
 		
 		 $(document).ready(function() {
-		      // 팝업 창 크기를 HTML 크기에 맞추어 자동으로 크기를 조정하는 함수.
-		      var strWidth;
-		      var strHeight;
-
-		      //innerWidth / innerHeight / outerWidth / outerHeight 지원 브라우저 
-		      if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
-		          strWidth = $('.messageMain').outerWidth() + (window.outerWidth - window.innerWidth);
-		          strHeight = $('.messageMain').outerHeight() + (window.outerHeight - window.innerHeight);
-		      }
-		      else {
-		          var strDocumentWidth = $(document).outerWidth();
-		          var strDocumentHeight = $(document).outerHeight();
-
-		          window.resizeTo ( strDocumentWidth, strDocumentHeight );
-
-		          var strMenuWidth = strDocumentWidth - $(window).width();
-		          var strMenuHeight = strDocumentHeight - $(window).height();
-
-		          strWidth = $('.messageMain').outerWidth() + strMenuWidth;
-		          strHeight = $('.messageMain').outerHeight() + strMenuHeight;
-		      }
-
-		      //resize 
-		      window.resizeTo( strWidth, strHeight );
-
+			// 팝업 창 크기를 HTML 크기에 맞추어 자동으로 크기를 조정하는 함수.
+			var strWidth;
+			var strHeight;
+			
+			//innerWidth / innerHeight / outerWidth / outerHeight 지원 브라우저 
+			if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
+			    strWidth = $('#messageMain').outerWidth() + (window.outerWidth - window.innerWidth);
+			    strHeight = $('#messageMain').outerHeight() + (window.outerHeight - window.innerHeight);
+			}
+			else {
+			    var strDocumentWidth = $(document).outerWidth();
+			    var strDocumentHeight = $(document).outerHeight();
+			
+			    window.resizeTo ( strDocumentWidth, strDocumentHeight );
+			
+			    var strMenuWidth = strDocumentWidth - $(window).width();
+			    var strMenuHeight = strDocumentHeight - $(window).height();
+			
+			    strWidth = $('#messageMain').outerWidth() + strMenuWidth;
+			    strHeight = $('#messageMain').outerHeight() + strMenuHeight;
+			}
+			
+			//resize 
+			window.resizeTo( strWidth, strHeight );
 		  });
-		 
-		 /*
-		$(window).load(function() { //창크기 맞춰서 열기 (IE8이하는 안먹힘)
-
-			 // 1영역, 2영역 크기 확인 
-			 // $('#container') : 2영역 컨텐츠를 감싸고 있는 div 
-			 // (window.outerWidth - window.innerWidth) : 1영역 width 
-			  //(window.outerHeight - window.innerHeight) : 1영역 height 
-			  
-
-			  var strWidth = $('#messageMain').outerWidth() + (window.outerWidth - window.innerWidth);
-			  var strHeight = $('#messageMain').outerHeight() + (window.outerHeight - window.innerHeight);
-
-			  //resize 
-			  window.resizeTo( strWidth, strHeight );
-		});
-		*/
 
 	});
 	
@@ -63,7 +45,6 @@
 		$(".note_title img").attr("src",data);	
 	}
 	
-
 </script>
 <style>
 	body{
@@ -72,6 +53,8 @@
 		overflow-y:hidden;
 		margin:0;
 		padding:0;
+		width:482px;
+		height:600px;
 	}
 
 	#messageMain{
@@ -119,6 +102,7 @@
 	
 </style>
 </head>
+<body onload="reloadWindow()">
 <div id="messageMain">
 	<div id="note_tile" class="clearfix">
 		<p class="note_title" style="float:left">

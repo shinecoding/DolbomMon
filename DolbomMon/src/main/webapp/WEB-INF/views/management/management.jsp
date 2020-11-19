@@ -59,7 +59,7 @@
 		window.open("/dbmon/messagetest","message","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=482, height=600"); 
 	}
 */
-
+	
 </script>
 <style>
 	body, div{
