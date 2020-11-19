@@ -26,10 +26,10 @@
 		<div id="top">
 			<b>공지사항 게시글 보기</b>
 		</div>
-		<table class="table">
+		<table class="table" style="table-layout: fixed">
 			<tbody>
 				<tr>
-					<th scope="col">글제목</th>
+					<th scope="col" width="130px">글제목</th>
 					<td>공지사항 글제목</td>
 				</tr>
 				<tr>

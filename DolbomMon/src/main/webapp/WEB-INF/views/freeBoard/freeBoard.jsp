@@ -49,6 +49,7 @@
 	<table class="table table-hover">
 		<colgroup>
 			<col style="width: 10%;">
+			<col style="width: 15%;">
 			<col>
 			<col style="width: 15%;">
 			<col style="width: 15%;">
@@ -57,6 +58,7 @@
 		<thead>
 			<tr>
 				<th scope="col">글번호</th>
+				<th scope="col">말머리</th>
 				<th scope="col">글제목</th>
 				<th scope="col">작성자</th>
 				<th scope="col">등록일</th>
@@ -64,42 +66,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<!-- 글제목 script로 글자수 제한하기 -->
-				<td class="subject"><a href="freeBoardView">글제목입니다1111111글제목입니다1111111</a></td>
-				<td>홍길동</td>
-				<td>13:11</td>
-				<td>1</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td class="subject"><a href="#">글제목입니다2222222</a></td>
-				<td>정길동</td>
-				<td>11-11 15:11</td>
-				<td>2</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td class="subject"><a href="#">글제목입니다3333333</a></td>
-				<td>정길동</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-			</tr>
-			<tr>
-				<th scope="row">4</th>
-				<td class="subject"><a href="#">글제목입니다4444444</a></td>
-				<td>정길동</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-			</tr>
-			<tr>
-				<th scope="row">5</th>
-				<td class="subject"><a href="#">글제목입니다5555555</a></td>
-				<td>정길동</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-			</tr>
+			<c:forEach var="vo" items="${list}">
+				<tr>
+					<th scope="row">${vo.no}</th>
+					<th scope="row">${vo.head}</th>
+					<!-- 글제목 script로 글자수 제한하기 -->
+					<td class="subject"><a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
+					<td>${vo.userid}</td>
+					<td>${vo.writedate}</td>
+					<td>${vo.hit}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<br/>
