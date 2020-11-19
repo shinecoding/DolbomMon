@@ -8,28 +8,27 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
-	//게시판 리스트로 이동
+	
 	@RequestMapping("/freeBoard")
 	public String freeBoard() {
 		
 		return "freeBoard/freeBoard";
 	}
 	
-	//게시판 글쓰기 폼으로 이동
+	
 	@RequestMapping("/freeBoardWrite")
 	public String freeBoardWrite() {
 		
 		return "freeBoard/freeBoardWrite";
 	}
 	
-	//게시판 글쓰기
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
 	public ModelAndView freeBoardWriteOk() {
 		
 		return null;	
 	}
 	
-	//게시글 보기
+	
 //	@RequestMapping("/freeBoardView")
 //	public ModelAndView freeBoardView() {
 		
@@ -41,21 +40,21 @@ public class BoardController {
 		return "freeBoard/freeBoardView";
 	}
 	
-	//공지사항 게시판으로 이동
+	//怨듭��궗�빆 寃뚯떆�뙋�쑝濡� �씠�룞
 	@RequestMapping("/noticeBoard")
 	public String noticeBoard() {
 		
 		return "freeBoard/noticeBoard";
 	}
 	
-	//공지사항 글쓰기 폼으로 이동
+	//怨듭��궗�빆 湲��벐湲� �뤌�쑝濡� �씠�룞
 	@RequestMapping("/noticeBoardWrite")
 	public String noticeBoardWrite() {
 		
 		return "freeBoard/noticeBoardWrite";
 	}
 	
-	//공지사항 게시글 보기
+	//怨듭��궗�빆 寃뚯떆湲� 蹂닿린
 //	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
 //	public ModelAndView noticeBoardView() {
 		
@@ -68,28 +67,28 @@ public class BoardController {
 		return "freeBoard/noticeBoardView";
 	}
 	
-	//신고게시판으로 이동
+	//�떊怨좉쾶�떆�뙋�쑝濡� �씠�룞
 	@RequestMapping("/bulletinBoard")
 	public String bulletinBoard() {
 		
 		return "freeBoard/bulletinBoard";
 	}
 	
-	//신고게시글 보기
+	//�떊怨좉쾶�떆湲� 蹂닿린
 	@RequestMapping("/bulletinBoardView")
 	public String bulletinBoardView() {
 		
 		return "freeBoard/bulletinBoardView";
 	}
 	
-	//인증게시판으로 이동
+	//�씤利앷쾶�떆�뙋�쑝濡� �씠�룞
 	@RequestMapping("/confirmBoard")
 	public String confirmBoard() {
 		
 		return "freeBoard/confirmBoard";
 	}
 	
-	//인증글 보기
+	//�씤利앷� 蹂닿린
 	@RequestMapping("/confirmBoardView")
 	public String confirmBoardView() {
 		

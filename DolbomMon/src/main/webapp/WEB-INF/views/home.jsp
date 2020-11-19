@@ -35,13 +35,19 @@ if(manager!="Y"){
       font-family:"Noto Sans KR,sans-serif!important;";
       text-decoration:none;
       font-weight:bold;
-      text-align: center;   
-      
+      text-align: center; 
+      width: -webkit-calc(100%);  
+       margin:0; padding:0;
+       width: 100%;  
      
       }
+   html{
+   	   margin:0; padding:0;
+       width: 100%;  
+   }
    #slider{ 
          margin: 0 auto;
-         width:100%;
+         width: -webkit-calc(100%);
          max-width:980px;
       }
     #list{
@@ -90,12 +96,12 @@ if(manager!="Y"){
 
   <div id="list" style="max-width: 1000px; margin: auto;">
   <ul id ="listitem" class="list-group list-group-horizontal-sm">
-     <li class="list-group-item" style="border-radius:50%"><img src="img/a.png"  width="56" height="56"/><br/>등하원</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/b.png"  width="56" height="56"/><br/>실내놀이</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/c.png"  width="56" height="56"/><br/>야외활동</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/d.png"  width="56" height="56"/><br/>학습지도</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/f.png"  width="56" height="56"/><br/>영어놀이</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/g.png"  width="56" height="56"/><br/>가사돌봄</li>
+     <li class="list-group-item" style="border-radius:50%"><img src="img/a.png"  width="56" height="56" href="#"/><br/>등하원</li>
+     <li class="list-group-item" style="border-radius:50%"><img src="img/b.png"  width="56" height="56" href="#"/><br/>실내놀이</li>
+     <li class="list-group-item" style="border-radius:50%"><img src="img/c.png"  width="56" height="56" href="#"/><br/>야외활동</li>
+     <li class="list-group-item" style="border-radius:50%"><img src="img/d.png"  width="56" height="56" href="#"/><br/>학습지도</li>
+     <li class="list-group-item" style="border-radius:50%"><img src="img/f.png"  width="56" height="56" href="#"/><br/>영어놀이</li>
+     <li class="list-group-item" style="border-radius:50%"><img src="img/g.png"  width="56" height="56" href="#"/><br/>가사돌봄</li>
   </ul>
   
   <!-- START THE FEATURETTES -->
