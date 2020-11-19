@@ -27,6 +27,8 @@
 		font-size:14px;
 		overflow-x:hidden; 
 		overflow-y:hidden;
+		margin:0;
+		padding:0;
 	}
 
 	#messageMain{
