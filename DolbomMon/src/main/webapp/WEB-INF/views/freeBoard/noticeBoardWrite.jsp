@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
+<script src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 <style>
 	.container{
 		width: 900px;	
@@ -28,13 +29,36 @@
 		margin: 0 auto;
 	}
 </style>
+<script>
+$(function(){
+	//ckeditor를 textarea와 연결하기
+	CKEDITOR.replace("content");
+	
+	//데이터 입력유무 확인
+	$("#noticeBoardFrm").submit(function(){
+		if($("#subject").val()==""){
+			alert("글제목을 입력하세요.");
+			$("#subject").focus();
+			return false;
+			
+		}
+		if(CKEDITOR.instances.content.getData()==""){
+			alert("글내용을 입력하세요.");
+			$("#content").focus();
+			return false;
+		}
+		return true;
+	});
+});
+
+</script>
 </head>
 <body>
 <div class="container">
 <div id="top">
 <b>공지사항 글쓰기</b>
 </div>
-	<form method="post" action="#">
+	<form method="post" action="#" id="noticeBoardFrm">
 		<div class="form-group">
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -48,8 +72,8 @@
 					<option value="3">블라블라</option>
 				</select>
 			</div>
-	 		<label for="title">제목</label>
-			<input type="text" class="form-control" id="title" placeholder="제목을 입력하세요"><br/>
+	 		<label for="subject">제목</label>
+			<input type="text" class="form-control" id="subject" placeholder="제목을 입력하세요"><br/>
 			<div>
 			<label for="content">글내용</label><br/>
 				<textarea class="form-control" id="content" placeholder="글내용을 입력하세요"></textarea>
