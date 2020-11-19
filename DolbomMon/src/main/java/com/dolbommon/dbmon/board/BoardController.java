@@ -52,7 +52,7 @@ public class BoardController {
 	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest hsr, HttpSession hs) {
 		
 		vo.setIp(hsr.getRemoteAddr());	//ip 구하기
-		vo.setUserid((String)hs.getAttribute("logId"));
+		vo.setUserid((String)hs.getAttribute("userid"));	
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		int result = dao.freeBoardInsert(vo);
@@ -81,15 +81,60 @@ public class BoardController {
 	
 		return mav;
 	}
-
-	//공지사항 게시판으로 이동
+	
+	//자유게시판 글 수정폼으로 이동
+	@RequestMapping("/freeBoardEdit")
+	public ModelAndView freeBoardEdit(int no) {
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		
+		FreeBoardVO vo = dao.freeBoardSelect(no);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("freeBoard/freeBoardEdit");
+		
+		return mav;
+	}
+	
+	//자유게시판 글 수정
+	@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)
+	public ModelAndView freeBoardEditOk(FreeBoardVO vo, HttpSession ses) {
+		vo.setUserid((String)ses.getAttribute("logId"));
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		int result = dao.freeBoardEditOk(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.addObject("no", vo.getNo());
+			mav.setViewName("redirect:freeBoard");
+		}else {
+			mav.setViewName("board/result");
+		}
+		return mav;
+	}
+	
+	//자유게시판 글 삭제ok
+	@RequestMapping("/freeBoardDel")
+	public ModelAndView freeBoardDel(int no, HttpSession ses) {
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		int result = dao.freeBoardDel(no, (String)ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:freeBoard");
+		}else {
+			mav.setViewName("freeBoard/result");
+		}
+		return mav;
+	}
+	
+	//공지사항 게시판으로 이동ok
 	@RequestMapping("/noticeBoard")
 	public String noticeBoard() {
 		
 		return "freeBoard/noticeBoard";
 	}
 	
-	//공지사항 글쓰기 폼으로 이동
+	//공지사항 글쓰기 폼으로 이동ok
 	@RequestMapping("/noticeBoardWrite")
 	public String noticeBoardWrite() {
 		

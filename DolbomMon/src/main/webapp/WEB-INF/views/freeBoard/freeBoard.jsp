@@ -49,6 +49,7 @@
 	<table class="table table-hover">
 		<colgroup>
 			<col style="width: 10%;">
+			<col style="width: 15%;">
 			<col>
 			<col style="width: 15%;">
 			<col style="width: 15%;">
@@ -57,6 +58,7 @@
 		<thead>
 			<tr>
 				<th scope="col">글번호</th>
+				<th scope="col">말머리</th>
 				<th scope="col">글제목</th>
 				<th scope="col">작성자</th>
 				<th scope="col">등록일</th>
@@ -67,6 +69,7 @@
 			<c:forEach var="vo" items="${list}">
 				<tr>
 					<th scope="row">${vo.no}</th>
+					<th scope="row">${vo.head}</th>
 					<!-- 글제목 script로 글자수 제한하기 -->
 					<td class="subject"><a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
 					<td>${vo.userid}</td>

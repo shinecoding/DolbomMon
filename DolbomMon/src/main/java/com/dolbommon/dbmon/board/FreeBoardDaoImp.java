@@ -12,6 +12,8 @@ public interface FreeBoardDaoImp {
 	public int hitCount(int no);
 	//자유게시판 글쓰기
 	public int freeBoardInsert(FreeBoardVO vo);
-	
-	
+	//자유게시판 글 삭제
+	public int freeBoardDel(int no, String userid);
+	//자유게시판 글 수정
+	public int freeBoardEditOk(FreeBoardVO vo);
 }

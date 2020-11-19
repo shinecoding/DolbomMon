@@ -9,6 +9,7 @@ public class FreeBoardVO {
 	private int hit;
 	private String writedate;
 	private String ip;
+	private String head;
 	
 	public int getNo() {
 		return no;
@@ -51,5 +52,11 @@ public class FreeBoardVO {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public String getHead() {
+		return head;
+	}
+	public void setHead(String head) {
+		this.head = head;
 	}
 }

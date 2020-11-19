@@ -28,6 +28,7 @@
 			}		
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -35,10 +36,14 @@
 		<div id="top">
 			<b>게시글 보기</b>
 		</div>
-		<table class="table">
+		<table class="table" style="table-layout: fixed">
 			<tbody>
 				<tr>
-					<th scope="col">글제목</th>
+					<th scope="col" width="130px">말머리</th>
+					<td>${vo.head}</td>
+				</tr>
+				<tr>
+					<th scope="col" width="130px">글제목</th>
 					<td>${vo.subject}</td>
 				</tr>
 				<tr>
@@ -72,10 +77,10 @@
 			</tfoot>
 		</table>
 		<div>
-			<a class="btn btn-warning" href="#" role="button" id="delBtn">삭제</a>
-			<a class="btn btn-warning" href="#" role="button">수정</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoardEdit" role="button">수정</a>
 			<a class="btn btn-warning" href="#" role="button">답변</a>
-			<a class="btn btn-warning" href="#" role="button">목록</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoard" role="button">목록</a>
 		</div>
 	</div>
 </body>

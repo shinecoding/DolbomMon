@@ -1,6 +1,5 @@
 package com.dolbommon.dbmon.login;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,7 +23,6 @@ public class LoginController {
 		this.sqlSession = sqlSession;
 	}
 
-	
 	//로그인 폼으로 이동
 	@RequestMapping("/login")
 	public String login() {
@@ -39,10 +37,23 @@ public class LoginController {
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
 		
+		if(resultVO==null) {
+			mav.setViewName("redirect:login");			
+		}else {
+			ses.setAttribute("userid", resultVO.getUserid());
+			ses.setAttribute("username", resultVO.getUsername());
+			ses.setAttribute("logStatus", "Y");
+			mav.setViewName("redirect:/");	
+		}
+		return mav;
+	}
+	
+	//로그아웃
+	@RequestMapping("/logout")
+	public String logout(HttpSession ses) {
+		ses.invalidate();
 		
-		
-		
-		return null;
+		return "home";
 	}
 	
 	//계정찾기 폼으로 이동
