@@ -152,7 +152,7 @@
 		    <li><a href="/dbmon/join">결제조회</a></li>
 			<li><a href="/dbmon/login">서브메뉴</a></li>
 			<li><a href="teacherList">선생님페이지</a></li>
-			<li><a href="#">부모님페이지</a></li>
+			<li><a href="mypage">부모님페이지</a></li>
 		</ul>
    </ul>
    </div>
