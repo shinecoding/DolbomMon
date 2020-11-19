@@ -1,5 +1,12 @@
 package com.dolbommon.dbmon.board;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,14 +15,32 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BoardController {
 
-	//게시판 리스트로 이동
-	@RequestMapping("/freeBoard")
-	public String freeBoard() {
-		
-		return "freeBoard/freeBoard";
+	SqlSession sqlSession;
+
+	public SqlSession getSqlSession() {
+		return sqlSession;
 	}
 	
-	//게시판 글쓰기 폼으로 이동
+	@Autowired
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
+	//게시판 리스트로 이동ok
+	@RequestMapping("/freeBoard")
+	public ModelAndView freeBoard() {
+		
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		List<FreeBoardVO> list = dao.freeBoardList();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("freeBoard/freeBoard");
+		
+		return mav;
+	}
+	
+	//게시판 글쓰기 폼으로 이동ok
 	@RequestMapping("/freeBoardWrite")
 	public String freeBoardWrite() {
 		
@@ -24,23 +49,39 @@ public class BoardController {
 	
 	//게시판 글쓰기
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardWriteOk() {
+	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest hsr, HttpSession hs) {
 		
-		return null;	
+		vo.setIp(hsr.getRemoteAddr());	//ip 구하기
+		vo.setUserid((String)hs.getAttribute("logId"));
+		
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		int result = dao.freeBoardInsert(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result>0) {
+			mav.setViewName("redirect:freeBoard");
+		}else {
+			mav.setViewName("freeBoard/result");	
+		}
+		return mav;
 	}
 	
-	//게시글 보기
-//	@RequestMapping("/freeBoardView")
-//	public ModelAndView freeBoardView() {
-		
-//		return null;
-//	}
+	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
-	public String freeBoardView() {
+	public ModelAndView freeBoardView(int no) {
 		
-		return "freeBoard/freeBoardView";
-	}
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		dao.hitCount(no);
+		FreeBoardVO vo = dao.freeBoardSelect(no);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("freeBoard/freeBoardView");
 	
+		return mav;
+	}
+
 	//공지사항 게시판으로 이동
 	@RequestMapping("/noticeBoard")
 	public String noticeBoard() {
