@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
 	SqlSession sqlSession;
-	
+
 	public SqlSession getSqlSession() {
 		return sqlSession;
 	}
@@ -24,12 +24,13 @@ public class LoginController {
 	}
 
 	//로그인 폼으로 이동
+
 	@RequestMapping("/login")
 	public String login() {
 		return "login/loginForm";	
 	}
-	
 	//로그인
+	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
 		
@@ -57,6 +58,7 @@ public class LoginController {
 	}
 	
 	//계정찾기 폼으로 이동
+
 	@RequestMapping("/searchId")
 	public String searchId() {
 		return "login/idSearch";		
@@ -74,6 +76,5 @@ public class LoginController {
 	public String idInfo() {
 		
 		return "login/idInfo";
-
 	}
 }
