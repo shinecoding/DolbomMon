@@ -25,6 +25,7 @@ public class RegisterController {
 		}
 		
 		
+
 		//////////////공통//////////////
 		
 		//////////////////////////// 학부모 회원가입 시작 /////////////////////////////////
@@ -47,10 +48,28 @@ public class RegisterController {
 			return "register/parent/location";
 		}
 		
-		// 학부모 - 원하는 시간 입력
+		// 학부모 - 스케줄 선택
 		@RequestMapping("/parent/schedule")
 		public String parentSchedule() {
-			return "register/parent/schedule";
+			return "register/parent/schedule/schedule";
+		}
+		
+		// 학부모 - 정기적으로 시간 설정
+		@RequestMapping("/parent/scheduleType/regular")
+		public String parentScheduleRegular() {
+			return "register/parent/schedule/regular";
+		}
+		
+		// 학부모 - 특정날에만 시간 설정 
+		@RequestMapping("/parent/scheduleType/shortTerm")
+		public String parentScheduleShortTerm() {
+			return "register/parent/schedule/shortTerm";
+		}
+		
+		// 학부모 - 아직 정확한 계획은 없어요 설정
+		@RequestMapping("/parent/scheduleType/noPlan")
+		public String parentScheduleNoPlan() {
+			return "register/parent/schedule/noPlan";
 		}
 		
 		// 학부모 - 특이사항 입력
@@ -82,7 +101,51 @@ public class RegisterController {
 		// 돌봄몬 - 원하는 시간 입력
 		@RequestMapping("/dbm/schedule")
 		public String dbmSchedule() {
-			return "register/dbm/schedule";
+			return "register/dbm/schedule/schedule";
 		}
 		
+		// 돌봄몬 - 원하는 시간 직접 입력하기
+		@RequestMapping("/dbm/schedule/detail")
+		public String dbmScheduleDetail() {
+			return "register/dbm/schedule/detail";
+		}
+		
+		// 돌봄몬 - 희망시급과 CCTV동의여부 
+		@RequestMapping("/dbm/wantedPaymentAndCCTV")
+		public String dbmWantedPaymentAndCCTV() {
+			return "register/dbm/wantedPaymentAndCCTV";
+		}
+		
+		// 돌봄몬 - 프로필 사진 등록
+		@RequestMapping("/dbm/profileImage")
+		public String dbmProfileImage(){
+			return "register/dbm/profileImage";
+		}
+		
+		// 돌봄몬 - 간단 자기소개
+		@RequestMapping("/dbm/introduce")
+		public String dbmIntroduce() {
+			return "register/dbm/introduce";
+		}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

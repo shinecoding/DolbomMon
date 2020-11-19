@@ -10,10 +10,6 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 </head>
 <body>
-	<h1>언제 활동할 수 있나요??</h1>
-	<form action="<%=request.getContextPath()%>/regForm">
-		
-		<input type="submit" value="다음">
-	</form>
+	<h1>특정날에만</h1>
 </body>
 </html>
