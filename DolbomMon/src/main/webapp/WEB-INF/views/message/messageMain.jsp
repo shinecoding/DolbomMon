@@ -38,6 +38,8 @@
 			//resize 
 			window.resizeTo( strWidth, strHeight );
 		  });
+		 
+		 
 
 	});
 	
