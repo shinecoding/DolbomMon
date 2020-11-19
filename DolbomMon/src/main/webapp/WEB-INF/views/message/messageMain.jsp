@@ -41,7 +41,7 @@
 		<div style="float:clear"></div>		
 		<ul class="nav nav-tabs">
 		  <li class="nav-item">
-		    <a class="nav-link active" data-toggle="tab" href="#send">보낸쪽지</a>
+		    <a class="nav-link active" data-toggle="tab" href="#message">보낸쪽지</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" data-toggle="tab" href="#accept">받은쪽지</a>
