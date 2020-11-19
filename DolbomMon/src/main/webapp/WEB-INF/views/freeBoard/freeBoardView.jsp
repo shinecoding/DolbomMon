@@ -28,6 +28,7 @@
 			}		
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -35,42 +36,32 @@
 		<div id="top">
 			<b>게시글 보기</b>
 		</div>
-		<table class="table">
+		<table class="table" style="table-layout: fixed">
 			<tbody>
 				<tr>
-					<th scope="col">글제목</th>
-					<td>글제목글제목글제목글제목글제목글제목</td>
+					<th scope="col" width="130px">말머리</th>
+					<td>${vo.head}</td>
+				</tr>
+				<tr>
+					<th scope="col" width="130px">글제목</th>
+					<td>${vo.subject}</td>
 				</tr>
 				<tr>
 					<th scope="col">작성자</th>
-					<td>홍길동</td>
+					<td>${vo.userid}</td>
 				</tr>
 				<tr>
 					<th scope="col">등록일</th>
-					<td>11-16 15:35</td>
+					<td>${vo.writedate}</td>
 				</tr>
 				<tr>
 					<th scope="col">조회수</th>
-					<td>20</td>
+					<td>${vo.hit}</td>
 				</tr>
 				<tr>
 					<th scope="col">글내용</th>
 					<td>
-					<br/>마스크 착용 의무화(10.13~), 집회금지 명령 지속
-					
-					대형학원, 뷔페 등 고위험시설 10종 집합제한으로 전환<br/>
-					
-					수도권 방역수칙 의무화 대상 시설 (16종)<br/>
-					
-					실내외 공공시설 개방, 인원 50%로 제한 운영<br/>
-					
-					사회적 거리두기 조정 방안(2020.10.12.~)<br/>
-					
-					방역수칙 위반 시 책임 강화…개정된 감염병예방법 시행<br/>
-					
-					(상세한 내용은 링크를 참조하세요!)<br/>
-					
-					자세한 사항은 아래의 링크 주소를 클릭해 주세요.<br/><br/>
+					<br/>${vo.content}<br/><br/>
 					</td>
 				</tr>
 			</tbody>
@@ -86,10 +77,10 @@
 			</tfoot>
 		</table>
 		<div>
-			<a class="btn btn-warning" href="#" role="button" id="delBtn">삭제</a>
-			<a class="btn btn-warning" href="#" role="button">수정</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoardEdit?no=${vo.no}" role="button">수정</a>
 			<a class="btn btn-warning" href="#" role="button">답변</a>
-			<a class="btn btn-warning" href="#" role="button">목록</a>
+			<a class="btn btn-warning" href="/dbmon/freeBoard" role="button">목록</a>
 		</div>
 	</div>
 </body>
