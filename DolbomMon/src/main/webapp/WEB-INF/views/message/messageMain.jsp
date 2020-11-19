@@ -25,6 +25,8 @@
 <style>
 	body{
 		font-size:14px;
+		overflow-x:hidden; 
+		overflow-y:hidden;
 	}
 
 	#messageMain{
@@ -61,7 +63,9 @@
 	    color:#000;
 	}
 	
-	ul, li{
+	.search_box ul, .search_box li{
+		margin:0;
+		padding:0;
 		list-style-type:none;
 		text-align:center;
 	}
@@ -186,11 +190,11 @@
 	
 	<!-- 검색창 -->
 
-	<div class="search_box01">
+	<div class="search_box">
 		<form name="search" action="#">
 			<ul>
 				<li>
-				   	<select name="head">
+				   	<select name="head" style="height:27px;">
 					<option value="sub_memo" > 제목+본문</option>
 					<option value="subject" >제목만</option>
 					<option value="name" >이름으로</option>

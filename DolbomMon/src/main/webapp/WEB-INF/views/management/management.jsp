@@ -43,6 +43,10 @@
     function logOut(){
 		location.href="/dbmon/managerLogout";
     } 
+    
+	function openNewWindow() { 
+		window.open("/dbmon/messagetest","","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=482, height=600"); 
+		}
 
 
 </script>
@@ -301,7 +305,7 @@
 
 
 <!-- ============================= -->
-<div id="topBar" id="topBar"></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
+<div id="topBar" id="topBar"><a href="javascript:openNewWindow()"><button class="btn btn-primary">쪽지</button></a></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
 <div id="mainPage"></div>
 </body>
 </html>
