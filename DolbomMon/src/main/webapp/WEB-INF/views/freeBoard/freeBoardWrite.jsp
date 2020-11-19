@@ -34,7 +34,7 @@
 <div id="top">
 <b>게시판 글쓰기</b>
 </div>
-	<form method="post" action="/dbmon/freeBoardWriteOk">
+	<form method="post" action="#">
 		<div class="form-group">
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
