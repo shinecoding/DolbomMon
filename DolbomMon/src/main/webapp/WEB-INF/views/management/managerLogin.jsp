@@ -10,7 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 </head>
 <body>
-<h1>로그인화면</h1>
 <title>DolbomMon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
@@ -21,10 +20,7 @@
 
 	$(function(){
 		$("#test").click(function(){ /*DB작업 전 임시 로그인버튼*/
-			<%
-			session.setAttribute("logStatus", "Y");
-			%>		
-			location.href="/dbmon/management";
+			location.href="/dbmon/managerlogin2";
 			
 		});
 		
@@ -83,7 +79,6 @@
 		font-weight: 200;
 	}
 	
-	
 	*,
 	*:before,
 	*:after {
@@ -91,8 +86,6 @@
 	  -webkit-box-sizing: border-box;
 	  box-sizing: border-box; 
 	}
-	
-	
 	h2 {
 	  color:rgba(255,255,255,.8);
 	  margin-left:45px;

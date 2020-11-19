@@ -8,30 +8,37 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
-	//로그인 페이지로 이동
+	//濡쒓렇�씤 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/login")
 	public String login() {
 		return "login/loginForm";	
 	}
 	
-	//로그인
+	//濡쒓렇�씤
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk() {
 		
 		return null;
 	}
 	
-	//계정 찾기 페이지로 이동
+	//怨꾩젙 李얘린 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/searchId")
 	public String searchId() {
 		return "login/idSearch";		
 	}
 	
-	//계정 찾기
-	@RequestMapping("/idInfo")
-	public ModelAndView idInfo() {
+	//怨꾩젙 李얘린
+//	@RequestMapping("/idInfo")
+//	public ModelAndView idInfo() {
 	
-		return null;	
-	}
+//		return null;	
+//	}
+	
+	//怨꾩젙 李얘린
+	@RequestMapping("/idInfo")
+	public String idInfo() {
+		
+		return "login/idInfo";
 
+	}
 }

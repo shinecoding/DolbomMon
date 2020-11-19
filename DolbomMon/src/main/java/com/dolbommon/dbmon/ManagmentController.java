@@ -1,5 +1,7 @@
 package com.dolbommon.dbmon;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +12,7 @@ public class ManagmentController {
 	public String management() {
 		return "management/management";
 	}
-	@RequestMapping("/managerLogin")
+	@RequestMapping("/managerLogin") //인터셉터용
 	public String login() {
 		return "management/managerLogin";
 	}
@@ -29,6 +31,7 @@ public class ManagmentController {
 	@RequestMapping("/managerRegister")
 	public String managerRegister(){
 		return "management/managerRegister";
+
 	}
 	@RequestMapping("/accountManage")
 	public String accountManage(){
@@ -37,6 +40,17 @@ public class ManagmentController {
 	@RequestMapping("/managerManage")
 	public String managerManage(){
 		return "management/managerManage";
+	}
+	
+	@RequestMapping("/managerLogout")
+	public String managerLogout(HttpSession session) {
+		session.setAttribute("managerStatus", "N");
+		return "management/managerLogin";
+	}
+	@RequestMapping("/managerlogin2") //임시로그인
+	public String managerlogin(HttpSession session) {
+		session.setAttribute("managerStatus", "Y");
+		return "management/management";
 	}
 
 }
