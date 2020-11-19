@@ -141,7 +141,7 @@ public class BoardController {
 		return "freeBoard/noticeBoardWrite";
 	}
 	
-	//공지사항 게시글 보기
+//	//공지사항 게시글 보기
 //	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
 //	public ModelAndView noticeBoardView() {
 		
