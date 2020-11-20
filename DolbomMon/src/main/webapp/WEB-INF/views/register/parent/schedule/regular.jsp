@@ -13,6 +13,7 @@
 	*{margin:0; padding:0; text-decoration:none; list-style:none;}
 	.container{width:518px; padding:0;}
 	/* ==================== 초기화 ====================== */
+	#selectDayDiv input[type=checkbox]{display:none;}
 	
 	/* ==================== 헤더 ====================== */
 	#header{
@@ -30,11 +31,9 @@
 	#startDateDiv span{float:left; font-weight:bold; color:gray; line-height:30px;}
 	#startDateDiv input[type=date]{float:right; background-color:rgb(255, 222, 89);}/*돌봄 시작일*/
 	
-	#selectDayDiv input[type=checkbox]{display:block;}
 	
 	#selectDayDiv{width:100%; overflow:hidden; height:auto;}
 	#selectDayDiv li>label{
-		display:block; 
 		width:100%; height:100%; 
 		border:1px solid gray; border-radius:50%; 
 		background-color:#EFEFEF; 

@@ -13,6 +13,7 @@
 	*{margin:0; padding:0; text-decoration:none; list-style:none;}
 	.container{width:600px; padding:0px;}
 	#header{width:100%; height:60px; margin-top:50px; text-align:center;}
+	input[type=radio]{display:none;}
 	/* ====================== 자녀 수 ========================= */
 	#childrenInfo{width:100%; overflow:hidden; height:auto; }
 	#childrenCnt label{

@@ -18,7 +18,7 @@
 	/* ================== 돌볼 수 있는 아이의 나이 ================== */
 	#childrenAgeHeader{width:100%; overflow:hidden; height:auto; margin-top:40px; text-align:center; font-size:2em;}
 	#childrenAgeDiv{width:100%; overflow:hidden; height:auto; margin-top:30px; }	
-	#childrenAgeDiv input[type=checkbox]{display:block;}
+	#childrenAgeDiv input[type=checkbox]{display:none;}
 	#childrenAgeDiv div{width:25%; overflow:hidden; height:auto; padding:10px; float:left; text-align:center;}
 	#childrenAgeDiv div>label{display:inline-block; width:auto; height:auto;}
 	/* ================== 돌볼 수 있는 아이의 나이 ================== */
@@ -26,7 +26,7 @@
 	/* ================== 가능한 돌봄유형 ====================*/
 	#careTypeHeader{width:100%; overflow:hidden; height:auto; margin-top:30px; text-align:center; font-size:2em;}
 	#careTypeDiv{width:100%; overflow:hidden; height:auto; margin-top:30px;}
-	#careTypeDiv input[type=checkbox]{display:block;}
+	#careTypeDiv input[type=checkbox]{display:none;}
 	#careTypeDiv div{width:25%; height:120px; padding:10px; float:left; text-align:center;}
 	#careTypeDiv div:nth-of-type(12){clear:left;}
 	/* ================== 가능한 돌봄유형 ====================*/

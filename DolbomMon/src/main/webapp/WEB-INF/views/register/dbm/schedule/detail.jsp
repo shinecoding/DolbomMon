@@ -13,7 +13,7 @@
 	.container{width:518px; padding:0;}
 	
 	#headerDiv{width:100%; height:auto; text-align:center; margin-top:50px; border-bottom:1px solid #EFEFEF;}
-	
+	input[type=radio], input[type=checkbox]{display:none;}
 	/* ==================== 시작 날짜 =================== */
 	#startDateDiv{padding:10px 0;}
 	#startDateDiv>input[type=date]{width:100%;}

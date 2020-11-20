@@ -12,6 +12,7 @@
 	/* ============= 초기화 ==============  */
 	*{margin:0; padding:0; list-style:none; text-decoration:none;}
 	.container{width:600px; margin-top:100px;}
+	input[type=checkbox]{display:none;}
 	/* ============= 초기화 ==============  */
 	
 	/* ============= 헤더 =============== */
