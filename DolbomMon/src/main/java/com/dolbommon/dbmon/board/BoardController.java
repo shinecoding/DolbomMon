@@ -196,19 +196,18 @@ public class BoardController {
 		return "freeBoard/noticeBoardWrite";
 	}
 	
-	
-	
-//	//공지사항 게시글 보기
-//	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
-//	public ModelAndView noticeBoardView() {
+	//공지사항 게시글 보기
+	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
+	public ModelAndView noticeBoardView() {
 		
-//		return null;
-//	}
-	
-	@RequestMapping("/noticeBoardView")
-	public String noticeBoardView() {
 		
-		return "freeBoard/noticeBoardView";
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("freeBoard/noticeBoardView");
+		
+		return mav;
 	}
 	
 	//신고게시판으로 이동

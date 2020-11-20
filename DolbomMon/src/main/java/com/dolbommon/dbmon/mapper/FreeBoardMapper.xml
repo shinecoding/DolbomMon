@@ -46,5 +46,4 @@
 		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, #{ref}, #{step}, #{lvl})
 	</insert>
 	
-	
 </mapper>
