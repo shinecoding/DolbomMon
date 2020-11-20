@@ -23,7 +23,7 @@ public class ManagmentController {
 		return "management/test";
 	}
 	
-	@RequestMapping(value="/memberManage", method=RequestMethod.POST)
+	@RequestMapping("/memberManage")
 	public String memberManage(){
 		return "management/memberManage";
 	}
