@@ -105,7 +105,7 @@
 			<div id="profBox">
 				<img class="rounded-circle mx-auto d-block" id="profIcon" src="img/profilepic.png"/>
 				<img id="profPlus" src="icon/profile-add-bt.svg"/>
-				<input type="file" id="pic" name="pic" accept="image/*,video/*">
+				<input type="file" id="pic" name="filename" accept="image/*,video/*">
 			</div>		
 				
 				<div id="picWarning">
