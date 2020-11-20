@@ -37,11 +37,9 @@
 			if(selectedId=="cr7") {
 				$("form").attr("action", "<%=request.getContextPath()%>/dbm/schedule/detail");
 			}else{
-				$("form").attr("action", "<%=request.getContextPath()%>/regForm");
+				$("form").attr("action", "<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV");
 			}
 		});
-		
-	 	
 	});
 </script>
 </head>
@@ -50,7 +48,7 @@
 		<div id="headerDiv">
 			언제 활동할 수 있나요?
 		</div>
-		<form action="<%=request.getContextPath()%>/regForm">
+		<form action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 			<div class="inputRadioDiv">
 				<label for="wdAll"><input type="radio" id="wdAll" name="1" />월~금 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>
