@@ -21,8 +21,8 @@
 	</update>
 	
 	<insert id="freeBoardInsert" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip) 
-		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip})
+		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref) 
+		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, board_sq.currval)
 	</insert>
 	
 	<delete id="freeBoardDel">
@@ -32,5 +32,19 @@
 	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
 		update freeBoard set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid}
 	</update>
+	
+	<select id="optionSelect" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select no, ref, step, lvl from freeBoard where no=#{param1}
+	</select>
+	
+	<update id="levelUpdate" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
+		update freeBoard set lvl=lvl+1 where ref=#{ref} and lvl>#{lvl} 
+	</update>
+	
+	<insert id="replyBoardInsert" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
+		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref, step, lvl) 
+		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, #{ref}, #{step}, #{lvl})
+	</insert>
+	
 	
 </mapper>
