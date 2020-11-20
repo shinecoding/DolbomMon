@@ -42,25 +42,26 @@
 	$(function(){
 		$(document).ready(function(){
 			for(var i=1;i<9;i++){
+				var nowImg = $("label[for="+i+"]").children("img").attr("src");
 				if($("input[id="+i+"]").is(":checked")){
-					if(selectedData=="2"){
+					if(i=="2"){
 						var changeImg = nowImg.replace("-n@", "-s@"); 
-						$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-						$("label[for="+selectedData+"]").css("background-color", "#ff5400");
+						$("label[for="+i+"]").children("img").attr("src", changeImg);
+						$("label[for="+i+"]").css("background-color", "#ff5400");
 					}else{
 						var changeImg = nowImg.replace("-n.", "-s."); 
-						$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-						$("label[for="+selectedData+"]").css("background-color", "#ff5400");
+						$("label[for="+i+"]").children("img").attr("src", changeImg);
+						$("label[for="+i+"]").css("background-color", "#ff5400");
 					}
 				}else{
-					if(selectedData=="2") {
+					if(i=="2") {
 						var changeImg = nowImg.replace("-s@", "-n@"); 
-						$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-						$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");
+						$("label[for="+i+"]").children("img").attr("src", changeImg);
+						$("label[for="+i+"]").css("background-color", "#EFEFEF");
 					}else{
 						var changeImg = nowImg.replace("-s.", "-n."); 
-						$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-						$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");
+						$("label[for="+i+"]").children("img").attr("src", changeImg);
+						$("label[for="+i+"]").css("background-color", "#EFEFEF");
 					}
 				}
 			}
