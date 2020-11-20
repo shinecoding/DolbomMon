@@ -136,7 +136,7 @@ width:50%;
    	
    	<h5>돌봄 기간/시간</h5>
    	<li class="list-group-item">
-	   	<i class="fas fa-pen"><a class="editBtn" href="parnentWage"></a></i>
+	   	<i class="fas fa-pen"><a class="editBtn" href="scheduleEdit"></a></i>
 	   	스케쥴차트</li>
    	<h5>돌봄 아이 연령</h5>
    	<li class="list-group-item">
