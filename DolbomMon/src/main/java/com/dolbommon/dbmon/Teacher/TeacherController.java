@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,16 +138,16 @@ public class TeacherController {
 	}
 	
 	@RequestMapping(value="/teacherPictureOk", method=RequestMethod.POST)
-	public ModelAndView teacherPictureOk(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses) {
+	public ModelAndView teacherPictureOk(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses, HttpServletRequest req) {
 		
 		//folder where the pic will be saved
 		String path = ses.getServletContext().getRealPath("/upload");
 		
 		
 		//get the file from teacherPicture.jsp input name=
-		MultipartFile mf = mtfRequest.getFile("pic");
+		MultipartFile mf = mtfRequest.getFile("filename");
 		
-		
+			
 		String pic = null;
 		
 		if(mf!=null) { //renaming

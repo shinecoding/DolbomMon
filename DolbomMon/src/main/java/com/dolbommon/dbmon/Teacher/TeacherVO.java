@@ -1,8 +1,10 @@
 package com.dolbommon.dbmon.Teacher;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class TeacherVO {
 	private String userid;
-	private String pic;
+	private String pic = "테스트";
 	private String care_type;
 	private String[] type_list;
 	private String child_age;
@@ -16,8 +18,14 @@ public class TeacherVO {
 	private String area3;
 	private String cctv;
 	private String certi_check;
+	private MultipartFile filename;
 	
-	
+	public MultipartFile getFilename() {
+		return filename;
+	}
+	public void setFilename(MultipartFile filename) {
+		this.filename = filename;
+	}
 	public String getUserid() {
 		return userid;
 	}

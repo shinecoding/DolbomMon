@@ -38,15 +38,22 @@
 			//resize 
 			window.resizeTo( strWidth, strHeight );
 		  });
-		 
-		 
 
+			$(".nav-tabs a").click(function(){
+				var result = $(this).parent().attr("id");
+			});
 	});
 	
 	function imgchange(data){
 		$(".note_title img").attr("src",data);	
+		
+		//"imgchange('icon/message/message3.gif')
 	}
 	
+
+	function tabChange(){
+		$("#send>a").attr("class", "nav-link active");
+	}
 </script>
 <style>
 	body{
@@ -104,7 +111,7 @@
 	
 </style>
 </head>
-<body onload="reloadWindow()">
+<body onload="tabChange()">
 <div id="messageMain">
 	<div id="note_tile" class="clearfix">
 		<p class="note_title" style="float:left">
@@ -114,17 +121,16 @@
 			<!-- 게시판 검색주소 넣기 .. ex:https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox&sort=unread -->
 			<!--  ex : https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox -->
 			<a href="#" class="btn_show"> 안 읽은 쪽지 <font
-				style="font-weight: bold; color: #F00;">0</font></a> / <a href="#"
-				class="btn_show"> 전체 <span style='font-weight: bold;'>0</span></a>
+				style="font-weight: bold; color: #F00;">0</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;'>0</span></a>
 
 		</p>
 	</div>
 
-	<ul class="nav nav-tabs">
-		<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#message" onclick="imgchange('icon/message/message1.gif')">받은쪽지</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#message" onclick="imgchange('icon/message/message2.gif')">보낸쪽지</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#message" onclick="imgchange('icon/message/message3.gif')">쪽지보관</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#message" onclick="imgchange('icon/message/message4.gif')">스팸쪽지</a></li>
+	<ul class="nav nav-tabs" id="test2">
+		<li class="nav-item" id="receive"><a class="" href="/dbmon/message?tabType=1">받은쪽지</a></li>
+		<li class="nav-item" id="send"><a class="" href="/dbmon/message?tabType=2">보낸쪽지</a></li>
+		<li class="nav-item" id="storage"><a class="" href="/dbmon/message?tabType=3">쪽지보관</a></li>
+		<li class="nav-item" id="spam"><<a class="" href="/dbmon/message?tabType=4">스팸쪽지</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#memberSearch" onclick="imgchange('icon/message/message5.gif')">회원검색</a></li>
 	</ul>
 
@@ -158,17 +164,17 @@
 					<tr>
 						<td colspan="4" class="board-line"></td>
 					</tr>
+					<c:forEach var="vo" items="${list}">
 					
-					<%for(int i=0; i<=10; i++){ %>
 					<tr class="list_line">
-						<td style="text-align:center;"><input type="checkbox" name=delMessage value="100685490"/></td>
+						<td style="text-align:center;"><input type="checkbox" name=delMessage value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
 								<a href="https://www.ppomppu.co.kr/zboard/member_memo_talk.php?member_no=258492&memo_type=inbox&sort=">
 									<img src="icon/message/ico_talk.gif" alt="대화형 보기" title="대화형 보기"/>
 								</a>
 								<a href="https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=100685490&page=1&search_type=&keyword=&memo_type=inbox&sort=" class="btn_show">
-									테스트
+									${vo.subject}
 								</a>
 							</p>
 						</td>
@@ -177,23 +183,22 @@
 								<img src="icon/message/note_new1.gif" width="8px" height="8px" /> 
 							</a>
 							<a href="javascript:;" onclick="window.open('/zboard/view_info2.php?member_no=GmC49Ayrh6WLrGZT3k1Zjw%3D%3D','view_info','width=478,height=510,toolbar=no,scrollbars=yes')" >
-								사용자
+								<span id="sendWrite">${vo.userid_w}</span>
 							</a>
-						<td class="date">11/19</td>
+						<td class="date">${vo.writedate}</td>
 					</tr>
-					<%} %>
-					
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 		<!-- 
-<div class="tab-pane fade" id="accept">
+<div class="tab-pane fade" id="">
   <p>받은쪽지</p>
 </div>
-<div class="tab-pane fade" id="storage">
+<div class="tab-pane fade" id="">
   <p>쪽지보관</p>
 </div>
-<div class="tab-pane fade" id="spam">
+<div class="tab-pane fade" id="">
   <p>스팸쪽지</p>
 </div>
 
@@ -222,15 +227,15 @@
 	<!-- 검색창 -->
 
 	<div class="search_box">
-		<form name="search" action="#">
+		<form method="get" action="/dbmon/message">
 			<ul>
 				<li>
-				   	<select name="head" style="height:27px;">
-					<option value="sub_memo" > 제목+본문</option>
-					<option value="subject" >제목만</option>
-					<option value="name" >이름으로</option>
+				   	<select name="searchKey" id="searchKey" style="height:27px;">
+					<option value="subject" > 제목</option>
+					<option value="content" >본문</option>
+					<option value="userid" >아이디</option>
 	            	</select>
-				<input type="text" name="keyword" id="keyword" size=15/>
+				<input type="text" name="searchWord" id="searchWord" value="${vo.getSearchWord() }"/>
 				<input type="submit" value="검색"/>
 				</li>
 			</ul>
