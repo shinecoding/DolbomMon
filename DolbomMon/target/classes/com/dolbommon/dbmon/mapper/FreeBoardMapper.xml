@@ -7,6 +7,10 @@
 		select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate from freeBoard order by no desc	
 	</select>
 	
+	<select id="getTotalRecord" resultType="int">	
+		select count(no) from freeBoard
+	</select>
+	
 	<select id="freeBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
 		select no, head, subject, content, userid, hit, writedate
 		from freeBoard where no=#{param1}
