@@ -6,6 +6,8 @@ public interface FreeBoardDaoImp {
 
 	//자유게시판 리스트 보기
 	public List<FreeBoardVO> freeBoardList();
+	//총 게시물 수 구하기
+	public int getTotalRecord();
 	//레코드 한개 선택
 	public FreeBoardVO freeBoardSelect(int no);
 	//조회수 증가
