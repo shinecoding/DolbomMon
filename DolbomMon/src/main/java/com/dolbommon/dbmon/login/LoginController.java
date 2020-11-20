@@ -32,7 +32,6 @@ public class LoginController {
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
-		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();

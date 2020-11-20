@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.message.MessageDaoImp">
+	<select id="messageAllRecord" resultType="com.dolbommon.dbmon.message.MessageVO">
+		select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save, spam from message where userid_r=#{userid} order by no desc	
+	</select>
+	<select id="searchWordRecord" resultType="com.dolbommon.dbmon.message.MessageVO">
+		select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save, spam from message where userid_r=#{userid} and 
+		<if test='searchKey.equals("userid")'>
+			userid_w
+		</if>
+		<if test='!searchKey.equals("userid")'>
+			${searchKey}
+		</if>		
+		like #{searchWord} order by no desc	
+	</select>
+	<select id="getAllRecordCount" parameterType="com.dolbommon.dbmon.message.MessageVO" resultType="int">
+		select count(no) from message where userid_r=#{userid}
+	</select>
+</mapper>
