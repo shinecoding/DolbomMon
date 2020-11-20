@@ -99,19 +99,22 @@
 	   		margin-right:180px;
 	   		
 	   }
+	   .clearfix:after { clear:both; } 
    </style>
 </head>
 <body>
  <div id="container">
- <header>
- <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
-        class="logo" alt="Logo" src="home" style="margin-left:10px;" 
-        Onclick="location.href='/dbmon'"/>
- <a class="btn">	
-	<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
-	<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/>  			
-</a> 				
-</header>
+ <div class="clearfix">
+	 <header>
+	 <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
+	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
+	        Onclick="location.href='/dbmon'"/>
+	 <a class="btn" style="float:right">	
+		<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
+		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/>  			
+	</a> 				
+	</header>
+</div>
   
   
    <ul class="menu">

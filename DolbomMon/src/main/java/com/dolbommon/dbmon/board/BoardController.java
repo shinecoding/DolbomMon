@@ -32,13 +32,27 @@ public class BoardController {
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		List<FreeBoardVO> list = dao.freeBoardList();
+		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("freeBoard/freeBoard");
 		
 		return mav;
 	}
+
+	//총 게시물 수 구하기
+//	public int getTotalRecord() {
+		
+//		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+//		int totalRecord = dao.getTotalRecord();
+//		
+//		ModelAndView mav = new ModelAndView();
+		
+		
+//		return totalRecord;
+//	}
 	
 	//게시판 글쓰기 폼으로 이동ok
 	@RequestMapping("/freeBoardWrite")
@@ -47,7 +61,7 @@ public class BoardController {
 		return "freeBoard/freeBoardWrite";
 	}
 	
-	//게시판 글쓰기
+	//게시판 글쓰기ok
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
 	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest hsr, HttpSession hs) {
 		
@@ -82,7 +96,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	//자유게시판 글 수정폼으로 이동
+	//자유게시판 글 수정폼으로 이동ok
 	@RequestMapping("/freeBoardEdit")
 	public ModelAndView freeBoardEdit(int no) {
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
@@ -95,10 +109,10 @@ public class BoardController {
 		return mav;
 	}
 	
-	//자유게시판 글 수정
+	//자유게시판 글 수정ok
 	@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)
 	public ModelAndView freeBoardEditOk(FreeBoardVO vo, HttpSession ses) {
-		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setUserid((String)ses.getAttribute("userid"));
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		int result = dao.freeBoardEditOk(vo);
 		

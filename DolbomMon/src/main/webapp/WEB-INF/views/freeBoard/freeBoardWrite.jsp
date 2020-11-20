@@ -72,7 +72,7 @@ $(function(){
 				</select>
 			</div>
 	 		<label for="subject">제목</label>
-			<input type="text" maxlength="40" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요"><br/>
+			<input type="text" maxlength="60" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요"><br/>
 			<div>
 			<label for="content">글내용</label><br/>
 				<textarea class="form-control" id="content" name="content" placeholder="글내용을 입력하세요"></textarea>

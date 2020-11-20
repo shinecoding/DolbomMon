@@ -161,7 +161,7 @@
 					
 					<%for(int i=0; i<=10; i++){ %>
 					<tr class="list_line">
-						<td style="text-align:center;"><input type="checkbox" name=del[] value="100685490"/></td>
+						<td style="text-align:center;"><input type="checkbox" name=delMessage value="100685490"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
 								<a href="https://www.ppomppu.co.kr/zboard/member_memo_talk.php?member_no=258492&memo_type=inbox&sort=">
