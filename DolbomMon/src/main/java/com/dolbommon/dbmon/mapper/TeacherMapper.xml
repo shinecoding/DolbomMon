@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.Teacher.TeacherDaoImp">
+	<select id="selectTeacher" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.TeacherVO">
+		select userid, intro, care_type, desired_wage from teacher where userid=#{userid}
+	</select>
+	<update id="updateIntro" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
+		update teacher set intro = #{intro} where userid = #{userid}
+	</update>
+	<update id="updateWage" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO" >
+		update teacher set desired_wage = #{desired_wage} where userid= #{userid}
+	</update>
+	<update id="updatePic" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
+		update teacher set pic = #{pic} where userid= #{userid}
+	</update>
+</mapper>
