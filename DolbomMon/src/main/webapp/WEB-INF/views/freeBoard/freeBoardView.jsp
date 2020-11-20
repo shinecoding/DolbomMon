@@ -25,7 +25,8 @@
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
 				location.href="/dbmon/freeBoardDel?no=${vo.no}";
-			}		
+			}
+			return false;
 		});
 	});
 	
@@ -61,7 +62,7 @@
 				<tr>
 					<th scope="col">글내용</th>
 					<td>
-					<br/>${vo.content}<br/><br/>
+					<br/>${vo.content}<br/>
 					</td>
 				</tr>
 			</tbody>
