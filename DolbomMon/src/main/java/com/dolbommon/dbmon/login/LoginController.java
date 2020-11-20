@@ -29,7 +29,6 @@ public class LoginController {
 	public String login() {
 		return "login/loginForm";	
 	}
-	//로그인
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
