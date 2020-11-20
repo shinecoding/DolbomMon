@@ -13,7 +13,7 @@
 	.container{width:518px; padding:0;}
 	
 	#headerDiv{width:100%; height:auto; text-align:center; margin-top:50px; border-bottom:1px solid #EFEFEF;}
-	
+	input[type=radio], input[type=checkbox]{display:none;}
 	/* ==================== 시작 날짜 =================== */
 	#startDateDiv{padding:10px 0;}
 	#startDateDiv>input[type=date]{width:100%;}
@@ -61,6 +61,24 @@
 <script>
 
 	$(function(){
+		$(document).ready(function(){
+			for(var i=1;i<8;i++){
+				if($("input[id="+i+"]").is(":checked")){
+					$("label[for="+i+"]").css("background-color", "rgb(255, 222, 89)");//노랑
+				}else{
+					$("label[for="+i+"]").css("background-color", "#EFEFEF");//회색
+				}
+			}
+			
+			for(var i=1;i<5;i++){
+				if($("input[id=p"+i+"]").is(":checked")){
+					$("label[for=p"+i+"]").css("background-color", "#ff5400").css("color", "white");
+				}else{
+					$("label[for=p"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+				}
+			}
+			
+		});
 		
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
@@ -75,14 +93,19 @@
 		
 		// 기간 선택 시 색상변경
 		$("input[type=radio]").change(function(){
+			
 			var selectedData = $(this).attr("id");
 			
-			if($("input[id="+selectedData+"]").is(":checked")){
-				
-				$("label[for="+selectedData+"]").css("background-color", "#ff5400").css("color", "white");
-			}else{
-				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");
+			for(var i=1;i<5;i++){
+				if($("input[id=p"+i+"]").is(":checked")){
+					
+					$("label[for=p"+i+"]").css("background-color", "#ff5400").css("color", "white");
+				}else{
+					$("label[for=p"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+				}
 			}
+			
+			
 		});
 		
 	});
@@ -97,21 +120,21 @@
 			<input type="date" id="time" name="" />
 		</div>
 		<div id="selectDayDiv">
-			<input type="checkbox" id="mon" name="yoil" value="mon" />
-			<input type="checkbox" id="tue" name="yoil" value="tue" />
-			<input type="checkbox" id="wed" name="yoil" value="wed" />
-			<input type="checkbox" id="thu" name="yoil" value="thu" />
-			<input type="checkbox" id="fri" name="yoil" value="fri" />
-			<input type="checkbox" id="sat" name="yoil" value="sat" />
-			<input type="checkbox" id="sun" name="yoil" value="sun" />
+			<input type="checkbox" id="1" name="yoil" value="mon" />
+			<input type="checkbox" id="2" name="yoil" value="tue" />
+			<input type="checkbox" id="3" name="yoil" value="wed" />
+			<input type="checkbox" id="4" name="yoil" value="thu" />
+			<input type="checkbox" id="5" name="yoil" value="fri" />
+			<input type="checkbox" id="6" name="yoil" value="sat" />
+			<input type="checkbox" id="7" name="yoil" value="sun" />
 			<ul>
-				<li><label for="mon">월</label></li>
-				<li><label for="tue">화</label></li>
-				<li><label for="wed">수</label></li>
-				<li><label for="thu">목</label></li>
-				<li><label for="fri">금</label></li>
-				<li><label for="sat">토</label></li>
-				<li><label for="sun">일</label></li>
+				<li><label for="1">월</label></li>
+				<li><label for="2">화</label></li>
+				<li><label for="3">수</label></li>
+				<li><label for="4">목</label></li>
+				<li><label for="5">금</label></li>
+				<li><label for="6">토</label></li>
+				<li><label for="7">일</label></li>
 			</ul>
 		</div>
 		<div id="timeDiv">
@@ -127,10 +150,10 @@
 		<div id="periodDiv">
 			<h6>이 일정으로 얼마나 일할 수 있나요?</h6>
 			<ul id="periodList">
-				<li><label for="w1"><input type="radio" id="w1" name="asdf" />1주일 이상</label></li>
-				<li><label for="m1"><input type="radio" id="m1" name="asdf" />1개월 이상</label></li>
-				<li><label for="m3"><input type="radio" id="m3" name="asdf" />3개월 이상</label></li>
-				<li><label for="m6"><input type="radio" id="m6" name="asdf" />6개월 이상</label></li>
+				<li><label for="p1"><input type="radio" id="p1" name="asdf" />1주일 이상</label></li>
+				<li><label for="p2"><input type="radio" id="p2" name="asdf" />1개월 이상</label></li>
+				<li><label for="p3"><input type="radio" id="p3" name="asdf" />3개월 이상</label></li>
+				<li><label for="p4"><input type="radio" id="p4" name="asdf" />6개월 이상</label></li>
 			</ul>
 			<input type="submit" value="다음" />
 		</div>

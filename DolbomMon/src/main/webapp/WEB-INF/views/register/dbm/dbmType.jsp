@@ -30,9 +30,53 @@
 </style>
 <script>
 	$(function(){
-		$("label").click(function(){
+		// 페이지 로딩 시
+		$(document).ready(function(){
+			imgChange();
+		});
+		
+		// 마우스오버 시
+		$(".d1").hover(function(){
+			$(this).css("background-color", "lightblue");
+			
+		}, function(){
+			$(this).css("background-color", "white");
+		});
+		
+		// 항목 클릭 시
+		$(".d1").click(function(){
+			var selectedData = $(this).children("label").attr("for");
+			var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
+			if(!$("input[id="+selectedData+"]").is(":checked")){
+				$("input[id="+selectedData+"]").prop("checked", true);
+				var changedImg = nowImg.replace("N.cr7", "Y.cr7");
+				$("label[for="+selectedData+"]").children("img").attr("src", changedImg);
+			}
+			
+			imgChange();
+		});
+		
+		$("input[name=dbmType]").change(function(){
+			
+			imgChange();
 		});
 	});
+	
+	// 라디오버튼 상태에따라 이미지 변경해주는 함수
+	function imgChange(){
+		for(var i=1;i<5;i++){
+			var nowImg = $("label[for=dt"+i+"]").children("img").attr("src");
+			if($("input[id=dt"+i+"]").is(":checked")){
+				// 체크 되어있는 경우
+				var changedImg = nowImg.replace("N.cr7", "Y.cr7");
+				$("label[for=dt"+i+"]").children("img").attr("src", changedImg);
+			}else{
+				// 체크 안 되어있는 경우
+				var changedImg = nowImg.replace("Y.cr7", "N.cr7");
+				$("label[for=dt"+i+"]").children("img").attr("src", changedImg);
+			}
+		}
+	}
 	
 </script>
 <body>
@@ -42,14 +86,14 @@
 		</div>
 		<div id="dbmTypeDiv">
 			<form action="<%=request.getContextPath()%>/dbm/activityAndAge">
-				<input type="radio" name="dbmType" id="t" value="선생님" />
-				<input type="radio" name="dbmType" id="d" value="대학생" />
-				<input type="radio" name="dbmType" id="m" value="엄마" />
-				<input type="radio" name="dbmType" id="n" value="일반" />
- 				<div class="d1"><label for="t"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">선생님</p><p class="dt">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는 경우</p></div></div>
-				<div class="d1"><label for="d"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div></div>
-				<div class="d1"><label for="m"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div></div>
-				<div class="d1"><label for="n"><img src=http://placehold.it/150x150/></label><div class="d2"><p class="dbmType">일반</p><p class="dt">위 3가지 경우에 속하지 않지만 돌봄몬으로 활동하고 싶은 경우</p></div></div>
+				<input type="radio" name="dbmType" id="dt1" value="선생님" />
+				<input type="radio" name="dbmType" id="dt2" value="대학생" />
+				<input type="radio" name="dbmType" id="dt3" value="엄마" />
+				<input type="radio" name="dbmType" id="dt4" value="일반" />
+ 				<div class="d1"><label for="dt1"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">선생님</p><p class="dt">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는 경우</p></div></div>
+				<div class="d1"><label for="dt2"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div></div>
+				<div class="d1"><label for="dt3"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div></div>
+				<div class="d1"><label for="dt4"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">일반</p><p class="dt">위 3가지 경우에 속하지 않지만 돌봄몬으로 활동하고 싶은 경우</p></div></div>
 				<input type="submit" value="다음" />
 			</form>
 		</div>

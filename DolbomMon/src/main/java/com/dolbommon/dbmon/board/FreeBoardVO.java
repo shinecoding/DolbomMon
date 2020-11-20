@@ -10,6 +10,10 @@ public class FreeBoardVO {
 	private String writedate;
 	private String ip;
 	private String head;
+	private int ref;
+	private int step;
+	private int lvl;
+	
 	
 	public int getNo() {
 		return no;
@@ -58,5 +62,23 @@ public class FreeBoardVO {
 	}
 	public void setHead(String head) {
 		this.head = head;
+	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	public int getLvl() {
+		return lvl;
+	}
+	public void setLvl(int lvl) {
+		this.lvl = lvl;
 	}
 }
