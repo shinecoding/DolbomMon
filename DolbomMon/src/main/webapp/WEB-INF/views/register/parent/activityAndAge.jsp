@@ -73,11 +73,7 @@
 					$("label[for="+i+"0]").parent().css("background-color", "#EFEFEF").css("color", "black");
 				}
 			}
-			
-			
-			
 		});
-		
 		
 		// 돌봄 유형 선택 시 색상 변경
 		$("input[name=activity]").change(function(){
@@ -119,16 +115,6 @@
 			}
 			
 		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		// 포커스 없애기

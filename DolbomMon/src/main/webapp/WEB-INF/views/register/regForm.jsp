@@ -14,7 +14,7 @@
 <style>
 	.container{width:700px;}
 	.container div{width:100%; overflow:hidden; height:auto; margin-top:15px;}
-
+	
 	#headerDiv{text-align:center; }
 	#headerDiv>img{width:400px; height:200px;} 	
 	#headerDiv>h4{width:70%; margin:0 auto;}
@@ -78,7 +78,7 @@
 	<div class="container">
 		<div id="headerDiv">
 			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />
-			<h4>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h4>
+			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
 		</div>
 		<div id="useridDiv">
 			<label for="userid">아이디</label><span></span><br/>

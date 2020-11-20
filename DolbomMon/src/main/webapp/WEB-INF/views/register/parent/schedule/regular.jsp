@@ -62,6 +62,15 @@
 <script>
 
 	$(function(){
+		$(document).ready(function(){
+			for(var i=1;i<8;i++){
+				if($("input[id=y"+i+"]").is(":checked")){
+					$("label[for=y"+i+"]").css("background-color", "rgb(255, 222, 89)");//노랑
+				}else{
+					$("label[for=y"+i+"]").css("background-color", "#EFEFEF");//회색
+				}
+			}
+		});
 		
 		// 요일 선택 시 색깔변경
 		$("input[name=yoil]").change(function(){
@@ -87,21 +96,21 @@
 		<div id="header">정기적으로</div>	
 		<div id="startDateDiv"><span>돌봄시작일</span><input type="date" name="start_date"/></div>
 		<div id="selectDayDiv">
-			<input type="checkbox" id="mon" name="yoil" value="mon" />
-			<input type="checkbox" id="tue" name="yoil" value="tue" />
-			<input type="checkbox" id="wed" name="yoil" value="wed" />
-			<input type="checkbox" id="thu" name="yoil" value="thu" />
-			<input type="checkbox" id="fri" name="yoil" value="fri" />
-			<input type="checkbox" id="sat" name="yoil" value="sat" />
-			<input type="checkbox" id="sun" name="yoil" value="sun" />
+			<input type="checkbox" id="y1" name="yoil" value="mon" />
+			<input type="checkbox" id="y2" name="yoil" value="tue" />
+			<input type="checkbox" id="y3" name="yoil" value="wed" />
+			<input type="checkbox" id="y4" name="yoil" value="thu" />
+			<input type="checkbox" id="y5" name="yoil" value="fri" />
+			<input type="checkbox" id="y6" name="yoil" value="sat" />
+			<input type="checkbox" id="y7" name="yoil" value="sun" />
 			<ul>
-				<li><label for="mon">월</label></li>
-				<li><label for="tue">화</label></li>
-				<li><label for="wed">수</label></li>
-				<li><label for="thu">목</label></li>
-				<li><label for="fri">금</label></li>
-				<li><label for="sat">토</label></li>
-				<li><label for="sun">일</label></li>
+				<li><label for="y1">월</label></li>
+				<li><label for="y2">화</label></li>
+				<li><label for="y3">수</label></li>
+				<li><label for="y4">목</label></li>
+				<li><label for="y5">금</label></li>
+				<li><label for="y6">토</label></li>
+				<li><label for="y7">일</label></li>
 			</ul>
 		</div>
 		<div id="selectTimeDiv">
