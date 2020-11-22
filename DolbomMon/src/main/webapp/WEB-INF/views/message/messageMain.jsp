@@ -50,9 +50,9 @@
 		//"imgchange('icon/message/message3.gif')
 	}
 	
-
+	//탭매뉴 클릭시 전환
 	function tabChange(){
-		$("#send>a").attr("class", "nav-link active");
+		$("#test2").children().eq(${tabType}-1).children('a').attr("class", "nav-link active");
 	}
 </script>
 <style>
@@ -107,8 +107,14 @@
 		text-align:center;
 	}
 	
-	
-	
+	.wordCut{
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	#paging ul{
+		float:right;
+	}
 </style>
 </head>
 <body onload="tabChange()">
@@ -127,10 +133,10 @@
 	</div>
 
 	<ul class="nav nav-tabs" id="test2">
-		<li class="nav-item" id="receive"><a class="" href="/dbmon/message?tabType=1">받은쪽지</a></li>
-		<li class="nav-item" id="send"><a class="" href="/dbmon/message?tabType=2">보낸쪽지</a></li>
-		<li class="nav-item" id="storage"><a class="" href="/dbmon/message?tabType=3">쪽지보관</a></li>
-		<li class="nav-item" id="spam"><<a class="" href="/dbmon/message?tabType=4">스팸쪽지</a></li>
+		<li class="nav-item" id="receive"><a class="nav-link" href="/dbmon/message?tabType=1">받은쪽지</a></li>
+		<li class="nav-item" id="send"><a class="nav-link" href="/dbmon/message?tabType=2">보낸쪽지</a></li>
+		<li class="nav-item" id="storage"><a class="nav-link" href="/dbmon/message?tabType=3">쪽지보관</a></li>
+		<li class="nav-item" id="spam"><a class="nav-link" href="/dbmon/message?tabType=4">스팸쪽지</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#memberSearch" onclick="imgchange('icon/message/message5.gif')">회원검색</a></li>
 	</ul>
 
@@ -147,7 +153,16 @@
 					<tr>
 						<th scope="col" style="text-align:center;"><input type="checkbox"/></th>
 						<th scope="col" class="sub_title">제목</th>
-						<th scope="col" class="sub_title">보낸사람</th>
+						<th scope="col" class="sub_title">
+						<c:choose>
+							<c:when test="${tabType==2}">
+							받은사람
+							</c:when>
+							<c:otherwise>
+							보낸사람
+							</c:otherwise>
+						</c:choose>
+						</th>
 						<th scope="col" class="sub_title">날짜</th>
 					</tr>
 				</thead>
@@ -156,7 +171,7 @@
 						<td class="note_info note_notice" colspan="4">
 							<p class="note_new">
 								<a href="/zboard/view.php?id=notice&no=940" target="_blank" class="btn_show">
-									<img src="icon/message/icon_notice_new.png" border="0" alt="notice" class="icon-notice"> <span>전자파 미인증 제품 판매글 관련 안내</span> 
+									<img src="icon/message/icon_notice_new.png" border="0" alt="notice" class="icon-notice"> <span>돌봄몬 운영자 사칭 쪽지 주의</span> 
 								</a>
 							</p>
 						</td>
@@ -170,10 +185,10 @@
 						<td style="text-align:center;"><input type="checkbox" name=delMessage value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
-								<a href="https://www.ppomppu.co.kr/zboard/member_memo_talk.php?member_no=258492&memo_type=inbox&sort=">
-									<img src="icon/message/ico_talk.gif" alt="대화형 보기" title="대화형 보기"/>
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
+									<img src="icon/message/ico_talk.gif"/>
 								</a>
-								<a href="https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=100685490&page=1&search_type=&keyword=&memo_type=inbox&sort=" class="btn_show">
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}" class="btn_show wordCut">
 									${vo.subject}
 								</a>
 							</p>
@@ -183,7 +198,14 @@
 								<img src="icon/message/note_new1.gif" width="8px" height="8px" /> 
 							</a>
 							<a href="javascript:;" onclick="window.open('/zboard/view_info2.php?member_no=GmC49Ayrh6WLrGZT3k1Zjw%3D%3D','view_info','width=478,height=510,toolbar=no,scrollbars=yes')" >
-								<span id="sendWrite">${vo.userid_w}</span>
+								<span id="sendWrite">
+									<c:if test="${tabType==1 || tabType==3 || tabType==4}">
+									${vo.userid_w}
+									</c:if>
+									<c:if test="${tabType==2 }">
+									${vo.userid_r}
+									</c:if>
+								</span>
 							</a>
 						<td class="date">${vo.writedate}</td>
 					</tr>
@@ -191,23 +213,12 @@
 				</tbody>
 			</table>
 		</div>
-		<!-- 
-<div class="tab-pane fade" id="">
-  <p>받은쪽지</p>
-</div>
-<div class="tab-pane fade" id="">
-  <p>쪽지보관</p>
-</div>
-<div class="tab-pane fade" id="">
-  <p>스팸쪽지</p>
-</div>
-
- -->
-		<div class="tab-pane fade" id="memberSearch">
+	<div class="tab-pane fade" id="memberSearch">
 			<p>회원검색</p>
 		</div>
 	</div>
 	
+<!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
 		<div class="btns">
 			<a href="#" onClick="move_save(); return false;" class="btn_keep">
@@ -217,18 +228,43 @@
 		</div>
 
 		<!--page-->
-		<div id="page_list">
-			<font class="han"> <font class="page_inert">1</font>
-			</font>
+		<div id="paging">
+			<ul  class="pagination" >
+				<!-- 이전페이지 -->
+			
+				<li class="page-item">
+					<c:if test="${pVo.nowPage>1}"> <!--														여기부터 검색어 있을때 검색어페이지 넘어가게 작성한것. 밑에도 다 있음	  -->
+						<a class="page-link"  class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>">Prev</a>
+					</c:if>
+				</li>
+				<!-- 									1						1+10			 -->
+				<!-- 									11						11+10			 -->
+				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onepageNumCount-1}">
+					<c:if test="${p<=pVo.totalPage }">
+						<li class="page-item">
+							<a class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>"><span <c:if test="${p==pVo.nowPage}">style="color:red"</c:if>>${p}</span></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				
+				<!-- 다음페이지 -->
+				<li class="page-item"> 
+					<c:if test="${pVo.nowPage<pVo.totalPage}">
+						<a class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage+1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>">Next</a>
+					</c:if>
+					
+				</li>
+				
+			</ul>
 		</div>
 		<!--//page-->
 	</div>
-	
 	<!-- 검색창 -->
 
 	<div class="search_box">
 		<form method="get" action="/dbmon/message">
 			<ul>
+				<input type="hidden" name="tabType" value="${tabType}"/>
 				<li>
 				   	<select name="searchKey" id="searchKey" style="height:27px;">
 					<option value="subject" > 제목</option>
