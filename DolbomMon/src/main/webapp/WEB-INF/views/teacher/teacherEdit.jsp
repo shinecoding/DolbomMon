@@ -25,6 +25,8 @@ h5{
 }
 
 #cctvLst>label{
+position:relative;
+display:inline-block;
 width:45%;
 height:150px;
 border: 1px solid #ddd;
@@ -33,6 +35,15 @@ margin:5px;
 text-align:center;
 
 }
+input[type=submit]{
+opacity:0;
+width:100%;
+height:100%;
+left:0;
+top:0;
+position:absolute;
+}
+
 #cctvWarning{
 font-size: 0.8em;
 color: gray;
@@ -94,6 +105,10 @@ img{
 width:50%;
 
 }
+.boldFont{
+color:orange;
+font-weight:bold;
+}
 </style>
 <script>
 	$(function(){
@@ -121,17 +136,20 @@ width:50%;
    	<h5>간단 자기소개</h5>
    	<li class="list-group-item" style="text-align:center">
 	   	<i class="fas fa-pen"><a class="editBtn" href="teacherIntro"></a></i>
-	   	${vo.intro }
+	   <c:if test="${vo.intro!=null }">	${vo.intro }</c:if>
+	   <c:if test="${vo.intro==null }">작성 시 부모로부터<br/>
+			<span class="boldFont">4배 더 많은 선택<span>을 받게 됩니다!</c:if>
    	</li>
    	<h5>선호하는 돌봄유형</h5>
    	<li class="list-group-item" style="text-align:center">
 	   	<i class="fas fa-pen"><a class="editBtn" href="teacherType"></a></i>
-	   	"저는 <span>${vo.care_type}</span>돌봄을 가장 선호해요"
+	   	"저는 <span class="boldFont">${vo.care_type}</span> 돌봄을 가장 선호해요"
    	</li>
    	<h5>희망 시급</h5>
    	<li class="list-group-item" style="text-align:center">
    		<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
-   		${vo.desired_wage }
+   		<c:if test="${vo.desired_wage!=null }"> ₩${vo.desired_wage }<br/></c:if>
+   		<span class="boldFont"> 원하는 시급을 자유롭게 입력해주세요</span>
    	</li>
    	<h5>관련 경험</h5>
    	<li class="list-group-item" style="text-align:center">
@@ -191,24 +209,26 @@ width:50%;
 		</li>
 		
 		<h5>CCTV동의 여부</h5>
-		<li id="cctvLst" class="list-group-item" >
-			<div id="cctvHidden">
-				<input type="radio" name="options" id="cctvDisagree" />
-			    <input type="radio" name="options" id="cctvAgree" />
-		    </div>
-		    <label for="cctvDisagree" class="rounded">   
-		    CCTV촬영을<br/> 원치 않습니다.<br/>
-		    	<i id="cctvCheck1" class="fas fa-check-circle"></i>
-		    </label>
-		    <label for="cctvAgree" class="rounded">
-		    CCTV가 있어도<br/>당당히 일할 수 있습니다.<br/>
-		    	<i id="cctvCheck2" class="fas fa-check-circle"></i>
-			</label>
-	
-			<p id="cctvWarning">단, 녹화된 영상을 유출 배포하지 않는 전제</p>		
+		<form method="post" action="cctvOk">
 		
+			<li id="cctvLst" class="list-group-item" >
+				<div id="cctvHidden">
+					<input type="submit" name="cctv" id="cctvDisagree" value="N"/>
+				    <input type="submit" name="cctv" id="cctvAgree" value="Y"/>	    
+			    </div>
+					 <label for="cctvDisagree" class="rounded"  <c:if test="${vo.cctv=='N'}"> style="background-color:orange" </c:if>>   
+				    CCTV촬영을<br/> 원치 않습니다.<br/>
+				    	<i id="cctvCheck1" class="fas fa-check-circle"></i>
+				    </label>
+				    <label for="cctvAgree" class="rounded" <c:if test="${vo.cctv=='Y'}"> style="background-color:orange" </c:if>>
+				    CCTV가 있어도<br/>당당히 일할 수 있습니다.<br/>
+				    	<i id="cctvCheck2" class="fas fa-check-circle"></i>
+					</label>
+			
+				<p id="cctvWarning">단, 녹화된 영상을 유출 배포하지 않는 전제</p>		
+			
 		</li>
-   		
+   	</form>	
    <br/>
 </div>
 

@@ -9,7 +9,7 @@ public interface TeacherDaoImp {
 	public int updatePic(TeacherVO vo);
 	public int updateAge(TeacherVO vo);
 	public int updateActivity(TeacherVO vo);
-	
+	public int updateCCTV(TeacherVO vo);
 	
 	
 }

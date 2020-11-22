@@ -80,7 +80,15 @@ $(function(){
 		}
 		
 	});
-	
+	/*
+	var age_list = [];
+	$("input:submit").click(function(){
+		
+		$("input:checkbox[name='child_age']:checked").each(functioin(){
+			age_list.push($(this).val());
+		});
+	});
+	*/
 });
 
 </script>
@@ -88,7 +96,7 @@ $(function(){
 <body>
 
 	<div class="container">
-		<form method="get" action="<%=request.getContextPath()%>/teacher/teacherAgeOk">
+		<form method="post" action="<%=request.getContextPath()%>/teacher/teacherAgeOk">
 		<div id="title">
 			<div id="titlefont">돌봄 가능 연령</div>
 		</div>

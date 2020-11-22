@@ -110,7 +110,7 @@
 		</div>
 	 	
 	 	
-		<form method="get" action="">
+		<form method="post" action="teacherExpOk">
 			<div class="form-group">
 				<ul id="result">
 				<li>
@@ -128,7 +128,7 @@
 				</ul>
 				<input type="button" id="addExp" class="btn btn-warning" value="+경험내용 추가하기"/>
 				
-				<!-- <input type="submit" class="btn btn-warning" value="저장" /> -->
+				<input type="submit" class="btn btn-warning" value="저장" />
 			</div>
 		</form>
 	</div>

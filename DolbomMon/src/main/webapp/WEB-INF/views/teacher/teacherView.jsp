@@ -25,6 +25,10 @@ h5{
  font-size:60px;
  margin: 8px;
 }
+.boldFont{
+color:orange;
+font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -40,7 +44,7 @@ h5{
    <ul class="list-group list-group-horizontal-sm">
    		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>129</div></li>
    		<li class="list-group-item col-4" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/>3일 전</li>
-   		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-video mr-2"></i>CCTV<br/>동의함</li>
+   		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-video mr-2"></i>CCTV<br/><c:if test="${vo.cctv=='Y'}">동의함</c:if><c:if test="${vo.cctv!='Y'}">동의안함</c:if></li>
    </ul>
    <ul class="list-group">
    	<li class="list-group-item">
@@ -59,9 +63,15 @@ h5{
    	<li class="list-group-item"><span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>등초본 인증</li>
    	<li class="list-group-item"><span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>성범죄 인증</li>
    	<h5>간단 자기소개</h5>
-   	<li class="list-group-item p-5" style="text-align:center">${vo.intro}</li>
+   	<li class="list-group-item p-5" style="text-align:center">
+		  <c:if test="${vo.intro!=null }">	${vo.intro }</c:if>
+	   <c:if test="${vo.intro==null }">작성 시 부모로부터<br/>
+			<span class="boldFont">4배 더 많은 선택<span>을 받게 됩니다!</c:if>
+   	</li>
    	<h5>선호하는 돌봄유형</h5>
-   	<li class="list-group-item p-5" style="text-align:center">"저는 <span>${vo.care_type}</span>돌봄을 가장 선호해요"</li>
+   	<li class="list-group-item p-5" style="text-align:center">
+   		"저는 <span class="boldFont">${vo.care_type}</span> 돌봄을 가장 선호해요"
+   	</li>
    	<h5>활동 가능 시간</h5>
    	<li class="list-group-item">스케쥴차트</li>
    	<h5>돌봄 가능 연령</h5>
