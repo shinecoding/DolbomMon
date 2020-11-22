@@ -2,6 +2,8 @@ package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,10 +48,12 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
-	
+		List<ExperienceVO> list = dao.selectExp(userid);
+		
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("vo", vo);
+		mav.addObject("list", list);
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
@@ -193,7 +197,7 @@ public class TeacherController {
 				ff.delete();
 			}
 			// fail
-			mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
+			//mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
 			mav.setViewName("/teacher/teacherResult");
 		} else { // success
 			mav.setViewName("redirect:teacherPicture");
@@ -202,8 +206,51 @@ public class TeacherController {
 	}
 
 	@RequestMapping("/teacherExp")
-	public String teacherExp() {
-		return "/teacher/teacherExp";
+	public ModelAndView teacherExp(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		List<ExperienceVO> list = dao.selectExp(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("teacher/teacherExp");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/teacherExpOk", method=RequestMethod.POST)
+	public ModelAndView teacherExpOk(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
+		List<ExperienceVO> list = new ArrayList<ExperienceVO>();
+		evo.setUserid((String)ses.getAttribute("userid"));
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		String[] exp_content = req.getParameterValues("exp_content");
+		String[] exp_start = req.getParameterValues("exp_start");
+		String[] exp_end = req.getParameterValues("exp_end");
+		
+		if(exp_content!=null && exp_start!=null && exp_end!= null) {
+				for(int i=0; i<exp_content.length; i++) {
+					System.out.println(exp_content[i]);
+					evo.setExp_content(exp_content[i]);
+					evo.setExp_start(exp_start[i]);
+					evo.setExp_end(exp_end[i]);
+					list.add(evo);
+				}
+		}
+		
+		
+		int result = dao.updateExp(list);
+		if(result>0) {
+			mav.addObject("list", list);
+			mav.setViewName("redirect:teacherEdit");
+		}else {
+			mav.setViewName("teacher/teacherResult");
+		}
+		
+		
+		
+		return mav;
 	}
 
 	

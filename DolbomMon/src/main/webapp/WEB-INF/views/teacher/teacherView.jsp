@@ -115,8 +115,10 @@ font-weight:bold;
 		
    		<h5>관련 경험</h5>
    		<li class="list-group-item p-4">
-   			<b>키즈카페</b><br/>
-   			2017.01.01 ~ 2020.11.16
+   		<c:forEach var="evo" items="${list}">
+   			<b>${evo.exp_content}</b><br/>
+   			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
+   		</c:forEach>	
    		</li>
    <br/>
 </div>

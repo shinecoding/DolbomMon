@@ -24,5 +24,10 @@
 	<update id="updateCCTV" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set cctv= #{cctv} where userid= #{userid}
 	</update>
-
+	<select id="selectExp" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.ExperienceVO" >
+		select exp_content, to_char(exp_start, 'YYYY-MM-DD') as exp_start, to_char(exp_end, 'YYYY-MM-DD') as exp_end from experience where userid= #{userid}
+	</select>
+	<update id="updateExp" parameterType="com.dolbommon.dbmon.Teacher.ExperienceVO">
+		update experience set exp_content = #{exp_content}, exp_start = #{exp_start}, exp_end= #{exp_end} where userid= #{userid}
+	</update>
 </mapper>

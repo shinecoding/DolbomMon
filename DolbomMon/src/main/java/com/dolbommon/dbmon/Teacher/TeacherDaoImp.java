@@ -1,5 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
+import java.util.List;
+
 public interface TeacherDaoImp {
 	
 	public TeacherVO selectTeacher(String userid);
@@ -10,7 +12,7 @@ public interface TeacherDaoImp {
 	public int updateAge(TeacherVO vo);
 	public int updateActivity(TeacherVO vo);
 	public int updateCCTV(TeacherVO vo);
-	
-	
+	public List<ExperienceVO> selectExp(String userid);
+	public int updateExp(List<ExperienceVO> list);
 }
 

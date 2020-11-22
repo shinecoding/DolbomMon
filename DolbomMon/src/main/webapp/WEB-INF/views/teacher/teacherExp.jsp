@@ -83,12 +83,12 @@
 			var txt="";
 			txt+="<li><button class='btn btn-warning' type='button'>삭제</button>";		
 			txt+="<div>경험내용</div>";
-			txt+="<input type='text' class='form-control' placeholder='예)키즈카페, 교육기관, 봉사활동' />";
+			txt+="<input type='text' name='exp_content' class='form-control' placeholder='예)키즈카페, 교육기관, 봉사활동' />";
 			txt+="<hr/>";
 			txt+="<div>경험기간</div>";
 			txt+="<div class='expLine'>";
-			txt+="<input type='date' /> -";
-			txt+="<input type='date' />";
+			txt+="<input type='date' name='exp_start'/> -";
+			txt+="<input type='date' name='exp_end'/>";
 			txt+="</div></li>";
 			$("#result").append(txt);
 		}
@@ -113,18 +113,20 @@
 		<form method="post" action="teacherExpOk">
 			<div class="form-group">
 				<ul id="result">
+				<c:forEach var="evo" items="${list}">
 				<li>
 					<button class="btn btn-warning" type="button">삭제</button>		
 					<div>경험내용</div>
-					<input type="text" value="" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" />
+					<input type="text" name="exp_content" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" 
+					value="${evo.exp_content}"	/>
 					<hr/>
 					<div>경험기간</div>
 					<div class="expLine">
-						<input type="date" /> -
-						<input type="date" />
+						<input type="date" name="exp_start" value="${evo.exp_start}"/> -
+						<input type="date" name="exp_end" value="${evo.exp_end}"/>
 					</div>
 				</li>
-					
+					</c:forEach>
 				</ul>
 				<input type="button" id="addExp" class="btn btn-warning" value="+경험내용 추가하기"/>
 				
