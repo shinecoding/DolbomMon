@@ -16,8 +16,8 @@ public class ManagerLoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		
-		String managerStatus = (String)session.getAttribute("managerStatus"); 
-		if(managerStatus == null || managerStatus != "Y") {
+		String logStatus = (String)session.getAttribute("logStatus"); 
+		if(logStatus == null || logStatus != "Y") {
 			response.sendRedirect(request.getContextPath()+"/managerLogin");
 			return false;
 		}
