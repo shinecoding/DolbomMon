@@ -15,6 +15,18 @@
 				userid_r=#{userid} 
 			</otherwise>
 		</choose>
+		<if test='tabType.equals("4")'>
+			and spam='Y'	
+		</if>
+		<if test='tabType.equals("3")'>
+			and message_save='Y'	
+		</if>
+		<if test='tabType.equals("2")'>
+			and message_save='N'
+		</if>
+		<if test='tabType.equals("1")'>
+			and spam='N' and message_save='N'
+		</if>
 		<if test='searchKey != null and !searchKey.equals("") and !searchKey.equals("%%") and !searchKey.equals("%null%")'>
 			<if test='searchKey.equals("userid")'>
 				<choose>
@@ -47,5 +59,17 @@
 				userid_r=#{userid}
 			</otherwise>
 		</choose>
+		<if test='tabType.equals("4")'>
+			and spam='Y'
+		</if>
+		<if test='tabType.equals("3")'>
+			and message_save='Y'
+		</if>
+		<if test='tabType.equals("2")'>
+			and message_save='N'
+		</if>
+		<if test='tabType.equals("1")'>
+			and spam='N' and message_save='N'
+		</if>
 	</select>
 </mapper>

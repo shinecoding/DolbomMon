@@ -12,7 +12,7 @@
 <script>
 	$(function(){
 		
-		 $(document).ready(function() {
+		$(document).ready(function() {
 			// 팝업 창 크기를 HTML 크기에 맞추어 자동으로 크기를 조정하는 함수.
 			var strWidth;
 			var strHeight;
@@ -37,17 +37,24 @@
 			
 			//resize 
 			window.resizeTo( strWidth, strHeight );
-		  });
+		});
 
-			$(".nav-tabs a").click(function(){
-				var result = $(this).parent().attr("id");
-			});
+		$(".nav-tabs a").click(function(){
+			var result = $(this).parent().attr("id");
+		});
+		
+		$("#allCheck").on('change',function(){
+			$("#message_list input").prop("checked", $("#allCheck").prop("checked"));
+		});
+		
 	});
 	
-	function imgchange(data){
-		$(".note_title img").attr("src",data);	
-		
-		//"imgchange('icon/message/message3.gif')
+	//회원검색 탭 눌렀을때
+	function imgchange(data){ 
+		$(".note_title img").attr("src",data); //상단이미지 변환	
+		$("#changeTotal").html("0"); //전체레코드 0으로표시
+		$("#paging").css("display","none"); //페이징 제거
+		$(".note_msg").css("display","none"); //보관버튼 제거
 	}
 	
 	//탭매뉴 클릭시 전환
@@ -89,7 +96,7 @@
 		width:450px;
 	}
 	.clearfix:after { clear:both; }
-	.list_line>td{
+	.list_line>td, #message_list>td{
 		line-height:25px;
 	}
 	tbody p{
@@ -127,7 +134,9 @@
 			<!-- 게시판 검색주소 넣기 .. ex:https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox&sort=unread -->
 			<!--  ex : https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox -->
 			<a href="#" class="btn_show"> 안 읽은 쪽지 <font
-				style="font-weight: bold; color: #F00;">0</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;'>0</span></a>
+				style="font-weight: bold; color: #F00;">0</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
+				${pVo.totalRecord}
+				</span></a>
 
 		</p>
 	</div>
@@ -151,7 +160,7 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col" style="text-align:center;"><input type="checkbox"/></th>
+						<th scope="col" style="text-align:center;"><input type="checkbox" id="allCheck"/></th>
 						<th scope="col" class="sub_title">제목</th>
 						<th scope="col" class="sub_title">
 						<c:choose>
@@ -166,6 +175,7 @@
 						<th scope="col" class="sub_title">날짜</th>
 					</tr>
 				</thead>
+			
 				<tbody>
 					<tr class="list_line">
 						<td class="note_info note_notice" colspan="4">
@@ -179,9 +189,9 @@
 					<tr>
 						<td colspan="4" class="board-line"></td>
 					</tr>
+				<!-- 쪽지 리스트 -->	
 					<c:forEach var="vo" items="${list}">
-					
-					<tr class="list_line">
+					<tr id="message_list">
 						<td style="text-align:center;"><input type="checkbox" name=delMessage value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">

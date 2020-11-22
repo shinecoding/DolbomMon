@@ -34,14 +34,22 @@ public class MessageController {
 		// "=========================임시 로그인 체크========================"		
 		String loginCheck = (String)session.getAttribute("userid");
 		if(loginCheck != null) {
-			vo.setUserid(loginCheck);
+			
 
 			//현재페이지 구하기
 			String nowPageTxt = req.getParameter("nowPage");
 			if(nowPageTxt!=null) {
 				vo.setNowPage(Integer.parseInt(nowPageTxt));
 			}
+			//스팸 메시지 등록된 전체 레코드 숫자. 보관메시지 등록된 전체 레코드 숫자
+			if(tabType.equals("4")) {
+				vo.setSpam("Y");
+			}else if(tabType.equals("3")) {
+				vo.setMessage_save("Y");
+			}
+			//안읽은쪽지 구하기. 쿼리문 생성
 			
+			vo.setUserid(loginCheck);
 			//접속한 아이디의 전체 레코드 숫자
 			vo.setTotalRecord(dao.getAllRecordCount(vo));
 			System.out.println("접속자아이디 = "+loginCheck);
