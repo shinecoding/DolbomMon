@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.login.LoginDaoImp">
+	<select id="loginOk" resultType="com.dolbommon.dbmon.login.LoginVO">
+		select userid from member where userid=#{userid} and userpwd=#{userpwd}
+	</select>
+</mapper>

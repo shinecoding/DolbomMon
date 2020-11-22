@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.board.FreeBoardDaoImp">
+	<select id="freeBoardList" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate from freeBoard order by no desc	
+	</select>
+	
+	<select id="getTotalRecord" resultType="int">	
+		select count(no) from freeBoard
+	</select>
+	
+	<select id="freeBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select no, head, subject, content, userid, hit, writedate
+		from freeBoard where no=#{param1}
+	</select>
+	
+	<update id="hitCount" parameterType="int">
+		update freeBoard set hit=hit+1 where no=#{param1}
+	</update>
+	
+	<insert id="freeBoardInsert" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
+		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref) 
+		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, board_sq.currval)
+	</insert>
+	
+	<delete id="freeBoardDel">
+		delete from freeBoard where no=#{param1} and userid=#{param2}
+	</delete>
+	
+	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
+		update freeBoard set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid}
+	</update>
+	
+	<select id="optionSelect" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select no, ref, step, lvl from freeBoard where no=#{param1}
+	</select>
+	
+	<update id="levelUpdate" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
+		update freeBoard set lvl=lvl+1 where ref=#{ref} and lvl>#{lvl} 
+	</update>
+	
+	<insert id="replyBoardInsert" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
+		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref, step, lvl) 
+		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, #{ref}, #{step}, #{lvl})
+	</insert>
+	
+	
+</mapper>

@@ -17,6 +17,8 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/icon/**" location="/icon/" />
+	<resources mapping="/ckeditor/**" location="/ckeditor/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -26,13 +28,14 @@
 	
 	<context:component-scan base-package="com.dolbommon.dbmon" />
 	<context:component-scan base-package="com.bitcamp.test" />
-	<context:component-scan base-package="com.bitcamp.dbmon.firstpage" />
-		<!-- 오라클dataSource 객체 생성 -->
+	<context:component-scan base-package="com.bitcamp.dbmon.brand" />
+	
+	<!-- 오라클dataSource 객체 생성 -->
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></beans:property>
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></beans:property>
+		<beans:property name="url" value="jdbc:oracle:thin:@106.240.16.163:1521:xe"></beans:property>
 		<beans:property name="username" value="scott"></beans:property>
-		<beans:property name="password" value="tiger"></beans:property>
+		<beans:property name="password" value="tiger009"></beans:property>
 	</beans:bean>
 	
 	<!-- Template객체 만들기 -->
@@ -47,7 +50,7 @@
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 		<beans:property name="mapperLocations">
 			<beans:list>
-				<beans:value>classpath:com/bitcamp/test/mapper/*.xml</beans:value>
+				<beans:value>classpath:com/dolbommon/dbmon/mapper/*.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
