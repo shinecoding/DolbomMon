@@ -44,9 +44,15 @@
 		});
 		
 		$("#allCheck").on('change',function(){
-			$("#message_list input").prop("checked", $("#allCheck").prop("checked"));
+			$(".message_list input").prop("checked", $("#allCheck").prop("checked"));
 		});
 		
+		
+		//글번호 구하는 수식.. 아이디 클릭시(사용처?) 
+		$(".sendWrite").click(function(){
+			var no = $(this).parent().prev().prev().children("input").val();
+			console.log(no);
+		});
 	});
 	
 	//회원검색 탭 눌렀을때
@@ -61,6 +67,8 @@
 	function tabChange(){
 		$("#test2").children().eq(${tabType}-1).children('a').attr("class", "nav-link active");
 	}
+	
+
 </script>
 <style>
 	body{
@@ -69,8 +77,7 @@
 		overflow-y:hidden;
 		margin:0;
 		padding:0;
-		width:482px;
-		height:600px;
+		background-color:#F3F3F3;
 	}
 
 	#messageMain{
@@ -78,7 +85,6 @@
 		width:482px;
 		height:600px;
 		margin:0 auto;
-		border:1px solid lightblue;
 		background-color:#F3F3F3;
 	}
 	#message>table{
@@ -177,10 +183,12 @@
 				</thead>
 			
 				<tbody>
+				
 					<tr class="list_line">
+					<!-- 공지사항 반복문 돌리기 -->
 						<td class="note_info note_notice" colspan="4">
 							<p class="note_new">
-								<a href="/zboard/view.php?id=notice&no=940" target="_blank" class="btn_show">
+								<a href="/dbmon/messageContent&no= " target="_blank" class="btn_show">
 									<img src="icon/message/icon_notice_new.png" border="0" alt="notice" class="icon-notice"> <span>돌봄몬 운영자 사칭 쪽지 주의</span> 
 								</a>
 							</p>
@@ -191,31 +199,31 @@
 					</tr>
 				<!-- 쪽지 리스트 -->	
 					<c:forEach var="vo" items="${list}">
-					<tr id="message_list">
+					<tr class="message_list">
 						<td style="text-align:center;"><input type="checkbox" name=delMessage value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
-								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${vo.nowPage}&tabType=${tabType}">
 									<img src="icon/message/ico_talk.gif"/>
 								</a>
-								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}" class="btn_show wordCut">
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${vo.nowPage}&tabType=${tabType}" class="btn_show wordCut">
 									${vo.subject}
 								</a>
 							</p>
 						</td>
 						<td class="user_new">
-							<a href="https://www.ppomppu.co.kr/zboard/member_memo.php?search_type=name&memo_type=inbox&keyword=%B8%C1%B0%ED%21">
+							<a href="#">
 								<img src="icon/message/note_new1.gif" width="8px" height="8px" /> 
 							</a>
-							<a href="javascript:;" onclick="window.open('/zboard/view_info2.php?member_no=GmC49Ayrh6WLrGZT3k1Zjw%3D%3D','view_info','width=478,height=510,toolbar=no,scrollbars=yes')" >
-								<span id="sendWrite">
-									<c:if test="${tabType==1 || tabType==3 || tabType==4}">
-									${vo.userid_w}
-									</c:if>
-									<c:if test="${tabType==2 }">
-									${vo.userid_r}
-									</c:if>
-								</span>
+							<!-- 유저아이디 부분.. 회원정보? 쪽지보내기? 마우스위치에 창 뜨게 하기 -->
+							<!-- ex)  onclick="window.open('?member_no=GmC49Ayrh6WLrGZT3k1Zjw%3D%3D','view_info','width=478,height=510,toolbar=no,scrollbars=yes')"  -->
+							<a href="#" class="sendWrite">
+								<c:if test="${tabType==1 || tabType==3 || tabType==4}">
+								${vo.userid_w}
+								</c:if>
+								<c:if test="${tabType==2 }">
+								${vo.userid_r}
+								</c:if>
 							</a>
 						<td class="date">${vo.writedate}</td>
 					</tr>
@@ -247,8 +255,6 @@
 						<a class="page-link"  class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>">Prev</a>
 					</c:if>
 				</li>
-				<!-- 									1						1+10			 -->
-				<!-- 									11						11+10			 -->
 				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onepageNumCount-1}">
 					<c:if test="${p<=pVo.totalPage }">
 						<li class="page-item">

@@ -48,6 +48,23 @@ public class MessageController {
 				vo.setMessage_save("Y");
 			}
 			//안읽은쪽지 구하기. 쿼리문 생성
+			//읽는 순간 해당번호 글의 message_save를 Y로 등록
+			//리스트에서 Y로 등록된 글의 색은 회색으로 변하게 세팅.
+			//N일경우 파란색으로 보이게 세팅
+			
+			//공지사항 여부 구하기.
+			//테이블에 공지사항여부 체크 테이블 추가
+			//공지사항일경우 위쪽에 추가. (최대 2~3개?)
+			
+			
+			//스팸등록하기 방법
+			//userid가 받는이. 차단할 아이디가 보낸이.
+			//userid일때 차단할 아이디 테이블 생성.
+			//차단할 아이디가 메시지 보낼때 이 테이블 검색해서 userid와 보낼대상이 일치할경우 spam을 Y로 등록
+			//스팸 등록 버튼 누르는 순간 userid대상으로 보낸 차단할 아이디의 모든 글의 spam을 Y로바꿈
+			//차단 해제는 위 테이블에서 두 아이디 비교해서 레코드 삭제. 글의 spam을 모두 N으로바꿈
+			
+			
 			
 			vo.setUserid(loginCheck);
 			//접속한 아이디의 전체 레코드 숫자
@@ -101,14 +118,20 @@ public class MessageController {
 	//쪽지에서 글 클릭했을때
 	@RequestMapping("/messageContent")
 	public ModelAndView messageContent(MessageVO vo, HttpServletRequest req, HttpSession ses) {
-		vo.setNo(Integer.parseInt((String)req.getAttribute("no")));
-		vo.setNowPage(Integer.parseInt((String)req.getAttribute("nowPage")));
-		vo.setTabType((String)req.getAttribute("tabType"));
+		System.out.println(req.getParameter("no"));
+		System.out.println(req.getParameter("nowPage"));
+		System.out.println(req.getParameter("tabType"));
 		
+		vo.setNo(Integer.parseInt((String)req.getParameter("no")));
+		vo.setNowPage(Integer.parseInt((String)req.getParameter("nowPage")));
+		vo.setTabType((String)req.getParameter("tabType"));
 		
 		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message/messageView");
 		return mav;
 		
 	}
+	
+	
 }
