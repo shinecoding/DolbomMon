@@ -146,7 +146,6 @@ public class TeacherController {
 		
 		//get the file from teacherPicture.jsp input name=
 		MultipartFile mf = mtfRequest.getFile("filename");
-		
 			
 		String pic = null;
 		

@@ -11,6 +11,7 @@ public class MessageVO {
 	private String message_check;
 	private String message_save;
 	private String spam;
+	private String tabType;
 
 	
 	
@@ -19,10 +20,11 @@ public class MessageVO {
 	private int nowPage=1; //현재페이지
 	private int totalRecord; //총레코드수
 	private int totalPage; //총페이지수
-	private int onePageRecord=11; //한페이지 레코드수
+	private int onePageRecord=10; //한페이지 레코드수
 	private int onepageNumCount=5; //한번에 표시할 페이지번호수
 	private int startPageNum=1; //페이지 번호 시작위치
-	private int lastPageRecordCount=11; //마지막 페이지의 레코드수
+	private int currentPageRecord=nowPage*onePageRecord;
+	private int lastPageRecordCount=10; //마지막 페이지의 레코드수
 	private String searchKey; //검색키
 	private String searchWord; //검색어
 
@@ -40,6 +42,8 @@ public class MessageVO {
 	}
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
+		currentPageRecord = nowPage * onePageRecord;
+		startPageNum = (nowPage-1)/onepageNumCount*onepageNumCount+1;
 	}
 	public int getTotalRecord() {
 		return totalRecord;
@@ -175,6 +179,22 @@ public class MessageVO {
 	}
 	public void setSpam(String spam) {
 		this.spam = spam;
+	}
+
+	public String getTabType() {
+		return tabType;
+	}
+
+	public void setTabType(String tabType) {
+		this.tabType = tabType;
+	}
+
+	public int getCurrentPageRecord() {
+		return currentPageRecord;
+	}
+
+	public void setCurrentPageRecord(int currentPageRecord) {
+		this.currentPageRecord = currentPageRecord;
 	}
 	
 	
