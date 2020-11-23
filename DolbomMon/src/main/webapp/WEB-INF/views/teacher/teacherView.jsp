@@ -42,7 +42,7 @@ font-weight:bold;
    </ul>
    <br/>
    <ul class="list-group list-group-horizontal-sm">
-   		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>129</div></li>
+   		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>${vo.hit}</div></li>
    		<li class="list-group-item col-4" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/>3일 전</li>
    		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-video mr-2"></i>CCTV<br/><c:if test="${vo.cctv=='Y'}">동의함</c:if><c:if test="${vo.cctv!='Y'}">동의안함</c:if></li>
    </ul>

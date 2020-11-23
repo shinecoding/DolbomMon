@@ -48,6 +48,7 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
+		dao.hitCount(vo);
 		List<ExperienceVO> list = dao.selectExp(userid);
 		
 		ModelAndView mav = new ModelAndView();
@@ -231,15 +232,20 @@ public class TeacherController {
 		
 		if(exp_content!=null && exp_start!=null && exp_end!= null) {
 				for(int i=0; i<exp_content.length; i++) {
-					System.out.println(exp_content[i]);
-					evo.setExp_content(exp_content[i]);
-					evo.setExp_start(exp_start[i]);
-					evo.setExp_end(exp_end[i]);
-					list.add(evo);
-				}
+					if(exp_content[i]!= null && exp_start[i]!=null && exp_end[i]!=null) {
+						evo.setExp_content(exp_content[i]);
+						evo.setExp_start(exp_start[i]);
+						evo.setExp_end(exp_end[i]);
+						list.add(evo);
+						}else {
+							exp_content.remove(i);
+							exp_start[i].remove();
+							exp_end[i].remove();
+									
+						}//if
+				}//for
 		}
-		
-		
+			
 		int result = dao.updateExp(list);
 		if(result>0) {
 			mav.addObject("list", list);
@@ -248,19 +254,25 @@ public class TeacherController {
 			mav.setViewName("teacher/teacherResult");
 		}
 		
-		
-		
 		return mav;
 	}
 
+	@RequestMapping("/teacherDelExp")
+	public ModelAndView teacherDelExp(HttpSession ses) {
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		String userid = (String) ses.getAttribute("userid");
+		int result = dao.deleteExp();
+		
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
 	
 	@RequestMapping("/teacherAge") 
 	public ModelAndView teacherAge(HttpSession ses) { ////
-	
-
-	ModelAndView mav = new ModelAndView();
-	mav.setViewName("/teacher/teacherAge");
-	return mav;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/teacher/teacherAge");
+		return mav;
 	
 	}
 	
@@ -330,7 +342,9 @@ public class TeacherController {
 		}else {
 			mav.setViewName("teacher/teacherResult");
 		}
-			
 		return mav;		
 	}
+	
+
+	
 }

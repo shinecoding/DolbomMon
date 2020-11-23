@@ -96,6 +96,11 @@
 			exxxx();
 		});
 		
+		
+		$("button").click(function(){
+			
+			$(this).parent().remove("li");
+		});
 	});
 </script>
 </head>

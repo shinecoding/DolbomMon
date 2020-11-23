@@ -14,5 +14,6 @@ public interface TeacherDaoImp {
 	public int updateCCTV(TeacherVO vo);
 	public List<ExperienceVO> selectExp(String userid);
 	public int updateExp(List<ExperienceVO> list);
+	public int hitCount(TeacherVO vo);
 }
 
