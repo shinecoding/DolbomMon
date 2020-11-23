@@ -17,14 +17,6 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery.bxslider.css" type="text/css"/>
 <script>
-	$(function(){
-		$(".main-menu").hover(function(){
-			$("#mainPage").css("left","250");
-		},function(){
-			$("#mainPage").css("left","100");
-		});
-		
-	});
 	
 
 	$(document).ready(function(){
