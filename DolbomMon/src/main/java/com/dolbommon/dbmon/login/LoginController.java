@@ -29,7 +29,7 @@ public class LoginController {
 	public String login() {
 		return "login/loginForm";	
 	}
-	//로그인
+	
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
@@ -63,14 +63,7 @@ public class LoginController {
 	public String searchId() {
 		return "login/idSearch";		
 	}
-	
-	//계정 찾기
-//	@RequestMapping("/idInfo")
-//	public ModelAndView idInfo() {
-	
-//		return null;	
-//	}
-	
+
 	//계정 정보
 	@RequestMapping("/idInfo")
 	public String idInfo() {
