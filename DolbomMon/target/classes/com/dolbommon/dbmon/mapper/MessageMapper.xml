@@ -73,5 +73,8 @@
 			and spam='N' and message_save='N'
 		</if>
 	</select>
-
+	
+	<select id="messageView" resultType="com.dolbommon.dbmon.message.MessageVO">
+		select no, subject, userid_w, userid_r, to_char(writedate, 'YYYY"년 "MM"월 "DD"일"   PM HH:MI') writedate, content from message where no=#{no}
+	</select>
 </mapper>

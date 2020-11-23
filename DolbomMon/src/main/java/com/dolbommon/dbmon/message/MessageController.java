@@ -121,20 +121,36 @@ public class MessageController {
 		vo.setNo(Integer.parseInt((String)req.getParameter("no")));
 		vo.setNowPage(Integer.parseInt((String)req.getParameter("nowPage")));
 		vo.setTabType((String)req.getParameter("tabType"));
-		vo.setUserid((String)ses.getAttribute("userid"));
+		String loginCheck = (String)ses.getAttribute("userid");
 		
 		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
-		MessageVO resultVO = dao.messageView(vo); 
+		MessageVO resultVo = dao.messageView(vo); 
+		ModelAndView mav = new ModelAndView();
+	
 		
+		if(loginCheck.equals(resultVo.getUserid_w()) || loginCheck.equals(resultVo.getUserid_r())) {
+			mav.addObject("vo", resultVo);
+			mav.setViewName("message/messageView");
+		}else{
+			mav.addObject("msg", "로그인 상태를 확인하세요.");
+			mav.setViewName("message/loginCheck");
+		}
 		//세션 로그인 아이디 받아서 R(읽은아이디) W(보낸아이디)와 비교. 둘중 일치하는게 있으면
 		//검색은 no로
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", resultVO);
-		mav.setViewName("message/messageView");
+
 		return mav;
-		
 	}
 	
+	//뒤로가기
+	@RequestMapping("/back")
+	public ModelAndView historyBack(HttpServletRequest req) {
+		String msg = (String)req.getParameter("msg");
+		String back = (String)req.getParameter("back");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("back", back);
+		mav.addObject("msg", msg);
+		mav.setViewName("message/loginCheck");
+		return mav;
+	}
 	
 }
