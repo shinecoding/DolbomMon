@@ -40,6 +40,7 @@ public class MemberController {
 		public ModelAndView regForm(@RequestParam("dbm_type") String dbm_type,
 			      @RequestParam("child_age") String child_age,
 			      @RequestParam("care_type") String care_type,
+			      @RequestParam("yoil") String yoil,
 			      @RequestParam("start_time") String start_time,
 			      @RequestParam("end_time") String end_time,
 			      @RequestParam("start_date") String start_date,
@@ -54,6 +55,7 @@ public class MemberController {
 			mav.addObject("dbm_type" ,dbm_type);
 			mav.addObject("child_age" ,child_age);
 			mav.addObject("care_type" ,care_type);
+			mav.addObject("yoil" ,yoil);
 			mav.addObject("start_time" ,start_time);
 			mav.addObject("end_time" ,end_time);
 			mav.addObject("start_date" ,start_date);
@@ -68,8 +70,45 @@ public class MemberController {
 		}
 				
 		//회원가입 완료
-		public String regOk() {
-			return "";
+		@RequestMapping(value="/regOk", method=RequestMethod.POST)
+		public ModelAndView regOk(
+				@RequestParam("userid") String userid,
+				@RequestParam("userpwd") String userpwd,
+				@RequestParam("email1") String email1,
+				@RequestParam("email2") String email2,
+				@RequestParam("tel1") String tel1,
+				@RequestParam("zonecode") String zonecode,
+				@RequestParam("address") String address,
+				@RequestParam("addrdetail") String addrdetail,
+			      
+			    @RequestParam("dbm_type") String dbm_type,
+			    @RequestParam("child_age") String child_age,
+			    @RequestParam("care_type") String care_type,
+			    @RequestParam("desired_wage") String desired_wage,
+			    @RequestParam("cctv") String cctv,
+			    @RequestParam("pic") String pic,
+			    @RequestParam("intro") String intro,
+			    
+			    @RequestParam("yoil") String yoil,
+			    @RequestParam("start_time") String start_time,
+			    @RequestParam("end_time") String end_time,
+			    @RequestParam("start_date") String start_date,
+			    @RequestParam("end_date") String end_date,
+			      
+			    HttpServletRequest req, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
+			mVo.setUserid(userid); mVo.setUserpwd(userpwd); mVo.setEmail1(email1); mVo.setEmail2(email2); mVo.setTel1(tel1); mVo.setZipcode(zonecode); mVo.setAddress(address); mVo.setAddrdetail(addrdetail);
+			tVo.setDbm_type(dbm_type);tVo.setChild_age(child_age);tVo.setCare_type(care_type);tVo.setDesired_wage(desired_wage);tVo.setCctv(cctv);tVo.setPic(pic);tVo.setIntro(intro);
+			rdVo.setYoil(yoil);rdVo.setStart_time(start_time);rdVo.setEnd_time(end_time);rdVo.setStart_date(start_date);rdVo.setEnd_date(end_date);
+			
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			int result = dao.memberReg(mVo, tVo, rdVo);
+			
+			ModelAndView mav = new ModelAndView();
+			if(result > 0) {
+				mav.setViewName("login/loginForm");
+			}
+			
+			return mav;
 		}
 		
 		// 우편코드 선택창
@@ -101,7 +140,7 @@ public class MemberController {
 		    set.put("type", "sms"); // 문자 타입
 		   
 		    coolsms.send(set); // 보내기
-		 
+		    
 		    return "suc";
 		}
 
@@ -240,6 +279,7 @@ public class MemberController {
 		public ModelAndView dbmProfileImage(@RequestParam("dbm_type") String dbm_type,
 			      @RequestParam("child_age") String child_age,
 			      @RequestParam("care_type") String care_type,
+			      @RequestParam("yoil") String yoil,
 			      @RequestParam("start_time") String start_time,
 			      @RequestParam("end_time") String end_time,
 			      @RequestParam("start_date") String start_date,
@@ -251,6 +291,7 @@ public class MemberController {
 			mav.addObject("dbm_type" ,dbm_type);
 			mav.addObject("child_age" ,child_age);
 			mav.addObject("care_type" ,care_type);
+			mav.addObject("yoil" ,yoil);
 			mav.addObject("start_time" ,start_time);
 			mav.addObject("end_time" ,end_time);
 			mav.addObject("start_date" ,start_date);
@@ -266,6 +307,7 @@ public class MemberController {
 		public ModelAndView dbmIntroduce(@RequestParam("dbm_type") String dbm_type,
 			      @RequestParam("child_age") String child_age,
 			      @RequestParam("care_type") String care_type,
+			      @RequestParam("yoil") String yoil,
 			      @RequestParam("start_time") String start_time,
 			      @RequestParam("end_time") String end_time,
 			      @RequestParam("start_date") String start_date,
@@ -281,6 +323,7 @@ public class MemberController {
 			mav.addObject("dbm_type" ,dbm_type);
 			mav.addObject("child_age" ,child_age);
 			mav.addObject("care_type" ,care_type);
+			mav.addObject("yoil" ,yoil);
 			mav.addObject("start_time" ,start_time);
 			mav.addObject("end_time" ,end_time);
 			mav.addObject("start_date" ,start_date);

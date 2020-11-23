@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.register.MemberDaoImp">
 	<insert id="memberReg" >
+		insert into member(no, userid, userpwd, username, gender, tel1, email, address, addrdetail, zonecode) 
+				values(member_sq.nextval, #{mVo.userid}, #{mVo.userpwd}, #{mVo.username}, #{mVo.gender}, #{mVo.tel1}, #{mVo.email}, #{mVo.address}, #{mVo.addrdetail}, #{mVo.zonecode})
+		
 	</insert>
 
 </mapper>

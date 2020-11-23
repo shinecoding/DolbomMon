@@ -42,6 +42,7 @@
 			<input type="text" name="dbm_type" value="${dbm_type }" />
 			<input type="text" name="child_age" value="${child_age }" />
 			<input type="text" name="care_type" value="${care_type }" />
+			<input type="text" name="yoil" value="${yoil }" />
 			<input type="text" name="start_time" value="${start_time }" />
 			<input type="text" name="end_time" value="${end_time }" />
 			<input type="text" name="start_date" value="${start_date }" />

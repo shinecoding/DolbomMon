@@ -56,7 +56,9 @@ $(document).ready(function() {
        	}     
        	else{     
           	if(userNum.trim() == sysNum.trim()){
-          		
+          		alert("인증이 완료되었습니다.");
+          		opener.document.getElementById("tel1").value = $("#to").val();
+          		window.close();
            	}
            	else {
            		alert("인증번호를 다시 확인해주세요");
@@ -72,15 +74,15 @@ $(document).ready(function() {
 <body>
 
 <div id="contents"> 
-<form action="#" method="post">
-      받는사람 : <input type="text" id="to" name="to"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
-    <input type="button" id="send" value="전송"/><br> <!-- 문자보내는 전송버튼 -->
-     인증번호 :    <input type="text" id="userNum">   <!-- 인증번호 입력창 -->
-  <input type="button" id="enterBtn" value="확인">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
-  
-  
-  <input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
- 
+	<form action="#" method="post">
+ 		받는사람 : <input type="text" id="to" name="to"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+	    <input type="button" id="send" value="전송"/><br> <!-- 문자보내는 전송버튼 -->
+		인증번호 :    <input type="text" id="userNum">   <!-- 인증번호 입력창 -->
+	  	<input type="button" id="enterBtn" value="확인">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
+	  
+	  
+	  <input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+	 
 </form>  
 </div>
 
