@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${logStatus==null || logStatus!='Y'}">
+	<script>
+		alert('로그인 후 이용이 가능한 서비스입니다.');
+		location.href="/dbmon/login";
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +38,7 @@
 <script>
 $(function(){
 	//ckeditor를 textarea와 연결하기
-	CKEDITOR.replace("content");
+	CKEDITOR.replace("content",{filebrowserUploadUrl:'/dbmon/imageUpload'});
 	
 	//데이터 입력유무 확인
 	$("#freeBoardFrm").submit(function(){
@@ -72,7 +78,7 @@ $(function(){
 				</select>
 			</div>
 	 		<label for="subject">제목</label>
-			<input type="text" maxlength="40" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요"><br/>
+			<input type="text" maxlength="60" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요"><br/>
 			<div>
 			<label for="content">글내용</label><br/>
 				<textarea class="form-control" id="content" name="content" placeholder="글내용을 입력하세요"></textarea>

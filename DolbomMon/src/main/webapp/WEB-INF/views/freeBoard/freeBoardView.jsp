@@ -25,7 +25,8 @@
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
 				location.href="/dbmon/freeBoardDel?no=${vo.no}";
-			}		
+			}
+			return false;
 		});
 	});
 	
@@ -61,7 +62,7 @@
 				<tr>
 					<th scope="col">글내용</th>
 					<td>
-					<br/>${vo.content}<br/><br/>
+					<br/>${vo.content}<br/>
 					</td>
 				</tr>
 			</tbody>
@@ -77,9 +78,11 @@
 			</tfoot>
 		</table>
 		<div>
-			<a class="btn btn-warning" href="/dbmon/freeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
-			<a class="btn btn-warning" href="/dbmon/freeBoardEdit?no=${vo.no}" role="button">수정</a>
-			<a class="btn btn-warning" href="#" role="button">답변</a>
+			<c:if test="${userid==vo.userid}">
+				<a class="btn btn-warning" href="/dbmon/freeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
+				<a class="btn btn-warning" href="/dbmon/freeBoardEdit?no=${vo.no}" role="button">수정</a>
+			</c:if>
+			<a class="btn btn-warning" href="/dbmon/freeBoardReplyForm?no=${vo.no}" role="button">답변</a>
 			<a class="btn btn-warning" href="/dbmon/freeBoard" role="button">목록</a>
 		</div>
 	</div>

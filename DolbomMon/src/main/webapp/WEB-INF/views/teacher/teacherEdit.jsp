@@ -121,17 +121,17 @@ width:50%;
    	<h5>간단 자기소개</h5>
    	<li class="list-group-item" style="text-align:center">
 	   	<i class="fas fa-pen"><a class="editBtn" href="teacherIntro"></a></i>
-	   	아직 작성하지 않았습니다.
+	   	${vo.intro }
    	</li>
    	<h5>선호하는 돌봄유형</h5>
    	<li class="list-group-item" style="text-align:center">
 	   	<i class="fas fa-pen"><a class="editBtn" href="teacherType"></a></i>
-	   	"저는 <span>놀이/학습</span>돌봄을 가장 선호해요"
+	   	"저는 <span>${vo.care_type}</span>돌봄을 가장 선호해요"
    	</li>
    	<h5>희망 시급</h5>
    	<li class="list-group-item" style="text-align:center">
    		<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
-   		원하는 시급을 자유롭게 작성해주세요.
+   		${vo.desired_wage }
    	</li>
    	<h5>관련 경험</h5>
    	<li class="list-group-item" style="text-align:center">

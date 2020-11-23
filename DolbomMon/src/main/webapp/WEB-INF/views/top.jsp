@@ -105,28 +105,39 @@
 	   		margin-right:180px;
 	   		
 	   }
+	   .clearfix:after { clear:both; } 
    </style>
 </head>
 <body>
  <div id="container">
- <header>
- <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
-        class="logo" alt="Logo" src="home" style="margin-left:10px;" 
-        Onclick="location.href='/dbmon'"/>
- <a class="btn">	
-	<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
-	
-	<c:if test="${logStatus == null || logStatus=='N'}">
- 		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
- 	</c:if>
+
+ <div class="clearfix">
+	 <header>
+	 <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
+	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
+	        Onclick="location.href='/dbmon'"/>
+	        <span style="float:right">
+	        <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
+	        <button class="btn btn-primary">쪽지</button></a>
+	        <a href="/dbmon/temporaryLogin">
+	        <button class="btn btn-info">임시로그인</button></a>
+	        </span>
+	 		<a class="btn" style="float:right">	
+			<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
+			<c:if test="${logStatus == null || logStatus=='N'}">
+	 		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
+ 			</c:if>
  	
  	
-	<c:if test="${logStatus != null || logStatus=='Y'}">
-	${username } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
-	</c:if>
-	
-</a> 				
-</header>
+			<c:if test="${logStatus != null || logStatus=='Y'}">
+			${username } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
+			</c:if>
+
+					
+	</a> 				
+	</header>
+</div>
+
   
   
    <ul class="menu">

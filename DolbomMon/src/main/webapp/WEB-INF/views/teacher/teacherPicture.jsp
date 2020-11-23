@@ -71,7 +71,7 @@
 	white-space:nowrap;
 	vertical-align: middle;
 	}
-	#profFile{
+	#pic{
 	opacity:0%;
 	position:absolute;
 	top:0;
@@ -101,18 +101,19 @@
 		<div id="title">
 	   		<div id="titlefont">내 사진 수정</div>
 	 	</div>
-		
+		<form name="picForm" method="post"  action="/dbmon/teacherPictureOk" enctype="multipart/form-data" >
 			<div id="profBox">
 				<img class="rounded-circle mx-auto d-block" id="profIcon" src="img/profilepic.png"/>
 				<img id="profPlus" src="icon/profile-add-bt.svg"/>
-				<input type="file" id="profFile" accept="image/*,video/*">
+				<input type="file" id="pic" name="filename" accept="image/*,video/*">
 			</div>		
+				
 				<div id="picWarning">
 				“내 사진을 올리면 부모회원의 선택을<br/> <span id="teacherPicRed">5배 더 많이</span> 받을 수 있습니다.”
 				</div>
 				<input type="submit" class="btn btn-warning" value="저장" />
-			</div>
-		
-
+			
+		</form>
+	</div>
 </body>
 </html>

@@ -41,10 +41,6 @@ public class ManagmentController {
 	public String managerManage(){
 		return "management/managerManage";
 	}
-	@RequestMapping("/messagetest")
-	public String message(){
-		return "message/messageMain";
-	}
 	
 	@RequestMapping("/managerLogout")
 	public String managerLogout(HttpSession session) {

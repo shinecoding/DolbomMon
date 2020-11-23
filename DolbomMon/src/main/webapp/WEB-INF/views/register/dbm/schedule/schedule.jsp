@@ -21,7 +21,7 @@
 	/* =============== 시간 선택 라디오버튼 ============== */
 	.inputRadioDiv{width:100%; height:auto; padding:20px; border-bottom:1px solid gray;}
 	.inputRagiodiv:last-child{border:1px solid gray;}
-	label{margin:0px;}
+	label{margin:0px; width:100%; }
 	
 	/* =============== 시간 선택 라디오버튼 ============== */
 	
@@ -37,11 +37,9 @@
 			if(selectedId=="cr7") {
 				$("form").attr("action", "<%=request.getContextPath()%>/dbm/schedule/detail");
 			}else{
-				$("form").attr("action", "<%=request.getContextPath()%>/regForm");
+				$("form").attr("action", "<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV");
 			}
 		});
-		
-	 	
 	});
 </script>
 </head>
@@ -50,7 +48,7 @@
 		<div id="headerDiv">
 			언제 활동할 수 있나요?
 		</div>
-		<form action="<%=request.getContextPath()%>/regForm">
+		<form action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 			<div class="inputRadioDiv">
 				<label for="wdAll"><input type="radio" id="wdAll" name="1" />월~금 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>

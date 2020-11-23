@@ -44,7 +44,7 @@
 	left: calc(50% - 100px);
 	}
 	
-	input[type=text]{
+	input[type=number]{
 	border-color: orange;
 	display:inline-block;
 	width:200px;
@@ -64,32 +64,19 @@
 	}
 </style>	
 <script>
-	var regex= /[^0-9]/;
+	
 	$(function(){
-		
+		//최저시급 보여주기==========
 		function minCheck(){
 			if( $("#minWageChk").prop("checked") ){
-				$("#showWageBox").val("8600");
+				$("#desired_wage").val("8600");
 			}
 		}
-		
 		 $("#minWageChk").change(function(){
 			minCheck();
 		});
-		 
-		 function numCheck(){
-			 var dWage = parseInt( $("#showWageBox").val() );
-				console.log(dWage);
-			 if(!regex.test(dWage)){
-				 alert("숫자만^^");
-				 $("#showWageBox").val("");
-				 return false;
-			 }
-		 }
-		 $("#showWageBox").keydown(function(){
-			numCheck();
-		 })
-		 
+	
+
 		
 	});
 </script>
@@ -100,9 +87,9 @@
 	   		<div id="titlefont">희망 시급</div>
 	 	</div>
 	 	<i id="coinIcon" class="fas fa-coins"></i>
-		<form method="get" action="">
+		<form method="POST" action="teacherWageOk">
 			<div class="form-group">		
-				<div id="teacherWageBox"><input type="text" id="showWageBox" class="form-control" />원/1시간
+				<div id="teacherWageBox"><input type="number" id="desired_wage" name="desired_wage" class="form-control" />원/1시간
 				</div>
 				
 				<div id="checkDiv"><input type="checkbox" id="minWageChk"/>평균시급 적용</div>

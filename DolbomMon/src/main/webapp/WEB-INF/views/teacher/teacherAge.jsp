@@ -37,6 +37,8 @@
 	text-align: center;
 }
 
+#ageBox{height:auto;}
+
 #ageWarning {
 	color: gray;
 	text-align: center;
@@ -45,12 +47,6 @@
 #ageHidden {
 	overflow: hidden;
 	height: 0px;
-}
-
-#shinsaenga, #yua, #younga, #chodeung {
-	font-size: 40px;
-	float: right;
-	color: white;
 }
 
 input[type=submit] {
@@ -71,16 +67,16 @@ border-radius:5px;
 <script>
 $(function(){
 	
-	$("input:radio[name=tAge]").click(function(){
-		if($("input:radio[name=tAge]:checked").val()== "1"){
-			$("input:radio[name=tAge]").parent().css("background-color","orange");
-		}
-		
-		if( $(this).css("background-color") =="rgb(255, 255, 255)" ){
-		$(this).css("background", "orange");
-		}else{
-			
-			$(this).css("background", "white");
+	$("#ageBox label").click(function(){
+		var selectedAge = $(this).attr("for");
+		var alt = $("input[id='"+selectedAge+"']" ).attr("alt");
+
+		if(alt=="1"){
+			$(this).css("background-color", "orange");
+			$("input[id='"+ selectedAge+"']").attr("alt", "2");
+		}else if(alt=="2"){
+			$(this).css("background-color", "white");
+			$("input[id='"+ selectedAge +"']").attr("alt", "1");
 		}
 		
 	});
@@ -92,6 +88,7 @@ $(function(){
 <body>
 
 	<div class="container">
+		<form method="get" action="<%=request.getContextPath()%>/teacher/teacherAgeOk">
 		<div id="title">
 			<div id="titlefont">돌봄 가능 연령</div>
 		</div>
@@ -100,24 +97,27 @@ $(function(){
 			합니다<br />
 		</div>
 
-
+		<div id="ageBox">
 			<div id="ageHidden">
-				
-				<input type="radio" name="tAge" id="younga" />
-				<input type="radio" name="tAge" id="yua" />
-				<input type="radio" name="tAge" id="chodeung" />
+				<input type="checkbox" name="child_age" id="age1" alt="1"  />
+				<input type="checkbox" name="child_age" id="age2" alt="1" />
+				<input type="checkbox" name="child_age" id="age3" alt="1" />
+				<input type="checkbox" name="child_age" id="age4" alt="1"  />
 			</div>
 
-			<label for="shinsaenga"><input type="radio" name="tAge" id="shinsaenga" /><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
-			<label for="younga"><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br />영아</label>
-			<label for="yua"><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br />유아</label>
-			<label for="chodeung"><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br />초등학생</label>
-
+			<label for="age1"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
+			<label for="age2"><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br />영아</label>
+			<label for="age3"><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br />유아</label>
+			<label for="age4"><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br />초등학생</label>
+		</div>
 
 
 
 			<input type="submit" class="btn btn-warning" value="저장" />
-		</div>
+		
+		</form>
+	</div>
+		
 </body>
 </html>
 

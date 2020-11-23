@@ -8,23 +8,33 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/regFormStyle.css" type="text/css"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
+<style>
+	.container{width:700px;}
+	.container div{width:100%; overflow:hidden; height:auto; margin-top:15px;}
+	
+	#headerDiv{text-align:center; }
+	#headerDiv>img{width:400px; height:200px;} 	
+	#headerDiv>h4{width:70%; margin:0 auto;}
+	
+	.container>div>label{display:inline-block; width:30%;float:left; margin:0;}
+	.container>div>span{width:auto;height:20px;float:left;}
+	.container>div>input{width:80%; height:50px; padding:5px 10px; float:left;}
+	#emailDiv input:nth-of-type(1){width:25%;}
+	#emailDiv input:nth-of-type(2){width:30%;}
+	#emailDiv select{width:20%; height:50px; padding:5px 10px; margin-left:5px;}
+	#emailDiv span{width:auto; height:20px; font-size:20px; line-height:50px; float:left; margin:0 5px;} 
+	
+	
+	input[type=submit]{width:100%; height:40px; margin:30px 0;}
+	
+</style>
 <script>
 	$(function(){
 		
-		// 성별 라디오 버튼
-		$("#genderLst>label").click(function(){
-			$(this).css("color", "rgb(0,74,173)").css("background-color", "rgb(255, 222, 89)");
-			$(this).siblings().css("color","black").css("background-color", "gray");
-		});
 		
-		// 우편번호
-		$("#zipcodeSearch").click(function(){
-			window.open('<%=request.getContextPath()%>/zipcodeSearch', 'zipcode', 'top=300,left=500,width=500,height=600');
-		});
 		
 		// 포커스 제거
 		$(":focus").blur();
@@ -65,48 +75,35 @@
 </script>
 </head>
 <body>
-<div id="mainDiv">
-	<div id="header">회원가입</div>
-	<form method="post" action="<%=request.getContextPath()%>/regFormOk" onsubmit="formCheck()">
-		<ul>
-			<li><input type="text" id="userid" name="userid" placeholder="아이디 입력" /></li>
-			<li><input type="password" name="userpwd" placeholder="비밀번호 입력" /></li>
-			<li><input type="text" id="username" name="username" placeholder="이름 입력" /></li>
-			<li>
-				<input type="text" class="email" id="email1" name="email1" placeholder="이메일 입력"/>
-				<input type="text" class="email" id="email2" name="email2" placeholder="직접 입력"/>
-				<select id="selectEmail">
-					<option>gmail.com</option>
-					<option>naver.com</option>
-					<option>daum.net</option>
-					<option>nate.com</option>
-					<option>직접 입력</option>
-				</select>
-			</li>
-			<li>
-				<input type="text" id="birth" name="birth" placeholder="생년월일 입력"/>
-			</li>
-			<li>
-				<span>연락처</span><input type="text" class="tel" name="tel1_1" id="tel1_1"/><input type="text" class="tel" name="tel1_2" id="tel1_2"/><input type="text" class="tel" name="tel1_3" id="tel1_3"/>
-				<span>비상연락처</span><input type="text" class="tel" name="tel2_1" id="tel2_1"/><input type="text" class="tel" name="tel2_2" id="tel2_2"/><input type="text" class="tel" name="tel2_3" id="tel2_3"/>
-			</li>
-			<li id="genderLst">
-				<div id="radioDiv">
-					<input id="M" type="radio" name="gender" checked="checked"/>
-					<input id="F" type="radio" name="gender"/>
-				</div>
-				<label for="M">남</label>
-				<label for="F">여</label>
-			</li>
-			<li>
-				<input type="text" class="addr" name="zipcode" id="zipcode" placeholder="우편번호 입력" size="5"/><input type="button" class="addr" id="zipcodeSearch" value="우편번호 검색"/><input type="text" class="addr" name="addr" id="addr" placeholder="도로명주소 입력" />
-				<input type="text" class="addr" name="addrdetail" id="addrdetail" placeholder="상세 주소 입력"/>
-			</li>
-			<li>
-				<input type="submit" value="가입하기" />
-			</li>
-		</ul>
-	</form>
-</div>
+	<div class="container">
+		<div id="headerDiv">
+			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />
+			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
+		</div>
+		<div id="useridDiv">
+			<label for="userid">아이디</label><span></span><br/>
+			<input type="text" id="userid" name="userid" placeholder="아이디 입력"/>
+		</div>
+		<div id="userpwdDiv">
+			<label for="userpwd">비밀번호</label><span></span><br/>
+			<input type="password" id="userpwd" name="userpwd" placeholder="비밀번호 입력"/>
+		</div>
+		<div id="userpwdChkDiv">
+			<label for="userpwdChk">비밀번호 확인</label><span></span><br/>
+			<input type="password" id="userpwdChk" />
+		</div>
+		<div id="emailDiv">
+			<label for="email1">이메일</label><span></span><br/>
+			<input type="text" id="email1" name="email1" placeholder="이메일 입력" /><span>@</span><input type="text" id="email2" name="email2" placeholder="직접 입력"/>
+			<select>
+				<option selected="selected">직접입력</option>
+				<option>gmail.com</option>
+				<option>naver.com</option>
+				<option>nate.com</option>
+				<option>daum.net</option>
+			</select>
+		</div>
+		<input type="submit" value="다음" />
+	</div>
 </body>
 </html>

@@ -44,6 +44,7 @@
 <div>
 	<a class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
 </div>
+<div><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board">
 <br/>
 	<table class="table table-hover">
@@ -70,6 +71,14 @@
 				<tr>
 					<th scope="row">${vo.no}</th>
 					<th scope="row">${vo.head}</th>
+					<!-- 공백을 step만큼 띄어주기 -->
+					<c:forEach var="space" begin="1" end="${vo.step}">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</c:forEach>
+					<c:if test="${vo.step>0}">
+						☞
+					</c:if>
+					
 					<!-- 글제목 script로 글자수 제한하기 -->
 					<td class="subject"><a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
 					<td>${vo.userid}</td>
@@ -79,7 +88,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<br/>
+	<br/>	
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<li class="page-item disabled">
