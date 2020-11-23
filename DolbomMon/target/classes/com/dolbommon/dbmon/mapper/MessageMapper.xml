@@ -49,6 +49,7 @@
 		<![CDATA[rownum<=${lastPageRecordCount}]]>
 		order by no desc
 	</select>
+	
 	<select id="getAllRecordCount" parameterType="com.dolbommon.dbmon.message.MessageVO" resultType="int">
 		select count(no) from message where 
 		<choose>
@@ -72,4 +73,5 @@
 			and spam='N' and message_save='N'
 		</if>
 	</select>
+
 </mapper>

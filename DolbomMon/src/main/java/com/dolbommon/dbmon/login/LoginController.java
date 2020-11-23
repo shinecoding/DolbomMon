@@ -69,4 +69,25 @@ public class LoginController {
 		
 		return "login/idInfo";
 	}
+	
+	//임시로그인버튼 작동.. 추후 삭제 요망
+	@RequestMapping("/temporaryLogin")
+	public ModelAndView temporaryLogin(LoginVO vo, HttpSession ses) {
+		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
+		vo.setUserid("test1");
+		vo.setUserpwd("1234");
+		LoginVO resultVO = dao.loginOk(vo);
+		ModelAndView mav = new ModelAndView();
+		
+		if(resultVO==null) {
+			mav.setViewName("redirect:login");			
+		}else {
+			ses.setAttribute("userid", resultVO.getUserid());
+			ses.setAttribute("username", resultVO.getUsername());
+			ses.setAttribute("logStatus", "Y");
+			mav.setViewName("redirect:/");	
+		}
+		return mav;
+	}
+	
 }

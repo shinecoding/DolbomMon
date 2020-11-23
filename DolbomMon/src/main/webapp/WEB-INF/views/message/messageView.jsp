@@ -68,7 +68,7 @@
 		padding:10px;
 		padding-top: 15px;
 		width:446px;
-		overflow-x:hidden; 
+		overflow-x:hidden;
 		max-height:600px;
 	}
 	ul{
@@ -77,6 +77,9 @@
 	li{
 	    vertical-align: middle;
     	border-color: d3abab;
+	}
+	#content{
+		min-height:300px;
 	}
 	#note li{
 		background-color:#fff;
@@ -99,7 +102,7 @@
 	<div id="note">
 		<div id="note2">
 			<ul>
-				<li>보낸사람 : 보낸이 아이디 &nbsp;
+				<li>보낸사람 : ${vo.userid} &nbsp;
 					<a href='?exec=spam&spam_no=258492' onclick="return confirm('스팸등록을 하시면 해당 회원이 발송한 쪽지는 스팸쪽지함에서만 확인할 수 있습니다.\n\n스팸 등록하시겠습니까?')">
 						<img src="icon/message/btn_spam1.gif" width="58px" height="18px" boarder="0"></a>&nbsp; 
 					<a href="javascript:void(window.open('?type=memo&memo_id=inbox&memo_no=100701821','claim_memo','width=470,height=580,toolbar=no,scrollbars=no'));">
@@ -108,7 +111,7 @@
 				</li>
 				<li class="wordCut"><b>제 목 : 제목</b></li>
 				<li>날 짜 : 2020년 11월 20일 10시 10분</li>
-				<li>내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트
+				<li id="content">내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트
 				내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트내용 테스트
 				</li>
 	
