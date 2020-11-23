@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
    <script type="text/javascript">
+   
          $(function(){
 	     $("ul.sub").hide();
 		 $("ul.menu li").hover(function(){
@@ -45,7 +47,7 @@
 	  	display:block;
 	  	
 	  }
-	
+
       ul.menu li{ 
 	     float: left;
 		 width: 179px;
@@ -90,9 +92,13 @@
 		 clear: both;
 		 }
 		.logo{
-		 
 	      width:180px;
 	      height:80px;
+	      margin-left:0;
+	      
+	   }
+	   header{
+	   		margin-left:0px;
 	   }
 	   a.btn{
 	   		float:right;
@@ -104,6 +110,7 @@
 </head>
 <body>
  <div id="container">
+
  <div class="clearfix">
 	 <header>
 	 <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
@@ -115,13 +122,22 @@
 	        <a href="/dbmon/temporaryLogin">
 	        <button class="btn btn-info">임시로그인</button></a>
 	        </span>
-	 <a class="btn" style="float:right">	
-		<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
-		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/>  
+	 		<a class="btn" style="float:right">	
+			<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
+			<c:if test="${logStatus == null || logStatus=='N'}">
+	 		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
+ 			</c:if>
+ 	
+ 	
+			<c:if test="${logStatus != null || logStatus=='Y'}">
+			${username } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
+			</c:if>
+
 					
 	</a> 				
 	</header>
 </div>
+
   
   
    <ul class="menu">
@@ -143,9 +159,9 @@
 		<li><a href="/dbmon/freeBoard">자유게시판</a>
 
 		</li>
-		<li><a href="#">돌봄몬찾기</a>
+		<li><a href="/dbmon/sitter">돌봄몬찾기</a>
 		</li>
-		<li><a href="#">일자리찾기</a>
+		<li><a href="/dbmon/parent">일자리찾기</a>
 	    
 		</li>
 		<li><a href="#">My Menu</a>
