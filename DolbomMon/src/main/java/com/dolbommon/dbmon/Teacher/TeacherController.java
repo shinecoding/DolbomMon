@@ -239,6 +239,3 @@ public class TeacherController {
 	public String teacherType() {
 		return "/teacher/teacherType";
 	}
-	
-
-}
