@@ -102,7 +102,7 @@
 	<div id="note">
 		<div id="note2">
 			<ul>
-				<li>보낸사람 : ${vo.userid} &nbsp;
+				<li>보낸사람 : 보낸이 &nbsp;
 					<a href='?exec=spam&spam_no=258492' onclick="return confirm('스팸등록을 하시면 해당 회원이 발송한 쪽지는 스팸쪽지함에서만 확인할 수 있습니다.\n\n스팸 등록하시겠습니까?')">
 						<img src="icon/message/btn_spam1.gif" width="58px" height="18px" boarder="0"></a>&nbsp; 
 					<a href="javascript:void(window.open('?type=memo&memo_id=inbox&memo_no=100701821','claim_memo','width=470,height=580,toolbar=no,scrollbars=no'));">
