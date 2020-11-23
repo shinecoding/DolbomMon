@@ -2,7 +2,7 @@ package com.dolbommon.dbmon.message;
 
 public class MessageVO {
 	private int no;
-	private String userid;
+	private String userid; //현재접속자
 	private String userid_w;
 	private String userid_r;
 	private String subject;
