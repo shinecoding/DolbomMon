@@ -4,19 +4,74 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.message.MessageDaoImp">
 	<select id="messageAllRecord" resultType="com.dolbommon.dbmon.message.MessageVO">
-		select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save, spam from message where userid_r=#{userid} order by no desc	
-	</select>
-	<select id="searchWordRecord" resultType="com.dolbommon.dbmon.message.MessageVO">
-		select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save, spam from message where userid_r=#{userid} and 
-		<if test='searchKey.equals("userid")'>
-			userid_w
+		select * from
+		(select * from
+		(select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save, spam from message where 
+		<choose>
+			<when test='tabType.equals("2")'>
+				userid_w=#{userid}  
+			</when>
+			<otherwise>
+				userid_r=#{userid} 
+			</otherwise>
+		</choose>
+		<if test='tabType.equals("4")'>
+			and spam='Y'	
 		</if>
-		<if test='!searchKey.equals("userid")'>
-			${searchKey}
-		</if>		
-		like #{searchWord} order by no desc	
+		<if test='tabType.equals("3")'>
+			and message_save='Y'	
+		</if>
+		<if test='tabType.equals("2")'>
+			and message_save='N'
+		</if>
+		<if test='tabType.equals("1")'>
+			and spam='N' and message_save='N'
+		</if>
+		<if test='searchKey != null and !searchKey.equals("") and !searchKey.equals("%%") and !searchKey.equals("%null%")'>
+			<if test='searchKey.equals("userid")'>
+				<choose>
+					<when test='tabType.equals("2")'>
+						and userid_w
+					</when>
+					<otherwise>
+						and userid_r
+					</otherwise>
+				</choose>
+			</if>
+			<if test='!searchKey.equals("userid")'>
+				and ${searchKey}
+			</if>	
+			like #{searchWord} 
+		</if>
+		order by no desc) where
+		<![CDATA[rownum<=${currentPageRecord}]]>		
+		order by no asc) where
+		<![CDATA[rownum<=${lastPageRecordCount}]]>
+		order by no desc
 	</select>
+	
 	<select id="getAllRecordCount" parameterType="com.dolbommon.dbmon.message.MessageVO" resultType="int">
-		select count(no) from message where userid_r=#{userid}
+		select count(no) from message where 
+		<choose>
+			<when test='tabType.equals("2")'>
+				userid_w=#{userid}	
+			</when>
+			<otherwise>
+				userid_r=#{userid}
+			</otherwise>
+		</choose>
+		<if test='tabType.equals("4")'>
+			and spam='Y'
+		</if>
+		<if test='tabType.equals("3")'>
+			and message_save='Y'
+		</if>
+		<if test='tabType.equals("2")'>
+			and message_save='N'
+		</if>
+		<if test='tabType.equals("1")'>
+			and spam='N' and message_save='N'
+		</if>
 	</select>
+
 </mapper>

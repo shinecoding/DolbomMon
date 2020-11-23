@@ -10,9 +10,7 @@ public interface MessageDaoImp {
 	// 접속한 유저의 메시지 총 레코드 수 구하기
 	public int getAllRecordCount(MessageVO vo);
 	
-	// 검색어 있을때 전체 레코드 선택
-	public List<MessageVO> searchWordRecord(MessageVO vo);
-
-	
+	// 쪽지 보기 게시판 이동
+	public MessageVO messageView(MessageVO vo);
 	
 }
