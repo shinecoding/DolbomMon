@@ -34,6 +34,9 @@ $(function(){
 		overflow-x:hidden;
 		max-height:600px;
 	}
+	#content{
+		font-size:14px;
+	}
 </style>
 </head>
 <body onload="">

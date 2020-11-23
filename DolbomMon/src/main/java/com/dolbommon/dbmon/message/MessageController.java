@@ -185,8 +185,59 @@ public class MessageController {
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
 			mav.addObject("back", 2);
 			mav.setViewName("redirect:back");
+		}else {
+			
+			//여기서 스팸여부 확인해야함. userid_r
+			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+			int result=0;
+			try {
+			result = dao.messageWrite(vo);
+			}catch(Exception e) {
+				System.out.println("쪽지보내기 에러" + e.getMessage());
+			}
+			if(result>=1) {
+				mav.setViewName("redirect:message");
+			}else {
+				mav.addObject("msg", "쪽지 보내기를 실패하였습니다. 제목은 한글 100자, 내용은 한글 1500자까지 허용됩니다.");
+				mav.addObject("back", 1);
+				mav.setViewName("redirect:back");
+			}
+			
 		}
 		
+		return mav;
+	}
+	@RequestMapping(value="/deleteMessage", method=RequestMethod.POST)
+	public ModelAndView deleteMessage(HttpServletRequest req, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("접속아이디확인"+req.getParameter("userid"));;
+		//로그인 체크
+		if(!req.getParameter("userid").equals(ses.getAttribute("userid"))){
+			mav.addObject("msg", "로그인 상태를 확인하세요.");
+			mav.addObject("back", 2);
+			mav.setViewName("redirect:back");
+		}else {
+			String[] checkBoxNo = req.getParameterValues("delCheck[]");
+			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+			int result = 0;
+			for(String i : checkBoxNo) {
+				System.out.println("no값 출력 ==> "+i);
+				int no = Integer.parseInt(i);
+				try {
+					result = dao.MessageDelete(no);
+				}catch(Exception e) {
+					System.out.println("메시지 삭제 실패-->"+e.getMessage());
+				}
+			}
+			
+			if(result>=1) {
+				mav.setViewName("redirect:message");
+			}else {
+				mav.addObject("msg", "메시지 삭제에 실패하였습니다.");
+				mav.addObject("back", 2);
+				mav.setViewName("redirect:back");
+			}
+		}
 		return mav;
 	}
 	

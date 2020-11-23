@@ -13,4 +13,9 @@ public interface MessageDaoImp {
 	// 쪽지 보기 게시판 이동
 	public MessageVO messageView(MessageVO vo);
 	
+	//쪽지쓰기
+	public int messageWrite(MessageVO vo);
+	
+	//쪽지 삭제
+	public int MessageDelete(int no);
 }

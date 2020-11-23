@@ -68,6 +68,28 @@
 		$("#test2").children().eq(${tabType}-1).children('a').attr("class", "nav-link active");
 	}
 	
+	//쪽지 삭제 .. 체크박스 체크유무 확인 후 체크되어있는 박스의 value를 each반복문으로 배열에 담고 post로 보낸다.
+	function deleteMessage(){
+		var checkBoxCount = $("input:checkbox[name=messageBox]:checked").length;
+		if($("input:checkbox[name=messageBox]:checked").length!=0){
+			var delCheck = [];
+			if(confirm("쪽지를 삭제하면 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")){
+				$("input:checkbox[name=messageBox]:checked").each(function(){
+					delCheck.push($(this).val());
+				});
+				
+				var tag = "<form method='post' action='/dbmon/deleteMessage' id='checkBoxForm' name='checkBoxForm'>";
+					tag += "<input type='hidden' value='${pVo.userid}' name='userid' />";
+				for(var i = 0 ; i<checkBoxCount ; i++){
+				  tag += "<input type='hidden' value='"+delCheck[i]+"'  name='delCheck[]' />";
+				}
+				tag+="</form>";
+								
+				$("#checkBoxSpan").append(tag);
+				document.getElementById('checkBoxForm').submit();
+			};
+		}
+	}
 
 </script>
 <style>
@@ -200,7 +222,7 @@
 				<!-- 쪽지 리스트 -->	
 					<c:forEach var="vo" items="${list}">
 					<tr class="message_list">
-						<td style="text-align:center;"><input type="checkbox" name=delMessage value="${vo.no}"/></td>
+						<td style="text-align:center;"><input type="checkbox" name=messageBox value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
 								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
@@ -248,7 +270,7 @@
 		<div class="btns">
 			<a href="#" onClick="move_save(); return false;" class="btn_keep">
 				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>
-			</a> <a href="javascript:doDeleteMemo();" class="btn_keep"> <span><img
+			</a> <a href="javascript:deleteMessage()" class="btn_keep"> <span><img
 					src="icon/message/delete_icon.gif" alt="삭제" /></span></a>
 		</div>
 
@@ -285,7 +307,7 @@
 	<!-- 검색창 -->
 
 	<div class="search_box">
-		<form method="get" action="/dbmon/message">
+		<form name="search_form" method="get" action="/dbmon/message">
 			<ul>
 				<input type="hidden" name="tabType" value="${tabType}"/>
 				<li>
@@ -304,6 +326,7 @@
 	
 	
 </div>
+<span id="checkBoxSpan"></span>
 
 </body>
 </html>
