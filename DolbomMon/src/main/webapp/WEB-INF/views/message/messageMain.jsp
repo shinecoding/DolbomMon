@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -203,21 +203,28 @@
 						<td style="text-align:center;"><input type="checkbox" name=delMessage value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
-								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${vo.nowPage}&tabType=${tabType}">
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
 									<img src="icon/message/ico_talk.gif"/>
 								</a>
-								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${vo.nowPage}&tabType=${tabType}" class="btn_show wordCut">
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}" class="btn_show wordCut">
 									${vo.subject}
 								</a>
 							</p>
 						</td>
 						<td class="user_new">
-							<a href="#">
+							<a href="/dbmon/messageWrite">
 								<img src="icon/message/note_new1.gif" width="8px" height="8px" /> 
 							</a>
 							<!-- 유저아이디 부분.. 회원정보? 쪽지보내기? 마우스위치에 창 뜨게 하기 -->
 							<!-- ex)  onclick="window.open('?member_no=GmC49Ayrh6WLrGZT3k1Zjw%3D%3D','view_info','width=478,height=510,toolbar=no,scrollbars=yes')"  -->
-							<a href="#" class="sendWrite">
+							<a href="/dbmon/messageWrite?receiveId=
+								<c:if test="${tabType==1 || tabType==3 || tabType==4}">
+								${vo.userid_w}
+								</c:if>
+								<c:if test="${tabType==2 }">
+								${vo.userid_r}
+								</c:if>							
+							" class="sendWrite">
 								<c:if test="${tabType==1 || tabType==3 || tabType==4}">
 								${vo.userid_w}
 								</c:if>

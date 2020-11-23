@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -38,9 +39,12 @@ public class MessageController {
 
 			//현재페이지 구하기
 			String nowPageTxt = req.getParameter("nowPage");
+			
 			if(nowPageTxt!=null) {
 				vo.setNowPage(Integer.parseInt(nowPageTxt));
 			}
+			System.out.println("현재페이지 확인"+nowPageTxt);
+			
 			//스팸 메시지 등록된 전체 레코드 숫자. 보관메시지 등록된 전체 레코드 숫자
 			if(tabType.equals("4")) {
 				vo.setSpam("Y");
@@ -102,7 +106,7 @@ public class MessageController {
 				System.out.println("쪽지 리스트 검색에러 --->");
 				e.printStackTrace(); 
 			}
-			
+			mav.addObject("nowPage", vo.getNowPage());
 			mav.addObject("tabType", tabType);
 			mav.addObject("list", list);
 			mav.addObject("pVo", vo);
@@ -118,9 +122,10 @@ public class MessageController {
 	//쪽지에서 글 클릭했을때
 	@RequestMapping("/messageContent")
 	public ModelAndView messageContent(MessageVO vo, HttpServletRequest req, HttpSession ses) {
-		vo.setNo(Integer.parseInt((String)req.getParameter("no")));
-		vo.setNowPage(Integer.parseInt((String)req.getParameter("nowPage")));
-		vo.setTabType((String)req.getParameter("tabType"));
+		System.out.println("vo에 자동 들어가는지 테스트"+vo.getNo()+vo.getNowPage()+vo.getTabType());
+//		vo.setNo(Integer.parseInt((String)req.getParameter("no")));
+//		vo.setNowPage(Integer.parseInt((String)req.getParameter("nowPage")));
+//		vo.setTabType((String)req.getParameter("tabType"));
 		String loginCheck = (String)ses.getAttribute("userid");
 		
 		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
@@ -141,7 +146,7 @@ public class MessageController {
 		return mav;
 	}
 	
-	//뒤로가기
+	//뒤로가기 .. back=숫자 & msg=내용 .. back쓴 숫자만큼 뒤로가고 msg에 쓴 내용이 alert로 출력된다.
 	@RequestMapping("/back")
 	public ModelAndView historyBack(HttpServletRequest req) {
 		String msg = (String)req.getParameter("msg");
@@ -150,6 +155,38 @@ public class MessageController {
 		mav.addObject("back", back);
 		mav.addObject("msg", msg);
 		mav.setViewName("message/loginCheck");
+		return mav;
+	}
+	
+	//쪽지보내기폼으로 이동
+	@RequestMapping("/messageWrite")
+	public ModelAndView messageWrite(HttpServletRequest req, HttpSession ses) {
+		String userid_w = (String)ses.getAttribute("userid");
+		String userid_r = (String)req.getParameter("receiveId");
+		
+		System.out.println("보낸아이디"+userid_r);
+		System.out.println("받는아이디"+userid_w);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid_r", userid_r);
+		mav.addObject("userid_w", userid_w);
+		mav.setViewName("message/messageWrite");
+		return mav;
+	}
+	
+	//쪽지보내기
+	@RequestMapping(value="/messageWriteOk", method=RequestMethod.POST)
+	public ModelAndView messageWriteOk(MessageVO vo, HttpSession ses) {
+		String loginCheck = (String)ses.getAttribute("userid");
+		ModelAndView mav = new ModelAndView();
+		System.out.println("쪽지보내기 아이디"+loginCheck);
+		System.out.println("쪽지보내기 아이디"+vo.getUserid_w());
+		
+		if(!vo.getUserid_w().equals(loginCheck)){
+			mav.addObject("msg", "로그인 상태를 확인하세요.");
+			mav.addObject("back", 2);
+			mav.setViewName("redirect:back");
+		}
+		
 		return mav;
 	}
 	
