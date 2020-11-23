@@ -12,9 +12,9 @@ public class MemberVO {
 	private String email;
 	private String email1;
 	private String email2;
-	private String address;
+	private String addr;
 	private String addrdetail;
-	private String zonecode;
+	private String zipcode;
 	private String regdate;
 	private String memo;
 	public int getNo() {
@@ -78,11 +78,11 @@ public class MemberVO {
 	public void setEmail2(String email2) {
 		this.email2 = email2;
 	}
-	public String getAddress() {
-		return address;
+	public String getAddr() {
+		return addr;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddr(String address) {
+		this.addr = address;
 	}
 	public String getAddrdetail() {
 		return addrdetail;
@@ -91,10 +91,10 @@ public class MemberVO {
 		this.addrdetail = addrdetail;
 	}
 	public String getZipcode() {
-		return zonecode;
+		return zipcode;
 	}
 	public void setZipcode(String zipcode) {
-		this.zonecode = zipcode;
+		this.zipcode = zipcode;
 	}
 	public String getRegdate() {
 		return regdate;

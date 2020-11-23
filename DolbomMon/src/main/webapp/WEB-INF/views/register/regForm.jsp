@@ -39,11 +39,11 @@
 		});
 		
 		// 우편번호 검색창
-		$("#zonecodeBtn").click(function(){
+		$("#zipcodeBtn").click(function(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
-		            $("#zonecode").val(data.zonecode);
-		            $("#address").val(data.address);
+		            $("#zipcode").val(data.zonecode);
+		            $("#addr").val(data.address);
 		           	window.close();
 		        },theme:{
 		        	searchBgColor: "#ff5400", //검색창 배경색
@@ -100,6 +100,7 @@
 		<input type="text" name="dbm_type" value="${dbm_type }" />
 		<input type="text" name="child_age" value="${child_age }" />
 		<input type="text" name="care_type" value="${care_type }" />
+		<input type="text" name="yoil" value="${yoil }" />
 		<input type="text" name="start_time" value="${start_time }" />
 		<input type="text" name="end_time" value="${end_time }" />
 		<input type="text" name="start_date" value="${start_date }" />
@@ -151,10 +152,10 @@
 		</div>
 		<div id="zonecodeDiv">
 			<label>우편번호</label><br/>
-			<input type="text" id="zonecode" name="zonecode" placeholder="우편번호 입력" style="width:28%;"/>
-			<input type="button" value="우편번호 선택" id="zonecodeBtn" style="width:28%; margin-left:4%;"/> 
+			<input type="text" id="zipcode" name="zipcode" placeholder="우편번호 입력" style="width:28%;"/>
+			<input type="button" value="우편번호 선택" id="zipcodeBtn" style="width:28%; margin-left:4%;"/> 
 			<label for="tel1" style="clear:both; margin-top:10px;">도로명 주소</label><br/>
-			<input type="text" id="address" name="address" placeholder="도로명 주소 입력" style="width:80%;"/>
+			<input type="text" id="addr" name="addr" placeholder="도로명 주소 입력" style="width:80%;"/>
 			<label for="tel1" style="clear:both; margin-top:10px;">상세 주소</label><br/>
 			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
 		</div>

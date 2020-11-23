@@ -9,7 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,10 @@ public class MemberController {
 		public void setSqlSession(SqlSession sqlSession) {
 			this.sqlSession = sqlSession;
 		}
+		
+		@Autowired
+		DataSourceTransactionManager transactionManager;
+		
 		
 		////////////////공통//////////////	
 		// 선생님, 부모님 회원가입 선택
@@ -77,8 +84,8 @@ public class MemberController {
 				@RequestParam("email1") String email1,
 				@RequestParam("email2") String email2,
 				@RequestParam("tel1") String tel1,
-				@RequestParam("zonecode") String zonecode,
-				@RequestParam("address") String address,
+				@RequestParam("zipcode") String zipcode,
+				@RequestParam("addr") String addr,
 				@RequestParam("addrdetail") String addrdetail,
 			      
 			    @RequestParam("dbm_type") String dbm_type,
@@ -95,26 +102,41 @@ public class MemberController {
 			    @RequestParam("start_date") String start_date,
 			    @RequestParam("end_date") String end_date,
 			      
-			    HttpServletRequest req, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
-			mVo.setUserid(userid); mVo.setUserpwd(userpwd); mVo.setEmail1(email1); mVo.setEmail2(email2); mVo.setTel1(tel1); mVo.setZipcode(zonecode); mVo.setAddress(address); mVo.setAddrdetail(addrdetail);
+			HttpServletRequest req, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
+			mVo.setUserid(userid); mVo.setUserpwd(userpwd); mVo.setEmail1(email1); mVo.setEmail2(email2); mVo.setTel1(tel1); mVo.setZipcode(zipcode); mVo.setAddr(addr); mVo.setAddrdetail(addrdetail);
 			tVo.setDbm_type(dbm_type);tVo.setChild_age(child_age);tVo.setCare_type(care_type);tVo.setDesired_wage(desired_wage);tVo.setCctv(cctv);tVo.setPic(pic);tVo.setIntro(intro);
 			rdVo.setYoil(yoil);rdVo.setStart_time(start_time);rdVo.setEnd_time(end_time);rdVo.setStart_date(start_date);rdVo.setEnd_date(end_date);
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberReg(mVo, tVo, rdVo);
-			
 			ModelAndView mav = new ModelAndView();
-			if(result > 0) {
-				mav.setViewName("login/loginForm");
-			}
 			
-			return mav;
-		}
-		
-		// 우편코드 선택창
-		@RequestMapping("/zipcodeSearch")
-		public String zipcodeSearch() {
-			return "register/zipcodeSearch";
+			int result1 = dao.memberReg1(mVo);
+			if(result1<0) { 
+				System.out.println("member 테이블 삽입 실패");
+				mav.setViewName("register/regForm");
+				return mav;
+			}else { // member 테이블 성공
+				int result2 = dao.memberReg2(mVo, tVo);
+				if(result2<0) {
+					System.out.println("teacher 테이블 삽입 실패");
+					dao.memberDelete(mVo);
+					mav.setViewName("register/regForm");
+					return mav;
+				}else { // teacher 테이블 성공
+					int result3 = dao.memberReg3(mVo, rdVo);
+					if(result3<0) {
+						System.out.println("regulardate 테이블 삽입 실패");
+						dao.memberDelete(mVo);
+						mav.setViewName("register/regForm");
+						return mav;
+					} else { // 다 성공
+						mav.addObject("result", result3);
+						mav.setViewName("login/loginForm");
+						
+						return mav;
+					}
+				}
+			}
 		}
 		
 		// SMS 인증창 

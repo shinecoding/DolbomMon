@@ -85,7 +85,7 @@
 				주말 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>
 			<div class="inputRadioDiv">
-				<label for="cr7"><input type="radio" id="cr7" name="1" />내가 원하는 시간 직접 입력하기</label>
+				<label for="cr7"><input type="radio" id="cr7" name="yoil" />내가 원하는 시간 직접 입력하기</label>
 			</div>
 			<input type="submit" value="다음">
 		</form>

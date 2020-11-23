@@ -37,7 +37,13 @@
 	
 </style>
 <script>
-	
+	$(function(){
+		$(document).on('keyup','input[inputmode=numeric]',function(event){
+			this.value = this.value.replace(/[^0-9]/g,'');  
+			this.value = this.value.replace(/,/g,'');         
+			this.value = this.value.replace(/\B(?=(\d{3})+(?!\d))/g, ","); 	
+		}); 
+	});
 </script>
 </head>
 <body>
@@ -56,7 +62,7 @@
 				<h4>희망시급을 입력해주세요</h4>
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
-					<input type="text" name="desired_wage" value="8,600" /><span>원/1시간</span>
+					<input type="text" inputmode="numeric"  name="desired_wage"/><span>원/1시간</span>
 				</div>
 				<label for="avgWage"><input type="checkbox" id="avgWage"/>평균시급 적용</label>
 				<p>

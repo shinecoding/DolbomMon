@@ -3,10 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.register.MemberDaoImp">
-	<insert id="memberReg" >
-		insert into member(no, userid, userpwd, username, gender, tel1, email, address, addrdetail, zonecode) 
-				values(member_sq.nextval, #{mVo.userid}, #{mVo.userpwd}, #{mVo.username}, #{mVo.gender}, #{mVo.tel1}, #{mVo.email}, #{mVo.address}, #{mVo.addrdetail}, #{mVo.zonecode})
-		
+	<insert id="memberReg1" >
+		insert into member_2(no, userid, userpwd, username, gender, tel1, email, addr, addrdetail, zipcode) 
+				values(member_sq.nextval, #{mVo.userid}, #{mVo.userpwd}, #{mVo.username}, #{mVo.gender}, #{mVo.tel1}, #{mVo.email}, #{mVo.addr}, #{mVo.addrdetail}, #{mVo.zipcode})
 	</insert>
-
+	<insert id="memberReg2">
+		insert into teacher_2(userid, pic, dbm_type, child_age, care_type, desired_wage, intro, cctv) 
+				values(#{mVo.userid}, #{tVo.pic}, #{tVo.dbm_type}, #{tVo.child_age}, #{tVo.care_type}, #{tVo.desired_wage}, #{tVo.intro}, #{tVo.cctv})
+	</insert>
+	<insert id="memberReg3">
+		insert into regular_date_2(userid, yoil, start_time, end_time, start_date, end_date)
+					values(#{mVo.userid}, #{rdVo.yoil}, #{rdVo.start_time}, #{rdVo.end_time}, #{rdVo.start_date}, #{rdVo.end_date})
+	</insert>
+	<delete id="memberDelete" parameterType="com.dolbommon.dbmon.register.MemberVO">
+		delete from member_2 where userid = #{userid}
+	</delete>
 </mapper>
