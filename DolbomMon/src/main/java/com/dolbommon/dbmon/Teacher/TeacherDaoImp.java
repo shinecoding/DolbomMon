@@ -1,6 +1,6 @@
 package com.dolbommon.dbmon.Teacher;
 
-import java.util.List;
+import java.util.HashSet;
 
 public interface TeacherDaoImp {
 	
@@ -12,8 +12,8 @@ public interface TeacherDaoImp {
 	public int updateAge(TeacherVO vo);
 	public int updateActivity(TeacherVO vo);
 	public int updateCCTV(TeacherVO vo);
-	public List<ExperienceVO> selectExp(String userid);
-	public int updateExp(List<ExperienceVO> list);
+	public HashSet<ExperienceVO> selectExp(String userid);
+	public int updateExp(HashSet<ExperienceVO> list);
 	public int hitCount(TeacherVO vo);
 }
 

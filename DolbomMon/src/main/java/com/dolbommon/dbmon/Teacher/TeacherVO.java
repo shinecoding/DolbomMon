@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TeacherVO {
 	private String userid;
-	private String pic = "테스트";
+	private String pic;
 	private String care_type;
 	private String[] type_list;
 	private String child_age;

@@ -3,6 +3,8 @@ package com.dolbommon.dbmon.Teacher;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -148,7 +150,8 @@ public class TeacherController {
 
 		// folder where the pic will be saved
 		String path = ses.getServletContext().getRealPath("/upload");
-
+		System.out.println(path);
+		
 		// get the file from teacherPicture.jsp input name=
 		MultipartFile mf = mtfRequest.getFile("filename");
 
@@ -210,7 +213,7 @@ public class TeacherController {
 	public ModelAndView teacherExp(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		List<ExperienceVO> list = dao.selectExp(userid);
+		HashSet<ExperienceVO> list = dao.selectExp(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -218,10 +221,11 @@ public class TeacherController {
 		
 		return mav;
 	}
-	
+	/*
 	@RequestMapping(value="/teacherExpOk", method=RequestMethod.POST)
 	public ModelAndView teacherExpOk(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
-		List<ExperienceVO> list = new ArrayList<ExperienceVO>();
+		HashSet<ExperienceVO> list = new HashSet<ExperienceVO>();
+		
 		evo.setUserid((String)ses.getAttribute("userid"));
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		ModelAndView mav = new ModelAndView();
@@ -229,6 +233,8 @@ public class TeacherController {
 		String[] exp_content = req.getParameterValues("exp_content");
 		String[] exp_start = req.getParameterValues("exp_start");
 		String[] exp_end = req.getParameterValues("exp_end");
+		
+		
 		
 		if(exp_content!=null && exp_start!=null && exp_end!= null) {
 				for(int i=0; i<exp_content.length; i++) {
@@ -245,7 +251,13 @@ public class TeacherController {
 						}//if
 				}//for
 		}
+		
+		Iterator<ExperienceVO> it = list.iterator();
+		while(it.hasNext()) {
 			
+		}
+		
+		
 		int result = dao.updateExp(list);
 		if(result>0) {
 			mav.addObject("list", list);
@@ -267,7 +279,7 @@ public class TeacherController {
 		
 		return mav;
 	}
-	
+	*/
 	@RequestMapping("/teacherAge") 
 	public ModelAndView teacherAge(HttpSession ses) { ////
 		ModelAndView mav = new ModelAndView();
