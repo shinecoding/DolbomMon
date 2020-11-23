@@ -136,7 +136,8 @@
 </script>
 <body>
 	<div class="container">
-		<form action="<%=request.getContextPath()%>/dbm/location">
+		<form method="post" action="<%=request.getContextPath()%>/dbm/location">
+			<input type="text" name="dbm_type" value="${dbm_type}" />
 			<div id="childrenAgeHeader">어떤 아이를 돌볼 수 있나요?</div>
 			<div id="childrenAgeDiv">
 				<input type="checkbox" id="age1" value="신생아" name="child_age" />

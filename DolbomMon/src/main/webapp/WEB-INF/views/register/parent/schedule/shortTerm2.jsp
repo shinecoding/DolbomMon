@@ -39,7 +39,7 @@
 <script>
 
     var today = new Date(); // 선택한 날짜
-    var date = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // 지금날짜로부터 5일 후
+    var date = new Date(today.getFullYear(), today.getMonth(), today.getDate()+10); // 지금날짜로부터 5일 후
  
     function prevMonth() {  //이전 달을 today에 값을 저장
         today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
@@ -91,9 +91,9 @@
    		    calTag += "<li>&nbsp</li>";
       		cnt = cnt + 1;
    		}
-        
+        var nowDay = 0;
        	// 달력 출력
-		/* for(i = 1; i <= getLastDay.getDate(); i++) {// 1일부터 마지막 일까지
+		for(i = 1; i <= getLastDay.getDate(); i++) {// 1일부터 마지막 일까지
            	cnt = cnt + 1;
            	if(cnt % 7 == 1) {
             	calTag += "<li style='color:pink'><label for='d"+i+"' style='cursor:pointer;' onclick='selectedDate();' ><input name='cr7' type='radio' id='d"+i+"' >"+i+"</label></li>";//일요일
@@ -105,29 +105,8 @@
             } else {
 	            calTag += "<li><label for='d"+i+"' style='cursor:pointer;' onclick='selectedDate();'><input name='cr7' type='radio' id='d"+i+"' >"+i+"</label></li>";
             }
-       	} */
-       	var nowDay = 0;
-		for(i = 1; i <= getLastDay.getDate(); i++) {
-			cnt = cnt + 1;
-			if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i<date.getDate()){
-	       		calTag += "<li style='color:#ccc'><label for='d"+i+"' ><input name='cr7' type='radio' id='d"+i+"' >"+i+"</label></li>";
-	       	}else{
-	       		if(cnt % 7 == 1) {
-	            	calTag += "<li style='color:pink'><label for='d"+i+"' style='cursor:pointer;' onclick='selectedDate();' ><input name='cr7' type='radio' id='d"+i+"' >"+i+"</label></li>";//일요일
-	           	} else if(cnt % 7 == 0) { 
-	           		calTag += "<li style='color:lightblue'><label for='d"+i+"' style='cursor:pointer;' onclick='selectedDate();'><input name='cr7' type='radio' id='d"+i+"' >"+i+"</label></li>";//토요일 
-	          	} else if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) {
-	                calTag += "<li><label for='d"+i+"' style='cursor:pointer;' onclick='selectedDate();'><input name='cr7' type='radio' checked='checked' id='d"+i+"' >"+i+"</label></li>"; //오늘날짜
-	                nowDay = i;
-	            } else {
-		            calTag += "<li><label for='d"+i+"' style='cursor:pointer;' onclick='selectedDate();'><input name='cr7' type='radio' id='d"+i+"' >"+i+"</label></li>";
-	            }
-	       	}
-		}
-       	
+       	}
     	calList.innerHTML = calTag;
-    	
-    	
     	
     	var tag = today.getFullYear()+"년, "+(today.getMonth()+1)+"월 "+nowDay+"일";
     	calHeader.innerHTML = tag;
@@ -149,12 +128,16 @@
 			var fontColor = $("label[for=d"+i+"]").parent().css("color");
 			if($("input[id=d"+i+"]").is(":checked")){
 				$("label[for=d"+i+"]").css("background-color", "#ff5400").css("color", "white");
-				var tag = today.getFullYear()+"년, "+(today.getMonth()+1)+"월 "+i+"일";
-		    	calHeader.innerHTML = tag;
 			}else{
 				$("label[for=d"+i+"]").css("background-color", "white").css("color", fontColor);
 			}
 		}
+		
+		var d = document.getElementById(this);
+		d = d.substring(1);
+		console.log("라벨 클릭됨");
+		$("#calHeader").html(today.getFullYear()+"년, "+(today.getMonth()+1)+"월 "+d+"일" );
+				
 	}
 	
 </script>

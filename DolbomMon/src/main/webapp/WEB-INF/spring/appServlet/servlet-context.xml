@@ -17,6 +17,8 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/profileImg/**" location="/profileImg/" />
+	<resources mapping="/include/**" location="/include/" />
 	<resources mapping="/icon/**" location="/icon/" />
 	<resources mapping="/ckeditor/**" location="/ckeditor/" />
 

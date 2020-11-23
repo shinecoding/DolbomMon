@@ -42,12 +42,21 @@
 </head>
 <body>
 	<div class="container">
-		<form action="<%=request.getContextPath()%>/dbm/profileImage">
+		<form method="post" action="<%=request.getContextPath()%>/dbm/profileImage">
+			<input type="text" name="dbm_type" value="${dbm_type }" />
+			<input type="text" name="child_age" value="${child_age }" />
+			<input type="text" name="care_type" value="${care_type }" />
+			<input type="text" name="yoil" value="${yoil }" />
+			<input type="text" name="start_time" value="${start_time }" />
+			<input type="text" name="end_time" value="${end_time }" />
+			<input type="text" name="start_date" value="${start_date }" />
+			<input type="text" name="end_date" value="${end_date }" />
+		
 			<div id="paymentDiv">
 				<h4>희망시급을 입력해주세요</h4>
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
-					<input type="text" value="8,600" /><span>원/1시간</span>
+					<input type="text" name="desired_wage" value="8,600" /><span>원/1시간</span>
 				</div>
 				<label for="avgWage"><input type="checkbox" id="avgWage"/>평균시급 적용</label>
 				<p>
@@ -59,8 +68,8 @@
 			<div id="cctvDiv">
 				<h5>CCTV 촬영 동의여부</h5>
 				<span>동의할 경우 부모에게 더 많은 선택을 받게 됩니다.</span>
-				<label for="Y"><input type="radio" id="Y" name="CCTV" checked="checked" /><span>CCTV가 있어도 당당히 일할 수 있습니다</span><br/><span>(단, 녹화된 영상을 유출 배포하지 않는 전제)</span></label>			
-				<label for="N"><input type="radio" id="N" name="CCTV" /><span>CCTV촬영을 원하지 않습니다.</span></label>			
+				<label for="Y"><input type="radio" id="Y" name="cctv" value="Y" checked="checked" /><span>CCTV가 있어도 당당히 일할 수 있습니다</span><br/><span>(단, 녹화된 영상을 유출 배포하지 않는 전제)</span></label>			
+				<label for="N"><input type="radio" id="N" name="cctv" value="N" /><span>CCTV촬영을 원하지 않습니다.</span></label>			
 			</div>
 			<input type="submit" value="다음"/>
 		</form>

@@ -31,7 +31,17 @@
 
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/dbm/introduce">
+	<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/dbm/introduce">
+			<input type="text" name="dbm_type" value="${dbm_type }" />
+			<input type="text" name="child_age" value="${child_age }" />
+			<input type="text" name="care_type" value="${care_type }" />
+			<input type="text" name="start_time" value="${start_time }" />
+			<input type="text" name="end_time" value="${end_time }" />
+			<input type="text" name="start_date" value="${start_date }" />
+			<input type="text" name="end_date" value="${end_date }" />
+			<input type="text" name="desired_wage" value="${desired_wage }" />
+			<input type="text" name="cctv" value="${cctv }" />
+			<input type="file" name="pic" />
 	<div class="container">
 		<h3>내 프로필 사진<span>(선택사항)</span></h3>
 		<div id="imgDiv">

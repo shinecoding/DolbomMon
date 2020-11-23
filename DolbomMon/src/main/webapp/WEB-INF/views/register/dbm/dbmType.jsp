@@ -16,7 +16,7 @@
 	#top{width:100%; overflow:hidden; height:auto; margin-top:30px; text-align:center; font-size:3em;}
 	/* ================== 상단 =====================*/
 	/* ==================== 라디오 버튼 ====================== */
-	#dbmTypeDiv input[type=radio]{display:none;}
+	#dbmTypeDiv input[type=radio]{display:block;}
 	.d1{width:100%; overflow:hidden; height:150px; margin-top:15px; border-top:1px solid black; border-bottom:1px solid black;}
 	.d2{width:450px; height:150px; float:right; padding:20px;}
 	
@@ -56,7 +56,7 @@
 			imgChange();
 		});
 		
-		$("input[name=dbmType]").change(function(){
+		$("input[name=dbm_type]").change(function(){
 			
 			imgChange();
 		});
@@ -85,11 +85,11 @@
 			당신은 어떤분 인가요?
 		</div>
 		<div id="dbmTypeDiv">
-			<form action="<%=request.getContextPath()%>/dbm/activityAndAge">
-				<input type="radio" name="dbmType" id="dt1" value="선생님" />
-				<input type="radio" name="dbmType" id="dt2" value="대학생" />
-				<input type="radio" name="dbmType" id="dt3" value="엄마" />
-				<input type="radio" name="dbmType" id="dt4" value="일반" />
+			<form method="post" action="<%=request.getContextPath()%>/dbm/activityAndAge">
+				<input type="radio" name="dbm_type" id="dt1" value="선생님" />
+				<input type="radio" name="dbm_type" id="dt2" value="대학생" />
+				<input type="radio" name="dbm_type" id="dt3" value="엄마" />
+				<input type="radio" name="dbm_type" id="dt4" value="일반" />
  				<div class="d1"><label for="dt1"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">선생님</p><p class="dt">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는 경우</p></div></div>
 				<div class="d1"><label for="dt2"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div></div>
 				<div class="d1"><label for="dt3"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div></div>

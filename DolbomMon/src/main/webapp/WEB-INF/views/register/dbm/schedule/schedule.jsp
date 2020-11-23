@@ -39,6 +39,11 @@
 			}else{
 				$("form").attr("action", "<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV");
 			}
+			
+			var selectedData = $("input[type=radio]:checked").attr("id");
+			$("input[type=checkbox]").prop("checked", false);
+			$("input[id="+selectedData+"]").prop("checked", true);
+			
 		});
 	});
 </script>
@@ -48,18 +53,36 @@
 		<div id="headerDiv">
 			언제 활동할 수 있나요?
 		</div>
-		<form action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
+		<form method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
+		
+			<input type="text" name="dbm_type" value="${dbm_type }" />
+			<input type="text" name="child_age" value="${child_age }" />
+			<input type="text" name="care_type" value="${care_type }" />
+			<input type="hidden" name="start_date" value="2020-11-22" />
+			<input type="hidden" name="end_date" value="2021-2-22" />
 			<div class="inputRadioDiv">
-				<label for="wdAll"><input type="radio" id="wdAll" name="1" />월~금 종일<span>오전 8시 - 저녁 8시</span></label>
+				<label for="wdAll"><input type="radio" id="wdAll" name="yoil" value="월,화,수,목,금"/>
+								   <input type="checkbox" id="wdAll" name="start_time" value="08:00"/>
+								   <input type="checkbox" id="wdAll" name="end_time" value="20:00"/>
+				월~금 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>
 			<div class="inputRadioDiv">
-				<label for="wdAM"><input type="radio" id="wdAM" name="1" />월~금 오전<span>오전 7시 - 오후 2시</span></label>
+				<label for="wdAM"><input type="radio" id="wdAM" name="yoil" value="월,화,수,목,금"/>
+								  <input type="checkbox" id="wdAM" name="start_time" value="07:00"/>
+								  <input type="checkbox" id="wdAM" name="end_time" value="14:00"/>
+				월~금 오전<span>오전 7시 - 오후 2시</span></label>
 			</div>
 			<div class="inputRadioDiv">
-				<label for="wdPM"><input type="radio" id="wdPM" name="1" />월~금 오후<span>오후 2시 - 저녁 10시</span></label>
+				<label for="wdPM"><input type="radio" id="wdPM" name="yoil" value="월,화,수,목,금"/>
+								  <input type="checkbox" id="wdPM" name="start_time" value="14:00"/>
+								  <input type="checkbox" id="wdPM" name="end_time" value="22:00"/>
+				월~금 오후<span>오후 2시 - 저녁 10시</span></label>
 			</div>
 			<div class="inputRadioDiv">
-				<label for="weAll"><input type="radio" id="weAll" name="1" />주말 종일<span>오전 8시 - 저녁 8시</span></label>
+				<label for="weAll"><input type="radio" id="weAll" name="yoil" value="토,일"/>
+								  <input type="checkbox" id="weAll" name="start_time" value="08:00"/>
+								  <input type="checkbox" id="weAll" name="end_time" value="20:00"/>
+				주말 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>
 			<div class="inputRadioDiv">
 				<label for="cr7"><input type="radio" id="cr7" name="1" />내가 원하는 시간 직접 입력하기</label>

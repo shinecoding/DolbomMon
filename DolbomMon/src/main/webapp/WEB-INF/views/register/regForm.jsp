@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
 	.container{width:700px;}
 	.container div{width:100%; overflow:hidden; height:auto; margin-top:15px;}
@@ -33,11 +34,35 @@
 </style>
 <script>
 	$(function(){
-		
+		$("#smsIdentity").click(function(){
+			window.open("<%=request.getContextPath()%>/smsIdentity", "sms", 'top=300, left=1000, width=150, height:200');
+		});
 		
 		
 		// 포커스 제거
 		$(":focus").blur();
+	});
+	function zonecodeSearch(){
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	        }
+	    }).open();
+	}
+	
+	new daum.Postcode({
+	    onclose: function(state) {
+	        //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+	        if(state === 'FORCE_CLOSE'){
+	            //사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
+				console.log("그냥 닫음");
+	        } else if(state === 'COMPLETE_CLOSE'){
+	            //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
+	            //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
+	            console.log("검색결과 선택");
+	        }
+	    }
 	});
 	
 	function formCheck(){
@@ -75,7 +100,21 @@
 </script>
 </head>
 <body>
+	<form action="" >
 	<div class="container">
+	
+		<input type="text" name="dbm_type" value="${dbm_type }" />
+		<input type="text" name="child_age" value="${child_age }" />
+		<input type="text" name="care_type" value="${care_type }" />
+		<input type="text" name="start_time" value="${start_time }" />
+		<input type="text" name="end_time" value="${end_time }" />
+		<input type="text" name="start_date" value="${start_date }" />
+		<input type="text" name="end_date" value="${end_date }" />
+		<input type="text" name="desired_wage" value="${desired_wage }" />
+		<input type="text" name="cctv" value="${cctv }" />
+		<input type="text" name="pic" value="${pic }" />
+		<input type="text" name="intro" value="${intro }" />
+	
 		<div id="headerDiv">
 			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />
 			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
@@ -103,7 +142,16 @@
 				<option>daum.net</option>
 			</select>
 		</div>
+		<div id="smsDiv">
+			<input type="button" id="smsIdentity" value="휴대폰 본인인증하기"/>
+		</div>
+		<div id="zonecodeDiv">
+			<input type="text" id="zonecode" name="zonecode" placeholder="우편번호 입력"/>
+			<input type="button" value="우편번호 선택" onclick="zonecodeSearch();"/> 
+			<input type="text" id="address" name="address" placeholder="주소 입력"/>
+		</div>
 		<input type="submit" value="다음" />
 	</div>
+	</form>
 </body>
 </html>
