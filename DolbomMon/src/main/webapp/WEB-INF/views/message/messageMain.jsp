@@ -10,6 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script>
+
+///////	쪽지 보관하다가 멈춤. 쪽지보관 보낸거, 받은거 구분해서 올리기. 필드는 추가했음.
+/////// 보관함에 쪽지 안뜨는 이유 찾기.
 	$(function(){
 		
 		$(document).ready(function() {
@@ -90,6 +93,28 @@
 			};
 		}
 	}
+	
+	function saveMessage(){
+		var checkBoxCount = $("input:checkbox[name=messageBox]:checked").length;
+		if($("input:checkbox[name=messageBox]:checked").length!=0){
+			var delCheck = [];
+			if(confirm("선택한 쪽지를 보관함으로 이동하시겠습니까?")){
+				$("input:checkbox[name=messageBox]:checked").each(function(){
+					delCheck.push($(this).val());
+				});
+				
+				var tag = "<form method='post' action='/dbmon/saveMessage' id='checkBoxForm' name='checkBoxForm'>";
+					tag += "<input type='hidden' value='${pVo.userid}' name='userid' />";
+				for(var i = 0 ; i<checkBoxCount ; i++){
+				  tag += "<input type='hidden' value='"+delCheck[i]+"'  name='delCheck[]' />";
+				}
+				tag+="</form>";
+								
+				$("#checkBoxSpan").append(tag);
+				document.getElementById('checkBoxForm').submit();
+			};
+		}
+	}
 
 </script>
 <style>
@@ -150,6 +175,10 @@
 	#paging ul{
 		float:right;
 	}
+	#imgResize{
+		width:15px;
+		height:15px;
+	}
 </style>
 </head>
 <body onload="tabChange()">
@@ -162,7 +191,7 @@
 			<!-- 게시판 검색주소 넣기 .. ex:https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox&sort=unread -->
 			<!--  ex : https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox -->
 			<a href="#" class="btn_show"> 안 읽은 쪽지 <font
-				style="font-weight: bold; color: #F00;">0</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
+				style="font-weight: bold; color: #F00;">${newMessage}</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
 				${pVo.totalRecord}
 				</span></a>
 
@@ -225,9 +254,16 @@
 						<td style="text-align:center;"><input type="checkbox" name=messageBox value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
+							<c:if test="${vo.message_check.equals('Y')}">							
 								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
 									<img src="icon/message/ico_talk.gif"/>
 								</a>
+							</c:if>	
+							<c:if test="${!vo.message_check.equals('Y')}">
+								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
+									<img src="icon/message/new_message2.png" id="imgResize"/>
+								</a>
+							</c:if>
 								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}" class="btn_show wordCut">
 									${vo.subject}
 								</a>
@@ -268,7 +304,7 @@
 <!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
 		<div class="btns">
-			<a href="#" onClick="move_save(); return false;" class="btn_keep">
+			<a href="javascript:saveMessage()" class="btn_keep">
 				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>
 			</a> <a href="javascript:deleteMessage()" class="btn_keep"> <span><img
 					src="icon/message/delete_icon.gif" alt="삭제" /></span></a>

@@ -77,6 +77,7 @@
 	<select id="messageView" resultType="com.dolbommon.dbmon.message.MessageVO">
 		select no, subject, userid_w, userid_r, to_char(writedate, 'YYYY"년 "MM"월 "DD"일"   PM HH:MI') writedate, content from message where no=#{no}
 	</select>
+	
 	<insert id="messageWrite"  parameterType="com.dolbommon.dbmon.message.MessageVO">
 		insert into message(no, userid_w, userid_r, subject, content) values(message_sq.nextval, #{userid_w}, #{userid_r}, #{subject}, #{content})
 	</insert>
@@ -84,5 +85,29 @@
 	<delete id="MessageDelete">
 		delete from message where no=#{no}
 	</delete>
+	
+	<update id="readMessage">
+		update message set message_check='Y' where no=#{no}
+	</update>
+	
+	<select id="newMessage" parameterType="com.dolbommon.dbmon.message.MessageVO" resultType="int">
+		select count(no) from message where message_check='N' and 
+		<if test='tabType.equals("4")'>
+			userid_r=#{userid} and spam='Y'
+		</if>
+		<if test='tabType.equals("3")'>
+			userid_r=#{userid} and message_save='Y'
+		</if>
+		<if test='tabType.equals("2")'>
+			userid_w=#{userid} and message_save='N'
+		</if>
+		<if test='tabType.equals("1")'>
+			userid_r=#{userid}  and spam='N' and message_save='N'
+		</if>
+	</select>
+	
+	<update id="saveMessage">
+		update message set Message_save='Y' where no=#{no}
+	</update>
 	
 </mapper>

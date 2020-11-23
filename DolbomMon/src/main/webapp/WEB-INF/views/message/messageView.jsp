@@ -112,6 +112,7 @@
 				<li>날 짜 : ${vo.writedate}</li>
 				<li id="content">${vo.content}</li>
 			</ul>
+			
 			<div style="float:right">
 				<a href="javascript:void(window.open('?member_no=258492','view_info','width=478,height=530,toolbar=no,scrollbars=yes'))">
 					<img src="icon/message/reply_icon.gif" /></a> 
@@ -119,7 +120,7 @@
 					<img src="icon/message/keep_icon.gif" /></a> 
 				<a href="?exec=del&no=100701821&page=1&search_type=&keyword=&memo_type=inbox" onclick="return confirm('삭제하시겠습니까?')">
 					<img src="icon/message/delete_icon.gif" /></a> 
-				<a href="/dbmon/back?back=2">
+				<a href="/dbmon/message?tabType=${tabType}&nowPage=${nowPage}">
 					<img src="icon/message/list_icon.gif" /></a>
 			</div>
 		</div>	

@@ -116,6 +116,15 @@ public class MessageController {
 			System.out.println("=========================임시 로그인 체크========================");
 		}
 		System.out.println("vo tab = "+vo.getTabType());
+		
+		//안읽은 쪽지 내역 찍기
+		int result =0; 
+		try {
+			result = dao.newMessage(vo);
+		}catch(Exception e) {
+			System.out.println("안읽은 쪽지 내역 확인 에러-->"+e.getMessage());
+		}
+		mav.addObject("newMessage", result);
 		return mav;
 	}
 	
@@ -123,23 +132,46 @@ public class MessageController {
 	@RequestMapping("/messageContent")
 	public ModelAndView messageContent(MessageVO vo, HttpServletRequest req, HttpSession ses) {
 		System.out.println("vo에 자동 들어가는지 테스트"+vo.getNo()+vo.getNowPage()+vo.getTabType());
-//		vo.setNo(Integer.parseInt((String)req.getParameter("no")));
-//		vo.setNowPage(Integer.parseInt((String)req.getParameter("nowPage")));
-//		vo.setTabType((String)req.getParameter("tabType"));
 		String loginCheck = (String)ses.getAttribute("userid");
 		
 		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
 		MessageVO resultVo = dao.messageView(vo); 
 		ModelAndView mav = new ModelAndView();
-	
+		String tabType = (String)req.getParameter("tabType");
+		String nowPage = (String)req.getParameter("nowPage");
 		
-		if(loginCheck.equals(resultVo.getUserid_w()) || loginCheck.equals(resultVo.getUserid_r())) {
-			mav.addObject("vo", resultVo);
-			mav.setViewName("message/messageView");
-		}else{
-			mav.addObject("msg", "로그인 상태를 확인하세요.");
-			mav.setViewName("message/loginCheck");
-		}
+			if(loginCheck.equals(resultVo.getUserid_w()) || loginCheck.equals(resultVo.getUserid_r())) {
+				//내가 보낸 메시지인지 확인하는부분
+				if(tabType.equals("2")) {
+					mav.addObject("tabType",tabType);
+					mav.addObject("nowPage",nowPage);
+					mav.addObject("vo", resultVo);
+					mav.setViewName("message/messageView");
+				}else {
+					//읽은글 체크하는부분
+					int result=0;
+					try {
+						result = dao.readMessage(vo.getNo());
+					}catch(Exception e){
+						System.out.println("읽은글 전환 에러 -->" + e.getMessage());
+					}
+					if(result>=1) {
+						mav.addObject("tabType",tabType);
+						mav.addObject("nowPage",nowPage);
+						mav.addObject("vo", resultVo);
+						mav.setViewName("message/messageView");
+					}else {
+						mav.addObject("msg", "읽은글 전환 에러가 발생하였습니다. 관리자에게 문의하세요.");
+						mav.addObject("back", 2);
+						mav.setViewName("redirect:back");
+					}
+				
+				}
+			}else{
+				mav.addObject("msg", "로그인 상태를 확인하세요.");
+				mav.setViewName("message/loginCheck");
+			}
+		
 		//세션 로그인 아이디 받아서 R(읽은아이디) W(보낸아이디)와 비교. 둘중 일치하는게 있으면
 		//검색은 no로
 
@@ -207,6 +239,7 @@ public class MessageController {
 		
 		return mav;
 	}
+	//메시지 삭제
 	@RequestMapping(value="/deleteMessage", method=RequestMethod.POST)
 	public ModelAndView deleteMessage(HttpServletRequest req, HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
@@ -241,4 +274,38 @@ public class MessageController {
 		return mav;
 	}
 	
+	
+	@RequestMapping(value="/saveMessage", method=RequestMethod.POST)
+	public ModelAndView saveMessage(HttpServletRequest req, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("접속아이디확인"+req.getParameter("userid"));;
+		//로그인 체크
+		if(!req.getParameter("userid").equals(ses.getAttribute("userid"))){
+			mav.addObject("msg", "로그인 상태를 확인하세요.");
+			mav.addObject("back", 2);
+			mav.setViewName("redirect:back");
+		}else {
+			String[] checkBoxNo = req.getParameterValues("delCheck[]");
+			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+			int result = 0;
+			for(String i : checkBoxNo) {
+				System.out.println("no값 출력 ==> "+i);
+				int no = Integer.parseInt(i);
+				try {
+					result = dao.saveMessage(no);
+				}catch(Exception e) {
+					System.out.println("메시지 저장 실패-->"+e.getMessage());
+				}
+			}
+			
+			if(result>=1) {
+				mav.setViewName("redirect:message");
+			}else {
+				mav.addObject("msg", "메시지 저장에 실패하였습니다.");
+				mav.addObject("back", 2);
+				mav.setViewName("redirect:back");
+			}
+		}
+		return mav;
+	}
 }

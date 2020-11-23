@@ -18,4 +18,13 @@ public interface MessageDaoImp {
 	
 	//쪽지 삭제
 	public int MessageDelete(int no);
+	
+	//읽은 글 읽음 상태 전환
+	public int readMessage(int no);
+	
+	//안읽은 글 숫자 확인
+	public int newMessage(MessageVO vo);
+	
+	//쪽지 저장하기
+	public int saveMessage(int no);
 }
