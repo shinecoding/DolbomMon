@@ -13,7 +13,7 @@
 	.container{
 		width: 800px;
 	}
-	#loginChk{
+	#loginCookie{
 		margin-left: 0px;
 	}
 	#search{

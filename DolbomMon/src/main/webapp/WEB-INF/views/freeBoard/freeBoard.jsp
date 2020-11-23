@@ -19,21 +19,22 @@
 		text-align: center;
 		font-size: 30px;
 	}
-	
+	#head{
+		text-align: center;
+	}
 	.subject{
 		width: 400px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-	
+		
 	}
 	a:link, a:visited, a:hover{
 	 	color: black;
 	 }
 	body{
 	 	font-size: 0.9em;
-	 }
-	
+	 }	
 </style>
 </head>
 <body>
@@ -48,42 +49,33 @@
 <div id="board">
 <br/>
 	<table class="table table-hover">
-		<colgroup>
-			<col style="width: 10%;">
-			<col style="width: 15%;">
-			<col>
-			<col style="width: 15%;">
-			<col style="width: 15%;">
-			<col style="width: 10%;">
-		</colgroup>
 		<thead>
-			<tr>
-				<th scope="col">글번호</th>
-				<th scope="col">말머리</th>
-				<th scope="col">글제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">등록일</th>
-				<th scope="col">조회수</th>
+			<tr id="head">
+				<th width="70">글번호</th>
+				<th width="140">말머리</th>
+				<th>글제목</th>
+				<th width="90">작성자</th>
+				<th width="100">등록일</th>
+				<th width="70">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="vo" items="${list}">
 				<tr>
-					<th scope="row">${vo.no}</th>
-					<th scope="row">${vo.head}</th>
-					<!-- 공백을 step만큼 띄어주기 -->
-					<c:forEach var="space" begin="1" end="${vo.step}">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					</c:forEach>
-					<c:if test="${vo.step>0}">
-						☞
-					</c:if>
-					
-					<!-- 글제목 script로 글자수 제한하기 -->
-					<td class="subject"><a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
-					<td>${vo.userid}</td>
-					<td>${vo.writedate}</td>
-					<td>${vo.hit}</td>
+					<td scope="row" align="center">${vo.no}</td>
+					<td scope="row" align="center">${vo.head}</td>
+					<td scope="row" class="subject">
+						<!-- 공백을 step만큼 띄어주기 -->
+						<c:forEach var="s" begin="1" end="${vo.step}">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+						<c:if test="${vo.step>0}">
+							Re:
+						</c:if>
+						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
+					<td align="center">${vo.userid}</td>
+					<td align="center">${vo.writedate}</td>
+					<td align="center">${vo.hit}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -90,8 +90,7 @@ $(function(){
 					<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
 					<label class="custom-file-label" for="inputGroupFile03">파일을 선택하세요</label>
 				</div>
-			</div>			
-			<!-- <input type="submit" id="post" class="btn btn-warning" value="등록"/> -->
+			</div>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="등록"/>
 		</div>
 	</form>
