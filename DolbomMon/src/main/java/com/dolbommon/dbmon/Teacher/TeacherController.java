@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.certification.CertificationDaoImp;
+import com.dolbommon.dbmon.certification.CertificationVO;
 import com.dolbommon.dbmon.member.MemberDaoImp;
 import com.dolbommon.dbmon.member.MemberVO;
 
@@ -51,12 +53,12 @@ public class TeacherController {
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		dao.hitCount(vo);
-		List<ExperienceVO> list = dao.selectExp(userid);
+		HashSet<ExperienceVO> hash = dao.selectExp(userid);
 		
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("vo", vo);
-		mav.addObject("list", list);
+		mav.addObject("hash", hash);
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
@@ -76,16 +78,24 @@ public class TeacherController {
 		String userid = (String) ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
+		HashSet<ExperienceVO> hash = dao.selectExp(userid);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
+		mav.addObject("hash", hash);
 		mav.setViewName("teacher/teacherEdit");
 		return mav;
 	}
 
 	@RequestMapping("/teacherProof")
-	public String teacherProof() {
-		return "/teacher/teacherProof";
+	public ModelAndView teacherProof(HttpSession ses) {
+		CertificationDaoImp dao = sqlSession.getMapper(CertificationDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		CertificationVO cvo = dao.selectCert(userid);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cvo", cvo);
+		mav.setViewName("/teacher/teacherProof");
+		return mav;
 	}
 
 	@RequestMapping("/teacherIntro")
@@ -140,8 +150,15 @@ public class TeacherController {
 	}
 
 	@RequestMapping("/teacherPicture")
-	public String teacherPicture() {
-		return "/teacher/teacherPicture";
+	public ModelAndView teacherPicture(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		TeacherVO vo = dao.selectTeacher(userid);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", vo);
+		mav.setViewName("/teacher/teacherPicture");
+		return mav;
 	}
 
 	@RequestMapping(value = "/teacherPictureOk", method = RequestMethod.POST)
@@ -204,7 +221,7 @@ public class TeacherController {
 			//mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
 			mav.setViewName("/teacher/teacherResult");
 		} else { // success
-			mav.setViewName("redirect:teacherPicture");
+			mav.setViewName("redirect:teacherEdit");
 		}
 		return mav;
 	}
@@ -213,18 +230,18 @@ public class TeacherController {
 	public ModelAndView teacherExp(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		HashSet<ExperienceVO> list = dao.selectExp(userid);
+		HashSet<ExperienceVO> hash = dao.selectExp(userid);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
+		mav.addObject("hash", hash);
 		mav.setViewName("teacher/teacherExp");
 		
 		return mav;
 	}
-	/*
+	
 	@RequestMapping(value="/teacherExpOk", method=RequestMethod.POST)
 	public ModelAndView teacherExpOk(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
-		HashSet<ExperienceVO> list = new HashSet<ExperienceVO>();
+		HashSet<ExperienceVO> hash = new HashSet<ExperienceVO>();
 		
 		evo.setUserid((String)ses.getAttribute("userid"));
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
@@ -242,25 +259,23 @@ public class TeacherController {
 						evo.setExp_content(exp_content[i]);
 						evo.setExp_start(exp_start[i]);
 						evo.setExp_end(exp_end[i]);
-						list.add(evo);
-						}else {
-							exp_content.remove(i);
-							exp_start[i].remove();
-							exp_end[i].remove();
-									
-						}//if
+						hash.add(evo);
+					}else {
+						evo.setExp_content(exp_content[i]);
+						evo.setExp_start(exp_start[i]);
+						evo.setExp_end(exp_end[i]);
+						hash.remove(evo);
+						}
+					
 				}//for
 		}
 		
-		Iterator<ExperienceVO> it = list.iterator();
-		while(it.hasNext()) {
-			
-		}
+	
 		
 		
-		int result = dao.updateExp(list);
+		int result = dao.updateExp(hash);
 		if(result>0) {
-			mav.addObject("list", list);
+			mav.addObject("hash", hash);
 			mav.setViewName("redirect:teacherEdit");
 		}else {
 			mav.setViewName("teacher/teacherResult");
@@ -268,6 +283,7 @@ public class TeacherController {
 		
 		return mav;
 	}
+	/*
 
 	@RequestMapping("/teacherDelExp")
 	public ModelAndView teacherDelExp(HttpSession ses) {

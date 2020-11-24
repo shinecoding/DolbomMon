@@ -68,8 +68,13 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="/proofIdenti">
+				<form action="/dbmon/proofIdenti">
+					<c:if test="${cvo.identi==null}">
 					<button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.identi!=null}">
+					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -104,8 +109,12 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofSchool">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofSchool">
+					<c:if test="${cvo.school_proof==null}"><button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.school_proof!=null}">
+					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -139,8 +148,12 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofTeacher">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofTeacher">
+					<c:if test="${cvo.license==null}"><button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.license!=null}">
+					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -174,8 +187,12 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofCrime">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofCrime">
+					<c:if test="${cvo.crime==null}"><button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.crime!=null}">
+					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -209,8 +226,12 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofPrivacy">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofPrivacy">
+					<c:if test="${cvo.privacy==null}"><button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.privacy!=null}">
+					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
 				</form>
 				</div>
 				

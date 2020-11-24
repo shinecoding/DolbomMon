@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.certification.CertificationDaoImp">
+<insert id="insertIdenti" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	insert into certification(userid, no, identi, identi_addr, identi_date) values(#{userid}, certi_sq.nextval, #{identi}, #{identi_addr}, #{identi_date})
+</insert>
+<insert id="insertSchool" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	insert into certification(userid, no, school, department, degree, status, grade, school_date, school_proof) values(#{userid}, certi_sq.nextval, #{school}, #{department}, #{degree}, #{status}, #{grade}, #{school_date}, #{school_proof})
+</insert>
+<insert id="insertLicense" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	insert into certification(userid, no, license, license_date, license_proof) values(#{userid}, certi_sq.nextval, #{license}, #{license_date}, #{license_proof})
+</insert>
+<insert id="insertCrime" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	insert into certification(userid, no, crime, crime_date) values(#{userid}, certi_sq.nextval, #{crime}, #{crime_date})
+</insert>
+<select id="selectCert" parameterType="String" resultType="com.dolbommon.dbmon.certification.CertificationVO">
+	select school_proof, license, identi, crime, privacy from certification where userid = #{userid}
+</select>
+</mapper>

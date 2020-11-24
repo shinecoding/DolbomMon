@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.Teacher.TeacherDaoImp">
 	<select id="selectTeacher" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		select userid, intro, care_type, desired_wage, cctv, hit from teacher where userid=#{userid}
+		select userid, intro, care_type, desired_wage, pic, cctv, hit from teacher where userid=#{userid}
 	</select>
 	<update id="updateIntro" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set intro = #{intro} where userid = #{userid}
@@ -28,7 +28,10 @@
 		select exp_content, to_char(exp_start, 'YYYY-MM-DD') as exp_start, to_char(exp_end, 'YYYY-MM-DD') as exp_end from experience where userid= #{userid}
 	</select>
 	<update id="updateExp" parameterType="com.dolbommon.dbmon.Teacher.ExperienceVO">
-		update experience set exp_content = #{exp_content}, exp_start = #{exp_start}, exp_end= #{exp_end} where userid= #{userid}
+		if exists(select * from experience where userid=#{userid} and exp_content=#{exp_content}) 
+			run update experience set exp_content = #{exp_content}, exp_start = #{exp_start}, exp_end= #{exp_end} where userid= #{userid}
+		else
+			run insert into experience(exp_content, exp_start, exp_end) values(#{exp_content}, #{exp_start}, #{exp_end}) where userid = #{userid}
 	</update>
 	<update id="hitCount" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO" >
 		update teacher set hit= hit+1 where userid= #{userid}

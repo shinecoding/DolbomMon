@@ -35,7 +35,7 @@ font-weight:bold;
 
 <div class="container">
 	<div class="badge badge-warning badge-pill float-right mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
-   <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
+   <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
    <ul class="list-group">
    		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">홍O동</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="ml-2">no.798521</span></li>
@@ -115,7 +115,7 @@ font-weight:bold;
 		
    		<h5>관련 경험</h5>
    		<li class="list-group-item p-4">
-   		<c:forEach var="evo" items="${list}">
+   		<c:forEach var="evo" items="${hash}">
    			<b>${evo.exp_content}</b><br/>
    			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
    		</c:forEach>	

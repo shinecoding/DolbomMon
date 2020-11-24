@@ -85,7 +85,7 @@ vertical-align:middle;
 						- 아이 관련 가사활동 필수<br/></label>
 			<label for="typeTwo2">
 			<input type="radio" name="care_type" id="type2" value="등하원" class="col-1"/>
-			<b>등하원 돌봄</b>
+			<b>등하원 돌봄</b><br/>
 						- 2~10세 아이를 기관에 가기 전후에 돌보는 활동<br/>
 						- 보통 주5일 하루 3~5시간 책임지고 돌봄 필요<br/>
 						- 등하원, 밥 챙겨주기, 씻기기, 놀아주기 활동 포함<br/></label>

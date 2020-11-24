@@ -128,6 +128,7 @@
 				회원님의 개인정보 보호를 위해 주민등록번호 뒷자리를 꼭 가리고 보내주세요.<br/> 
 				(주민등록뒷자리 ‘미포함’ 선택 후 발급, 또는 해당부분 가린 후 촬영)<br/>
 				<br/>
+				<img src="img/ex-cert-privacy.jpg" />
 				<i class="fas fa-exclamation-circle"></i>사진첨부는 최대 5장까지 가능합니다.<br/>
 				</div>
 				

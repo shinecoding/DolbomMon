@@ -19,6 +19,7 @@ public class TeacherVO {
 	private String cctv;
 	private String certi_check;
 	private MultipartFile filename;
+	private int hit;
 	
 	public MultipartFile getFilename() {
 		return filename;
@@ -115,6 +116,12 @@ public class TeacherVO {
 	}
 	public void setCerti_check(String certi_check) {
 		this.certi_check = certi_check;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	
 	

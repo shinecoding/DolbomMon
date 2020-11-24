@@ -128,7 +128,8 @@ font-weight:bold;
 	<h5>내 사진</h5>
 
 	   	<div id="profFrame">
-				<img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
+				<img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if>
+				<c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if>/>
 				<i class="fas fa-pen"><a class="editBtn" href="teacherPicture"></a></i>	
 			</div>	
    
@@ -154,7 +155,15 @@ font-weight:bold;
    	<h5>관련 경험</h5>
    	<li class="list-group-item" style="text-align:center">
    		<i class="fas fa-pen"><a class="editBtn" href="teacherExp"></a></i>
+   		<c:if test="${hash!=null}">
+   		<c:forEach var="evo" items="${hash}">
+   			<b>${evo.exp_content}</b><br/>
+   			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
+   		</c:forEach>	
+   		</c:if>
+   		<c:if test="${hash==null}">
    		작성 시 부모로부터<br/>3배 더 많은 선택을 받게 됩니다!
+   		</c:if>
    	</li>
    	<h5>활동 가능 시간</h5>
    	<li class="list-group-item">

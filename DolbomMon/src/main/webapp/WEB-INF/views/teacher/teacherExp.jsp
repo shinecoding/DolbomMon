@@ -118,19 +118,19 @@
 		<form method="post" action="teacherExpOk">
 			<div class="form-group">
 				<ul id="result">
-				<c:forEach var="evo" items="${list}">
-				<li>
-					<button class="btn btn-warning" type="button">삭제</button>		
-					<div>경험내용</div>
-					<input type="text" name="exp_content" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" 
-					value="${evo.exp_content}"	/>
-					<hr/>
-					<div>경험기간</div>
-					<div class="expLine">
-						<input type="date" name="exp_start" value="${evo.exp_start}"/> -
-						<input type="date" name="exp_end" value="${evo.exp_end}"/>
-					</div>
-				</li>
+				<c:forEach var="evo" items="${hash}">
+					<li>
+						<button class="btn btn-warning" type="button">삭제</button>		
+						<div>경험내용</div>
+						<input type="text" name="exp_content" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" 
+						value="${evo.exp_content}"	/>
+						<hr/>
+						<div>경험기간</div>
+						<div class="expLine">
+							<input type="date" name="exp_start" value="${evo.exp_start}"/> -
+							<input type="date" name="exp_end" value="${evo.exp_end}"/>
+						</div>
+					</li>
 					</c:forEach>
 				</ul>
 				<input type="button" id="addExp" class="btn btn-warning" value="+경험내용 추가하기"/>

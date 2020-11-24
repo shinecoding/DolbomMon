@@ -119,7 +119,7 @@
 		<div id="title">
 	   		<div id="titlefont">학교 인증</div>
 	 	</div>
-		<form method="post" action="/teacher/teacherProofIdentiOk" enctype="multipart/form-data">
+		<form method="post" action="/dbmon/proofIdentiOk" enctype="multipart/form-data">
 			<div id="profBox">
 				<div class="badge badge-warning">1번째</div>
 				<div>소속기관과 전공분야를 확인하기<br/>
@@ -132,7 +132,7 @@
 				
 				<label for="identi">
 					<i class="fas fa-upload"></i>사진 추가하기
-					<input type="file" id="identi" name="identi" accept="image/*,application/pdf">
+					<input type="file" id="identi" name="filename" accept="image/*,application/pdf">
 				</label>
 				
 				<img src="img/ex-cert-resident-1.png"/>
@@ -140,7 +140,7 @@
 			<div class="badge badge-warning">2번째</div>
 			<div>등(초)본에 적혀있는 현주소를
 			아래 입력칸에 똑같이 적어주세요.</div>
-			<input type="text" placeholder="여기에 똑같이 적어주세요" />
+			<input type="text" name="identi_addr" placeholder="여기에 똑같이 적어주세요" />
 			<img src="img/ex-cert-resident-2.png"/>
 			<div class="warning">
 				<i class="fas fa-exclamation-circle"></i>
@@ -155,17 +155,17 @@
 			
 			<img src="img/ex-cert-resident-3.png"/>
 			<div id="certTime">
-			<select name="certYear">
+			<select name="identi_year">
 			<c:forEach var="i" begin="1950" end="2020" >
 				<option>${i}</option>
 			</c:forEach>
 			</select>년
-			<select name="certYear">
+			<select name="identi_month">
 			<c:forEach var="i" begin="1" end="12" >
 				<option>${i}</option>
 			</c:forEach>
 			</select>월
-			<select name="certYear">
+			<select name="identi_day">
 			<c:forEach var="i" begin="1" end="31" >
 				<option>${i}</option>
 			</c:forEach>
