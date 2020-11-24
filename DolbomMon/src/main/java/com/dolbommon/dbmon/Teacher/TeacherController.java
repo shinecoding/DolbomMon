@@ -54,10 +54,12 @@ public class TeacherController {
 		TeacherVO vo = dao.selectTeacher(userid);
 		dao.hitCount(vo);
 		HashSet<ExperienceVO> hash = dao.selectExp(userid);
-		
+		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
+		CertificationVO cvo = cdao.selectCert(userid);
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("vo", vo);
+		mav.addObject("cvo", cvo);
 		mav.addObject("hash", hash);
 		mav.setViewName("teacher/teacherView");
 		return mav;

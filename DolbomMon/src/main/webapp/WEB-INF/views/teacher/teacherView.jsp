@@ -15,7 +15,8 @@
 .container{width:800px;}
 i{color:gray;}
 #profimg{
-	width:50%;
+	width:70%;
+	height:500px;
 }
 h5{
 	padding: 20px 0px 0px 0px;
@@ -50,31 +51,84 @@ font-weight:bold;
    	<li class="list-group-item">
    		<div class="row">
    			<div class="col-1">
-   			<span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-check fa-stack-1x fa-inverse"></i></span>
+   			<span class="fa-stack fa-2x">
+   			<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.identi_status=='S'}">style="color:orange" </c:if> ></i>
+		   	
+		   	<c:if test="${cvo.identi_status=='N'}">
+		   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+		   	</c:if>
+		   	<c:if test="${cvo.identi_status=='S'}">
+		   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
+		   	</c:if>
+   			</span>
 	   		</div>
 	   		<div class="col-10 ml-3 mt-1">
 	   		<b style="font-size:1.2em">본인 인증 완료</b><br/>
-	   		돌봄몬 고객안전관리팀에서 실명 / 생년월일 /  연락처를 확인하였습니다.
+	   		돌봄몬 고객안전관리팀에서 실명 / 생년월일 / 연락처를 확인하였습니다.
 	   		</div>
    		</div>
    	</li>
    	</ul>
    	<h5>핵심인증</h5>
-   	<li class="list-group-item"><span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>등초본 인증</li>
-   	<li class="list-group-item"><span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>성범죄 인증</li>
+   	<ul class="list-group">
+   	<li class="list-group-item">
+	   	<span class="fa-stack fa-2x">
+	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='S'}">style="color:orange" </c:if> ></i>
+	   	
+	   	<c:if test="${cvo.license_status=='N'}">
+	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+	   	</c:if>
+	   	<c:if test="${cvo.license_status=='S'}">
+	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
+	   	</c:if>
+	   	</span>선생님 인증</li>
+	   	
+	   	<li class="list-group-item">
+	   	<span class="fa-stack fa-2x">
+	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='S'}">style="color:orange" </c:if> ></i>
+	   	
+	   	<c:if test="${cvo.school_status=='N'}">
+	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+	   	</c:if>
+	   	<c:if test="${cvo.school_status=='S'}">
+	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
+	   	</c:if>
+	   	</span>학교 인증</li>
+	   	
+	   	<li class="list-group-item">
+	   	<span class="fa-stack fa-2x">
+	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='S'}">style="color:orange" </c:if> ></i>
+	   	
+	   	<c:if test="${cvo.crime_status=='N'}">
+	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+	   	</c:if>
+	   	<c:if test="${cvo.crime_status=='S'}">
+	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
+	   	</c:if>
+	   	
+	   	</span>성범죄 경력 조회 인증</li>
+	   	
+   	</ul>
+   	
    	<h5>간단 자기소개</h5>
+   	<ul class="list-group">
    	<li class="list-group-item p-5" style="text-align:center">
 		  <c:if test="${vo.intro!=null }">	${vo.intro }</c:if>
 	   <c:if test="${vo.intro==null }">작성 시 부모로부터<br/>
 			<span class="boldFont">4배 더 많은 선택<span>을 받게 됩니다!</c:if>
-   	</li>
+   	</li></ul>
    	<h5>선호하는 돌봄유형</h5>
+   	<ul class="list-group">
    	<li class="list-group-item p-5" style="text-align:center">
    		"저는 <span class="boldFont">${vo.care_type}</span> 돌봄을 가장 선호해요"
    	</li>
+   	</ul>
    	<h5>활동 가능 시간</h5>
+   	<ul class="list-group">
    	<li class="list-group-item">스케쥴차트</li>
+   	</ul>
    	<h5>돌봄 가능 연령</h5>
+   	<ul class="list-group">
    	<li class="list-group-item">
 	   	<ul class="list-group list-group-horizontal-sm" >
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br/>신생아</li>
@@ -83,7 +137,9 @@ font-weight:bold;
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br/>초등학생</li>
 	   </ul>
    </li>
+   </ul>
    <h5>가능한 활동</h5>
+   <ul class="list-group">
    <li class="list-group-item">
    		<ul class="list-group list-group-horizontal-sm" >
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-indoorplay-off.svg" /><br/>실내놀이</li>
@@ -108,18 +164,21 @@ font-weight:bold;
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/change-shortperiod-off.svg"/><br/>단기입주</li>
 
    		</ul>
-   	</li>	
+   	</li>
+   	</ul>	
 		<h5>활동 가능 지역</h5>
-		
+		<ul class="list-group">
 		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동</li>
-		
+		</ul>
    		<h5>관련 경험</h5>
+   		<ul class="list-group">
    		<li class="list-group-item p-4">
    		<c:forEach var="evo" items="${hash}">
    			<b>${evo.exp_content}</b><br/>
    			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
    		</c:forEach>	
    		</li>
+   		</ul>
    <br/>
 </div>
 
