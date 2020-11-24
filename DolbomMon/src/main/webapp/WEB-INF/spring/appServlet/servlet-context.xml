@@ -27,7 +27,6 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.dolbommon.dbmon" />
-	<context:component-scan base-package="com.bitcamp.test" />
 	<context:component-scan base-package="com.bitcamp.dbmon.brand" />
 	
 	<!-- 오라클dataSource 객체 생성 -->
