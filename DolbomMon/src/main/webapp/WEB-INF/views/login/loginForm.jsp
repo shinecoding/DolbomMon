@@ -29,6 +29,32 @@
 		margin: 0px auto;
 	}
 </style>
+<script>
+
+
+$(function(){
+	
+	//데이터 입력유무 확인
+	$("#loginFrm").submit(function(){
+		if($("#userid").val()==""){
+			alert("아이디를 입력하세요.");
+			$("#userid").focus();
+			return false;
+			
+		}
+		if($("#userpwd").val()==""){
+			alert("비밀번호를 입력하세요.");
+			$("#userpwd").focus();
+			return false;
+		}
+		return true;
+	});
+});
+
+
+
+</script>
+
 </head>
 <body>
 <div class="container">
@@ -36,7 +62,7 @@
 	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/dbLogo.png" id="logo" align="middle"/></a>
 	
 	</div>
-	<form method="post" action="loginOk">
+	<form method="post" action="loginOk" id="loginFrm">
 		<div class="form-group">
 			<label for="userid">아이디</label>
 			<input type="text" class="form-control" name="userid" id="userid" placeholder="아이디를 입력하세요">

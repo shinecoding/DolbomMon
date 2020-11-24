@@ -1,8 +1,16 @@
 package com.dolbommon.dbmon.login;
 
+import java.util.Properties;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,8 +49,8 @@ public class LoginController {
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
 		
-		if(resultVO==null) {
-			mav.setViewName("redirect:login");			
+		if(resultVO==null) {	//실패
+			mav.setViewName("login/loginResult");			
 		}else {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
@@ -63,7 +71,7 @@ public class LoginController {
 	//계정찾기 폼으로 이동
 	@RequestMapping("/searchId")
 	public String searchId() {
-		return "login/idSearch";		
+		return "login/idSearch";	
 	}
 	
 	//계정 정보
@@ -91,8 +99,8 @@ public class LoginController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		//아이디 조회 실패시
-		if(logVO==null) {
+		
+		if(logVO==null) {	//아이디 조회 실패시
 			mav.setViewName("login/loginResult");
 		}else {
 			mav.addObject("logVO", logVO);
@@ -103,23 +111,63 @@ public class LoginController {
 	
 	//임시비밀번호 발급 및 변경
 	@RequestMapping(value="/temporaryPwd", method=RequestMethod.POST)
-	public ModelAndView temporaryPwd(LoginVO vo, HttpServletRequest req) {
+	public ModelAndView temporaryPwd(LoginVO vo, HttpServletRequest req) throws AddressException, MessagingException {
 		
 		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10));
 		vo.setUsername((String)req.getParameter("username"));
 		vo.setBirth((String)req.getParameter("birth"));
 		vo.setTel1((String)req.getParameter("tel1"));
+		vo.setEmail((String)req.getParameter("email"));	
 		
 		StringBuffer sbBirth = new StringBuffer(vo.getBirth());
 		sbBirth.delete(10, 22);	
 		String strBirth = sbBirth.toString();
 		vo.setBirth(strBirth);
 		
-		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
-		
-		int result = dao.pwdChange(vo);
-		
+		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);		
+		int result = dao.pwdChange(vo);		
 		ModelAndView mav = new ModelAndView();
+		
+		//네이버일 경우 smtp.naver.com 을 입력
+		//Google일 경우 smtp.gmail.com 을 입력
+		String host = "smtp.naver.com";  
+		final String username = ""; //발신자 아이디 @nave.com 제외하고 네이버 아이디 입력
+		final String password = ""; //발신자 네이버 이메일 비밀번호
+		int port = 465; //포트번호
+		
+		//메일 내용  
+		String recipient = vo.getEmail(); //받는 사람의 이메일 주소
+		String subject = "맘시터가 보내드리는 임시 비밀번호입니다."; //메일 제목  
+		String body = "임시 비밀번호는 "+ vo.getUserpwd() + "입니다.\n임시 비밀번호로 로그인 해주세요."; //메일 내용  
+	
+		Properties props = System.getProperties();  
+	
+		//정보를 담기 위한 객체 생성  
+		//SMTP 서버 정보 설정  
+		props.put("mail.smtp.host", host);  
+		props.put("mail.smtp.port", port);  
+		props.put("mail.smtp.auth", "true");  
+		props.put("mail.smtp.ssl.enable", "true");  
+		props.put("mail.smtp.ssl.trust", host);  
+	
+		//Session 생성  
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {  
+			String un=username;  
+			String pw=password;  
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {  
+				return new javax.mail.PasswordAuthentication(un, pw);  
+			}  
+		});
+	
+		session.setDebug(true); //for debug  
+		Message mimeMessage = new MimeMessage(session); //MimeMessage 생성 
+		mimeMessage.setFrom(new InternetAddress("seulgi4229@naver.com")); //보내는 사람의 이메일주소를 한번 더 입력 도메인 포함한 전체 주소  
+		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient)); //수신자 셋팅
+		mimeMessage.setSubject(subject); //제목 셋팅
+		mimeMessage.setText(body); //내용 셋팅
+		Transport.send(mimeMessage); //javax.mail.Transport.send() 이용	
+		
+		//////////////////////////////////////////////////////
 		
 		if(result>0) {	//성공
 			mav.setViewName("login/temporaryPwdResult");	

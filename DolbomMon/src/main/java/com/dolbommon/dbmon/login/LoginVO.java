@@ -7,6 +7,7 @@ public class LoginVO {
 	private String username;
 	private String birth;
 	private String tel1;
+	private String email;
 	
 	public String getUserid() {
 		return userid;
@@ -37,5 +38,11 @@ public class LoginVO {
 	}
 	public void setTel1(String tel1) {
 		this.tel1 = tel1;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
