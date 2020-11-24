@@ -57,22 +57,11 @@ public class MessageController {
 			}else if(tabType.equals("3")) {
 				vo.setMessage_save_r("Y");
 			}
-			//안읽은쪽지 구하기. 쿼리문 생성
-			//읽는 순간 해당번호 글의 message_save를 Y로 등록
-			//리스트에서 Y로 등록된 글의 색은 회색으로 변하게 세팅.
-			//N일경우 파란색으로 보이게 세팅
 			
 			//공지사항 여부 구하기.
 			//테이블에 공지사항여부 체크 테이블 추가
 			//공지사항일경우 위쪽에 추가. (최대 2~3개?)
 			
-			
-			//스팸등록하기 방법
-			//userid가 받는이. 차단할 아이디가 보낸이.
-			//userid일때 차단할 아이디 테이블 생성.
-			//차단할 아이디가 메시지 보낼때 이 테이블 검색해서 userid와 보낼대상이 일치할경우 spam을 Y로 등록
-			//스팸 등록 버튼 누르는 순간 userid대상으로 보낸 차단할 아이디의 모든 글의 spam을 Y로바꿈
-			//차단 해제는 위 테이블에서 두 아이디 비교해서 레코드 삭제. 글의 spam을 모두 N으로바꿈
 			vo.setUserid(loginCheck);
 			
 			// 검색어 vo로 넘기기
@@ -103,11 +92,7 @@ public class MessageController {
 			System.out.println("검색키"+searchKey);
 			//검색어 있을때.. 없을때도 상관없이 하나로 되게 바꿈
 			try {
-			//	if(!(vo.getSearchKey()==null || vo.getSearchWord()==null)) {
-			//		list = 	dao.searchWordRecord(vo);
-			//	}else {
-					list = 	dao.messageAllRecord(vo);
-			//	}
+				list = 	dao.messageAllRecord(vo);
 			}catch(Exception e) {
 				System.out.println("쪽지 리스트 검색에러 --->");
 				e.printStackTrace(); 
@@ -137,6 +122,8 @@ public class MessageController {
 		return mav;
 	}
 	
+	
+	
 	//쪽지에서 글 클릭했을때
 	@RequestMapping("/messageContent")
 	public ModelAndView messageContent(MessageVO vo, HttpServletRequest req, HttpSession ses) {
@@ -153,30 +140,6 @@ public class MessageController {
 		resultVo.setUserid(loginCheck);
 		
 			if(loginCheck.equals(resultVo.getUserid_w()) || loginCheck.equals(resultVo.getUserid_r())) {
-//				//내가 보낸 메시지인지 확인하는부분
-//				if(tabType.equals("2")) {
-//					mav.addObject("tabType",tabType);
-//					mav.addObject("nowPage",nowPage);
-//					mav.addObject("vo", resultVo);
-//					mav.setViewName("message/messageView");
-//				}else if(tabType.equals("3")){
-//					
-//					//내가 받은 메시지인지 확인하는작업 해야함.
-//					//스팸메시지에도 마찬가지로?
-//					
-//					mav.addObject("tabType",tabType);
-//					mav.addObject("nowPage",nowPage);
-//					mav.addObject("vo", resultVo);
-//					mav.setViewName("message/messageView");					
-//				}else if(tabType.equals("4")) {
-//					//스팸메시지부분 
-//					//읽어도 체크 안되게
-//					mav.addObject("tabType",tabType);
-//					mav.addObject("nowPage",nowPage);
-//					mav.addObject("vo", resultVo);
-//					mav.setViewName("message/messageView");	
-//				}else {
-					//읽은글 체크하는부분
 					int result=0;
 					try {
 						
@@ -204,9 +167,6 @@ public class MessageController {
 				mav.setViewName("message/loginCheck");
 			}
 		
-		//세션 로그인 아이디 받아서 R(읽은아이디) W(보낸아이디)와 비교. 둘중 일치하는게 있으면
-		//검색은 no로
-
 		return mav;
 	}
 	

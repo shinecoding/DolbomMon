@@ -21,8 +21,8 @@
 			
 			//innerWidth / innerHeight / outerWidth / outerHeight 지원 브라우저 
 			if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
-			    strWidth = $('#messageMain').outerWidth() + (window.outerWidth - window.innerWidth);
-			    strHeight = $('#messageMain').outerHeight() + (window.outerHeight - window.innerHeight);
+			    strWidth = $('.messageMain').outerWidth() + (window.outerWidth - window.innerWidth);
+			    strHeight = $('.messageMain').outerHeight() + (window.outerHeight - window.innerHeight);
 			}
 			else {
 			    var strDocumentWidth = $(document).outerWidth();
@@ -33,10 +33,17 @@
 			    var strMenuWidth = strDocumentWidth - $(window).width();
 			    var strMenuHeight = strDocumentHeight - $(window).height();
 			
-			    strWidth = $('#messageMain').outerWidth() + strMenuWidth;
-			    strHeight = $('#messageMain').outerHeight() + strMenuHeight;
+			    strWidth = $('.messageMain').outerWidth() + strMenuWidth;
+			    strHeight = $('.messageMain').outerHeight() + strMenuHeight;
 			}
 			
+			if(${tabType.equals("5")}){ //회원검색 버튼 눌렀을때
+				$("#paging").css("display","none"); //페이징 제거
+				$(".note_msg").css("display","none"); //보관버튼 제거
+				$(".tab-content").css("display","none"); // 메인페이지 숨김
+				$(".search_box").css("display","none"); //검색창 숨김
+				$(".text_title").css("display","none"); //레코드수 숨기기
+			}
 			//resize 
 			window.resizeTo( strWidth, strHeight );
 		});
@@ -57,7 +64,7 @@
 		});
 	});
 	
-	//회원검색 탭 눌렀을때
+	//회원검색 탭 눌렀을때 //방법 바꾸면서 안쓰는듯.
 	function imgchange(data){ 
 		$(".note_title img").attr("src",data); //상단이미지 변환	
 		$("#changeTotal").html("0"); //전체레코드 0으로표시
@@ -127,12 +134,15 @@
 		background-color:#F3F3F3;
 	}
 
-	#messageMain{
+	.messageMain{
 		padding:15px 15px;
-		width:482px;
+		width:480px;
 		height:600px;
 		margin:0 auto;
 		background-color:#F3F3F3;
+	}
+	#memberSearch{
+	
 	}
 	#message>table{
 		background-color:#fff;
@@ -182,15 +192,14 @@
 </style>
 </head>
 <body onload="tabChange()">
-<div id="messageMain">
+	
+<div class="messageMain">
 	<div id="note_tile" class="clearfix">
 		<p class="note_title" style="float:left">
-       		<a href="#"><img src="icon/message/message1.gif" width="98px" height="23px" /></a>
+       		<a href="#"><img src="icon/message/message${tabType}.gif" width="98px" height="23px" /></a>
     	</p>
 		<p class="text_title" style='text-align:right; float:right;'>
-			<!-- 게시판 검색주소 넣기 .. ex:https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox&sort=unread -->
-			<!--  ex : https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox -->
-			<a href="#" class="btn_show"> 안 읽은 쪽지 <font style="font-weight: bold; color: #F00;">${newMessage}</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
+			<c:if test='${!tabType.equals("3") }'><a href="#" class="btn_show"> 안 읽은 쪽지 <font style="font-weight: bold; color: #F00;">${newMessage}</font></a> / </c:if><a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
 				${pVo.totalRecord}
 				</span></a>
 
@@ -202,9 +211,8 @@
 		<li class="nav-item" id="send"><a class="nav-link" href="/dbmon/message?tabType=2">보낸쪽지</a></li>
 		<li class="nav-item" id="storage"><a class="nav-link" href="/dbmon/message?tabType=3">쪽지보관</a></li>
 		<li class="nav-item" id="spam"><a class="nav-link" href="/dbmon/message?tabType=4">스팸쪽지</a></li>
-		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#memberSearch" onclick="imgchange('icon/message/message5.gif')">회원검색</a></li>
+		<li class="nav-item" id="searchTab"><a class="nav-link" href="/dbmon/message?tabType=5">회원검색</a></li>
 	</ul>
-
 	<div class="tab-content">
 		<div class="tab-pane fade show active" id="message">
 			<table>
@@ -304,10 +312,8 @@
 				</tbody>
 			</table>
 		</div>
-	<div class="tab-pane fade" id="memberSearch">
-			<p>회원검색</p>
-		</div>
 	</div>
+
 	
 <!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
@@ -348,6 +354,8 @@
 		</div>
 		<!--//page-->
 	</div>
+	
+
 	<!-- 검색창 -->
 
 	<div class="search_box">
@@ -367,9 +375,16 @@
 	</form>
 	</div>
  <!-- 검색창 -->  
-	
-	
 </div>
+
+
+
+
+
+
+
+
+
 <span id="checkBoxSpan"></span>
 
 </body>

@@ -38,7 +38,7 @@
 			}
 			
 			//resize 
-			window.resizeTo( strWidth+33, strHeight+20 );
+			window.resizeTo( strWidth+33, strHeight+15 );
 		});
 	});	
 
@@ -79,7 +79,7 @@
     	line-height:21px;
 	}
 	#content{
-		min-height:250px;
+		min-height:200px;
 	}
 	#note li{
 		background-color:#fff;
