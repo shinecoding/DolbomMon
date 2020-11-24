@@ -27,7 +27,7 @@
 		<if test='tabType.equals("1")'>
 			and spam='N' and message_save_r='N' and inactivity_r='N'
 		</if>
-		<if test='searchKey != null and !searchKey.equals("") and !searchKey.equals("%%") and !searchKey.equals("%null%")'>
+		<if test='searchWord != null and !searchWord.equals("") and !searchWord.equals("%%") and !searchWord.equals("%null%")'>
 			<if test='searchKey.equals("userid")'>
 				<choose>
 					<when test='tabType.equals("2")'>
@@ -54,23 +54,39 @@
 		select count(no) from message where 
 		<choose>
 			<when test='tabType.equals("2")'>
-				userid_w=#{userid} and inactivity_w='N'	
+				userid_w=#{userid}  
 			</when>
 			<when test='tabType.equals("3")'>
 				(userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N')
 			</when>
 			<otherwise>
-				userid_r=#{userid} and inactivity_r='N'
+				userid_r=#{userid} 
 			</otherwise>
 		</choose>
 		<if test='tabType.equals("4")'>
-			and spam='Y'
+			and spam='Y' and inactivity_r='N'	
 		</if>
 		<if test='tabType.equals("2")'>
-			and message_save_r='N'
+			and message_save_w='N' and inactivity_w='N'
 		</if>
 		<if test='tabType.equals("1")'>
-			and spam='N' and message_save_r='N'
+			and spam='N' and message_save_r='N' and inactivity_r='N'
+		</if>
+		<if test='searchWord != null and !searchWord.equals("") and !searchWord.equals("%%") and !searchWord.equals("%null%")'>
+			<if test='searchKey.equals("userid")'>
+				<choose>
+					<when test='tabType.equals("2")'>
+						and userid_w
+					</when>
+					<otherwise>
+						and userid_r
+					</otherwise>
+				</choose>
+			</if>
+			<if test='!searchKey.equals("userid")'>
+				and ${searchKey}
+			</if>	
+			like #{searchWord} 
 		</if>
 	</select>
 	
@@ -99,6 +115,22 @@
 		</if>
 		<if test='tabType.equals("1")'>
 			userid_r=#{userid}  and spam='N' and message_save_r='N' and inactivity_r='N'
+		</if>
+		<if test='searchWord != null and !searchWord.equals("") and !searchWord.equals("%%") and !searchWord.equals("%null%")'>
+			<if test='searchKey.equals("userid")'>
+				<choose>
+					<when test='tabType.equals("2")'>
+						and userid_w
+					</when>
+					<otherwise>
+						and userid_r
+					</otherwise>
+				</choose>
+			</if>
+			<if test='!searchKey.equals("userid")'>
+				and ${searchKey}
+			</if>	
+			like #{searchWord} 
 		</if>
 	</select>
 	

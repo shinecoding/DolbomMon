@@ -325,13 +325,13 @@
 			
 				<li class="page-item">
 					<c:if test="${pVo.nowPage>1}"> <!--														여기부터 검색어 있을때 검색어페이지 넘어가게 작성한것. 밑에도 다 있음	  -->
-						<a class="page-link"  class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>">Prev</a>
+						<a class="page-link"  class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>">Prev</a>
 					</c:if>
 				</li>
 				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onepageNumCount-1}">
 					<c:if test="${p<=pVo.totalPage }">
 						<li class="page-item">
-							<a class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>"><span <c:if test="${p==pVo.nowPage}">style="color:red"</c:if>>${p}</span></a>
+							<a class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>"><span <c:if test="${p==pVo.nowPage}">style="color:red"</c:if>>${p}</span></a>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -339,7 +339,7 @@
 				<!-- 다음페이지 -->
 				<li class="page-item"> 
 					<c:if test="${pVo.nowPage<pVo.totalPage}">
-						<a class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage+1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord }</c:if>">Next</a>
+						<a class="page-link" href="/dbmon/message?tabType=${tabType }&nowPage=${pVo.nowPage+1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>">Next</a>
 					</c:if>
 					
 				</li>

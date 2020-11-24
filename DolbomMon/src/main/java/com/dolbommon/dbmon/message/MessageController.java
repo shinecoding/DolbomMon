@@ -18,19 +18,24 @@ public class MessageController {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@RequestMapping("/message")
+	@RequestMapping(value="/message", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView message(MessageVO vo, HttpSession session, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
-		
+		String prevWord = req.getParameter("searchWord"); //검색어 넘길값. 이거없으면 다음페이지값 안나옴.
 		//==탭번호 확인==
 		String tabType = req.getParameter("tabType");
 		System.out.println("=====================탭페이지"+tabType+"=====================");
+		System.out.println("검색어2"+req.getParameter("searchWord"));
+		System.out.println("검색어3"+vo.getSearchWord());
+		System.out.println("테스트갑 받아보기 ===="+req.getParameter("test"));
+		System.out.println("테스트갑 현재페이지 받아보기 ===="+req.getParameter("nowPage"));
+		
 		if(tabType==null) {
 			tabType="1";
 		}
 		vo.setTabType(tabType);
-		
+	
 
 		// "=========================임시 로그인 체크========================"		
 		String loginCheck = (String)session.getAttribute("userid");
@@ -68,15 +73,7 @@ public class MessageController {
 			//차단할 아이디가 메시지 보낼때 이 테이블 검색해서 userid와 보낼대상이 일치할경우 spam을 Y로 등록
 			//스팸 등록 버튼 누르는 순간 userid대상으로 보낸 차단할 아이디의 모든 글의 spam을 Y로바꿈
 			//차단 해제는 위 테이블에서 두 아이디 비교해서 레코드 삭제. 글의 spam을 모두 N으로바꿈
-			
-			
-			
 			vo.setUserid(loginCheck);
-			//접속한 아이디의 전체 레코드 숫자
-			vo.setTotalRecord(dao.getAllRecordCount(vo));
-			System.out.println("접속자아이디 = "+loginCheck);
-			System.out.println("토탈레코드수"+vo.getTotalRecord());
-			List<MessageVO> list = new ArrayList<MessageVO>();
 			
 			// 검색어 vo로 넘기기
 			String searchKey = (String)req.getParameter("searchKey");
@@ -93,7 +90,15 @@ public class MessageController {
 				}
 				vo.setSearchKey(req.getParameter("searchKey"));
 			}
+						
+			//접속한 아이디의 전체 레코드 숫자. 검색어 있을때와 없을때
+			System.out.println("현재페이지값 확인"+vo.getNowPage());
+			vo.setTotalRecord(dao.getAllRecordCount(vo));
+			System.out.println("접속자아이디 = "+loginCheck);
+			System.out.println("토탈레코드수"+vo.getTotalRecord());
+			List<MessageVO> list = new ArrayList<MessageVO>();
 			
+
 			System.out.println("검색어"+vo.getSearchWord());
 			System.out.println("검색키"+searchKey);
 			//검색어 있을때.. 없을때도 상관없이 하나로 되게 바꿈
@@ -108,6 +113,7 @@ public class MessageController {
 				e.printStackTrace(); 
 			}
 			mav.addObject("nowPage", vo.getNowPage());
+			mav.addObject("prevWord", prevWord);
 			mav.addObject("tabType", tabType);
 			mav.addObject("list", list);
 			mav.addObject("pVo", vo);
@@ -126,6 +132,8 @@ public class MessageController {
 			System.out.println("안읽은 쪽지 내역 확인 에러-->"+e.getMessage());
 		}
 		mav.addObject("newMessage", result);
+		
+		System.out.println("마지막 검색어 확인==="+prevWord);
 		return mav;
 	}
 	
