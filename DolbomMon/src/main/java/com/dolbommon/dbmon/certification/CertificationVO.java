@@ -16,12 +16,13 @@ public class CertificationVO {
 	private String school_month;
 	private String school_day;
 	private String school_proof;
+	private String school_status;
 	private String license;
 	private String license_date;
 	private String license_year;
 	private String license_month;
 	private String license_day;
-	
+	private String license_status;
 	private String license_proof;
 	private String identi;
 	private String identi_date;
@@ -29,10 +30,13 @@ public class CertificationVO {
 	private String identi_month;
 	private String identi_day;
 	private String identi_addr;
+	private String identi_status;
 	private String crime;
 	private String crime_date;
+	private String crime_status;
 	private String privacy;
 	private String privacy_date;
+	private String privacy_status;
 	private MultipartFile filename;
 	
 	public String getUserid() {
@@ -213,6 +217,36 @@ public class CertificationVO {
 	}
 	public void setFilename(MultipartFile filename) {
 		this.filename = filename;
+	}
+	public String getSchool_status() {
+		return school_status;
+	}
+	public void setSchool_status(String school_status) {
+		this.school_status = school_status;
+	}
+	public String getLicense_status() {
+		return license_status;
+	}
+	public void setLicense_status(String license_status) {
+		this.license_status = license_status;
+	}
+	public String getIdenti_status() {
+		return identi_status;
+	}
+	public void setIdenti_status(String identi_status) {
+		this.identi_status = identi_status;
+	}
+	public String getCrime_status() {
+		return crime_status;
+	}
+	public void setCrime_status(String crime_status) {
+		this.crime_status = crime_status;
+	}
+	public String getPrivacy_status() {
+		return privacy_status;
+	}
+	public void setPrivacy_status(String privacy_status) {
+		this.privacy_status = privacy_status;
 	}
 	
 	

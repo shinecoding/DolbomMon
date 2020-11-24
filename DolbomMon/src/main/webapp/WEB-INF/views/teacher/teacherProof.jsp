@@ -69,11 +69,14 @@
 				</div>
 				<div class="col-3">
 				<form action="/dbmon/proofIdenti">
-					<c:if test="${cvo.identi==null}">
+					<c:if test="${cvo.identi_status=='N'}">
 					<button class="btn btn-warning float-right">인증받기</button>
 					</c:if>
-					<c:if test="${cvo.identi!=null}">
+					<c:if test="${cvo.identi_status=='S'}">
 					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.identi_status=='Y'}">
+					<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
 				</form>
 				</div>
@@ -110,10 +113,14 @@
 				</div>
 				<div class="col-3">
 				<form action="/dbmon/proofSchool">
-					<c:if test="${cvo.school_proof==null}"><button class="btn btn-warning float-right">인증받기</button>
+					<c:if test="${cvo.school_status=='N'}">
+						<button class="btn btn-warning float-right">인증받기</button>
 					</c:if>
-					<c:if test="${cvo.school_proof!=null}">
-					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					<c:if test="${cvo.school_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.school_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
 				</form>
 				</div>
@@ -149,10 +156,14 @@
 				</div>
 				<div class="col-3">
 				<form action="/dbmon/proofTeacher">
-					<c:if test="${cvo.license==null}"><button class="btn btn-warning float-right">인증받기</button>
+					<c:if test="${cvo.license_status=='N'}">
+						<button class="btn btn-warning float-right">인증받기</button>
 					</c:if>
-					<c:if test="${cvo.license!=null}">
-					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					<c:if test="${cvo.license_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.license_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
 				</form>
 				</div>
@@ -188,10 +199,14 @@
 				</div>
 				<div class="col-3">
 				<form action="/dbmon/proofCrime">
-					<c:if test="${cvo.crime==null}"><button class="btn btn-warning float-right">인증받기</button>
+					<c:if test="${cvo.crime_status=='N'}">
+						<button class="btn btn-warning float-right">인증받기</button>
 					</c:if>
-					<c:if test="${cvo.crime!=null}">
-					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					<c:if test="${cvo.crime_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.crime_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
 				</form>
 				</div>
@@ -227,10 +242,14 @@
 				</div>
 				<div class="col-3">
 				<form action="/dbmon/proofPrivacy">
-					<c:if test="${cvo.privacy==null}"><button class="btn btn-warning float-right">인증받기</button>
+					<c:if test="${cvo.privacy_status=='N'}">
+						<button class="btn btn-warning float-right">인증받기</button>
 					</c:if>
-					<c:if test="${cvo.privacy!=null}">
-					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					<c:if test="${cvo.privacy_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.privacy_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
 				</form>
 				</div>
