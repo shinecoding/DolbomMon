@@ -2,6 +2,8 @@ package com.dolbommon.dbmon.message;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MessageDaoImp {
 	
 	// 접속한 유저의 전체 레코드 선택 .. 모든 게시글 선택 
@@ -26,5 +28,11 @@ public interface MessageDaoImp {
 	public int newMessage(MessageVO vo);
 	
 	//쪽지 저장하기
-	public int saveMessage(int no);
+	public int saveMessage(@Param("no")int no, @Param("tabType")String tabType);
+	
+	//쪽지 삭제시 로그인 상태 확인
+	public MessageVO loginCheck(int no);
+	
+	//쪽지 삭제(보기상태변환)
+	public int messageDel(@Param("no")int no, @Param("viewType")String viewType);
 }

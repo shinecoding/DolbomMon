@@ -102,14 +102,15 @@
 	<div id="note">
 		<div id="note2">
 			<ul>
-				<li>보낸사람 : ${vo.userid_w} &nbsp;
-					<a href='?exec=spam&spam_no=258492' onclick="return confirm('스팸등록을 하시면 해당 회원이 발송한 쪽지는 스팸쪽지함에서만 확인할 수 있습니다.\n\n스팸 등록하시겠습니까?')">
+				<li>보낸이 : ${vo.userid_w} &nbsp; =>&nbsp; 받은이 : ${vo.userid_r} &nbsp;
+					<div style="float:right; line-height:5px;"><a href='?exec=spam&spam_no=258492' onclick="return confirm('스팸등록을 하시면 해당 회원이 발송한 쪽지는 스팸쪽지함에서만 확인할 수 있습니다.\n\n스팸 등록하시겠습니까?')">
 						<img src="icon/message/btn_spam1.gif" width="58px" height="18px" boarder="0"></a>&nbsp; 
 					<a href="javascript:void(window.open('?type=memo&memo_id=inbox&memo_no=100701821','claim_memo','width=470,height=580,toolbar=no,scrollbars=no'));">
-						<img src="icon/message/claim.gif" board="0" /></a>			
+						<img src="icon/message/claim.gif" board="0" /></a>
+					</div>				
 				</li>
-				<li class="wordCut"><b>제 목 : ${vo.subject}</b></li>
 				<li>날 짜 : ${vo.writedate}</li>
+				<li class="wordCut"><b>제 목 : ${vo.subject}</b></li>
 				<li id="content">${vo.content}</li>
 			</ul>
 			
@@ -118,7 +119,7 @@
 					<img src="icon/message/reply_icon.gif" /></a> 
 				<a href="javascript:move_save(100701821);">
 					<img src="icon/message/keep_icon.gif" /></a> 
-				<a href="?exec=del&no=100701821&page=1&search_type=&keyword=&memo_type=inbox" onclick="return confirm('삭제하시겠습니까?')">
+				<a href="/dbmon/deleteMessage2?no=${vo.no}" onclick="return confirm('삭제하시겠습니까?')">
 					<img src="icon/message/delete_icon.gif" /></a> 
 				<a href="/dbmon/message?tabType=${tabType}&nowPage=${nowPage}">
 					<img src="icon/message/list_icon.gif" /></a>

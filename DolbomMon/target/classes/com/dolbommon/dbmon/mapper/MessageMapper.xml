@@ -6,26 +6,26 @@
 	<select id="messageAllRecord" resultType="com.dolbommon.dbmon.message.MessageVO">
 		select * from
 		(select * from
-		(select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save, spam from message where 
+		(select no, userid_w, userid_r, subject, content, to_char(writedate, 'MM-DD') writedate, message_check, message_save_r, spam from message where 
 		<choose>
 			<when test='tabType.equals("2")'>
 				userid_w=#{userid}  
+			</when>
+			<when test='tabType.equals("3")'>
+				(userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N')
 			</when>
 			<otherwise>
 				userid_r=#{userid} 
 			</otherwise>
 		</choose>
 		<if test='tabType.equals("4")'>
-			and spam='Y'	
-		</if>
-		<if test='tabType.equals("3")'>
-			and message_save='Y'	
+			and spam='Y' and inactivity_r='N'	
 		</if>
 		<if test='tabType.equals("2")'>
-			and message_save='N'
+			and message_save_r='N' and inactivity_w='N'
 		</if>
 		<if test='tabType.equals("1")'>
-			and spam='N' and message_save='N'
+			and spam='N' and message_save_r='N' and inactivity_r='N'
 		</if>
 		<if test='searchKey != null and !searchKey.equals("") and !searchKey.equals("%%") and !searchKey.equals("%null%")'>
 			<if test='searchKey.equals("userid")'>
@@ -54,23 +54,23 @@
 		select count(no) from message where 
 		<choose>
 			<when test='tabType.equals("2")'>
-				userid_w=#{userid}	
+				userid_w=#{userid} and inactivity_w='N'	
+			</when>
+			<when test='tabType.equals("3")'>
+				(userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N')
 			</when>
 			<otherwise>
-				userid_r=#{userid}
+				userid_r=#{userid} and inactivity_r='N'
 			</otherwise>
 		</choose>
 		<if test='tabType.equals("4")'>
 			and spam='Y'
 		</if>
-		<if test='tabType.equals("3")'>
-			and message_save='Y'
-		</if>
 		<if test='tabType.equals("2")'>
-			and message_save='N'
+			and message_save_r='N'
 		</if>
 		<if test='tabType.equals("1")'>
-			and spam='N' and message_save='N'
+			and spam='N' and message_save_r='N'
 		</if>
 	</select>
 	
@@ -96,18 +96,43 @@
 			userid_r=#{userid} and spam='Y'
 		</if>
 		<if test='tabType.equals("3")'>
-			userid_r=#{userid} and message_save='Y'
+			userid_r=#{userid} and message_save_r='Y' and inactivity_r='N'
 		</if>
 		<if test='tabType.equals("2")'>
-			userid_w=#{userid} and message_save='N'
+			userid_w=#{userid} and message_save_r='N' and inactivity_w='N'
 		</if>
 		<if test='tabType.equals("1")'>
-			userid_r=#{userid}  and spam='N' and message_save='N'
+			userid_r=#{userid}  and spam='N' and message_save_r='N' and inactivity_r='N'
 		</if>
 	</select>
 	
-	<update id="saveMessage">
-		update message set Message_save='Y' where no=#{no}
+	<update id="saveMessage" parameterType="map">
+		update message set 
+		<choose>
+			<when test='tabType.equals("2")'>
+				Message_save_w='Y'	
+			</when>
+			<otherwise>
+				message_save_r='Y' 
+			</otherwise>
+		</choose>
+		where no=#{no}
 	</update>
 	
+	<select id="loginCheck" resultType="com.dolbommon.dbmon.message.MessageVO" parameterType="int">
+		select userid_r, userid_w from message where no=#{no}
+	</select>
+	
+	<update id="messageDel" parameterType="map">
+		update message set 
+		<choose>
+			<when test='viewType.equals("recieve")'>
+				inactivity_r='Y'	
+			</when>
+			<otherwise>
+				inactivity_w='Y' 
+			</otherwise>
+		</choose>
+		where no=#{no}
+	</update>
 </mapper>

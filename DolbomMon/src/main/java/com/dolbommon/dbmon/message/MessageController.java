@@ -147,6 +147,22 @@ public class MessageController {
 					mav.addObject("nowPage",nowPage);
 					mav.addObject("vo", resultVo);
 					mav.setViewName("message/messageView");
+				}else if(tabType.equals("3")){
+					
+					//내가 받은 메시지인지 확인하는작업 해야함.
+					//스팸메시지에도 마찬가지로?
+					
+					mav.addObject("tabType",tabType);
+					mav.addObject("nowPage",nowPage);
+					mav.addObject("vo", resultVo);
+					mav.setViewName("message/messageView");					
+				}else if(tabType.equals("4")) {
+					//스팸메시지부분 
+					//읽어도 체크 안되게
+					mav.addObject("tabType",tabType);
+					mav.addObject("nowPage",nowPage);
+					mav.addObject("vo", resultVo);
+					mav.setViewName("message/messageView");	
 				}else {
 					//읽은글 체크하는부분
 					int result=0;
@@ -230,7 +246,7 @@ public class MessageController {
 			if(result>=1) {
 				mav.setViewName("redirect:message");
 			}else {
-				mav.addObject("msg", "쪽지 보내기를 실패하였습니다. 제목은 한글 100자, 내용은 한글 1500자까지 허용됩니다.");
+				mav.addObject("msg", "errorcode-1");
 				mav.addObject("back", 1);
 				mav.setViewName("redirect:back");
 			}
@@ -239,42 +255,97 @@ public class MessageController {
 		
 		return mav;
 	}
-	//메시지 삭제
+	//쪽지창에서 체크박스로 쪽지 삭제(상태변환. 테이블에서 삭제되지는 않는다.)
 	@RequestMapping(value="/deleteMessage", method=RequestMethod.POST)
 	public ModelAndView deleteMessage(HttpServletRequest req, HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("접속아이디확인"+req.getParameter("userid"));;
+		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+		
+		String loginCheck = (String)ses.getAttribute("userid");
+		System.out.println("접속아이디확인"+req.getParameter("userid"));
 		//로그인 체크
-		if(!req.getParameter("userid").equals(ses.getAttribute("userid"))){
+		if(!req.getParameter("userid").equals(loginCheck)){
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
-			mav.addObject("back", 2);
+			mav.addObject("back", 100);
 			mav.setViewName("redirect:back");
 		}else {
 			String[] checkBoxNo = req.getParameterValues("delCheck[]");
-			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+			
 			int result = 0;
 			for(String i : checkBoxNo) {
 				System.out.println("no값 출력 ==> "+i);
 				int no = Integer.parseInt(i);
+				String viewType="";
+				
+				MessageVO resultVo = dao.loginCheck(no);
+				
+				if(resultVo.getUserid_r().equals(loginCheck)) {
+					viewType="recieve";
+				}else {
+					viewType="send";
+				}
 				try {
-					result = dao.MessageDelete(no);
+					result = dao.messageDel(no, viewType); 
+				
 				}catch(Exception e) {
 					System.out.println("메시지 삭제 실패-->"+e.getMessage());
 				}
-			}
-			
-			if(result>=1) {
-				mav.setViewName("redirect:message");
-			}else {
-				mav.addObject("msg", "메시지 삭제에 실패하였습니다.");
-				mav.addObject("back", 2);
-				mav.setViewName("redirect:back");
+				
+				if(result>=1) {
+					mav.setViewName("redirect:message");
+				}else {
+					mav.addObject("msg", "삭제에 실패하였습니다.");
+					mav.addObject("back", 2);
+					mav.setViewName("redirect:back");
+				}
 			}
 		}
 		return mav;
 	}
 	
+	//쪽지 내용 보기에서 삭제
+	@RequestMapping("deleteMessage2")
+	public ModelAndView deleteMessage2(MessageVO vo, HttpServletRequest req, HttpSession ses) {
+		int no = Integer.parseInt(req.getParameter("no"));
+		ModelAndView mav = new ModelAndView();
+		String loginCheck = (String)ses.getAttribute("userid");
+		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+		MessageVO resultVo = dao.loginCheck(no);
+		if(resultVo.getUserid_r().equals(loginCheck) || resultVo.getUserid_w().equals(loginCheck)) {
+			String viewType="";
+			if(resultVo.getUserid_r().equals(loginCheck)) {
+				viewType="recieve";
+			}else {
+				viewType="send";
+			}
+			//쪽지 보기상태 변환시키기(삭제된것처럼)
+			int result=0;
+			try {
+			result = dao.messageDel(no, viewType); 
+			}catch(Exception e) {
+				System.out.println("쪽지 보기상태 변환 에러 ->"+e.getMessage());
+			}
+			
+			if(result>=1) {
+				mav.setViewName("redirect:message");
+			}else {
+				mav.addObject("msg", "삭제에 실패하였습니다.");
+				mav.addObject("back", 2);
+				mav.setViewName("redirect:back");
+			}
+			
+		}else {
+			mav.addObject("msg", "로그인 상태를 확인하세요.");
+			mav.addObject("back", 100);
+			mav.setViewName("redirect:back");
+		}
+		
+		
+		return mav;
+	}
 	
+	
+	//쪽지 저장
 	@RequestMapping(value="/saveMessage", method=RequestMethod.POST)
 	public ModelAndView saveMessage(HttpServletRequest req, HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
@@ -291,21 +362,24 @@ public class MessageController {
 			for(String i : checkBoxNo) {
 				System.out.println("no값 출력 ==> "+i);
 				int no = Integer.parseInt(i);
+				String tabType = req.getParameter("tabType");
+				System.out.println("tabType 확인하기."+tabType);
 				try {
-					result = dao.saveMessage(no);
+					result = dao.saveMessage(no, tabType);
 				}catch(Exception e) {
-					System.out.println("메시지 저장 실패-->"+e.getMessage());
+					System.out.println("쪽지 저장 실패-->"+e.getMessage());
 				}
 			}
 			
 			if(result>=1) {
 				mav.setViewName("redirect:message");
 			}else {
-				mav.addObject("msg", "메시지 저장에 실패하였습니다.");
+				mav.addObject("msg", "쪽지 저장에 실패하였습니다.");
 				mav.addObject("back", 2);
 				mav.setViewName("redirect:back");
 			}
 		}
 		return mav;
 	}
+	
 }

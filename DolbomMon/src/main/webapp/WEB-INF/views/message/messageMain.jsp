@@ -12,7 +12,6 @@
 <script>
 
 ///////	쪽지 보관하다가 멈춤. 쪽지보관 보낸거, 받은거 구분해서 올리기. 필드는 추가했음.
-/////// 보관함에 쪽지 안뜨는 이유 찾기.
 	$(function(){
 		
 		$(document).ready(function() {
@@ -93,7 +92,7 @@
 			};
 		}
 	}
-	
+	//쪽지 보관
 	function saveMessage(){
 		var checkBoxCount = $("input:checkbox[name=messageBox]:checked").length;
 		if($("input:checkbox[name=messageBox]:checked").length!=0){
@@ -105,6 +104,7 @@
 				
 				var tag = "<form method='post' action='/dbmon/saveMessage' id='checkBoxForm' name='checkBoxForm'>";
 					tag += "<input type='hidden' value='${pVo.userid}' name='userid' />";
+					tag += "<input type='hidden' value='${tabType}' name='tabType' />";
 				for(var i = 0 ; i<checkBoxCount ; i++){
 				  tag += "<input type='hidden' value='"+delCheck[i]+"'  name='delCheck[]' />";
 				}
@@ -175,7 +175,7 @@
 	#paging ul{
 		float:right;
 	}
-	#imgResize{
+	.imgResize{
 		width:15px;
 		height:15px;
 	}
@@ -254,19 +254,28 @@
 						<td style="text-align:center;"><input type="checkbox" name=messageBox value="${vo.no}"/></td>
 						<td class="note_info" title="테스트">
 							<p class="note_new">
-							<c:if test="${vo.message_check.equals('Y')}">							
+							<c:choose>
+								<c:when test="${tabType.equals('3')}">
 								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
-									<img src="icon/message/ico_talk.gif"/>
+									<img src="icon/message/save2.png" class="imgResize"/>
 								</a>
-							</c:if>	
-							<c:if test="${!vo.message_check.equals('Y')}">
-								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
-									<img src="icon/message/new_message2.png" id="imgResize"/>
-								</a>
-							</c:if>
+								</c:when>
+								<c:otherwise>
+									<c:if test="${vo.message_check.equals('Y')}">							
+										<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
+											<img src="icon/message/ico_talk.gif"/>
+										</a>
+									</c:if>	
+									<c:if test="${!vo.message_check.equals('Y')}">
+										<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}">
+											<img src="icon/message/new_message2.png" class="imgResize"/>
+										</a>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
 								<a href="/dbmon/messageContent?no=${vo.no}&nowPage=${nowPage}&tabType=${tabType}" class="btn_show wordCut">
-									${vo.subject}
-								</a>
+											${vo.subject}
+								</a>	
 							</p>
 						</td>
 						<td class="user_new">
@@ -304,10 +313,10 @@
 <!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
 		<div class="btns">
+			<c:if test="${tabType!='3'}">
 			<a href="javascript:saveMessage()" class="btn_keep">
-				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>
-			</a> <a href="javascript:deleteMessage()" class="btn_keep"> <span><img
-					src="icon/message/delete_icon.gif" alt="삭제" /></span></a>
+				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>	</a> </c:if>
+			<a href="javascript:deleteMessage()" class="btn_keep"> <span><img src="icon/message/delete_icon.gif" alt="삭제" /></span></a>
 		</div>
 
 		<!--page-->
