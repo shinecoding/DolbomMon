@@ -52,12 +52,12 @@ font-weight:bold;
    		<div class="row">
    			<div class="col-1">
    			<span class="fa-stack fa-2x">
-   			<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.identi_status=='S'}">style="color:orange" </c:if> ></i>
+   			<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.identi_status=='Y'}">style="color:orange" </c:if> ></i>
 		   	
 		   	<c:if test="${cvo.identi_status=='N'}">
 		   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 		   	</c:if>
-		   	<c:if test="${cvo.identi_status=='S'}">
+		   	<c:if test="${cvo.identi_status=='Y'}">
 		   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
 		   	</c:if>
    			</span>
@@ -73,36 +73,36 @@ font-weight:bold;
    	<ul class="list-group">
    	<li class="list-group-item">
 	   	<span class="fa-stack fa-2x">
-	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='S'}">style="color:orange" </c:if> ></i>
+	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
 	   	<c:if test="${cvo.license_status=='N'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
-	   	<c:if test="${cvo.license_status=='S'}">
+	   	<c:if test="${cvo.license_status=='Y'}">
 	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	</span>선생님 인증</li>
 	   	
 	   	<li class="list-group-item">
 	   	<span class="fa-stack fa-2x">
-	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='S'}">style="color:orange" </c:if> ></i>
+	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
 	   	<c:if test="${cvo.school_status=='N'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
-	   	<c:if test="${cvo.school_status=='S'}">
+	   	<c:if test="${cvo.school_status=='Y'}">
 	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	</span>학교 인증</li>
 	   	
 	   	<li class="list-group-item">
 	   	<span class="fa-stack fa-2x">
-	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='S'}">style="color:orange" </c:if> ></i>
+	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
 	   	<c:if test="${cvo.crime_status=='N'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
-	   	<c:if test="${cvo.crime_status=='S'}">
+	   	<c:if test="${cvo.crime_status=='Y'}">
 	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	
