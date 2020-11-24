@@ -104,21 +104,29 @@
 	border-radius:3px;
 	border-color: gray;
 	}
-</style>	
+</style>
+<script>
+	$(function(){
+		console.log.("identi=="+$("identi").val());
+		
+	});
+</script>	
 </head>
 <body>
 	<div class="container">
 		<div id="title">
-	   		<div id="titlefont">학교 인증</div>
+	   		<div id="titlefont">등초본 인증</div>
 	 	</div>
 		<form method="post" action="/dbmon/proofIdentiOk" enctype="multipart/form-data">
 			<div id="profBox">
 				<div class="badge badge-warning">1번째</div>
-				<div>소속기관과 전공분야를 확인하기<br/>
-				위해서 아래 서류 중 1개를 사진으로<br/>
+				<div>주민등록등(초)본을 사진으로<br/>
 				찍어서 올려주세요.<br/></div>
 				<div class="warning">
-				<i class="fas fa-exclamation-circle"></i>사진첨부는 최대 5장까지 가능합니다.
+				<i class="fas fa-exclamation-circle"></i>
+				최근 6개월 이내에 발급된 경우만 인정됩니다.<br/>
+				<i class="fas fa-exclamation-circle"></i>
+				회원님의 개인정보 보호를 위해 주민등록번호 뒷자리를 꼭 가리고 보내주세요. (주민등록뒷자리 ‘미포함’ 선택 후 발급, 또는 해당부분 가린 후 촬영)<br/>
 				</div>
 				
 				
@@ -126,7 +134,7 @@
 					<i class="fas fa-upload"></i>사진 추가하기
 					<input type="file" id="identi" name="filename" accept="image/*,application/pdf">
 				</label>
-				<input type="file" id="identi" name="filename" accept="image/*,application/pdf">
+
 				
 				<img src="img/ex-cert-resident-1.png"/>
 			</div>	
