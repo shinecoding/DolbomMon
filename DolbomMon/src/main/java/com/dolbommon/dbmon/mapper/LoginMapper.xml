@@ -8,7 +8,7 @@
 	</select>
 		
 	<select id="findUserid" resultType="com.dolbommon.dbmon.login.LoginVO">
-		select userid from member where username=#{username} and tel1=#{tel1} and birth=#{birth}
+		select userid, username, birth, tel1 from member where username=#{username} and tel1=#{tel1} and birth=#{birth}
 	</select>
 	
 	<update id="pwdChange" parameterType="com.dolbommon.dbmon.login.LoginVO">

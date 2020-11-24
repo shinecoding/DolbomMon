@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.login;
 
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -77,6 +78,17 @@ public class LoginController {
 		vo.setBirth((String)req.getParameter("birth"));
 		vo.setTel1((String)req.getParameter("tel1"));
 		
+		StringBuffer sb1 = new StringBuffer(vo.getTel1());
+		StringBuffer sbTel = sb1.insert(3, "-");
+		sbTel = sb1.insert(8, "-");
+		String strTel = sbTel.toString();	//010-1111-2222
+		vo.setTel1(strTel);
+		
+		StringBuffer sb2 = new StringBuffer(vo.getBirth());
+		StringBuffer sbBirth = sb2.insert(4, "-");
+		sbBirth = sb2.insert(7, "-");
+		String strBirth = sbBirth.toString();	//1999-12-12
+		vo.setBirth(strBirth);
 		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		LoginVO logVO = dao.findUserid(vo);
@@ -90,52 +102,44 @@ public class LoginController {
 			mav.addObject("logVO", logVO);
 			mav.setViewName("login/idInfo");
 		}
-		return mav;
-		
+		return mav;	
 	}
 	
 	//임시비밀번호 발급
 	@RequestMapping(value="/temporaryPwd", method=RequestMethod.POST)
-	public String temporaryPwd(LoginVO vo, HttpServletRequest req) {
+	public ModelAndView temporaryPwd(LoginVO vo, HttpServletRequest req) {
 		
+		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8));
 		vo.setUsername((String)req.getParameter("username"));
 		vo.setBirth((String)req.getParameter("birth"));
 		vo.setTel1((String)req.getParameter("tel1"));
-		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8));
 		
-	//	System.out.println(vo.getUsername());
-	//	System.out.println(vo.getBirth());
-	//	System.out.println(vo.getTel1());
-	//	System.out.println(vo.getUserpwd());
+		StringBuffer sbBirth = new StringBuffer(vo.getBirth());
+		sbBirth.delete(10, 22);	
+		String strBirth = sbBirth.toString();
+		vo.setBirth(strBirth);
+
+		System.out.println(vo.getUserpwd());
+		System.out.println(vo.getUsername());
+		System.out.println(vo.getBirth());
+		System.out.println(vo.getTel1());
 		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		
 		int result = dao.pwdChange(vo);
 		
-		return "login/temporaryPwdResult";
+		System.out.println("11111111111111");
+		ModelAndView mav = new ModelAndView();
+		
+		if(result>0) {	//성공
+			mav.setViewName("login/temporaryPwdResult");
+			
+		}else {	//실패
+			mav.setViewName("login");
+			
+		}
+		return mav;
 		
 	}
-	
-	
-		
-		//int pwdResult = dao.pwdChange(vo);
-		
-		//비밀번호 변경 성공, 임시비밀번호 발송
-//		ModelAndView mav = new ModelAndView();
-//		if(pwdResult>0) {
-			
-			
-			
-		//실패
-//		}else {	
-		
-//		mav.setViewName("login/loginResult");
-//		}
 
-	
-	
-	
-	
-	
-	
 }

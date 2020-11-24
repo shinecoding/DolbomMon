@@ -34,10 +34,10 @@
 </div>
 	<br/><label>아이디: ${logVO.userid}</label><br/>
 	<form method="post" action="temporaryPwd">
-		<input type="hidden" name="userid" value="${logVO.userid}">
-		<input type="hidden" name="username" value="${logVO.username}">
-		<input type="hidden" name="birth" value="${logVO.birth}">
-		<input type="hidden" name="tel1" value="${logVO.tel1}">
+		<input type="hidden" name="userid" id="userid" value="${logVO.userid}">
+		<input type="hidden" name="username" id="username" value="${logVO.username}">
+		<input type="hidden" name="birth" id="birth" value="${logVO.birth}">
+		<input type="hidden" name="tel1" id="tel1" value="${logVO.tel1}">
 		<br/><input type="submit" class="btn btn-warning btn-lg btn-block" value="임시 비밀번호 발급"/>
 		<br/><a class="btn btn-outline-warning btn-lg btn-block" href="/dbmon" role="button">돌아가기</a>	
 	</form>
