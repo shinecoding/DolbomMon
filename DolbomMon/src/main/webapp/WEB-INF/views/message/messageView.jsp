@@ -115,10 +115,12 @@
 			</ul>
 			
 			<div style="float:right">
-				<a href="javascript:void(window.open('?member_no=258492','view_info','width=478,height=530,toolbar=no,scrollbars=yes'))">
+				<a href="/dbmon/messageWrite?receiveId=${vo.userid_w }">
 					<img src="icon/message/reply_icon.gif" /></a> 
-				<a href="javascript:move_save(100701821);">
-					<img src="icon/message/keep_icon.gif" /></a> 
+				<c:if test="${tabType!='3' && tabType!='4'}">
+				<a href="/dbmon/saveMessage2?no=${vo.no}&tabType=${tabType}">
+					<img src="icon/message/keep_icon.gif" /></a>
+				</c:if> 
 				<a href="/dbmon/deleteMessage2?no=${vo.no}" onclick="return confirm('삭제하시겠습니까?')">
 					<img src="icon/message/delete_icon.gif" /></a> 
 				<a href="/dbmon/message?tabType=${tabType}&nowPage=${nowPage}">

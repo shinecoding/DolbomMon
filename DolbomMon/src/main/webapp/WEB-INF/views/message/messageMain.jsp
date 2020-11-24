@@ -11,7 +11,6 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script>
 
-///////	쪽지 보관하다가 멈춤. 쪽지보관 보낸거, 받은거 구분해서 올리기. 필드는 추가했음.
 	$(function(){
 		
 		$(document).ready(function() {
@@ -37,13 +36,6 @@
 			    strHeight = $('.messageMain').outerHeight() + strMenuHeight;
 			}
 			
-			if(${tabType.equals("5")}){ //회원검색 버튼 눌렀을때
-				$("#paging").css("display","none"); //페이징 제거
-				$(".note_msg").css("display","none"); //보관버튼 제거
-				$(".tab-content").css("display","none"); // 메인페이지 숨김
-				$(".search_box").css("display","none"); //검색창 숨김
-				$(".text_title").css("display","none"); //레코드수 숨기기
-			}
 			//resize 
 			window.resizeTo( strWidth, strHeight );
 		});
@@ -57,20 +49,7 @@
 		});
 		
 		
-		//글번호 구하는 수식.. 아이디 클릭시(사용처?) 
-		$(".sendWrite").click(function(){
-			var no = $(this).parent().prev().prev().children("input").val();
-			console.log(no);
-		});
 	});
-	
-	//회원검색 탭 눌렀을때 //방법 바꾸면서 안쓰는듯.
-	function imgchange(data){ 
-		$(".note_title img").attr("src",data); //상단이미지 변환	
-		$("#changeTotal").html("0"); //전체레코드 0으로표시
-		$("#paging").css("display","none"); //페이징 제거
-		$(".note_msg").css("display","none"); //보관버튼 제거
-	}
 	
 	//탭매뉴 클릭시 전환
 	function tabChange(){
@@ -141,9 +120,6 @@
 		margin:0 auto;
 		background-color:#F3F3F3;
 	}
-	#memberSearch{
-	
-	}
 	#message>table{
 		background-color:#fff;
 		border:1px solid #EBD9D9;
@@ -211,7 +187,7 @@
 		<li class="nav-item" id="send"><a class="nav-link" href="/dbmon/message?tabType=2">보낸쪽지</a></li>
 		<li class="nav-item" id="storage"><a class="nav-link" href="/dbmon/message?tabType=3">쪽지보관</a></li>
 		<li class="nav-item" id="spam"><a class="nav-link" href="/dbmon/message?tabType=4">스팸쪽지</a></li>
-		<li class="nav-item" id="searchTab"><a class="nav-link" href="/dbmon/message?tabType=5">회원검색</a></li>
+		<li class="nav-item" id="searchTab"><a class="nav-link" href="/dbmon/messageMemberSearch?tabType=5">회원검색</a></li>
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane fade show active" id="message">
@@ -243,7 +219,7 @@
 				<tbody>
 				
 					<tr class="list_line">
-					<!-- 공지사항 반복문 돌리기 -->
+					<!-- 공지사항 반복문 돌리기? 인크루드로 가져와서 넣는게 편할듯 -->
 						<td class="note_info note_notice" colspan="4">
 							<p class="note_new">
 								<a href="/dbmon/messageContent&no= " target="_blank" class="btn_show">
@@ -318,7 +294,7 @@
 <!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
 		<div class="btns">
-			<c:if test="${tabType!='3'}">
+			<c:if test="${tabType!='3' && tabType!='4'}">
 			<a href="javascript:saveMessage()" class="btn_keep">
 				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>	</a> </c:if>
 			<a href="javascript:deleteMessage()" class="btn_keep"> <span><img src="icon/message/delete_icon.gif" alt="삭제" /></span></a>
@@ -368,7 +344,7 @@
 					<option value="content" >본문</option>
 					<option value="userid" >아이디</option>
 	            	</select>
-				<input type="text" name="searchWord" id="searchWord" value="${vo.getSearchWord() }"/>
+				<input type="text" name="searchWord" id="searchWord" value="${prevWord}"/>
 				<input type="submit" value="검색"/>
 				</li>
 			</ul>
@@ -376,12 +352,6 @@
 	</div>
  <!-- 검색창 -->  
 </div>
-
-
-
-
-
-
 
 
 

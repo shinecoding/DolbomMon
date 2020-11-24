@@ -56,7 +56,7 @@ $(function(){
 	        <textarea class="form-control" id="content" name="content" rows="10"></textarea>
 		</div>
 	    <button type="submit" class="btn btn-info">쪽지보내기</button>
-	    <a href="/dbmon/back?back=2"><button type="button" class="btn btn-secondary">목록으로</button></a>
+	    <a href="/dbmon/message"><button type="button" class="btn btn-secondary">목록으로</button></a>
 	</form>
 </div>
 </body>

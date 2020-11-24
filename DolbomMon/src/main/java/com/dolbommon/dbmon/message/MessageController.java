@@ -122,9 +122,25 @@ public class MessageController {
 		return mav;
 	}
 	
+	//쪽지 회원검색탭 눌렀을때
+	@RequestMapping(value="/messageMemberSearch", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView messageMemberSearch(MessageVO vo, HttpSession session, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();		
+		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+		String prevWord = req.getParameter("searchWord");
+		//레코드 다 출력하기.
+		
+		//레코드 수 구하기
+		
+		//페이징
+		
+		
+		
+		mav.setViewName("message/messageMember");
+		return mav;
+	}
 	
-	
-	//쪽지에서 글 클릭했을때
+	//쪽지 클릭했을때
 	@RequestMapping("/messageContent")
 	public ModelAndView messageContent(MessageVO vo, HttpServletRequest req, HttpSession ses) {
 		System.out.println("vo에 자동 들어가는지 테스트"+vo.getNo()+vo.getNowPage()+vo.getTabType());
@@ -187,7 +203,6 @@ public class MessageController {
 	public ModelAndView messageWrite(HttpServletRequest req, HttpSession ses) {
 		String userid_w = (String)ses.getAttribute("userid");
 		String userid_r = (String)req.getParameter("receiveId");
-		
 		System.out.println("보낸아이디"+userid_r);
 		System.out.println("받는아이디"+userid_w);
 		ModelAndView mav = new ModelAndView();
@@ -281,7 +296,7 @@ public class MessageController {
 	}
 	
 	//쪽지 내용 보기에서 삭제
-	@RequestMapping("deleteMessage2")
+	@RequestMapping("/deleteMessage2")
 	public ModelAndView deleteMessage2(MessageVO vo, HttpServletRequest req, HttpSession ses) {
 		int no = Integer.parseInt(req.getParameter("no"));
 		ModelAndView mav = new ModelAndView();
@@ -322,7 +337,7 @@ public class MessageController {
 	}
 	
 	
-	//쪽지 저장
+	//쪽지 목록에서 쪽지 저장 
 	@RequestMapping(value="/saveMessage", method=RequestMethod.POST)
 	public ModelAndView saveMessage(HttpServletRequest req, HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
@@ -358,5 +373,51 @@ public class MessageController {
 		}
 		return mav;
 	}
+	
+	//쪽지 내용 보기에서 쪽지 저장
+	@RequestMapping("/saveMessage2")
+	public ModelAndView saveMessage2(MessageVO vo, HttpServletRequest req, HttpSession ses) {
+		int no = Integer.parseInt(req.getParameter("no"));
+		ModelAndView mav = new ModelAndView();
+		String loginCheck = (String)ses.getAttribute("userid");
+		String tabType = (String)req.getParameter("tabType");
+		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+		MessageVO resultVo = dao.loginCheck(no);
+		if(resultVo.getUserid_r().equals(loginCheck) || resultVo.getUserid_w().equals(loginCheck)) {
+			String viewType="";
+			if(resultVo.getUserid_r().equals(loginCheck)) {
+				viewType="recieve";
+			}else {
+				viewType="send";
+			}
+		
+			int result=0;
+			try {
+			result = dao.saveMessage(no, tabType); 
+			}catch(Exception e) {
+				System.out.println("쪽지 저장 실패-->"+e.getMessage());
+			}
+			
+			if(result>=1) {
+				mav.setViewName("redirect:message");
+			}else {
+				mav.addObject("msg", "쪽지 저장에 실패하였습니다.");
+				mav.addObject("back", 2);
+				mav.setViewName("redirect:back");
+			}
+			
+		}else {
+			mav.addObject("msg", "로그인 상태를 확인하세요.");
+			mav.addObject("back", 100);
+			mav.setViewName("redirect:back");
+		}
+		return mav;
+	}
+	
+	//스팸 등록하기.
+	//스팸 등록된 아이디가 등록한 아이디로 보내는 모든 글은 spam속성이 Y로 바뀌게 만든다. 
+	
+	//신고게시판으로 이동하기.
+	
 	
 }
