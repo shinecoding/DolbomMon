@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +28,6 @@ public class LoginController {
 	}
 
 	//로그인 폼으로 이동
-
 	@RequestMapping("/login")
 	public String login() {
 		return "login/loginForm";	
@@ -63,12 +61,10 @@ public class LoginController {
 	}
 	
 	//계정찾기 폼으로 이동
-
 	@RequestMapping("/searchId")
 	public String searchId() {
 		return "login/idSearch";		
 	}
-	
 	
 	//계정 정보
 	@RequestMapping(value="/idInfo", method=RequestMethod.POST)
@@ -105,11 +101,11 @@ public class LoginController {
 		return mav;	
 	}
 	
-	//임시비밀번호 발급
+	//임시비밀번호 발급 및 변경
 	@RequestMapping(value="/temporaryPwd", method=RequestMethod.POST)
 	public ModelAndView temporaryPwd(LoginVO vo, HttpServletRequest req) {
 		
-		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8));
+		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10));
 		vo.setUsername((String)req.getParameter("username"));
 		vo.setBirth((String)req.getParameter("birth"));
 		vo.setTel1((String)req.getParameter("tel1"));
@@ -118,28 +114,18 @@ public class LoginController {
 		sbBirth.delete(10, 22);	
 		String strBirth = sbBirth.toString();
 		vo.setBirth(strBirth);
-
-		System.out.println(vo.getUserpwd());
-		System.out.println(vo.getUsername());
-		System.out.println(vo.getBirth());
-		System.out.println(vo.getTel1());
 		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		
 		int result = dao.pwdChange(vo);
 		
-		System.out.println("11111111111111");
 		ModelAndView mav = new ModelAndView();
 		
 		if(result>0) {	//성공
-			mav.setViewName("login/temporaryPwdResult");
-			
+			mav.setViewName("login/temporaryPwdResult");	
 		}else {	//실패
-			mav.setViewName("login");
-			
+			mav.setViewName("login");	
 		}
-		return mav;
-		
+		return mav;	
 	}
-
 }

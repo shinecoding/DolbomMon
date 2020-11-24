@@ -12,7 +12,7 @@
 	</select>
 	
 	<update id="pwdChange" parameterType="com.dolbommon.dbmon.login.LoginVO">
-		update member set userpwd=#{userpwd} where username=#{username} and tel1=#{tel1} and birth=#{birth}
+		update member set userpwd=#{userpwd} where username=#{username} and birth=#{birth} and tel1=#{tel1}
 	</update>
 	
 </mapper>

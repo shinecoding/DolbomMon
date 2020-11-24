@@ -80,7 +80,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<br/>	
+	<br/>
+	
+	<div>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<li class="page-item disabled">
@@ -96,6 +98,7 @@
 			</li>
 		</ul>
 	</nav>
+	</div>
 	<br/>
 	<div class="input-group mb-3">
 		<input type="text" class="form-control" placeholder="검색어를 입력하세요"/>
