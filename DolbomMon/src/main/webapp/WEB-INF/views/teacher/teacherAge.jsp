@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +98,7 @@ $(function(){
 <body>
 
 	<div class="container">
-		<form method="post" action="<%=request.getContextPath()%>/teacher/teacherAgeOk">
+		<form method="post" action="<%=request.getContextPath()%>/teacherAgeOk">
 		<div id="title">
 			<div id="titlefont">돌봄 가능 연령</div>
 		</div>
@@ -104,19 +106,22 @@ $(function(){
 			<b>돌봄 가능 연령</b><br /> 현재 놀이/학습 돌봄유형이므로 영아/유아/초등 중 1개 아이 연령은 필수로 선택되어야
 			합니다<br />
 		</div>
-
+		
+	
+		 <c:set var = "str" value = "${vo.child_age}"/>
+     	
 		<div id="ageBox">
 			<div id="ageHidden">
-				<input type="checkbox" name="child_age" id="age1" alt="1"  />
-				<input type="checkbox" name="child_age" id="age2" alt="1" />
-				<input type="checkbox" name="child_age" id="age3" alt="1" />
-				<input type="checkbox" name="child_age" id="age4" alt="1"  />
+				<input type="checkbox" name="child_age" id="age1" value="신생아" alt="1"  />
+				<input type="checkbox" name="child_age" id="age2" value="영아" alt="1" />
+				<input type="checkbox" name="child_age" id="age3" value="유아" alt="1" />
+				<input type="checkbox" name="child_age" id="age4" value="초등학생" alt="1"  />
 			</div>
 
-			<label for="age1"><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
-			<label for="age2"><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br />영아</label>
-			<label for="age3"><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br />유아</label>
-			<label for="age4"><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br />초등학생</label>
+			<label for="age1" <c:if test = "${fn:contains(str, '신생아')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
+			<label for="age2" <c:if test = "${fn:contains(str, '영아')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br />영아</label>
+			<label for="age3" <c:if test = "${fn:contains(str, '유아')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br />유아</label>
+			<label for="age4" <c:if test = "${fn:contains(str, '초등학생')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br />초등학생</label>
 		</div>
 
 

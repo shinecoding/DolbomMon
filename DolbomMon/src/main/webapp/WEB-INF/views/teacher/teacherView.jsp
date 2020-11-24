@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +116,7 @@ font-weight:bold;
    	<li class="list-group-item p-5" style="text-align:center">
 		  <c:if test="${vo.intro!=null }">	${vo.intro }</c:if>
 	   <c:if test="${vo.intro==null }">작성 시 부모로부터<br/>
-			<span class="boldFont">4배 더 많은 선택<span>을 받게 됩니다!</c:if>
+			<span class="boldFont">4배 더 많은 선택</span>을 받게 됩니다!</c:if>
    	</li></ul>
    	<h5>선호하는 돌봄유형</h5>
    	<ul class="list-group">
@@ -127,6 +128,7 @@ font-weight:bold;
    	<ul class="list-group">
    	<li class="list-group-item">스케쥴차트</li>
    	</ul>
+   	<c:set var = "str" value = "${vo.child_age}"/>
    	<h5>돌봄 가능 연령</h5>
    	<ul class="list-group">
    	<li class="list-group-item">
@@ -138,6 +140,7 @@ font-weight:bold;
 	   </ul>
    </li>
    </ul>
+   <c:set var = "str" value = "${vo.activity_type}"/>
    <h5>가능한 활동</h5>
    <ul class="list-group">
    <li class="list-group-item">

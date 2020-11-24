@@ -18,8 +18,7 @@ public interface CertificationDaoImp {
 	public int insertPrivacy(CertificationVO vo);
 	public int updatePrivacy(CertificationVO vo);
 	
-	public int insertCrime(CertificationVO vo);
-	
+
 	public CertificationVO selectCert(String userid);
 	
 }

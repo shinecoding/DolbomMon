@@ -98,8 +98,15 @@
 		
 		
 		$("button").click(function(){
-			
-			$(this).parent().remove("li");
+			$(this).parent("li").remove();
+		});
+	
+	
+		$("input[type=submit]").click(function(){
+			if( $("input[type=text]").val()=="" || $("input[name='exp_start']").val()=="" || $("input[name='exp_end']").val()==""){
+				alert("빈칸을 채워주세요");
+			}
+			return false;
 		});
 	});
 </script>

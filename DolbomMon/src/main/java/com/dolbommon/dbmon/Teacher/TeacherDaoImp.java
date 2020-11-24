@@ -13,7 +13,10 @@ public interface TeacherDaoImp {
 	public int updateActivity(TeacherVO vo);
 	public int updateCCTV(TeacherVO vo);
 	public HashSet<ExperienceVO> selectExp(String userid);
-	public int updateExp(HashSet<ExperienceVO> list);
 	public int hitCount(TeacherVO vo);
+	public int findIdT(ExperienceVO vo);
+	public int updateExp(HashSet<ExperienceVO> hash);
+	public int insertExp(HashSet<ExperienceVO> hash);
+	public int deleteExp(HashSet<ExperienceVO> hash);
 }
 

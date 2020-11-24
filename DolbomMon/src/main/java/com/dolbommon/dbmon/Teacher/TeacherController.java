@@ -244,8 +244,8 @@ public class TeacherController {
 	@RequestMapping(value="/teacherExpOk", method=RequestMethod.POST)
 	public ModelAndView teacherExpOk(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
 		HashSet<ExperienceVO> hash = new HashSet<ExperienceVO>();
-		
-		evo.setUserid((String)ses.getAttribute("userid"));
+		String userid = (String)ses.getAttribute("userid");
+		evo.setUserid(userid);
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
@@ -253,29 +253,88 @@ public class TeacherController {
 		String[] exp_start = req.getParameterValues("exp_start");
 		String[] exp_end = req.getParameterValues("exp_end");
 		
-		
-		
-		if(exp_content!=null && exp_start!=null && exp_end!= null) {
-				for(int i=0; i<exp_content.length; i++) {
-					if(exp_content[i]!= null && exp_start[i]!=null && exp_end[i]!=null) {
-						evo.setExp_content(exp_content[i]);
-						evo.setExp_start(exp_start[i]);
-						evo.setExp_end(exp_end[i]);
+		int len = exp_content.length;
+		int cnt = dao.findIdT(evo);
+		int result;
+		if (cnt<0) {	//first insert
+			for(int i=0; i<len; i++) {
+				evo.setExp_content(exp_content[i]);
+				evo.setExp_start(exp_start[i]);
+				evo.setExp_end(exp_end[i]);
+				if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+					hash.add(evo);
+				} else {
+					hash.remove(evo);
+					}
+				}//for			
+			result = dao.insertExp(hash);
+		}else {	//update
+			
+			if(len==cnt) { //before = after  good to update
+			
+				for(int i=0; i<len; i++) {
+					evo.setExp_content(exp_content[i]);
+					evo.setExp_start(exp_start[i]);
+					evo.setExp_end(exp_end[i]);
+					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
 						hash.add(evo);
-					}else {
-						evo.setExp_content(exp_content[i]);
-						evo.setExp_start(exp_start[i]);
-						evo.setExp_end(exp_end[i]);
+					} else {
 						hash.remove(evo);
 						}
-					
-				}//for
+					}//for
+				result = dao.updateExp(hash);
+			}else if(len>cnt) { //added some records
+								//5-3
+				for(int i=0; i<len-cnt; i++) {
+					evo.setExp_content(exp_content[i]);
+					evo.setExp_start(exp_start[i]);
+					evo.setExp_end(exp_end[i]);
+					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						hash.add(evo);
+					} else {
+						hash.remove(evo);
+						}
+					}//for
+				result = dao.updateExp(hash);
+						//3		  5	
+				for(int i=len; i<cnt; i++) {
+					evo.setExp_content(exp_content[i]);
+					evo.setExp_start(exp_start[i]);
+					evo.setExp_end(exp_end[i]);
+					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						hash.add(evo);
+					} else {
+						hash.remove(evo);
+						}
+					}//for
+				result = dao.insertExp(hash);
+			}else { //deleted new records len(new)<cnt(old)
+				for(int i=0; i<len; i++) {
+					evo.setExp_content(exp_content[i]);
+					evo.setExp_start(exp_start[i]);
+					evo.setExp_end(exp_end[i]);
+					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						hash.add(evo);
+					} else {
+						hash.remove(evo);
+						}
+					}//for
+				result = dao.updateExp(hash);
+				for(int i=len; i<cnt; i++) {
+					evo.setExp_content(exp_content[i]);
+					evo.setExp_start(exp_start[i]);
+					evo.setExp_end(exp_end[i]);
+					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						hash.add(evo);
+					} else {
+						hash.remove(evo);
+						}
+					}//for
+				result = dao.deleteExp(hash);
+			}
 		}
 		
-	
 		
-		
-		int result = dao.updateExp(hash);
 		if(result>0) {
 			mav.addObject("hash", hash);
 			mav.setViewName("redirect:teacherEdit");
@@ -300,7 +359,12 @@ public class TeacherController {
 	*/
 	@RequestMapping("/teacherAge") 
 	public ModelAndView teacherAge(HttpSession ses) { ////
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		TeacherVO vo = dao.selectTeacher(userid);
 		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", vo);
 		mav.setViewName("/teacher/teacherAge");
 		return mav;
 	
@@ -312,7 +376,11 @@ public class TeacherController {
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
 		String[] age_list = req.getParameterValues("child_age"); 
-		vo.setAge_list(age_list);
+		String child_age="";
+		for(String age: age_list) {
+			child_age += age+"/";
+		}
+		vo.setChild_age(child_age);
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 			int result = dao.updateAge(vo);
 			ModelAndView mav = new ModelAndView();
@@ -323,16 +391,46 @@ public class TeacherController {
 			mav.setViewName("teacher/teacherResult");
 		}
 			
+			return mav;
+	}
+
+	@RequestMapping("/teacherActivity") 
+	public ModelAndView teacherActivity(HttpSession ses) { ////
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
+		TeacherVO vo = dao.selectTeacher(userid);
+		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("vo", vo);
+		mav.setViewName("/teacher/teacherActivity");
+		return mav;
+	
+	}
+	
+	@RequestMapping(value="/teacherActivityOk", method= RequestMethod.POST)
+	public ModelAndView teacherActivityOk(TeacherVO vo, HttpServletRequest req, HttpSession ses) {
 		
+		vo.setUserid((String)ses.getAttribute("userid"));
+		
+		String[] activity_list = req.getParameterValues("activity_type"); 
+		String activity_type="";
+		for(String act: activity_list) {
+			activity_type += act+"/";
+		}
+		vo.setActivity_type(activity_type);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+			int result = dao.updateActivity(vo);
+			ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.addObject("vo", vo);
+			mav.setViewName("redirect:teacherEdit");
+		}else {
+			mav.setViewName("teacher/teacherResult");
+		}
+
 		return mav;
 	}
-
-	@RequestMapping("/teacherActivity")
-	public String teacherActivity() {
-		return "/teacher/teacherActivity";
-	}
-
+	
 	@RequestMapping("/teacherType")
 	public String teacherType() {
 		return "/teacher/teacherType";
