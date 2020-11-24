@@ -38,14 +38,6 @@
 	justify-content:center;
 	
 	}
-	input[type="submit"]{
-	display: flex;
-	justify-content:center;
-	
-	}
-	#profBox{
-	
-	}
 	#profIcon{
 	width:120px;
 	height:120px;
@@ -134,6 +126,7 @@
 					<i class="fas fa-upload"></i>사진 추가하기
 					<input type="file" id="identi" name="filename" accept="image/*,application/pdf">
 				</label>
+				<input type="file" id="identi" name="filename" accept="image/*,application/pdf">
 				
 				<img src="img/ex-cert-resident-1.png"/>
 			</div>	

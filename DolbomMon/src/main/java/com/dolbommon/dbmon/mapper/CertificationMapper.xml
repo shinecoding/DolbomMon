@@ -3,19 +3,41 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.certification.CertificationDaoImp">
+<select id="findId" parameterType="com.dolbommon.dbmon.certification.CertificationVO" resultType="int">
+	select count(#{userid}) from certification
+</select>
 <insert id="insertIdenti" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
-	insert into certification(userid, no, identi, identi_addr, identi_date) values(#{userid}, certi_sq.nextval, #{identi}, #{identi_addr}, #{identi_date})
+	insert into certification(userid, no, identi, identi_date, identi_addr, identi_status) values(#{userid}, certi_sq.nextval, #{identi}, #{identi_date}, #{identi_addr}, 'S')
 </insert>
+<update id="updateIdenti" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	update certification set identi=#{identi}, identi_date=#{identi_date}, identi_addr=#{identi_addr}, identi_status='S' where userid = #{userid}
+</update>
 <insert id="insertSchool" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
-	insert into certification(userid, no, school, department, degree, status, grade, school_date, school_proof) values(#{userid}, certi_sq.nextval, #{school}, #{department}, #{degree}, #{status}, #{grade}, #{school_date}, #{school_proof})
+	insert into certification(userid, no, school, department, degree, status, grade, school_date, school_proof, school_status) values(#{userid}, certi_sq.nextval, #{school}, #{department}, #{degree}, #{status}, #{grade}, #{school_date}, #{school_proof}, 'S')
 </insert>
+<update id="updateSchool" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	update certification set school=#{school}, department=#{department}, degree=#{degree}, status=#{status}, grade=#{grade}, school_date=#{school_date}, school_proof=#{school_proof}, school_status='S' where userid = #{userid}
+</update>
 <insert id="insertLicense" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
-	insert into certification(userid, no, license, license_date, license_proof) values(#{userid}, certi_sq.nextval, #{license}, #{license_date}, #{license_proof})
+	insert into certification(userid, no, license, license_date, license_proof, license_status) values(#{userid}, certi_sq.nextval, #{license}, #{license_date}, #{license_proof}, 'S')
 </insert>
+<update id="updateLicense" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	update certification set license=#{license}, license_date=#{license_date}, license_proof=#{license_proof}, license_status='S' where userid = #{userid}
+</update>
 <insert id="insertCrime" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
-	insert into certification(userid, no, crime, crime_date) values(#{userid}, certi_sq.nextval, #{crime}, #{crime_date})
+	insert into certification(userid, no, crime, crime_date, crime_status) values(#{userid}, certi_sq.nextval, #{crime}, #{crime_date}, 'S')
 </insert>
+<update id="updateCrime" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	update certification set crime=#{crime}, crime_date=#{crime_date}, crime_status='S' where userid = #{userid}
+</update>
+<insert id="insertPrivacy" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	insert into certification(userid, no, privacy, privacy_date, privacy_status) values(#{userid}, certi_sq.nextval, #{privacy}, #{privacy_date}, 'S')
+</insert>
+<update id="updatePrivacy" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
+	update certification set privacy=#{privacy}, privacy_date=#{privacy_date}, privacy_status='S' where userid = #{userid}
+</update>
+
 <select id="selectCert" parameterType="String" resultType="com.dolbommon.dbmon.certification.CertificationVO">
-	select school_proof, license, identi, crime, privacy from certification where userid = #{userid}
+	select school_status, license_status, identi_status, crime_status, privacy_status from certification where userid = #{userid}
 </select>
 </mapper>

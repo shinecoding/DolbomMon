@@ -95,8 +95,17 @@ public class CertificationController {
 		String identi_date = identi_year+"-"+identi_month+"-"+identi_day;
 		vo.setIdenti_addr(identi_addr);
 		vo.setIdenti_date(identi_date);
+		vo.setIdenti_status("S");
 		CertificationDaoImp dao = sqlSession.getMapper(CertificationDaoImp.class);
-		int result = dao.insertIdenti(vo); // query
+		int result;
+		int cnt = dao.findId(vo);
+		System.out.println("cnt===" + cnt);
+		if(cnt>0) {
+			result = dao.updateIdenti(vo); // query
+		} else {
+			result = dao.insertIdenti(vo); 
+		}
+		
 		
 		ModelAndView mav = new ModelAndView();
 
@@ -184,8 +193,16 @@ public class CertificationController {
 		}
 		String school_date = school_year+"-"+school_month+"-"+school_day;
 		vo.setSchool_date(school_date);
+		vo.setSchool_status("S");
 		CertificationDaoImp dao = sqlSession.getMapper(CertificationDaoImp.class);
-		int result = dao.insertSchool(vo); // query
+		int result;
+		int cnt = dao.findId(vo);
+		System.out.println("cnt===" + cnt);
+		if(cnt>0) {
+			result = dao.updateSchool(vo); // query
+		} else {
+			result = dao.insertSchool(vo); 
+		}
 		
 		ModelAndView mav = new ModelAndView();
 
@@ -271,9 +288,16 @@ public class CertificationController {
 		}
 		String license_date = license_year+"-"+ license_month+"-"+ license_day;
 		vo.setLicense_date(license_date);
+		vo.setLicense_status("S");
 		CertificationDaoImp dao = sqlSession.getMapper(CertificationDaoImp.class);
-		int result = dao.insertLicense(vo); // query
-		
+		int result;
+		int cnt = dao.findId(vo);
+		System.out.println("cnt===" + cnt);
+		if(cnt>0) {
+			result = dao.updateLicense(vo); // query
+		} else {
+			result = dao.insertLicense(vo); 
+		}
 		ModelAndView mav = new ModelAndView();
 
 		if (result <= 0) {
@@ -359,8 +383,16 @@ public class CertificationController {
 		}
 		String crime_date = crime_year+"-"+ crime_month+"-"+ crime_day;
 		vo.setCrime_date(crime_date);
+		vo.setCrime_status("S");
 		CertificationDaoImp dao = sqlSession.getMapper(CertificationDaoImp.class);
-		int result = dao.insertCrime(vo); // query
+		int result;
+		int cnt = dao.findId(vo);
+		System.out.println("cnt===" + cnt);
+		if(cnt>0) {
+			result = dao.updateCrime(vo); // query
+		} else {
+			result = dao.insertCrime(vo); 
+		}
 		
 		ModelAndView mav = new ModelAndView();
 
@@ -386,6 +418,91 @@ public class CertificationController {
 		return "/certification/proofPrivacy";
 	}
 	
+	@RequestMapping(value="/proofPrivacyOk", method=RequestMethod.POST)
+	public ModelAndView teacherProofPrivacyOk(CertificationVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses,
+			HttpServletRequest req) {
+
+		// folder where the pic will be saved
+		String path = ses.getServletContext().getRealPath("/upload");
+		System.out.println(path);
+		
+		// get the file from teacherPicture.jsp input name=
+		MultipartFile mf = mtfRequest.getFile("filename");
+
+		String pic = null;
+
+		if (mf != null) { // renaming
+			String fName = mf.getOriginalFilename();
+			if (fName != null && !fName.equals("")) {
+				String oriFileName = fName.substring(0, fName.lastIndexOf("."));
+				String oriExt = fName.substring(fName.lastIndexOf(".") + 1);
+
+				File f = new File(path, fName);
+				if (f.exists()) {
+					for (int renameNum = 1;; renameNum++) { // 1,2,3,4...
+						String renameFile = oriFileName + renameNum + "." + oriExt;
+						f = new File(path, renameFile);
+
+						if (!f.exists()) {
+							fName = renameFile;
+							break;
+						}
+					} // for
+				}
+
+				try {
+					mf.transferTo(f); // create file
+				} catch (Exception e) {
+				}
+				pic = fName; // "hi.jpg"
+
+			} // if fName
+
+		} // if mf!=Null
+
+		vo.setUserid((String) ses.getAttribute("userid")); // session id
+		vo.setPrivacy(pic); // putting the picture in
+		
+		
+		String privacy_year = (String)req.getParameter("privacy_year");
+		String privacy_month = (String)req.getParameter("privacy_month");
+		String privacy_day = (String)req.getParameter("privacy_day");
+		if(privacy_day.length()==1) {
+			privacy_day = "0"+privacy_day;
+		}
+		if(privacy_month.length()==1) {
+			privacy_month = "0"+ privacy_month;
+		}
+		String privacy_date = privacy_year+"-"+ privacy_month+"-"+ privacy_day;
+		vo.setPrivacy_date(privacy_date);
+		vo.setPrivacy_status("S");
+		CertificationDaoImp dao = sqlSession.getMapper(CertificationDaoImp.class);
+		int result;
+		int cnt = dao.findId(vo);
+		System.out.println("cnt===" + cnt);
+		if(cnt>0) {
+			result = dao.updatePrivacy(vo); // query
+		} else {
+			result = dao.insertPrivacy(vo); 
+		}
+		
+		ModelAndView mav = new ModelAndView();
+
+		if (result <= 0) {
+			// if the picture is not completely uploaded, then erase the picture from the
+			// upload folder
+			if (pic != null) {
+				File ff = new File(path, pic);
+				ff.delete();
+			}
+			// fail
+			//mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
+			mav.setViewName("/certification/proofResult");
+		} else { // success
+			mav.setViewName("redirect:teacherProof");
+		}
+		return mav;
+	}
 	
 	
 }
