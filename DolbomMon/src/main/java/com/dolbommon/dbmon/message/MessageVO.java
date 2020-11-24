@@ -9,7 +9,10 @@ public class MessageVO {
 	private String content;
 	private String writedate;
 	private String message_check;
-	private String message_save;
+	private String message_save_r;
+	private String message_save_w; 
+	private String inactivity_r;
+	private String inactivity_w;
 	private String spam;
 	private String tabType;
 
@@ -168,12 +171,39 @@ public class MessageVO {
 	public void setMessage_check(String message_check) {
 		this.message_check = message_check;
 	}
-	public String getMessage_save() {
-		return message_save;
+
+	public String getMessage_save_r() {
+		return message_save_r;
 	}
-	public void setMessage_save(String message_save) {
-		this.message_save = message_save;
+
+	public void setMessage_save_r(String message_save_r) {
+		this.message_save_r = message_save_r;
 	}
+
+	public String getMessage_save_w() {
+		return message_save_w;
+	}
+
+	public void setMessage_save_w(String message_save_w) {
+		this.message_save_w = message_save_w;
+	}
+
+	public String getInactivity_r() {
+		return inactivity_r;
+	}
+
+	public void setInactivity_r(String inactivity_r) {
+		this.inactivity_r = inactivity_r;
+	}
+
+	public String getInactivity_w() {
+		return inactivity_w;
+	}
+
+	public void setInactivity_w(String inactivity_w) {
+		this.inactivity_w = inactivity_w;
+	}
+
 	public String getSpam() {
 		return spam;
 	}

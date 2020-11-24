@@ -22,7 +22,7 @@
 			and spam='Y' and inactivity_r='N'	
 		</if>
 		<if test='tabType.equals("2")'>
-			and message_save_r='N' and inactivity_w='N'
+			and message_save_w='N' and inactivity_w='N'
 		</if>
 		<if test='tabType.equals("1")'>
 			and spam='N' and message_save_r='N' and inactivity_r='N'
@@ -82,12 +82,8 @@
 		insert into message(no, userid_w, userid_r, subject, content) values(message_sq.nextval, #{userid_w}, #{userid_r}, #{subject}, #{content})
 	</insert>
 	
-	<delete id="MessageDelete">
-		delete from message where no=#{no}
-	</delete>
-	
 	<update id="readMessage">
-		update message set message_check='Y' where no=#{no}
+		update message set message_check='Y' where no=#{no} and userid_r=#{userid}
 	</update>
 	
 	<select id="newMessage" parameterType="com.dolbommon.dbmon.message.MessageVO" resultType="int">
@@ -99,7 +95,7 @@
 			userid_r=#{userid} and message_save_r='Y' and inactivity_r='N'
 		</if>
 		<if test='tabType.equals("2")'>
-			userid_w=#{userid} and message_save_r='N' and inactivity_w='N'
+			userid_w=#{userid} and message_save_w='N' and inactivity_w='N'
 		</if>
 		<if test='tabType.equals("1")'>
 			userid_r=#{userid}  and spam='N' and message_save_r='N' and inactivity_r='N'

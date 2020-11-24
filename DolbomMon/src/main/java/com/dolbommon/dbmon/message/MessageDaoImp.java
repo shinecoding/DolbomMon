@@ -18,11 +18,8 @@ public interface MessageDaoImp {
 	//쪽지쓰기
 	public int messageWrite(MessageVO vo);
 	
-	//쪽지 삭제
-	public int MessageDelete(int no);
-	
 	//읽은 글 읽음 상태 전환
-	public int readMessage(int no);
+	public int readMessage(MessageVO vo);
 	
 	//안읽은 글 숫자 확인
 	public int newMessage(MessageVO vo);

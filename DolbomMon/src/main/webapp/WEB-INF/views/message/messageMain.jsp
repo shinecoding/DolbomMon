@@ -190,8 +190,7 @@
 		<p class="text_title" style='text-align:right; float:right;'>
 			<!-- 게시판 검색주소 넣기 .. ex:https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox&sort=unread -->
 			<!--  ex : https://www.ppomppu.co.kr/zboard/member_memo.php?exec=view&no=&page=1&memo_type=inbox -->
-			<a href="#" class="btn_show"> 안 읽은 쪽지 <font
-				style="font-weight: bold; color: #F00;">${newMessage}</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
+			<a href="#" class="btn_show"> 안 읽은 쪽지 <font style="font-weight: bold; color: #F00;">${newMessage}</font></a> / <a href="#" class="btn_show"> 전체 <span style='font-weight: bold;' id="changeTotal">
 				${pVo.totalRecord}
 				</span></a>
 

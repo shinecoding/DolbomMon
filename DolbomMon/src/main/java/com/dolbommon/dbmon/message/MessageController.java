@@ -25,7 +25,7 @@ public class MessageController {
 		
 		//==탭번호 확인==
 		String tabType = req.getParameter("tabType");
-		System.out.println("탭페이지"+tabType);
+		System.out.println("=====================탭페이지"+tabType+"=====================");
 		if(tabType==null) {
 			tabType="1";
 		}
@@ -43,13 +43,14 @@ public class MessageController {
 			if(nowPageTxt!=null) {
 				vo.setNowPage(Integer.parseInt(nowPageTxt));
 			}
-			System.out.println("현재페이지 확인"+nowPageTxt);
+			System.out.println("현재페이지 확인==> "+nowPageTxt);
+			System.out.println("현재페이지 확인vo==> "+vo.getNowPage());
 			
 			//스팸 메시지 등록된 전체 레코드 숫자. 보관메시지 등록된 전체 레코드 숫자
 			if(tabType.equals("4")) {
 				vo.setSpam("Y");
 			}else if(tabType.equals("3")) {
-				vo.setMessage_save("Y");
+				vo.setMessage_save_r("Y");
 			}
 			//안읽은쪽지 구하기. 쿼리문 생성
 			//읽는 순간 해당번호 글의 message_save를 Y로 등록
@@ -139,35 +140,42 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		String tabType = (String)req.getParameter("tabType");
 		String nowPage = (String)req.getParameter("nowPage");
+		System.out.println("받는이-"+resultVo.getUserid_r());
+		System.out.println("보낸이-"+resultVo.getUserid_w());
+		resultVo.setUserid(loginCheck);
 		
 			if(loginCheck.equals(resultVo.getUserid_w()) || loginCheck.equals(resultVo.getUserid_r())) {
-				//내가 보낸 메시지인지 확인하는부분
-				if(tabType.equals("2")) {
-					mav.addObject("tabType",tabType);
-					mav.addObject("nowPage",nowPage);
-					mav.addObject("vo", resultVo);
-					mav.setViewName("message/messageView");
-				}else if(tabType.equals("3")){
-					
-					//내가 받은 메시지인지 확인하는작업 해야함.
-					//스팸메시지에도 마찬가지로?
-					
-					mav.addObject("tabType",tabType);
-					mav.addObject("nowPage",nowPage);
-					mav.addObject("vo", resultVo);
-					mav.setViewName("message/messageView");					
-				}else if(tabType.equals("4")) {
-					//스팸메시지부분 
-					//읽어도 체크 안되게
-					mav.addObject("tabType",tabType);
-					mav.addObject("nowPage",nowPage);
-					mav.addObject("vo", resultVo);
-					mav.setViewName("message/messageView");	
-				}else {
+//				//내가 보낸 메시지인지 확인하는부분
+//				if(tabType.equals("2")) {
+//					mav.addObject("tabType",tabType);
+//					mav.addObject("nowPage",nowPage);
+//					mav.addObject("vo", resultVo);
+//					mav.setViewName("message/messageView");
+//				}else if(tabType.equals("3")){
+//					
+//					//내가 받은 메시지인지 확인하는작업 해야함.
+//					//스팸메시지에도 마찬가지로?
+//					
+//					mav.addObject("tabType",tabType);
+//					mav.addObject("nowPage",nowPage);
+//					mav.addObject("vo", resultVo);
+//					mav.setViewName("message/messageView");					
+//				}else if(tabType.equals("4")) {
+//					//스팸메시지부분 
+//					//읽어도 체크 안되게
+//					mav.addObject("tabType",tabType);
+//					mav.addObject("nowPage",nowPage);
+//					mav.addObject("vo", resultVo);
+//					mav.setViewName("message/messageView");	
+//				}else {
 					//읽은글 체크하는부분
 					int result=0;
 					try {
-						result = dao.readMessage(vo.getNo());
+						
+						result = dao.readMessage(resultVo);
+						if(!tabType.equals("1")) {
+							result+=1;
+						}
 					}catch(Exception e){
 						System.out.println("읽은글 전환 에러 -->" + e.getMessage());
 					}
@@ -182,7 +190,7 @@ public class MessageController {
 						mav.setViewName("redirect:back");
 					}
 				
-				}
+//				}
 			}else{
 				mav.addObject("msg", "로그인 상태를 확인하세요.");
 				mav.setViewName("message/loginCheck");
@@ -227,8 +235,9 @@ public class MessageController {
 		String loginCheck = (String)ses.getAttribute("userid");
 		ModelAndView mav = new ModelAndView();
 		System.out.println("쪽지보내기 아이디"+loginCheck);
-		System.out.println("쪽지보내기 아이디"+vo.getUserid_w());
-		
+		System.out.println("쪽지보내기 아이디"+vo.getUserid_r());
+		System.out.println(vo.getSubject());
+		System.out.println(vo.getContent());
 		if(!vo.getUserid_w().equals(loginCheck)){
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
 			mav.addObject("back", 2);
