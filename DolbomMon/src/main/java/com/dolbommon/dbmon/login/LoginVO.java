@@ -8,6 +8,7 @@ public class LoginVO {
 	private String birth;
 	private String tel1;
 	private String email;
+	private String loginCookie;
 	
 	public String getUserid() {
 		return userid;
@@ -44,5 +45,11 @@ public class LoginVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getLoginCookie() {
+		return loginCookie;
+	}
+	public void setLoginCookie(String loginCookie) {
+		this.loginCookie = loginCookie;
 	}
 }

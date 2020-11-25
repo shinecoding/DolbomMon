@@ -11,8 +11,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +46,11 @@ public class LoginController {
 	
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
-	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
+	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
+		//기존 세션값 제거
+		if(ses.getAttribute("logStatus")!=null) {
+			ses.removeAttribute("logStatus");	
+		}
 		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		LoginVO resultVO = dao.loginOk(vo);
@@ -52,10 +59,19 @@ public class LoginController {
 		if(resultVO==null) {	//실패
 			mav.setViewName("login/loginResult");			
 		}else {
+			//로그인 성공시 세션 만들기
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("logStatus", "Y");
-			mav.setViewName("redirect:/");	
+			
+			//자동로그인 선택시 쿠키 생성
+			if(req.getParameter("loginCookie")!=null) {
+				Cookie loginCookie = new Cookie("loginCookie", ses.getId());
+				loginCookie.setPath("/dbmon");
+				loginCookie.setMaxAge(60*60*24*7);
+				res.addCookie(loginCookie);
+			}
+			mav.setViewName("redirect:/");
 		}
 		return mav;
 	}
@@ -99,7 +115,6 @@ public class LoginController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		
 		if(logVO==null) {	//아이디 조회 실패시
 			mav.setViewName("login/loginResult");
 		}else {
@@ -127,16 +142,15 @@ public class LoginController {
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);		
 		int result = dao.pwdChange(vo);		
 		ModelAndView mav = new ModelAndView();
-		
-		//네이버일 경우 smtp.naver.com 을 입력
-		//Google일 경우 smtp.gmail.com 을 입력
-		String host = "smtp.naver.com";  
-		final String username = ""; //발신자 아이디 @nave.com 제외하고 네이버 아이디 입력
-		final String password = ""; //발신자 네이버 이메일 비밀번호
+
+		//메일 보내기
+		String host = "smtp.gmail.com";  
+		final String username = "dolbommon00"; //도메인을 제외한 발신자 아이디
+		final String password = "dolbommon1234"; //발신자 네이버 이메일 비밀번호
 		int port = 465; //포트번호
 		
 		//메일 내용  
-		String recipient = vo.getEmail(); //받는 사람의 이메일 주소
+		String recipient = "seulgi4229@naver.com"; //받는 사람의 이메일 주소
 		String subject = "맘시터가 보내드리는 임시 비밀번호입니다."; //메일 제목  
 		String body = "임시 비밀번호는 "+ vo.getUserpwd() + "입니다.\n임시 비밀번호로 로그인 해주세요."; //메일 내용  
 	

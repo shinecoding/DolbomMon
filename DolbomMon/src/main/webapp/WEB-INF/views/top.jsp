@@ -111,7 +111,8 @@
 	        Onclick="location.href='/dbmon'"/>
 	 <a class="btn" style="float:right">	
 		<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
-		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/>  			
+		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/>
+
 	</a> 				
 	</header>
 </div>

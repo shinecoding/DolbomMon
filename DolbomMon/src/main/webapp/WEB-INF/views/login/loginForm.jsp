@@ -30,8 +30,6 @@
 	}
 </style>
 <script>
-
-
 $(function(){
 	
 	//데이터 입력유무 확인
@@ -39,8 +37,7 @@ $(function(){
 		if($("#userid").val()==""){
 			alert("아이디를 입력하세요.");
 			$("#userid").focus();
-			return false;
-			
+			return false;	
 		}
 		if($("#userpwd").val()==""){
 			alert("비밀번호를 입력하세요.");
@@ -49,12 +46,13 @@ $(function(){
 		}
 		return true;
 	});
+	
+	
+	
+	
 });
 
-
-
 </script>
-
 </head>
 <body>
 <div class="container">
@@ -73,7 +71,7 @@ $(function(){
 		</div>
 		<div>	
 			<input type="submit" class="btn btn-warning btn-lg btn-block" value="로그인"/><br/>
-			<input class="form-check-input" type="checkbox" id="loginCookie">
+			<input class="form-check-input" type="checkbox" id="loginCookie" name="loginCookie">
 			<label class="form-check-label" for="loginCookie">
 			&nbsp;&nbsp;&nbsp;&nbsp;로그인 상태 유지
 			</label><hr/>

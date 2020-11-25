@@ -1,8 +1,11 @@
 package com.dolbommon.dbmon.board;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -58,9 +61,9 @@ public class BoardController {
 	
 	//게시판 글쓰기ok
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest hsr, HttpSession ses) {
+	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 		
-		vo.setIp(hsr.getRemoteAddr());	//ip 구하기
+		vo.setIp(req.getRemoteAddr());	//ip 구하기
 		vo.setUserid((String)ses.getAttribute("userid"));	
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
@@ -78,14 +81,20 @@ public class BoardController {
 	
 	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
-	public ModelAndView freeBoardView(int no) {
+	public ModelAndView freeBoardView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		FreeBoardVO vo = new FreeBoardVO();
+		PagingVO pVo = new PagingVO();
+		
+		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		dao.hitCount(no);
-		FreeBoardVO vo = dao.freeBoardSelect(no);
+		dao.hitCount(vo.getNo());
+		FreeBoardVO resultVo = dao.freeBoardSelect(vo.getNo());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", vo);
+		mav.addObject("vo", resultVo);
+		mav.addObject("pVo", pVo);
 		mav.setViewName("freeBoard/freeBoardView");
 	
 		return mav;
@@ -146,9 +155,9 @@ public class BoardController {
 	
 	//자유게시판 답글 쓰기
 	@RequestMapping(value="/freeBoardReplyOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardReplyOk(FreeBoardVO vo, HttpServletRequest hsr, HttpSession ses) {
+	public ModelAndView freeBoardReplyOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 		
-		vo.setIp(hsr.getRemoteAddr());	//ip 구하기	
+		vo.setIp(req.getRemoteAddr());	//ip 구하기	
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();

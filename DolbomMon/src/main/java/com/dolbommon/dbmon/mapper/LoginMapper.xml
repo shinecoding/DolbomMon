@@ -6,7 +6,15 @@
 	<select id="loginOk" resultType="com.dolbommon.dbmon.login.LoginVO">
 		select userid, username from member where userid=#{userid} and userpwd=#{userpwd}
 	</select>
-		
+<!--  	
+	<update id="keepLogin">
+		update member set sessionKey=#{sessionId}, sessionLimit=#{sessionLimit} where userid=#{userid}
+	</update>
+	
+	<select id="">
+		select * from member where sessionKey=#{value}
+	</select>	
+ -->	
 	<select id="findUserid" resultType="com.dolbommon.dbmon.login.LoginVO">
 		select userid, username, birth, tel1, email from member where username=#{username} and tel1=#{tel1} and birth=#{birth}
 	</select>
