@@ -30,8 +30,11 @@
 	}
 	h9{position:relative;
 		display: block;
+		margin:0 auto;
+		padding:0;
 		}
 	.row{margin:0 auto;}
+
 </style>
 </head>
 <body>
@@ -65,7 +68,7 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="teacherProofIdenti">
+				<form action="/proofIdenti">
 					<button class="btn btn-warning float-right">인증받기</button>
 				</form>
 				</div>
@@ -96,13 +99,14 @@
 						<h7><b>학교 인증</b></h7>
 					</div>
 					<div class="row">
-						재학/휴학/재적/졸업/수료 증명서
-					- 발급일 1년 이내만 유효
-					(졸업증명서 경우, 발급일 상관없음)
+						올리신 증명서 내용과 똑같게<br/>
+						아래 내용을 입력해주세요.<br/>
 					</div>
 				</div>
 				<div class="col-3">
+				<form action="proofSchool">
 					<button class="btn btn-warning float-right">인증받기</button>
+				</form>
 				</div>
 				
 			</div>
@@ -135,7 +139,9 @@
 					</div>
 				</div>
 				<div class="col-3">
+				<form action="proofTeacher">
 					<button class="btn btn-warning float-right">인증받기</button>
+				</form>
 				</div>
 				
 			</div>
@@ -168,7 +174,9 @@
 					</div>
 				</div>
 				<div class="col-3">
+				<form action="proofCrime">
 					<button class="btn btn-warning float-right">인증받기</button>
+				</form>
 				</div>
 				
 			</div>
@@ -201,7 +209,9 @@
 					</div>
 				</div>
 				<div class="col-3">
+				<form action="proofPrivacy">
 					<button class="btn btn-warning float-right">인증받기</button>
+				</form>
 				</div>
 				
 			</div>

@@ -11,7 +11,7 @@
 <style>
 	.container{width:600px; text-align:center; padding:0;}
 	h3{display:inline-block; margin-top:50px;}
-	h3>span{color:lightblue; font-size:17px;}
+	h3>span{color:lightblue; font-size:17px; line-height:33px;}
  	#imgDiv{margin:20px 0;text-align:center;padding-left:40px;}
  	#plusBtn{position:relative; right:45px; top:40px; width:40px;height:40px;}
  	p{display:inline-block; width:40%; overflow:hidden; height:auto; font-size:15px;}
