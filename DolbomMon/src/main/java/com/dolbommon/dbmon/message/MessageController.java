@@ -25,11 +25,6 @@ public class MessageController {
 		String prevWord = req.getParameter("searchWord"); //검색어 넘길값. 이거없으면 다음페이지값 안나옴.
 		//==탭번호 확인==
 		String tabType = req.getParameter("tabType");
-		System.out.println("=====================탭페이지"+tabType+"=====================");
-		System.out.println("검색어2"+req.getParameter("searchWord"));
-		System.out.println("검색어3"+vo.getSearchWord());
-		System.out.println("테스트갑 받아보기 ===="+req.getParameter("test"));
-		System.out.println("테스트갑 현재페이지 받아보기 ===="+req.getParameter("nowPage"));
 		
 		if(tabType==null) {
 			tabType="1";
@@ -48,8 +43,6 @@ public class MessageController {
 			if(nowPageTxt!=null) {
 				vo.setNowPage(Integer.parseInt(nowPageTxt));
 			}
-			System.out.println("현재페이지 확인==> "+nowPageTxt);
-			System.out.println("현재페이지 확인vo==> "+vo.getNowPage());
 			
 			//스팸 메시지 등록된 전체 레코드 숫자. 보관메시지 등록된 전체 레코드 숫자
 			if(tabType.equals("4")) {
@@ -65,30 +58,21 @@ public class MessageController {
 			
 			// 검색어 vo로 넘기기
 			String searchKey = (String)req.getParameter("searchKey");
-			System.out.println("검색키1"+searchKey);
-			System.out.println("검색어2"+req.getParameter("searchWord"));
 			//유저아이디 검색시 유사한 아이디 검색 안되게 막기
 			if(searchKey!=null) {
 				if(!searchKey.equals("userid")) {
 					vo.setSearchWord("%"+req.getParameter("searchWord")+"%");
-					System.out.println("유저아이디 없음");
 				}else {
 					vo.setSearchWord(req.getParameter("searchWord"));
-					System.out.println("유저아이디 있음");
 				}
 				vo.setSearchKey(req.getParameter("searchKey"));
 			}
 						
 			//접속한 아이디의 전체 레코드 숫자. 검색어 있을때와 없을때
-			System.out.println("현재페이지값 확인"+vo.getNowPage());
 			vo.setTotalRecord(dao.getAllRecordCount(vo));
-			System.out.println("접속자아이디 = "+loginCheck);
-			System.out.println("토탈레코드수"+vo.getTotalRecord());
 			List<MessageVO> list = new ArrayList<MessageVO>();
 			
 
-			System.out.println("검색어"+vo.getSearchWord());
-			System.out.println("검색키"+searchKey);
 			//검색어 있을때.. 없을때도 상관없이 하나로 되게 바꿈
 			try {
 				list = 	dao.messageAllRecord(vo);
@@ -106,7 +90,6 @@ public class MessageController {
 		}else {
 			System.out.println("=========================임시 로그인 체크========================");
 		}
-		System.out.println("vo tab = "+vo.getTabType());
 		
 		//안읽은 쪽지 내역 찍기
 		int result =0; 
@@ -142,7 +125,6 @@ public class MessageController {
 	//쪽지 클릭했을때
 	@RequestMapping("/messageContent")
 	public ModelAndView messageContent(MessageVO vo, HttpServletRequest req, HttpSession ses) {
-		System.out.println("vo에 자동 들어가는지 테스트"+vo.getNo()+vo.getNowPage()+vo.getTabType());
 		String loginCheck = (String)ses.getAttribute("userid");
 		
 		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
@@ -150,8 +132,6 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView();
 		String tabType = (String)req.getParameter("tabType");
 		String nowPage = (String)req.getParameter("nowPage");
-		System.out.println("받는이-"+resultVo.getUserid_r());
-		System.out.println("보낸이-"+resultVo.getUserid_w());
 		resultVo.setUserid(loginCheck);
 		
 			if(loginCheck.equals(resultVo.getUserid_w()) || loginCheck.equals(resultVo.getUserid_r())) {
@@ -202,8 +182,6 @@ public class MessageController {
 	public ModelAndView messageWrite(HttpServletRequest req, HttpSession ses) {
 		String userid_w = (String)ses.getAttribute("userid");
 		String userid_r = (String)req.getParameter("receiveId");
-		System.out.println("보낸아이디"+userid_r);
-		System.out.println("받는아이디"+userid_w);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userid_r", userid_r);
 		mav.addObject("userid_w", userid_w);
@@ -216,10 +194,6 @@ public class MessageController {
 	public ModelAndView messageWriteOk(MessageVO vo, HttpSession ses) {
 		String loginCheck = (String)ses.getAttribute("userid");
 		ModelAndView mav = new ModelAndView();
-		System.out.println("쪽지보내기 아이디"+loginCheck);
-		System.out.println("쪽지보내기 아이디"+vo.getUserid_r());
-		System.out.println(vo.getSubject());
-		System.out.println(vo.getContent());
 		
 		if(!vo.getUserid_w().equals(loginCheck)){
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
@@ -227,8 +201,6 @@ public class MessageController {
 			mav.setViewName("redirect:back");
 		}else {
 			//vo.getUserid_w이 스팸유저일때. userid_r= userid로 보내는 모든 쪽지는 spam이 Y 
-			System.out.println("받는이 차단한이 받는이"+vo.getUserid_r());
-			System.out.println("보내는이 스팸 보내는이"+vo.getUserid_w());
 			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
 			
 			int cnt=0;
@@ -275,7 +247,6 @@ public class MessageController {
 		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
 		
 		String loginCheck = (String)ses.getAttribute("userid");
-		System.out.println("접속아이디확인"+req.getParameter("userid"));
 		//로그인 체크
 		if(!req.getParameter("userid").equals(loginCheck)){
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
@@ -286,7 +257,6 @@ public class MessageController {
 			
 			int result = 0;
 			for(String i : checkBoxNo) {
-				System.out.println("no값 출력 ==> "+i);
 				int no = Integer.parseInt(i);
 				String viewType="";
 				
@@ -359,7 +329,6 @@ public class MessageController {
 	@RequestMapping(value="/saveMessage", method=RequestMethod.POST)
 	public ModelAndView saveMessage(HttpServletRequest req, HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("접속아이디확인"+req.getParameter("userid"));;
 		//로그인 체크
 		if(!req.getParameter("userid").equals(ses.getAttribute("userid"))){
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
@@ -370,10 +339,8 @@ public class MessageController {
 			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
 			int result = 0;
 			for(String i : checkBoxNo) {
-				System.out.println("no값 출력 ==> "+i);
 				int no = Integer.parseInt(i);
 				String tabType = req.getParameter("tabType");
-				System.out.println("tabType 확인하기."+tabType);
 				try {
 					result = dao.saveMessage(no, tabType);
 				}catch(Exception e) {
@@ -441,9 +408,6 @@ public class MessageController {
 		String spamId = (String)req.getParameter("spamId");
 		String recieveId = (String)req.getParameter("recieveId");
 		String sessionID = (String)ses.getAttribute("userid");
-		System.out.println(spamId);
-		System.out.println(recieveId);
-		System.out.println(sessionID);
 		if(recieveId.equals(sessionID) && !recieveId.equals(spamId)) {
 			//테이블에 스팸유저 등록.
 			int cnt=0; //등록유저인지확인
