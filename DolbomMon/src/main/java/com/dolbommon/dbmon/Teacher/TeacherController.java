@@ -22,8 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
-import com.dolbommon.dbmon.member.MemberDaoImp;
-import com.dolbommon.dbmon.member.MemberVO;
 
 @Controller
 public class TeacherController {
