@@ -55,7 +55,10 @@ public class TeacherController {
 		dao.hitCount(vo);
 		int timeInt = 0;
 		String timeStr = "";
-		if(Integer.parseInt(vo.getLast_edit())>43200) {
+		if(Integer.parseInt(vo.getLast_edit())>525600) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/525600;
+			timeStr = timeInt + "년 전";
+		} else if(Integer.parseInt(vo.getLast_edit())>43200) {
 			timeInt = Integer.parseInt(vo.getLast_edit())/43200;
 			timeStr = timeInt + "달 전";
 		} else if(Integer.parseInt(vo.getLast_edit())>1440) {
@@ -64,7 +67,7 @@ public class TeacherController {
 		} else if(Integer.parseInt(vo.getLast_edit())>60) {
 			timeInt = Integer.parseInt(vo.getLast_edit())/60;
 			timeStr = timeInt + "시간 전";
-		}else {
+		} else {
 			timeInt = Integer.parseInt(vo.getLast_edit());
 			timeStr = timeInt + "분 전";
 		}
