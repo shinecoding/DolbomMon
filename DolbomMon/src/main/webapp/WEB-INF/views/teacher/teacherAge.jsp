@@ -68,29 +68,23 @@ border-radius:5px;
 </style>
 <script>
 $(function(){
-	
-	$("#ageBox label").click(function(){
-		var selectedAge = $(this).attr("for");
-		var alt = $("input[id='"+selectedAge+"']" ).attr("alt");
 
-		if(alt=="1"){
-			$(this).css("background-color", "orange");
-			$("input[id='"+ selectedAge+"']").attr("alt", "2");
-		}else if(alt=="2"){
-			$(this).css("background-color", "white");
-			$("input[id='"+ selectedAge +"']").attr("alt", "1");
+	
+	
+	$("input[name=child_age]").change(function(){
+		var selectedData = $(this).attr("id");
+		
+		if($("input[id="+selectedData+"]").is(":checked")){
+			var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
+			var changeImg = nowImg.replace("-n.","-s.");
+			$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+		}else{
+			var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
+			var changeImg = nowImg.replace("-s.","-n.");
+			$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
 		}
-		
 	});
-	/*
-	var age_list = [];
-	$("input:submit").click(function(){
-		
-		$("input:checkbox[name='child_age']:checked").each(functioin(){
-			age_list.push($(this).val());
-		});
-	});
-	*/
+
 });
 
 </script>
@@ -112,16 +106,29 @@ $(function(){
      	
 		<div id="ageBox">
 			<div id="ageHidden">
-				<input type="checkbox" name="child_age" id="age1" value="신생아" alt="1"  />
-				<input type="checkbox" name="child_age" id="age2" value="영아" alt="1" />
-				<input type="checkbox" name="child_age" id="age3" value="유아" alt="1" />
-				<input type="checkbox" name="child_age" id="age4" value="초등학생" alt="1"  />
+				<input type="checkbox" name="child_age" id="age1" value="신생아" alt="1" <c:if test = "${fn:contains(str, '신생아')}" > checked </c:if> />
+				<input type="checkbox" name="child_age" id="age2" value="영아" alt="1" <c:if test = "${fn:contains(str, '영아')}" > checked </c:if>/>
+				<input type="checkbox" name="child_age" id="age3" value="유아" alt="1" <c:if test = "${fn:contains(str, '유아')}" > checked </c:if>/>
+				<input type="checkbox" name="child_age" id="age4" value="초등학생" alt="1"  <c:if test = "${fn:contains(str, '초등학생')}" > checked </c:if>/>
 			</div>
 
-			<label for="age1" <c:if test = "${fn:contains(str, '신생아')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-new-off.svg" alt="신생아" /><br />신생아</label>
-			<label for="age2" <c:if test = "${fn:contains(str, '영아')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-young-off.svg" alt="영아" /><br />영아</label>
-			<label for="age3" <c:if test = "${fn:contains(str, '유아')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-child-off.svg" alt="유아" /><br />유아</label>
-			<label for="age4" <c:if test = "${fn:contains(str, '초등학생')}">style="background-color:orange"</c:if>><img src="icon/sitter-profile-age-element-off.svg" alt="초등학생" /><br />초등학생</label>
+			<label for="age1"><img src=
+			<c:if test = "${ !fn:contains(str, '신생아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-newborn-baby-n.svg"</c:if>
+			<c:if test = "${fn:contains(str, '신생아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-newborn-baby-s.svg"</c:if> 
+			alt="신생아" /><br />신생아</label>
+			<label for="age2"><img src=
+			<c:if test = "${ !fn:contains(str, '영아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-toddler-n.svg"</c:if>
+			<c:if test = "${fn:contains(str, '영아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-toddler-s.svg"</c:if>
+			 alt="영아" /><br />영아</label>
+			<label for="age3"><img src=
+			<c:if test = "${ !fn:contains(str, '유아')}">
+			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-child-n.svg"</c:if>
+			<c:if test = "${fn:contains(str, '유아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-child-s.svg"</c:if>
+			 alt="유아" /><br />유아</label>
+			<label for="age4"><img src=
+			<c:if test = "${!fn:contains(str, '초등학생')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-schoolchild-n.svg"</c:if> 
+			<c:if test = "${fn:contains(str, '초등학생')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-schoolchild-s.svg"</c:if> 
+			 alt="초등학생" /><br />초등학생</label>
 		</div>
 
 

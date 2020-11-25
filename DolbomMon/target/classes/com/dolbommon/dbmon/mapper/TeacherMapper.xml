@@ -4,28 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.Teacher.TeacherDaoImp">
 	<select id="selectTeacher" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit from teacher where userid=#{userid}
+		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit from teacher where userid=#{userid}
 	</select>
 	<update id="updateIntro" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		update teacher set intro = #{intro} where userid = #{userid}
+		update teacher set intro = #{intro}, last_edit = sysdate where userid = #{userid}
 	</update>
 	<update id="updateWage" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO" >
-		update teacher set desired_wage = #{desired_wage} where userid= #{userid}
+		update teacher set desired_wage = #{desired_wage}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<update id="updatePic" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		update teacher set pic = #{pic} where userid= #{userid}
+		update teacher set pic = #{pic}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<update id="updateAge" parameterType="String">
-		update teacher set child_age=#{child_age} where userid= #{userid}
+		update teacher set child_age=#{child_age}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<update id="updateActivity" parameterType="String">
-		update teacher set activity_type=#{activity_type} where userid= #{userid}
+		update teacher set activity_type=#{activity_type}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<update id="updateType" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		update teacher set care_type= #{care_type} where userid= #{userid}
+		update teacher set care_type= #{care_type}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<update id="updateCCTV" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		update teacher set cctv= #{cctv} where userid= #{userid}
+		update teacher set cctv= #{cctv}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<select id="selectExp" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.ExperienceVO" >
 		select exp_content, to_char(exp_start, 'YYYY-MM-DD') as exp_start, to_char(exp_end, 'YYYY-MM-DD') as exp_end from experience where userid= #{userid}
@@ -45,4 +45,7 @@
 	<update id="hitCount" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO" >
 		update teacher set hit= hit+1 where userid= #{userid}
 	</update>
+	<select id="selectLastEdit" parameterType="String">
+		select round((sysdate - #{last_edit}) *1440) from teacher where userid= #{userid};
+	</select>
 </mapper>

@@ -53,11 +53,28 @@ public class TeacherController {
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		dao.hitCount(vo);
+		int timeInt = 0;
+		String timeStr = "";
+		if(Integer.parseInt(vo.getLast_edit())>43200) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/43200;
+			timeStr = timeInt + "달 전";
+		} else if(Integer.parseInt(vo.getLast_edit())>1440) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/1440;
+			timeStr = timeInt + "일 전";
+		} else if(Integer.parseInt(vo.getLast_edit())>60) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/60;
+			timeStr = timeInt + "시간 전";
+		}else {
+			timeInt = Integer.parseInt(vo.getLast_edit());
+			timeStr = timeInt + "분 전";
+		}
+		
 		HashSet<ExperienceVO> hash = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
 		CertificationVO cvo = cdao.selectCert(userid);
 		ModelAndView mav = new ModelAndView();
-
+		
+		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
 		mav.addObject("cvo", cvo);
 		mav.addObject("hash", hash);
@@ -118,8 +135,9 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		vo.setUserid((String) ses.getAttribute("userid"));
+		
 		int result = dao.updateIntro(vo);
-
+		
 		ModelAndView mav = new ModelAndView();
 		if (result > 0) {
 			mav.addObject("vo", vo);

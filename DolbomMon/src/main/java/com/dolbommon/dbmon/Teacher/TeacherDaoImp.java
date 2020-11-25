@@ -18,5 +18,6 @@ public interface TeacherDaoImp {
 	public int updateExp(HashSet<ExperienceVO> hash);
 	public int insertExp(HashSet<ExperienceVO> hash);
 	public int deleteExp(HashSet<ExperienceVO> hash);
+	public int selectLastEdit(String userid);
 }
 

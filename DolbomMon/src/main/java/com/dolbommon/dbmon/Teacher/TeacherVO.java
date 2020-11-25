@@ -20,6 +20,7 @@ public class TeacherVO {
 	private String certi_check;
 	private MultipartFile filename;
 	private int hit;
+	private String last_edit;
 	
 	public MultipartFile getFilename() {
 		return filename;
@@ -122,6 +123,12 @@ public class TeacherVO {
 	}
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+	public String getLast_edit() {
+		return last_edit;
+	}
+	public void setLast_edit(String last_edit) {
+		this.last_edit = last_edit;
 	}
 	
 	

@@ -98,7 +98,7 @@
 		
 		
 		$("button").click(function(){
-			$(this).parent("li").remove();
+			$(this).parent().remove("li");
 		});
 	
 	
