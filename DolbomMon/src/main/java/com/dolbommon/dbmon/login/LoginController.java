@@ -46,14 +46,11 @@ public class LoginController {
 
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
-
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
 		//기존 세션값 제거
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	
 		}
-
-	public ModelAndView loginOk(LoginVO vo, HttpSession ses) {
 
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		LoginVO resultVO = dao.loginOk(vo);

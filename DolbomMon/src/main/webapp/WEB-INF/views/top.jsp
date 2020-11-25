@@ -117,10 +117,6 @@
 	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
 	        Onclick="location.href='/dbmon'"/>
 
-	 <a class="btn" style="float:right">	
-		<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
-		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/>
-
 	        <span style="float:right">
 	        <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	        <button class="btn btn-primary">쪽지</button></a>
@@ -137,7 +133,6 @@
 			<c:if test="${logStatus != null || logStatus=='Y'}">
 			${username } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
 			</c:if>
-
 
 	</a> 				
 	</header>
