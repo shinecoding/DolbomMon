@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -455,6 +455,9 @@ public class TeacherController {
 		return "/teacher/teacherType";
 	}
 
+
+
+
 	
 	@RequestMapping("/teacherTypeOk")
 	public ModelAndView teacherTypeOk(TeacherVO vo, HttpSession ses, HttpServletRequest req) {
@@ -501,3 +504,4 @@ public class TeacherController {
 	
 
 }
+
