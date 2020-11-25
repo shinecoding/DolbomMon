@@ -119,7 +119,7 @@
 		<div id="title">
 	   		<div id="titlefont">학교 인증</div>
 	 	</div>
-		<form>
+		<form method="post" action="/dbmon/proofSchoolOk" enctype="multipart/form-data">
 			<div id="profBox">
 				<div class="badge badge-warning">1번째</div>
 				<div>소속기관과 전공분야를 확인하기<br/>
@@ -132,48 +132,77 @@
 				
 				<label for="proofFile">
 					<i class="fas fa-upload"></i>사진 추가하기
-					<input type="file" id="proofFile" accept="image/*,application/pdf">
+					<input type="file" id="proofFile" name="filename" accept="image/*,application/pdf">
 				</label>
+				<div>
+				-재학증명서(발급일 최근 1년 이내)<br/>
+				-휴학증명서<br/>
+				-재적증명서<br/>
+				-졸업증명서<br/>
+				-수료증명서<br/>
+				</div>
 				
 				<img src="img/ex-cert-enrollment-1.png"/>
 			</div>	
 			<div class="badge badge-warning">2번째</div>
-			<div>등(초)본에 적혀있는 현주소를
-			아래 입력칸에 똑같이 적어주세요.</div>
-			<input type="text" placeholder="여기에 똑같이 적어주세요" />
+			<div>올리신 증명서 내용과 똑같게<br/>
+			아래 내용을 입력해주세요.<br/></div>
+			<input type="text" name="school" placeholder="학교명" />
+			<input type="text" name="department" placeholder="학과명" />
+			
+			<div id="schoolInfo">
+				<select name="degree">
+				<option selected disabled>학위</option>
+				<c:forEach var="i" items="학사, 석사, 박사" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>
+				<select name="status">
+				<option selected disabled>학적상태</option>
+				<c:forEach var="i" items="재학, 제적, 졸업, 휴학, 퇴학" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>
+				<select name="grade">
+				<option selected disabled>학년</option>
+				<c:forEach var="i" items="1학년, 2학년, 3학년, 4학년, 해당없음" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>
+			</div>
 			
 			<div class="warning">
 				<i class="fas fa-exclamation-circle"></i>
-				올리신 등(초)본 현주소와 적어주신 내용이<br/>
+				올리신 증명서 내용과 아래 적어주신 내용이<br/>
 				일치되어야 인증처리가 완료됩니다.<br/>
 			</div>
 			
 			<div class="badge badge-warning">3번째</div>
-			<div>등(초)본 우측 상단에 적혀있는<br/>
+			<div>올리신 증명서에 적혀있는<br/>
 				발급일자를 아래 입력칸에<br/>
-				똑같이 입력해주세요.</div>
+				똑같이 입력해 주세요.<br/></div>
 			
 			<img src="img/ex-cert-enrollment-2.png"/>
+			<div>발급일자</div>
 			<div id="certTime">
-			<select name="certYear">
-			<c:forEach var="i" begin="1950" end="2020" >
-				<option>${i}</option>
-			</c:forEach>
-			</select>년
-			<select name="certYear">
-			<c:forEach var="i" begin="1" end="12" >
-				<option>${i}</option>
-			</c:forEach>
-			</select>월
-			<select name="certYear">
-			<c:forEach var="i" begin="1" end="31" >
-				<option>${i}</option>
-			</c:forEach>
-			</select>일
+				<select name="school_year">
+				<c:forEach var="i" begin="1950" end="2020" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>년
+				<select name="school_month">
+				<c:forEach var="i" begin="1" end="12" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>월
+				<select name="school_day">
+				<c:forEach var="i" begin="1" end="31" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>일
 			</div>
 				<input type="submit" class="btn btn-warning" value="신청" />
-			</div>
 		</form>
-
+</div>
 </body>
 </html>

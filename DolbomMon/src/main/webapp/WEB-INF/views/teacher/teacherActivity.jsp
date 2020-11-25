@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,22 +65,42 @@ label{
 width:24%;
 
 }
+img{
+width:55px;
+}
 
 </style>
 
 <script>
 	$(function(){
-		$("#actBox label").click(function(){
-			var selectedAct = $(this).attr("for");
-			var alt = $("input[id='"+ selectedAct+"']").attr("alt");
+	
+		$("input[name=activity_type]").change(function(){
+			var selectedData = $(this).attr("id");
 			
-			if(alt=="1"){
-				$(this).css("background-color","orange");
-				$("input[id='"+ selectedAct +"']").attr("alt", "2");
-			}else if(alt=="2"){
-				$(this).css("background-color","white");
-				$("input[id='"+ selectedAct +"']").attr("alt", "1");
-				
+			if($("input[id="+selectedData+"]").is(":checked")){
+				var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
+				if(selectedData=="act2"){
+					var changeImg = nowImg.replace("-n@","-s@");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+				}else if(selectedData=="act5"){
+					var changeImg = nowImg.replace("-n-","-s-");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+				}else{
+					var changeImg = nowImg.replace("-n.","-s.");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+				}
+			}else{
+				var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
+				if(selectedData=="act2"){
+					var changeImg = nowImg.replace("-s@","-n@");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+				}else if(selectedData=="act5"){
+					var changeImg = nowImg.replace("-s-","-n-");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+				}else{
+					var changeImg = nowImg.replace("-s.","-n.");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
+				}
 			}
 		});
 		
@@ -98,56 +119,124 @@ width:24%;
 			현재 놀이/학습 돌봄유형이므로 실내놀이와 책읽기 활동은 필수로 선택되어야 합니다<br/>
 		</div>
 
-
+		<form method="post" action="/dbmon/teacherActivityOk">
+		<c:set var = "str" value = "${vo.activity_type}"/>
 			<div id="activityHidden">
-				<input type="checkbox" name="tAct" id="act1" alt="1"/>
-				<input type="checkbox" name="tAct" id="act2" alt="1"/>
-				<input type="checkbox" name="tAct" id="act3" alt="1"/>
-				<input type="checkbox" name="tAct" id="act4" alt="1"/>
-				<input type="checkbox" name="tAct" id="act5" alt="1"/>
-				<input type="checkbox" name="tAct" id="act6" alt="1"/>
-				<input type="checkbox" name="tAct" id="act7" alt="1"/>
-				<input type="checkbox" name="tAct" id="act8" alt="1"/>
-				<input type="checkbox" name="tAct" id="act9" alt="1"/>
-				<input type="checkbox" name="tAct" id="act10" alt="1"/>
-				<input type="checkbox" name="tAct" id="act11" alt="1"/>
-				<input type="checkbox" name="tAct" id="act12" alt="1"/>
-				
+				<input type="checkbox" name="activity_type" value="등하원돕기" id="act1" alt="1" <c:if test = "${fn:contains(str, '등하원돕기')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="책읽기" id="act2" alt="1" <c:if test = "${fn:contains(str, '책읽기')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="실내놀이" id="act3" alt="1" <c:if test = "${fn:contains(str, '실내놀이')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="야외활동" id="act4" alt="1" <c:if test = "${fn:contains(str, '야외활동')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="한글놀이" id="act5" alt="1" <c:if test = "${fn:contains(str, '한글놀이')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="영어놀이" id="act6" alt="1" <c:if test = "${fn:contains(str, '영어놀이')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="학습지도" id="act7" alt="1" <c:if test = "${fn:contains(str, '학습지도')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="체육놀이" id="act8" alt="1" <c:if test = "${fn:contains(str, '체육놀이')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="간단 청소" id="act9" alt="1" <c:if test = "${fn:contains(str, '간단 청소')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="밥 챙겨주기" id="act10" alt="1" <c:if test = "${fn:contains(str, '밥 챙겨주기')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="간단 설거지" id="act11" alt="1" <c:if test = "${fn:contains(str, '간단 설거지')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="장기입주" id="act12" alt="1" <c:if test = "${fn:contains(str, '장기입주')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="단기입주" id="act13" alt="1" <c:if test = "${fn:contains(str, '단기입주')}" > checked </c:if>/>
 			</div>
 
 			<div id="actBox">
 				<div class="row">
-	   			<label for="act1"><img src="icon/change-join-walk-off.svg"/><br/>등하원돕기</label>
-	   			<label for="act2"><img src="icon/change-read-off.svg" /><br/>책읽기</label>
-	   			<label for="act3"><img src="icon/change-indoorplay-off.svg" /><br/>실내놀이</label>
-	   			<label for="act4"><img src="icon/change-outdooractivities-off.svg"/><br/>야외활동</label>
+	   			<label for="act1"  ><img src=
+	   			<c:if test = "${!fn:contains(str, '등하원돕기')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-indoorplay-n.svg" </c:if>
+	   			<c:if test = "${fn:contains(str, '등하원돕기')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-indoorplay-s.svg" </c:if>
+	   			/><br/>등하원돕기</label>
+	   			
+	   			<label for="act2"><img src=
+	   			<c:if test = "${!fn:contains(str, '책읽기')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-walk-n@2x.png" </c:if>
+	   			<c:if test = "${fn:contains(str, '책읽기')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-walk-s@2x.png" </c:if>
+	   			 /><br/>책읽기</label>
+	   			 
+	   			<label for="act3"><img src=
+	   			<c:if test = "${!fn:contains(str, '실내놀이')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-read-n.svg" </c:if> 
+	   			<c:if test = "${fn:contains(str, '실내놀이')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-read-s.svg" </c:if> 
+	   			/><br/>실내놀이</label>
+	   			
+	   			<label for="act4" ><img src=
+	   			<c:if test = "${!fn:contains(str, '야외활동')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-outdooractivities-n.svg" </c:if> 
+	   			<c:if test = "${fn:contains(str, '야외활동')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-outdooractivities-s.svg" </c:if> 
+	   			/><br/>야외활동</label>
 	   			</div>
 	   			
 	   			<div class="row">
-	   			<label for="act5"><img src="icon/change-korean-off.svg"/><br/>한글놀이</label>
-				<label for="act6"><img src="icon/change-english-off.svg"/><br/>영어놀이</label>
-				<label for="act7"><img src="icon/change-study-off.svg"/><br/>학습지도</label>
-				<label for="act8"><img src="icon/change-pe-off.svg"/><br/>체육놀이</label>
+	   			<label for="act5"><img src=
+	   			<c:if test = "${!fn:contains(str, '한글놀이')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/p-membership-2-koreanicon-n-2.svg" </c:if>
+	   			<c:if test = "${fn:contains(str, '한글놀이')}">
+	   			"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/p-membership-2-koreanicon-s-2.svg" </c:if>
+	   			 /><br/>한글놀이</label>
+				<label for="act6"><img src=
+				 <c:if test = "${!fn:contains(str, '영어놀이')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-english-n.svg" </c:if> 
+				<c:if test = "${fn:contains(str, '영어놀이')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-english-s.svg" </c:if> 
+				/><br/>영어놀이</label>
+				<label for="act7" ><img src=
+				<c:if test = "${!fn:contains(str, '학습지도')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-specially-n.svg" </c:if>
+				<c:if test = "${fn:contains(str, '학습지도')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-specially-s.svg" </c:if>
+				/><br/>학습지도</label>
+				<label for="act8" ><img src=
+				<c:if test = "${!fn:contains(str, '체육놀이')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-pe-n.svg" </c:if>
+				<c:if test = "${fn:contains(str, '체육놀이')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-pe-s.svg" </c:if>		
+				/><br/>체육놀이</label>
 	   			</div>
 	   			
 				<div class="row">   		
-				<label for="act9"><img src="icon/change-cleaning-off.svg"/><br/>간단 청소</label>
-				<label for="act10"><img src="icon/change-cook-off.svg"/><br/>밥 챙겨주기</label>
-				<label for="act11"><img src="icon/change-washing-off.svg"/><br/>간단 설거지</label><br/>
+				<label for="act9"><img src=
+				<c:if test = "${!fn:contains(str, '간단 청소')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-n.svg"</c:if>
+				<c:if test = "${fn:contains(str, '간단 청소')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-s.svg"</c:if>
+				/><br/>간단 청소</label>
+				<label for="act10" ><img src=
+				<c:if test = "${!fn:contains(str, '밥 챙겨주기')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-n.svg"</c:if>
+				<c:if test = "${fn:contains(str, '밥 챙겨주기')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-s.svg"</c:if>
+				/><br/>밥 챙겨주기</label>
+				<label for="act11" ><img src=
+				<c:if test = "${!fn:contains(str, '간단 설거지')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-n.svg" </c:if>
+				<c:if test = "${fn:contains(str, '간단 설거지')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-s.svg" </c:if>						
+				/><br/>간단 설거지</label><br/>
 				<label></label>
 				</div>  
 				
 				<div class="row">   		
-				<label for="act12"><img src="icon/change-longterm-off.svg"/><br/>장기입주</label>
-				<label for="act13"><img src="icon/change-shortperiod-off.svg"/><br/>단기입주</label><br/>
+				<label for="act12"><img src=
+				<c:if test = "${!fn:contains(str, '장기입주')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-n.svg"</c:if>
+				<c:if test = "${fn:contains(str, '장기입주')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-s.svg"</c:if>
+				/><br/>장기입주</label>
+				<label for="act13" ><img src=
+				<c:if test = "${!fn:contains(str, '단기입주')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"</c:if> 
+				<c:if test = "${fn:contains(str, '단기입주')}">
+				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-s.svg"</c:if> 			
+				/><br/>단기입주</label><br/>
 				<label></label>
 				<label></label>
 	   			</div>
 			</div>
-
-
-
+			
 			<input type="submit" class="btn btn-warning" value="저장" />
+			</form>
 		</div>
 </body>
 </html>

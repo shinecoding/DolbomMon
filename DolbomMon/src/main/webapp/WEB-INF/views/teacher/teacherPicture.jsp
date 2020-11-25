@@ -103,7 +103,8 @@
 	 	</div>
 		<form name="picForm" method="post"  action="/dbmon/teacherPictureOk" enctype="multipart/form-data" >
 			<div id="profBox">
-				<img class="rounded-circle mx-auto d-block" id="profIcon" src="img/profilepic.png"/>
+				<img class="rounded-circle mx-auto d-block" id="profIcon" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if>
+				<c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if>/>
 				<img id="profPlus" src="icon/profile-add-bt.svg"/>
 				<input type="file" id="pic" name="filename" accept="image/*,video/*">
 			</div>		
