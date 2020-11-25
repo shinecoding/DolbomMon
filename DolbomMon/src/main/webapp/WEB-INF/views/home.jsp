@@ -37,7 +37,7 @@ if(manager!="Y"){
       font-weight:bold;
       text-align: center; 
       width: -webkit-calc(100%);  
-       margin:0; padding:0;
+     
        width: 100%;  
      
       }
@@ -96,12 +96,12 @@ if(manager!="Y"){
 
   <div id="list" style="max-width: 1000px; margin: auto;">
   <ul id ="listitem" class="list-group list-group-horizontal-sm">
-     <li class="list-group-item" style="border-radius:50%"><img src="img/a.png"  width="56" height="56" href="#"/><br/>등하원</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/b.png"  width="56" height="56" href="#"/><br/>실내놀이</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/c.png"  width="56" height="56" href="#"/><br/>야외활동</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/d.png"  width="56" height="56" href="#"/><br/>학습지도</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/f.png"  width="56" height="56" href="#"/><br/>영어놀이</li>
-     <li class="list-group-item" style="border-radius:50%"><img src="img/g.png"  width="56" height="56" href="#"/><br/>가사돌봄</li>
+     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
+     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
+     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
+     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
+     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
+     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
   
   <!-- START THE FEATURETTES -->

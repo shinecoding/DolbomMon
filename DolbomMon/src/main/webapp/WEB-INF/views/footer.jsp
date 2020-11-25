@@ -13,6 +13,8 @@
  
 </style>
  <footer class="footer">
+ <br/>
+ <hr/>
               <div>돌봄몬</div>
                  <div>
                  @ 2020 Dolbommon 대표 : 이승현 

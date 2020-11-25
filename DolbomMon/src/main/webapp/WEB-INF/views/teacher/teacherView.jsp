@@ -59,9 +59,9 @@ h5{
    	<li class="list-group-item"><span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>등초본 인증</li>
    	<li class="list-group-item"><span class="fa-stack fa-2x"><i class="fas fa-circle fa-stack-2x"></i><i class="fas fa-lock fa-stack-1x fa-inverse"></i></span>성범죄 인증</li>
    	<h5>간단 자기소개</h5>
-   	<li class="list-group-item p-5" style="text-align:center">${tvo.intro}</li>
+   	<li class="list-group-item p-5" style="text-align:center">${vo.intro}</li>
    	<h5>선호하는 돌봄유형</h5>
-   	<li class="list-group-item p-5" style="text-align:center">"저는 <span>${tvo.type}</span>돌봄을 가장 선호해요"</li>
+   	<li class="list-group-item p-5" style="text-align:center">"저는 <span>${vo.care_type}</span>돌봄을 가장 선호해요"</li>
    	<h5>활동 가능 시간</h5>
    	<li class="list-group-item">스케쥴차트</li>
    	<h5>돌봄 가능 연령</h5>
