@@ -116,6 +116,7 @@
 	 <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
 	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
 	        Onclick="location.href='/dbmon'"/>
+
 	        <span style="float:right">
 	        <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	        <button class="btn btn-primary">쪽지</button></a>
@@ -135,7 +136,6 @@
 			${userid } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
 			</c:if>
 
-					
 	</a> 				
 	</header>
 </div>

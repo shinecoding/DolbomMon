@@ -101,7 +101,7 @@
 	width:100%;
 	display:block;
 	}
-	#certTime{
+	.certTime{
 	position:relative;
 	display:block;
 	text-align:center;
@@ -117,47 +117,55 @@
 <body>
 	<div class="container">
 		<div id="title">
-	   		<div id="titlefont">개인정보 동의서 인증</div>
+	   		<div id="titlefont">개인정보 제공 동의서 인증</div>
 	 	</div>
-		<form>
+		<form method="post" action="/dbmon/proofPrivacyOk" enctype="multipart/form-data">
 			<div id="profBox">
 				<div class="badge badge-warning">1번째</div>
 				<div>개인정보 제공 동의서를 사진으로 찍어서 올려주세요.<br/></div>
 				<div class="warning">
 				<i class="fas fa-exclamation-circle"></i>최근 6개월 이내에 발급된 경우만 인정됩니다.<br/>
-				회원님의 개인정보 보호를 위해 주민등록번호 뒷자리를 꼭 가리고 보내주세요.<br/> 
+				회원님의 개인정보 보호를 위해 주민등록번호 뒷자리를 꼭 가리고 보내주세요.<br/>
 				(주민등록뒷자리 ‘미포함’ 선택 후 발급, 또는 해당부분 가린 후 촬영)<br/>
 				<br/>
+				
 				<i class="fas fa-exclamation-circle"></i>사진첨부는 최대 5장까지 가능합니다.<br/>
 				</div>
 				
 				
 				<label for="proofFile">
 					<i class="fas fa-upload"></i>사진 추가하기
-					<input type="file" id="proofFile" accept="image/*,application/pdf">
+					<input type="file" name="filename" id="proofFile" accept="image/*,application/pdf">
 				</label>
+				<img src="img/ex-cert-privacy.jpg" />
 				
-				<div id="certTime">
-					<select name="certYear">
+				<div class="badge badge-warning">2번째</div>
+				<div>올리신 증명서에 적혀있는<br/>
+					발급일자를 아래 입력칸에<br/>
+					똑같이 입력해 주세요.<br/></div>
+				
+				<div class="certTime">
+					<select name="privacy_year">
 					<c:forEach var="i" begin="1950" end="2020" >
 						<option>${i}</option>
 					</c:forEach>
 					</select>년
-					<select name="certYear">
+					<select name="privacy_month">
 					<c:forEach var="i" begin="1" end="12" >
 						<option>${i}</option>
 					</c:forEach>
 					</select>월
-					<select name="certYear">
+					<select name="privacy_day">
 					<c:forEach var="i" begin="1" end="31" >
 						<option>${i}</option>
 					</c:forEach>
 					</select>일
-					</div>
+				</div>
+					
 				</div>		
-				
 				<input type="submit" class="btn btn-warning" value="신청" />
+				
 		</form>
-
+	</div>
 </body>
 </html>

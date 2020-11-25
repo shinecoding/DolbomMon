@@ -16,7 +16,7 @@
  	#plusBtn{position:relative; right:45px; top:40px; width:40px;height:40px;}
  	p{display:inline-block; width:40%; overflow:hidden; height:auto; font-size:15px;}
  	.container>input{width:70%; height:40px; border:1px solid #CCC; border-radius:10px;}
- 	input[type=submit]{margin:20px 0; background-color:#ff5400; color:#EFEFEF}
+ 	input[type=submit]:nth-of-type(1){margin:20px 0; background-color:#ff5400; color:#EFEFEF}
 </style>
 <script>
 	$(function(){
@@ -31,7 +31,8 @@
 
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/dbm/introduce">
+	<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/dbm/introduce">
+			<input type="file" name="pic" />
 	<div class="container">
 		<h3>내 프로필 사진<span>(선택사항)</span></h3>
 		<div id="imgDiv">
@@ -40,7 +41,7 @@
 		</div>
 		<p>내 사진을 올리면 부모회원의 선택을 <span>5배 더 많이</span> 받을 수 있습니다.</p>		
 		<input type="submit" value="지금 올리기" />
-		<input type="button" value="나중에 하기" onclick="nextTime();"/>
+		<input type="submit" value="나중에 하기" />
 	</div>
 	</form>
 </body>
