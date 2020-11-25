@@ -43,8 +43,9 @@
 	#startDiv{padding:20px; border-right:1px solid gray;}
 	#startDiv *{float:right;}
 	#endDiv{padding:20px;}
-	#startDiv>select{width:50%;}
-	#endDiv>select{width:50%;}
+	#startDiv>select{text-align-last:center}
+	#endDiv>select{text-align-last:center;}
+	select{width:50%; height:40px; font-size:17px; -webkit-appearance: none; moz-appearance: none;}
 	#timeDiv span{}
 	
 	/* ==================== 활동 기간 설정 ==========================*/
@@ -167,19 +168,41 @@
 	}
 	
 	function setEndDate(i){
+		var date = new Date();
 		var startDate = document.getElementById("start_date").value;
 		var data = startDate.split("-");
 		var endDate;
+		var setEndDate;
+		var month = Number(data[1]);
 		if(i==1){
-			var endDate = new Date(data[0], data[1], Number(data[2])+7);
+			endDate = new Date(data[0], data[1], Number(data[2])+7);
+			setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
 		}else if(i==2){
-			var endDate = new Date(data[0], Number(data[1])+1, data[2]);
+			if(month+1==12){
+				endDate = new Date(data[0], month+1, data[2]);
+				setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
+			}else{
+				endDate = new Date(data[0], month+1, data[2]);
+				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+			}
 		}else if(i==3){
-			var endDate = new Date(data[0], Number(data[1])+3, data[2]);
+			if(month+3==12){
+				endDate = new Date(data[0], month+3, data[2]);
+				setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
+			}else{
+				endDate = new Date(data[0], month+3, data[2]);
+				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+			}
 		}else if(i==4){
-			var endDate = new Date(data[0], Number(data[1])+6, data[2]);
+			if(month+6==12){
+				endDate = new Date(data[0], month+6, data[2]);
+				setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
+			}else{
+				endDate = new Date(data[0], month+6, data[2]);
+				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+			}
 		}
-		document.getElementById("end_date").value = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+		document.getElementById("end_date").value = setEndDate;
 	}
 </script>
 </head>

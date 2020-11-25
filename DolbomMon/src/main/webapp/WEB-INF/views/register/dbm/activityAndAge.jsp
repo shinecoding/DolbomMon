@@ -130,13 +130,38 @@
 			}
 		});
 		
+		$("#aaaFrm").submit(function(){
+			var childAgeData;
+			var activityTypeData;
+			$("input[name=child_age]").each(function(){
+				if(this.checked){
+					childAgeData += this.value;
+				}
+			});
+			console.log("childAgeData =>"+ childAgeData);
+			if(childAgeData==null || childAgeData==""){
+				alert("돌볼 수 있는 아이의 연령대를 선택해주세요.");
+				return false;
+			}
+			
+			$("input[name=activity_type]").each(function(){
+				if(this.checked){
+					activityTypeData += this.value;
+				}
+			});
+			if(activityTypeData==null || activityTypeData==""){
+				alert("가능한 활동을 선택해주세요")				
+				return false;
+			}
+			return true;
+		});
 		
 		
 	});
 </script>
 <body>
 	<div class="container">
-		<form method="post" action="<%=request.getContextPath()%>/dbm/location">
+		<form id="aaaFrm" method="post" action="<%=request.getContextPath()%>/dbm/location">
 			<div id="childrenAgeHeader">어떤 아이를 돌볼 수 있나요?</div>
 			<div id="childrenAgeDiv">
 				<input type="checkbox" id="age1" value="신생아" name="child_age" />

@@ -22,7 +22,7 @@
 	.inputRadioDiv{width:100%; height:auto; padding:20px; border-bottom:1px solid gray;}
 	.inputRagiodiv:last-child{border:1px solid gray;}
 	label{margin:0px; width:100%; }
-	
+	input[type=checkbox]{display:none;}
 	/* =============== 시간 선택 라디오버튼 ============== */
 	
 	input[type=submit]{width:100%; height:50px; margin-top:30px;}
@@ -45,6 +45,20 @@
 			$("input[id="+selectedData+"]").prop("checked", true);
 			
 		});
+		
+		$("#scheduleFrm").submit(function(){
+			var data;
+			$("input[name=yoil]").each(function(){
+				if(this.checked){
+					data += this.value;
+				}
+			});
+			if(data==null||data==""){
+				alert("활동가능한 시간대를 선택해주세요");
+				return false;
+			}
+			return true;
+		});
 	});
 </script>
 </head>
@@ -53,7 +67,7 @@
 		<div id="headerDiv">
 			언제 활동할 수 있나요?
 		</div>
-		<form method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
+		<form id="scheduleFrm" method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 		
 			<input type="hidden" name="start_date" value="2020-11-22" />
 			<input type="hidden" name="end_date" value="2021-2-22" />
@@ -82,7 +96,7 @@
 				주말 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>
 			<div class="inputRadioDiv">
-				<label for="cr7"><input type="radio" id="cr7" name="yoil" />내가 원하는 시간 직접 입력하기</label>
+				<label for="cr7"><input type="radio" id="cr7" name="yoil" value="1"/>내가 원하는 시간 직접 입력하기</label>
 			</div>
 			<input type="submit" value="다음">
 		</form>

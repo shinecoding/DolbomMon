@@ -60,7 +60,17 @@
 			
 			imgChange();
 		});
+		
+		$("#dbmTypeFrm").submit(function(){
+			var data = $("input[name=care_type]").val();
+			if(data == null || data == ""){
+				alert("유형을 선택해주세요");				
+				return false;
+			}
+			return true;
+		});
 	});
+	
 	
 	// 라디오버튼 상태에따라 이미지 변경해주는 함수
 	function imgChange(){
@@ -85,7 +95,7 @@
 			당신은 어떤분 인가요?
 		</div>
 		<div id="dbmTypeDiv">
-			<form method="post" action="<%=request.getContextPath()%>/dbm/activityAndAge">
+			<form id="dbmTypeFrm" method="post" action="<%=request.getContextPath()%>/dbm/activityAndAge">
 				<input type="radio" name="care_type" id="dt1" value="선생님" />
 				<input type="radio" name="care_type" id="dt2" value="대학생" />
 				<input type="radio" name="care_type" id="dt3" value="엄마" />

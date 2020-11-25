@@ -5,7 +5,7 @@ public class TeacherVO {
 	private String care_type; 
 	private String activity_type;// 원하는 돌봄유형
 	private String child_age; // 돌봄가능연령 
-	private String desired_wage; // 희망시급
+	private int desired_wage; // 희망시급
 	private String intro;
 	private String cctv;
 	private String pic;
@@ -40,10 +40,10 @@ public class TeacherVO {
 	public void setChild_age(String child_age) {
 		this.child_age = child_age;
 	}
-	public String getDesired_wage() {
+	public int getDesired_wage() {
 		return desired_wage;
 	}
-	public void setDesired_wage(String desired_wage) {
+	public void setDesired_wage(int desired_wage) {
 		this.desired_wage = desired_wage;
 	}
 	public String getIntro() {
