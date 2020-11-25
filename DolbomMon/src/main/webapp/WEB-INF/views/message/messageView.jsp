@@ -12,12 +12,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script>
+	var strWidth;
+	var strHeight;
 	$(function(){
 		
 		$(document).ready(function() {
 			// 팝업 창 크기를 HTML 크기에 맞추어 자동으로 크기를 조정하는 함수.
-			var strWidth;
-			var strHeight;
 			
 			//innerWidth / innerHeight / outerWidth / outerHeight 지원 브라우저 
 			if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
@@ -41,7 +41,31 @@
 			window.resizeTo( strWidth+33, strHeight+15 );
 		});
 	});	
-
+	
+	function delBox(){
+		window.resizeTo( strWidth+133, strHeight+15 );
+		if(confirm("쪽지를 삭제하시겠습니까?")){
+			location.href="/dbmon/deleteMessage2?no=${vo.no}"
+		}else{
+			window.resizeTo( strWidth+33, strHeight+15 );	
+		}
+	}
+	function spamBox(){
+		window.resizeTo( strWidth+133, strHeight+15 );
+		if(confirm('스팸등록을 하시면 해당 회원이 발송한 쪽지는 스팸쪽지함에서만 확인할 수 있습니다.\n\n스팸 등록하시겠습니까?')){
+			location.href="/dbmon/spamUser?spamId=${vo.userid_w}&recieveId=${vo.userid_r}"
+		}else{
+			window.resizeTo( strWidth+33, strHeight+15 );	
+		}
+	}
+	function saveBox(){
+		window.resizeTo( strWidth+133, strHeight+15 );
+		if(confirm("쪽지를 보관하시겠습니까?")){
+			location.href="/dbmon/saveMessage2?no=${vo.no}&tabType=${tabType}"
+		}else{
+			window.resizeTo( strWidth+33, strHeight+15 );	
+		}
+	}
 </script>
 <style>
 	body{
@@ -103,7 +127,8 @@
 		<div id="note2">
 			<ul>
 				<li>보낸이 : ${vo.userid_w} &nbsp; =>&nbsp; 받은이 : ${vo.userid_r} &nbsp;
-					<div style="float:right; line-height:5px;"><a href='?exec=spam&spam_no=258492' onclick="return confirm('스팸등록을 하시면 해당 회원이 발송한 쪽지는 스팸쪽지함에서만 확인할 수 있습니다.\n\n스팸 등록하시겠습니까?')">
+					<div style="float:right; line-height:5px;">
+					<a href="javascript:spamBox()">
 						<img src="icon/message/btn_spam1.gif" width="58px" height="18px" boarder="0"></a>&nbsp; 
 					<a href="javascript:void(window.open('?type=memo&memo_id=inbox&memo_no=100701821','claim_memo','width=470,height=580,toolbar=no,scrollbars=no'));">
 						<img src="icon/message/claim.gif" board="0" /></a>
@@ -114,14 +139,14 @@
 				<li id="content">${vo.content}</li>
 			</ul>
 			
-			<div style="float:right">
+			<div style="float:right" class="alertBox">
 				<a href="/dbmon/messageWrite?receiveId=${vo.userid_w }">
 					<img src="icon/message/reply_icon.gif" /></a> 
-				<c:if test="${tabType!='3' && tabType!='4'}">
-				<a href="/dbmon/saveMessage2?no=${vo.no}&tabType=${tabType}">
+				<c:if test="${tabType!='3'}">
+				<a href="javascript:saveBox();">
 					<img src="icon/message/keep_icon.gif" /></a>
 				</c:if> 
-				<a href="/dbmon/deleteMessage2?no=${vo.no}" onclick="return confirm('삭제하시겠습니까?')">
+				<a href="javascript:delBox()">
 					<img src="icon/message/delete_icon.gif" /></a> 
 				<a href="/dbmon/message?tabType=${tabType}&nowPage=${nowPage}">
 					<img src="icon/message/list_icon.gif" /></a>

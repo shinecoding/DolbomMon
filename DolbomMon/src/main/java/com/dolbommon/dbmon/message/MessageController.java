@@ -58,9 +58,8 @@ public class MessageController {
 				vo.setMessage_save_r("Y");
 			}
 			
-			//공지사항 여부 구하기.
-			//테이블에 공지사항여부 체크 테이블 추가
-			//공지사항일경우 위쪽에 추가. (최대 2~3개?)
+			//공지사항 여부 구하기.(공지사항 게시판)
+			//공지사항일경우 위쪽에 추가. (최대 2~3개? 1개만?)
 			
 			vo.setUserid(loginCheck);
 			
@@ -221,28 +220,50 @@ public class MessageController {
 		System.out.println("쪽지보내기 아이디"+vo.getUserid_r());
 		System.out.println(vo.getSubject());
 		System.out.println(vo.getContent());
+		
 		if(!vo.getUserid_w().equals(loginCheck)){
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
 			mav.addObject("back", 2);
 			mav.setViewName("redirect:back");
 		}else {
-			
-			//여기서 스팸여부 확인해야함. userid_r
+			//vo.getUserid_w이 스팸유저일때. userid_r= userid로 보내는 모든 쪽지는 spam이 Y 
+			System.out.println("받는이 차단한이 받는이"+vo.getUserid_r());
+			System.out.println("보내는이 스팸 보내는이"+vo.getUserid_w());
 			MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
-			int result=0;
-			try {
-			result = dao.messageWrite(vo);
-			}catch(Exception e) {
-				System.out.println("쪽지보내기 에러" + e.getMessage());
-			}
-			if(result>=1) {
-				mav.setViewName("redirect:message");
-			}else {
-				mav.addObject("msg", "errorcode-1");
-				mav.addObject("back", 1);
-				mav.setViewName("redirect:back");
-			}
 			
+			int cnt=0;
+			cnt = dao.checkSpamId(vo.getUserid_r(), vo.getUserid_w());
+			if(cnt>=1) {
+				//스팸유저인것
+				int result=0;
+				try {
+				result = dao.spamWrite(vo);
+				}catch(Exception e) {
+					System.out.println("쪽지보내기 에러" + e.getMessage());
+				}
+				if(result>=1) {
+					mav.setViewName("redirect:message");
+				}else {
+					mav.addObject("msg", "errorcode-1");
+					mav.addObject("back", 1);
+					mav.setViewName("redirect:back");
+				}
+				
+			}else { //스팸유저 아닌것.
+				int result=0;
+				try {
+				result = dao.messageWrite(vo);
+				}catch(Exception e) {
+					System.out.println("쪽지보내기 에러" + e.getMessage());
+				}
+				if(result>=1) {
+					mav.setViewName("redirect:message");
+				}else {
+					mav.addObject("msg", "errorcode-1");
+					mav.addObject("back", 1);
+					mav.setViewName("redirect:back");
+				}
+			}
 		}
 		
 		return mav;
@@ -325,14 +346,11 @@ public class MessageController {
 				mav.addObject("back", 2);
 				mav.setViewName("redirect:back");
 			}
-			
 		}else {
 			mav.addObject("msg", "로그인 상태를 확인하세요.");
 			mav.addObject("back", 100);
 			mav.setViewName("redirect:back");
 		}
-		
-		
 		return mav;
 	}
 	
@@ -415,9 +433,112 @@ public class MessageController {
 	}
 	
 	//스팸 등록하기.
-	//스팸 등록된 아이디가 등록한 아이디로 보내는 모든 글은 spam속성이 Y로 바뀌게 만든다. 
+	@RequestMapping("/spamUser")
+	public ModelAndView spamUserRegistration(HttpServletRequest req, HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		
+		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+		String spamId = (String)req.getParameter("spamId");
+		String recieveId = (String)req.getParameter("recieveId");
+		String sessionID = (String)ses.getAttribute("userid");
+		System.out.println(spamId);
+		System.out.println(recieveId);
+		System.out.println(sessionID);
+		if(recieveId.equals(sessionID) && !recieveId.equals(spamId)) {
+			//테이블에 스팸유저 등록.
+			int cnt=0; //등록유저인지확인
+			int result=0; //유저등록결과
+			int result2=0; //스팸유저에게 받은 모든 쪽지 스팸전환결과
+			
+			try {
+				//스팸등록한 유저인지 확인.	
+				cnt = dao.checkSpamId(recieveId, spamId);
+				
+				if(cnt==0) {
+					 //스팸유저 등록
+					result = dao.registerSpamId(recieveId, spamId);
+					if(result>=1) {
+						result2 = dao.changSpam(recieveId, spamId);
+						if(result2>=1) {
+							mav.setViewName("redirect:message");
+						}else {
+							mav.addObject("msg", "스팸유저가 보낸 쪽지를 스팸게시판으로 이동하는데 실패하였습니다. 고객센터에 문의하세요.");
+							mav.addObject("back", 2);
+							mav.setViewName("redirect:back");
+						}
+					}else {
+						mav.addObject("msg", "스팸유저 등록에 실패하였습니다. 고객센터에 문의하세요.");
+						mav.addObject("back", 2);
+						mav.setViewName("redirect:back");
+					}
+				}else{
+					mav.addObject("msg", "이미 스팸유저로 등록된 아이디입니다.");
+					mav.addObject("back", 2);
+					mav.setViewName("redirect:back");
+				}
+				
+			}catch(Exception e) {
+				System.out.println("스팸유저 등록 에러 ==>"+e.getMessage());
+			}
+			
+		}else {
+			mav.addObject("msg", "로그인 상태를 확인하세요. 자신이 받은 메시지만 스팸 등록할 수 있습니다.");
+			mav.addObject("back", 2);
+			mav.setViewName("redirect:back");
+		}
+		return mav;
+	}
 	
-	//신고게시판으로 이동하기.
+	
+	//스팸등록 취소기능
+	@RequestMapping(value="/spamCancel", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView spamCancel(HttpServletRequest req, HttpSession ses) {
+		MessageDaoImp dao = sqlSession.getMapper(MessageDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		String recieveId = (String)req.getParameter("userid");
+		String spamId = (String)req.getParameter("messageUserid");
+		
+		spamId = spamId.trim(); //공백제거
+		int cnt=0;
+		int result=0;
+		int result2=0;
+		
+		try {
+			//스팸테이블에 있는지 값 확인
+			cnt = dao.checkSpamId(recieveId, spamId);
+			if(cnt>=1) {
+				//스팸테이블에서 제거
+				result = dao.spamCancel(recieveId, spamId);
+				if(result>=1) {
+					//스팸게시글 정상화
+					result2 = dao.changMessage(recieveId, spamId);
+					if(result2>=1) {
+						mav.setViewName("redirect:message");
+					}else {
+						mav.addObject("msg", "스팸 해제된 유저의 게시글을 정상화하는데 실패하였습니다. 고객센터에 문의하세요.");
+						mav.addObject("back", 2);
+						mav.setViewName("redirect:back");
+					}
+				}else {
+					mav.addObject("msg", "스팸 등록 해제에 실패하였습니다. 고객센터에 문의하세요.");
+					mav.addObject("back", 2);
+					mav.setViewName("redirect:back");
+				}
+				
+			}else {
+				mav.addObject("msg", "이미 스팸 등록 해제된 아이디입니다.");
+				mav.addObject("back", 2);
+				mav.setViewName("redirect:back");
+			}
+			
+		}catch(Exception e) {
+			System.out.println("스팸유저 등록 취소 에러-->"+e.getMessage());
+		}
+		
+		return mav;
+	}
+	
+	//신고게시판 글쓰기로 이동하기. 신고기능 추가되면.
 	
 	
 }
