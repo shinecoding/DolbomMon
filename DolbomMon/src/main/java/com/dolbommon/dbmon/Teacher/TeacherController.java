@@ -456,6 +456,7 @@ public class TeacherController {
 	public String teacherType() {
 		return "/teacher/teacherType";
 	}
+
 	
 	@RequestMapping("/teacherTypeOk")
 	public ModelAndView teacherTypeOk(TeacherVO vo, HttpSession ses, HttpServletRequest req) {
@@ -500,4 +501,5 @@ public class TeacherController {
 	}
 
 	
+
 }
