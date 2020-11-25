@@ -1,4 +1,4 @@
-package com.dolbommon.dbmon.register;
+package com.dolbommon.dbmon.member;
 
 
 import org.apache.ibatis.annotations.Param;

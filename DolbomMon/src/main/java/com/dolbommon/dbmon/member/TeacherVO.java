@@ -1,4 +1,4 @@
-package com.dolbommon.dbmon.register;
+package com.dolbommon.dbmon.member;
 
 public class TeacherVO {
 	private String userid;

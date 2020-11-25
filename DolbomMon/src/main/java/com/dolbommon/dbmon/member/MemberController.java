@@ -1,4 +1,4 @@
-package com.dolbommon.dbmon.register;
+package com.dolbommon.dbmon.member;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +59,6 @@ public class MemberController {
 		//회원가입 완료
 		@RequestMapping(value="/regOk", method=RequestMethod.POST)
 		public ModelAndView regOk(
-			      
 			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
 			
 			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -104,7 +103,7 @@ public class MemberController {
 			String api_key = "NCSQ0VURJQQSSIOA";
 			String api_secret = "JXF7YGYDKKIHGNGMCRJY5ABSZX5S8GII";
 
-		    com.dolbommon.dbmon.register.Coolsms coolsms = new com.dolbommon.dbmon.register.Coolsms(api_key, api_secret);
+		    com.dolbommon.dbmon.member.Coolsms coolsms = new com.dolbommon.dbmon.member.Coolsms(api_key, api_secret);
 		       
 		    HashMap<String, String> set = new HashMap<String, String>();
 
