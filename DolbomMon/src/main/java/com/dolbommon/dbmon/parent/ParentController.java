@@ -31,5 +31,5 @@ public class ParentController {
 	public String parentWage() {
 		return "/parents/parentWage";
 	}
-	
+
 }
