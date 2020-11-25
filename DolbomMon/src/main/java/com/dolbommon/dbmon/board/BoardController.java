@@ -1,13 +1,20 @@
 package com.dolbommon.dbmon.board;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +33,9 @@ public class BoardController {
 		this.sqlSession = sqlSession;
 	}
 	
+	@Autowired
+	DataSourceTransactionManager transactionManager;	
+	
 	//게시판 리스트로 이동ok
 	@RequestMapping("/freeBoard")
 	public ModelAndView freeBoard() {
@@ -41,18 +51,6 @@ public class BoardController {
 		
 		return mav;
 	}
-
-	//총 게시물 수 구하기
-//	public int getTotalRecord() {
-		
-//		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-//		int totalRecord = dao.getTotalRecord();
-//		
-//		ModelAndView mav = new ModelAndView();
-		
-		
-//		return totalRecord;
-//	}
 	
 	//게시판 글쓰기 폼으로 이동ok
 	@RequestMapping("/freeBoardWrite")
@@ -63,10 +61,10 @@ public class BoardController {
 	
 	//게시판 글쓰기ok
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest hsr, HttpSession hs) {
+	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 		
-		vo.setIp(hsr.getRemoteAddr());	//ip 구하기
-		vo.setUserid((String)hs.getAttribute("userid"));	
+		vo.setIp(req.getRemoteAddr());	//ip 구하기
+		vo.setUserid((String)ses.getAttribute("userid"));	
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		int result = dao.freeBoardInsert(vo);
@@ -83,14 +81,20 @@ public class BoardController {
 	
 	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
-	public ModelAndView freeBoardView(int no) {
+	public ModelAndView freeBoardView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		FreeBoardVO vo = new FreeBoardVO();
+		PagingVO pVo = new PagingVO();
+		
+		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		dao.hitCount(no);
-		FreeBoardVO vo = dao.freeBoardSelect(no);
+		dao.hitCount(vo.getNo());
+		FreeBoardVO resultVo = dao.freeBoardSelect(vo.getNo());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", vo);
+		mav.addObject("vo", resultVo);
+		mav.addObject("pVo", pVo);
 		mav.setViewName("freeBoard/freeBoardView");
 	
 		return mav;
@@ -141,6 +145,51 @@ public class BoardController {
 		return mav;
 	}
 	
+	//자유게시판 답글 쓰기 폼으로 이동
+	@RequestMapping("/freeBoardReplyForm")
+	public String replyWrite(int no, Model model) {
+		model.addAttribute("no", no);
+			
+		return "freeBoard/freeBoardReplyForm";
+	}
+	
+	//자유게시판 답글 쓰기
+	@RequestMapping(value="/freeBoardReplyOk", method=RequestMethod.POST)
+	public ModelAndView freeBoardReplyOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
+		
+		vo.setIp(req.getRemoteAddr());	//ip 구하기	
+		vo.setUserid((String)ses.getAttribute("userid"));
+		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+				
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		
+		//원글의 ref, step, lvl 선택하기
+		FreeBoardVO optVo = dao.optionSelect(vo.getNo());
+		
+		try {
+			dao.levelUpdate(optVo);
+			
+			//답글 쓰기
+			vo.setRef(optVo.getRef());
+			vo.setStep(optVo.getStep()+1);
+			vo.setLvl(optVo.getLvl()+1);
+			
+			dao.replyBoardInsert(vo);
+			
+			transactionManager.commit(status);
+		}catch(Exception e) {
+			transactionManager.rollback(status);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("redirect:freeBoard");
+		return mav;
+	}
+	
 	//공지사항 게시판으로 이동ok
 	@RequestMapping("/noticeBoard")
 	public String noticeBoard() {
@@ -155,17 +204,15 @@ public class BoardController {
 		return "freeBoard/noticeBoardWrite";
 	}
 	
-//	//공지사항 게시글 보기
-//	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
-//	public ModelAndView noticeBoardView() {
+	//공지사항 게시글 보기
+	@RequestMapping(value="/noticeBoardView", method=RequestMethod.POST)
+	public ModelAndView noticeBoardView() {
 		
-//		return null;
-//	}
-	
-	@RequestMapping("/noticeBoardView")
-	public String noticeBoardView() {
 		
-		return "freeBoard/noticeBoardView";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("freeBoard/noticeBoardView");
+		
+		return mav;
 	}
 	
 	//신고게시판으로 이동

@@ -17,6 +17,7 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/profileImg/**" location="/profileImg/" />
 	<resources mapping="/include/**" location="/include/" />
 	<resources mapping="/icon/**" location="/icon/" />
 	<resources mapping="/ckeditor/**" location="/ckeditor/" />
@@ -28,15 +29,14 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.dolbommon.dbmon" />
-	<context:component-scan base-package="com.bitcamp.test" />
 	<context:component-scan base-package="com.bitcamp.dbmon.brand" />
 	
-	<!-- 오라클dataSource 객체 생성 -->
+	<!-- 오라클dataSource 객체 생성 "jdbc:oracle:thin:@106.240.16.163:1521:xe" -->
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></beans:property>
-		<beans:property name="url" value="jdbc:oracle:thin:@106.240.16.163:1521:xe"></beans:property>
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></beans:property>
 		<beans:property name="username" value="scott"></beans:property>
-		<beans:property name="password" value="tiger009"></beans:property>
+		<beans:property name="password" value="tiger"></beans:property>
 	</beans:bean>
 	
 	<!-- Template객체 만들기 -->
