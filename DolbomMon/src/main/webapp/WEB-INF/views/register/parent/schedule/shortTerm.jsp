@@ -38,9 +38,9 @@
 </style>
 <script>
 
-    var today = new Date(); // 선택한 날짜
+    var today = new Date();
     var date = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // 지금날짜로부터 5일 후
- 
+ 	var firstDate = date;
     function prevMonth() {  //이전 달을 today에 값을 저장
         today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
         getCalendar(); 
@@ -53,8 +53,7 @@
         selectedDate()
     }
     
-    function getCalendar()
-	{	
+    function getCalendar() {	
         var getFirstDay = new Date(today.getFullYear(), today.getMonth(), 1); 
         var getLastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0); 
         var calHeader = document.getElementById("calHeader"); // 현재 년 월 일을 찍을 Div객체
@@ -62,7 +61,9 @@
         var yearmonth = document.getElementById("yearmonth"); //  바뀐 년도와 월 출력할곳
         yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
         
-        
+        if(firstDate.getMonth()==today.getMonth()){
+        	//
+        }
         
         if(today.getMonth()+1==12) {// 달력 넘기기 버튼
             prev.innerHTML=(today.getMonth())+"월";
@@ -70,10 +71,16 @@
         } else if(today.getMonth()+1==1) {//  1월 일 때
 	        prev.innerHTML="12월";
 	        next.innerHTML=(today.getMonth()+2)+"월";
-	    } else {//   12월 일 때
-            prev.innerHTML=(today.getMonth())+"월";
+	    } else if(today.getMonth()+1==12){//   12월 일 때
+            prev.innerHTML=(today.getMonth())+"월"; //-1
             next.innerHTML=(today.getMonth()+2)+"월";
+        } else if(today.getMonth()==date.getMonth()){
+        	prev.innerHTML=(today.getMonth()+1)+"월";
+        	next.innerHTML=(today.getMonth()+2)+"월";
         }
+        console.log("today.getMonth()+1 =>" + (today.getMonth()+1));
+        console.log("today.getFullYear => " + today.getFullYear());
+        console.log("today.getDate => " + today.getDate());
         
         // 달력찍기 시작
        	var calTag = "";

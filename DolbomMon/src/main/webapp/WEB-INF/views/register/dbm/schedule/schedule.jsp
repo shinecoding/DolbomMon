@@ -55,9 +55,6 @@
 		</div>
 		<form method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 		
-			<input type="text" name="dbm_type" value="${dbm_type }" />
-			<input type="text" name="child_age" value="${child_age }" />
-			<input type="text" name="care_type" value="${care_type }" />
 			<input type="hidden" name="start_date" value="2020-11-22" />
 			<input type="hidden" name="end_date" value="2021-2-22" />
 			<div class="inputRadioDiv">

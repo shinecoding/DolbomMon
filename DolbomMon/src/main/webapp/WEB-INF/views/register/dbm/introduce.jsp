@@ -39,17 +39,6 @@
 <body>
 	<div class="container">
 		<form method="post" action="<%=request.getContextPath()%>/regForm">
-			<input type="text" name="dbm_type" value="${dbm_type }" />
-			<input type="text" name="child_age" value="${child_age }" />
-			<input type="text" name="care_type" value="${care_type }" />
-			<input type="text" name="yoil" value="${yoil }" />
-			<input type="text" name="start_time" value="${start_time }" />
-			<input type="text" name="end_time" value="${end_time }" />
-			<input type="text" name="start_date" value="${start_date }" />
-			<input type="text" name="end_date" value="${end_date }" />
-			<input type="text" name="desired_wage" value="${desired_wage }" />
-			<input type="text" name="cctv" value="${cctv }" />
-			<input type="text" name="pic" value="${pic }" />
 		
 			<h4>간단 자기소개<span>(선택사항)</span></h4>
 			<textarea name="intro" placeholder="간단한 자기소개 작성 시 부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>

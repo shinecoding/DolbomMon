@@ -17,6 +17,8 @@ public class MemberVO {
 	private String zipcode;
 	private String regdate;
 	private String memo;
+	private String lat;
+	private String lng;
 	public int getNo() {
 		return no;
 	}
@@ -107,5 +109,17 @@ public class MemberVO {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
 }

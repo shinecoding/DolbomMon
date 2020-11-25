@@ -12,6 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <style>
 	.container{width:600px;}
 	.container div{width:100%; overflow:hidden; height:auto; margin-top:15px;}
@@ -30,6 +31,7 @@
 	input[type=submit]{width:100%; height:40px; margin:30px 0;}
 	
 </style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
 <script>
 	$(function(){
 		
@@ -38,12 +40,27 @@
 			window.open("<%=request.getContextPath()%>/smsIdentity", "sms", 'top=300, left=1000, width=150, height:200');
 		});
 		
+		
 		// 우편번호 검색창
 		$("#zipcodeBtn").click(function(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
 		            $("#zipcode").val(data.zonecode);
 		            $("#addr").val(data.address);
+		            
+		            var geocoder = new kakao.maps.services.Geocoder();
+		            
+		            geocoder.addressSearch(data.address, function(result, status) {
+
+		                // 정상적으로 검색이 완료됐으면 
+		                 if (status === kakao.maps.services.Status.OK) {
+							
+							console.log("경도=> " + result[0].x);
+							console.log("위도=> " + result[0].y);
+		                	 $("#lng").val(result[0].x);
+		                	 $("#lat").val(result[0].y);
+		                } 
+		            });
 		           	window.close();
 		        },theme:{
 		        	searchBgColor: "#ff5400", //검색창 배경색
@@ -64,6 +81,8 @@
 			}
 		});
 		
+		
+
 		
 	});
 	
@@ -97,9 +116,9 @@
 	<form method="post" action="<%=request.getContextPath()%>/regOk" >
 	<div class="container">
 	
-		<input type="text" name="dbm_type" value="${dbm_type }" />
-		<input type="text" name="child_age" value="${child_age }" />
 		<input type="text" name="care_type" value="${care_type }" />
+		<input type="text" name="child_age" value="${child_age }" />
+		<input type="text" name="activity_type" value="${activity_type }" />
 		<input type="text" name="yoil" value="${yoil }" />
 		<input type="text" name="start_time" value="${start_time }" />
 		<input type="text" name="end_time" value="${end_time }" />
@@ -109,6 +128,8 @@
 		<input type="text" name="cctv" value="${cctv }" />
 		<input type="text" name="pic" value="${pic }" />
 		<input type="text" name="intro" value="${intro }" />
+		<input type="text" id="lat" name="lat" />
+		<input type="text" id="lng" name="lng" />
 	
 		<div id="headerDiv">
 			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />
@@ -148,7 +169,7 @@
 		<div id="smsDiv">
 			<input type="button" id="smsIdentity" value="휴대폰 본인인증하기"/>
 			<label for="tel1" style="clear:both; margin-top:10px;">연락처</label><br/>
-			<input type="text" id="tel1" name="tel1" value="" style="width:80%;" readonly="readonly" />
+			<input type="text" id="tel1" name="tel1" value="" style="width:80%;" />
 		</div>
 		<div id="zonecodeDiv">
 			<label>우편번호</label><br/>

@@ -2,8 +2,8 @@ package com.dolbommon.dbmon.register;
 
 public class TeacherVO {
 	private String userid;
-	private String dbm_type;
-	private String care_type; // 원하는 돌봄유형
+	private String care_type; 
+	private String activity_type;// 원하는 돌봄유형
 	private String child_age; // 돌봄가능연령 
 	private String desired_wage; // 희망시급
 	private String intro;
@@ -22,11 +22,11 @@ public class TeacherVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getDbm_type() {
-		return dbm_type;
+	public String getActivity_type() {
+		return activity_type;
 	}
-	public void setDbm_type(String dbm_type) {
-		this.dbm_type = dbm_type;
+	public void setActivity_type(String activity_type) {
+		this.activity_type = activity_type;
 	}
 	public String getCare_type() {
 		return care_type;

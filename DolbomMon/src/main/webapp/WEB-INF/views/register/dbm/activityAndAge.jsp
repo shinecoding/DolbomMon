@@ -100,7 +100,7 @@
 		});
 		
 		// 돌봄몬 - 가능한 활동
-		$("input[name=care_type]").change(function(){
+		$("input[name=activity_type]").change(function(){
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
@@ -137,7 +137,6 @@
 <body>
 	<div class="container">
 		<form method="post" action="<%=request.getContextPath()%>/dbm/location">
-			<input type="text" name="dbm_type" value="${dbm_type}" />
 			<div id="childrenAgeHeader">어떤 아이를 돌볼 수 있나요?</div>
 			<div id="childrenAgeDiv">
 				<input type="checkbox" id="age1" value="신생아" name="child_age" />
@@ -151,19 +150,19 @@
 			</div>
 			<div id="careTypeHeader">어떤 활동을 할 수 있나요?</div>
 			<div id="careTypeDiv">
-				<input type="checkbox" id="1" value="실내놀이" name="care_type" checked="checked"/>
-				<input type="checkbox" id="2" value="등하원돕기" name="care_type" checked="checked"/>
-				<input type="checkbox" id="3" value="책읽기" name="care_type" checked="checked"/>
-				<input type="checkbox" id="4" value="야외활동" name="care_type" />
-				<input type="checkbox" id="5" value="한글놀이" name="care_type" />
-				<input type="checkbox" id="6" value="영어놀이" name="care_type" />
-				<input type="checkbox" id="7" value="학습지도" name="care_type" />
-				<input type="checkbox" id="8" value="체육놀이" name="care_type" />
-				<input type="checkbox" id="9" value="간단청소" name="care_type" />
-				<input type="checkbox" id="10" value="밥챙겨주기" name="care_type" />
-				<input type="checkbox" id="11" value="간단설거지" name="care_type" />
-				<input type="checkbox" id="12" value="장기입주" name="care_type" />
-				<input type="checkbox" id="13" value="단기입주" name="care_type" />
+				<input type="checkbox" id="1" value="실내놀이" name="activity_type" checked="checked"/>
+				<input type="checkbox" id="2" value="등하원돕기" name="activity_type" checked="checked"/>
+				<input type="checkbox" id="3" value="책읽기" name="activity_type" checked="checked"/>
+				<input type="checkbox" id="4" value="야외활동" name="activity_type" />
+				<input type="checkbox" id="5" value="한글놀이" name="activity_type" />
+				<input type="checkbox" id="6" value="영어놀이" name="activity_type" />
+				<input type="checkbox" id="7" value="학습지도" name="activity_type" />
+				<input type="checkbox" id="8" value="체육놀이" name="activity_type" />
+				<input type="checkbox" id="9" value="간단청소" name="activity_type" />
+				<input type="checkbox" id="10" value="밥챙겨주기" name="activity_type" />
+				<input type="checkbox" id="11" value="간단설거지" name="activity_type" />
+				<input type="checkbox" id="12" value="장기입주" name="activity_type" />
+				<input type="checkbox" id="13" value="단기입주" name="activity_type" />
 				<div><label for="1"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-indoorplay-n.svg"/><br/><span>실내놀이</span></label></div>
 				<div><label for="2"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-walk-n@2x.png" style="width:56px; height:56px;"/><br/><span>등하원돕기</span></label></div>
 				<div><label for="3"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-read-n.svg"/><br/><span>책읽기</span></label></div>

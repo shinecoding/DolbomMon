@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -44,33 +45,12 @@ public class MemberController {
 		
 		// 선생님, 부모님 회원가입 폼
 		@RequestMapping(value="/regForm", method=RequestMethod.POST)
-		public ModelAndView regForm(@RequestParam("dbm_type") String dbm_type,
-			      @RequestParam("child_age") String child_age,
-			      @RequestParam("care_type") String care_type,
-			      @RequestParam("yoil") String yoil,
-			      @RequestParam("start_time") String start_time,
-			      @RequestParam("end_time") String end_time,
-			      @RequestParam("start_date") String start_date,
-			      @RequestParam("end_date") String end_date,
-			      @RequestParam("desired_wage") String desired_wage,
-			      @RequestParam("cctv") String cctv,
-			      @RequestParam("pic") String pic,
-			      @RequestParam("intro") String intro
+		public ModelAndView regForm(
+				@RequestParam("intro") String intro,
+				HttpSession ses
 				) {
-			
+			ses.setAttribute("intro", intro);
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("dbm_type" ,dbm_type);
-			mav.addObject("child_age" ,child_age);
-			mav.addObject("care_type" ,care_type);
-			mav.addObject("yoil" ,yoil);
-			mav.addObject("start_time" ,start_time);
-			mav.addObject("end_time" ,end_time);
-			mav.addObject("start_date" ,start_date);
-			mav.addObject("end_date" ,end_date);
-			mav.addObject("desired_wage" ,desired_wage);
-			mav.addObject("cctv" ,cctv);
-			mav.addObject("pic" ,pic);
-			mav.addObject("intro" ,intro);
 			
 			mav.setViewName("register/regForm");
 			return mav;
@@ -79,64 +59,36 @@ public class MemberController {
 		//회원가입 완료
 		@RequestMapping(value="/regOk", method=RequestMethod.POST)
 		public ModelAndView regOk(
-				@RequestParam("userid") String userid,
-				@RequestParam("userpwd") String userpwd,
-				@RequestParam("email1") String email1,
-				@RequestParam("email2") String email2,
-				@RequestParam("tel1") String tel1,
-				@RequestParam("zipcode") String zipcode,
-				@RequestParam("addr") String addr,
-				@RequestParam("addrdetail") String addrdetail,
 			      
-			    @RequestParam("dbm_type") String dbm_type,
-			    @RequestParam("child_age") String child_age,
-			    @RequestParam("care_type") String care_type,
-			    @RequestParam("desired_wage") String desired_wage,
-			    @RequestParam("cctv") String cctv,
-			    @RequestParam("pic") String pic,
-			    @RequestParam("intro") String intro,
-			    
-			    @RequestParam("yoil") String yoil,
-			    @RequestParam("start_time") String start_time,
-			    @RequestParam("end_time") String end_time,
-			    @RequestParam("start_date") String start_date,
-			    @RequestParam("end_date") String end_date,
-			      
-			HttpServletRequest req, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
-			mVo.setUserid(userid); mVo.setUserpwd(userpwd); mVo.setEmail1(email1); mVo.setEmail2(email2); mVo.setTel1(tel1); mVo.setZipcode(zipcode); mVo.setAddr(addr); mVo.setAddrdetail(addrdetail);
-			tVo.setDbm_type(dbm_type);tVo.setChild_age(child_age);tVo.setCare_type(care_type);tVo.setDesired_wage(desired_wage);tVo.setCctv(cctv);tVo.setPic(pic);tVo.setIntro(intro);
-			rdVo.setYoil(yoil);rdVo.setStart_time(start_time);rdVo.setEnd_time(end_time);rdVo.setStart_date(start_date);rdVo.setEnd_date(end_date);
+			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
+			
+			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+			
+			TransactionStatus status = transactionManager.getTransaction(def);
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
-			int result1 = dao.memberReg1(mVo);
-			if(result1<0) { 
-				System.out.println("member 테이블 삽입 실패");
-				mav.setViewName("register/regForm");
-				return mav;
-			}else { // member 테이블 성공
-				int result2 = dao.memberReg2(mVo, tVo);
-				if(result2<0) {
-					System.out.println("teacher 테이블 삽입 실패");
-					dao.memberDelete(mVo);
-					mav.setViewName("register/regForm");
-					return mav;
-				}else { // teacher 테이블 성공
-					int result3 = dao.memberReg3(mVo, rdVo);
-					if(result3<0) {
-						System.out.println("regulardate 테이블 삽입 실패");
-						dao.memberDelete(mVo);
-						mav.setViewName("register/regForm");
-						return mav;
-					} else { // 다 성공
-						mav.addObject("result", result3);
-						mav.setViewName("login/loginForm");
-						
-						return mav;
-					}
-				}
+			int result = 0;
+			try {
+				dao.memberReg1(mVo);
+				
+				dao.memberReg2(mVo, tVo);
+				
+				result = dao.memberReg3(mVo, rdVo);
+				
+				transactionManager.commit(status);
+			}catch(Exception e) {
+				transactionManager.rollback(status);
 			}
+			
+			if(result > 0 ) {
+				mav.setViewName("login/loginForm");
+			}else {
+				mav.setViewName("redirect/regForm");
+			}
+			return mav;
 		}
 		
 		// SMS 인증창 
@@ -177,14 +129,26 @@ public class MemberController {
 		}
 		
 		// 자녀 정보 입력
-		@RequestMapping("/parent/children")
-		public String children() {
+		@RequestMapping(value="/parent/children", method=RequestMethod.POST)
+		public String children(HttpSession ses,
+							  @RequestParam("pw_activity") String pw_activity,
+							  @RequestParam("wish_age") String wish_age
+				) {
+			ses.setAttribute("pw_activity", pw_activity);
+			ses.setAttribute("wish_age", wish_age);
 			return "register/parent/children";
 		}
 		
 		// 학부모 - 지역(시,군,구,동) 설정 
-		@RequestMapping("/parent/location")
-		public String parentLoaction() {
+		@RequestMapping(value="/parent/location", method=RequestMethod.POST)
+		public String parentLoaction(HttpSession ses,
+									@RequestParam("child_name") String child_name,
+									@RequestParam("child_birth") String child_birth,
+									@RequestParam("wish_wage") String wish_wage
+			) {
+			ses.setAttribute("child_name", child_name);
+			ses.setAttribute("child_birth", child_birth);
+			ses.setAttribute("wish_wage", wish_wage);
 			return "register/parent/location";
 		}
 		
@@ -213,146 +177,102 @@ public class MemberController {
 		}
 		
 		// 학부모 - 특이사항 입력
-		@RequestMapping("/parent/description")
-		public String parentDescription() {
+		@RequestMapping(value="/parent/description", method=RequestMethod.POST)
+		public String parentDescription(HttpSession ses,
+				@RequestParam("yoil") String yoil,
+				@RequestParam("start_date") String start_date,
+				@RequestParam("end_date") String end_date,
+				@RequestParam("start_time") String start_time,
+				@RequestParam("end_time") String end_time
+				) {
+			ses.setAttribute("yoil", yoil);
+			ses.setAttribute("start_date", start_date);
+			ses.setAttribute("end_date", end_date);
+			ses.setAttribute("start_time", start_time);
+			ses.setAttribute("end_time", end_time);
+			
 			return "register/parent/description";
 		}
 		
 		////////////////////////////// 돌봄몬 회원가입 시작 //////////////////////////////////
 		
-		// 돌봄몬 - 유형 선택(선생님, 대학생, 엄마, 일반)
+		// 돌봄몬 - 유형 선택(선생님, 대학생, 엄마, 일반) >>
 		@RequestMapping("/dbm/dbmType")
 		public String selectDbmType() {
 			return "register/dbm/dbmType";
 		}
 		
-		// 돌볼 수 있는 아이의 연령대와 가능한 활동
+		// 돌볼 수 있는 아이의 연령대와 가능한 활동  >>
 		@RequestMapping(value = "/dbm/activityAndAge", method = RequestMethod.POST)
-		public ModelAndView dbmActivityAndAge(@RequestParam("dbm_type") String dbm_type) {
+		public String dbmActivityAndAge(@RequestParam("care_type") String care_type, HttpSession ses) {
 			
-			ModelAndView mav = new ModelAndView();
+			ses.setAttribute("care_type", care_type);
 			
-			mav.addObject("dbm_type", dbm_type);
-			mav.setViewName("register/dbm/activityAndAge");
-			
-			return mav;
+			return "register/dbm/activityAndAge";
 		}
 		
-		// 돌봄몬 - 지역(시,군,구,동) 설정 
+		// 돌봄몬 - 지역(시,군,구,동) 설정  >>
 		@RequestMapping(value="/dbm/location", method = RequestMethod.POST)
-		public ModelAndView dbmLoaction(@RequestParam("dbm_type") String dbm_type,
-										@RequestParam("child_age") String child_age,
-										@RequestParam("care_type") String care_type
-		) {
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("dbm_type" ,dbm_type);
-			mav.addObject("child_age" ,child_age);
-			mav.addObject("care_type" ,care_type);
-			mav.setViewName("register/dbm/location");
-			return mav;
+		public String dbmLoaction(@RequestParam("child_age") String child_age,
+										@RequestParam("activity_type") String activity_type,
+										HttpSession ses
+		) {	
+			ses.setAttribute("child_age", child_age);
+			ses.setAttribute("activity_type", activity_type);
+			
+			return "register/dbm/location";
 		}
 		
-		// 돌봄몬 - 원하는 시간 입력
+		// 돌봄몬 - 원하는 시간 입력 >>
 		@RequestMapping(value="/dbm/schedule", method = RequestMethod.POST)
-		public ModelAndView dbmSchedule(@RequestParam("dbm_type") String dbm_type,
-							      @RequestParam("child_age") String child_age,
-							      @RequestParam("care_type") String care_type) {
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("dbm_type" ,dbm_type);
-			mav.addObject("child_age" ,child_age);
-			mav.addObject("care_type" ,care_type);
+		public String dbmSchedule(
+							      ) {
 			// 지역(시,군,구,동) 값 넘겨줘야 함 (미구현)
-			mav.setViewName("register/dbm/schedule/schedule");
-			return mav;
+			return "register/dbm/schedule/schedule";
 		}
 		
-		// 돌봄몬 - 원하는 시간 직접 입력하기
+		// 돌봄몬 - 원하는 시간 직접 입력하기 >>
 		@RequestMapping("/dbm/schedule/detail")
 		public String dbmScheduleDetail() {
 			return "register/dbm/schedule/detail";
 		}
 		
-		// 돌봄몬 - 희망시급과 CCTV동의여부 
+		// 돌봄몬 - 희망시급과 CCTV동의여부 >>
 		@RequestMapping(value="/dbm/wantedPaymentAndCCTV", method = RequestMethod.POST)
-		public ModelAndView dbmWantedPaymentAndCCTV(@RequestParam("dbm_type") String dbm_type,
-			      @RequestParam("child_age") String child_age,
-			      @RequestParam("care_type") String care_type,
+		public String dbmWantedPaymentAndCCTV(HttpSession ses,
 			      @RequestParam("yoil") String yoil,
 			      @RequestParam("start_time") String start_time,
 			      @RequestParam("end_time") String end_time,
 			      @RequestParam("start_date") String start_date,
 			      @RequestParam("end_date") String end_date
 		) {
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("dbm_type" ,dbm_type);
-			mav.addObject("child_age" ,child_age);
-			mav.addObject("care_type" ,care_type);
-			mav.addObject("yoil" ,yoil);
-			mav.addObject("start_time" ,start_time);
-			mav.addObject("end_time" ,end_time);
-			mav.addObject("start_date" ,start_date);
-			mav.addObject("end_date" ,end_date);
-			mav.setViewName("register/dbm/wantedPaymentAndCCTV");
-			return mav;
+			ses.setAttribute("yoil", yoil);
+			ses.setAttribute("start_time", start_time);
+			ses.setAttribute("end_time", end_time);
+			ses.setAttribute("start_date", start_date);
+			ses.setAttribute("end_date", end_date);
+			return "register/dbm/wantedPaymentAndCCTV";
 		}
 		
-		// 돌봄몬 - 프로필 사진 등록 폼
+		// 돌봄몬 - 프로필 사진 등록 폼 >>
 		@RequestMapping(value="/dbm/profileImage", method = RequestMethod.POST)
-		public ModelAndView dbmProfileImage(@RequestParam("dbm_type") String dbm_type,
-			      @RequestParam("child_age") String child_age,
-			      @RequestParam("care_type") String care_type,
-			      @RequestParam("yoil") String yoil,
-			      @RequestParam("start_time") String start_time,
-			      @RequestParam("end_time") String end_time,
-			      @RequestParam("start_date") String start_date,
-			      @RequestParam("end_date") String end_date,
+		public String dbmProfileImage(HttpSession ses, 
 			      @RequestParam("desired_wage") String desired_wage,
 			      @RequestParam("cctv") String cctv
 		){
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("dbm_type" ,dbm_type);
-			mav.addObject("child_age" ,child_age);
-			mav.addObject("care_type" ,care_type);
-			mav.addObject("yoil" ,yoil);
-			mav.addObject("start_time" ,start_time);
-			mav.addObject("end_time" ,end_time);
-			mav.addObject("start_date" ,start_date);
-			mav.addObject("end_date" ,end_date);
-			mav.addObject("desired_wage" ,desired_wage);
-			mav.addObject("cctv" ,cctv);
-			mav.setViewName("register/dbm/profileImage");
-			return mav;
+			ses.setAttribute("desired_wage" ,desired_wage);
+			ses.setAttribute("cctv" ,cctv);
+			return "register/dbm/profileImage";
 		}
 		
-		// 돌봄몬 - 간단 자기소개입력 폼
+		// 돌봄몬 - 간단 자기소개입력 폼 >>
 		@RequestMapping(value="/dbm/introduce", method = RequestMethod.POST)
-		public ModelAndView dbmIntroduce(@RequestParam("dbm_type") String dbm_type,
-			      @RequestParam("child_age") String child_age,
-			      @RequestParam("care_type") String care_type,
-			      @RequestParam("yoil") String yoil,
-			      @RequestParam("start_time") String start_time,
-			      @RequestParam("end_time") String end_time,
-			      @RequestParam("start_date") String start_date,
-			      @RequestParam("end_date") String end_date,
-			      @RequestParam("desired_wage") String desired_wage,
-			      @RequestParam("cctv") String cctv,
+		public String dbmIntroduce(
 			      @RequestParam("pic") MultipartFile pic,
 			      HttpServletRequest req
 				) {
 			HttpSession ses = req.getSession();
 			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("dbm_type" ,dbm_type);
-			mav.addObject("child_age" ,child_age);
-			mav.addObject("care_type" ,care_type);
-			mav.addObject("yoil" ,yoil);
-			mav.addObject("start_time" ,start_time);
-			mav.addObject("end_time" ,end_time);
-			mav.addObject("start_date" ,start_date);
-			mav.addObject("end_date" ,end_date);
-			mav.addObject("desired_wage" ,desired_wage);
-			mav.addObject("cctv" ,cctv);
-
 			String path = ses.getServletContext().getRealPath("/profileImg");
 			System.out.println("path = " + path);
 			String fileParamName1 = pic.getName();//폼의 파일첨부 객체 변수
@@ -366,11 +286,9 @@ public class MemberController {
 			}catch(IOException ie) {
 				ie.printStackTrace();
 			}
+			ses.setAttribute("pic", oriFileName1);
 			
-			mav.addObject("pic" ,oriFileName1);
-			
-			mav.setViewName("register/dbm/introduce");
-			return mav;
+			return "register/dbm/introduce";
 		}
 }
 
