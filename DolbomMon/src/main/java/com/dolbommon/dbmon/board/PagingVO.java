@@ -9,7 +9,7 @@ public class PagingVO {
 	private int onePageNumCount = 10;	//한번에 표시할 페이지 번호 숫자
 	private int startPageNum = 1;	//페이지 번호의 시작페이지
 	private int lastPageRecordCount = 10;	//마지막 페이지의 선택 레코드 수
-	
+	private int currentPageRecord = nowPage*onePageRecord;
 	//검색어
 	private String searchKey;
 	private String searchWord;
@@ -39,7 +39,6 @@ public class PagingVO {
 			lastPageRecordCount = onePageRecord;
 		}	
 	}
-	
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -69,6 +68,12 @@ public class PagingVO {
 	}
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
+	}
+	public int getCurrentPageRecord() {
+		return currentPageRecord;
+	}
+	public void setCurrentPageRecord(int currentPageRecord) {
+		this.currentPageRecord = currentPageRecord;
 	}
 	public String getSearchKey() {
 		return searchKey;
