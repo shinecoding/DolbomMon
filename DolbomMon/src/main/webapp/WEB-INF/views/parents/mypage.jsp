@@ -59,6 +59,7 @@
 
 </style>
 </head>
+<jsp:include page="../top.jsp"/>
 <body>
 
 <div class="container" >

@@ -123,7 +123,7 @@
  
    
    <div class="wrapper1" style="display:inline">
-	<div class="total" style="float:left"> 총 82 명 </div>
+	<div class="total" style="float:left"> 총 게시물 수 : ${totalRecord} </div>
 	<div class="float-right" style="float:right">후기순
 	<svg class="arrow-down-square-fill" width="1em" height="1em" viewBox="0 0 16 16"  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
  	 <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
@@ -131,8 +131,9 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-<div class="wrapper2"><a href="/parents/parentView"></a>
-	<ul class="list-group">
+	 <c:forEach var="vo" items="${list }">
+	<div class="wrapper2" Onclick="location.href='parentView'">
+	<ul class="list-group" style="font-size:.85em; font-weight: 500;">
 	<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
 			<li class="list-group-item border-0 col-2">
@@ -140,118 +141,25 @@
 				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 			</li>
 			<li class="list-group-item border-0 col-10">
-				<h6><b>이ㅇ기</b> | 3분전</h6>
-				<h6>서울시 마포구 백범로</h6>
-				<h7>21세| 희망시급 100000원</h7>
-				<div class="review_rate" style="line-height: 1.375;">후기수 : 100개</div>
+				<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
+				<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation }</a> <br/><br/>
+				<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
+				<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
+				
+				<div class="review_rate" style="line-height: 1.375;">등록일 : ${vo.t_date} | 후기수 : 100개</div>
 			</li>
 		</ul>
 	</li>
 	</ul>
+
 </div>
+<hr/>
+<br/>
+</c:forEach> 
+
+
 	<hr/>
-	<br/>
-<div class="wrapper2"><a href="/parents/parentView"></a>
-	<ul class="list-group">
-	<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				<h6><b>최ㅇ은</b> | 3분전</h6>
-				<h6>서울시 마포구 백범로</h6>
-				<h7>21세| 희망시급 100000원</h7>
-				<div class="review_rate" style="line-height: 1.375;">후기수 : 100개</div>
-			</li>
-		</ul>
-	</li>
-	</ul>
-</div>
-	<hr/>
-	<br/>
-<div class="wrapper2">
-<a href="/parents/parentView"></a>
-	<ul class="list-group">
-	<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				<h6><b>이ㅇ준</b> | 3분전</h6>
-				<h6>서울시 마포구 백범로</h6>
-				<h7>21세| 희망시급 100000원</h7>
-				<div class="review_rate" style="line-height: 1.375;">후기수 : 100개</div>
-			</li>
-		</ul>
-	</li>
-	</ul>
-</div>
-	<hr/>
-	<br/>
-<div class="wrapper2">
-	<ul class="list-group">
-	<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				<h6><b>이ㅇ기</b> | 3분전</h6>
-				<h6>서울시 마포구 백범로</h6>
-				<h7>21세| 희망시급 100000원</h7>
-				<div class="review_rate" style="line-height: 1.375;">후기수 : 100개</div>
-			</li>
-		</ul>
-	</li>
-	</ul>
-</div>
-	<hr/>
-	<br/>
-<div class="wrapper2">
-	<ul class="list-group">
-	<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				<h6><b>이ㅇ현</b> | 3분전</h6>
-				<h6>서울시 마포구 백범로</h6>
-				<h7>21세| 희망시급 100000원</h7>
-				<div class="review_rate" style="line-height: 1.375;">후기수 : 100개</div>
-			</li>
-		</ul>
-	</li>
-	</ul>
-</div>
-	<hr/>
-	<br/>
-<div class="wrapper2">
-	<ul class="list-group">
-	<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				<h6><b>고ㅇ연</b> | 3분전</h6>
-				<h6>서울시 마포구 백범로</h6>
-				<h7>21세| 희망시급 100000원</h7>
-				<div class="review_rate" style="line-height: 1.375;">후기수 : 100개</div>
-			</li>
-		</ul>
-	</li>
-	</ul>
-</div>
-	<hr/>
-	<br/>
+	<br/><br/>
 
 
 
