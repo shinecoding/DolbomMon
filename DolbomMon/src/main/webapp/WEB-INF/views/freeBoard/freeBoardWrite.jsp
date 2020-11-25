@@ -38,7 +38,7 @@
 <script>
 $(function(){
 	//ckeditor를 textarea와 연결하기
-	CKEDITOR.replace("content",{filebrowserUploadUrl:'/dbmon/imageUpload'});
+	CKEDITOR.replace("content",{filebrowserUploadUrl:'/dbmon/imageUpload.do'});
 	
 	//데이터 입력유무 확인
 	$("#freeBoardFrm").submit(function(){

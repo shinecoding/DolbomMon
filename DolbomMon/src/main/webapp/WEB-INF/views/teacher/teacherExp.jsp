@@ -83,12 +83,12 @@
 			var txt="";
 			txt+="<li><button class='btn btn-warning' type='button'>삭제</button>";		
 			txt+="<div>경험내용</div>";
-			txt+="<input type='text' class='form-control' placeholder='예)키즈카페, 교육기관, 봉사활동' />";
+			txt+="<input type='text' name='exp_content' class='form-control' placeholder='예)키즈카페, 교육기관, 봉사활동' />";
 			txt+="<hr/>";
 			txt+="<div>경험기간</div>";
 			txt+="<div class='expLine'>";
-			txt+="<input type='date' /> -";
-			txt+="<input type='date' />";
+			txt+="<input type='date' name='exp_start'/> -";
+			txt+="<input type='date' name='exp_end'/>";
 			txt+="</div></li>";
 			$("#result").append(txt);
 		}
@@ -96,6 +96,18 @@
 			exxxx();
 		});
 		
+		
+		$("button").click(function(){
+			$(this).parent().remove("li");
+		});
+	
+	
+		$("input[type=submit]").click(function(){
+			if( $("input[type=text]").val()=="" || $("input[name='exp_start']").val()=="" || $("input[name='exp_end']").val()==""){
+				alert("빈칸을 채워주세요");
+			}
+			return false;
+		});
 	});
 </script>
 </head>
@@ -110,25 +122,27 @@
 		</div>
 	 	
 	 	
-		<form method="get" action="">
+		<form method="post" action="teacherExpOk">
 			<div class="form-group">
 				<ul id="result">
-				<li>
-					<button class="btn btn-warning" type="button">삭제</button>		
-					<div>경험내용</div>
-					<input type="text" value="" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" />
-					<hr/>
-					<div>경험기간</div>
-					<div class="expLine">
-						<input type="date" /> -
-						<input type="date" />
-					</div>
-				</li>
-					
+				<c:forEach var="evo" items="${hash}">
+					<li>
+						<button class="btn btn-warning" type="button">삭제</button>		
+						<div>경험내용</div>
+						<input type="text" name="exp_content" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" 
+						value="${evo.exp_content}"	/>
+						<hr/>
+						<div>경험기간</div>
+						<div class="expLine">
+							<input type="date" name="exp_start" value="${evo.exp_start}"/> -
+							<input type="date" name="exp_end" value="${evo.exp_end}"/>
+						</div>
+					</li>
+					</c:forEach>
 				</ul>
 				<input type="button" id="addExp" class="btn btn-warning" value="+경험내용 추가하기"/>
 				
-				<!-- <input type="submit" class="btn btn-warning" value="저장" /> -->
+				<input type="submit" class="btn btn-warning" value="저장" />
 			</div>
 		</form>
 	</div>

@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TeacherVO {
 	private String userid;
-	private String pic = "테스트";
+	private String pic;
 	private String care_type;
 	private String[] type_list;
 	private String child_age;
@@ -19,6 +19,8 @@ public class TeacherVO {
 	private String cctv;
 	private String certi_check;
 	private MultipartFile filename;
+	private int hit;
+	private String last_edit;
 	
 	public MultipartFile getFilename() {
 		return filename;
@@ -115,6 +117,18 @@ public class TeacherVO {
 	}
 	public void setCerti_check(String certi_check) {
 		this.certi_check = certi_check;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public String getLast_edit() {
+		return last_edit;
+	}
+	public void setLast_edit(String last_edit) {
+		this.last_edit = last_edit;
 	}
 	
 	
