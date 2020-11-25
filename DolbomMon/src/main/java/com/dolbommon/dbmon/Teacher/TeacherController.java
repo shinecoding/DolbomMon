@@ -473,6 +473,10 @@ public class TeacherController {
 		return mav;		
 	}
 	
+	@RequestMapping("/teacherMap")
+	public String teacherMap() {
+		return "/teacher/teacherMap";
+	}
 
 	
 }
