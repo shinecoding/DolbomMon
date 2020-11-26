@@ -31,10 +31,13 @@ public class RecruitBoardController {
 		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("search/parent");
+
+
 		
 		return mav;
 		}
