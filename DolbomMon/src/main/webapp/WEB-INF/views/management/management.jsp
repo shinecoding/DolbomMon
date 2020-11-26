@@ -11,24 +11,28 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/74c16632e0.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery.bxslider.css" type="text/css"/>
 <script>
-	$(function(){
-		$(".main-menu").hover(function(){
-			$("#mainPage").css("left","250");
-		},function(){
-			$("#mainPage").css("left","100");
-		});
-		
+	
+
+	$(document).ready(function(){
+
+	    $("#mainPage").load("/dbmon/");
+
 	});
+
+
+	
  
     function memberPage(url){
         var ajaxOption = {
                 url : url,
                 async : true,
-                type : "POST",
+                type : "GET",
                 dataType : "html",
                 cache : false
         };
@@ -40,13 +44,14 @@
         
     }
     function logOut(){
-		<%
-			session.setAttribute("logStatus", "N");
-		%>		
-		location.href="/dbmon/management";
+		location.href="/dbmon/managerLogout";
     } 
-
-
+    /*
+	function openNewWindow() { 
+		window.open("/dbmon/messagetest","message","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=482, height=600"); 
+	}
+*/
+	
 </script>
 <style>
 	body, div{
@@ -67,9 +72,11 @@
 		height: -webkit-calc(100% - 100px);
 		
 	}
+	/*
 	button{
 		margin-top:15px;
 	}
+	*/
 	
 
 	.fa {
@@ -99,7 +106,7 @@
 		-webkit-transition:width .05s linear;
 		transition:width .05s linear;
 		-webkit-transform:translateZ(0) scale(1,1);
-		z-index:1000;	
+		z-index:1002;	
 	}
 	
 	.main-menu>ul {
@@ -187,21 +194,17 @@
 		color:#fff;
 		background-color:#5fa2db;
 	}
-	.area {
-		float: left;
-		background: #e2e2e2;
-		width: 100%;
-		height: 100%;
-	}
 	#nav-text {
 		font-family: 'Noto Sans KR', sans-serif;
 		font-style: normal;
 		font-weight: 300;
 	}
+	#mainPage{
+		overflow: scroll;
+	}
 
 	
 </style>
-
 
 </head>
 <body>
@@ -302,7 +305,8 @@
 
 
 <!-- ============================= -->
-<div id="topBar" id="topBar"></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
+<!-- <div id="topBar" id="topBar"><a href="javascript:openNewWindow()"><button class="btn btn-primary">쪽지</button></a></div> --> <!-- 돌봄몬 사이트 네비게이션 위치 --> 
+<div id="topBar" id="topBar"><a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))"><button class="btn btn-primary">쪽지</button></a></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
 <div id="mainPage"></div>
 </body>
 </html>
