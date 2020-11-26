@@ -193,6 +193,11 @@ hr {
 .chat-box-tray i:last-of-type {
   margin-left: 25px;
 }
+	#chatBox{
+		overflow:scroll;
+		overflow-x:hidden;
+		height:448px;
+	}
 </style>
 </head>
 <body>
@@ -282,57 +287,67 @@ hr {
 			</span>
 		  </div>
 		</div>
-		<div class="chat-panel">
-		  <div class="row no-gutters">
-			<div class="col-md-3">
-			  <div class="chat-bubble chat-bubble--left">
-				채팅 내용11
+		<div id="chatBox">
+			<div class="chat-panel">
+			  <div class="row no-gutters">
+				<div class="col-md-3">
+				  <div class="chat-bubble chat-bubble--left">
+					채팅 내용11
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row no-gutters">
-			<div class="col-md-3 offset-md-9">
-			  <div class="chat-bubble chat-bubble--right">
-				채팅 내용22
+			  <div class="row no-gutters">
+				<div class="col-md-3 offset-md-9">
+				  <div class="chat-bubble chat-bubble--right">
+					채팅 내용22
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row no-gutters">
-			<div class="col-md-3 offset-md-9">
-			  <div class="chat-bubble chat-bubble--right">
-				채팅 내용33
+			  <div class="row no-gutters">
+				<div class="col-md-3 offset-md-9">
+				  <div class="chat-bubble chat-bubble--right">
+					채팅 내용33
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row no-gutters">
-			<div class="col-md-3">
-			  <div class="chat-bubble chat-bubble--left">
-				채팅 내용44
+			  <div class="row no-gutters">
+				<div class="col-md-3">
+				  <div class="chat-bubble chat-bubble--left">
+					채팅 내용44
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row no-gutters">
-			<div class="col-md-3">
-			  <div class="chat-bubble chat-bubble--left">
-				채팅 내용55
+			  <div class="row no-gutters">
+				<div class="col-md-3">
+				  <div class="chat-bubble chat-bubble--left">
+					채팅 내용55
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row no-gutters">
-			<div class="col-md-3">
-			  <div class="chat-bubble chat-bubble--left">
-				채팅 내용66
+			  <div class="row no-gutters">
+				<div class="col-md-3">
+				  <div class="chat-bubble chat-bubble--left">
+					채팅 내용66
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row no-gutters">
-			<div class="col-md-3 offset-md-9">
-			  <div class="chat-bubble chat-bubble--right">
-				채팅 내용77
+			  <div class="row no-gutters">
+				<div class="col-md-3 offset-md-9">
+				  <div class="chat-bubble chat-bubble--right">
+					채팅 내용77
+				  </div>
+				</div>
 			  </div>
-			</div>
-		  </div>
-		  <div class="row">
+			  <div class="row no-gutters">
+				<div class="col-md-3 offset-md-9">
+				  <div class="chat-bubble chat-bubble--right">
+					채팅 내용88
+				  </div>
+				</div>
+			  </div>
+		 	</div>
+		</div>
+		<div class="row">
 			<div class="col-12">
 			  <div class="chat-box-tray">
 				<i class="material-icons">sentiment_very_satisfied</i>
@@ -342,7 +357,6 @@ hr {
 			  </div>
 			</div>
 		  </div>
-		</div>
 	  </div>
 	</div>
   </div>
