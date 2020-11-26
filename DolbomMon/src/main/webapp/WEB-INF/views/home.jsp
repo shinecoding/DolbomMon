@@ -38,8 +38,6 @@ if(manager!="Y"){
       text-align: center; 
       width: -webkit-calc(100%);  
      
-       width: 100%;  
-     
       }
    html{
    	   margin:0; padding:0;
@@ -53,15 +51,7 @@ if(manager!="Y"){
     #list{
        text-align:center;
        margin:0 auto;
-       
        }
-    #listitem{
-       
-       position:relative;
-       left:calc(10%);
-       width:10%;
-       
-    }
    
     #list img{
        background-color:orange;
@@ -80,6 +70,7 @@ if(manager!="Y"){
 </style>
 
 <body>
+<div style="min-width:1000px; overflow:hidden;">
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <jsp:include page="top.jsp"/>
@@ -94,8 +85,8 @@ if(manager!="Y"){
  <!--================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
-  <div id="list" style="max-width: 1000px; margin: auto;">
-  <ul id ="listitem" class="list-group list-group-horizontal-sm">
+  <div id="list" style="width: 1000px; min-width:1000px; overflow:hidden;">
+  <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:700px; margin:0 auto;">
      <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
      <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
      <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
@@ -168,7 +159,7 @@ if(manager!="Y"){
     
 
 
-
+</div>
 </body>
 
 </html>

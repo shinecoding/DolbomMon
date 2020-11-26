@@ -48,6 +48,7 @@
 	<!-- sqlSessionfactory객체 생성 -->
 	<beans:bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
+		<beans:property name="configLocation" value="classpath:/mybatis-config.xml"></beans:property>
 		<beans:property name="mapperLocations">
 			<beans:list>
 				<beans:value>classpath:com/dolbommon/dbmon/mapper/*.xml</beans:value>

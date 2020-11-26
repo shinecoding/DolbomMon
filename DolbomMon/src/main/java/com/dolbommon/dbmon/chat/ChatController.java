@@ -11,10 +11,13 @@ public class ChatController {
 	@Autowired
 	SqlSession sqlSession;
 	
+	@Autowired
+	ChatDAO chat;
+	
 	@RequestMapping("/chat")
 	public ModelAndView chatMain() {
 		ModelAndView mav = new ModelAndView();
-		
+		//채팅 폼으로 이동 임시.
 		mav.setViewName("chat/chatMain");
 		return mav;
 	}

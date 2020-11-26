@@ -64,7 +64,6 @@
 		 width: 100%;
 		 height: 100%;
 		 line-height: 48px;
-		 text-indent: 30px;
 		 font-weight:bold;
 		 color: #f6a21c;
 		 text-decoration: none;
@@ -105,7 +104,12 @@
 	   		margin-right:180px;
 	   		
 	   }
+	   .sub{
+	   }
 	   .clearfix:after { clear:both; } 
+	   .menu>li *{
+	   	width:100%
+	   }
    </style>
 </head>
 <body>
