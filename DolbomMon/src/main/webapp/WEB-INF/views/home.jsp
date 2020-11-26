@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dolbommon</title>
-<meta name="viewport" content="width=device, initial-scale=1" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
-<%
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" /><%
 String manager = (String)session.getAttribute("managerStatus");
 if(manager!="Y"){
 %>
@@ -16,18 +14,75 @@ if(manager!="Y"){
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
+
+
 </head>
 <script>
+var b = document.getElementById ("menu-button");
+b.addEventListener("click", showMenu, false);
+var i = 0;
+function showMenu () {
+       i++;
+       if(i % 2 == 1)
+           document.getElementById("menu").style.display = "block";
+       else
+           document.getElementById("menu").style.display = "none";
+}
+</script>
+<script>
+
+function getCookie(name) {
+
+    var cookies = document.cookie.split(";");
+
+    for(var i=0; i<cookies.length; i++) {
+
+        if(cookies[i].indexOf("=") == -1) {
+
+            if(name == cookies[i])
+
+                return "";
+
+        }
+
+        else {
+
+            var crumb = cookies[i].split("=");
+
+            if(name == crumb[0].trim())
+
+                return unescape(crumb[1].trim());
+
+        }
+
+    }
+
+};
+
+var desktopModeTF = getCookie("DesktopMode")
+
+var Scale = getCookie("DesktopModeScale")
+
+if (desktopModeTF == "true") {
+
+document.write('<meta name="viewport" content="width=1024, user-scalable=yes, initial-scale='+Scale+'">');
+
+} else {
+
+document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">')
+
+}
 
 </script>
+
 <style type="text/css">
-      *{
-      margin: 0px;
-      padding: 0px;
-      list-style-type: none;
-      cursor:pointer;
-      font-family:"Noto Sans KR";
-      
+
+*{
+margin: 0px;
+padding: 0px;
+list-style-type: none;
+cursor:pointer;
+font-family:"Noto Sans KR";
        }
    body{
       background-color:white; 
@@ -36,19 +91,14 @@ if(manager!="Y"){
       text-decoration:none;
       font-weight:bold;
       text-align: center; 
-      width: -webkit-calc(100%);  
-     
-       width: 100%;  
-     
+      margin:0; padding:0;
       }
    html{
    	   margin:0; padding:0;
        width: 100%;  
    }
-   #slider{ 
-         margin: 0 auto;
-         width: -webkit-calc(100%);
-         max-width:980px;
+        
+     
       }
     #list{
        text-align:center;
@@ -57,22 +107,23 @@ if(manager!="Y"){
        }
     #listitem{
        
-       position:relative;
-       left:calc(10%);
        width:10%;
        
     }
    
     #list img{
-       background-color:orange;
+       background-color:rgb(255, 121, 40);
        font-family:"Noto Sans KR,sans-serif!important;";
+       
+       
+       
     }
       li.list-group-item {
-          background-color: orange;
+          background-color:rgb(255, 121, 40);
           font-size:12px;
           font-weight:bold;
           margin:10px;
-   }
+          color:white;
     
 
 
@@ -82,26 +133,26 @@ if(manager!="Y"){
 <body>
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
-<jsp:include page="top.jsp"/>
+<%@include file="/WEB-INF/views/top.jsp"%>
 </div>
 
 
 <!-- -------------------bx슬라이더------------- -->
-<div id="slider">
+<div id="slider" >
 <%@ include file="/WEB-INF/views/bxslider.jsp" %>
 </div>
 
  <!--================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
-  <div id="list" style="max-width: 1000px; margin: auto;">
-  <ul id ="listitem" class="list-group list-group-horizontal-sm">
-     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
-     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
-     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
-     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
-     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
-     <li class="list-group-item" style="border-radius:50%"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
+  <div id="list" style="max-width: 1000px; margin:0 auto;">
+  <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; margin:0 auto;">
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
   
   <!-- START THE FEATURETTES -->
@@ -117,7 +168,7 @@ if(manager!="Y"){
         </p>
       </div>
       <div class="col-md-5">
-        <img src="img/guide1.PNG" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500"  focusable="false" role="img" /><rect width="100%" height="100%"/>
+        <img src="img/guide1.PNG" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500px" height="500px"  focusable="false" role="img" /><rect width="100%" height="100%"/>
       </div>
     </div>
 
