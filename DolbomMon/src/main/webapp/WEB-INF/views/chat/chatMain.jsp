@@ -200,7 +200,7 @@ hr {
 	<div class="row no-gutters">
 	  <div class="col-md-4 border-right">
 		<div class="settings-tray">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/filip.jpg" alt="Profile img">
+		  <img class="profile-image" src="https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMjEx/MDAxNDkxMTc1MTc3MDU2._c0rnvCrPIVJUFdB40z-tR3eUTv2aC9CMmm9b57lgmUg.FGaQd94-twbynMnhrvYW1gIdijL1vAbXcXQEzsT3WGYg.JPEG.eungee_e/se3_image_570625329.jpg?type=w800" alt="Profile img">
 		  <span class="settings-tray--right">
 			<i class="material-icons">cached</i>
 			<i class="material-icons">message</i>
@@ -214,55 +214,55 @@ hr {
 		  </div>
 		</div>
 		<div class="friend-drawer friend-drawer--onhover">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
+		  <img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">
 		  <div class="text">
-			<h6>Robo Cop</h6>
-			<p class="text-muted">Hey, you're arrested!</p>
+			<h6>test1</h6>
+			<p class="text-muted">채팅 내용</p>
 		  </div>
 		  <span class="time text-muted small">13:21</span>
 		</div>
 		<hr>
 		<div class="friend-drawer friend-drawer--onhover">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/optimus-prime.jpeg" alt="">
+		  <img class="profile-image" src="https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg" alt="">
 		  <div class="text">
-			<h6>Optimus</h6>
-			<p class="text-muted">Wanna grab a beer?</p>
+			<h6>test2</h6>
+			<p class="text-muted">채팅 내용1</p>
 		  </div>
 		  <span class="time text-muted small">00:32</span>
 		</div>
 		<hr>
 		<div class="friend-drawer friend-drawer--onhover ">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/real-terminator.png" alt="">
+		  <img class="profile-image" src="http://blog.jinbo.net/attach/615/200937431.jpg" alt="">
 		  <div class="text">
-			<h6>Skynet</h6>
-			<p class="text-muted">Seen that canned piece of s?</p>
+			<h6>test3</h6>
+			<p class="text-muted">채팅 내용2</p>
 		  </div>
 		  <span class="time text-muted small">13:21</span>
 		</div>
 		<hr>
 		<div class="friend-drawer friend-drawer--onhover">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/termy.jpg" alt="">
+		  <img class="profile-image" src="https://taegon.kim/wp-content/uploads/2018/05/image-1.gif" alt="">
 		  <div class="text">
-			<h6>Termy</h6>
-			<p class="text-muted">Im studying spanish...</p>
+			<h6>test4</h6>
+			<p class="text-muted">채팅 내용3</p>
 		  </div>
 		  <span class="time text-muted small">13:21</span>
 		</div>
 		<hr>
 		<div class="friend-drawer friend-drawer--onhover">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/rick.jpg" alt="">
+		  <img class="profile-image" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F24283C3858F778CA2EFABE" alt="">
 		  <div class="text">
-			<h6>Richard</h6>
-			<p class="text-muted">I'm not sure...</p>
+			<h6>test5</h6>
+			<p class="text-muted">채팅 내용4</p>
 		  </div>
 		  <span class="time text-muted small">13:21</span>
 		</div>
 		<hr>
 		<div class="friend-drawer friend-drawer--onhover">
-		  <img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/rachel.jpeg" alt="">
+		  <img class="profile-image" src="https://item.kakaocdn.net/do/a3f71a301d363f57dc069aa14d284ae2617ea012db208c18f6e83b1a90a7baa7" alt="">
 		  <div class="text">
-			<h6>XXXXX</h6>
-			<p class="text-muted">Hi, wanna see something?</p>
+			<h6>test6</h6>
+			<p class="text-muted">채팅 내용5</p>
 		  </div>
 		  <span class="time text-muted small">13:21</span>
 		</div>
@@ -270,10 +270,10 @@ hr {
 	  <div class="col-md-8">
 		<div class="settings-tray">
 			<div class="friend-drawer no-gutters friend-drawer--grey">
-			<img class="profile-image" src="https://www.clarity-enhanced.net/wp-content/uploads/2020/06/robocop.jpg" alt="">
+			<img class="profile-image" src="https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg" alt="">
 			<div class="text">
-			  <h6>Robo Cop</h6>
-			  <p class="text-muted">Layin' down the law since like before Christ...</p>
+			  <h6>test1</h6>
+			  <p class="text-muted">채팅 내용6</p>
 			</div>
 			<span class="settings-tray--right">
 			  <i class="material-icons">cached</i>
@@ -286,49 +286,49 @@ hr {
 		  <div class="row no-gutters">
 			<div class="col-md-3">
 			  <div class="chat-bubble chat-bubble--left">
-				Hello dude!
+				채팅 내용11
 			  </div>
 			</div>
 		  </div>
 		  <div class="row no-gutters">
 			<div class="col-md-3 offset-md-9">
 			  <div class="chat-bubble chat-bubble--right">
-				Hello dude!
+				채팅 내용22
 			  </div>
 			</div>
 		  </div>
 		  <div class="row no-gutters">
 			<div class="col-md-3 offset-md-9">
 			  <div class="chat-bubble chat-bubble--right">
-				Hello dude!
+				채팅 내용33
 			  </div>
 			</div>
 		  </div>
 		  <div class="row no-gutters">
 			<div class="col-md-3">
 			  <div class="chat-bubble chat-bubble--left">
-				Hello dude!
+				채팅 내용44
 			  </div>
 			</div>
 		  </div>
 		  <div class="row no-gutters">
 			<div class="col-md-3">
 			  <div class="chat-bubble chat-bubble--left">
-				Hello dude!
+				채팅 내용55
 			  </div>
 			</div>
 		  </div>
 		  <div class="row no-gutters">
 			<div class="col-md-3">
 			  <div class="chat-bubble chat-bubble--left">
-				Hello dude!
+				채팅 내용66
 			  </div>
 			</div>
 		  </div>
 		  <div class="row no-gutters">
 			<div class="col-md-3 offset-md-9">
 			  <div class="chat-bubble chat-bubble--right">
-				Hello dude!
+				채팅 내용77
 			  </div>
 			</div>
 		  </div>
@@ -336,7 +336,7 @@ hr {
 			<div class="col-12">
 			  <div class="chat-box-tray">
 				<i class="material-icons">sentiment_very_satisfied</i>
-				<input type="text" placeholder="Type your message here...">
+				<input type="text" placeholder="내용을 입력하세요.">
 				<i class="material-icons">mic</i>
 				<i class="material-icons">send</i>
 			  </div>
