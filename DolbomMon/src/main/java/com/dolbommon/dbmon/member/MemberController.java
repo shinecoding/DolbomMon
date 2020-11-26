@@ -3,11 +3,11 @@ package com.dolbommon.dbmon.member;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dolbommon.dbmon.Teacher.TeacherVO;
 
 @Controller
 public class MemberController {
@@ -39,8 +42,21 @@ public class MemberController {
 		////////////////공통//////////////	
 		// 선생님, 부모님 회원가입 선택
 		@RequestMapping("/join")
-		public String join() {
+		public String join(HttpSession ses) {
 			return "register/join";
+		}
+		
+		@RequestMapping(value="parentJoin", method=RequestMethod.POST)
+		public String parentJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
+			
+			ses.setAttribute("joinType", joinType);
+			return "register/regForm";
+		}
+		
+		@RequestMapping(value="dbmJoin", method=RequestMethod.POST)
+		public String dbmJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
+			ses.setAttribute("joinType", joinType);
+			return "register/dbm/dbmType";
 		}
 		
 		// 선생님, 부모님 회원가입 폼
@@ -56,8 +72,7 @@ public class MemberController {
 			return mav;
 		}
 				
-		//회원가입 완료
-		@RequestMapping(value="/regOk", method=RequestMethod.POST)
+		@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
 		public ModelAndView regOk(
 			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
 			
@@ -69,26 +84,30 @@ public class MemberController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
+			String joinType = (String)ses.getAttribute("joinType");
 			int result = 0;
+			
 			try {
-				dao.memberReg1(mVo);
-				
-				dao.memberReg2(mVo, tVo);
-				
-				result = dao.memberReg3(mVo, rdVo);
-				
+				if(joinType=="T") {
+					dao.memberReg(mVo);
+					
+					dao.memberRegTeacher(mVo, tVo);
+					
+					result = dao.memberRegRegular(mVo, rdVo);
+				}else {
+					result = dao.memberReg(mVo);
+				}
 				transactionManager.commit(status);
 			}catch(Exception e) {
 				transactionManager.rollback(status);
 			}
 			
-			if(result > 0 ) {
-				mav.setViewName("login/loginForm");
-			}else {
-				mav.setViewName("redirect/regForm");
-			}
+			mav.addObject("result", result);
+			mav.setViewName("register/regResult");
+			
 			return mav;
 		}
+		
 		
 		// SMS 인증창 
 		@RequestMapping("/smsIdentity")
@@ -196,7 +215,7 @@ public class MemberController {
 		////////////////////////////// 돌봄몬 회원가입 시작 //////////////////////////////////
 		
 		// 돌봄몬 - 유형 선택(선생님, 대학생, 엄마, 일반) >>
-		@RequestMapping("/dbm/dbmType")
+		@RequestMapping(value="/dbm/dbmType", method = RequestMethod.POST)
 		public String selectDbmType() {
 			return "register/dbm/dbmType";
 		}
@@ -216,6 +235,8 @@ public class MemberController {
 										@RequestParam("activity_type") String activity_type,
 										HttpSession ses
 		) {	
+			child_age = child_age.replace(",", "/");
+			activity_type = activity_type.replace(",", "/");
 			ses.setAttribute("child_age", child_age);
 			ses.setAttribute("activity_type", activity_type);
 			
@@ -253,7 +274,6 @@ public class MemberController {
 			return "register/dbm/wantedPaymentAndCCTV";
 		}
 		
-		// 돌봄몬 - 프로필 사진 등록 폼 >>
 		@RequestMapping(value="/dbm/profileImage", method = RequestMethod.POST)
 		public String dbmProfileImage(HttpSession ses, 
 			      @RequestParam("desired_wage") String desired_wage,
@@ -264,6 +284,55 @@ public class MemberController {
 			return "register/dbm/profileImage";
 		}
 		
+		@RequestMapping(value="/dbm/profileImageOk")
+		public String dbmProfileImageOk(HttpServletRequest req, HttpSession ses
+				) {
+			String path = ses.getServletContext().getRealPath("/upload");
+			// 파일 업로드를 하기위해서 req에서 MultipartHttpServletRequest 를 생성한다.
+			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+			
+			// mr에서 MultipartFile객체를 얻어온다.	-> List
+			List<MultipartFile> files = mr.getFiles("pic");
+			
+			//파일명을 저장할 변수
+			String fileNames[] = new String[files.size()]; 
+			int idx = 0;
+			
+			if(files!=null) { //첨부파일이 있을 때
+				for(int i=0;i<files.size();i++) { //for 111
+					MultipartFile mf = files.get(i);
+					System.out.println("files.get==>" + files.get(i));
+					String fName = mf.getOriginalFilename();// 폼의 파일명 얻어오기
+					if(fName!=null && !fName.equals("")) {
+						String oriFileName = fName.substring(0, fName.lastIndexOf("."));// 원파일의 앞부분
+						String oriExt = fName.substring(fName.lastIndexOf(".")+1);//확장자
+						// 이름을 바꿔야 한다.
+						File f = new File(path, fName); // 
+						if(f.exists()) { // 원래 파일객체가 서버에 있으면 실행
+							for(int renameNum=1;;renameNum++) { //1,2,3,4,5,6...
+								// 변경된 파일명
+								String renameFile = oriFileName+renameNum+"."+oriExt;
+								f = new File(path, renameFile);
+								if(!f.exists()) { // 파일이 있으면 true 없으면 false
+									fName = renameFile; 
+									break;
+								}
+							}
+						}
+						try {
+							mf.transferTo(f);
+						}catch(Exception e) {}
+						fileNames[idx++] = fName;
+					}
+				}//for 111
+			}
+			for(int i=0; i<fileNames.length; i++) {
+				ses.setAttribute("pic", fileNames[i]);
+			}
+			
+			return "register/dbm/introduce";
+		}
+		
 		// 돌봄몬 - 간단 자기소개입력 폼 >>
 		@RequestMapping(value="/dbm/introduce", method = RequestMethod.POST)
 		public String dbmIntroduce(
@@ -272,7 +341,7 @@ public class MemberController {
 				) {
 			HttpSession ses = req.getSession();
 			
-			String path = ses.getServletContext().getRealPath("/profileImg");
+			String path = ses.getServletContext().getRealPath("/upload");
 			System.out.println("path = " + path);
 			String fileParamName1 = pic.getName();//폼의 파일첨부 객체 변수
 			String oriFileName1 = pic.getOriginalFilename();// 원래 파일명
