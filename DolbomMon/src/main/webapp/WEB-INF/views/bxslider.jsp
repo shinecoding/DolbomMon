@@ -12,19 +12,18 @@
       -moz-box-shadow: none;
       -webkit-box-shadow: none;
       box-shadow: none;
-       border: 0;
-        outline:0;
+      border: 0;
+      outline:0;
       border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;
    }
   
 
- .bx-wrapper img{
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: 0;
-  outline:0;
-}
+ .bx-wrapper {
+ 	padding: 0; 
+ 	-webkit-box-shadow: none; 
+ 	box-shadow: none; 
+ 	border: none;
+ 	}
  
 
 
