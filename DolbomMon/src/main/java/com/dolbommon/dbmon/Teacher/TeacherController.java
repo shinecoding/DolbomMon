@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.register.MemberDaoImp;
+import com.dolbommon.dbmon.register.MemberVO;
 
 @Controller
 public class TeacherController {
@@ -495,13 +497,7 @@ public class TeacherController {
 		}
 		return mav;		
 	}
-	
-	@RequestMapping("/teacherMap")
-	public String teacherMap() {
-		return "/teacher/teacherMap";
-	}
 
-	
 
 }
 

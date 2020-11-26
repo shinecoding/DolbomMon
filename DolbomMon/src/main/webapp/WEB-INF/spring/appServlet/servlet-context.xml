@@ -29,7 +29,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.dolbommon.dbmon" />
-	<context:component-scan base-package="com.bitcamp.dbmon.brand" />
+
 	
 	<!-- 오라클dataSource 객체 생성 "jdbc:oracle:thin:@106.240.16.163:1521:xe" -->
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

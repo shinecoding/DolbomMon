@@ -151,9 +151,9 @@
 					</c:forEach>
 					</select>년
 					<select name="crime_month">
-					<c:forEach var="i" begin="1" end="12" >
-						<option>${i}</option>
-					</c:forEach>
+					<% for(int i=2020; i>1900; i--){ %>
+					<option><%=i%></option>
+					<% }; %>
 					</select>월
 					<select name="crime_day">
 					<c:forEach var="i" begin="1" end="31" >
