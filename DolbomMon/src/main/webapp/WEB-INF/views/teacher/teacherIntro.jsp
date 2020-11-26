@@ -24,7 +24,7 @@
 		vertical-align: bottom;
 		text-align:center;
 	}
-	#teacherIntroBox{
+	#intro{
 	border-color: orange;
 	
 	}
@@ -47,9 +47,9 @@
 		<div id="title">
 	   		<div id="titlefont">자기 소개 수정</div>
 	 	</div>
-		<form method="get" action="">
+		<form method="post" action="teacherIntroOk">
 			<div class="form-group">
-				<textarea class="form-control" id="teacherIntroBox" rows="10" placeholder="자기소개 작성 시  부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>
+				<textarea class="form-control" id="intro" name="intro" rows="10"  placeholder="자기소개 작성 시  부모님에게 2배 더 많은 신청을 받게 됩니다.">${vo.intro}</textarea>
 				<div class="m-2" id="introWarning"><i class="fas fa-ban"></i>
 				자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</div><br/>
 				<input type="submit" class="btn btn-warning" value="저장" />

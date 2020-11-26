@@ -77,7 +77,7 @@
 		});
 		
 		// 돌봄 유형 선택 시 색상 변경
-		$("input[name=activity]").change(function(){
+		$("input[name=pw_activity]").change(function(){
 			var selectedData = $(this).attr("id");
 			var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
 			if($(this).is(":checked")){
@@ -126,19 +126,19 @@
 </head>
 <body>
 	<div class="container">
-		<form method="get" action="<%=request.getContextPath()%>/parent/children">
+		<form method="post" action="<%=request.getContextPath()%>/parent/children">
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
 				<div id="headerTxt">어떤 돌봄을 원하세요?</div>
 			</div>
-				<input type="checkbox" id="1" name="activity" value="실내놀이"/>		
-				<input type="checkbox" id="2" name="activity" value="등하원돕기"/>		
-				<input type="checkbox" id="3" name="activity" value="영어놀이"/>	
-				<input type="checkbox" id="4" name="activity" value="한글놀이"/>		
-				<input type="checkbox" id="5" name="activity" value="학습지도"/>	
-				<input type="checkbox" id="6" name="activity" value="야외활동"/>	
-				<input type="checkbox" id="7" name="activity" value="밥챙겨주기"/>	
-				<input type="checkbox" id="8" name="activity" value="책읽기"/>
+				<input type="checkbox" id="1" name="pw_activity" value="실내놀이"/>		
+				<input type="checkbox" id="2" name="pw_activity" value="등하원돕기"/>		
+				<input type="checkbox" id="3" name="pw_activity" value="영어놀이"/>	
+				<input type="checkbox" id="4" name="pw_activity" value="한글놀이"/>		
+				<input type="checkbox" id="5" name="pw_activity" value="학습지도"/>	
+				<input type="checkbox" id="6" name="pw_activity" value="야외활동"/>	
+				<input type="checkbox" id="7" name="pw_activity" value="밥챙겨주기"/>	
+				<input type="checkbox" id="8" name="pw_activity" value="책읽기"/>
 			<div id="activityListDiv">
 				<div><label for="1" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-indooricon-n.svg"/></label><span>실내놀이</span></div>
 				<div><label for="2" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-guideicon-n@3x.png" style="width:38px; height:38px;"/></label><span>등하원돕기</span></div>
@@ -153,11 +153,11 @@
 				<div id="ageDivTitle">
 					어느 나이대의 돌봄몬을 원하시나요?
 				</div>
-				<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
-				<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
-				<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
-				<input type="checkbox" id="50" name="wish_age" value="50" />
-				<input type="checkbox" id="60" name="wish_age" value="60" />
+				<input type="checkbox" id="20" name="wish_age" value="20대" checked="checked"/>
+				<input type="checkbox" id="30" name="wish_age" value="30대" checked="checked"/>
+				<input type="checkbox" id="40" name="wish_age" value="40대" checked="checked"/>
+				<input type="checkbox" id="50" name="wish_age" value="50대" />
+				<input type="checkbox" id="60" name="wish_age" value="60대" />
 				<ul>
 					<li><label for="20">20</label></li>
 					<li><label for="30">30</label></li>

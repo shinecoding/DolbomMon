@@ -104,7 +104,7 @@
 				<div><label for="3">3명</label></div>
 				<div><label for="4">4명</label></div>
 			</div>
-			<form action="<%=request.getContextPath()%>/parent/location">
+			<form method="post" action="<%=request.getContextPath()%>/parent/location">
 				<div id="childrenDetailDiv">
 					<ul id="childrenDetail"></ul>
 				</div>

@@ -32,9 +32,4 @@ public class ParentController {
 		return "/parents/parentWage";
 	}
 	
-	// 학부모 스케줄 수정 폼
-	@RequestMapping("/scheduleEdit")
-	public String parentScheduleEdit() {
-		return "/parents/scheduleEdit";
-	}
 }
