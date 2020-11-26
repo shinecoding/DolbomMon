@@ -30,7 +30,7 @@
 		left: 760px;
 		top: 10px;
 	}
-	#replyList{
+	#replyListDiv{
 		width: 850px;
 	}
 </style>
@@ -42,7 +42,106 @@
 			}
 			return false;
 		});
+		
+		//댓글 쓰기
+		$("#replyForm").submit(function(){
+			if($("#content").val()==""){
+				alert("댓글을 입력후 등록하세요.");
+				return false;
+			}
+			var url = "/dbmon/replyWrite";
+			var params = $("#replyForm").serialize();
+			
+			$.ajax({
+				url: url,
+				data: params,
+				success: function(result){
+					replyListSelect();
+					$("#content").val("");
+				}, error: function(){
+					console.log("댓글 쓰기 에러 발생");			
+				}			
+			});		
+			return false;
+		});
+		
+		//댓글 수정 버튼 클릭시 수정폼 보여주기
+		$(document).on('click', '.edit', function(){
+			$(this).parent().css("display", "none");
+			$(this).parent().next().css("display", "block");	
+		});
+		
+		//edit 버튼 클릭시
+		$(document).on('submit', '#replyList form', function(){
+			var url = '/dbmon/replyEdit';
+			var params = $(this).serialize();	
+			
+			$.ajax({
+				url: url,
+				data: params,
+				success: function(result){
+					replyListSelect();
+				}, error: function(){
+					console.log("댓글 수정 에러 발생");
+				}		
+			});
+			return false;
+		});
+		
+		$(document).on('click', '.del', function(){		
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				var url = "/dbmon/replyDel";
+				var params = "re_no="+$(this).attr("title");
+				
+				$.ajax({
+					url: url,
+					data: params,
+					success: function(result){
+						replyListSelect();
+					}, error: function(){
+						console.log("댓글 삭제 에러 발생");
+					}				
+				});
+			}		
+		});	
 	});
+	
+	function replyListSelect(){	
+		var url = "/dbmon/replyList";
+		var data = "no=${vo.no}";
+		
+		$.ajax({
+			url: url,
+			data: data,
+			success: function(result){
+				var $result = $(result);
+				var tag = "";
+				$result.each(function(i, v){
+					tag += "<li><div>" + v.userid + " ("+v.writedate+") ";
+					if(v.userid=='${userid}'){
+						tag += "<input type='button' class='edit' value='수정'/>";
+						tag += "<input type='button' class='del' value='삭제' title='"+v.re_no+"'/>";
+					}
+					tag += "<br/>" + v.content + "<hr/></div>";
+					//로그인 한 아이디와 현재 댓글의 아이디가 같으면 수정폼을 생성
+					if(v.userid=='${userid}'){
+						tag += "<div style='display: none;'><form>";
+						tag += "<input type='hidden' name='re_no' value='" + v.re_no + "'/>";
+						tag += "<textarea name='content' style='width: 500px; height: 100px;'>"+v.content+"</textarea>"
+						tag += "<input type='submit' value='Edit'/></form></div>";		
+					}
+					tag += "</li>";
+				});
+				$("#replyList").html(tag);
+			}, error: function(){
+				console.log("댓글 선택 에러 발생");
+			}		
+		});
+	}
+	
+	//글내용보기 댓글 표시
+	replyListSelect();
+	
 
 </script>
 </head>
@@ -96,7 +195,6 @@
 		<!-- 댓글 쓰기 -->
 		<div id="reply">
 			<c:if test="${logStatus=='Y'}">
-				<!-- 댓글 쓰기 -->
 				<form method="post" id="replyForm">
 					<input type="hidden" name="no" value="${vo.no}"/>	<!-- 원글번호 -->
 					<textarea name="content" class="form-control" id="content" style="width: 720px; height: 60px;"></textarea>
@@ -104,15 +202,13 @@
 				</form>
 			</c:if>
 		</div>
-		<div id="replyList">
 			<br/>
 			
-			<ul id="replyList2" class="list-group">
+			<ul id="replyList" class="list-group">
 			<li class="list-group-item">gamja (2020-10-10)&nbsp;<a href="">수정</a> <a href="">삭제</a><br/>
 				댓글내용2
 			</li>
 			</ul>
-		</div>
 		<div>
 		<br/>
 			<c:if test="${userid==vo.userid}">

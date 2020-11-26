@@ -1,7 +1,6 @@
 package com.dolbommon.dbmon.board;
 
-import java.util.List;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ReplyController {
@@ -28,28 +28,38 @@ public class ReplyController {
 	//댓글 쓰기
 	@RequestMapping(value="/replyWrite", method=RequestMethod.GET)
 	@ResponseBody
-	public int replyInsert(FreeBoardReplyVO vo, HttpSession ses) {
+	public ModelAndView replyInsert(FreeBoardReplyVO vo, HttpServletRequest req, HttpSession ses) {
 		
-		System.out.println("111111111222222222");
 		System.out.println(vo.getContent());
 		
 		vo.setUserid((String)ses.getAttribute("userid"));	
+		
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
 		
-		System.out.println(vo.getNo()+vo.getContent());
-		return dao.replyInsert(vo);
+		int result = dao.replyInsert(vo);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result>0) {
+			mav.setViewName("redirect:freeBoardView");
+		}else {
+			mav.setViewName("freeBoard/result");	
+		}
+		return mav;
 	}
 	
 	//댓글 보기
 	@RequestMapping("/replyList")
 	@ResponseBody
-	public List<FreeBoardReplyVO> replyAllSelect(int no){
+	public ModelAndView replyAllSelect(int no){
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
+		FreeBoardReplyVO rVo = dao.replyAllSelect(no);
 		
-		System.out.println("111111111");
-		dao.replyAllSelect(no);
-		
-		return null;
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("rVo", rVo);
+		mav.setViewName("freeBoard/freeBoardView");
+
+		return mav;
 	}
 	
 	//댓글 수정
