@@ -24,7 +24,7 @@ public class JobSearchController {
 	DataSourceTransactionManager transactionManager;
 	
 	//구인페이지로 이동하기
-	@RequestMapping("/sitter") 
+	@RequestMapping("/sitterList") 
 	public ModelAndView parent() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
