@@ -18,18 +18,32 @@
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
-	}	
+	}
+	
+	#reply{
+		position: relative;
+		width: 900px;
+	}
+	#replyBtn{
+		float: rigth;
+		position: absolute;
+		left: 760px;
+		top: 10px;
+	}
+	#replyList{
+		width: 850px;
+	}
 </style>
 <script>
 	$(function(){
 		$("#delBtn").click(function(){
-			if(confirm("삭제하시겠습니까?")){
+			if(confirm("글을 삭제하시겠습니까?")){
 				location.href="/dbmon/freeBoardDel?no=${vo.no}";
 			}
 			return false;
 		});
 	});
-	
+
 </script>
 </head>
 <body>
@@ -77,7 +91,30 @@
 				</tr>
 			</tfoot>
 		</table>
+		<hr/>
+		
+		<!-- 댓글 쓰기 -->
+		<div id="reply">
+			<c:if test="${logStatus=='Y'}">
+				<!-- 댓글 쓰기 -->
+				<form method="post" id="replyForm">
+					<input type="hidden" name="no" value="${vo.no}"/>	<!-- 원글번호 -->
+					<textarea name="content" class="form-control" id="content" style="width: 720px; height: 60px;"></textarea>
+					<input type="submit" id="replyBtn" class="btn btn-outline-warning" value="등록"/>
+				</form>
+			</c:if>
+		</div>
+		<div id="replyList">
+			<br/>
+			
+			<ul id="replyList2" class="list-group">
+			<li class="list-group-item">gamja (2020-10-10)&nbsp;<a href="">수정</a> <a href="">삭제</a><br/>
+				댓글내용2
+			</li>
+			</ul>
+		</div>
 		<div>
+		<br/>
 			<c:if test="${userid==vo.userid}">
 				<a class="btn btn-warning" href="/dbmon/freeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
 				<a class="btn btn-warning" href="/dbmon/freeBoardEdit?no=${vo.no}" role="button">수정</a>
