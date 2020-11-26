@@ -200,7 +200,7 @@ hr {
 	<div class="row no-gutters">
 	  <div class="col-md-4 border-right">
 		<div class="settings-tray">
-		  <img class="profile-image" src="https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMjEx/MDAxNDkxMTc1MTc3MDU2._c0rnvCrPIVJUFdB40z-tR3eUTv2aC9CMmm9b57lgmUg.FGaQd94-twbynMnhrvYW1gIdijL1vAbXcXQEzsT3WGYg.JPEG.eungee_e/se3_image_570625329.jpg?type=w800" alt="Profile img">
+		  <img class="profile-image" src="https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMjEx/MDAxNDkxMTc1MTc3MDU2._c0rnvCrPIVJUFdB40z-tR3eUTv2aC9CMmm9b57lgmUg.FGaQd94-twbynMnhrvYW1gIdijL1vAbXcXQEzsT3WGYg.JPEG.eungee_e/se3_image_570625329.jpg?type=w8001" alt="Profile img">
 		  <span class="settings-tray--right">
 			<i class="material-icons">cached</i>
 			<i class="material-icons">message</i>
