@@ -21,9 +21,9 @@ $(document).ready(function() {
         $("#text").val(number); 
        
       	var to = $("#to").val();
-       
-       	if(to == "" || to == null){
-          	alert("-를 제외하고 입력해주세요");
+      	var telReg = /^01(?:0)\d{8}$/;
+       	if(!telReg.test(to)){
+          	alert("010으로 시작하는 전화번호만 인증가능합니다.");
        	} else {
 			var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
           
@@ -68,23 +68,34 @@ $(document).ready(function() {
 });
 </script>
 <style>
-
+	#contents{width:100%;}
+	#contents div{text-align:center; margin-top:20px;}
+	#telNum{display:inline-block; width:100%; margin:1%; }
+	#tel{display:inline-block; width:20%;}
+	#telChk{diplay:inline-block; width:80%;}
+	input[type=button]{width:18%; margin:0 1%;}
+	input[type=text]{width:78; margin:0 1%;}
+	
 </style>
 </head>
 <body>
-
-<div id="contents"> 
-	<form action="#" method="post">
- 		받는사람 : <input type="text" id="to" name="to"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
-	    <input type="button" id="send" value="전송"/><br> <!-- 문자보내는 전송버튼 -->
-		인증번호 :    <input type="text" id="userNum">   <!-- 인증번호 입력창 -->
-	  	<input type="button" id="enterBtn" value="확인">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
-	  
-	  
-	  <input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
-	 
-</form>  
-</div>
-
+	<div id="contents"> 
+		<form action="#" method="post">
+			<div>
+				<h3 style="margin:0 auto;">휴대폰 본인인증</h3>
+			</div>
+			<div>
+		 		<span id="tel">전화번호</span><span id="telChk"></span><br/>
+		 		<input type="text" id="to" name="to" placeholder="전화번호 입력"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+			    <input type="button" id="send" value="전송"/><br> <!-- 문자보내는 전송버튼 -->
+			</div>
+			<div>
+				<span id="telNum">인증번호</span><br/>
+				<input type="text" id="userNum" placeholder="인증번호 입력">   <!-- 인증번호 입력창 -->
+			  	<input type="button" id="enterBtn" value="확인">   <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
+			</div>
+		    <input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+		</form>  
+	</div>
 </body>
 </html>

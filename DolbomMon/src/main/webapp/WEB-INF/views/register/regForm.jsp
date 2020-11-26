@@ -26,8 +26,8 @@
 	#headerDiv>h4{width:70%; margin:0 auto;}
 	
 	sapn{display:inline-block; margin-left:5px; font-size:14px;}	
-	.container>div>label{display:inline-block; width:auto;float:left; margin:0;}
-	.container>div>span{width:auto;height:20px;float:left;}
+	.container>div>label{display:inline-block; width:auto;float:left; margin:0; margin-right:5px;}
+	.container>div>span{display:inline-block; width:auto;height:20px;line-height:24px; font-size:14px; float:left;}
 	.container>div>input{width:80%; height:50px; padding:5px 10px; float:left;}
 	#emailDiv span{width:auto; height:20px; font-size:20px; line-height:50px; float:left; margin:0 5px;} 
 	
@@ -39,6 +39,8 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
 <script>
 	$(function(){
+		
+		
 		// 생년월일 옵션
 		var option = {
 			showAnim : "show",
@@ -47,15 +49,15 @@
 			minDate : '-100y',
 			dateFormat : "yy-mm-dd"
 		}
-		$("#birth").datepicker({
+		$("#birthBtn").datepicker({
 			showAnim : "show",
 			changeMonth : true,
 			changeYear : true,
 			yearRange : 'c-100:c',
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
-				$("#birthTxt").val(dateText);
-				$("#birth").val("생년월일");
+				$("#birth").val(dateText);
+				$("#birthBtn").val("생년월일");
 			},
 			altFormat:"yyyy-mm-dd"
 		});
@@ -63,7 +65,7 @@
 		
 		// 휴대폰 본인인증 
 		$("#smsIdentity").click(function(){
-			window.open("<%=request.getContextPath()%>/smsIdentity", "sms");
+			window.open("<%=request.getContextPath()%>/smsIdentity", "sms", "top=100, left=500, width=500, height=400");
 		});
 		
 		
@@ -97,7 +99,10 @@
 		
 		// 성별 라디오 버튼 
 		$("#genderDiv input[type=radio]").change(function(){
-			var selectedDate = $(this).attr("id");
+			setGenderRadioBtnColor();
+		});
+		
+		function setGenderRadioBtnColor(){
 			for(var i=1;i<=2;i++){
 				if($("input[id="+i+"]").is(":checked")) {
 					$("label[for="+i+"]").css("background-color", "#ff5400").css("color", "white");
@@ -105,7 +110,7 @@
 					$("label[for="+i+"]").css("background-color", "#EFEFEF").css("color", "black");
 				}
 			}
-		});
+		}
 		
 		// 아이디 중복검사
 		$("#useridChk").on('click', function(){
@@ -159,7 +164,7 @@
 	
 </script>
 </head>
-<body>
+<body onload="setGenderRadioBtnColor();">
 	<form method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
 	
@@ -200,8 +205,8 @@
 			<input type="text" id="username" name="username" placeholder="이름 입력" style="width:80%;"/> 
 		</div>
 		<div id="birthDiv">
-			<input type="button" id="birth" value="생년월일" style="width:20%;margin-right:5%" />
-			<input type="text" id="birthTxt" name="birth" style="width:50%;" readonly="readonly" placeholder="생년월일"/>
+			<input type="button" id="birthBtn" value="생년월일" style="width:20%;margin-right:5%" />
+			<input type="text" id="birth" name="birth" style="width:50%;" readonly="readonly" placeholder="생년월일"/>
 		</div>
 		<div id="genderDiv"> 
 			<label for="1"  ><input type="radio" name="gender" id="1" value="M" />남자</label>
