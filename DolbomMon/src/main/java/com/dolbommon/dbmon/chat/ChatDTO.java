@@ -1,14 +1,17 @@
 package com.dolbommon.dbmon.chat;
 
-
-public class ChatRoomDTO {
-	
+public class ChatDTO {
+	private String chatseq;
 	private String roomseq;
 	private String userid;
-	private String roomname;
+	private String message;
 	private String indate;
-	
-	
+	public String getChatseq() {
+		return chatseq;
+	}
+	public void setChatseq(String chatseq) {
+		this.chatseq = chatseq;
+	}
 	public String getRoomseq() {
 		return roomseq;
 	}
@@ -21,11 +24,11 @@ public class ChatRoomDTO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getRoomname() {
-		return roomname;
+	public String getMessage() {
+		return message;
 	}
-	public void setRoomname(String roomname) {
-		this.roomname = roomname;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	public String getIndate() {
 		return indate;
