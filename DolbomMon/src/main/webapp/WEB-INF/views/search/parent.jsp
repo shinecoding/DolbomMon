@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+
 <style>
 	* {
 		margin:0; padding:0; list-style-type:none; box-sizing:border-box; 
@@ -131,7 +132,7 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-<div class="wrapper2">
+<div class="wrapper2" onclick="location.href='parentView'">
 	<ul class="list-group">
 	<li class="list-group-item">
 	<ul class="list-group list-group-horizontal">
@@ -140,6 +141,7 @@
 			<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 		</li>
 		<li class="list-group-item border-0 col-10">
+			<h6>글번호  : ${search.search_num}</h6>
 			<h6><b>신생아 1명, 유아 1명</b> | 3분전</h6>
 			<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
 			<h7>경북 구미시 | 홍O동 | 11/18 시작</h7>

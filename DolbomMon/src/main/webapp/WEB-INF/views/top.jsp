@@ -123,6 +123,8 @@
 	        <a href="/dbmon/temporaryLogin">
 	        <button class="btn btn-info">임시로그인</button></a>
 	        </span>
+	        
+	        
 	 		<a class="btn" style="float:right">	
 			<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
 			<c:if test="${logStatus == null || logStatus=='N'}">
@@ -131,7 +133,7 @@
  	
  	
 			<c:if test="${logStatus != null || logStatus=='Y'}">
-			${username } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
+			${userid } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
 			</c:if>
 
 	</a> 				
@@ -159,9 +161,9 @@
 		<li><a href="/dbmon/freeBoard">자유게시판</a>
 
 		</li>
-		<li><a href="/dbmon/sitter">돌봄몬찾기</a>
+		<li><a href="/dbmon/parent">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
 		</li>
-		<li><a href="/dbmon/parent">일자리찾기</a>
+		<li><a href="/dbmon/sitter">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
 	    
 		</li>
 		<li><a href="#">My Menu</a>

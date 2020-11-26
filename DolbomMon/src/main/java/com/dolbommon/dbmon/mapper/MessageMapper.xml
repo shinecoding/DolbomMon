@@ -12,14 +12,14 @@
 				userid_w=#{userid}  
 			</when>
 			<when test='tabType.equals("3")'>
-				(userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N')
+				((userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N'))
 			</when>
 			<otherwise>
 				userid_r=#{userid} 
 			</otherwise>
 		</choose>
 		<if test='tabType.equals("4")'>
-			and spam='Y' and inactivity_r='N'	
+			and spam='Y' and inactivity_r='N' and message_save_r='N'	
 		</if>
 		<if test='tabType.equals("2")'>
 			and message_save_w='N' and inactivity_w='N'
@@ -31,10 +31,10 @@
 			<if test='searchKey.equals("userid")'>
 				<choose>
 					<when test='tabType.equals("2")'>
-						and userid_w
+						and userid_r
 					</when>
 					<otherwise>
-						and userid_r
+						and userid_w
 					</otherwise>
 				</choose>
 			</if>
@@ -57,14 +57,14 @@
 				userid_w=#{userid}  
 			</when>
 			<when test='tabType.equals("3")'>
-				(userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N')
+				((userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N'))
 			</when>
 			<otherwise>
 				userid_r=#{userid} 
 			</otherwise>
 		</choose>
 		<if test='tabType.equals("4")'>
-			and spam='Y' and inactivity_r='N'	
+			and spam='Y' and inactivity_r='N' and message_save_r='N'	
 		</if>
 		<if test='tabType.equals("2")'>
 			and message_save_w='N' and inactivity_w='N'
@@ -76,10 +76,10 @@
 			<if test='searchKey.equals("userid")'>
 				<choose>
 					<when test='tabType.equals("2")'>
-						and userid_w
+						and userid_r
 					</when>
 					<otherwise>
-						and userid_r
+						and userid_w
 					</otherwise>
 				</choose>
 			</if>
@@ -95,7 +95,11 @@
 	</select>
 	
 	<insert id="messageWrite"  parameterType="com.dolbommon.dbmon.message.MessageVO">
-		insert into message(no, userid_w, userid_r, subject, content) values(message_sq.nextval, #{userid_w}, #{userid_r}, #{subject}, #{content})
+		insert into message(no, userid_w, userid_r, subject, content, spam) values(message_sq.nextval, #{userid_w}, #{userid_r}, #{subject}, #{content}, 'N')
+	</insert>
+	
+	<insert id="spamWrite"  parameterType="com.dolbommon.dbmon.message.MessageVO">
+		insert into message(no, userid_w, userid_r, subject, content, spam) values(message_sq.nextval, #{userid_w}, #{userid_r}, #{subject}, #{content}, 'Y')
 	</insert>
 	
 	<update id="readMessage">
@@ -105,10 +109,10 @@
 	<select id="newMessage" parameterType="com.dolbommon.dbmon.message.MessageVO" resultType="int">
 		select count(no) from message where message_check='N' and 
 		<if test='tabType.equals("4")'>
-			userid_r=#{userid} and spam='Y'
+			userid_r=#{userid} and spam='Y' and message_save_r='N' and inactivity_r='N'
 		</if>
 		<if test='tabType.equals("3")'>
-			userid_r=#{userid} and message_save_r='Y' and inactivity_r='N'
+			((userid_r=#{userid} and message_save_r='Y' and inactivity_r='N') or (userid_w=#{userid} and message_save_w='Y' and inactivity_w='N'))
 		</if>
 		<if test='tabType.equals("2")'>
 			userid_w=#{userid} and message_save_w='N' and inactivity_w='N'
@@ -120,10 +124,10 @@
 			<if test='searchKey.equals("userid")'>
 				<choose>
 					<when test='tabType.equals("2")'>
-						and userid_w
+						and userid_r
 					</when>
 					<otherwise>
-						and userid_r
+						and userid_w
 					</otherwise>
 				</choose>
 			</if>
@@ -162,5 +166,25 @@
 			</otherwise>
 		</choose>
 		where no=#{no}
+	</update>
+	
+	<select id="checkSpamId" parameterType="map" resultType="int">
+		select count(userid) from spammessage where userid=#{recieveId} and spamId=#{spamId}
+	</select>
+	
+	<insert id="registerSpamId" parameterType="map">
+		insert into spammessage(userid, spamid) values(#{recieveId}, #{spamId})
+	</insert>
+	
+	<update id="changSpam" parameterType="map">
+		update message set spam='Y' where userid_r=#{recieveId} and userid_w=#{spamId}
+	</update>
+	
+	<delete id="spamCancel" parameterType="map">
+		delete from spammessage where userid=#{recieveId} and spamid=#{spamId}
+	</delete>
+	
+		<update id="changMessage" parameterType="map">
+		update message set spam='N' where userid_r=#{recieveId} and userid_w=#{spamId}
 	</update>
 </mapper>

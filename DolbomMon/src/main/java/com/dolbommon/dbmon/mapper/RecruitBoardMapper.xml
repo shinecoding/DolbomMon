@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
+	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select job_board_no, userid, care_addr, zone, time_type, wish_age, consultation, content, wish_gender, content, hit, to_char(write_date, 'MM-DD HH:MI') write_date from parent_list order by no desc	
+	</select>
+	
+	
+	<select id="getTotalRecord" resultType="int">	
+		select count(job_board_no) from parent_list
+	</select>
+	
+	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select job_board_no, userid, content, hit, writedate
+		from parent_list where job_board_no=#{param1}
+	</select>
+	
+	<update id="hitCount" parameterType="int">
+		update parent_list set hit=hit+1 where job_board_no=#{param1}
+	</update>
+	
+	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		insert into parent_list(job_board_no, content, userid, hit, writedate) 
+		values(board_sq.nextval,#{content}, #{userid}, 0, sysdate)
+	</insert>
+	
+	<delete id="recruitBoardDel">
+		delete from parent_list where job_board_no=#{param1} and userid=#{param2}
+	</delete>
+	
+	<update id="recruitBoardEditOk" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		update parent_list set content=#{content}, where job_board_no=#{job_board_no} and userid=#{userid}
+	</update>
+<!-- 	
+	<select id="optionSelect" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select job_board_no, ref, step, lvl from parent_list where job_board_no=#{param1}
+	</select> -->
+	
+	
+	<insert id="replyBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		insert into parent_list(job_board_no, content, userid, hit, writedate) 
+		values(board_sq.nextval, #{content}, #{userid}, 0, sysdate)
+	</insert>
+	
+	
+</mapper>
