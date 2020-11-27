@@ -11,8 +11,8 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <style>
 	* {
-		margin:0; padding:0; list-style-type:none; box-sizing:border-box; 
-		font-family: Noto Sans KR,sans-serif!important;
+		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
+		font-family: Noto Sans KR,sans-serif!important; 
 	}
 
 	#all{
@@ -83,11 +83,11 @@
  
 </style>
 
-<!-- -------------------상단메뉴------------- -->
-<jsp:include page="../top.jsp"/>
-<!-- ------------------------------------------ -->
 <body>
-
+<!-- -------------------상단메뉴------------- -->
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+</div>
 <div class="all_wrapper">
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:#f0f0f0;"> 
 <div id="filterbox" >

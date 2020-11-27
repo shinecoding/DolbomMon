@@ -11,21 +11,23 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <script>
-	$(function(){
+/* 	$(function(){
 		$("a").hover(function(){
 			  $(this).css("text-decoration", "none").css("color", "black");
 			  }, function(){
 			  $(this).css("text-decoration", "none").css("color", "black");
 			});
 		
-	});
+	}); */
 </script>
 <style>
 	.container{width:800px;}
+	
 	#title{
 		margin:20px 5px;
 		display:block;
-	width:100%;
+    	width:100%;
+    	
 	}
 	#titlefont{
 		font-size: 25px;
@@ -59,8 +61,12 @@
 
 </style>
 </head>
-<jsp:include page="../top.jsp"/>
+<!-- -------------------상단메뉴------------- -->
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+</div>
 <body>
+
 
 <div class="container" >
    <div id="title">
