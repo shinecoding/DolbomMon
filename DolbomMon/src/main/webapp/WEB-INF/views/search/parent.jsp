@@ -100,7 +100,7 @@
 <form class="form-inline">
   <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
   <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
-    <option selected>돌봄 유형을 선택하시면, 맞춤시터를 보여드려요</option>
+    <option selected>돌봄 유형을 선택하시면, 맞춤 일자리를 보여드려요</option>
     <option value="1">2~10세 정기 돌봄</option>
     <option value="2">신생아/영아 정기 돌봄</option>
     <option value="3">긴급 돌봄</option>

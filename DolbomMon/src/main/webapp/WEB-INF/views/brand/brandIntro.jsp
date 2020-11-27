@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <style>
-	body,li{margin:0; padding:0; text-align:center;}
+	body,ul,li{margin:0; padding:0; text-align:center;}
 	.img1{
 		width:80%;
 		height:280px;
