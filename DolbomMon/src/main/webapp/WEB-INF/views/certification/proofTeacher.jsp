@@ -162,9 +162,9 @@
 			<img src="img/ex-cert-childcare-2.png"/>
 			<div class="certTime">
 				<select name="license_year">
-				<% for(int i=2020; i>1900; i--){ %>
-					<option><%=i%></option>
-				<% }; %>
+				<c:forEach var="i" begin="1950" end="2020" >
+					<option>${i}</option>
+				</c:forEach>
 				</select>년
 				<select name="license_month">
 				<c:forEach var="i" begin="1" end="12" >

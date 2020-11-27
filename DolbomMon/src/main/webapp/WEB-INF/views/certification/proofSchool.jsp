@@ -153,9 +153,9 @@
 			<div id="schoolInfo">
 				<select name="degree">
 				<option selected disabled>학위</option>
-				<% for(int i=2020; i>1900; i--){ %>
-					<option><%=i%></option>
-				<% }; %>
+				<c:forEach var="i" items="학사, 석사, 박사" >
+					<option>${i}</option>
+				</c:forEach>
 				</select>
 				<select name="status">
 				<option selected disabled>학적상태</option>
