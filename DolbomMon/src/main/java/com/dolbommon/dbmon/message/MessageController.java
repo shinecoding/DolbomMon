@@ -100,7 +100,6 @@ public class MessageController {
 		}
 		mav.addObject("newMessage", result);
 		
-		System.out.println("마지막 검색어 확인==="+prevWord);
 		return mav;
 	}
 	

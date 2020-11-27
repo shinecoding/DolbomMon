@@ -186,6 +186,17 @@
 		width:15px;
 		height:15px;
 	}
+	
+	#btnResize{
+		height:29px;
+		width:45px;
+		font-size:14px;
+		text-align:center;
+		padding:0;
+		margin:0;
+		margin-bottom:3px;
+	}
+
 </style>
 </head>
 <body onload="tabChange()">
@@ -315,7 +326,7 @@
 	
 <!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
-		<div class="btns">
+		<div class="btns" class="clearfix" style="margin-bottom:10px;">
 			<c:if test="${tabType!='3'}">
 			<a href="javascript:saveMessage()" class="btn_keep">
 				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>	</a> </c:if>
@@ -323,10 +334,12 @@
 			<c:if test="${tabType=='4'}">
 			<a href="javascript:spamCancel()" class="btn_keep"> <span><img src="icon/message/block_clear.gif" alt="스팸등록해제" /></span></a>
 			</c:if>
+			<a href="/dbmon/messageWrite" class="btn_keep" style="float:right"> <span><img src="icon/message/btn_write.gif" alt="쪽지보내기" /></span></a>
+			
 		</div>
 
 		<!--page-->
-		<div id="paging">
+		<div id="paging" class="clearfix">
 			<ul  class="pagination" >
 				<!-- 이전페이지 -->
 			
@@ -364,13 +377,13 @@
 			<ul>
 				<input type="hidden" name="tabType" value="${tabType}"/>
 				<li>
-				   	<select name="searchKey" id="searchKey" style="height:27px;">
+				   	<select name="searchKey" class="" id="searchKey" style="height:27px;">
 					<option value="subject" > 제목</option>
 					<option value="content" >본문</option>
 					<option value="userid" >아이디</option>
 	            	</select>
 				<input type="text" name="searchWord" id="searchWord" value="${prevWord}"/>
-				<input type="submit" value="검색"/>
+				<input type="submit" value="검색" class="btn btn-info" id="btnResize"/>
 				</li>
 			</ul>
 	</form>
