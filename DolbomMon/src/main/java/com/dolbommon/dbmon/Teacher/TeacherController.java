@@ -22,8 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
-import com.dolbommon.dbmon.register.MemberDaoImp;
-import com.dolbommon.dbmon.register.MemberVO;
+import com.dolbommon.dbmon.Teacher.MemberVO;
 
 @Controller
 public class TeacherController {
@@ -498,6 +497,45 @@ public class TeacherController {
 		return mav;		
 	}
 
+	//지도
+	@RequestMapping("/teacherMap")
+	public ModelAndView teacherMap(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		MemberVO mvo = dao.selectTMap(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("mvo", mvo);
+		mav.setViewName("/teacher/teacherMap");
+		
+		return mav;
+		
+	}
+	
+@RequestMapping(value="/teacherMapOk", method=RequestMethod.POST)
+	public ModelAndView teacherMapOk(MemberVO mvo, HttpSession ses, HttpServletRequest req) {
+		String userid = (String) ses.getAttribute("userid");
+		mvo.setUserid(userid);
+		
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		String lat = req.getParameter("lat");
+		String lng = req.getParameter("lng");
+		mvo.setLat(lat);
+		mvo.setLng(lng);
+		
+		int result = dao.updateTMap(mvo);
+		TeacherVO vo = dao.selectTeacher(userid);
+		ModelAndView mav = new ModelAndView();
+
+		if(result>0) {
+		mav.addObject("mvo", mvo);
+		mav.addObject("vo", vo);
+		mav.setViewName("/teacher/teacherEdit");
+		}else {
+			mav.setViewName("teacher/teacherResult");
+		}
+		return mav;
+	}
 
 }
 

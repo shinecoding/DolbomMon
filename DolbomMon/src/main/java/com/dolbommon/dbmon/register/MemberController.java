@@ -295,44 +295,7 @@ public class MemberController {
 		
 		
 		
-		@RequestMapping("/teacherMap")
-		public ModelAndView teacherMap(HttpSession ses) {
-			String userid = (String)ses.getAttribute("userid");
-			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			MemberVO mvo = dao.selectTMap(userid);
-			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("mvo", mvo);
-			mav.setViewName("/teacher/teacherMap");
-			
-			return mav;
-			
-		}
 		
-	@RequestMapping(value="/teacherMapOk", method=RequestMethod.POST)
-		public ModelAndView teacherMapOk(MemberVO mvo, HttpSession ses, HttpServletRequest req) {
-			mvo.setUserid((String)ses.getAttribute("userid"));
-			String userid = (String) ses.getAttribute("userid");
-			
-			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			TeacherDaoImp tdao = sqlSession.getMapper(TeacherDaoImp.class);
-			String lat = req.getParameter("lat");
-			String lng = req.getParameter("lng");
-			mvo.setLat(lat);
-			mvo.setLng(lng);
-			
-			int result = dao.updateTMap(mvo);
-			
-			ModelAndView mav = new ModelAndView();
-	
-			if(result>0) {
-			mav.addObject("mvo", mvo);
-			mav.setViewName("/teacher/teacherEdit");
-			}else {
-				mav.setViewName("teacher/teacherResult");
-			}
-			return mav;
-		}
 		
 		
 }

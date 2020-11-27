@@ -13,7 +13,5 @@ public interface MemberDaoImp {
 	public int memberDelete(MemberVO mVo);
 	
 	
-	//선생 지도 받기
-	public MemberVO selectTMap(String userid);
-	public int updateTMap(MemberVO mvo);
+	
 }
