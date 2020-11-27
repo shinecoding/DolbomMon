@@ -1,4 +1,4 @@
-package com.dolbommon.dbmon.register;
+package com.dolbommon.dbmon.Teacher;
 
 public class MemberVO {
 	private int no;

@@ -9,7 +9,7 @@
    #bxslider img{
       height: 550px; 
       
-      max-width:100%;
+      width:100%;
       text-align:center;
       -moz-box-shadow: none;
      -webkit-box-shadow: none; 

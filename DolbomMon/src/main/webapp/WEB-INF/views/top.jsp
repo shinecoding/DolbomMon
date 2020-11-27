@@ -15,19 +15,7 @@
 
       });	
    </script>
-   <script>
-   
-   var b = document.getElementById ("menu-button");
-   b.addEventListener("click", showMenu, false);
-   var i = 0;
-   function showMenu () {
-          i++;
-          if(i % 2 == 1)
-              document.getElementById("menu-button").style.display = "block";
-          else
-              document.getElementById("menu-button").style.display = "none";
-   }
-   </script>
+
    
    <style type="text/css">
 HTML CSSResult
@@ -35,23 +23,20 @@ EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-       #menu {
-           display: block;
-           
-       }
-}
    
       *{
 		 margin: 0 auto;
 		 padding: 0px;
 		 list-style-type: none;
-	 	 cursor:pointer;
      	 font-family:"Noto Sans KR";
      	
      	
 		 }
 
-     
+     #menu-button{
+     	-webkit-padding-start:0px;
+     }
+
       html,
       body {
         width: 100%;
@@ -194,7 +179,7 @@ EDIT ON
 		</li>
 		<li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
 		</li>
-		<li><a href="/dbmon/sitter_list">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+		<li><a href="/dbmon/sitterList	">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
 	    
 		</li>
 		<li><a href="#">My Menu</a>
