@@ -48,7 +48,7 @@
 	<div class="container">
 		<div id="header1"><span>선택작성 항목</span></div>
 		<div id="header2">돌봄몬이 알아야 할 내용이 있나요?</div>
-		<form method="post" action="<%=request.getContextPath()%>/regForm">
+		<form method="post" action="<%=request.getContextPath()%>/teacherRegForm">
 			<div id="textareaDiv"><textarea name="content" placeholder="아이의  성별, 성격, 특이사항 등을 적어주세요."></textarea></div>
 			<div id="warningMsg"><span>신청서 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</span></div>
 			<input type="submit" value="나중에 입력할게요."/>

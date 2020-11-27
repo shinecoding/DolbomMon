@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>돌봄몬 회원가입</title>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -276,7 +276,7 @@
 </script>
 </head>
 <body>
-	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
+	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/teacherRegFormOk" >
 	<div class="container">
 		<input type="hidden" name="care_type" value="${care_type }" />
 		<input type="hidden" name="child_age" value="${child_age }" />
@@ -348,7 +348,7 @@
 			<label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label><br/>
 			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
 		</div>
-		<input type="submit" value="다음" />
+		<input type="submit" value="회원가입" />
 	</div>
 	</form>
 </body>
