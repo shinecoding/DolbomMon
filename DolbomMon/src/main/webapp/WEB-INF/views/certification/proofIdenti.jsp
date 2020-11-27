@@ -162,9 +162,9 @@
 			</c:forEach>
 			</select>년
 			<select name="identi_month">
-			<% for(int i=2020; i>1900; i--){ %>
-					<option><%=i%></option>
-			<% }; %>
+			<c:forEach var="i" begin="1" end="12" >
+				<option>${i}</option>
+			</c:forEach>
 			</select>월
 			<select name="identi_day">
 			<c:forEach var="i" begin="1" end="31" >
