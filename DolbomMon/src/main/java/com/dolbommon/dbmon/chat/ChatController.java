@@ -38,12 +38,26 @@ public class ChatController {
 		System.out.println(room.getRoomname());
 		System.out.println(room.getUserid());
 		chatdao.insertRoom(room);
-		
+		System.out.println("방번호 테스트"+room.getRoomseq());
 		return "ok";
 		
 	}
 	
-	
+	//채팅입력
+	@RequestMapping(value="/insertChat", method=RequestMethod.POST)
+	@ResponseBody
+	public String insertChat(ChatDTO chat, HttpSession session) {
+		System.out.println("ajax 값 확인"+ chat.getRoomseq());
+		System.out.println("ajax 값 확인"+ chat.getMessage());
+		if(session.getAttribute("userid") != null) {
+			String userid = (String)session.getAttribute("userid");
+			chat.setUserid(userid);
+			chatdao.insertChat(chat);
+		}
+		
+		return "ok";
+		
+	}
 	
 	
 	/////////////
@@ -85,20 +99,21 @@ public class ChatController {
 	
 	
 	
-	//채팅입력
-	@RequestMapping(value="/insertChat", method=RequestMethod.POST)
-	@ResponseBody
-	public String insertChat(ChatDTO chat, HttpSession session) {
-		
-		if(session.getAttribute("userid") != null) {
-			String userid = (String)session.getAttribute("userid");
-			chat.setUserid(userid);
-			chatdao.insertChat(chat);
-		}
-		
-		return "redirect:/chat?roomseq="+chat.getRoomseq();
-		
-	}
+	/*
+	 * //채팅입력
+	 * 
+	 * @RequestMapping(value="/insertChat", method=RequestMethod.POST)
+	 * 
+	 * @ResponseBody public String insertChat(ChatDTO chat, HttpSession session) {
+	 * 
+	 * if(session.getAttribute("userid") != null) { String userid =
+	 * (String)session.getAttribute("userid"); chat.setUserid(userid);
+	 * chatdao.insertChat(chat); }
+	 * 
+	 * return "redirect:/chat?roomseq="+chat.getRoomseq();
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping("/goChatRoom")
 	public String goChatRoom(Model model, ChatDTO chat, HttpSession session) {

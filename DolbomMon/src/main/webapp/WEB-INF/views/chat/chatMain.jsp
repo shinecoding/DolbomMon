@@ -12,6 +12,15 @@
 <script>
 	$(function(){
 		
+		$(document).ready(function() {
+		});
+		
+		$("#send2").click(function(){
+			insertChat();
+		});
+		
+		
+		
 		//setInterval(getChatList, 2000);
 		
 		$("#send").click(function(){
@@ -29,7 +38,7 @@
 			console.log("test")
 			makeRoom();
 		})
-		
+		var roomseq;
 		function makeRoom(){
 			$.ajax({
 				url : "makeRoom", //채팅폼의 액션
@@ -39,14 +48,42 @@
 				type : "post",
 				success : function(result){
 					if(result=="ok"){
-						$(".chatform").css("display","block"); //이거 엡솔루트해야할듯. 포지션바꿔서 창크기 고정시키기
+						//$(".chatform").css("display","block"); //이거 엡솔루트해야할듯. 포지션바꿔서 창크기 고정시키기
+						$("#roomname").val("");
+						$("#message").focus();
+					}
+				}
+			});
+		}
+		
+		function insertChat(){
+			$.ajax({
+				url : "insertChat", //채팅폼의 액션
+				data : {
+					message:$("#message").val(),
+					roomseq:$("#roomseq").val()
+				},
+				type : "post",
+				success : function(data){
+					if(data!=null){
+						tag="";
+						tag+='<div class="row no-gutters"><div class="col-md-3 offset-md-9"><div class="chat-bubble chat-bubble--right">'
+						tag+=$("#message").val()+'</div></div> </div>'
+
+						$(".chat-panel:last-child").after().append(tag);
+						$("#message").val("");
+						$("#message").focus();
 					}
 				}
 			});
 		}
 		
 		
-		function insertChat(){
+		/////////////////////////////////////////////////////////
+		
+		
+		
+		/* function insertChat(){
 			$.ajax({
 				url : "/insertChat", //채팅폼의 액션
 				data : {
@@ -61,7 +98,7 @@
 					}
 				}
 			});
-		}
+		} */
 		
 		function getChatList(){ //받아오는부분
 			$.ajax({
@@ -298,7 +335,7 @@ $( '.friend-drawer--onhover' ).on( 'click',  function() {
 
 	
 	방생성 : <input type="text" id="roomname">
-		<input type="button" value="방만들기" class="btn btn-info" id="room2">
+		<input type="button" value="방만들기" class="btn btn-info" id="room2" style="margin-bottom:15px;">
 	
 <%-- 	<input type="hidden" id="roomseq" value="${roomseq}">
 	테스트입력 : <input type="text" id="message">
@@ -469,8 +506,9 @@ $( '.friend-drawer--onhover' ).on( 'click',  function() {
 			<div class="col-12">
 			  <div class="chat-box-tray">
 				<i class="material-icons">sentiment_very_satisfied</i>
-				<input type="text" placeholder="내용을 입력하세요.">
-				<i class="material-icons">mic</i>
+				<input type="text" name="message" placeholder="내용을 입력하세요." id="message">
+				<input type="hidden" name="roomseq" id="roomseq" value="${roomseq}">
+				<input type="button" id="send2" value="보내기" class="btn btn-secondary" style="width:100px">
 				<i class="material-icons">send</i>
 			  </div>
 			</div>
