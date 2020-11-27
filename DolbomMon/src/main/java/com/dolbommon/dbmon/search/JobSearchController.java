@@ -5,9 +5,10 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+@Controller
 public class JobSearchController {
 	SqlSession sqlSession;
 	
@@ -23,7 +24,7 @@ public class JobSearchController {
 	DataSourceTransactionManager transactionManager;
 	
 	//구인페이지로 이동하기
-	@RequestMapping("/sitter") 
+	@RequestMapping("/sitter_list") 
 	public ModelAndView parent() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
