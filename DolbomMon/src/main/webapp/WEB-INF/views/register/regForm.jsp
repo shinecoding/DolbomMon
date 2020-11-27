@@ -29,7 +29,6 @@
 	.container>div>label{display:inline-block; width:auto;float:left; margin:0;}
 	.container>div>span{width:auto;height:20px;float:left;}
 	.container>div>input{width:80%; height:50px; padding:5px 10px; float:left;}
-	#emailDiv span{width:auto; height:20px; font-size:20px; line-height:50px; float:left; margin:0 5px;} 
 	
 	#genderDiv label{width:19%; height:50px; line-height:50px; text-align:center; border:1px solid gray; background-color:#EFEFEF; cursor:pointer;}
 	#genderDiv input[type=radio]{display:none;}
@@ -63,7 +62,7 @@
 		
 		// 휴대폰 본인인증 
 		$("#smsIdentity").click(function(){
-			window.open("<%=request.getContextPath()%>/smsIdentity", "sms");
+			window.open("<%=request.getContextPath()%>/smsIdentity", "sms", );
 		});
 		
 		
@@ -155,6 +154,37 @@
 			}
 		});
 		
+		$("#email1").keyup(function(){
+			var email1 = $(this).val();
+			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
+			if(!email1Reg.test(email1)){
+				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ").css("color", "#ff0000");
+			}else{
+				$("#emailChk").html("");
+			}
+			
+			var email2 = $("#email2").val();
+			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			if(!email2Reg.test(email2)) {
+				$("#email2").val("");
+			}
+		})
+		
+		$("#email2").keyup(function(){
+			var email2 = $(this).val();
+			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			if(!email2Reg.test(email2)) {
+				$("#emailChk").html("올바른 이메일 도메인 형식이 아닙니다.").css("color", "red");
+			}else{
+				$("#emailChk").html("");
+			}
+			
+			var email1 = $("#email1").val();
+			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
+			if(!email1Reg.test(email1)){
+				$("#email1").val("");
+			}
+		});
 	});
 	
 </script>
@@ -208,8 +238,8 @@
 			<label for="2" style="margin-left:2%;"><input type="radio" name="gender" id="2" value="F" />여자</label>
 		</div>
 		<div id="emailDiv">
-			<label for="email1">이메일</label><span></span><br/>
-			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:24%;" /><span style="wdith:2%; text-aling:center; margin:0 1%;">@</span><input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
+			<label for="email1">이메일</label><span id="emailChk"></span><br/>
+			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:24%;" /><span style="wdith:2%; height:50px; line-height:50px; text-aling:center; margin:0 1%;">@</span><input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
 			<select style="width:24%; margin-left:3%; height:50px;" >
 				<option selected="selected" >직접입력</option>
 				<option>gmail.com</option>
