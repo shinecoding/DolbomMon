@@ -79,7 +79,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.license_status=='N' || cvo.identi_status=='S'}">
+	   	<c:if test="${cvo.license_status=='N' || cvo.license_status=='S'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.license_status=='Y'}">
@@ -91,7 +91,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.school_status=='N' || cvo.identi_status=='S'}">
+	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.school_status=='Y'}">
@@ -103,7 +103,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.crime_status=='N' || cvo.identi_status=='S'}">
+	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.crime_status=='Y'}">
