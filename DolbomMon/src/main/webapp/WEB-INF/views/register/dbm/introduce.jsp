@@ -38,9 +38,10 @@
 </head>
 <body>
 	<div class="container">
-		<form action="<%=request.getContextPath()%>/regForm">
+		<form method="post" action="<%=request.getContextPath()%>/regForm">
+		
 			<h4>간단 자기소개<span>(선택사항)</span></h4>
-			<textarea placeholder="간단한 자기소개 작성 시 부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>
+			<textarea name="intro" placeholder="간단한 자기소개 작성 시 부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>
 			<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			<input type="submit" value="다음"/>
 		</form>

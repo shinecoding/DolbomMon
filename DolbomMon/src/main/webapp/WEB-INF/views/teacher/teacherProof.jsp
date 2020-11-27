@@ -68,8 +68,16 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="/proofIdenti">
+				<form action="/dbmon/proofIdenti">
+					<c:if test="${cvo.identi_status=='N' || cvo.identi_status==null}" >
 					<button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.identi_status=='S'}">
+					<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.identi_status=='Y'}">
+					<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -99,13 +107,22 @@
 						<h7><b>학교 인증</b></h7>
 					</div>
 					<div class="row">
-						올리신 증명서 내용과 똑같게<br/>
-						아래 내용을 입력해주세요.<br/>
+						재학/휴학/재적/졸업/수료 증명서<br/>
+						- 발급일 1년 이내만 유효<br/>
+						(졸업증명서 경우, 발급일 상관없음)<br/>
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofSchool">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofSchool">
+					<c:if test="${cvo.school_status=='N' || cvo.identi_status==null}">
+						<button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.school_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.school_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -139,8 +156,16 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofTeacher">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofTeacher">
+					<c:if test="${cvo.license_status=='N' || cvo.identi_status==null}">
+						<button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.license_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.license_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -174,8 +199,16 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofCrime">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofCrime">
+					<c:if test="${cvo.crime_status=='N' || cvo.identi_status==null}">
+						<button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.crime_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.crime_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
 				</form>
 				</div>
 				
@@ -209,8 +242,16 @@
 					</div>
 				</div>
 				<div class="col-3">
-				<form action="proofPrivacy">
-					<button class="btn btn-warning float-right">인증받기</button>
+				<form action="/dbmon/proofPrivacy">
+					<c:if test="${cvo.privacy_status=='N' || cvo.identi_status==null}">
+						<button class="btn btn-warning float-right">인증받기</button>
+					</c:if>
+					<c:if test="${cvo.privacy_status=='S'}">
+						<div class="badge badge-secondary float-right p-3">인증신청중</div>
+					</c:if>
+					<c:if test="${cvo.privacy_status=='Y'}">
+						<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
 				</form>
 				</div>
 				

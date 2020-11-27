@@ -9,12 +9,13 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+
 <style>
 	* {
-		margin:0; padding:0; list-style-type:none; box-sizing:border-box; 
+		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
 		font-family: Noto Sans KR,sans-serif!important;
 	}
-
+	
 	#all{
 		margin:0 auto;
 		
@@ -80,16 +81,20 @@
     text-align: left;
     color: rgb(74, 74, 74);
 }
+	
  
 </style>
-
-<!-- -------------------상단메뉴------------- -->
-<jsp:include page="../top.jsp"/>
-<!-- ------------------------------------------ -->
 <body>
-
-<div class="all_wrapper">
-<div class="listPanel" style="display: block; vertical-align: inherit; background-color:#f0f0f0;"> 
+<!-- -------------------상단메뉴------------- -->
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+</div>
+<!-- ------------------------------------------ -->
+<div class="all_wrapper" >
+<div>
+<button type="button" class="btn btn-secondary btn-lg btn-block">어떤 돌봄몬을 찾으세요?</button>
+ </div>
+<div class="listPanel" style="display: block; vertical-align: inherit; background-color:#f0f0f0; "> 
 <div id="filterbox" >
 <input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요" readonly>
 <form class="form-inline">
@@ -123,7 +128,7 @@
  
    
    <div class="wrapper1" style="display:inline">
-	<div class="total" style="float:left"> 총 82 명 </div>
+	<div class="total" style="float:left"> 총 ${totalRecord} 명 </div>
 	<div class="float-right" style="float:right">후기순
 	<svg class="arrow-down-square-fill" width="1em" height="1em" viewBox="0 0 16 16"  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
  	 <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
@@ -131,15 +136,16 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-<div class="wrapper2">
+<div class="wrapper2" onclick="location.href='parentView'">
 	<ul class="list-group">
 	<li class="list-group-item">
 	<ul class="list-group list-group-horizontal">
 		<li class="list-group-item border-0 col-2">
 			<img src="img/profilepic.png" class="rounded-circle"/><br/>
-			<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
+		<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 		</li>
 		<li class="list-group-item border-0 col-10">
+			<h6>글번호  : ${job_board_no}</h6>
 			<h6><b>신생아 1명, 유아 1명</b> | 3분전</h6>
 			<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
 			<h7>경북 구미시 | 홍O동 | 11/18 시작</h7>

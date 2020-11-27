@@ -38,14 +38,6 @@
 	justify-content:center;
 	
 	}
-	input[type="submit"]{
-	display: flex;
-	justify-content:center;
-	
-	}
-	#profBox{
-	
-	}
 	#profIcon{
 	width:120px;
 	height:120px;
@@ -112,35 +104,44 @@
 	border-radius:3px;
 	border-color: gray;
 	}
-</style>	
+</style>
+<script>
+	$(function(){
+		console.log.("identi=="+$("identi").val());
+		
+	});
+</script>	
 </head>
 <body>
 	<div class="container">
 		<div id="title">
-	   		<div id="titlefont">학교 인증</div>
+	   		<div id="titlefont">등초본 인증</div>
 	 	</div>
-		<form method="post" action="/teacher/teacherProofIdentiOk" enctype="multipart/form-data">
+		<form method="post" action="/dbmon/proofIdentiOk" enctype="multipart/form-data">
 			<div id="profBox">
 				<div class="badge badge-warning">1번째</div>
-				<div>소속기관과 전공분야를 확인하기<br/>
-				위해서 아래 서류 중 1개를 사진으로<br/>
+				<div>주민등록등(초)본을 사진으로<br/>
 				찍어서 올려주세요.<br/></div>
 				<div class="warning">
-				<i class="fas fa-exclamation-circle"></i>사진첨부는 최대 5장까지 가능합니다.
+				<i class="fas fa-exclamation-circle"></i>
+				최근 6개월 이내에 발급된 경우만 인정됩니다.<br/>
+				<i class="fas fa-exclamation-circle"></i>
+				회원님의 개인정보 보호를 위해 주민등록번호 뒷자리를 꼭 가리고 보내주세요. (주민등록뒷자리 ‘미포함’ 선택 후 발급, 또는 해당부분 가린 후 촬영)<br/>
 				</div>
 				
 				
 				<label for="identi">
 					<i class="fas fa-upload"></i>사진 추가하기
-					<input type="file" id="identi" name="identi" accept="image/*,application/pdf">
+					<input type="file" id="identi" name="filename" accept="image/*,application/pdf">
 				</label>
+
 				
 				<img src="img/ex-cert-resident-1.png"/>
 			</div>	
 			<div class="badge badge-warning">2번째</div>
 			<div>등(초)본에 적혀있는 현주소를
 			아래 입력칸에 똑같이 적어주세요.</div>
-			<input type="text" placeholder="여기에 똑같이 적어주세요" />
+			<input type="text" name="identi_addr" placeholder="여기에 똑같이 적어주세요" />
 			<img src="img/ex-cert-resident-2.png"/>
 			<div class="warning">
 				<i class="fas fa-exclamation-circle"></i>
@@ -155,17 +156,17 @@
 			
 			<img src="img/ex-cert-resident-3.png"/>
 			<div id="certTime">
-			<select name="certYear">
+			<select name="identi_year">
 			<c:forEach var="i" begin="1950" end="2020" >
 				<option>${i}</option>
 			</c:forEach>
 			</select>년
-			<select name="certYear">
-			<c:forEach var="i" begin="1" end="12" >
-				<option>${i}</option>
-			</c:forEach>
+			<select name="identi_month">
+			<% for(int i=2020; i>1900; i--){ %>
+					<option><%=i%></option>
+			<% }; %>
 			</select>월
-			<select name="certYear">
+			<select name="identi_day">
 			<c:forEach var="i" begin="1" end="31" >
 				<option>${i}</option>
 			</c:forEach>

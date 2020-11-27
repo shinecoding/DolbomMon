@@ -101,6 +101,27 @@
 			};
 		}
 	}
+	
+	//차단 해제
+	function spamCancel(){
+		var checkBoxCount = $("input:checkbox[name=messageBox]:checked").length;
+		if(checkBoxCount==1){
+			var spamCheck;
+			if(confirm("해당 쪽지의 보낸이를 차단 해제하시겠습니까?")){
+				var messageUserid = $("#messageUserid").text();
+				spamCheck = $("input:checkbox[name=messageBox]:checked").val();
+				var tag = "<form method='post' action='/dbmon/spamCancel' id='checkBoxForm' name='checkBoxForm'>";
+				tag += "<input type='hidden' value='${pVo.userid}' name='userid' />";
+				tag += "<input type='hidden' value='"+messageUserid+"' name='messageUserid' />";
+				tag+="</form>";
+							
+			$("#checkBoxSpan").append(tag);
+			document.getElementById('checkBoxForm').submit();
+			}
+		}else{
+			alert("하나의 글만 선택해주세요.");
+		}
+	}
 
 </script>
 <style>
@@ -274,13 +295,14 @@
 								<c:if test="${tabType==2 }">
 								${vo.userid_r}
 								</c:if>							
-							" class="sendWrite">
+							" class="sendWrite"><span id="messageUserid">
 								<c:if test="${tabType==1 || tabType==3 || tabType==4}">
 								${vo.userid_w}
 								</c:if>
 								<c:if test="${tabType==2 }">
 								${vo.userid_r}
 								</c:if>
+								</span>
 							</a>
 						<td class="date">${vo.writedate}</td>
 					</tr>
@@ -294,10 +316,13 @@
 <!-- 보관, 삭제 버튼 -->	
 	<div class="note_msg  clearfix">
 		<div class="btns">
-			<c:if test="${tabType!='3' && tabType!='4'}">
+			<c:if test="${tabType!='3'}">
 			<a href="javascript:saveMessage()" class="btn_keep">
 				<span><img src="icon/message/keep_icon.gif" alt="보관" /></span>	</a> </c:if>
 			<a href="javascript:deleteMessage()" class="btn_keep"> <span><img src="icon/message/delete_icon.gif" alt="삭제" /></span></a>
+			<c:if test="${tabType=='4'}">
+			<a href="javascript:spamCancel()" class="btn_keep"> <span><img src="icon/message/block_clear.gif" alt="스팸등록해제" /></span></a>
+			</c:if>
 		</div>
 
 		<!--page-->

@@ -50,10 +50,11 @@
 	
 	#selectTimeDiv{margin:30px 0;}
 	#selectTimeDiv>ul{width:100%; overflow:hidden; height:auto;}
-	#selectTimeDiv li>input[type=date]{background-color:rgb(255, 222, 89); } /* 시작종료시간 색상*/ 
+	#selectTimeDiv li{width:25%;}
 	#selectTimeDiv li:nth-of-type(1){float:left;}
-	#selectTimeDiv li:nth-of-type(2){float:right;}
-	
+	#selectTimeDiv li:nth-of-type(2){float:right;text-align:right;}
+	#selectTimeDiv select{width:100%; height:50px; font-size:20px; padding-left:10px;}
+	option{border-bottom:1px solid gray;}
 	input[type=submit]{width:100%; height:40px; background-color:rgb(255, 222, 89);}
 	/* ==================== 기간, 요일 설정 ====================== */
 	
@@ -81,27 +82,91 @@
 				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");//회색
 			}
 		});
-		
-		// 요일 선택 시 div 출력
-		
-		
 	});
+		
+	function startTime(){
+		var time = new Date(2020, 0, 1);
+		var tag="";
+		for(var i=1;i<=48;i++){
+			if(time.getHours()<10 && time.getMinutes()==0) {
+				tag += "<option id='"+i+"'>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
+			}else if(time.getHours()<10 && time.getMinutes()!=0){
+				tag += "<option id='"+i+"'>0"+time.getHours()+":"+time.getMinutes()+"</option>";
+			}else if(time.getHours()>10 && time.getMinutes()==0){
+				tag += "<option id='"+i+"'>"+time.getHours()+":0"+time.getMinutes()+"</option>";
+			}else if(time.getHours()>10 && time.getMinutes()!=0){
+				tag += "<option id='"+i+"'>"+time.getHours()+":"+time.getMinutes()+"</option>";
+			}
+			time.setMinutes(time.getMinutes()+30);
+		}
+		document.getElementById("start_time").innerHTML = tag;
+	}
+	
+	$(function(){
+		$("#start_time").on('change' ,function(){
+			var test = $("#start_time").val();
+			var i=1;
+			for(i;i<=48;i++){
+				if($("#start_time option[id="+i+"]").val()==test){
+					endTime(i);
+				}
+			}
+			
+		});
+	});
+	
+	function endTime(i){
+		var time = new Date(2020, 0, 1);
+		var tag="";
+		time.setMinutes(time.getMinutes()+30*i);
+		for(i;i<48;i++){
+			if(time.getHours()<10 && time.getMinutes()==0) {
+				tag += "<option>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
+			}else if(time.getHours()<10 && time.getMinutes()!=0){
+				tag += "<option>0"+time.getHours()+":"+time.getMinutes()+"</option>";
+			}else if(time.getHours()>10 && time.getMinutes()==0){
+				tag += "<option>"+time.getHours()+":0"+time.getMinutes()+"</option>";
+			}else if(time.getHours()>10 && time.getMinutes()!=0){
+				tag += "<option>"+time.getHours()+":"+time.getMinutes()+"</option>";
+			}else if(time.getHours()>=24){
+				break;
+			}
+			time.setMinutes(time.getMinutes()+30);
+		}
+		document.getElementById("end_time").innerHTML = tag;
+	}
+	
+	function setEndDate(){
+		var startDate = document.getElementById("start_date").value;
+		var data = startDate.split("-");
+		var year = Number(data[0]); 
+		var month = Number(data[1])+3;
+		if(month==12){
+			month = 1;
+			year = year + 1;
+		}
+		var endDate = new Date(year, month, data[2]);
+		document.getElementById("end_date").value = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+	}
+	
+	
 </script>
 </head>
 
-<body>
+<body onload="startTime();">
 	<div class="container">
-		<form action="<%=request.getContextPath()%>/parent/description">
+		<form method="post" onsubmit="setEndDate();" action="<%=request.getContextPath()%>/parent/description">
+		<input id="end_date" name="end_date" type="text" value="" />
 		<div id="header">정기적으로</div>	
-		<div id="startDateDiv"><span>돌봄시작일</span><input type="date" name="start_date"/></div>
+		<div id="startDateDiv"><span>돌봄시작일</span><input type="date" id="start_date" name="start_date"/></div>
 		<div id="selectDayDiv">
-			<input type="checkbox" id="y1" name="yoil" value="mon" />
-			<input type="checkbox" id="y2" name="yoil" value="tue" />
-			<input type="checkbox" id="y3" name="yoil" value="wed" />
-			<input type="checkbox" id="y4" name="yoil" value="thu" />
-			<input type="checkbox" id="y5" name="yoil" value="fri" />
-			<input type="checkbox" id="y6" name="yoil" value="sat" />
-			<input type="checkbox" id="y7" name="yoil" value="sun" />
+			<input type="checkbox" id="y1" name="yoil" value="월" />
+			<input type="checkbox" id="y2" name="yoil" value="화" />
+			<input type="checkbox" id="y3" name="yoil" value="수" />
+			<input type="checkbox" id="y4" name="yoil" value="목" />
+			<input type="checkbox" id="y5" name="yoil" value="금" />
+			<input type="checkbox" id="y6" name="yoil" value="토" />
+			<input type="checkbox" id="y7" name="yoil" value="일" />
 			<ul>
 				<li><label for="y1">월</label></li>
 				<li><label for="y2">화</label></li>
@@ -113,9 +178,17 @@
 			</ul>
 		</div>
 		<div id="selectTimeDiv">
+			
+			
 			<ul id="selectTimeList">
-				<li><span>시작시간</span><br/><input type="date" value="" name="start_time" /></li>
-				<li><span>종료시간</span><br/><input type="date" value="" name="end_time" /></li>
+				<li><span>시작시간</span><br/>
+				<select id="start_time" name="start_time" onselect="endTime();">
+				
+				</select></li>
+				<li><span>종료시간</span><br/>
+				<select id="end_time" name="end_time">
+					<option>종료시간</option>
+				</select></li>
 			</ul>
 			<input type="submit" value="다음" />
 		</div>

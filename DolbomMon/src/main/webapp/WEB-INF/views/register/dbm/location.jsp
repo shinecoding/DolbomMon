@@ -10,12 +10,16 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 </head>
 <body>
+	
 	<div>
-	<form action="<%=request.getContextPath()%>/dbm/schedule">
-	<!-- 돌봄몬은 지역 3개 선택 (학부모는 1개) -->
-	<h1>활동하고 싶은 지역을 선택해주세요</h1>
-	<input type="submit" value="다음"/>
-	</form>
+
+		<form method="post" action="<%=request.getContextPath()%>/dbm/schedule">
+		
+			
+			<!-- 돌봄몬은 지역 3개 선택 (학부모는 1개) -->
+			<h1>활동하고 싶은 지역을 선택해주세요</h1>
+			<input type="submit" value="다음"/>
+		</form>
 	</div>
 </body>
 </html>

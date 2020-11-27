@@ -101,7 +101,7 @@
 	width:100%;
 	display:block;
 	}
-	#certTime{
+	.certTime{
 	position:relative;
 	display:block;
 	text-align:center;
@@ -119,7 +119,7 @@
 		<div id="title">
 	   		<div id="titlefont">선생님 인증</div>
 	 	</div>
-		<form>
+		<form method="post" action="/dbmon/proofTeacherOk" enctype="multipart/form-data">
 			<div id="profBox">
 				<div class="badge badge-warning">1번째</div>
 				<div>전문 선생님 자격이 있는지 확인하기<br/>
@@ -133,19 +133,24 @@
 				
 				<label for="proofFile">
 					<i class="fas fa-upload"></i>사진 추가하기
-					<input type="file" id="proofFile" accept="image/*,application/pdf">
+					<input type="file" name="filename" id="proofFile" accept="image/*,application/pdf">
 				</label>
-				
+				<c:forEach var="i" items="보육교사1급,보육교사2급,보육교사3급,유치원 정교사,특수학교 정교사,초등학교 정교사" >
+					<option>-${i}</option>
+				</c:forEach>
 				<img src="img/ex-cert-childcare-1.png"/>
 			</div>	
 			<div class="badge badge-warning">2번째</div>
 			<div>올리신 자격증 종류를 선택해주세요.</div>
-			<c:forEach var="i" items="보육교사1급,보육교사2급,보육교사3급,유치원 정교사" >
+			<div class="certTime">
+			<select name="license">
+			<c:forEach var="i" items="보육교사1급,보육교사2급,보육교사3급,유치원 정교사,특수학교 정교사,초등학교 정교사" >
 				<option>${i}</option>
 			</c:forEach>
+			</select>
+			</div>
 			
 			<div class="warning">
-				<i class="fas fa-exclamation-circle"></i>
 				자격증 종류 선택<br/>
 			</div>
 			
@@ -155,26 +160,26 @@
 				똑같이 입력해 주세요.<br/></div>
 			
 			<img src="img/ex-cert-childcare-2.png"/>
-			<div id="certTime">
-			<select name="certYear">
-			<c:forEach var="i" begin="1950" end="2020" >
-				<option>${i}</option>
-			</c:forEach>
-			</select>년
-			<select name="certYear">
-			<c:forEach var="i" begin="1" end="12" >
-				<option>${i}</option>
-			</c:forEach>
-			</select>월
-			<select name="certYear">
-			<c:forEach var="i" begin="1" end="31" >
-				<option>${i}</option>
-			</c:forEach>
-			</select>일
+			<div class="certTime">
+				<select name="license_year">
+				<% for(int i=2020; i>1900; i--){ %>
+					<option><%=i%></option>
+				<% }; %>
+				</select>년
+				<select name="license_month">
+				<c:forEach var="i" begin="1" end="12" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>월
+				<select name="license_day">
+				<c:forEach var="i" begin="1" end="31" >
+					<option>${i}</option>
+				</c:forEach>
+				</select>일
 			</div>
 				<input type="submit" class="btn btn-warning" value="신청" />
-			</div>
+			
 		</form>
-
+	</div>
 </body>
 </html>
