@@ -73,7 +73,7 @@ public class MemberController {
 		}
 				
 		@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
-		public ModelAndView regOk(
+		public ModelAndView regOk(@RequestParam(value="desired_wage", required = false) int desired_wage,
 			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
 			
 			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
