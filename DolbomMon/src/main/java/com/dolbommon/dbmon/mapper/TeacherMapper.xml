@@ -48,4 +48,10 @@
 	<select id="selectLastEdit" parameterType="String">
 		select round((sysdate - #{last_edit}) *1440) from teacher where userid= #{userid};
 	</select>
+	<select id="selectTMap" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.MemberVO">
+		select lat, lng, addr, addrdetail, zipcode from member where userid = #{userid}
+	</select>
+	<update id="updateTMap" parameterType="com.dolbommon.dbmon.Teacher.MemberVO" >
+		update member set lat= #{lat}, lng=#{lng} where userid = #{userid}
+	</update>
 </mapper>

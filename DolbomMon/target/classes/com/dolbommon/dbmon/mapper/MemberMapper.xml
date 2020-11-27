@@ -15,4 +15,5 @@
 		insert into regular_date(userid, yoil, start_time, end_time, start_date, end_date)
 					values(#{mVo.userid}, #{rdVo.yoil}, #{rdVo.start_time}, #{rdVo.end_time}, #{rdVo.start_date}, #{rdVo.end_date})
 	</insert>
+	
 </mapper>

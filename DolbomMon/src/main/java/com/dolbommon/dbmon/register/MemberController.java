@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.Teacher.TeacherDaoImp;
+
 @Controller
 public class MemberController {
 		SqlSession sqlSession;
@@ -290,6 +292,12 @@ public class MemberController {
 			
 			return "register/dbm/introduce";
 		}
+		
+		
+		
+		
+		
+		
 }
 
 

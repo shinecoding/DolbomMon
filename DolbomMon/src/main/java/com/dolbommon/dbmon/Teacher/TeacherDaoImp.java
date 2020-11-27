@@ -19,5 +19,8 @@ public interface TeacherDaoImp {
 	public int insertExp(HashSet<ExperienceVO> hash);
 	public int deleteExp(HashSet<ExperienceVO> hash);
 	public int selectLastEdit(String userid);
+	//선생 지도 받기
+	public MemberVO selectTMap(String userid);
+	public int updateTMap(MemberVO mvo);
 }
 
