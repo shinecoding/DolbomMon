@@ -73,6 +73,8 @@ public class TeacherController {
 		}
 	
 		
+		String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
+		mvo.setUsername(hideName);
 		
 		
 		HashSet<ExperienceVO> hash = dao.selectExp(userid);
@@ -82,6 +84,7 @@ public class TeacherController {
 		
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
+		mav.addObject("mvo", mvo);
 		mav.addObject("cvo", cvo);
 		mav.addObject("hash", hash);
 		mav.setViewName("teacher/teacherView");
