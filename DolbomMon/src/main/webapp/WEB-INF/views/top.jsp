@@ -5,21 +5,14 @@
    <script type="text/javascript">
    
          $(function(){
-        $("ul.sub").hide();
-       $("ul.menu li").hover(function(){
+        $("ul.subMain").hide();
+       $("ul.mainTopmenu li").hover(function(){
           $("ul:not(:animated)",this).slideDown("fast");
          },
          function(){
             $("ul",this).slideUp("fast");
          });
-/*        $(function(){
-            $(".menu>li").hover(function(){
-               $(this).children("ul").css("display","block");
-            }, function(){
-               $(this).children("ul").css("display","none");
-            
-            }); */
-       
+
       });   
    </script>
 
@@ -39,24 +32,28 @@ EDIT ON
         
         
        }
+
      #menu-button{
         -webkit-padding-start:0px;
      }
+
       html,
       body {
         width: 100%;
         height: 100%;
         min-width:1200px;
         
-      }
+    }
+     #topmenu-button{
+        -webkit-padding-start:0px;
+     }
+   
+
       #container {
         width: 100%;
       }
-     #menu{
-        overflow:hidden;
-        display:block;
-     }
-      ul.menu li{ 
+
+      ul.mainTopmenu li{ 
         float: left;
         width:100%;
        width: 263px;
@@ -69,7 +66,7 @@ EDIT ON
        list-style-type: none;
       
        }
-      ul.menu li a{
+      ul.mainTopmenu li a{
         display: block;
        width: 100%;
        height: 100%;
@@ -82,22 +79,29 @@ EDIT ON
        font-family:"Noto Sans KR";
        text-align:center;
        list-style-type: none;
+       margin-left:0px;
        }
-     ul.menu li {
+     ul.mainTopmenu li {
       width: calc(100%/6);
+      
       }
-     ul.menu ul.sub li {width: 100%}
-      ul.menu li a:hover{
-        background-color: #ffefd5;
-        opacity:20;
+     ul.mainTopmenu ul.subMain li {
+       width: 100%;
+       -webkit-padding-start:0px;
        }
-      ul.menu li ul.sub{
+     
+     
+      ul.mainTopmenu li a:hover{
+        background-color: #ffefd5;
+        opacity:50;
+       }
+      ul.mainTopmenu li ul.subMain{
         position: absolute;
        }
-      ul.menu{
+      ul.mainTopmenu{
         zoom: 1;
        }
-      ul.menu:after{
+      ul.mainTopmenu:after{
         height: 0;
        visibility: hidden;
        content: ".";
@@ -110,7 +114,7 @@ EDIT ON
          margin-left:0;
          
       }
-      header{
+      header#topHeader{
             margin-left:0px;
       }
       a.btn{
@@ -119,7 +123,7 @@ EDIT ON
             
       }
       .clearfix:after { clear:both; } 
-      .menu>li *{
+      .mainTopmenu>li *{
       width:100%
       }
       
@@ -129,7 +133,7 @@ EDIT ON
  <div id="container">
 
  <div class="clearfix">
-    <header>
+    <header id="topHeader">
     <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
            class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
            Onclick="location.href='/dbmon'"/>
@@ -155,22 +159,18 @@ EDIT ON
 
    </a>             
    </header>
-</div>
+</div> 
 
-  
-  
-   <ul class="menu" id="menu-button">
+   <ul class="mainTopmenu" id="topmenu-button">
        
        <li><a href="#">고객센터</a>
-        <ul class="sub">
+        <ul class="subMain">
           <li><a href="/dbmon/brandIntro">회사소개</a></li>
-         <li><a href="#">신고하기</a></li>
-         
+         <li><a href="#">신고하기</a></li>         
        </ul>
        </li>
        <li><a href="/dbmon/noticeBoard">공지사항</a>
-       <ul class="sub">
-       
+       <ul class="subMain">    
        
       </ul>
       </li>
@@ -179,11 +179,11 @@ EDIT ON
       </li>
       <li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
       </li>
-      <li><a href="/dbmon/sitter_list   ">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+      <li><a href="/dbmon/sitter_list">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
        
       </li>
       <li><a href="#">My Menu</a>
-       <ul class="sub">
+       <ul class="subMain">
           <li><a href="/dbmon/join">결제조회</a></li>
          <li><a href="/dbmon/login">서브메뉴</a></li>
          <li><a href="teacherList">선생님페이지</a></li>
