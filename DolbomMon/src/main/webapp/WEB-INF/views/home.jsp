@@ -17,18 +17,7 @@ if(manager!="Y"){
 
 
 </head>
-<script>
-var b = document.getElementById ("menu-button");
-b.addEventListener("click", showMenu, false);
-var i = 0;
-function showMenu () {
-       i++;
-       if(i % 2 == 1)
-           document.getElementById("menu").style.display = "block";
-       else
-           document.getElementById("menu").style.display = "none";
-}
-</script>
+
 <script>
 
 function getCookie(name) {
