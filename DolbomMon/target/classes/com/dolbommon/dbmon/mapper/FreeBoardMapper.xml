@@ -5,9 +5,9 @@
 <mapper namespace="com.dolbommon.dbmon.board.FreeBoardDaoImp">
 	<select id="freeBoardList" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
 		select * from (select * from (select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate, ref, step, lvl from freeBoard order by ref desc, lvl asc) where 
-		<![CDATA[rownum<=20]]>
+		<![CDATA[rownum<=${currentPageRecord}]]>
 		order by ref asc, lvl desc) where 
-		<![CDATA[rownum<=10]]>
+		<![CDATA[rownum<=${lastPageRecordCount}]]>
 		order by ref desc, lvl asc
 	</select>
 	

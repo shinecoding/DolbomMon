@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="replyAllSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardReplyVO">
-		select re_no, userid, content, writedate from replyBoard where no=#{no} order by re_no desc
+		select re_no, userid, content, writedate from replyBoard where no=#{no} order by re_no asc
 	</select>
 
 	<update id="replyUpdate" parameterType="com.dolbommon.dbmon.board.FreeBoardReplyVO">

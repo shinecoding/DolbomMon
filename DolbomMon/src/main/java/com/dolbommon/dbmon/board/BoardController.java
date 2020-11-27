@@ -40,7 +40,7 @@ public class BoardController {
 	@RequestMapping("/freeBoard")
 	public ModelAndView freeBoard() {
 		
-		//PagingVO pVo = new PagingVO();
+		PagingVO pVo = new PagingVO();
 		
 		//String nowPageTxt = req.getParameter("nowPage");
 		
@@ -50,7 +50,7 @@ public class BoardController {
 		//}
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		List<FreeBoardVO> list = dao.freeBoardList();
+		List<FreeBoardVO> list = dao.freeBoardList(pVo);
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		ModelAndView mav = new ModelAndView();
