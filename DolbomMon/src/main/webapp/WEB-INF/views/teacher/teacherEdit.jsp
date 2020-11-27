@@ -293,7 +293,7 @@ font-weight:bold;
 			<i class="fas fa-pen"><a class="editBtn" href="teacherMap"></a></i>
 			<ul class="list-group" >
 			<li class="list-group-item" style="border:none">
-				<span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동
+				<span class="badge badge-warning">1순위</span> ${vo.area1}
 			</li>
 			</ul>
 		</li>
