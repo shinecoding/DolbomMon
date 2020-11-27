@@ -300,7 +300,7 @@ $( '.friend-drawer--onhover' ).on( 'click',  function() {
 	방생성 : <input type="text" id="roomname">
 		<input type="button" value="방만들기" class="btn btn-info" id="room2">
 	
-	<input type="hidden" id="roomseq" value="${roomseq}">
+<%-- 	<input type="hidden" id="roomseq" value="${roomseq}">
 	테스트입력 : <input type="text" id="message">
 	<input type="submit" id="send" value="send">
 	
@@ -315,7 +315,7 @@ $( '.friend-drawer--onhover' ).on( 'click',  function() {
 	</tr>
 	</c:forEach>
 	</table>
-	
+	 --%>
 	
 	
 	
