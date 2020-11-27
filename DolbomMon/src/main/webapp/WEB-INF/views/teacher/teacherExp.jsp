@@ -97,7 +97,7 @@
 		});
 		
 		
-		$("button").click(function(){
+		$(document).on('click', 'button', (function(){
 			$(this).parent().remove("li");
 		});
 	

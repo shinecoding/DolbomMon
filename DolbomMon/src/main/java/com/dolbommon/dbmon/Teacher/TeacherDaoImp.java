@@ -5,6 +5,7 @@ import java.util.HashSet;
 public interface TeacherDaoImp {
 	
 	public TeacherVO selectTeacher(String userid);
+	public MemberVO selectTMember(String userid);
 	public int updateIntro(TeacherVO vo);
 	public int updateType(TeacherVO vo);
 	public int updateWage(TeacherVO vo);
@@ -22,5 +23,6 @@ public interface TeacherDaoImp {
 	//선생 지도 받기
 	public MemberVO selectTMap(String userid);
 	public int updateTMap(MemberVO mvo);
+	public int updateArea(TeacherVO vo);
 }
 

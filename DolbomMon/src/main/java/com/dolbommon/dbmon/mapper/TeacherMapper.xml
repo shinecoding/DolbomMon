@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.Teacher.TeacherDaoImp">
 	<select id="selectTeacher" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit from teacher where userid=#{userid}
+		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit, area1, area2, area3 from teacher where userid=#{userid}
+	</select>
+	<select id="selectTMember" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.MemberVO">
+		select username, gender, birth, no from member where userid = #{userid}
 	</select>
 	<update id="updateIntro" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set intro = #{intro}, last_edit = sysdate where userid = #{userid}
@@ -54,4 +57,8 @@
 	<update id="updateTMap" parameterType="com.dolbommon.dbmon.Teacher.MemberVO" >
 		update member set lat= #{lat}, lng=#{lng} where userid = #{userid}
 	</update>
+	<update id="updateArea" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
+		update teacher set area1= #{area1} where userid = #{userid}
+	</update>
+	
 </mapper>

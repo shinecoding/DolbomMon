@@ -14,17 +14,23 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<style>
+	.container{
+	width:800px;
+
+	}
+</style>
 </head>
 <body>
 <div class="container">
 	<form method="post" action="teacherMapOk" name="locationFrm" >
 	
-	<input type="text" id="addr" placeholder="주소">
-	<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+	<input type="text" id="addr" name = "area" placeholder="주소">
+	<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="btn btn-warning"><br>
 	<input type="text" id="addrdetail" placeholder="상세주소">
-	<input type="text" id="zipcode" placeholder="우편번호"><br/>
-	<input type="text" id="lat" name="lat" value=${mvo.lat}/>
-	<input type="text" id="lng" name="lng" value=${mvo.lng}/><br/>
+	<input type="text" id="zipcode" placeholder="우편번호" value="${mvo.zipcode}" ><br/>
+	<input type="text" id="lat" name="lat" value="${mvo.lat}" />
+	<input type="text" id="lng" name="lng" value="${mvo.lng}" /><br/>
 <div id="map" style="width:600px;height:600px;margin-top:10px;display:block"></div>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -32,7 +38,7 @@
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            center: new daum.maps.LatLng("${mvo.lat}", "${mvo.lng}"), // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
 	
@@ -45,7 +51,7 @@
     var geocoder = new daum.maps.services.Geocoder();
     //마커를 미리 생성
     var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
+        position: new daum.maps.LatLng("${mvo.lat}", "${mvo.lng}"),
         map: map,
         draggable:true// 마커가 드래그 가능하도록 설정합니다 
     });
@@ -100,8 +106,8 @@
         }).open();
     }
 </script>
-	
-	<input type="submit" value="저장" />
+	<input type="button" value="뒤로" onclick="javascript:history.back()" class="btn btn-warning"/>
+	<input type="submit" value="저장" class="btn btn-warning"/>
 	
 	</form>
 </div>

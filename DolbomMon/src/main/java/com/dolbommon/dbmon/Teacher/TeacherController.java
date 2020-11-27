@@ -51,6 +51,7 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
+		MemberVO mvo = dao.selectTMember(userid);
 		dao.hitCount(vo);
 		int timeInt = 0;
 		String timeStr = "";
@@ -70,6 +71,9 @@ public class TeacherController {
 			timeInt = Integer.parseInt(vo.getLast_edit());
 			timeStr = timeInt + "분 전";
 		}
+	
+		
+		
 		
 		HashSet<ExperienceVO> hash = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
@@ -513,9 +517,11 @@ public class TeacherController {
 	}
 	
 @RequestMapping(value="/teacherMapOk", method=RequestMethod.POST)
-	public ModelAndView teacherMapOk(MemberVO mvo, HttpSession ses, HttpServletRequest req) {
-		mvo.setUserid((String)ses.getAttribute("userid"));
+	public ModelAndView teacherMapOk(MemberVO mvo, TeacherVO tvo, HttpSession ses, HttpServletRequest req) {
+		
 		String userid = (String) ses.getAttribute("userid");
+		mvo.setUserid(userid);
+		tvo.setUserid(userid);
 		
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		String lat = req.getParameter("lat");
@@ -523,8 +529,15 @@ public class TeacherController {
 		mvo.setLat(lat);
 		mvo.setLng(lng);
 		
+		String area1 = req.getParameter("area");
+		if(area1 != null || area1.equals("")) {
+			tvo.setArea1(area1);
+			int cnt = dao.updateArea(tvo);
+			} 
 		int result = dao.updateTMap(mvo);
-		TeacherVO vo = dao.selectTeacher(userid);
+		
+		TeacherVO vo = dao.selectTeacher(tvo.getUserid());
+		
 		ModelAndView mav = new ModelAndView();
 
 		if(result>0) {
