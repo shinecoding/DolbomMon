@@ -92,7 +92,7 @@ public class BoardController {
 	
 	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
-	public ModelAndView freeBoardView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		FreeBoardVO vo = new FreeBoardVO();
 		PagingVO pVo = new PagingVO();

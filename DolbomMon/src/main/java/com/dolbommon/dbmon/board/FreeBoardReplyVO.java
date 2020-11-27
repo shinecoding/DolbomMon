@@ -7,6 +7,7 @@ public class FreeBoardReplyVO {
 	private String userid;
 	private String content;
 	private String writedate;
+	
 	public int getRe_no() {
 		return re_no;
 	}

@@ -49,6 +49,7 @@
 				alert("댓글을 입력후 등록하세요.");
 				return false;
 			}
+			
 			var url = "/dbmon/replyWrite";
 			var params = $("#replyForm").serialize();
 			
@@ -117,18 +118,18 @@
 				var $result = $(result);
 				var tag = "";
 				$result.each(function(i, v){
-					tag += "<li><div>" + v.userid + " ("+v.writedate+") ";
+					tag += "<li class='list-group-item'><div><b>" + v.userid + "</b> ("+v.writedate+") ";
 					if(v.userid=='${userid}'){
-						tag += "<input type='button' class='edit' value='수정'/>";
-						tag += "<input type='button' class='del' value='삭제' title='"+v.re_no+"'/>";
+						tag += "&nbsp;&nbsp;&nbsp;<input type='button' class='edit btn btn-outline-warning btn-sm' value='수정'/>&nbsp;&nbsp;&nbsp;";
+						tag += "<input type='button' class='del btn btn-outline-warning btn-sm' value='삭제' title='"+v.re_no+"'/>";
 					}
-					tag += "<br/>" + v.content + "<hr/></div>";
+					tag += "<br/>" + v.content + "</div>";
 					//로그인 한 아이디와 현재 댓글의 아이디가 같으면 수정폼을 생성
 					if(v.userid=='${userid}'){
 						tag += "<div style='display: none;'><form>";
 						tag += "<input type='hidden' name='re_no' value='" + v.re_no + "'/>";
-						tag += "<textarea name='content' style='width: 500px; height: 100px;'>"+v.content+"</textarea>"
-						tag += "<input type='submit' value='Edit'/></form></div>";		
+						tag += "<textarea name='content' style='width: 500px; height: 100px;'>"+v.content+"</textarea>&nbsp;&nbsp;&nbsp;"
+						tag += "<input type='submit' class='btn btn-outline-warning btn-sm' value='수정하기'/></form></div>";		
 					}
 					tag += "</li>";
 				});
@@ -203,11 +204,10 @@
 			</c:if>
 		</div>
 			<br/>
-			
 			<ul id="replyList" class="list-group">
-			<li class="list-group-item">gamja (2020-10-10)&nbsp;<a href="">수정</a> <a href="">삭제</a><br/>
-				댓글내용2
-			</li>
+				<li class="list-group-item">gamja (2020-10-10)&nbsp;<a href="">수정</a> <a href="">삭제</a><br/>
+					댓글내용2
+				</li>
 			</ul>
 		<div>
 		<br/>

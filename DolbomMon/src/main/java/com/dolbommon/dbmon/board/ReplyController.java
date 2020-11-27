@@ -1,5 +1,7 @@
 package com.dolbommon.dbmon.board;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,56 +30,39 @@ public class ReplyController {
 	//댓글 쓰기
 	@RequestMapping(value="/replyWrite", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView replyInsert(FreeBoardReplyVO vo, HttpServletRequest req, HttpSession ses) {
-		
-		System.out.println(vo.getContent());
-		
-		vo.setUserid((String)ses.getAttribute("userid"));	
-		
+	public int replyInsert(FreeBoardReplyVO vo, HttpServletRequest req, HttpSession ses) {
+
+		vo.setUserid((String)ses.getAttribute("userid"));			
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
-		
-		int result = dao.replyInsert(vo);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		if(result>0) {
-			mav.setViewName("redirect:freeBoardView");
-		}else {
-			mav.setViewName("freeBoard/result");	
-		}
-		return mav;
+		int result = dao.replyInsert(vo);	
+		return result;
 	}
 	
 	//댓글 보기
 	@RequestMapping("/replyList")
 	@ResponseBody
-	public ModelAndView replyAllSelect(int no){
+	public List<FreeBoardReplyVO> replyAllSelect(int no){
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
-		FreeBoardReplyVO rVo = dao.replyAllSelect(no);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("rVo", rVo);
-		mav.setViewName("freeBoard/freeBoardView");
-
-		return mav;
+		return dao.replyAllSelect(no);
 	}
 	
 	//댓글 수정
 	@RequestMapping("/replyEdit")
 	@ResponseBody
 	public int replyEdit(FreeBoardReplyVO vo, HttpSession ses) {
-		vo.setUserid((String)ses.getAttribute("logId"));
+		vo.setUserid((String)ses.getAttribute("userid"));
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
 		
-		return dao.replyUpdate(vo);	
+		return dao.replyUpdate(vo);
 	}
 	
 	//댓글 삭제
 	@RequestMapping("/replyDel")
 	@ResponseBody
-	public int replyDel(int re_no, String userid) {
+	public int replyDel(int re_no) {
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
 		
-		return dao.replyDelete(re_no, userid);
+		return dao.replyDelete(re_no);
 	}
 }

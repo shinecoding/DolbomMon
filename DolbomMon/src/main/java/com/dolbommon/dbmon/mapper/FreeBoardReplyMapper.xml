@@ -16,6 +16,6 @@
 	</update>
 	
 	<delete id="replyDelete">
-		delete from replyBoard where re_no=" + #{re_no}
+		delete from replyBoard where re_no=${param1}
 	</delete>
 </mapper>
