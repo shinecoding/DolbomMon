@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <style>
    *{
         margin:0;
         padding:0;
        }
    #bxslider img{
-      height: 500px; 
-      text-align:center;
+      height: 550px; 
       
+      width:100%;
+      text-align:center;
       -moz-box-shadow: none;
-      -webkit-box-shadow: none;
+     -webkit-box-shadow: none; 
       box-shadow: none;
       border: 0;
-      outline:0;
+      outline: 0;
       border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;
    }
   
@@ -34,7 +36,6 @@
 $(function(){
    $("#bxslider").bxSlider({
       mode :'horizontal'
-      ,slideWidth:1380
       ,pager:true	//페이지 탭
       ,speed:1000 // 변환 속도
       ,auto:true // 자동 시작(true,false)
@@ -51,14 +52,18 @@ $(function(){
 </script>
 </head>
 <body>
-<div>
+
    <ul id="bxslider">
-      <li><a href="#"><img src="img/ca01.png" style='width:100%' /></a></li>
-      <li><a href="#"><img src="img/ca02.jpg" style='width:100%'/></a></li>
-      <li><a href="#"><img src="img/ca03.png" /></a></li>
-      <li><a href="#"><img src="img/DOL02.PNG" /></a></li>
-      <li><a href="#"><img src="img/ca05.png" /></a></li>
-      <li><a href="#"><img src="img/22.jpg" /></a></li>
-      <li><a href="#"><img src="img/3.jpg" /></a></li>
+      <li><a href="#"><img src="img/bx4.png" />
+      <strong data-v-6f47ee50="">
+      등하원 전문
+      <br data-v-6f47ee50="">놀이돌봄 서비스
+    </strong></a></li>
+      <li><a href="#"><img src="img/bx3.png" /></a></li>
+      <li><a href="#"><img src="img/bx1.png" /></a></li>
+      <li><a href="#"><img src="img/141.png" /></a></li>
+      <li><a href="#"><img src="img/bx2.png" /></a></li>
+      <li><a href="#"><img src="img/242.jpg" /></a></li>
+      <li><a href="#"><img src="img/243.png" /></a></li>
    </ul>
-</div>
+

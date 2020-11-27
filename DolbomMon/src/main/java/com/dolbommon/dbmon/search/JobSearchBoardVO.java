@@ -15,6 +15,8 @@ public class JobSearchBoardVO {
 	private String content; //내용
 	private int headcount; //인원수
 	private String discussion; //협의유무
+	private int hit; //조회수
+	
 //	public String getInsurance() {
 //		return insurance;
 //	}
@@ -92,6 +94,12 @@ public class JobSearchBoardVO {
 	}
 	public void setDiscussion(String discussion) {
 		this.discussion = discussion;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	
 	
