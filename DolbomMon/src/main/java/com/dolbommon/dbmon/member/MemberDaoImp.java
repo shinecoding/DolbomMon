@@ -13,4 +13,7 @@ public interface MemberDaoImp {
 	
 	//회원 삭제
 	public int memberDelete(MemberVO mVo);
+	
+	//아이디 중복검사 (아이디 존재여부)
+	public int memberUseridChk(String userid);
 }
