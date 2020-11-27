@@ -80,9 +80,7 @@ font-family:"Noto Sans KR";
       text-decoration:none;
       font-weight:bold;
       text-align: center; 
-
       margin:0; padding:0;
-
       }
    html{
    	   margin:0; padding:0;
@@ -94,8 +92,13 @@ font-family:"Noto Sans KR";
     #list{
        text-align:center;
        margin:0 auto;
+       
        }
-
+    #listitem{
+       
+       width:10%;
+       
+    }
    
     #list img{
        background-color:rgb(255, 121, 40);
@@ -117,7 +120,6 @@ font-family:"Noto Sans KR";
 </style>
 
 <body>
-<div style="min-width:1000px; overflow:hidden;">
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
@@ -132,7 +134,6 @@ font-family:"Noto Sans KR";
  <!--================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
-
   <div id="list" style="max-width: 1000px; margin:0 auto;">
   <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; margin:0 auto;">
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
@@ -141,7 +142,6 @@ font-family:"Noto Sans KR";
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
-
   </ul>
   
   <!-- START THE FEATURETTES -->
@@ -208,7 +208,7 @@ font-family:"Noto Sans KR";
     
 
 
-</div>
+
 </body>
 
 </html>
