@@ -13,22 +13,36 @@
 	*{margin:0; padding:0;}
 	.container{width:600px;}
 	.container>div{width:100%; height:300px; margin-top:80px; overflow:hidden;}
-	
-	
 </style>
+<script>
+	$(function(){
+		$("#parent").click(function(){
+			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/parentJoin");
+			$("#joinType").val("P")
+			$("#submit").click();
+		});	
+		
+		$("#dbm").click(function(){
+			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/dbmJoin");
+			$("#joinType").val("T")
+			$("#submit").click();
+		});
+	});
+</script>
 </head>
 <body>
+	<form id="joinTypeFrm" method="post" action="">
 	<div class="container" >
 		<div>
-			<a href="<%=request.getContextPath()%>/parent/activityAndAge">
-				<img src="<%=request.getContextPath()%>/img/mom.png"/>
-			</a>
+			<img id="parent" src="<%=request.getContextPath()%>/img/mom.png"/>
 		</div>
 		<div>
-			<a href="<%=request.getContextPath()%>/dbm/dbmType">
-				<img src="<%=request.getContextPath()%>/img/dbm.png"/>
-			</a>
+			<img id="dbm" src="<%=request.getContextPath()%>/img/dbm.png"/>
 		</div>
 	</div>
+	<input id="submit" type="submit" />
+	<input type="hidden" name="intro"/>
+	<input type="hidden" id="joinType" name="joinType" value=""/>
+	</form>
 </body>
 </html>
