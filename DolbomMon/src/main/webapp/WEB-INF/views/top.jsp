@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
    <script type="text/javascript">
    
@@ -21,42 +22,51 @@
 		 
       });	
    </script>
- 
+
+   
    <style type="text/css">
+HTML CSSResult
+EDIT ON
+/* 폰트적용 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+   
       *{
 		 margin: 0 auto;
 		 padding: 0px;
 		 list-style-type: none;
-	 	 cursor:pointer;
      	 font-family:"Noto Sans KR";
      	
+     	
 		 }
-     
+     #menu-button{
+     	-webkit-padding-start:0px;
+     }
       html,
       body {
         width: 100%;
         height: 100%;
+        min-width:1200px;
         
       }
       #container {
         width: 100%;
       }
 	  #menu{
-	  	width: -webkit-calc(100%);
 	  	overflow:hidden;
 	  	display:block;
-	  	
 	  }
-
       ul.menu li{ 
 	     float: left;
-		 width: 179px;
+	     width:100%;
+		 width: 263px;
 		 height: 48px;
+		 text-align:center;
 		 background-color: white;
-		 border-bottom:1px solid #f6a21c;
-		 
+	     /*border:1px solid #f6a21c; */
 		 position: relative;
 		 z-index:1000;
+		 list-style-type: none;
 		
 		 }
       ul.menu li a{
@@ -64,11 +74,14 @@
 		 width: 100%;
 		 height: 100%;
 		 line-height: 48px;
-		 text-indent: 30px;
 		 font-weight:bold;
-		 color: #f6a21c;
+		 overflow:hidden;
+		/*  color: #f6a21c; */
+		 color:gray;
 		 text-decoration: none;
 		 font-family:"Noto Sans KR";
+		 text-align:center;
+		 list-style-type: none;
 		 }
 	  ul.menu li {
 		width: calc(100%/6);
@@ -106,6 +119,10 @@
 	   		
 	   }
 	   .clearfix:after { clear:both; } 
+	   .menu>li *{
+	   width:100%
+	   }
+	   
    </style>
 </head>
 <body>
@@ -142,28 +159,27 @@
 
   
   
-   <ul class="menu">
+   <ul class="menu" id="menu-button">
        
        <li><a href="#">고객센터</a>
 	     <ul class="sub">
 		    <li><a href="/dbmon/brandIntro">회사소개</a></li>
 			<li><a href="#">신고하기</a></li>
-			<li><a href="#">서브메뉴A</a></li>
+			
 		 </ul>
 		 </li>
 	    <li><a href="/dbmon/noticeBoard">공지사항</a>
 	    <ul class="sub">
-		    <li><a href="#">서브메뉴B</a></li>
-			<li><a href="#">서브메뉴B</a></li>
-			<li><a href="#">서브메뉴B</a></li>
+	    
+	    
 		</ul>
 		</li>
 		<li><a href="/dbmon/freeBoard">자유게시판</a>
 
 		</li>
-		<li><a href="/dbmon/parent">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
+		<li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
 		</li>
-		<li><a href="/dbmon/sitter">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+		<li><a href="/dbmon/sitterList	">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
 	    
 		</li>
 		<li><a href="#">My Menu</a>

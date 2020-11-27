@@ -16,51 +16,94 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
-<div id="map" style="width:500px;height:400px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+<div class="container">
+	<form method="post" action="teacherMapOk" name="locationFrm" >
+	
+	<input type="text" id="addr" placeholder="주소">
+	<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+	<input type="text" id="addrdetail" placeholder="상세주소">
+	<input type="text" id="zipcode" placeholder="우편번호"><br/>
+	<input type="text" id="lat" name="lat" value=${mvo.lat}/>
+	<input type="text" id="lng" name="lng" value=${mvo.lng}/><br/>
+<div id="map" style="width:600px;height:600px;margin-top:10px;display:none"></div>
 
-		var map = new kakao.maps.Map(container, options);
-	</script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(${mvo.lat}, ${mvo.lng}), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
 	
-	
-	
-	<script>
-	
-	var IMP = window.IMP; // 생략가능
-	IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 14000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
+    
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    mapContainer.style.display = "block";
+    
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(${mvo.lat}, ${mvo.lng}),
+        map: map,
+        draggable:true// 마커가 드래그 가능하도록 설정합니다 
+    });
+    map.relayout();
+  //드래그 후 위도,경도 위치
+	kakao.maps.event.addListener(marker, 'dragend', function() {
+		
+		
+		latlng = marker.getPosition();
+		$("#lat").val(latlng.getLat());
+		$("#lng").val(latlng.getLng());
+		
+		 map.relayout();
+		
 	});
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+				var zipcode = data.zonecode;
+                var lat = data.lat;
+                
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("addr").value = addr;
+                document.getElementById("zipcode").value = zipcode;
+                document.getElementById("addrdetail").focus();
+                
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        document.getElementById("lat").value = result.y;
+                        document.getElementById("lng").value = result.x;
+                        
+                        
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
+</script>
 	
-	</script>
+	<input type="submit" value="저장" />
+	
+	</form>
+</div>
 </body>
 </html>
