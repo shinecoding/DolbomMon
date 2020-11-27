@@ -38,25 +38,23 @@ public class BoardController {
 	
 	//게시판 리스트로 이동ok
 	@RequestMapping("/freeBoard")
-	public ModelAndView freeBoard() {
+	public ModelAndView freeBoard(FreeBoardVO vo, HttpServletRequest req) {
 		
-		PagingVO pVo = new PagingVO();
 		
-		//String nowPageTxt = req.getParameter("nowPage");
+		String nowPageTxt = req.getParameter("nowPage");
+		
 		
 		//System.out.println(nowPageTxt);
-		//if(nowPageTxt!=null) {
-			//pVo.setNowPage(Integer.parseInt(nowPageTxt));
-		//}
+		if(nowPageTxt!=null) {
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
+		}
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		List<FreeBoardVO> list = dao.freeBoardList(pVo);
+		List<FreeBoardVO> list = dao.freeBoardList(vo);
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
-	//	mav.addObject("nowPage", pVo.getNowPage());
-	//	mav.addObject("pVo", pVo);
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("freeBoard/freeBoard");
 		

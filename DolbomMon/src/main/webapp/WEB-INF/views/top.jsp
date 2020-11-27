@@ -174,7 +174,7 @@ EDIT ON
 	    
 		</ul>
 		</li>
-		<li><a href="/dbmon/freeBoard">자유게시판</a>
+		<li><a href="/dbmon/freeBoard?nowPage=1">자유게시판</a>
 
 		</li>
 		<li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->

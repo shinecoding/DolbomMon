@@ -18,6 +18,7 @@
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
+		position: relative;
 	}
 	#head{
 		text-align: center;
@@ -34,16 +35,34 @@
 	 }
 	body{
 	 	font-size: 0.9em;
-	 }	
+	 }
+	 ul, li{
+		margin: 0px;
+		padding: 0px;
+		list-style-type: none;
+	}
+	#paging ul{
+		width: 100%;
+		height: 40px;
+		overflow: auto;
+	}
+	#paging li{
+		float: left;
+		width: 60px;
+		height: 40px;
+		text-align: center;
+		font-size: 1.3em;
+	}
 </style>
 </head>
 <body>
+
 <div class="container">
 <div id="top">
 <b>자유게시판</b>
 </div>
 <div>
-	<a class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
+	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
 </div>
 <div><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board">
@@ -87,24 +106,62 @@
 		</tbody>
 	</table>
 	<br/>
+
+	<c:forEach var="pVo" items="${list}">
+		<div id="paging">
+			<ul>
+				<!-- 이전페이지 -->
+				<li>
+					<c:if test="${pVo.nowPage>1}">
+					<a href="/dbmon/freeBoardView?nowPage=${pVo.nowPage-1}">Prev</a>
+					</c:if>
+				</li>
+				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum + pVo.onePageRecord-1}">			
+					<c:if test="${p<=pVo.totalPage}">
+						<li <c:if test="${p==pVo.nowPage}"></c:if>>
+							<a href="/dbmon/freeBoardView?nowPage=${p}">${p}</a></li>
+						</c:if>
+				</c:forEach>
+		
+				<li>
+					<c:if test="${pVo.nowPage<pVo.totalPage}">
+						<a href="/dbmon/freeBoardView?nowPage=${pVo.nowPage+1}">Next</a>
+					
+					</c:if>				
+				</li>	
+			</ul>
+		</div>
+	</c:forEach>
+	
 	
 	<div>
 	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Next</a>
-			</li>
-		</ul>
+		<c:forEach var="pVo" items="${list}">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled">
+					<c:if test="${pVo.nowPage>1}">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+					</c:if>
+				</li>
+				
+				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum + pVo.onePageRecord-1}">
+					<c:if test="${p<=pVo.totalPage}">
+						<li class="page-item" <c:if test="${p==pVo.nowPage}"> style="background-color: lightblue"</c:if>>
+							<a class="page-link" href="/dbmon/freeBoardView?nowPage=${p}">${p}</a></li>
+					</c:if>
+				</c:forEach>
+				
+				
+				<li class="page-item">
+					<c:if test="${pVo.nowPage<pVo.totalPage}">
+						<a class="page-link" href="/dbmon/freeBoardView?nowPage=${pVo.nowPage+1}">Next</a>
+					</c:if>
+				</li>
+			</ul>
+		</c:forEach>	
 	</nav>
 	</div>
+	
 	<br/>
 	<div class="input-group mb-3">
 		<input type="text" class="form-control" placeholder="검색어를 입력하세요"/>

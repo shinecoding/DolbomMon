@@ -19,7 +19,7 @@ public class PagingVO {
 	}
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
-		
+		currentPageRecord = nowPage*onePageRecord;
 		//시작페이지 번호 계산
 		startPageNum = (nowPage-1)/onePageNumCount*onePageNumCount+1;	
 	}

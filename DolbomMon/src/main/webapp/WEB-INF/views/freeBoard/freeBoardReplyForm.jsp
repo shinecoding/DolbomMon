@@ -57,6 +57,8 @@ $(function(){
 </script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 <div class="container">
 <div id="top">
 <b>답글 쓰기</b>

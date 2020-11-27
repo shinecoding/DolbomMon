@@ -52,6 +52,7 @@ $(function(){
 </script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
 <div id="top">
 <b>게시판 글 수정하기</b>
