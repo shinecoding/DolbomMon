@@ -52,10 +52,14 @@
     map.relayout();
   //드래그 후 위도,경도 위치
 	kakao.maps.event.addListener(marker, 'dragend', function() {
+		
+		
 		latlng = marker.getPosition();
 		$("#lat").val(latlng.getLat());
 		$("#lng").val(latlng.getLng());
+		
 		 map.relayout();
+		
 	});
 
     function sample5_execDaumPostcode() {
