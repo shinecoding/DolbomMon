@@ -25,14 +25,14 @@
 	<input type="text" id="zipcode" placeholder="우편번호"><br/>
 	<input type="text" id="lat" name="lat" value=${mvo.lat}/>
 	<input type="text" id="lng" name="lng" value=${mvo.lng}/><br/>
-<div id="map" style="width:600px;height:600px;margin-top:10px;display:block"></div>
+<div id="map" style="width:600px;height:600px;margin-top:10px;display:none"></div>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            center: new daum.maps.LatLng(${mvo.lat}, ${mvo.lng}), // 지도의 중심좌표
             level: 5 // 지도의 확대 레벨
         };
 	
@@ -45,7 +45,7 @@
     var geocoder = new daum.maps.services.Geocoder();
     //마커를 미리 생성
     var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
+        position: new daum.maps.LatLng(${mvo.lat}, ${mvo.lng}),
         map: map,
         draggable:true// 마커가 드래그 가능하도록 설정합니다 
     });

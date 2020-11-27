@@ -12,6 +12,4 @@ public interface MemberDaoImp {
 	//회원 삭제
 	public int memberDelete(MemberVO mVo);
 	
-	
-	
 }
