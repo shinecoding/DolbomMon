@@ -269,8 +269,7 @@
 				return false;
 			}
 			
-			alert("가입성공");
-			return false;
+			return true;
 		});
 	});
 	
