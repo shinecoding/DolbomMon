@@ -11,6 +11,9 @@
 	<select id="getTotalRecord" resultType="int">	
 		select count(no) from teacher_list2
 	</select>
+	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO" >
+		update teacher_list2 set hit= hit+1 where userid= #{userid}
+	</update>
 	
 	<!-- <select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
 		select no, head, subject, content, userid, hit, writedate

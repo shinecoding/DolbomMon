@@ -11,6 +11,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <style>
 .container{width:800px;}
 i{color:gray;}
@@ -108,7 +109,7 @@ width:50%;
 </script>
 </head>
 <body>
-
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
 	<h5>내 사진</h5>
 
@@ -207,8 +208,6 @@ width:50%;
    		
    <br/>
 </div>
-
-
 
 </body>
 </html>

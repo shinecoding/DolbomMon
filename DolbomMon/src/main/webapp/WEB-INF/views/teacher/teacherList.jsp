@@ -72,7 +72,6 @@
 	   </div>
 	</div>   
  <br/>
- <a href="teacherMap">지도?</a>
    <ul class="list-group list-group-flush">
    		<li class="list-group-item list-group-item-action"><a href="teacherApplyHistory"><i class="fas fa-clipboard mx-2"></i> 내 구직현황</a><i class="fas fa-angle-right float-right mt-1 mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherHeart"><i class="fas fa-heart mx-2"></i> 찜한 일자리</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>

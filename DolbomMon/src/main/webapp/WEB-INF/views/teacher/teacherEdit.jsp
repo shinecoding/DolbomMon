@@ -290,7 +290,7 @@ font-weight:bold;
 		<h5>활동 가능 지역</h5>
 		
 		<li class="list-group-item">
-			<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
+			<i class="fas fa-pen"><a class="editBtn" href="teacherMap"></a></i>
 			<ul class="list-group" >
 			<li class="list-group-item" style="border:none">
 				<span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동
