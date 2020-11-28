@@ -510,9 +510,11 @@ public class TeacherController {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		MemberVO mvo = dao.selectTMap(userid);
+		TeacherVO vo = dao.selectTeacher(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mvo", mvo);
+		mav.addObject("vo", vo);
 		mav.setViewName("/teacher/teacherMap");
 		
 		return mav;
@@ -532,10 +534,10 @@ public class TeacherController {
 		mvo.setLat(lat);
 		mvo.setLng(lng);
 		
-		String area1 = req.getParameter("area");
-		if(area1 != null || area1.equals("")) {
+		String area1 = req.getParameter("area1");
+		if(area1 != null || !area1.equals("")) {
 			tvo.setArea1(area1);
-			int cnt = dao.updateArea(tvo);
+			int cnt = dao.updateArea(tvo);//칸이 채워져있을 경우만 업데이트 실행update only if the input box isn't blank
 			} 
 		int result = dao.updateTMap(mvo);
 		
