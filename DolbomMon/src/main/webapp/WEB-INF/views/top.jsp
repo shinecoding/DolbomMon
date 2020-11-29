@@ -82,18 +82,18 @@ EDIT ON
        margin-left:0px;
        }
      ul.mainTopmenu li {
-      width: 263.27px;
+      width: calc(100%/6);
       
       }
      ul.mainTopmenu ul.subMain li {
-       width: 263.27px;
+       width: 100%;
        -webkit-padding-start:0px;
        }
      
      
       ul.mainTopmenu li a:hover{
         background-color: #ffefd5;
-        opacity:20;
+        opacity:50;
        }
       ul.mainTopmenu li ul.subMain{
         position: absolute;
