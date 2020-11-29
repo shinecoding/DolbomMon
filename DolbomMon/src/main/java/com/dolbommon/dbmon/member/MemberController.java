@@ -109,26 +109,19 @@ public class MemberController {
 		}
 		
 		// 아이디 중복검사 창
-		@RequestMapping("/idCheckForm")
+		@RequestMapping("/idCheck")
 		public String idCheckWindow() {
 			return "register/idCheck";
 		}
 		
-		@RequestMapping(value = "/idChk", method = RequestMethod.POST)
+		@RequestMapping(value = "/idCheckAjax", method = RequestMethod.POST)
 		@ResponseBody
-		public String useridChk(HttpServletRequest req) {
-			
-			System.out.println(req.getParameter("getUserid"));
-			
+		public String useridChk(MemberVO vo) {
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberUseridChk(req.getParameter("getUserid"));
+			int result = dao.memberUseridChk(vo);
 			
-			System.out.println("result => " + result);
-			
-			req.setAttribute("result", result);
-			
-			return "idchk";
+			return "idChk";
 		}
 		
 		// SMS 인증창 

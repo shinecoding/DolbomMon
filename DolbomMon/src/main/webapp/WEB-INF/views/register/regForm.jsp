@@ -66,7 +66,7 @@
 		
 		// 아이디 중복검사
 		$("#useridChkBtn").on('click', function(){
-			window.open("<%=request.getContextPath()%>/idCheckForm", "idChk", "left=400, top=150, width=500, height=300");
+			window.open("<%=request.getContextPath()%>/idCheck", "idChk", "left=400, top=150, width=500, height=300");
 		});
 		
 		// 우편번호 검색창

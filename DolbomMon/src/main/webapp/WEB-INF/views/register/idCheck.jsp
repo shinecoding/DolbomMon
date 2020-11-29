@@ -12,19 +12,25 @@
 	$(function(){
 		
 		$(document).ready(function(){
-			$("#getUserid").val(opener.document.getElementById('userid').value);	
+			$("#userid").val(opener.document.getElementById('userid').value);	
 			
 		});
 		
 		$("#idChkBtn").click(function(){
 	        //userid 를 param.
-	        var userid = $("#getUserid").val();
+	        var userid = $("#userid").val();
 	        $.ajax({
-	            url : "idChk",
+	            url : "/dbm/idChk",
 	            type : 'post',
-	            data : userid,
+	            dataType: "json",
+	            data : {"userId" : userid},
 	            success : function(result) {
-	               console.log("result =>" + result);
+	               if(result == 1) {
+	            	   alert("중복된 아이디입니다ㅣ.");
+	               }else if(result == 0){
+	            	   $("#idchk").val("Y");
+	            	   alert("사용가능한 아이디입니다.");
+	               }
 	            },
 	            error : function(error) {
 	                alert("error : " + error);
@@ -42,13 +48,14 @@
 </style>
 </head>
 <body>
+	<input type="hidden" id="idChkOk" value="N" />
 	<div id="mainDiv">
 		<h3>아이디 중복검사</h3>
 		<div>
 			
 			<span>사용할 아이디</span><span style="font-size:13px;" id="useridRegChk"></span><br/>
 			<form method="post" action="<%=request.getContextPath()%>/idChk">
-				<input type="text" name="getUserid" id="getUserid" value="" />
+				<input type="text" name="userid" id="userid" value="" />
 				<input type="button" id="idChkBtn" value="아이디 중복검사" />
 				<input type="button" id="idUseBtn" value="사용하기"/>
 			</form>
