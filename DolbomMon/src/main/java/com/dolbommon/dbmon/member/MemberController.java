@@ -50,66 +50,53 @@ public class MemberController {
 		public String parentJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
 			
 			ses.setAttribute("joinType", joinType);
-			return "/register/parent/parentRegForm";
+			return "register/regForm";
 		}
 		
-		
-		// 부모님 회원가입 폼
-		
-		@RequestMapping(value="/parentRegFormOk", method=RequestMethod.POST)
-		public ModelAndView parentRegFormOk(MemberVO mVo) {
-			
-			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			
-			int result = dao.memberReg(mVo);
-			
-			ModelAndView mav = new ModelAndView();
-			
-			mav.addObject("result", result);
-			mav.setViewName("register/regResult");
-			
-			return mav;
-		}
-		
-		
-		///////////////////////// 선생님 회원가입 //////////////////////////////
 		@RequestMapping(value="dbmJoin", method=RequestMethod.POST)
 		public String dbmJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
 			ses.setAttribute("joinType", joinType);
 			return "register/dbm/dbmType";
 		}
 		
-		@RequestMapping(value="/teacherRegForm", method=RequestMethod.POST)
-		public ModelAndView teacherRegForm(
+		// 선생님, 부모님 회원가입 폼
+		@RequestMapping(value="/regForm", method=RequestMethod.POST)
+		public ModelAndView regForm(
 				@RequestParam("intro") String intro,
 				HttpSession ses
 				) {
 			ses.setAttribute("intro", intro);
 			ModelAndView mav = new ModelAndView();
 			
-			mav.setViewName("register/dbm/teacherRegForm");
+			mav.setViewName("register/regForm");
 			return mav;
 		}
 				
-		@RequestMapping(value="/teacherRegFormOk", method=RequestMethod.POST)
-		public ModelAndView teacherRegFormOk(
+		@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
+		public ModelAndView regOk(
 			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
 			
 			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
 			
 			TransactionStatus status = transactionManager.getTransaction(def);
+			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
+			String joinType = (String)ses.getAttribute("joinType");
 			int result = 0;
+			
 			try {
-				dao.memberReg(mVo);
+				if(joinType=="T") {
+					dao.memberReg(mVo);
 					
-				dao.memberRegTeacher(mVo, tVo);
+					dao.memberRegTeacher(mVo, tVo);
 					
-				result = dao.memberRegRegular(mVo, rdVo);
-					
+					result = dao.memberRegRegular(mVo, rdVo);
+				}else {
+					result = dao.memberReg(mVo);
+				}
 				transactionManager.commit(status);
 			}catch(Exception e) {
 				transactionManager.rollback(status);
@@ -120,8 +107,6 @@ public class MemberController {
 			
 			return mav;
 		}
-		///////////////////////// 선생님 회원가입 //////////////////////////////
-
 		
 		// 아이디 중복검사 창
 		@RequestMapping("/idCheckForm")

@@ -38,7 +38,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="<%=request.getContextPath()%>/teacherRegForm">
+		<form method="post" action="<%=request.getContextPath()%>/regForm">
 		
 			<h4>간단 자기소개<span>(선택사항)</span></h4>
 			<textarea name="intro" placeholder="간단한 자기소개 작성 시 부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>
