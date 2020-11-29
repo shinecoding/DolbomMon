@@ -60,5 +60,7 @@
 	<update id="updateArea" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set area1= #{area1} where userid = #{userid}
 	</update>
-	
+	<select id="selectAllTeacher" resultType="com.dolbommon.dbmon.Teacher.MemberVO">
+		select userid, lat, lng, addr from member where lat is not null and lng is not null
+	</select>
 </mapper>

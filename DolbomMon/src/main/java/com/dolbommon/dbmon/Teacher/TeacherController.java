@@ -44,6 +44,7 @@ public class TeacherController {
 		return "/teacher/teacherList";
 	}
 
+
 	@RequestMapping("/teacherView")
 	public ModelAndView teacherView(HttpSession ses) {//
 
@@ -280,84 +281,80 @@ public class TeacherController {
 		String[] exp_start = req.getParameterValues("exp_start");
 		String[] exp_end = req.getParameterValues("exp_end");
 		
-		int len = exp_content.length;
-		int cnt = dao.findIdT(evo);
-		int result;
-		if (cnt<0) {	//first insert
-			for(int i=0; i<len; i++) {
+		int lenP = exp_content.length; //파라미터로 가져온 값
+		int cntDB = dao.findIdT(evo); //데이터에비스에 들어있는 값
+		int result = 0;
+		if (cntDB<=0) {	//first insert
+			for(int i=0; i<lenP; i++) {
 				evo.setExp_content(exp_content[i]);
 				evo.setExp_start(exp_start[i]);
 				evo.setExp_end(exp_end[i]);
 				if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+					result = dao.insertExp(evo);
 					hash.add(evo);
-				} else {
-					hash.remove(evo);
-					}
+				}
 				}//for			
-			result = dao.insertExp(hash);
+			
 		}else {	//update
 			
-			if(len==cnt) { //before = after  good to update
+			if(lenP==cntDB) { //beforeDB = afterP  good to update
 			
-				for(int i=0; i<len; i++) {
+				for(int i=0; i<lenP; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.updateExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
-						}
+					}
 					}//for
-				result = dao.updateExp(hash);
-			}else if(len>cnt) { //added some records
+				
+				
+		}else if(lenP>cntDB) { //added some records
 								//5-3
-				for(int i=0; i<len-cnt; i++) {
+				for(int i=0; i<lenP-cntDB; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.updateExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
 						}
 					}//for
-				result = dao.updateExp(hash);
+				
+		
 						//3		  5	
-				for(int i=len; i<cnt; i++) {
+				for(int i=cntDB; i<lenP; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.insertExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
 						}
 					}//for
-				result = dao.insertExp(hash);
+				
+				
 			}else { //deleted new records len(new)<cnt(old)
-				for(int i=0; i<len; i++) {
+				for(int i=0; i<cntDB-lenP; i++) { //삭제
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
-						hash.add(evo);
-					} else {
-						hash.remove(evo);
-						}
+						result = dao.deleteExp(evo);
+										}
 					}//for
-				result = dao.updateExp(hash);
-				for(int i=len; i<cnt; i++) {
+				
+				for(int i=0; i<lenP; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.insertExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
-						}
+					}
 					}//for
-				result = dao.deleteExp(hash);
+				
 			}
 		}
 		
@@ -504,7 +501,22 @@ public class TeacherController {
 		return mav;		
 	}
 
+	//학부모가 선생 찾을 때 보는 지도
+	@RequestMapping("/teacherSearchMap")
+	public ModelAndView teacherSearchMap(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		//HashSet<MemberVO> hash = dao.selectAllTeacher();
+		MemberVO mvo = dao.selectTMember(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject("hash", hash);
+		mav.addObject("mvo", mvo);
+		mav.setViewName("/teacher/teacherSearchMap");
+		return mav;
+	}
 	
+	//선생 개인 위치 수정용 지도
 	@RequestMapping("/teacherMap")
 	public ModelAndView teacherMap(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
@@ -552,6 +564,14 @@ public class TeacherController {
 		}else {
 			mav.setViewName("teacher/teacherResult");
 		}
+		return mav;
+	}
+
+	@RequestMapping("/payment")
+	public ModelAndView payment() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("teacher/payment");
 		return mav;
 	}
 
