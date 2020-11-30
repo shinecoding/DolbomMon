@@ -5,6 +5,7 @@ public class ChatRoomDTO {
 	
 	private String roomseq;
 	private String userid;
+	private String userid_t;
 	private String roomname;
 	private String indate;
 	
@@ -32,6 +33,12 @@ public class ChatRoomDTO {
 	}
 	public void setIndate(String indate) {
 		this.indate = indate;
+	}
+	public String getUserid_t() {
+		return userid_t;
+	}
+	public void setUserid_t(String userid_t) {
+		this.userid_t = userid_t;
 	}
 	
 	

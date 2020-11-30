@@ -2,11 +2,26 @@ package com.dolbommon.dbmon.chat;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface ChatDaoImp {
 
-	public int insertRoom(ChatRoomDTO room);//방만들기
+	//방만들기
+	public int insertRoom(ChatRoomDTO room);
 	
-	public List<ChatRoomDTO> selectAllRoom();//방 목록
+	//채팅 내용 가져오기
+	public List<ChatDTO> selectRoom(int roomNo);
+	
+	//방 목록
+	public List<ChatRoomDTO> selectAllRoom(String userid);
+	
+	//중복 방 확인하기
+	public int roomCheck(@Param("userid")String userid, @Param("userid_t")String userid_t);
+
+	
+	
+	
+	
 	
 	public int insertChat(ChatDTO chat); //채팅목록
 	

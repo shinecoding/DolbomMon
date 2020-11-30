@@ -2,6 +2,7 @@ package com.dolbommon.dbmon.chat;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,35 +23,51 @@ public class ChatController {
 	ChatDAO chatdao;
 	
 	@RequestMapping("/chat")
-	public String chatMain(Model model) {
-		//채팅 폼으로 이동 임시.
+	public ModelAndView chatMain(HttpSession session) {
 		
-		//model.addAttribute("roomList", chatdao.selectAllRoom()); //방정보..
-		return "chat/chatMain";
+		ModelAndView mav = new ModelAndView();
+		
+		String userid = (String)session.getAttribute("userid");
+		
+		mav.addObject("roomList", chatdao.selectAllRoom(userid)); //방정보..
+		mav.addObject("myId", userid);
+		mav.setViewName("chat/chatMain");
+		return mav;
 	}
 	
 	//////////////
+	
+	//방만들기 and 채팅방열기
 	@RequestMapping(value="/makeRoom", method=RequestMethod.POST)
 	@ResponseBody
-	public String makeakeRoom(ChatRoomDTO room, HttpSession session) {
-		String userid = (String)session.getAttribute("userid");
-		room.setUserid(userid);
-		System.out.println(room.getRoomname());
-		System.out.println(room.getUserid());
-		chatdao.insertRoom(room);
-		System.out.println("방번호 테스트"+room.getRoomseq());
-		return "ok";
+	public List<ChatRoomDTO> makeakeRoom(ChatRoomDTO room, HttpSession session) {
 		
+		String userid = (String)session.getAttribute("userid");
+		
+		//userid는 고정으로 테스트. test4가 글쓴이.
+		room.setUserid("test3"); //글, 프로필 대상
+		
+		int result = chatdao.roomCheck(userid, room.getUserid());
+		
+		List<ChatRoomDTO> resultRoomDTO =null;
+		if(result>=1) {
+			resultRoomDTO = chatdao.selectAllRoom(userid);
+			return resultRoomDTO;
+		}
+		room.setUserid_t((String)session.getAttribute("userid")); //접속한 사람.. 추후 선생님 아이디(댓글등록자아이디)로 변경. 만약 선생님에게 부모님이 신청한거면?
+		chatdao.insertRoom(room); //방 생성 // 방번호 가져오기.
+		
+		resultRoomDTO = chatdao.selectAllRoom(userid);
+		return resultRoomDTO;
 	}
 	
-	//채팅입력
+	//채팅입력 //입력할때마다 방번호가 최신시간으로 갱신되게 만들기? 아니면 방삭제권한..? 그럼 방에다가 삭제권한 줘야하는데. . 시간을 현재시간으로 갱신하게 만들기.
 	@RequestMapping(value="/insertChat", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertChat(ChatDTO chat, HttpSession session) {
-		System.out.println("ajax 값 확인"+ chat.getRoomseq());
-		System.out.println("ajax 값 확인"+ chat.getMessage());
+	public String insertChat(ChatDTO chat, HttpServletRequest req, HttpSession session) {
 		if(session.getAttribute("userid") != null) {
 			String userid = (String)session.getAttribute("userid");
+			chat.setRoomseq((String)req.getParameter("roomseq"));
 			chat.setUserid(userid);
 			chatdao.insertChat(chat);
 		}
@@ -58,6 +75,16 @@ public class ChatController {
 		return "ok";
 		
 	}
+	
+	//방 클릭시 채팅내용에 반영되게하기
+	@RequestMapping("/selectChatRoom")
+	@ResponseBody
+	public List<ChatDTO> selectRoom(HttpServletRequest req) {
+		int roomNo = Integer.parseInt((String)req.getParameter("roomNo"));
+		List resultDTO = chatdao.selectRoom(roomNo);
+		return resultDTO;
+	}
+	
 	
 	
 	/////////////
@@ -68,13 +95,7 @@ public class ChatController {
 	
 	
 	
-	@RequestMapping(value = "/goChatList", method = RequestMethod.GET)
-	public String goChatList(Model model) {// 채팅방목록이동액션
 
-		model.addAttribute("roomList", chatdao.selectAllRoom());
-
-		return "redirect:chat";
-	}
 	
 	@RequestMapping(value="/goMakeRoom", method=RequestMethod.POST)
 	public String goMakeRoom(ChatRoomDTO room, HttpSession session) {

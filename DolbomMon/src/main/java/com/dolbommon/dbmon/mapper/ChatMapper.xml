@@ -4,11 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.chat.ChatDaoImp">
 	<insert id="insertRoom" parameterType="com.dolbommon.dbmon.chat.ChatRoomDTO">
-		insert into chatroom(roomseq, userid, roomname, indate) values(chatseq.nextval,#{userid}, #{roomname} ,sysdate)
+		insert into chatroom(roomseq, userid, userid_t, indate) values(chatseq.nextval,#{userid}, #{userid_t}, sysdate)
 	</insert>
-	<select id="selectAllRoom" parameterType="com.dolbommon.dbmon.chat.ChatRoomDTO">
-		select roomseq, userid, roomname, indate from chatroom order by indate desc
+	
+	<select id="selectAllRoom" resultType="com.dolbommon.dbmon.chat.ChatRoomDTO" parameterType="String">
+		select roomseq, userid, userid_t, to_char(indate ,'MM"월"DD"일" HH24:MI:SS') indate from chatroom where userid=#{userid} or userid_t=#{userid} order by indate desc
 	</select>
+	
+	<select id="selectRoom" resultType="com.dolbommon.dbmon.chat.ChatDTO" parameterType="int">
+		select chatseq, roomseq, userid, message, to_char(indate ,'MM"월"DD"일" HH24:MI:SS') indate from chat where roomseq=#{roomNo} order by chatseq asc
+	</select>
+	
+	<select id="roomCheck" resultType="int" parameterType="map">
+		select count(roomseq) from chatroom where (userid=#{userid} and userid_t=#{userid_t}) or (userid=#{userid_t} and userid_t=#{userid}) 
+	</select>
+	
+	
+	
+	
+	
+	
+
 	
 	<select id="selectChat" resultType="com.dolbommon.dbmon.chat.ChatDTO" parameterType="String">
 		select roomseq, chatseq, userid, message, indate from chat where roomseq=#{roomseq} 
