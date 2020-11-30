@@ -66,11 +66,6 @@ public class BoardController {
 		vo.setTotalRecord(dao.getTotalRecord());
 		
 		List<FreeBoardVO> list = dao.freeBoardList(vo);
-	
-		System.out.println(vo.getTotalRecord());
-		System.out.println(vo.getNowPage());
-		System.out.println(vo.getTotalPage());
-		System.out.println(vo.getStartPageNum());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
