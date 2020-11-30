@@ -29,8 +29,6 @@
  
 
 
-
-
 </style>
 <script>
 $(function(){
@@ -39,26 +37,24 @@ $(function(){
       ,pager:true	//페이지 탭
       ,speed:1000 // 변환 속도
       ,auto:true // 자동 시작(true,false)
+   	  ,moveSliders : 1 // 슬라이더 이동시 개수
       ,randomStart:true //시작슬라이드 랜덤
       ,caption:true //title속성의 값을 설명으로 표시한다.(true,false)
       ,infiniteLoop: true//반복여부
       ,hideControlOnEnd: false//처음과 마지막에 컨트롤러 표시 여부 설정(true, false)
    //easing
       ,useCSS: true//easing 사용 여부 설정(true(easing사용안함), false(easing사용));
-      
+     });
    
-   });
+   
+  
+
 });
 </script>
 </head>
 <body>
 
    <ul id="bxslider">
-      <li><a href="#"><img src="img/bx4.png" />
-      <strong data-v-6f47ee50="">
-      등하원 전문
-      <br data-v-6f47ee50="">놀이돌봄 서비스
-    </strong></a></li>
       <li><a href="#"><img src="img/bx3.png" /></a></li>
       <li><a href="#"><img src="img/bx1.png" /></a></li>
       <li><a href="#"><img src="img/141.png" /></a></li>

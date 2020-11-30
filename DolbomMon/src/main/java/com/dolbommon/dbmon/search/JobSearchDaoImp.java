@@ -26,5 +26,7 @@ public interface JobSearchDaoImp {
 	
 	//답글 쓰기
 	public int replyBoardInsert(JobSearchBoardVO vo);
+	//글번호 구하기
+	public List<MemberVO> selectTMemNo(); 
 	}
 

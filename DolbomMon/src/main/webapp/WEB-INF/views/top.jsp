@@ -5,15 +5,17 @@
    <script type="text/javascript">
    
          $(function(){
-        $("ul.subMain").hide();
-       $("ul.mainTopmenu li").hover(function(){
-          $("ul:not(:animated)",this).slideDown("fast");
-         },
-         function(){
-            $("ul",this).slideUp("fast");
-         });
 
-      });   
+	        $("ul.subMain").hide();
+	        $("ul.mainTopmenu li").hover(function(){
+	        	$("ul:not(:animated)",this).slideDown("fast");
+	         },
+	         function(){
+	            $("ul",this).slideUp("fast");
+	         });
+
+	      });   
+
    </script>
 
    
@@ -23,33 +25,25 @@ EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-   
-      *{
-       margin: 0 auto;
-       padding: 0px;
-       list-style-type: none;
-         font-family:"Noto Sans KR";
-        
-        
-       }
+
 
      #menu-button{
-        -webkit-padding-start:0px;
+     	-webkit-padding-start:0px;
+     	
      }
 
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        min-width:1200px;
-        
-    }
+     #topmenu-button{
+     	-webkit-padding-start:0px;
+     	
+     }
+   
      #topmenu-button{
         -webkit-padding-start:0px;
      }
    
 
       #container {
+
         width: 100%;
       }
 
@@ -126,17 +120,18 @@ EDIT ON
       .mainTopmenu>li *{
       width:100%
       }
-      
+
    </style>
 </head>
 <body>
- <div id="container">
+ <div id="containertoptoptop" >
 
  <div class="clearfix">
     <header id="topHeader">
     <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
            class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
            Onclick="location.href='/dbmon'"/>
+
 
            <span style="float:right">
            <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
@@ -159,11 +154,13 @@ EDIT ON
 
    </a>             
    </header>
+
 </div> 
 
    <ul class="mainTopmenu" id="topmenu-button">
        
        <li><a href="#">고객센터</a>
+
         <ul class="subMain">
           <li><a href="/dbmon/brandIntro">회사소개</a></li>
          <li><a href="#">신고하기</a></li>         
@@ -189,5 +186,6 @@ EDIT ON
          <li><a href="teacherList">선생님페이지</a></li>
          <li><a href="mypage">부모님페이지</a></li>
       </ul>
-   </ul>
-   </div>
+ </ul>
+
+ </div>
