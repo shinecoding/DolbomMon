@@ -89,9 +89,11 @@
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
 <div class="all_wrapper">
+<button type="button" class="btn btn-warning btn-lg btn-block">어떤 돌봄몬을 찾으세요?</button>
+<button type="button" class="btn btn-light btn-lg" style="width:100%">가까운 돌봄몬 찾기</button><br/><br/>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:#f0f0f0;"> 
 <div id="filterbox" >
-<input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요" readonly>
+<input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요">
 <form class="form-inline">
   <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
   <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
