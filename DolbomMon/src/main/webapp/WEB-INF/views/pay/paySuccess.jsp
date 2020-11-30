@@ -16,6 +16,8 @@
 <body>
 <div>
 결제가 성공적으로 완료되었습니다.
+리퀘스트 : <%= request.getParameter("msg") %>
+괄호 : ${mvo.msg}
 </div>
 </body>
 </html>

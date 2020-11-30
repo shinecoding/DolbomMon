@@ -41,6 +41,17 @@
 	display:inline-block;
 	width:200px;
 	}
+	#title{
+		margin:20px 5px;
+		display:block;
+	width:100%;
+	}
+	#titlefont{
+		font-size: 25px;
+		font-weight: 700;
+		vertical-align: bottom;
+		text-align:center;
+	}
 </style>
 <script>
 	$(function(){
@@ -52,6 +63,9 @@
 </head>
 <body>
 <div class="container">
+	<div id="title">
+	   	<div id="titlefont">활동가능지역</div>
+	 </div>
 	<form method="post" action="teacherMapOk" name="locationFrm" >
 	
 	<div class="card">

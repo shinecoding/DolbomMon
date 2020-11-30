@@ -567,23 +567,7 @@ public class TeacherController {
 		return mav;
 	}
 
-	@RequestMapping("/payment")
-	public ModelAndView payment(HttpSession ses) {
-		String userid = (String)ses.getAttribute("userid");
-		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		MemberVO mvo = dao.selectTMember(userid);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("mvo", mvo);
-		mav.setViewName("teacher/payment");
-		return mav;
-	}
 	
-	@RequestMapping("/paySuccess")
-	public String paySuccess() {
-		
-		return "teacher/paySuccess";
-	}
 
 }
 
