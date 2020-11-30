@@ -24,11 +24,10 @@ public class JobSearchController {
 	DataSourceTransactionManager transactionManager;
 	
 	//구인페이지로 이동하기
-	//돌봄몬찾기
-
 
 	@RequestMapping("/sitter_list") 
 	public ModelAndView sitter() {
+
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수

@@ -10,33 +10,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <style>
-	body,ul,li{margin:0; padding:0; text-align:center;}
-	.img1{
-		width:80%;
-		height:280px;
-	}
-	#upper{
-		text-align:center;
-		color:black;
-		
-	}
-	
-	
+
+   body,ul,li{margin:0; padding:0; text-align:center;}
+   .img1{
+      width:80%;
+      height:280px;
+   }
+   #upper{
+      text-align:center;
+      color:black;
+      
+   }
+   
+
 </style>
 </head>
 <jsp:include page="../top.jsp"/>
 <body>
 
 <div id="upper">
-	<img src="img/intro2.PNG" class="img1"/>
-	<br/><br/>
-	<h1 class="brand">사업소개</h1>
-	<h5>Services</h5>
-	<br/><br/>
-	<h2 style="color:gray">놀이부터 배움까지 선생님 매칭 웹</h2>
-	<h2 style="font-weight:bold;">아이돌봄 웹 서비스</h2><br/><br/><br/>
-	<img src="img/pic2.png"/>
-	<img src="img/intro1.png" style="margin-top: 4rem;max-width: 786px;padding: 0 15px; margin: 50 auto;"/>
+   <img src="img/intro2.PNG" class="img1"/>
+   <br/><br/>
+   <h1 class="brand">사업소개</h1>
+   <h5>Services</h5>
+   <br/><br/>
+   <h2 style="color:gray">놀이부터 배움까지 선생님 매칭 웹</h2>
+   <h2 style="font-weight:bold;">아이돌봄 웹 서비스</h2><br/><br/><br/>
+   <img src="img/pic2.png"/>
+   <img src="img/intro1.png" style="margin-top: 4rem;max-width: 786px;padding: 0 15px; margin: 50 auto;"/>
 </div>
 </body>
 <!-- ------------------footer------------- -->

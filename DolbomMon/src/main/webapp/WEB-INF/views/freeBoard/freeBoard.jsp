@@ -65,15 +65,21 @@
 		<tbody>
 			<c:forEach var="vo" items="${list}">
 				<tr>
+					<c:if test="${vo.step<=0}">
 					<td scope="row" align="center">${vo.no}</td>
 					<td scope="row" align="center">${vo.head}</td>
+				</c:if>
+				<c:if test="${vo.step>0}">
+					<td scope="row" align="center"></td>
+					<td scope="row" align="center"></td>
+				</c:if>
 					<td scope="row" class="subject">
 						<!-- 공백을 step만큼 띄어주기 -->
 						<c:forEach var="s" begin="1" end="${vo.step}">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</c:forEach>
 						<c:if test="${vo.step>0}">
-							Re:
+							☞
 						</c:if>
 						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
 					<td align="center">${vo.userid}</td>

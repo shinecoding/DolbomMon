@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
-import com.dolbommon.dbmon.Teacher.MemberVO;
+
 
 @Controller
 public class TeacherController {
@@ -497,7 +497,7 @@ public class TeacherController {
 		return mav;		
 	}
 
-	//지도
+	
 	@RequestMapping("/teacherMap")
 	public ModelAndView teacherMap(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
@@ -514,8 +514,8 @@ public class TeacherController {
 	
 @RequestMapping(value="/teacherMapOk", method=RequestMethod.POST)
 	public ModelAndView teacherMapOk(MemberVO mvo, HttpSession ses, HttpServletRequest req) {
+		mvo.setUserid((String)ses.getAttribute("userid"));
 		String userid = (String) ses.getAttribute("userid");
-		mvo.setUserid(userid);
 		
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		String lat = req.getParameter("lat");
