@@ -36,5 +36,10 @@ public class ParentController {
 	public String dbmSearchWriteForm() {
 		return "/parents/dbmSearchWriteForm";
 	}
+	
+	@RequestMapping("/dbmSearchWriteFormOk")
+	public String dbmSearchWriteFormOk() {
+		return "";
+	}
 
 }

@@ -39,13 +39,6 @@
 <script>
 	$(function(){
 		// 생년월일 옵션
-		var option = {
-			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			minDate : '-100y',
-			dateFormat : "yy-mm-dd"
-		}
 		$("#birthBtn").datepicker({
 			showAnim : "show",
 			changeMonth : true,
@@ -75,7 +68,7 @@
 		        oncomplete: function(data) {
 		            $("#zipcode").val(data.zonecode);
 		            $("#addr").val(data.address);
-		            console.log("시, 도 =>" + sido);
+		            console.log("시, 도 =>" + data.sido);
 		            console.log("시군구 =>" + data.sigungu);
 		            console.log("법정동명(동) => " + data.bname);
 		            console.log("법정동명(읍, 면, 리) => " + data.bname1);
@@ -273,6 +266,7 @@
 				return false;
 			}
 			
+			var idStatus = $("#idStatus").val();
 			if(idStatus=="N"){
 				alert("아이디 중복검사를 해주세요.");
 				return false;
@@ -359,7 +353,7 @@
 			<label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label><br/>
 			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
 		</div>
-		<input type="submit" value="다음" />
+		<input type="submit" value="가입하기" />
 	</div>
 	</form>
 </body>

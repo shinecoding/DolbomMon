@@ -111,10 +111,6 @@
 		});
 		
 		$("#childrenInfo>input[type=radio]").change(function(){
-			// 
-			var childrenCnt = $(this).attr("id");
-			childrenCnt = Number(childrenCnt);
-			
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ff5400");
@@ -171,7 +167,7 @@
 </script>
 <body>
 	<div class="container">
-		<form method="post" action="<%=request.getContextPath()%>/parent/children">
+		<form method="post" action="<%=request.getContextPath()%>/dbmSearchWriteFormOk">
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
 			</div>
@@ -213,10 +209,10 @@
 			
 			<div class="title">자녀의 정보를 입력해주세요</div>
 			<div id="childrenInfo">
-				<input type="radio" id="childrenCnt1" />
-				<input type="radio" id="childrenCnt2" />
-				<input type="radio" id="childrenCnt3" />
-				<input type="radio" id="childrenCnt4" />
+				<input type="radio" id="childrenCnt1" name="childrenCnt"/>
+				<input type="radio" id="childrenCnt2" name="childrenCnt"/>
+				<input type="radio" id="childrenCnt3" name="childrenCnt"/>
+				<input type="radio" id="childrenCnt4" name="childrenCnt"/>
 				<div id=childrenCnt>
 					<div><label for="childrenCnt1">1명</label></div>
 					<div><label for="childrenCnt2">2명</label></div>
@@ -242,15 +238,15 @@
 			
 			<div class="title">언제 돌봐드릴까요?</div>
 			<div id="timeTypeDiv">
-				<input type="radio" id="timeType1" />
-				<input type="radio" id="timeType2" />
+				<input type="radio" id="timeType1" name="timeType"/>
+				<input type="radio" id="timeType2" name="timeType"/>
 				<label for="timeType1">정기적으로</label>
 				<label for="timeType2">특정날에만</label>
 			</div>
 			
 			<div class="title">돌봄몬이 알아야 할 내용이 있나요?</div>
 			<div id="descriptionDiv">
-				<textarea name="content" placeholder="간단한 자기소개 작성 시 부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>
+				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
 			
