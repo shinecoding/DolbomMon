@@ -17,7 +17,7 @@
 	</insert>
 
 	<select id="memberUseridChk" resultType="int">
-		select count(userid) from member where userid = #{userid}
+		select count(userid) from member where userid = #{param1}
 	</select>
 
 </mapper>

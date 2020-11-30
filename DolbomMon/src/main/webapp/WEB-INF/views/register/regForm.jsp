@@ -75,6 +75,10 @@
 		        oncomplete: function(data) {
 		            $("#zipcode").val(data.zonecode);
 		            $("#addr").val(data.address);
+		            console.log("시, 도 =>" + sido);
+		            console.log("시군구 =>" + data.sigungu);
+		            console.log("법정동명(동) => " + data.bname);
+		            console.log("법정동명(읍, 면, 리) => " + data.bname1);
 		            
 		            var geocoder = new kakao.maps.services.Geocoder();
 		            
@@ -269,6 +273,11 @@
 				return false;
 			}
 			
+			if(idStatus=="N"){
+				alert("아이디 중복검사를 해주세요.");
+				return false;
+			}
+			
 			return true;
 		});
 	});
@@ -303,7 +312,7 @@
 		<div id="useridDiv">
 			<label for="userid">아이디</label><span id="useridRegChk"></span><br/>
 			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" id="useridChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
-			<input type="hidden" name="idStatus" id="idStatus" value="N"/>
+			<input type="hidden" id="idStatus" value="N"/>
 		</div>
 		<div id="userpwdDiv">
 			<label for="userpwd">비밀번호</label><span id="userpwdRegChk"></span><br/>

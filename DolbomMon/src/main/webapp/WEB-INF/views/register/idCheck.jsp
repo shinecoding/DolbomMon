@@ -16,27 +16,46 @@
 			
 		});
 		
+		$("#userid").keyup(function(){
+			var userid = $(this).val();
+			var useridReg = /^[A-Za-z]{1}\w{7,11}$/;
+			$("#idStatus").val("N");
+			$("#idUseBtn").css("display", "none");
+			$("#idStatus").val("N");
+			if(!useridReg.test(userid)){
+				$("#useridRegChk").html("시작문자는 영문자, 아이디는 8~14글자의 영문,숫자,_만 입력가능").css("color", "#ff0000");
+			}else{
+				$("#useridRegChk").html("사용가능한 아이디 입니다.").css("color", "green");
+			}
+		});
+		
 		$("#idChkBtn").click(function(){
 	        //userid 를 param.
 	        var userid = $("#userid").val();
+	        console.log("userid => " + userid);
 	        $.ajax({
-	            url : "/dbm/idChk",
-	            type : 'post',
-	            dataType: "json",
-	            data : {"userId" : userid},
-	            success : function(result) {
-	               if(result == 1) {
-	            	   alert("중복된 아이디입니다ㅣ.");
-	               }else if(result == 0){
-	            	   $("#idchk").val("Y");
-	            	   alert("사용가능한 아이디입니다.");
-	               }
-	            },
-	            error : function(error) {
-	                alert("error : " + error);
-	            }
-	        });
+                url:"idCheckAjax",
+                type:"post",
+                data:{userid: $("#userid").val()
+                     },
+              success:function(result){
+            	  if(result==1){
+            		  alert("이미 사용중인 아이디입니다.");
+            	  }else if(result==0){
+            		  alert("사용가능한 아이디입니다.");
+            		  $("#idUseBtn").css("display", "block");
+            	  }
+                }, error:function(){
+                   
+                }
+             });
 	    });
+		
+		$("#idUseBtn").click(function(){
+			$("#idStatus", opener.document).val("Y");
+			self.close();
+		});
+		
 	});
 </script>
 <style>
@@ -48,17 +67,14 @@
 </style>
 </head>
 <body>
-	<input type="hidden" id="idChkOk" value="N" />
 	<div id="mainDiv">
 		<h3>아이디 중복검사</h3>
 		<div>
-			
 			<span>사용할 아이디</span><span style="font-size:13px;" id="useridRegChk"></span><br/>
-			<form method="post" action="<%=request.getContextPath()%>/idChk">
 				<input type="text" name="userid" id="userid" value="" />
 				<input type="button" id="idChkBtn" value="아이디 중복검사" />
-				<input type="button" id="idUseBtn" value="사용하기"/>
-			</form>
+				<input type="button" id="idUseBtn" value="사용하기" style="display:none;"/>
+				<input type="hidden" id="idStatus" value="N" />
 		</div>
 	</div>
 </body>

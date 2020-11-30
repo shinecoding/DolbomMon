@@ -116,12 +116,11 @@ public class MemberController {
 		
 		@RequestMapping(value = "/idCheckAjax", method = RequestMethod.POST)
 		@ResponseBody
-		public String useridChk(MemberVO vo) {
+		public int useridChk(@RequestParam("userid") String userid) {
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberUseridChk(vo);
-			
-			return "idChk";
+			int result = dao.memberUseridChk(userid);
+			return result;
 		}
 		
 		// SMS 인증창 

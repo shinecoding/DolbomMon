@@ -15,5 +15,5 @@ public interface MemberDaoImp {
 	public int memberDelete(MemberVO mVo);
 	
 	//아이디 중복검사 (아이디 존재여부)
-	public int memberUseridChk(MemberVO mVo);
+	public int memberUseridChk(String userid);
 }
