@@ -10,6 +10,8 @@ public class FreeBoardVO {
 	private String writedate;
 	private String ip;
 	private String head;
+	private String filename1;
+	private String filename2;
 	private int ref;
 	private int step;
 	private int lvl;
@@ -150,6 +152,18 @@ public class FreeBoardVO {
 	}
 	public void setHead(String head) {
 		this.head = head;
+	}
+	public String getFilename1() {
+		return filename1;
+	}
+	public void setFilename1(String filename1) {
+		this.filename1 = filename1;
+	}
+	public String getFilename2() {
+		return filename2;
+	}
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
 	}
 	public int getRef() {
 		return ref;

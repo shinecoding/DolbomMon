@@ -106,61 +106,26 @@
 		</tbody>
 	</table>
 	<br/>
-
+	
+	<!-- paging -->
+	<nav>
 	<c:forEach var="pVo" items="${list}">
-		<div id="paging">
-			<ul>
-				<!-- 이전페이지 -->
-				<li>
-					<c:if test="${pVo.nowPage>1}">
-					<a href="/dbmon/freeBoardView?nowPage=${pVo.nowPage-1}">Prev</a>
-					</c:if>
-				</li>
-				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum + pVo.onePageRecord-1}">			
-					<c:if test="${p<=pVo.totalPage}">
-						<li <c:if test="${p==pVo.nowPage}"></c:if>>
-							<a href="/dbmon/freeBoardView?nowPage=${p}">${p}</a></li>
-						</c:if>
-				</c:forEach>
+		<ul class="pagination">
+		<c:if test="${vo.nowPage>1}">
+			<li class="page-item"><a class="page-link" href="/dbmon/freeBoard?nowPage=${vo.nowPage-1}">Prev</a></li>
+		</c:if>
 		
-				<li>
-					<c:if test="${pVo.nowPage<pVo.totalPage}">
-						<a href="/dbmon/freeBoardView?nowPage=${pVo.nowPage+1}">Next</a>
-					
-					</c:if>				
-				</li>	
-			</ul>
-		</div>
+			<li class="page-item"><a class="page-link" href="/dbmon/freeBoard?nowPage=${vo.nowPage}">1</a></li>
+		<c:if test="${pVo.nowPage<pVo.totalPage}">	
+			<li class="page-item"><a class="page-link" href="/dbmon/freeBoard?nowPage=${pVo.nowPage+1}">Next</a></li>
+		</c:if>
+		</ul>
+
 	</c:forEach>
 	
-	
-	<div>
-	<nav aria-label="Page navigation example">
-		<c:forEach var="pVo" items="${list}">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled">
-					<c:if test="${pVo.nowPage>1}">
-						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-					</c:if>
-				</li>
-				
-				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum + pVo.onePageRecord-1}">
-					<c:if test="${p<=pVo.totalPage}">
-						<li class="page-item" <c:if test="${p==pVo.nowPage}"> style="background-color: lightblue"</c:if>>
-							<a class="page-link" href="/dbmon/freeBoardView?nowPage=${p}">${p}</a></li>
-					</c:if>
-				</c:forEach>
-				
-				
-				<li class="page-item">
-					<c:if test="${pVo.nowPage<pVo.totalPage}">
-						<a class="page-link" href="/dbmon/freeBoardView?nowPage=${pVo.nowPage+1}">Next</a>
-					</c:if>
-				</li>
-			</ul>
-		</c:forEach>	
 	</nav>
-	</div>
+	
+	
 	
 	<br/>
 	<div class="input-group mb-3">
