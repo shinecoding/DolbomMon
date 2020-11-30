@@ -506,11 +506,11 @@ public class TeacherController {
 	public ModelAndView teacherSearchMap(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		//HashSet<MemberVO> hash = dao.selectAllTeacher();
-		MemberVO mvo = dao.selectTMember(userid);
+		HashSet<MemberVO> hash = dao.selectAllTeacher();
+		MemberVO mvo = dao.selectTMap(userid);
 		
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("hash", hash);
+		mav.addObject("hash", hash);
 		mav.addObject("mvo", mvo);
 		mav.setViewName("/teacher/teacherSearchMap");
 		return mav;
@@ -568,11 +568,21 @@ public class TeacherController {
 	}
 
 	@RequestMapping("/payment")
-	public ModelAndView payment() {
+	public ModelAndView payment(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		MemberVO mvo = dao.selectTMember(userid);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("mvo", mvo);
 		mav.setViewName("teacher/payment");
 		return mav;
+	}
+	
+	@RequestMapping("/paySuccess")
+	public String paySuccess() {
+		
+		return "teacher/paySuccess";
 	}
 
 }
