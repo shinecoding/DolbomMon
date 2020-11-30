@@ -24,32 +24,34 @@ EDIT ON
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
    
-      *{
+     /*  *{
 		 margin: 0 auto;
 		 padding: 0px;
 		 list-style-type: none;
      	 font-family:"Noto Sans KR";
      	
      	
-		 }
+		 } */
 
      #menu-button{
      	-webkit-padding-start:0px;
+     	
      }
 
-      html,
+     /*  html,
       body {
         width: 100%;
         height: 100%;
         min-width:1200px;
         
-	 }
+	 } */
      #topmenu-button{
      	-webkit-padding-start:0px;
+     	
      }
    
 
-      #container {
+      #containertoptoptop {
         width: 100%;
       }
 
@@ -59,8 +61,9 @@ EDIT ON
 		 width: 263px;
 		 height: 48px;
 		 text-align:center;
-		 background-color: white;
-	     /*border:1px solid #f6a21c; */
+		background-color: white;
+		
+	    /*  border-t:1px solid gray; */
 		 position: relative;
 		 z-index:1000;
 		 list-style-type: none;
@@ -82,24 +85,25 @@ EDIT ON
 		 margin-left:0px;
 		 }
 	  ul.mainTopmenu li {
-		width: 263.27px;
+		width: calc(100%/6);
 		
 		}
 	  ul.mainTopmenu ul.subMain li {
-	    width: 263.27px;
+	    width: 100%;
 	    -webkit-padding-start:0px;
 	    }
 	  
 	  
       ul.mainTopmenu li a:hover{
 	     background-color: #ffefd5;
-	     opacity:20;
+	     opacity:50;
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
 		 }
       ul.mainTopmenu{
 	     zoom: 1;
+	     margin-bottom:0;
 		 }
       ul.mainTopmenu:after{
 	     height: 0;
@@ -116,6 +120,7 @@ EDIT ON
 	   }
 	   header#topHeader{
 	   		margin-left:0px;
+	   		
 	   }
 	   a.btn{
 	   		float:right;
@@ -130,11 +135,11 @@ EDIT ON
    </style>
 </head>
 <body>
- <div id="container">
+ <div id="containertoptoptop" >
 
  <div class="clearfix">
 	 <header id="topHeader">
-	 <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
+	 <img src="<%=request.getContextPath()%>/img/DOL02.PNG" 
 	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
 	        Onclick="location.href='/dbmon'"/>
 
@@ -179,7 +184,7 @@ EDIT ON
 		</li>
 		<li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
 		</li>
-		<li><a href="/dbmon/sitterList	">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+		<li><a href="/dbmon/sitter_list">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
 	    
 		</li>
 		<li><a href="#">My Menu</a>

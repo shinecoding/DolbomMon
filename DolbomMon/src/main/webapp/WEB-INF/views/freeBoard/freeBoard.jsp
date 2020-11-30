@@ -37,7 +37,10 @@
 	 }	
 </style>
 </head>
+
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 <div class="container">
 <div id="top">
 <b>자유게시판</b>
