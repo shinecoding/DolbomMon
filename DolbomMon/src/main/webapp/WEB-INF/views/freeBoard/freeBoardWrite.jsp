@@ -86,8 +86,8 @@ $(function(){
 			</div>
 			<br/>
 			<div>
-				<input type="file" id="filename1" name="filename1">
-				<input type="file" id="filename2" name="filename2">
+				<input type="file" id="filename" name="filename">
+				<input type="file" id="filename" name="filename">
 			</div>
 			
 			<br/>

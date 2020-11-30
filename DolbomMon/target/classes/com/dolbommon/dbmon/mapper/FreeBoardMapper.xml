@@ -25,10 +25,26 @@
 	</update>
 	
 	<insert id="freeBoardInsert" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref) 
-		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, board_sq.currval)
+		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, filename1
+			</when>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, filename2
+			</when>
+		</choose>
+		) values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, board_sq.currval
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, #{filename1}
+			</when>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, #{filename2}
+			</when>
+		</choose>
+		)
 	</insert>
-	
 	<delete id="freeBoardDel">
 		delete from freeBoard where no=#{param1} and userid=#{param2}
 	</delete>

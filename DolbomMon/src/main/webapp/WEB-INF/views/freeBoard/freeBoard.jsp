@@ -108,25 +108,33 @@
 	<br/>
 	
 	<!-- paging -->
-	<nav>
-	<c:forEach var="pVo" items="${list}">
-		<ul class="pagination">
-		<c:if test="${vo.nowPage>1}">
-			<li class="page-item"><a class="page-link" href="/dbmon/freeBoard?nowPage=${vo.nowPage-1}">Prev</a></li>
-		</c:if>
+		<nav aria-label="...">
+			<ul  class="pagination" >
+				<!-- 이전페이지 -->	
+				<li class="page-item">
+					<c:if test="${pVo.nowPage>1}"> <!--														여기부터 검색어 있을때 검색어페이지 넘어가게 작성한것. 밑에도 다 있음	  -->
+						<a class="page-link"  class="page-link" href="/dbmon/freeBoard?nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>">Prev</a>
+					</c:if>
+				</li>
+				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onePageNumCount-1}">
+					<c:if test="${p<=pVo.totalPage }">
+						<li class="page-item">
+							<a class="page-link" href="/dbmon/freeBoard?nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>"><span <c:if test="${p==pVo.nowPage}"></c:if>>${p}</span></a>
+						</li>
+					</c:if>
+				</c:forEach>
+				
+				<!-- 다음페이지 -->
+				<li class="page-item"> 
+					<c:if test="${pVo.nowPage<pVo.totalPage}">
+						<a class="page-link" href="/dbmon/freeBoard?nowPage=${pVo.nowPage+1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>">Next</a>
+					</c:if>
+					
+				</li>
+				
+			</ul>
+		</nav>
 		
-			<li class="page-item"><a class="page-link" href="/dbmon/freeBoard?nowPage=${vo.nowPage}">1</a></li>
-		<c:if test="${pVo.nowPage<pVo.totalPage}">	
-			<li class="page-item"><a class="page-link" href="/dbmon/freeBoard?nowPage=${pVo.nowPage+1}">Next</a></li>
-		</c:if>
-		</ul>
-
-	</c:forEach>
-	
-	</nav>
-	
-	
-	
 	<br/>
 	<div class="input-group mb-3">
 		<input type="text" class="form-control" placeholder="검색어를 입력하세요"/>

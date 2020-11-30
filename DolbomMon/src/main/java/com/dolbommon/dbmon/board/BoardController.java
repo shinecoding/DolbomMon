@@ -74,6 +74,7 @@ public class BoardController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+		mav.addObject("pVo", vo);
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("freeBoard/freeBoard");
 		
@@ -138,15 +139,18 @@ public class BoardController {
         }catch(IOException e){
             e.printStackTrace();
         } finally {
-        	
-          try {
-           if(out != null) { out.close(); }
-           if(printWriter != null) { printWriter.close(); }
-          } catch(IOException e) { e.printStackTrace(); }
-         }
         
+        try {
+        	if(out != null) { out.close(); }
+        	if(printWriter != null) {
+        		printWriter.close();
+        	}
+        }catch(IOException e){
+        	e.printStackTrace();
+        	}
+        }
         return;
-    }
+	}
 	
 	@RequestMapping("/ckImgSubmit.do")
     public void ckSubmit(@RequestParam(value="uid") String uid, 
@@ -198,7 +202,7 @@ public class BoardController {
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
 	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 	
-		/*
+		
 		//파일을 저장할 위치
 		String path = ses.getServletContext().getRealPath("/upload");
 		//파일 업로드를 하기 위해 req에서 MultipartHttpServletRequest를 생성한다.
@@ -250,7 +254,7 @@ public class BoardController {
 		vo.setFilename1(fileNames[0]);
 		vo.setFilename2(fileNames[1]);
 		
-		*/
+		
 		vo.setIp(req.getRemoteAddr());	//ip 구하기
 		vo.setUserid((String)ses.getAttribute("userid"));	
 		
