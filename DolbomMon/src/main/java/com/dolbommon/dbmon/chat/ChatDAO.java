@@ -12,7 +12,7 @@ public class ChatDAO {
 	SqlSession sqlSession;
 	
 	
-	//룸 생성
+	//채팅방(번호) 생성
 	public int insertRoom(ChatRoomDTO room) {
 		int result = 0;
 		ChatDaoImp dao = sqlSession.getMapper(ChatDaoImp.class);
@@ -82,27 +82,44 @@ public class ChatDAO {
 		return result;
 	}
 	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	public List<ChatDTO> selectChat(String roomseq){
-		List<ChatDTO> result = null;
-		
+	//새로운 채팅 등록
+	public int updateNewChat(String roomseq, String lastChat, String userCheck) {
+		int result =0;
 		ChatDaoImp dao = sqlSession.getMapper(ChatDaoImp.class);
 		try {
-			result=dao.selectChat(roomseq);
+			result = dao.updateNewChat(roomseq, lastChat, userCheck);
 		}catch(Exception e) {
-			System.out.println("채팅 가져오기 에러"+e.getMessage());
+			System.out.println("새로운 채팅 등록 에러"+e.getMessage());
 			return result;
 		}
 		return result;
 	}
 	
+	//채팅 확인
+	public int updateChatCheck(int roomseq, String userCheck) {
+		int result =0;
+		ChatDaoImp dao = sqlSession.getMapper(ChatDaoImp.class);
+		try {
+			result = dao.updateChatCheck(roomseq,userCheck);
+		}catch(Exception e) {
+			System.out.println("채팅 확인 등록 에러"+e.getMessage());
+			return result;
+		}
+		return result;
+	}
+	
+	//접속자 확인
+	public ChatRoomDTO selectNewchat(ChatRoomDTO room) {
+		ChatRoomDTO resultDTO = new ChatRoomDTO();
+		ChatDaoImp dao = sqlSession.getMapper(ChatDaoImp.class);
+		try {
+			resultDTO = dao.selectNewchat(room);
+		}catch(Exception e) {
+			System.out.println("접속자 확인 에러"+e.getMessage());
+			return resultDTO;
+		}
+		
+		return resultDTO;
+	}
 	
 }

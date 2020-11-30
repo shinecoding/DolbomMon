@@ -7,7 +7,10 @@ public class ChatRoomDTO {
 	private String userid;
 	private String userid_t;
 	private String roomname;
+	private String newchat;
+	private String newchat_t;
 	private String indate;
+	private String lastChat;
 	
 	
 	public String getRoomseq() {
@@ -40,7 +43,30 @@ public class ChatRoomDTO {
 	public void setUserid_t(String userid_t) {
 		this.userid_t = userid_t;
 	}
-	
+	public String getNewchat() {
+		return newchat;
+	}
+	public void setNewchat(String newchat) {
+		this.newchat = newchat;
+	}
+	public String getLastchat() {
+		return lastChat;
+	}
+	public void setLastchat(String lastChat) {
+		this.lastChat = lastChat;
+	}
+	public String getLastChat() {
+		return lastChat;
+	}
+	public void setLastChat(String lastChat) {
+		this.lastChat = lastChat;
+	}
+	public String getNewchat_t() {
+		return newchat_t;
+	}
+	public void setNewchat_t(String newchat_t) {
+		this.newchat_t = newchat_t;
+	}
 	
 	
 }

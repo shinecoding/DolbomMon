@@ -12,6 +12,7 @@
 <script>
 	$(function(){
 		var timerID;
+		var newTimerID;
 		var roomNo;
 		var scrollStop = 1;
 		//채팅입력
@@ -20,7 +21,7 @@
 		});
 		
 		//채팅방 클릭시
-		$(".roomBox>div").click(function(e){
+		$(document).on("click",".roomBox>div",function(e){
 			roomNo = $(this).attr('id');
 	        e.preventDefault();
 		    clearTimeout(timerID); // 타이머 중지
@@ -39,8 +40,20 @@
 			}
 		}
 		
+		//스크롤 정지 기능 개선
+		$(".chat-panel").scroll(function() {  
+				var scHeight = $('.chat-panel').prop('scrollHeight');
+				var currHeight = $('.chat-panel').prop('scrollTop');
+				
+	            if((currHeight+500)>scHeight){
+					scrollStop=1;
+				}else{
+					scrollStop=0;
+				}
+
+	    });  
 		
-		//스크롤 올릴때 자동으로 내려가는것 멈추기
+/* 		//스크롤 올릴때 자동으로 내려가는것 멈추기 (스크롤정지기능 휠 -> 모든 이벤트개선 위에)
 		$(".chat-panel").on('mousewheel',function(e){
 			var wheel = e.originalEvent.wheelDelta;
 			//스크롤값을 가져온다.
@@ -55,7 +68,7 @@
 					scrollStop=1;
 				}
 			}
-		});
+		}); */
 		
 		
 		$("#message").keypress(function(event){
@@ -92,9 +105,19 @@
 								tag+=rVo.userid
 							}
 							tag+='</h6>';
+							tag+='<p class="time text-muted small wordCut" style="width:150px; height:19px;">'+rVo.lastChat+'</p>';
 							tag+='<p class="time text-muted small">'+rVo.indate+'</p></div>';
-							tag+='<i class="material-icons" style="line-height:50px;">message</i>';
-							tag+="</div><hr>";
+							tag+='<div style="line-height:50px; height:50px;">';
+							if(rVo.userid=="${myId}"){
+								if(rVo.newchat=="Y"){
+									tag+='<img src="icon/message/newchat.png" class="imgResize"/>';
+								}							
+							}else if(rVo.userid_t=="${myId}"){
+								if(rVo.newchat_t=="Y"){
+									tag+='<img src="icon/message/newchat.png" class="imgResize"/>';
+								}					
+							}
+							tag+="</div></div><hr>";
 						});					
 						$(".roomBox").html(tag);
 						
@@ -106,6 +129,8 @@
 					$("#message").focus();
 				}
 			});
+			
+			newTimerID = setTimeout(makeRoom, 2999);
 		}
 		
 		//채팅입력시
@@ -164,61 +189,8 @@
 			timerID = setTimeout(selectRoom, 1000, roomNo);
 		}
 		
-		/////////////////////////////////////////////////////////
-		
-		
-		
-		/* function insertChat(){
-			$.ajax({
-				url : "/insertChat", //채팅폼의 액션
-				data : {
-					roomseq:$("#roomseq").val(),
-					message:$("#message").val()
-				},
-				type : "post",
-				success : function(data){
-					if(data=="ok"){
-						$("#message").val("");
-						$("#message").focus();
-					}
-				}
-			});
-		} */
-		
-		function getChatList(){ //받아오는부분
-			$.ajax({
-				url:"/chatMessage",
-				data:{roomseq:$("#roomseq").val()},
-				type:"get",
-				success:function(data){
-					var content="";
-					for(var i=0; i<data.length; i++){
-						content+="<tr>";
-						content+="<td>"+data[i].userid+' : ';
-						content+="</td>";
-						content+="<td>"+data[i].message;
-						content+="</td>";
-						content+="<td>"+data[i].indate;
-						content+="</td>";
-						content+="</tr>";
-					}
-					$("#messageList").html(content);
-				}
-				
-			});
-		}
-		
-		
 	});
 
-	
-
-
-$( '.friend-drawer--onhover' ).on( 'click',  function() {
-  
-  $( '.chat-bubble' ).hide('slow').show('slow');
-  
-});
 </script>
 <style>
 	body {
@@ -412,6 +384,16 @@ $( '.friend-drawer--onhover' ).on( 'click',  function() {
 		overflow-x:hidden;
 	}
 	
+	.imgResize{
+		width:35px;
+		height:35px;
+		vertical-align:middle;
+	}
+	.wordCut{
+	    white-space:nowrap;
+	    overflow:hidden;
+	    text-overflow:ellipsis;
+	}
 </style>
 </head>
 <body>
