@@ -51,4 +51,12 @@
 		where roomseq=#{roomseq}
 	</update>
 	
+	<update id="roomTimeUpdate" parameterType="map">	
+		update chatroom set indate=sysdate where (userid=#{userid} and userid_t=#{userid_t}) or (userid=#{userid_t} and userid_t=#{userid})
+	</update>
+	
+	<delete id="roomDelete" parameterType="map">
+		delete from chatroom a where rowid > (select min(rowid) from chat b
+		where (b.userid = a.userid) and (b.userid_t = a.userid_t));
+	</delete>
 </mapper>

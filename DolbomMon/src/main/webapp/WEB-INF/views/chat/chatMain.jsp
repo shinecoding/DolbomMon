@@ -105,45 +105,47 @@
 						var $data = $(result);
 						tag="";
 						$data.each(function(idx, rVo){
-							if(startChatRoom==0){
-								selectRoom(rVo.roomseq);
-								roomNo=rVo.roomseq;
-							}
-							tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
-							tag+='<img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">';
-							tag+='<div class="text">';
-							tag+='<h6>'+rVo.roomseq+' : ';
-							if(rVo.userid=="${myId}"){
+							if(rVo.userid!=rVo.userid_t){
 								if(startChatRoom==0){
-									$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
-									startChatRoom++;
+									selectRoom(rVo.roomseq);
+									roomNo=rVo.roomseq;
 								}
-								tag+="<span class='anotherUser'>"+rVo.userid_t;
-							}else{
-								if(startChatRoom==0){
-									$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
-									startChatRoom++;
-								}
-								tag+="<span class='anotherUser'>"+rVo.userid
-							}
-							tag+='</span></h6>';
-							tag+='<p class="time text-muted small wordCut" style="width:150px; height:19px;">'+rVo.lastChat+'</p>';
-							tag+='<p class="time text-muted small">'+rVo.indate+'</p></div>';
-							tag+='<div style="line-height:50px; height:50px;" class="imgChange">';
-							if(roomNo!=rVo.roomseq){
+								tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
+								tag+='<img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">';
+								tag+='<div class="text">';
+								tag+='<h6>'+rVo.roomseq+' : ';
 								if(rVo.userid=="${myId}"){
-									if(rVo.newchat=="Y"){
-										tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
-									}							
-								}else if(rVo.userid_t=="${myId}"){
-									if(rVo.newchat_t=="Y"){
-										tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
-									}					
+									if(startChatRoom==0){
+										$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
+										startChatRoom++;
+									}
+									tag+="<span class='anotherUser'>"+rVo.userid_t;
+								}else{
+									if(startChatRoom==0){
+										$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
+										startChatRoom++;
+									}
+									tag+="<span class='anotherUser'>"+rVo.userid
 								}
-							}else{
-								tag+='<img src="icon/message/chaticon2.png" class="imgResize"/>';
+								tag+='</span></h6>';
+								tag+='<p class="time text-muted small wordCut" style="width:150px; height:19px;">'+rVo.lastChat+'</p>';
+								tag+='<p class="time text-muted small">'+rVo.indate+'</p></div>';
+								tag+='<div style="line-height:50px; height:50px;" class="imgChange">';
+								if(roomNo!=rVo.roomseq){
+									if(rVo.userid=="${myId}"){
+										if(rVo.newchat=="Y"){
+											tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
+										}							
+									}else if(rVo.userid_t=="${myId}"){
+										if(rVo.newchat_t=="Y"){
+											tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
+										}					
+									}
+								}else{
+									tag+='<img src="icon/message/chaticon2.png" class="imgResize"/>';
+								}
+								tag+="</div></div><hr>";
 							}
-							tag+="</div></div><hr>";
 						});					
 					$(".roomBox").html(tag);
 					$("#roomname").val("");

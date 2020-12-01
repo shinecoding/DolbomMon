@@ -122,4 +122,30 @@ public class ChatDAO {
 		return resultDTO;
 	}
 	
+	//방시간 갱신
+	public int roomTimeUpdate(String userid, String userid_t) {
+		int result =0;
+		ChatDaoImp dao = sqlSession.getMapper(ChatDaoImp.class);
+		try {
+			result = dao.roomTimeUpdate(userid, userid_t);
+		}catch(Exception e) {
+			System.out.println("채팅룸 시간 갱신 에러"+e.getMessage());
+			return result;
+		}
+		return result;
+	}
+	
+	//중복방 삭제
+	public int roomDelete(String userid, String userid_t) {
+		int result =0;
+		ChatDaoImp dao = sqlSession.getMapper(ChatDaoImp.class);
+		try {
+			result = dao.roomDelete(userid, userid_t);
+		}catch(Exception e) {
+			System.out.println("채팅룸 시간 갱신 에러"+e.getMessage());
+			return result;
+		}
+		return result;
+	}
+	
 }

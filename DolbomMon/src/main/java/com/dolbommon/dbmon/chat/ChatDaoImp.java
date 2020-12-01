@@ -30,5 +30,9 @@ public interface ChatDaoImp {
 	//접속자 아이디 구분하기
 	public ChatRoomDTO selectNewchat(ChatRoomDTO room);
 	
+	//방시간 갱신
+	public int roomTimeUpdate(@Param("userid")String userid, @Param("userid_t")String userid_t);
 	
+	//중복방 삭제
+	public int roomDelete(@Param("userid")String userid, @Param("userid_t")String userid_t);
 }

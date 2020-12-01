@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ChatController {
+	int cnt = 0; //반복중지
+	
 	@Autowired
 	SqlSession sqlSession;
 
@@ -43,25 +45,35 @@ public class ChatController {
 
 		String userid = (String) session.getAttribute("userid");
 
-		// userid는 고정으로 테스트. test4가 글쓴이.
-		room.setUserid("test11"); // 글, 프로필 대상
+		room.setUserid("test9"); // 글, 프로필 대상
+		//userid를 전역변수로 저장하고 새로 받은것이 같지 않을때 cnt값을 0으로 세팅(갱신한번만)
 		
 		
 		//방갯수확인
 		int result = chatdao.roomCheck(userid, room.getUserid());
 		List<ChatRoomDTO> resultRoomDTO = null;
-		if (result >= 1) {
-			resultRoomDTO = chatdao.selectAllRoom(userid);
-			return resultRoomDTO;
+		if(userid!=null && !userid.equals("")) {
+			if (result >= 1) {
+				//방 시간 갱신 최상단에오게.
+				if(cnt==0) {
+					chatdao.roomTimeUpdate(userid, room.getUserid());
+					cnt++;
+				}
+				resultRoomDTO = chatdao.selectAllRoom(userid);
+				return resultRoomDTO;
+			}
+			room.setUserid_t((String) session.getAttribute("userid")); // 접속한 사람
+			//룸 중복확인후 생성
+	
+			//서버실행시 쿼리문 반복수행되는 에러때문에 밑에서 다시한번 방갯수구함
+			int result2 = chatdao.roomCheck(userid, room.getUserid());
+			if(result2==0) {
+				chatdao.insertRoom(room); // 방 생성 // 방번호 가져오기.
+			}
+			
 		}
-		room.setUserid_t((String) session.getAttribute("userid")); // 접속한 사람.. 추후 선생님 아이디(댓글등록자아이디)로 변경. 만약 선생님에게 부모님이
-		//룸 중복확인후 생성
-
-		//서버실행시 쿼리문 반복수행되는 에러때문에 밑에서 다시한번 방갯수구함
-		int result2 = chatdao.roomCheck(userid, room.getUserid());
-		if(result2==0) {
-			chatdao.insertRoom(room); // 방 생성 // 방번호 가져오기.
-		}
+		//중복방 삭제
+		chatdao.roomDelete(userid, room.getUserid());
 		resultRoomDTO = chatdao.selectAllRoom(userid);
 		return resultRoomDTO;
 	}
@@ -107,13 +119,14 @@ public class ChatController {
 		String userid = (String)ses.getAttribute("userid");
 		room.setRoomseq((String) req.getParameter("roomNo"));
 		ChatRoomDTO resultDTO2 = chatdao.selectNewchat(room);
-		
-		if(resultDTO2.getUserid().equals(userid)) {
-			String userCheck ="N";
-			chatdao.updateChatCheck(roomNo, userCheck);
-		}else { 
-			String userCheck ="Y"; 
-			chatdao.updateChatCheck(roomNo, userCheck);
+		if(userid!=null && !userid.equals("")) {
+			if(resultDTO2.getUserid().equals(userid)) {
+				String userCheck ="N";
+				chatdao.updateChatCheck(roomNo, userCheck);
+			}else { 
+				String userCheck ="Y"; 
+				chatdao.updateChatCheck(roomNo, userCheck);
+			}
 		}
 		//ChatDTO에 상태메시지? 이미지경로? 이름? 같은 표시할 정보 추가하고.. 
 		//다른 테이블과 VO에서 가져와서 집어넣고 쓰기.
