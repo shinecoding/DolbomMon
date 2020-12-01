@@ -35,6 +35,8 @@ public class JobSearchController {
 		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
+		
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list", list);
