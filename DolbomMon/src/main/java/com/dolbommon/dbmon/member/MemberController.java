@@ -47,15 +47,15 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="parentJoin", method=RequestMethod.POST)
-		public String parentJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
+		public String parentJoin(@RequestParam("who") String who, HttpSession ses) {
 			
-			ses.setAttribute("joinType", joinType);
+			ses.setAttribute("who", who);
 			return "register/regForm";
 		}
 		
 		@RequestMapping(value="dbmJoin", method=RequestMethod.POST)
-		public String dbmJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
-			ses.setAttribute("joinType", joinType);
+		public String dbmJoin(@RequestParam("who") String who, HttpSession ses) {
+			ses.setAttribute("who", who);
 			return "register/dbm/dbmType";
 		}
 		
@@ -84,11 +84,11 @@ public class MemberController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
-			String joinType = (String)ses.getAttribute("joinType");
+			String who = (String)ses.getAttribute("who");
 			int result = 0;
 			
 			try {
-				if(joinType=="T") {
+				if(who=="T") {
 					dao.memberReg(mVo);
 					
 					dao.memberRegTeacher(mVo, tVo);

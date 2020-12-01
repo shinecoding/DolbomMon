@@ -10,7 +10,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script>
 $(document).ready(function() {
-
+	
     $("#send").click(function() {
        
        	var number = Math.floor(Math.random() * 100000) + 100000;

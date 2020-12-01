@@ -4,6 +4,7 @@
 	.container{width:600px; margin-top:100px;}
 	input[type=checkbox]{display:none;}
 	input[type=radio]{display:none;}
+	#writeFrm{text-align:center;}
 	/* ============= 초기화 ==============  */
 	
 	/* ============= 헤더 =============== */
@@ -14,6 +15,7 @@
 	/* ============= 헤더 =============== */
 	
 	/* ============= 돌봄 유형 목록 ============== */
+	#activityTypeDiv{display:inline-block; width:70%;}
 	#activityListDiv{overflow:hidden; height:auto;}
 	#activityListDiv div{overflow:hidden; width:25%; height:105px; text-align:center; float:left; padding:23px 40px;}
 	#activityListDiv img{margin-top:10px;}
@@ -22,7 +24,12 @@
 	/* ============= 돌봄 유형 목록 ============== */
 	
 	/* ============= 원하는 선생님 나이 선택 ================ */
-	#ageDiv{overflow:hidden; height:auto; margin-top:40px;}
+	#ageAndGenderDiv{display:inline-block; width:70%;}
+	
+	#genderDiv input{display:none;}
+	#genderDiv label{width:50px; height:50px; line-height:50px; margin:0 5px; border-radius:50%; border:1px solid gray; background-color:#EFEFEF;}
+	
+	#ageDiv{width:100%; overflow:hidden; height:auto; margin-top:40px;}
 	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto;}
 	#ageDiv li{width:20%; height:50px; line-height:50px; float:left; margin:10px 0; border:none; border-radius:45%; background-color:#EFEFEF; color:black; font-weight:bold; }
 	#ageDiv label{width:100%; height:100%; text-align:center; }
@@ -42,6 +49,7 @@
 	}
 	
 	/* ===================== 자녀 세부정보 ==================== */
+	#childrenInfoDiv{display:inline-block; width:70%}
 	#childrenDetailDiv{width:100%; overflow:hidden; height:auto;}
 	#childrenDetail{width:100%; overflow:hidden; height:auto;}
 	#childrenDetail li{width:100%; overflow:hidden; height:auto; padding:10px; margin:10px 0; border:1px solid black; }
@@ -54,8 +62,7 @@
 	#zidcodeBtnDiv{text-align:center;}
 	#zidcodeBtnDiv> input[type=button]{width:40%; height:40px; padding:3px 10px; border-radius:10px; border:none;}
 	
-	#timeTypeDiv{text-align:center;}
-	#timeTypeDiv> label{display:inline-block; width:30%; height:40px; line-height:40px; margin:0 5%; border-radius:10px; border:none; background-color:#EFEFEF;}
+	
 	
 	#paymentDiv{display:inline-block; width:100%; overflow:hidden; height:auto; text-align:center;}
 	#paymentDiv img{width:30%; height:104px; margin:15px 0;}
@@ -84,8 +91,13 @@
 	#warningDiv img{width:17px; height:17px;}
 	#warningDiv p{display:inline-block; width:auto; font-size:13px; color:gray; margin:0;}
 	
+	
+	#timeTypeDiv{display:inline-block; width:70%; text-align:center;}
+	#timeTypeDiv> label{display:inline-block; width:30%; height:40px; line-height:40px; margin:0 5%; border-radius:10px; border:none; background-color:#EFEFEF;}
+	#timeTypeDiv #title{margin:20px 0;}
+	
 	/* ==================== 정기적으로 - 날짜 설정 =================== */
-	#regularDateDiv {display:inline-block; width:80%; text-align:center;}
+	#regularDateDiv {display:inline-block; width:100%; text-align:center;}
 	#regularDateDiv #startDateDiv{margin-bottom:20px;}
 	#regularDateDiv #startDateDiv>input{width:30%; height:40px; margin:0 5%; text-align:center; border:1px solid gray; border-radius:15px;}
 	#regularDateDiv #startDateDiv>input[type=text]{font-weight:bold;}
@@ -109,19 +121,21 @@
 	/* ===================== =====================*/
 	
 	/* ==================== 활동 요일 설정  ======================== */
-	#regularDateDiv #timeDiv{width:100%; overflow:hidden; height:auto;}
-	#regularDateDiv #timeDiv div{width:50%; height:100px; float:left;}
-	#regularDateDiv #startDiv{padding:20px; border-right:1px solid gray;}
-	#regularDateDiv #startDiv *{float:right;}
-	#regularDateDiv #endDiv *{float:left;}
-	#regularDateDiv #endDiv{padding:20px;}
-	#regularDateDiv #startDiv>select{text-align-last:center}
-	#regularDateDiv #endDiv>select{text-align-last:center;}
-	#regularDateDiv select{width:50%; height:40px; font-size:17px; -webkit-appearance: none; moz-appearance: none;}
+	#timeTypeDiv {display:inline-block; width:100%; text-align:center;}
+	#timeTypeDiv #timeDiv{width:100%; overflow:hidden; height:auto;}
+	#timeTypeDiv #timeDiv div{width:50%; height:100px; float:left;}
+	#timeTypeDiv #startDiv{padding:20px; border-right:1px solid gray;}
+	#timeTypeDiv #startDiv *{float:right;}
+	#timeTypeDiv #endDiv *{float:left;}
+	#timeTypeDiv #endDiv{padding:20px;}
+	#timeTypeDiv #startDiv>select{text-align-last:center}
+	#timeTypeDiv #endDiv>select{text-align-last:center;}
+	#timeTypeDiv select{width:50%; height:40px; font-size:17px; -webkit-appearance: none; moz-appearance: none;}
 	/* ==================== 활동 요일 설정  ======================== */
 	
 	/* ========================= 특정날짜 선택 ======================== */
-	
+	#specificDateDiv{text-align:center;}
+	#specificDateDiv>div{display:inline-block; width:100%;}
 	
 	
 	

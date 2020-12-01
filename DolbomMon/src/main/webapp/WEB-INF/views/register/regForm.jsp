@@ -281,7 +281,7 @@
 <body>
 	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
-	<c:if test="${joinType==T }" >
+	<c:if test="${who==T }" >
 		<input type="hidden" name="care_type" value="${care_type }" />
 		<input type="hidden" name="child_age" value="${child_age }" />
 		<input type="hidden" name="activity_type" value="${activity_type }" />
@@ -295,6 +295,7 @@
 		<input type="hidden" name="pic" value="${pic }" />
 		<input type="hidden" name="intro" value="${intro }" />
 	</c:if>
+		<input type="hidden" name="who" value="${who }" />
 		<input type="hidden" id="lat" name="lat" />
 		<input type="hidden" id="lng" name="lng" />
 		<input type="hidden" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
