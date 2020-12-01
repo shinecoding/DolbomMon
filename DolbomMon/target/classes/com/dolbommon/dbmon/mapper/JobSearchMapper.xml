@@ -16,7 +16,9 @@
 	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO" >
 		update teacher_list2 set hit= hit+1 where userid= #{userid}
 	</update>
-	
+	<select id="selectTAct1" resultType="com.dolbommon.dbmon.search.TeacherVO">
+		select userid from teacher where activity_type like '%실내놀이%'
+	</select>
 	<!-- <select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
 		select no, head, subject, content, userid, hit, writedate
 		from teacher_list2 where no=#{param1}

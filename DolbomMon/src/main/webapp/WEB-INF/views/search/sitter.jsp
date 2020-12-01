@@ -82,7 +82,48 @@
 }
  
 </style>
-
+<script>
+	$(function(){
+		$("#act1").click(function(){
+			var url = "/dbmon/searchAct1";
+			//var params = "act=실내돕기";
+			$.ajax({
+				url:url,
+				//data:params,
+				type:'GET',
+				success:function(result){
+					var $result = $(result);
+					var tag = "";
+					
+					$result.each(function(idx, tvo){
+						tag += "<li class="list-group-item">
+						<ul class="list-group list-group-horizontal">
+						<li class="list-group-item border-0 col-2">
+							<img src="img/profilepic.png" class="rounded-circle"/><br/>
+							<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
+						</li>
+						<li class="list-group-item border-0 col-10">
+							
+							<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
+							<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation } |  ${vo.no }</a> <br/><br/>
+							<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
+							<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
+							
+							<div class="review_rate" style="line-height: 1.375;">등록일 : ${vo.t_date} | 후기수 : 100개</div>
+						</li>
+					</ul>
+				</li>"
+					})
+				}, error: function(){
+					console.log("리스트 받기 에러");
+				}
+			})
+		})
+		
+		
+	});
+</script>
+</head>
 <body>
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
@@ -108,19 +149,19 @@
   
   <div style="overflow: scroll hidden; width: 100%; height: 50px; white-space: nowrap; 
   display: inline-block; vertical-align: top;">
-  <div class="btn1" role="button">실내놀이</div>
-  <div class="btn1" role="button">등하원 돕기</div>
-  <div class="btn1" role="button">책 읽기</div>
-  <div class="btn1" role="button">야외활동</div>
-  <div class="btn1" role="button">한글놀이</div>
-  <div class="btn1" role="button">영어놀이</div>
-  <div class="btn1" role="button">학습지도</div>
-  <div class="btn1" role="button">체육놀이</div>
-  <div class="btn1" role="button">간단청소</div>
-  <div class="btn1" role="button">밥챙겨주기</div>
-  <div class="btn1" role="button">간단설거지</div>
-  <div class="btn1" role="button">장기입주</div>
-  <div class="btn1" role="button">단기입주</div>
+  <button class="btn1" id="act1">실내놀이</button>
+  <button class="btn1" id="act2">등하원 돕기</button>
+  <button class="btn1" id="act3">책 읽기</button>
+  <button class="btn1" id="act4">야외활동</button>
+  <button class="btn1" id="act5">한글놀이</button>
+  <button class="btn1" id="act6">영어놀이</button>
+  <button class="btn1" id="act7">학습지도</button>
+  <button class="btn1" id="act8">체육놀이</button>
+  <button class="btn1" id="act9">간단청소</button>
+  <button class="btn1" id="act10">밥챙겨주기</button>
+  <button class="btn1" id="act11">간단설거지</button>
+  <button class="btn1" id="act12">장기입주</button>
+  <button class="btn1" id="act13">단기입주</button>
   </div>
  
    

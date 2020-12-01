@@ -1,5 +1,6 @@
 package com.dolbommon.dbmon.search;
 
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class JobSearchController {
@@ -57,5 +60,15 @@ public class JobSearchController {
 		
 		return mav;
 	
+	}
+	
+	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public List<TeacherVO> searchAct1(TeacherVO vo) {
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.selectTAct1();
+		
+		
+		return list;
 	}
 }
