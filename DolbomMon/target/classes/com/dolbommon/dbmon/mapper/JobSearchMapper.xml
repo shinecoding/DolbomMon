@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
-	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
+	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.teacherVO">
 		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit from teacher where userid=#{userid}
 		select no, username, headcount, age, zone, wage, situation, content, discussion, to_char(t_date, 'MM-DD HH:MI') t_date from teacher order by no desc	
 	</select>
@@ -14,11 +14,11 @@
 	<select id="getTotalRecord" resultType="int">	
 		select count(no) from teacher
 	</select>
-	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO" >
-		update teacher_list2 set hit= hit+1 where userid= #{userid}
+	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.teacherVO" >
+		update teacher set hit= hit+1 where userid= #{userid}
 	</update>
 	
-	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
+	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.teacherVO">
 		select no, head, subject, content, userid, hit, writedate
 		from teacher where no=#{param1}
 	</select>

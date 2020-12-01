@@ -2,7 +2,7 @@ package com.dolbommon.dbmon.search;
 
 public class RecruitBoardVO {
 		//구인게시판
-		private int job_board_no; //구인글 번호
+		private int jo_board_no; //구인글 번호
 		private String userid; //아이디
 		private String care_addr; //돌봄장소
 		private String time_type; //돌봄시간유형
@@ -16,11 +16,11 @@ public class RecruitBoardVO {
 		private int hit; //조회수
 		
 		
-		public int getJob_board_no() {
-			return job_board_no;
+		public int getJo_board_no() {
+			return jo_board_no;
 		}
-		public void setJob_board_no(int job_board_no) {
-			this.job_board_no = job_board_no;
+		public void setJo_board_no(int job_board_no) {
+			this.jo_board_no = job_board_no;
 		}
 		public String getUserid() {
 			return userid;

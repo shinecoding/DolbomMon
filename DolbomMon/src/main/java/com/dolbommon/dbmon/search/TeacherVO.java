@@ -1,4 +1,4 @@
-package com.dolbommon.dbmon.Teacher;
+package com.dolbommon.dbmon.search;
 
 import org.springframework.web.multipart.MultipartFile;
 

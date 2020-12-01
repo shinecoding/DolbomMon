@@ -19,9 +19,7 @@
 		from parent_list where job_board_no=#{param1}
 	</select>
 	
-	<update id="hitCount" parameterType="int">
-		update parent_list set hit=hit+1 where job_board_no=#{param1}
-	</update>
+
 	
 	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 

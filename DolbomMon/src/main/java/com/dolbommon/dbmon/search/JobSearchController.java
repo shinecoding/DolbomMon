@@ -8,8 +8,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dolbommon.dbmon.Teacher.TeacherVO;
 @Controller
 public class JobSearchController {
+	@Autowired
 	SqlSession sqlSession;
 	
 	public SqlSession getSqlSession() {
@@ -29,7 +32,7 @@ public class JobSearchController {
 	public ModelAndView sitter() {
 
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		List<MemberVO> mvoList = dao.selectTMemNo();
 		ModelAndView mav = new ModelAndView();
@@ -45,7 +48,7 @@ public class JobSearchController {
 	@RequestMapping("/teacher_chart") 
 	public ModelAndView teacher_chart() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		List<MemberVO> mvoList = dao.selectTMemNo();
 		ModelAndView mav = new ModelAndView();

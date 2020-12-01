@@ -30,7 +30,7 @@ public class RecruitBoardController {
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		List<MemberVO> mvoList = dao.selectTMemNo();
+		List<MemberVO> mvoList = dao.selectTMemNo(); //총 __명
 		ModelAndView mav = new ModelAndView();
 		
 		
