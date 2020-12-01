@@ -83,7 +83,7 @@ font-family:"Noto Sans KR";
       margin:0; padding:0;
       }
    html{
-         margin:0; padding:0;
+       margin:0; padding:0;
        width: 100%;  
    }
         
@@ -143,7 +143,7 @@ font-family:"Noto Sans KR";
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
-  
+  <br/><br/><hr/>
   
 <div id="teacher_chart">
 <%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 

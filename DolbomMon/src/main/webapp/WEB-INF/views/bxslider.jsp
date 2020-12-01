@@ -7,12 +7,12 @@
         padding:0;
        }
    #bxslider img{
+   	  margin-top:0px;
       height: 550px; 
-      
       width:100%;
       text-align:center;
       -moz-box-shadow: none;
-     -webkit-box-shadow: none; 
+      -webkit-box-shadow: none; 
       box-shadow: none;
       border: 0;
       outline: 0;

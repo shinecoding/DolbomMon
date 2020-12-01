@@ -15,5 +15,4 @@
 	<select id="selectTAct1" resultType="com.dolbommon.dbmon.search.TeacherVO">
 		select userid from teacher where activity_type like '%실내놀이%'
 	</select>
-	
 </mapper>
