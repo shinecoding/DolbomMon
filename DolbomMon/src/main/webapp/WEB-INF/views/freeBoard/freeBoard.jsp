@@ -32,9 +32,10 @@
 	a:link, a:visited, a:hover{
 	 	color: black;
 	 }
-	body{
+	/* body{
 	 	font-size: 0.9em;
-	 }	
+	 }	 */
+	 
 </style>
 </head>
 
@@ -48,8 +49,8 @@
 <div>
 	<a class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
 </div>
-<div><br/>총 게시물 수 : ${totalRecord}</div>
-<div id="board">
+<div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
+<div id="board" style="font-size: 0.9em;">
 <br/>
 	<table class="table table-hover">
 		<thead>

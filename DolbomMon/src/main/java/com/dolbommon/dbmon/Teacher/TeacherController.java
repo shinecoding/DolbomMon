@@ -1,12 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,15 +32,7 @@ public class TeacherController {
 		this.sqlSession = sqlSession;
 	}
 
-	// =======================================================
-
-	@RequestMapping("/teacherList")
-	public String teacherList() {
-		return "/teacher/teacherList";
-	}
-
-
-	@RequestMapping("/teacherView")
+	
 	public ModelAndView teacherView(HttpSession ses) {//
 
 		String userid = (String) ses.getAttribute("userid");
@@ -91,6 +78,7 @@ public class TeacherController {
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
+
 
 	@RequestMapping("/teacherHeart")
 	public String teacherHeart() {

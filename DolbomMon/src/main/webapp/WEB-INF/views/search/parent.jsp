@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
-
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	* {
 		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
@@ -17,7 +17,7 @@
 	}
 	
 	#all{
-		margin:0 auto;background-color:white
+		margin:0 auto;background-color:white;
 		
 	}
 	.all_wrapper{
@@ -25,7 +25,7 @@
 		width:1100px;
 		background-color:white;
 	}
-	img{ height:70px; width:70px;}
+	img{ height:110px; width:110px;}
 	.list
 	
 
@@ -63,11 +63,6 @@
 	 	width:1000px;
 	 
 	 }
-	   
-   /* color: #222;
-    font-weight: 100;
-    font-size: 1em;
-    line-height: 1.375;*/
 
 	.listPanel{
 		color: #222;
@@ -89,12 +84,13 @@
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 </div>
 <!-- ------------------------------------------ -->
 <div class="all_wrapper" >
 <div>
-<button type="button" class="btn btn-warning btn-lg btn-block">어떤 돌봄몬을 찾으세요?</button>
-<button type="button" class="btn btn-light btn-lg" style="width:100%">가까운 돌봄몬 찾기</button><br/><br/>
+<button type="button" class="btn btn-warning btn-lg btn-block">어떤 일자리를 찾으세요?</button>
+<button type="button" class="btn btn-light btn-lg" style="width:100%">가까운 일자리 찾기</button><br/><br/>
 </div>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:white; "> 
 <div id="filterbox" >
@@ -137,22 +133,26 @@
 	</svg>
 	</div>
 	<br/><br/><br/>
+	
 	</div>
 	<c:forEach var="vo" items="${list2}">
 <div class="wrapper2" onclick="location.href='parentView'">
 	<ul class="list-group">
-	<li class="list-group-item">
+	<li class="list-group-item"><i class="fas fa-star"></i>
 	<ul class="list-group list-group-horizontal">
+	
 		<li class="list-group-item border-0 col-2">
+			
 			<img src="img/tea1.PNG" class="rounded-circle"/><br/><br/>
 		<div class="badge badge-warning badge-pill ml-1" ><span>0</span>명 지원</div>
 		</li>
 		<li class="list-group-item border-0 col-10">
-			<h6>글번호  : ${vo.job_board_no}</h6>
+			<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
+			<h6 style="color:orange;"> no. ${vo.job_board_no}</h6>
 			<h6><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</h6>
 			<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
-			<h7>${vo.care_addr } | ${vo.userid } | 11/18 시작</h7>
-			<h6><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 <b>협의가능</b></h6>
+			<h7>${vo.care_addr } | ${vo.userid } | 11/18 시작</h7><br/><br/>
+			<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 | <b>협의가능</b></h6>
 		</li>
 		</ul>
 		</li>
