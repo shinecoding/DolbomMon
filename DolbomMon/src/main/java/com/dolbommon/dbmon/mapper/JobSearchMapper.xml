@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
 	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select pic, care_type, child_age, activity_type, desired_wage, area1, headcount, discussion from teacher
+		select m.username, m.gender, m.birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion from teacher t join member m on t.userid= m.userid where who = 'T'
 	</select>
-	<select id="selectTMem" resultType="com.dolbommon.dbmon.search.MemberVO">
+	<select id="selectTMem" resultType="com.dolbommon.dbmon.search.TeacherVO">
 		select username, birth, no, round((sysdate - last_edit) *1440) as last_edit from member
 	</select>
 	<select id="getTotalRecord" resultType="int">	

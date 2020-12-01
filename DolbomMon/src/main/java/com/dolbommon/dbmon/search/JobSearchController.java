@@ -32,14 +32,13 @@ public class JobSearchController {
 	public ModelAndView sitter() {
 
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> tList = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		//List<MemberVO> mvoList = dao.selectTMemNo();
-		List<MemberVO> mList = dao.selectTMem();
+		
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("mvoList", mvoList);
-		mav.addObject("tList", tList);
-		mav.addObject("mList", mList);
+		
+		mav.addObject("list", list);
+		
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("search/sitter");
 		
@@ -52,10 +51,10 @@ public class JobSearchController {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		List<MemberVO> mvoList = dao.selectTMem();
+		//List<MemberVO> mvoList = dao.selectTMem();
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("mvoList", mvoList);
+		//mav.addObject("mvoList", mvoList);
 		mav.addObject("list", list);
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("search/sitter");

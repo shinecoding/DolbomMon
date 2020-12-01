@@ -173,7 +173,7 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-	 <c:forEach var="vo" items="${tList}">
+	 <c:forEach var="vo" items="${list}">
 	<div class="wrapper2" Onclick="location.href='parentView'">
 	<ul class="list-group">
 		<li class="list-group-item">
@@ -183,8 +183,8 @@
 						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 				</li>
 				<li class="list-group-item border-0 col-10">
-						<h6><b></b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
-						<h6>서울시 강남구</h6>
+						<h6><b>${vo.username}</b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
+						<h6>${vo.area1}</h6>
 						<h6>20세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}</h6>
 						<h6>돌봄가능아이 수 : ${vo.headcount }</h6>
 				</li>
