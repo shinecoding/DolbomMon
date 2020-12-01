@@ -79,7 +79,46 @@
 }
  
 </style>
-
+<script>
+	$(function(){
+		$("#act1").click(function(){
+			var url = "/dbmon/searchAct1";
+			//var params = "act=실내돕기";
+			$.ajax({
+				url:url,
+				//data:params,
+				type:'GET',
+				success:function(result){
+					var $result = $(result);
+					var tag = "";
+					
+					$result.each(function(idx, tvo){
+						tag = "<ul class='list-group'>";
+						tag += "<li class='list-group-item'>";
+						tag += "<ul class='list-group list-group-horizontal'>";
+						tag += "<li class='list-group-item border-0 col-2'>";
+						tag += "<img src='img/profilepic.png' class='rounded-circle'/><br/>";
+						tag += "<div class='badge badge-warning badge-pill ml-3' ><span>0</span>명 지원</div>";
+						tag += "</li>";
+						tag += "<li class="list-group-item border-0 col-10">";
+						tag += "<h6><b>${vo.username }</b></h6><h7>3분전 작성</h7><br/>";
+						tag += "<h6>서울시 강남구</h6>";
+						tag += "<h6>20세 | <i class='fas fa-coins mr-1'></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}<br/>";
+						tag += "<h7>돌봄가능아이 수 : ${vo.headcount}</h7><br/><br/>";
+						tag += "</li>";
+						tag += "</ul></li></ul>";
+						
+					})
+				}, error: function(){
+					console.log("리스트 받기 에러");
+				}
+			})
+		})
+		
+		
+	});
+</script>
+</head>
 <body>
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
@@ -93,7 +132,7 @@
 </div>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:white;"> 
 <div id="filterbox" >
-<input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요" readonly>
+<input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요">
 <form class="form-inline">
   <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
   <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
@@ -106,21 +145,23 @@
   </form>
   </div>
   
-  <div style="/* overflow: scroll hidden; */ width: 100%; height: 50px; white-space: nowrap; 
-  display: inline-block; vertical-align: top; margin-bottom:50px;" >
-  <div class="btn1" role="button">실내놀이</div>
-  <div class="btn1" role="button">등하원 돕기</div>
-  <div class="btn1" role="button">책 읽기</div>
-  <div class="btn1" role="button">야외활동</div>
-  <div class="btn1" role="button">한글놀이</div>
-  <div class="btn1" role="button">영어놀이</div>
-  <div class="btn1" role="button">학습지도</div>
-  <div class="btn1" role="button">체육놀이</div>
-  <div class="btn1" role="button">간단청소</div>
-  <div class="btn1" role="button">밥챙겨주기</div><br/>
-  <div class="btn1" role="button">간단설거지</div>
-  <div class="btn1" role="button">장기입주</div>
-  <div class="btn1" role="button">단기입주</div>
+
+  <div style="overflow: scroll hidden; width: 100%; height: 50px; white-space: nowrap; 
+  display: inline-block; vertical-align: top;">
+  <button class="btn1" id="act1">실내놀이</button>
+  <button class="btn1" id="act2">등하원 돕기</button>
+  <button class="btn1" id="act3">책 읽기</button>
+  <button class="btn1" id="act4">야외활동</button>
+  <button class="btn1" id="act5">한글놀이</button>
+  <button class="btn1" id="act6">영어놀이</button>
+  <button class="btn1" id="act7">학습지도</button>
+  <button class="btn1" id="act8">체육놀이</button>
+  <button class="btn1" id="act9">간단청소</button>
+  <button class="btn1" id="act10">밥챙겨주기</button>
+  <button class="btn1" id="act11">간단설거지</button>
+  <button class="btn1" id="act12">장기입주</button>
+  <button class="btn1" id="act13">단기입주</button>
+
   </div>
  
   
@@ -133,34 +174,29 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-	 <c:forEach var="vo" items="${list }">
+	 <c:forEach var="vo" items="${list}">
 	<div class="wrapper2" Onclick="location.href='parentView'">
-	<ul class="list-group" style="font-size:.85em; font-weight: 500;">
-	<li class="list-group-item">
+	<ul class="list-group">
+		<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2" >
-				<img src="img/stu1.PNG" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				
-				<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
-				<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation } |  ${vo.no }</a> <br/><br/>
-				<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
-				<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
-				
-				<div class="review_rate" style="line-height: 1.375;">등록일 : ${vo.t_date} | 후기수 : 100개</div>
+				<li class="list-group-item border-0 col-2">
+						<img src="img/profilepic.png" class="rounded-circle"/><br/>
+						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
+				</li>
+				<li class="list-group-item border-0 col-10">
+						<h6><b>${vo.username}</b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
+						<h6>${vo.area1}</h6>
+						<h6>20세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}</h6>
+						<h6>돌봄가능아이 수 : ${vo.headcount }</h6>
+				</li>
+				</ul>
+
 			</li>
 		</ul>
-	</li>
-	</ul>
-
-
-
-</div>
-<hr/>
-<br/>
-</c:forEach> 
+	</div>
+	<hr/>
+	<br/>
+	</c:forEach> 
 
 
 	<hr/>
