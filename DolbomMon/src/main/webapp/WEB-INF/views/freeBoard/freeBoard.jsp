@@ -103,7 +103,16 @@
 					<td align="center">${vo.userid}</td>
 					<td align="center">${vo.writedate}</td>
 					<td align="center">${vo.hit}</td>
-					<td align="center">${vo.filename1}, ${vo.filename2}</td>
+					
+					<!-- 첨부파일 -->
+					<c:forEach var="f" items="${vo.filename}">
+					<c:if test="${f!=null}">
+					<a href="<%=request.getContextPath()%>/upload/${f}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f}" alt="${vo.no}"/></a>
+					</c:if>
+					</c:forEach>
+						
+					
+					<td align="center"><a href="" download><img src="<%=request.getContextPath()%>/img/disk.png"/>${vo.filename1}, ${vo.filename2}</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

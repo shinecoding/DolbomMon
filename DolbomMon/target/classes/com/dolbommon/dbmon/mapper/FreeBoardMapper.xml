@@ -4,15 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.board.FreeBoardDaoImp">
 	<select id="freeBoardList" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
-		select * from (select * from (select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate, ref, step, lvl 
-		<choose>
-			<when test='filename1!=null and !filename1.equals("")'>
-			, filename1 
-			</when>
-			<when test='filename2!=null and !filename2.equals("")'>
-			, filename2 
-			</when>
-		</choose>
+		select * from (select * from (select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate, ref, step, lvl, filename1, filename2 
+
 		from freeBoard order by ref desc, lvl asc) where 
 		<![CDATA[rownum<=${currentPageRecord}]]>
 		order by ref asc, lvl desc) where 
