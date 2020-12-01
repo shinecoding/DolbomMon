@@ -69,9 +69,9 @@
 		$(document).ready(function(){
 			for(var i=1;i<8;i++){
 				if($("input[id="+i+"]").is(":checked")){
-					$("label[for="+i+"]").css("background-color", "rgb(255, 222, 89)");//노랑
+					$("label[for="+i+"]").css("background-color", "#ff5400").css("color", "white");
 				}else{
-					$("label[for="+i+"]").css("background-color", "#EFEFEF");//회색
+					$("label[for="+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 			
