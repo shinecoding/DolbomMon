@@ -1,7 +1,5 @@
 package com.dolbommon.dbmon.board;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class FreeBoardVO {
 
 	private int no;
@@ -14,11 +12,13 @@ public class FreeBoardVO {
 	private String head;
 	private String filename1;
 	private String filename2;
+	private int nextNo;
+	private int preNo;
 	private int ref;
 	private int step;
 	private int lvl;
 	
-	/////////////
+	//페이징
 	private int nowPage = 1;	//현재 페이지
 	private int totalRecord;	//총 레코드 수
 	private int totalPage;	//총 페이지 수
@@ -27,11 +27,10 @@ public class FreeBoardVO {
 	private int startPageNum = 1;	//페이지 번호의 시작페이지
 	private int lastPageRecordCount = 20;	//마지막 페이지의 선택 레코드 수
 	private int currentPageRecord = nowPage*onePageRecord;
+	
 	//검색어
 	private String searchKey;
 	private String searchWord;
-	
-	////////////////
 	
 	public int getNowPage() {
 		return nowPage;
@@ -106,7 +105,7 @@ public class FreeBoardVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
-	
+	/////////////////////////////////////////
 	public int getNo() {
 		return no;
 	}
@@ -166,6 +165,18 @@ public class FreeBoardVO {
 	}
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
+	}
+	public int getNextNo() {
+		return nextNo;
+	}
+	public void setNextNo(int nextNo) {
+		this.nextNo = nextNo;
+	}
+	public int getPreNo() {
+		return preNo;
+	}
+	public void setPreNo(int preNo) {
+		this.preNo = preNo;
 	}
 	public int getRef() {
 		return ref;

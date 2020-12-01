@@ -181,15 +181,32 @@
 					<br/>${vo.content}<br/>
 					</td>
 				</tr>
+				<c:if test="${vo.filename1!=null}">
+					<tr>
+						<th scope="col">첨부파일</th>
+						<td>
+							<c:if test="${vo.filename1!=null}">
+								<c:forEach var="f1" items="${vo.filename1}">
+									<a href="<%=request.getContextPath()%>/upload/${f1}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f1}" alt="${vo.no}"/></a>		
+								</c:forEach>				
+							</c:if>
+							<c:if test="${vo.filename2!=null}">
+								<c:forEach var="f2" items="${vo.filename2}">						
+									<a href="<%=request.getContextPath()%>/upload/${f2}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f2}" alt="${vo.no}"/></a>							
+								</c:forEach>
+							</c:if>	
+						</td>
+					</tr>
+				</c:if>
 			</tbody>
 			<tfoot>
 				<tr>
 					<th scope="col">이전글</th>
-					<td><a href="#">이전글 이전글 이전글</a></td>	
+					<td><a href="/dbmon/preContentView?no=${vo.no}">이전글 이전글 이전글</a></td>	
 				</tr>
 				<tr>
 					<th scope="col">다음글</th>
-					<td><a href="#">다음글 다음글 다음글</a></td>	
+					<td><a href="/dbmon/nextContentView?no=${vo.no}">다음글 다음글 다음글</a></td>	
 				</tr>
 			</tfoot>
 		</table>

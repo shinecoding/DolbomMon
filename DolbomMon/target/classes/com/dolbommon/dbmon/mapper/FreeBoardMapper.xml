@@ -4,23 +4,68 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.board.FreeBoardDaoImp">
 	<select id="freeBoardList" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
-		select * from (select * from (select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate, ref, step, lvl, filename1, filename2 
-
-		from freeBoard order by ref desc, lvl asc) where 
+		select * from (select * from (select no, head, subject, userid, hit, writedate, ref, step, lvl, filename1, filename2 
+		from freeBoard 
+		<choose>
+			<when test="searchKey!=null and searchWord!=null">
+				<if test='searchKey.equals("subject")'>
+					where subject like '%'||#{searchWord}||'%' 
+				</if>
+				<if test='searchKey.equals("content")'>
+					where content like'%'||#{searchWord}||'%' 
+				</if>	
+				<if test='searchKey.equals("userid")'>
+					where userid like '%'||#{searchWord}||'%' 
+				</if>	
+			</when>
+		</choose>
+		order by ref desc, lvl asc) where 
 		<![CDATA[rownum<=${currentPageRecord}]]>
 		order by ref asc, lvl desc) where 
 		<![CDATA[rownum<=${lastPageRecordCount}]]>
 		order by ref desc, lvl asc
 	</select>
-	
-	<select id="getTotalRecord" resultType="int">	
-		select count(no) from freeBoard
+
+	<select id="getTotalRecord" parameterType="com.dolbommon.dbmon.board.FreeBoardVO" resultType="int">	
+		select count(no) from freeBoard 
+		<choose>
+			<when test="searchKey!=null and searchWord!=null">
+				<if test='searchKey.equals("subject")'>
+					where subject like '%'||#{searchWord}||'%' 
+				</if>
+				<if test='searchKey.equals("content")'>
+					where content like'%'||#{searchWord}||'%' 
+				</if>	
+				<if test='searchKey.equals("userid")'>
+					where userid like '%'||#{searchWord}||'%' 
+				</if>	
+			</when>
+		</choose>
 	</select>
 	
 	<select id="freeBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
-		select no, head, subject, content, userid, hit, writedate
+		select no, head, subject, content, userid, hit, writedate, filename1, filename2 
 		from freeBoard where no=#{param1}
 	</select>
+	
+	<select id="preContentSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select * from(
+			select no, lag(no, 1) over (order by no) preNo
+        	from freeBoard where step=0
+    		)
+    	where no=#{no}
+	
+	</select>	
+
+	<select id="nextContentSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select * from(
+			select no, lead(no, 1) over (order by no) nextNo
+        	from freeBoard where step=0
+    		)
+    	where no=#{no}
+	</select>	
+	
+	
 	
 	<update id="hitCount" parameterType="int">
 		update freeBoard set hit=hit+1 where no=#{param1}

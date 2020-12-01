@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,12 +60,31 @@ public class BoardController {
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
 		}
 		
+		String sWord = req.getParameter("searchWord");
+		if(!(sWord == null || sWord.equals(""))) {	//검색어가 있을 때
+			vo.setSearchKey(req.getParameter("searchKey"));
+			vo.setSearchWord(sWord);
+		}
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		
-		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		vo.setTotalRecord(dao.getTotalRecord());
+		int totalRecord = dao.getTotalRecord(vo);	//총 게시물 수
+		vo.setTotalRecord(dao.getTotalRecord(vo));
 		
 		List<FreeBoardVO> list = dao.freeBoardList(vo);
+		
+		Calendar now = Calendar.getInstance();
+		SimpleDateFormat fomat = new SimpleDateFormat("yy-MM-dd");
+		String dateStr = fomat.format(now.getTime());
+		for(int i=0; i<list.size(); i++) {
+			FreeBoardVO dateVo = list.get(i);
+			
+			if(dateStr.equals(dateVo.getWritedate().substring(2, 10))) {
+				dateVo.setWritedate((String)dateVo.getWritedate().subSequence(11, 16));	
+			}else {
+				
+				dateVo.setWritedate((String)dateVo.getWritedate().subSequence(2, 10));
+			}
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -73,6 +94,46 @@ public class BoardController {
 		
 		return mav;
 	}
+	
+	//이전글 선택
+	@RequestMapping("/preContentView")
+	public ModelAndView preContentView(int no, HttpServletRequest req, HttpServletResponse res) {
+		
+		FreeBoardVO vo = new FreeBoardVO();
+		vo.setNo(Integer.parseInt(req.getParameter("no")));
+		
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		FreeBoardVO resultVo = dao.preContentSelect(vo.getNo());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("no", resultVo.getPreNo());
+		mav.setViewName("redirect:freeBoardView");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	//다음글 선택
+	@RequestMapping("/nextContentView")
+	public ModelAndView nextContentView(int no, HttpServletRequest req, HttpServletResponse res) {
+		
+		FreeBoardVO vo = new FreeBoardVO();
+		vo.setNo(Integer.parseInt(req.getParameter("no")));
+		
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
+		FreeBoardVO resultVo = dao.nextContentSelect(vo.getNo());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("no", resultVo.getNextNo());
+		mav.setViewName("redirect:freeBoardView");
+		
+		return mav;
+	}
+			
+			
 	
 	//게시판 글쓰기 폼으로 이동ok
 	@RequestMapping("/freeBoardWrite")
