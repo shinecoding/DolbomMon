@@ -2,8 +2,6 @@ package com.dolbommon.dbmon.search;
 
 import java.util.List;
 
-import com.dolbommon.dbmon.Teacher.TeacherVO;
-
 public interface JobSearchDaoImp {
 	//구직게시판 리스트보기
 	public List<TeacherVO> jobSearchBoardList();
@@ -13,7 +11,11 @@ public interface JobSearchDaoImp {
 	public TeacherVO jobSearchBoardSelect(int no);
 	
 	//글번호 구하기
-	public List<MemberVO> selectTMemNo(); 
+
+	public List<TeacherVO> selectTMem(); 
+	
+	public List<TeacherVO> selectTAct1();
+
 	
 }
 
