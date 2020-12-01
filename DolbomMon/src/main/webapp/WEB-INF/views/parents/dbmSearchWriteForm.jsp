@@ -67,7 +67,7 @@
 				if(divStatus != "none"){
 					$("#"+selectedData).css("display", "none");
 				}else{
-					$("#"+selectedData).css("display", "inline-block");
+					$("#"+selectedData).css("display", "block");
 				}
 			});
 			
