@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	* {
 		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
@@ -96,23 +97,21 @@
 					var tag = "";
 					
 					$result.each(function(idx, tvo){
-						tag += "<li class="list-group-item">
-						<ul class="list-group list-group-horizontal">
-						<li class="list-group-item border-0 col-2">
-							<img src="img/profilepic.png" class="rounded-circle"/><br/>
-							<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-						</li>
-						<li class="list-group-item border-0 col-10">
-							
-							<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
-							<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation } |  ${vo.no }</a> <br/><br/>
-							<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
-							<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
-							
-							<div class="review_rate" style="line-height: 1.375;">등록일 : ${vo.t_date} | 후기수 : 100개</div>
-						</li>
-					</ul>
-				</li>"
+						tag = "<ul class='list-group'>";
+						tag += "<li class='list-group-item'>";
+						tag += "<ul class='list-group list-group-horizontal'>";
+						tag += "<li class='list-group-item border-0 col-2'>";
+						tag += "<img src='img/profilepic.png' class='rounded-circle'/><br/>";
+						tag += "<div class='badge badge-warning badge-pill ml-3' ><span>0</span>명 지원</div>";
+						tag += "</li>";
+						tag += "<li class="list-group-item border-0 col-10">";
+						tag += "<h6><b>${vo.username }</b></h6><h7>3분전 작성</h7><br/>";
+						tag += "<h6>서울시 강남구</h6>";
+						tag += "<h6>20세 | <i class='fas fa-coins mr-1'></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}<br/>";
+						tag += "<h7>돌봄가능아이 수 : ${vo.headcount}</h7><br/><br/>";
+						tag += "</li>";
+						tag += "</ul></li></ul>";
+						
 					})
 				}, error: function(){
 					console.log("리스트 받기 에러");
@@ -174,34 +173,28 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-	 <c:forEach var="vo" items="${list }">
+	 <c:forEach var="vo" items="${tList}">
 	<div class="wrapper2" Onclick="location.href='parentView'">
-	<ul class="list-group" style="font-size:.85em; font-weight: 500;">
-	<li class="list-group-item">
+	<ul class="list-group">
+		<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				
-				<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
-				<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation } |  ${vo.no }</a> <br/><br/>
-				<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
-				<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
-				
-				<div class="review_rate" style="line-height: 1.375;">등록일 : ${vo.t_date} | 후기수 : 100개</div>
+				<li class="list-group-item border-0 col-2">
+						<img src="img/profilepic.png" class="rounded-circle"/><br/>
+						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
+				</li>
+				<li class="list-group-item border-0 col-10">
+						<h6><b></b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
+						<h6>서울시 강남구</h6>
+						<h6>20세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}</h6>
+						<h6>돌봄가능아이 수 : ${vo.headcount }</h6>
+				</li>
+				</ul>
 			</li>
 		</ul>
-	</li>
-	</ul>
-
-
-
-</div>
-<hr/>
-<br/>
-</c:forEach> 
+	</div>
+	<hr/>
+	<br/>
+	</c:forEach> 
 
 
 	<hr/>

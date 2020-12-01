@@ -3,53 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
-	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		select no, username, headcount, age, zone, wage, situation, content, discussion, to_char(t_date, 'MM-DD HH:MI') t_date from teacher_list2 order by no desc	
+	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.TeacherVO">
+		select pic, care_type, child_age, activity_type, desired_wage, area1, headcount, discussion from teacher
 	</select>
-	
-	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
-		select no from member
+	<select id="selectTMem" resultType="com.dolbommon.dbmon.search.MemberVO">
+		select username, birth, no, round((sysdate - last_edit) *1440) as last_edit from member
 	</select>
 	<select id="getTotalRecord" resultType="int">	
-		select count(no) from teacher_list2
+		select count(userid) from teacher
 	</select>
-	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO" >
-		update teacher_list2 set hit= hit+1 where userid= #{userid}
-	</update>
 	<select id="selectTAct1" resultType="com.dolbommon.dbmon.search.TeacherVO">
 		select userid from teacher where activity_type like '%실내놀이%'
 	</select>
-	<!-- <select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		select no, head, subject, content, userid, hit, writedate
-		from teacher_list2 where no=#{param1}
-	</select>
-	
-	<update id="hitCount" parameterType="int">
-		update teacher_list2 set hit=hit+1 where no=#{param1}
-	</update>
-	
-	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		insert into teacher_list2(no, subject, content, userid, hit, writedate) 
-		values(board_sq.nextval, #{subject}, #{content}, #{userid}, 0, sysdate)
-	</insert>
-	
-	<delete id="recruitBoardDel">
-		delete from teacher_list2 where no=#{param1} and userid=#{param2}
-	</delete>
-	
-	<update id="recruitBoardEditOk" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		update teacher_list2 set content=#{content} where no=#{no} and userid=#{userid}
-	</update>
-	
-	<select id="optionSelect" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		select no, ref, step, lvl from teacher_list2 where no=#{param1}
-	</select>
-	
-	
-	<insert id="replyBoardInsert" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		insert into teacher_list2(no, content, userid, hit, writedate) 
-		values(board_sq.nextval, #{content}, #{userid}, 0, sysdate})
-	</insert>
-	 -->
 	
 </mapper>

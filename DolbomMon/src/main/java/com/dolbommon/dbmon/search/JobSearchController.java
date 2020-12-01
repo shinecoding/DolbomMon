@@ -32,25 +32,27 @@ public class JobSearchController {
 	public ModelAndView sitter() {
 
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> tList = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		List<MemberVO> mvoList = dao.selectTMemNo();
+		//List<MemberVO> mvoList = dao.selectTMemNo();
+		List<MemberVO> mList = dao.selectTMem();
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("mvoList", mvoList);
-		mav.addObject("list", list);
+		//mav.addObject("mvoList", mvoList);
+		mav.addObject("tList", tList);
+		mav.addObject("mList", mList);
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("search/sitter");
 		
 		return mav;
 	
 	}
+	//메인화면에 띄워줄 리스트
 	@RequestMapping("/teacher_chart") 
 	public ModelAndView teacher_chart() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		List<MemberVO> mvoList = dao.selectTMemNo();
+		List<MemberVO> mvoList = dao.selectTMem();
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("mvoList", mvoList);
