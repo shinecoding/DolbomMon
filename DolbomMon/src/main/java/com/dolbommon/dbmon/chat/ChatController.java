@@ -36,7 +36,6 @@ public class ChatController {
 	}
 
 	//////////////
-
 	// 방만들기 and 채팅방열기
 	@RequestMapping(value = "/makeRoom", method = RequestMethod.POST)
 	@ResponseBody
@@ -45,19 +44,24 @@ public class ChatController {
 		String userid = (String) session.getAttribute("userid");
 
 		// userid는 고정으로 테스트. test4가 글쓴이.
-		room.setUserid("test3"); // 글, 프로필 대상
-
+		room.setUserid("test11"); // 글, 프로필 대상
+		
+		
+		//방갯수확인
 		int result = chatdao.roomCheck(userid, room.getUserid());
-
 		List<ChatRoomDTO> resultRoomDTO = null;
 		if (result >= 1) {
 			resultRoomDTO = chatdao.selectAllRoom(userid);
 			return resultRoomDTO;
 		}
 		room.setUserid_t((String) session.getAttribute("userid")); // 접속한 사람.. 추후 선생님 아이디(댓글등록자아이디)로 변경. 만약 선생님에게 부모님이
-																	// 신청한거면?
-		chatdao.insertRoom(room); // 방 생성 // 방번호 가져오기.
+		//룸 중복확인후 생성
 
+		//서버실행시 쿼리문 반복수행되는 에러때문에 밑에서 다시한번 방갯수구함
+		int result2 = chatdao.roomCheck(userid, room.getUserid());
+		if(result2==0) {
+			chatdao.insertRoom(room); // 방 생성 // 방번호 가져오기.
+		}
 		resultRoomDTO = chatdao.selectAllRoom(userid);
 		return resultRoomDTO;
 	}
@@ -81,7 +85,7 @@ public class ChatController {
 				String userCheck ="N";
 				chatdao.updateNewChat(roomseq, chat.getMessage(), userCheck); 
 			}else { 
-				String userCheck ="Y"; 
+				String userCheck ="Y";
 				chatdao.updateNewChat(roomseq, chat.getMessage(), userCheck);
 			}
 			 
@@ -111,7 +115,8 @@ public class ChatController {
 			String userCheck ="Y"; 
 			chatdao.updateChatCheck(roomNo, userCheck);
 		}
-		
+		//ChatDTO에 상태메시지? 이미지경로? 이름? 같은 표시할 정보 추가하고.. 
+		//다른 테이블과 VO에서 가져와서 집어넣고 쓰기.
 		return resultDTO;
 	}
 }

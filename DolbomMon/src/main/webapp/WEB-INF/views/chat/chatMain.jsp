@@ -10,11 +10,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	var anotherUser;
 	$(function(){
 		var timerID;
-		var newTimerID;
+		var newTimerID; 
 		var roomNo;
 		var scrollStop = 1;
+		var startChatRoom = 0;
+		
 		//채팅입력
 		$("#send2").click(function(){
 			insertChat();
@@ -25,14 +28,21 @@
 			roomNo = $(this).attr('id');
 	        e.preventDefault();
 		    clearTimeout(timerID); // 타이머 중지
-		    
 		    selectRoom(roomNo);
+		    var anotherId = $(this).children('div.text').children('h6').children('span.anotherUser').text();
+		    $("#insertId").html(anotherId+"님과 채팅중입니다."); 
+		    //$(this).children('div.imgChange').html('<img src="icon/message/chaticon2.png" class="imgResize"/>');
 		});
+		
 		$("#room2").click(function(){
 			$(".container").css("display","block");
 		});
+		$("#hiddenChat").click(function(){
+			$(".container").css("display","none");
+		});
 		
-		 
+		
+		
 		//자동스크롤 다운
 		function scrollDown(){
 			if(scrollStop==1){
@@ -78,14 +88,14 @@
 			}
 		});
 		
-		//채팅방 접속, 생성(접속기능=채팅폼 띄우기. 만약 방검사해서 해당 인물과 방 없으면 채팅룸하나 만들기)
+		//채팅방 접속, 생성
 		$("#room2").click(function(){
 			makeRoom();
 		})
 		var roomseq;
 		function makeRoom(){
 			$.ajax({
-				url : "makeRoom", //채팅폼의 액션
+				url : "makeRoom", 
 				data : {
 					roomname:$("#roomname").val(),
 				},
@@ -95,48 +105,59 @@
 						var $data = $(result);
 						tag="";
 						$data.each(function(idx, rVo){
+							if(startChatRoom==0){
+								selectRoom(rVo.roomseq);
+								roomNo=rVo.roomseq;
+							}
 							tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
 							tag+='<img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">';
 							tag+='<div class="text">';
 							tag+='<h6>'+rVo.roomseq+' : ';
 							if(rVo.userid=="${myId}"){
-								tag+=rVo.userid_t;
+								if(startChatRoom==0){
+									$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
+									startChatRoom++;
+								}
+								tag+="<span class='anotherUser'>"+rVo.userid_t;
 							}else{
-								tag+=rVo.userid
+								if(startChatRoom==0){
+									$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
+									startChatRoom++;
+								}
+								tag+="<span class='anotherUser'>"+rVo.userid
 							}
-							tag+='</h6>';
+							tag+='</span></h6>';
 							tag+='<p class="time text-muted small wordCut" style="width:150px; height:19px;">'+rVo.lastChat+'</p>';
 							tag+='<p class="time text-muted small">'+rVo.indate+'</p></div>';
-							tag+='<div style="line-height:50px; height:50px;">';
-							if(rVo.userid=="${myId}"){
-								if(rVo.newchat=="Y"){
-									tag+='<img src="icon/message/newchat.png" class="imgResize"/>';
-								}							
-							}else if(rVo.userid_t=="${myId}"){
-								if(rVo.newchat_t=="Y"){
-									tag+='<img src="icon/message/newchat.png" class="imgResize"/>';
-								}					
+							tag+='<div style="line-height:50px; height:50px;" class="imgChange">';
+							if(roomNo!=rVo.roomseq){
+								if(rVo.userid=="${myId}"){
+									if(rVo.newchat=="Y"){
+										tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
+									}							
+								}else if(rVo.userid_t=="${myId}"){
+									if(rVo.newchat_t=="Y"){
+										tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
+									}					
+								}
+							}else{
+								tag+='<img src="icon/message/chaticon2.png" class="imgResize"/>';
 							}
 							tag+="</div></div><hr>";
 						});					
-						$(".roomBox").html(tag);
-						
-						
-				/////////////
-					
-					
+					$(".roomBox").html(tag);
 					$("#roomname").val("");
 					$("#message").focus();
 				}
 			});
 			
-			newTimerID = setTimeout(makeRoom, 2999);
+			newTimerID = setTimeout(makeRoom, 1999);
 		}
 		
 		//채팅입력시
 		function insertChat(){
 			$.ajax({
-				url : "insertChat", //채팅폼의 액션
+				url : "insertChat", 
 				data : {
 					message:$("#message").val(),
 					roomseq:$("#roomseq").val()
@@ -155,7 +176,6 @@
 				}
 			});
 		}
-		
 		//채팅방 클릭시
 		function selectRoom(roomNo){
 			$.ajax({
@@ -180,13 +200,17 @@
 								tag+=mVo.message;
 								tag+="</div></div></div>";
 							}
+							
 						});					
 						$(".chat-panel").html(tag);
 						$("#roomseq").val(roomNo);
 						scrollDown()
 				}
+			
 			});
+			
 			timerID = setTimeout(selectRoom, 1000, roomNo);
+			
 		}
 		
 	});
@@ -224,12 +248,15 @@
 	}
 	.settings-tray--right {
 	  float: right;
+	  text-align: right;
+	  width: 15%;
+	  margin-left: 25px;
 	}
 	.settings-tray--right i {
 	  margin-top: 10px;
 	  font-size: 25px;
 	  color: grey;
-	  margin-left: 14px;
+	  margin-left: 7px;
 	  transition: 0.3s;
 	}
 	.settings-tray--right i:hover {
@@ -278,7 +305,7 @@
 	}
 	.friend-drawer .text {
 	  margin-left: 12px;
-	  width: 70%;
+	  width: 75%;
 	}
 	.friend-drawer .text h6 {
 	  margin-top: 6px;
@@ -352,7 +379,7 @@
 	}
 	.chat-box-tray input {
 	  margin: 0 10px;
-	  padding: 6px 2px;
+	  padding: 6px 12px;
 	}
 	.chat-box-tray i {
 	  color: grey;
@@ -385,8 +412,8 @@
 	}
 	
 	.imgResize{
-		width:35px;
-		height:35px;
+		width:50px;
+		height:50px;
 		vertical-align:middle;
 	}
 	.wordCut{
@@ -398,22 +425,24 @@
 </head>
 <body>
 
-		<input type="button" value="방만들기" class="btn btn-info" id="room2" style="margin-bottom:15px;">
+<input type="button" value="방만들기" class="btn btn-info" id="room2" style="margin-bottom:15px;">
 <div class="container" style="display:none">
-
-	
-
-	
 	
 	<div class="row no-gutters chatform">
 	  <div class="col-md-4 border-right userBox">
 		<div class="settings-tray">
-		  <img class="profile-image" src="https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMjEx/MDAxNDkxMTc1MTc3MDU2._c0rnvCrPIVJUFdB40z-tR3eUTv2aC9CMmm9b57lgmUg.FGaQd94-twbynMnhrvYW1gIdijL1vAbXcXQEzsT3WGYg.JPEG.eungee_e/se3_image_570625329.jpg?type=w800" alt="Profile img">
-		  <!-- 본인 프로필 이미지 -->
-		  <span class="settings-tray--right">
-			<i class="material-icons">cached</i> <!-- 채팅방 새로고침 -->
-		  </span>
+		<div class="friend-drawer no-gutters friend-drawer--grey">
+			<img class="profile-image" src="https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMjEx/MDAxNDkxMTc1MTc3MDU2._c0rnvCrPIVJUFdB40z-tR3eUTv2aC9CMmm9b57lgmUg.FGaQd94-twbynMnhrvYW1gIdijL1vAbXcXQEzsT3WGYg.JPEG.eungee_e/se3_image_570625329.jpg?type=w800" alt="Profile img">
+			<!-- 본인 프로필 이미지 -->
+			<div class="text">
+			  <h4 style="line-height:45px;">${myId}</h4>
+			</div>
+			<span class="settings-tray--right">
+				<i class="material-icons">cached</i> <!-- 채팅방 새로고침 -->
+			</span>
+			</div>
 		</div>
+
 		<div class="search-box">
 		  <div class="input-wrapper">
 			<i class="material-icons">search</i> <!-- 상대방 검색? -->
@@ -423,26 +452,6 @@
 		
 		<!-- -------------------- 채팅room 영역--------------------- -->
 		<div class="roomBox">
-	<%-- 	<c:forEach var="vo" items="${roomList}">
-		<div class="friend-drawer friend-drawer--onhover" id="${vo.roomseq}">
-		  <img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">
-		  <div class="text">
-			<h6>${vo.roomseq} : 
-			<c:choose>
-				<c:when test="${vo.userid.equals(userid)}">
-					${vo.userid_t}
-				</c:when>
-				<c:otherwise>
-					${vo.userid}
-				</c:otherwise>
-			</c:choose>
-			</h6>
-			<p class="time text-muted small">${vo.indate}</p>
-		  </div>
-		  <i class="material-icons" style="line-height:50px;">message</i>
-		</div>
-		<hr>
-		</c:forEach> --%>
 		</div>
 		
 	  </div>
@@ -454,12 +463,12 @@
 			<div class="friend-drawer no-gutters friend-drawer--grey">
 			<img class="profile-image" src="https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg" alt="">
 			<div class="text">
-			  <h6>test1</h6>
-			  <p class="text-muted">상단바</p>
+			  <h6 id="insertId"></h6>
+			  <p class="text-muted">상태창</p>
 			</div>
 			<span class="settings-tray--right">
 			  <i class="material-icons">cached</i>
-			  <i class="material-icons">menu</i>
+			  <i class="material-icons" id="hiddenChat">close</i>
 			</span>
 		  </div>
 		</div>
@@ -469,11 +478,11 @@
 		<div class="row chatBox">
 			<div class="col-12">
 			  <div class="chat-box-tray">
-				<i class="material-icons">sentiment_very_satisfied</i>
 				<input type="text" name="message" placeholder="내용을 입력하세요." id="message">
 				<input type="hidden" name="roomseq" id="roomseq" value="">
 				<input type="button" id="send2" value="보내기" class="btn btn-secondary" style="width:100px">
-				<!-- 결제넘어가는 버튼 만들기 --><i class="material-icons">send</i>
+				<!-- 결제넘어가는 버튼 만들기 -->
+				<button class="btn btn-info">계약하기</button>
 			  </div>
 			</div>
 		</div>
