@@ -56,16 +56,33 @@ label{
 width:100%;
 border:1px orange solid;
 border-radius:10px;
-padding:20px;
+
 }
 
 input[type=radio]{
-padding:10px;
+
 float:left;
 vertical-align:middle;
 }
 
+#typeTitleBox1, #typeTitleBox2, #typeTitleBox3, #typeTitleBox4, #typeTitleBox5{
+padding:20px;
+}
+#typeContentBox1, #typeContentBox2, #typeContentBox3,#typeContentBox4,#typeContentBox5{
+display:none;
+padding:20px;
+}
 </style>
+<script>
+	$(function(){
+		
+		
+		$("#typeTitleBox1, #typeTitleBox2, #typeTitleBox3, #typeTitleBox4, #typeTitleBox5").click(function(){
+			$(this).siblings("div").toggle();
+		});
+		
+	});
+</script>
 </head>
 <body>
 
@@ -78,33 +95,43 @@ vertical-align:middle;
 
 		<form method="post" action="teacherTypeOk">
 			<label for="type1">
-			<input type="radio" name="care_type" id="type1" value="신생아/영아 풀타임" class="col-1"/>
-			<b>신생아/영아 풀타임 돌봄</b><br/>
+			<input type="radio" name="care_type" id="type1" value="신생아/영아 풀타임" class="col-1 mt-4"/>
+			<div id="typeTitleBox1"><b>신생아/영아 풀타임 돌봄</b></div>
+			<div id="typeContentBox1">
 						- 0~24개월 아이를 먹이고, 재우고, 놀아주는 활동<br/>
 						- 보통 주5일 하루 8~10시간 책임지고 돌봄 필요<br/>
-						- 아이 관련 가사활동 필수<br/></label>
-			<label for="typeTwo2">
-			<input type="radio" name="care_type" id="type2" value="등하원" class="col-1"/>
-			<b>등하원 돌봄</b><br/>
+						- 아이 관련 가사활동 필수<br/>
+						</div></label>
+			<label for="type2">
+			<input type="radio" name="care_type" id="type2" value="등하원" class="col-1 mt-4"/>
+			<div id="typeTitleBox2"><b>등하원 돌봄</b></div>
+			<div id="typeContentBox2">	
 						- 2~10세 아이를 기관에 가기 전후에 돌보는 활동<br/>
 						- 보통 주5일 하루 3~5시간 책임지고 돌봄 필요<br/>
-						- 등하원, 밥 챙겨주기, 씻기기, 놀아주기 활동 포함<br/></label>
+						- 등하원, 밥 챙겨주기, 씻기기, 놀아주기 활동 포함<br/>
+						</div></label>
 			<label for="type3">
-				<input type="radio" name="care_type" id="type3" value="신생아/영아 보조" class="col-1"/>
-			<b>신생아/영아 보조 돌봄</b><br/>
+				<input type="radio" name="care_type" id="type3" value="신생아/영아 보조" class="col-1 mt-4"/>
+			<div id="typeTitleBox3"><b>신생아/영아 보조 돌봄</b></div>
+			<div id="typeContentBox3">
 						- 0~24개월 아이를 보호자와 함께 또는 혼자 돌봄<br/>
 						- 최근 0~12개월 돌본 경험 1주일 이상 필수<br/>
-						- 주 1~4회 정기적으로 또는 단기로 2~4시간 활동<br/></label>
+						- 주 1~4회 정기적으로 또는 단기로 2~4시간 활동<br/>
+						</div></label>
 			<label for="type4">
-			<input type="radio" name="care_type" id="type4" value="놀이/학습" class="col-1"/>
-			<b>놀이/학습 돌봄</b><br/>
+			<input type="radio" name="care_type" id="type4" value="놀이/학습" class="col-1 mt-4"/>
+			<div id="typeTitleBox4"><b>놀이/학습 돌봄</b></div>
+			<div id="typeContentBox4">
 						- 2~10세 아이와 특기를 활용해서 즐겁고 학습적인 시간을 보내는 활동<br/>
-						- 주 1~4회 정기적으로 또는 단기로 2~4시간 활동<br/></label>
+						- 주 1~4회 정기적으로 또는 단기로 2~4시간 활동<br/>
+						</div></label>
 			<label for="type5">
-				<input type="radio" name="care_type" id="type5" value="긴급/단기" class="col-1"/>
-				<b>긴급/단기 돌봄</b><br/>
+				<input type="radio" name="care_type" id="type5" value="긴급/단기" class="col-1 mt-4"/>
+				<div id="typeTitleBox5"><b>긴급/단기 돌봄</b></div>
+				<div id="typeContentBox5">
 						- 정기 방문이 아닌, 1~2회 또는 짧은 기간 동안만 돌봄 활동<br/>
-						- 프로필에 돌봄 가능한 아이 연령과 활동 명시 필요<br/></label>
+						- 프로필에 돌봄 가능한 아이 연령과 활동 명시 필요<br/>
+						</div></label>
 
 			<input type="submit" class="btn btn-warning" value="저장" />
 			</form>

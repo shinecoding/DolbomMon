@@ -3,12 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
-	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select job_board_no, userid, care_addr, zone, time_type, wish_age, consultation, content, wish_gender, content, hit, to_char(write_date, 'MM-DD HH:MI') write_date from parent_list order by no desc	
+	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select job_board_no, userid, care_addr, time_type, wish_age, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate from parent_list order by job_board_no desc	
+	</select>
+	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
+		select no from member
 	</select>
 	
-	
-	<select id="getTotalRecord" resultType="int">	
+	<select id="getTotalRecords" resultType="int">	
 		select count(job_board_no) from parent_list
 	</select>
 	

@@ -27,14 +27,16 @@ public class RecruitBoardController {
 	//구인페이지로 이동하기
 	@RequestMapping("/parent_list") 
 	public ModelAndView parent() {
-		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<JobSearchBoardVO> list = dao.jobSearchBoardList();
-		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		
-
+		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
+		List<RecruitBoardVO> list2 = dao.recruitBoardList();
+		int totalRecords = dao.getTotalRecords();	//총 게시물 수
+		List<MemberVO> mvoList = dao.selectTMemNo();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.addObject("totalRecord", totalRecord);
+		
+		
+		mav.addObject("mvoList", mvoList);
+		mav.addObject("list2", list2);
+		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");
 
 

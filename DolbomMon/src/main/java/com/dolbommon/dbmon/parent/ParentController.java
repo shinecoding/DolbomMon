@@ -31,5 +31,15 @@ public class ParentController {
 	public String parentWage() {
 		return "/parents/parentWage";
 	}
+	
+	@RequestMapping("/dbmSearchWriteForm")
+	public String dbmSearchWriteForm() {
+		return "/parents/dbmSearchWriteForm";
+	}
+	
+	@RequestMapping("/dbmSearchWriteFormOk")
+	public String dbmSearchWriteFormOk() {
+		return "";
+	}
 
 }

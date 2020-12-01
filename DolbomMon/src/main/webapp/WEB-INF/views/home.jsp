@@ -113,7 +113,7 @@ font-family:"Noto Sans KR";
           font-weight:bold;
           margin:10px;
           color:white;
-    
+    }
 
 
 
@@ -144,7 +144,11 @@ font-family:"Noto Sans KR";
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
   
-  <!-- START THE FEATURETTES -->
+  
+<div id="teacher_chart">
+<%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 
+</div>
+
 
     <hr class="featurette-divider">
 

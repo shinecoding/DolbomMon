@@ -39,13 +39,6 @@
 <script>
 	$(function(){
 		// 생년월일 옵션
-		var option = {
-			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			minDate : '-100y',
-			dateFormat : "yy-mm-dd"
-		}
 		$("#birthBtn").datepicker({
 			showAnim : "show",
 			changeMonth : true,
@@ -66,7 +59,7 @@
 		
 		// 아이디 중복검사
 		$("#useridChkBtn").on('click', function(){
-			window.open("<%=request.getContextPath()%>/idCheckForm", "idChk", "left=400, top=150, width=500, height=300");
+			window.open("<%=request.getContextPath()%>/idCheck", "idChk", "left=400, top=150, width=500, height=300");
 		});
 		
 		// 우편번호 검색창
@@ -75,6 +68,10 @@
 		        oncomplete: function(data) {
 		            $("#zipcode").val(data.zonecode);
 		            $("#addr").val(data.address);
+		            console.log("시, 도 =>" + data.sido);
+		            console.log("시군구 =>" + data.sigungu);
+		            console.log("법정동명(동) => " + data.bname);
+		            console.log("법정동명(읍, 면, 리) => " + data.bname1);
 		            
 		            var geocoder = new kakao.maps.services.Geocoder();
 		            
@@ -269,8 +266,13 @@
 				return false;
 			}
 			
-			alert("가입성공");
-			return false;
+			var idStatus = $("#idStatus").val();
+			if(idStatus=="N"){
+				alert("아이디 중복검사를 해주세요.");
+				return false;
+			}
+			
+			return true;
 		});
 	});
 	
@@ -279,6 +281,7 @@
 <body>
 	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
+	<c:if test="${joinType==T }" >
 		<input type="hidden" name="care_type" value="${care_type }" />
 		<input type="hidden" name="child_age" value="${child_age }" />
 		<input type="hidden" name="activity_type" value="${activity_type }" />
@@ -291,6 +294,7 @@
 		<input type="hidden" name="cctv" value="${cctv }" />
 		<input type="hidden" name="pic" value="${pic }" />
 		<input type="hidden" name="intro" value="${intro }" />
+	</c:if>
 		<input type="hidden" id="lat" name="lat" />
 		<input type="hidden" id="lng" name="lng" />
 		<input type="hidden" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
@@ -302,7 +306,7 @@
 		<div id="useridDiv">
 			<label for="userid">아이디</label><span id="useridRegChk"></span><br/>
 			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" id="useridChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
-			<input type="hidden" name="idStatus" id="idStatus" value="N"/>
+			<input type="hidden" id="idStatus" value="N"/>
 		</div>
 		<div id="userpwdDiv">
 			<label for="userpwd">비밀번호</label><span id="userpwdRegChk"></span><br/>
@@ -349,7 +353,7 @@
 			<label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label><br/>
 			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
 		</div>
-		<input type="submit" value="다음" />
+		<input type="submit" value="가입하기" />
 	</div>
 	</form>
 </body>
