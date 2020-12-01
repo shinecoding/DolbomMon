@@ -44,6 +44,7 @@ public class TeacherController {
 		return "/teacher/teacherList";
 	}
 
+
 	@RequestMapping("/teacherView")
 	public ModelAndView teacherView(HttpSession ses) {//
 
@@ -51,6 +52,7 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
+		MemberVO mvo = dao.selectTMember(userid);
 		dao.hitCount(vo);
 		int timeInt = 0;
 		String timeStr = "";
@@ -70,6 +72,11 @@ public class TeacherController {
 			timeInt = Integer.parseInt(vo.getLast_edit());
 			timeStr = timeInt + "분 전";
 		}
+	
+		
+		String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
+		mvo.setUsername(hideName);
+		
 		
 		HashSet<ExperienceVO> hash = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
@@ -78,6 +85,7 @@ public class TeacherController {
 		
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
+		mav.addObject("mvo", mvo);
 		mav.addObject("cvo", cvo);
 		mav.addObject("hash", hash);
 		mav.setViewName("teacher/teacherView");
@@ -273,84 +281,80 @@ public class TeacherController {
 		String[] exp_start = req.getParameterValues("exp_start");
 		String[] exp_end = req.getParameterValues("exp_end");
 		
-		int len = exp_content.length;
-		int cnt = dao.findIdT(evo);
-		int result;
-		if (cnt<0) {	//first insert
-			for(int i=0; i<len; i++) {
+		int lenP = exp_content.length; //파라미터로 가져온 값
+		int cntDB = dao.findIdT(evo); //데이터에비스에 들어있는 값
+		int result = 0;
+		if (cntDB<=0) {	//first insert
+			for(int i=0; i<lenP; i++) {
 				evo.setExp_content(exp_content[i]);
 				evo.setExp_start(exp_start[i]);
 				evo.setExp_end(exp_end[i]);
 				if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+					result = dao.insertExp(evo);
 					hash.add(evo);
-				} else {
-					hash.remove(evo);
-					}
+				}
 				}//for			
-			result = dao.insertExp(hash);
+			
 		}else {	//update
 			
-			if(len==cnt) { //before = after  good to update
+			if(lenP==cntDB) { //beforeDB = afterP  good to update
 			
-				for(int i=0; i<len; i++) {
+				for(int i=0; i<lenP; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.updateExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
-						}
+					}
 					}//for
-				result = dao.updateExp(hash);
-			}else if(len>cnt) { //added some records
+				
+				
+		}else if(lenP>cntDB) { //added some records
 								//5-3
-				for(int i=0; i<len-cnt; i++) {
+				for(int i=0; i<lenP-cntDB; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.updateExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
 						}
 					}//for
-				result = dao.updateExp(hash);
+				
+		
 						//3		  5	
-				for(int i=len; i<cnt; i++) {
+				for(int i=cntDB; i<lenP; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.insertExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
 						}
 					}//for
-				result = dao.insertExp(hash);
+				
+				
 			}else { //deleted new records len(new)<cnt(old)
-				for(int i=0; i<len; i++) {
+				for(int i=0; i<cntDB-lenP; i++) { //삭제
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
-						hash.add(evo);
-					} else {
-						hash.remove(evo);
-						}
+						result = dao.deleteExp(evo);
+										}
 					}//for
-				result = dao.updateExp(hash);
-				for(int i=len; i<cnt; i++) {
+				
+				for(int i=0; i<lenP; i++) {
 					evo.setExp_content(exp_content[i]);
 					evo.setExp_start(exp_start[i]);
 					evo.setExp_end(exp_end[i]);
 					if(exp_content[i]!= null || exp_start[i]!=null || exp_end[i]!=null) {
+						result = dao.insertExp(evo);
 						hash.add(evo);
-					} else {
-						hash.remove(evo);
-						}
+					}
 					}//for
-				result = dao.deleteExp(hash);
+				
 			}
 		}
 		
@@ -497,15 +501,32 @@ public class TeacherController {
 		return mav;		
 	}
 
+	//학부모가 선생 찾을 때 보는 지도
+	@RequestMapping("/teacherSearchMap")
+	public ModelAndView teacherSearchMap(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		HashSet<MemberVO> hash = dao.selectAllTeacher();
+		MemberVO mvo = dao.selectTMap(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("hash", hash);
+		mav.addObject("mvo", mvo);
+		mav.setViewName("/teacher/teacherSearchMap");
+		return mav;
+	}
 	
+	//선생 개인 위치 수정용 지도
 	@RequestMapping("/teacherMap")
 	public ModelAndView teacherMap(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		MemberVO mvo = dao.selectTMap(userid);
+		TeacherVO vo = dao.selectTeacher(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mvo", mvo);
+		mav.addObject("vo", vo);
 		mav.setViewName("/teacher/teacherMap");
 		
 		return mav;
@@ -513,9 +534,11 @@ public class TeacherController {
 	}
 	
 @RequestMapping(value="/teacherMapOk", method=RequestMethod.POST)
-	public ModelAndView teacherMapOk(MemberVO mvo, HttpSession ses, HttpServletRequest req) {
-		mvo.setUserid((String)ses.getAttribute("userid"));
+	public ModelAndView teacherMapOk(MemberVO mvo, TeacherVO tvo, HttpSession ses, HttpServletRequest req) {
+		
 		String userid = (String) ses.getAttribute("userid");
+		mvo.setUserid(userid);
+		tvo.setUserid(userid);
 		
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		String lat = req.getParameter("lat");
@@ -523,8 +546,15 @@ public class TeacherController {
 		mvo.setLat(lat);
 		mvo.setLng(lng);
 		
+		String area1 = req.getParameter("area1");
+		if(area1 != null || !area1.equals("")) {
+			tvo.setArea1(area1);
+			int cnt = dao.updateArea(tvo);//칸이 채워져있을 경우만 업데이트 실행update only if the input box isn't blank
+			} 
 		int result = dao.updateTMap(mvo);
-		TeacherVO vo = dao.selectTeacher(userid);
+		
+		TeacherVO vo = dao.selectTeacher(tvo.getUserid());
+		
 		ModelAndView mav = new ModelAndView();
 
 		if(result>0) {
@@ -536,6 +566,8 @@ public class TeacherController {
 		}
 		return mav;
 	}
+
+	
 
 }
 

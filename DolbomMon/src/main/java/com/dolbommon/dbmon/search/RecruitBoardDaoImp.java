@@ -8,11 +8,13 @@ import java.util.List;
 	public List<RecruitBoardVO> recruitBoardList();
 	  
 	//총 게시물 수 구하기 
-	public int getTotalRecord(); 
+	public int getTotalRecords(); 
 	//레코드 한개 선택 
 	public RecruitBoardVO recruitBoardSelect(int job_board_no);
 	//조회수 증가
-	public int hitCount(int job_board_no); 
+	public int hitCount(int job_board_no);
+	//조회수 증가
+	public int hitCount(RecruitBoardVO vo);
 	//구인게시판 글쓰기
 	public int recruitBoardInsert(RecruitBoardVO vo); 
 	//구인게시판 글 삭제 
@@ -25,4 +27,7 @@ import java.util.List;
 	//public int levelUpdate(RecruitBoardVO vo); 
 	//답글 쓰기 
 	public int replyBoardInsert(RecruitBoardVO vo); 
+
+	//글번호 구하기
+	public List<MemberVO> selectTMemNo(); 
 	}

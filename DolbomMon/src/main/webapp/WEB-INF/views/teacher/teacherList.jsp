@@ -62,6 +62,8 @@
 <body>
 
 <div class="container" >
+<a href="teacherSearchMap">선생님 지도로 찾기</a><br/>
+<a href="payment">결제시스템</a>
    <div id="title">
    		<div id="titlefont">마이페이지</div>
    		<div class="rightlog">   

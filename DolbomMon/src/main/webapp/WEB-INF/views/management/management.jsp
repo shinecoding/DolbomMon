@@ -19,11 +19,11 @@
 <script>
 	
 
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 
 	    $("#mainPage").load("/dbmon/");
 
-	});
+	}); */
 
 
 	
