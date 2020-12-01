@@ -157,9 +157,9 @@
 			<img src="img/ex-cert-resident-3.png"/>
 			<div id="certTime">
 			<select name="identi_year">
-			<c:forEach var="i" begin="1950" end="2020" >
-				<option>${i}</option>
-			</c:forEach>
+			<% for(int i=2020; i>1900; i--){ %>
+					<option><%=i%></option>
+					<% }; %>
 			</select>년
 			<select name="identi_month">
 			<c:forEach var="i" begin="1" end="12" >

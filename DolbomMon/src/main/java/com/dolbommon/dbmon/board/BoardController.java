@@ -40,12 +40,23 @@ public class BoardController {
 	@RequestMapping("/freeBoard")
 	public ModelAndView freeBoard() {
 		
+		PagingVO pVo = new PagingVO();
+		
+		//String nowPageTxt = req.getParameter("nowPage");
+		
+		//System.out.println(nowPageTxt);
+		//if(nowPageTxt!=null) {
+			//pVo.setNowPage(Integer.parseInt(nowPageTxt));
+		//}
+		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		List<FreeBoardVO> list = dao.freeBoardList();
+		List<FreeBoardVO> list = dao.freeBoardList(pVo);
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
+	//	mav.addObject("nowPage", pVo.getNowPage());
+	//	mav.addObject("pVo", pVo);
 		mav.addObject("totalRecord", totalRecord);
 		mav.setViewName("freeBoard/freeBoard");
 		
@@ -81,7 +92,7 @@ public class BoardController {
 	
 	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
-	public ModelAndView freeBoardView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		FreeBoardVO vo = new FreeBoardVO();
 		PagingVO pVo = new PagingVO();

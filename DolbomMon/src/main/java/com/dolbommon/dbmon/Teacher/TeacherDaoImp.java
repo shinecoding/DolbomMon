@@ -5,6 +5,7 @@ import java.util.HashSet;
 public interface TeacherDaoImp {
 	
 	public TeacherVO selectTeacher(String userid);
+	public MemberVO selectTMember(String userid);
 	public int updateIntro(TeacherVO vo);
 	public int updateType(TeacherVO vo);
 	public int updateWage(TeacherVO vo);
@@ -15,9 +16,15 @@ public interface TeacherDaoImp {
 	public HashSet<ExperienceVO> selectExp(String userid);
 	public int hitCount(TeacherVO vo);
 	public int findIdT(ExperienceVO vo);
-	public int updateExp(HashSet<ExperienceVO> hash);
-	public int insertExp(HashSet<ExperienceVO> hash);
-	public int deleteExp(HashSet<ExperienceVO> hash);
+	public int updateExp(ExperienceVO evo);
+	public int insertExp(ExperienceVO evo);
+	public int deleteExp(ExperienceVO evo);
 	public int selectLastEdit(String userid);
+	//선생 지도 받기
+	public MemberVO selectTMap(String userid);
+	public int updateTMap(MemberVO mvo);
+	public int updateArea(TeacherVO vo);
+	//모든 선생 위치
+	public HashSet<MemberVO> selectAllTeacher();
 }
 

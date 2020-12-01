@@ -1,16 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
+<style>
+	*{margin:0; padding:0;}
+	.container{width:600px;}
+	.container>div{width:100%; height:300px; margin-top:80px; overflow:hidden;}
+</style>
+<script>
+	$(function(){
+		$("#parent").click(function(){
+			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/parentJoin");
+			$("#joinType").val("P")
+			$("#submit").click();
+		});	
+		
+		$("#dbm").click(function(){
+			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/dbmJoin");
+			$("#joinType").val("T")
+			$("#submit").click();
+		});
+	});
+</script>
 </head>
 <body>
-	<div>
-		
+	<form id="joinTypeFrm" method="post" action="">
+	<div class="container" >
+		<div>
+			<img id="parent" src="<%=request.getContextPath()%>/img/mom.png"/>
+		</div>
+		<div>
+			<img id="dbm" src="<%=request.getContextPath()%>/img/dbm.png"/>
+		</div>
 	</div>
-	<h1><a href="<%=request.getContextPath()%>/parentJoinStart">부모님 회원가입</a></h1><br/>
-	<h1><a href="<%=request.getContextPath()%>/dbmJoinStart">돌봄몬 회원가입</a></h1>
+	<input id="submit" type="submit" />
+	<input type="hidden" name="intro"/>
+	<input type="hidden" id="joinType" name="joinType" value=""/>
+	</form>
 </body>
 </html>

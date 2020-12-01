@@ -146,9 +146,9 @@
 				
 				<div class="certTime">
 					<select name="crime_year">
-					<c:forEach var="i" begin="1950" end="2020" >
-						<option>${i}</option>
-					</c:forEach>
+					<% for(int i=2020; i>1900; i--){ %>
+					<option><%=i%></option>
+					<% }; %>
 					</select>년
 					<select name="crime_month">
 					<c:forEach var="i" begin="1" end="12" >

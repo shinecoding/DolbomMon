@@ -11,8 +11,8 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <style>
 	* {
-		margin:0; padding:0; list-style-type:none; box-sizing:border-box; 
-		font-family: Noto Sans KR,sans-serif!important;
+		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
+		font-family: Noto Sans KR,sans-serif!important; 
 	}
 
 	#all{
@@ -83,11 +83,11 @@
  
 </style>
 
-<!-- -------------------상단메뉴------------- -->
-<jsp:include page="../top.jsp"/>
-<!-- ------------------------------------------ -->
 <body>
-
+<!-- -------------------상단메뉴------------- -->
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+</div>
 <div class="all_wrapper">
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:#f0f0f0;"> 
 <div id="filterbox" >
@@ -141,8 +141,9 @@
 				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 			</li>
 			<li class="list-group-item border-0 col-10">
+				
 				<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
-				<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation }</a> <br/><br/>
+				<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation } |  ${vo.no }</a> <br/><br/>
 				<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
 				<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
 				
@@ -151,6 +152,8 @@
 		</ul>
 	</li>
 	</ul>
+
+
 
 </div>
 <hr/>
