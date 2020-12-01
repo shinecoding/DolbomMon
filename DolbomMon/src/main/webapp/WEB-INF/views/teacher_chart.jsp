@@ -6,12 +6,15 @@
 <style>
 
 .dbmon_info_review1{
+		margin-left:30px;
 	 	float:left;
 		padding:0; margin:0;
 		display:block;
 		width:20%;
-
 }
+
+
+
 </style>
 
 
@@ -25,13 +28,13 @@
 
 
 
-  <div class="row" style="margin:0 auto;">
+  <div class="row" style="margin-top:70px; margin-left:70px;">
     <div class="col-3" style="padding:0px">
       <div class="dbmon_info_review1"> <!-- 김태희꺼리뷰 -->
-	<a class="dbmonImgTeacher"><img src="img/tea1.PNG" style="width:150px; height:150px;"></img></a><br/>
-	<div style="width:150px;">
+		<a class="dbmonImgTeacher"><img src="img/tea1.PNG" style="width:150px; height:150px;"></img></a><br/>
+		<div style="width:150px;">
 		<a class="product-info__artist-name">서울특별시 동작구</a><br/>
-		<a class="product-info__name">[돌봄몬 후기1위] 👍김태희👍</a><br/>
+		<a class="product-info__name">[돌봄몬 후기1위]<br/> 👍김태희👍</a><br/>
 		<a class="product-info__price">희망시급 : 10,000<span style="font-size: 14px;">원</span></a>
 			<div class="product-info__badge-group" style="margin-top: 12px;">
 			<div class="badge badge-activity1">영어놀이, 실내놀이</div>
@@ -51,13 +54,13 @@
     </div>
     <div class="col-3" style="padding:0px">
       <div class="dbmon_info_review1"> <!-- 김태희꺼리뷰 -->
-	<a class="dbmonImgTeacher"><img src="img/tea1.PNG" style="width:150px; height:150px;"></img></a><br/>
+	<a class="dbmonImgTeacher"><img src="img/stu2.jpg" style="width:150px; height:150px;"></img></a><br/>
 	<div style="width:150px;">
-	<a class="product-info__artist-name">서울특별시 동작구</a><br/>
-	<a class="product-info__name">[돌봄몬 후기1위] 👍김태희👍</a><br/>
-	<a class="product-info__price">희망시급 : 10,000<span style="font-size: 14px;">원</span></a>
+	<a class="product-info__artist-name">서울특별시 마포구</a><br/>
+	<a class="product-info__name">[돌봄몬 후기1위]<br/> 👍남주혁👍</a><br/>
+	<a class="product-info__price">희망시급 : 20,000<span style="font-size: 14px;">원</span></a>
 		<div class="product-info__badge-group" style="margin-top: 12px;">
-		<div class="badge badge-activity1">영어놀이, 실내놀이</div>
+		<div class="badge badge-activity1">등하원, 실내놀이</div>
 		<div class="product-info__review"><div class="review-rating"><span data-value="5" class="ui_rating fr" >
 		<i data-state="active" class="fas fa-star" style="font-size: 11px; color:orange;"></i>
 		<i data-state="active" class="fas fa-star" style="font-size: 11px; color:orange;"></i>
@@ -78,7 +81,7 @@
 	<a class="dbmonImgTeacher"><img src="img/tea1.PNG" style="width:150px; height:150px;"></img></a><br/>
 	<div style="width:150px;">
 	<a class="product-info__artist-name">서울특별시 동작구</a><br/>
-	<a class="product-info__name">[돌봄몬 후기1위] 👍김태희👍</a><br/>
+	<a class="product-info__name">[돌봄몬 후기1위]<br/> 👍김태희👍</a><br/>
 	<a class="product-info__price">희망시급 : 10,000<span style="font-size: 14px;">원</span></a>
 		<div class="product-info__badge-group" style="margin-top: 12px;">
 		<div class="badge badge-activity1">영어놀이, 실내놀이</div>
@@ -106,7 +109,7 @@
 	<a class="dbmonImgTeacher"><img src="img/tea1.PNG" style="width:150px; height:150px;"></img></a><br/>
 	<div style="width:150px;">
 	<a class="product-info__artist-name">서울특별시 동작구</a><br/>
-	<a class="product-info__name">[돌봄몬 후기1위] 👍김태희👍</a><br/>
+	<a class="product-info__name">[돌봄몬 후기1위]<br/> 👍김태희👍</a><br/>
 	<a class="product-info__price">희망시급 : 10,000<span style="font-size: 14px;">원</span></a>
 		<div class="product-info__badge-group" style="margin-top: 12px;">
 		<div class="badge badge-activity1">영어놀이, 실내놀이</div>

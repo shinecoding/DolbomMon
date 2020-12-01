@@ -9,22 +9,23 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	* {
 		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
 		font-family: Noto Sans KR,sans-serif!important; 
 	}
 
-	#all{
-		margin:0 auto;
+	#all{ 
+		margin:0 auto; background-color:white;
 		
 	}
 	.all_wrapper{
-		margin-top:0;
-		width:700px;
-		background-color:#f0f0f0;
+		margin-top:70px;
+		width:1100px;
+		background-color:white;
 	}
-	img{ height:70px; width:70px;}
+	img{ height:110px; width:110px;}
 	.list
 	
 
@@ -37,7 +38,7 @@
     	background-color:white;
     }
     html {
-	    color: #222;
+	    color: white;
 	    font-weight: 100;
 	    font-size: 1em;
 	    line-height: 1.375;
@@ -59,13 +60,9 @@
 	}
 	
 	 .list-group-item {
-	 	width:600px;
+	 	width:1000px;
 	 }
 	   
-   /* color: #222;
-    font-weight: 100;
-    font-size: 1em;
-    line-height: 1.375;*/
 
 	.listPanel{
 		color: #222;
@@ -78,7 +75,7 @@
     font-size: 12px;
     font-weight: 500;
     text-align: left;
-    color: rgb(74, 74, 74);
+    color: white;
 }
  
 </style>
@@ -87,9 +84,14 @@
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 </div>
 <div class="all_wrapper">
-<div class="listPanel" style="display: block; vertical-align: inherit; background-color:#f0f0f0;"> 
+<div>
+<button type="button" class="btn btn-warning btn-lg btn-block">어떤 돌봄몬을 찾으세요?</button>
+<button type="button" class="btn btn-light btn-lg" style="width:100%">가까운 돌봄몬 찾기</button><br/><br/>
+</div>
+<div class="listPanel" style="display: block; vertical-align: inherit; background-color:white;"> 
 <div id="filterbox" >
 <input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요" readonly>
 <form class="form-inline">
@@ -104,8 +106,8 @@
   </form>
   </div>
   
-  <div style="overflow: scroll hidden; width: 100%; height: 50px; white-space: nowrap; 
-  display: inline-block; vertical-align: top;">
+  <div style="/* overflow: scroll hidden; */ width: 100%; height: 50px; white-space: nowrap; 
+  display: inline-block; vertical-align: top; margin-bottom:50px;" >
   <div class="btn1" role="button">실내놀이</div>
   <div class="btn1" role="button">등하원 돕기</div>
   <div class="btn1" role="button">책 읽기</div>
@@ -115,13 +117,13 @@
   <div class="btn1" role="button">학습지도</div>
   <div class="btn1" role="button">체육놀이</div>
   <div class="btn1" role="button">간단청소</div>
-  <div class="btn1" role="button">밥챙겨주기</div>
+  <div class="btn1" role="button">밥챙겨주기</div><br/>
   <div class="btn1" role="button">간단설거지</div>
   <div class="btn1" role="button">장기입주</div>
   <div class="btn1" role="button">단기입주</div>
   </div>
  
-   
+  
    <div class="wrapper1" style="display:inline">
 	<div class="total" style="float:left"> 총 게시물 수 : ${totalRecord} </div>
 	<div class="float-right" style="float:right">후기순
@@ -136,8 +138,8 @@
 	<ul class="list-group" style="font-size:.85em; font-weight: 500;">
 	<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
+			<li class="list-group-item border-0 col-2" >
+				<img src="img/stu1.PNG" class="rounded-circle"/><br/>
 				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 			</li>
 			<li class="list-group-item border-0 col-10">

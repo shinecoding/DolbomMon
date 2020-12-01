@@ -1,12 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,45 +40,51 @@ public class TeacherController {
 	}
 
 	@RequestMapping("/teacherView")
-	public ModelAndView teacherView(HttpSession ses) {//
+	   public ModelAndView teacherView(HttpSession ses) {//
 
-		String userid = (String) ses.getAttribute("userid");
+	      String userid = (String) ses.getAttribute("userid");
 
-		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		TeacherVO vo = dao.selectTeacher(userid);
-		dao.hitCount(vo);
-		int timeInt = 0;
-		String timeStr = "";
-		if(Integer.parseInt(vo.getLast_edit())>525600) {
-			timeInt = Integer.parseInt(vo.getLast_edit())/525600;
-			timeStr = timeInt + "년 전";
-		} else if(Integer.parseInt(vo.getLast_edit())>43200) {
-			timeInt = Integer.parseInt(vo.getLast_edit())/43200;
-			timeStr = timeInt + "달 전";
-		} else if(Integer.parseInt(vo.getLast_edit())>1440) {
-			timeInt = Integer.parseInt(vo.getLast_edit())/1440;
-			timeStr = timeInt + "일 전";
-		} else if(Integer.parseInt(vo.getLast_edit())>60) {
-			timeInt = Integer.parseInt(vo.getLast_edit())/60;
-			timeStr = timeInt + "시간 전";
-		} else {
-			timeInt = Integer.parseInt(vo.getLast_edit());
-			timeStr = timeInt + "분 전";
-		}
-		
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
-		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
-		CertificationVO cvo = cdao.selectCert(userid);
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("timeStr", timeStr);		
-		mav.addObject("vo", vo);
-		mav.addObject("cvo", cvo);
-		mav.addObject("hash", hash);
-		mav.setViewName("teacher/teacherView");
-		return mav;
-	}
-
+	      TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+	      TeacherVO vo = dao.selectTeacher(userid);
+	      MemberVO mvo = dao.selectTMember(userid);
+	      dao.hitCount(vo);
+	      int timeInt = 0;
+	      String timeStr = "";
+	      if(Integer.parseInt(vo.getLast_edit())>525600) {
+	         timeInt = Integer.parseInt(vo.getLast_edit())/525600;
+	         timeStr = timeInt + "년 전";
+	      } else if(Integer.parseInt(vo.getLast_edit())>43200) {
+	         timeInt = Integer.parseInt(vo.getLast_edit())/43200;
+	         timeStr = timeInt + "달 전";
+	      } else if(Integer.parseInt(vo.getLast_edit())>1440) {
+	         timeInt = Integer.parseInt(vo.getLast_edit())/1440;
+	         timeStr = timeInt + "일 전";
+	      } else if(Integer.parseInt(vo.getLast_edit())>60) {
+	         timeInt = Integer.parseInt(vo.getLast_edit())/60;
+	         timeStr = timeInt + "시간 전";
+	      } else {
+	         timeInt = Integer.parseInt(vo.getLast_edit());
+	         timeStr = timeInt + "분 전";
+	      }
+	   
+	      
+	      String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
+	      mvo.setUsername(hideName);
+	      
+	      
+	      HashSet<ExperienceVO> hash = dao.selectExp(userid);
+	      CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
+	      CertificationVO cvo = cdao.selectCert(userid);
+	      ModelAndView mav = new ModelAndView();
+	      
+	      mav.addObject("timeStr", timeStr);      
+	      mav.addObject("vo", vo);
+	      mav.addObject("mvo", mvo);
+	      mav.addObject("cvo", cvo);
+	      mav.addObject("hash", hash);
+	      mav.setViewName("teacher/teacherView");
+	      return mav;
+	   }
 	@RequestMapping("/teacherHeart")
 	public String teacherHeart() {
 		return "/teacher/teacherHeart";

@@ -4,29 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
 	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
-		select no, username, headcount, age, zone, wage, situation, content, discussion, to_char(t_date, 'MM-DD HH:MI') t_date from teacher_list2 order by no desc	
+		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit from teacher where userid=#{userid}
+		select no, username, headcount, age, zone, wage, situation, content, discussion, to_char(t_date, 'MM-DD HH:MI') t_date from teacher order by no desc	
 	</select>
 	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
 		select no from member
 	</select>
 	<select id="getTotalRecord" resultType="int">	
-		select count(no) from teacher_list2
+		select count(no) from teacher
 	</select>
 	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO" >
 		update teacher_list2 set hit= hit+1 where userid= #{userid}
 	</update>
 	
-	<!-- <select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
+	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.JobSearchBoardVO">
 		select no, head, subject, content, userid, hit, writedate
-		from teacher_list2 where no=#{param1}
+		from teacher where no=#{param1}
 	</select>
 	
 	<update id="hitCount" parameterType="int">
-		update teacher_list2 set hit=hit+1 where no=#{param1}
+		update teacher set hit=hit+1 where no=#{param1}
 	</update>
 	
-	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO">
+	<!-- <insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO">
 		insert into teacher_list2(no, subject, content, userid, hit, writedate) 
 		values(board_sq.nextval, #{subject}, #{content}, #{userid}, 0, sysdate)
 	</insert>
@@ -47,7 +48,7 @@
 	<insert id="replyBoardInsert" parameterType="com.dolbommon.dbmon.search.JobSearchBoardVO">
 		insert into teacher_list2(no, content, userid, hit, writedate) 
 		values(board_sq.nextval, #{content}, #{userid}, 0, sysdate})
-	</insert>
-	 -->
+	</insert> -->
+	
 	
 </mapper>
