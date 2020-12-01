@@ -58,19 +58,6 @@
 				}
 			}
 			
-			//////////////////// div on off ///////////////// 
-			$(".divOnOff").click(function(){
-				var selectedData = $(this).attr("for");
-				console.log("sd => " + selectedData);
-				var divStatus = $("#"+selectedData).css("display");
-				console.log("ds => " + divStatus);
-				if(divStatus != "none"){
-					$("#"+selectedData).css("display", "none");
-				}else{
-					$("#"+selectedData).css("display", "block");
-				}
-			});
-			
 			/////////////// 성별 설정 /////////////////
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
@@ -107,11 +94,17 @@
 			/////////////////// 페이지 로딩 시 //////////////////////
 		});
 		
-		// div 숨기기
+		////////////////////div on off ///////////////// 
 		$(".divOnOff").click(function(){
-			var selectedData = $(this).attr("for");	
+			var selectedData = $(this).attr("for");
 			console.log("sd => " + selectedData);
-			
+			var divStatus = $("#"+selectedData).css("display");
+			console.log("ds => " + divStatus);
+			if(divStatus != "none"){
+				$("#"+selectedData).css("display", "none");
+			}else{
+				$("#"+selectedData).css("display", "inline-block");
+			}
 		});
 		
 		// 돌봄 유형 선택 시 색상 변경
@@ -370,6 +363,7 @@
 <style>
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
+ 	 
 </style>
 <body>
 	<div class="container">
@@ -378,7 +372,7 @@
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
 			</div>
 			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
-			<div id="activityTypeDiv" class="on">
+			<div id="activityTypeDiv">
 				<input type="checkbox" id="pa1" name="pw_activity" value="실내놀이"/>		
 				<input type="checkbox" id="pa2" name="pw_activity" value="등하원돕기"/>		
 				<input type="checkbox" id="pa3" name="pw_activity" value="영어놀이"/>	
@@ -400,7 +394,7 @@
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
-			<div id="ageAndGenderDiv" class="off">
+			<div id="ageAndGenderDiv">
 				<div id="genderDiv"> 
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
@@ -426,7 +420,7 @@
 			</div>
 			
 			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">자녀의 정보를 입력해주세요</label></div>
-			<div id="childrenInfoDiv" class="off">
+			<div id="childrenInfoDiv">
 				<div id="childrenInfo">
 					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
 					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
@@ -445,10 +439,9 @@
 			</div>
 			
 			<div class="title">
-				<label class="divOnOff" for="addrDiv">돌봄 장소를 입력해주세요<br/>
-				<span style="color:gray;font-size:14px;">매칭이 되기전까지 자세한 위치는 보여지지 않습니다.</span></label>
+				<label class="divOnOff" for="addrDiv">돌봄 장소를 입력해주세요</label>
 			</div>
-			<div id="addrDiv" class="off">
+			<div id="addrDiv">
 				<div style="margin:10px 0;">
 					<input type="text" id="dong_addr" />
 					<input type="text" id="care_addr" name="care_addr" />
@@ -457,12 +450,12 @@
 					
 				</div>
 				<div id="zidcodeBtnDiv">
-					<input type="button" id="zipcodeBtn" value="돌봄 장소를 입력해주세요" />
+					<input type="button" id="zipcodeBtn" value="돌봄 장소" />
 				</div>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
-			<div id="timeTypeDiv" class="off">
+			<div id="timeTypeDiv">
 				<input type="radio" id="timeType1" name="time_Type" value="R"/>
 				<input type="radio" id="timeType2" name="time_Type" value="S"/>
 				<label for="timeType1">정기적으로</label>
@@ -515,7 +508,7 @@
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="paymentDiv">희망시급을 입력해주세요</label></div>
-			<div id="paymentDiv" class="off">
+			<div id="paymentDiv">
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
 					<input type="number" inputmode="numeric" id="desired_wage" name="desired_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
@@ -531,7 +524,7 @@
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
-			<div id="descriptionDiv" class="off">
+			<div id="descriptionDiv">
 				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>

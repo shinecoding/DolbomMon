@@ -11,12 +11,13 @@
 	#header{ padding:10px;}
 	#header img{width:50%; height:130px; display:block; margin:0 auto;}
 	#header>div{text-align:center; font-size:2em; }
-	.title{width:100%; height:60px; margin-top:50px; text-align:center;}
+	.title{display:inline-block; width:70%; height:50px; line-height:50px; border-top:3px solid #EFEFEF; border-bottom:3px solid #EFEFEF; margin:10px 0;}
+	.title>label{width:100%; height:100%; cursor:pointer;}
 	/* ============= 헤더 =============== */
 	
 	/* ============= 돌봄 유형 목록 ============== */
 	#activityTypeDiv{display:inline-block; width:70%;}
-	#activityListDiv{overflow:hidden; height:auto;}
+	#activityListDiv{display:inline-block; overflow:hidden; height:auto;}
 	#activityListDiv div{overflow:hidden; width:25%; height:105px; text-align:center; float:left; padding:23px 40px;}
 	#activityListDiv img{margin-top:10px;}
 	#activityListDiv label{width:100%; height:100%; margin:0; text-align:center; background-color:#EFEFEF; border-radius:50%;}
@@ -27,7 +28,7 @@
 	#ageAndGenderDiv{display:inline-block; width:70%;}
 	
 	#genderDiv input{display:none;}
-	#genderDiv label{width:50px; height:50px; line-height:50px; margin:0 5px; border-radius:50%; border:1px solid gray; background-color:#EFEFEF;}
+	#genderDiv label{display:inline-block; width:50px; height:50px; line-height:50px; margin:0 5px; border-radius:50%; border:1px solid gray; background-color:#EFEFEF;}
 	
 	#ageDiv{width:100%; overflow:hidden; height:auto; margin-top:40px;}
 	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto;}
@@ -62,8 +63,6 @@
 	#zidcodeBtnDiv{text-align:center;}
 	#zidcodeBtnDiv> input[type=button]{width:40%; height:40px; padding:3px 10px; border-radius:10px; border:none;}
 	
-	
-	
 	#paymentDiv{display:inline-block; width:100%; overflow:hidden; height:auto; text-align:center;}
 	#paymentDiv img{width:30%; height:104px; margin:15px 0;}
 	#paymentDiv div{display:inline-block; width:70%; overflow:hidden; height:auto; text-align:center; background-color:#ff5400;}
@@ -74,7 +73,7 @@
 	#paymentDiv p{display:inline-block; width:70%; margin-bottom:30px; font-size:14px; font-weight:bold; color:gray;}
 	#paymentDiv input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 	
-	#descriptionDiv{text-align:center;}
+	#descriptionDiv{display:inline-block; text-align:center; width:70%;}
 	textarea{
 		display:inline-block; 
 		width:90%; 
@@ -97,9 +96,9 @@
 	#timeTypeDiv #title{margin:20px 0;}
 	
 	/* ==================== 정기적으로 - 날짜 설정 =================== */
-	#regularDateDiv {display:inline-block; width:100%; text-align:center;}
+	#regularDateDiv {display:inline-block; width:100%%; text-align:center;}
 	#regularDateDiv #startDateDiv{margin-bottom:20px;}
-	#regularDateDiv #startDateDiv>input{width:30%; height:40px; margin:0 5%; text-align:center; border:1px solid gray; border-radius:15px;}
+	#regularDateDiv #startDateDiv>input{width:35%; height:40px; margin:0 5%; text-align:center; border:1px solid gray; border-radius:15px;}
 	#regularDateDiv #startDateDiv>input[type=text]{font-weight:bold;}
 	/* ===================== =====================*/
 	#regularDateDiv #selectDayDiv{width:100%; overflow:hidden; height:auto; border-bottom:1px solid gray; padding-bottom:20px; margin-bottom:30px;}
@@ -135,7 +134,7 @@
 	
 	/* ========================= 특정날짜 선택 ======================== */
 	#specificDateDiv{text-align:center;}
-	#specificDateDiv>div{display:inline-block; width:100%;}
+	#specificDateDiv>div{display:inline-block; width:70%;}
 	
 	
 	
