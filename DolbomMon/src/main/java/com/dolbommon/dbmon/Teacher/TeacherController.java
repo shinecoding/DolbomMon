@@ -32,7 +32,12 @@ public class TeacherController {
 		this.sqlSession = sqlSession;
 	}
 
+	@RequestMapping("/teacherList")
+	public String teacherList() {
+		return "/teacher/teacherList";
+	}
 	
+	@RequestMapping("/teacherView")
 	public ModelAndView teacherView(HttpSession ses) {//
 
 		String userid = (String) ses.getAttribute("userid");

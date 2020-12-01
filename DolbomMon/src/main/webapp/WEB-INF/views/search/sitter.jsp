@@ -81,6 +81,14 @@
 </style>
 <script>
 	$(function(){
+		
+		
+		
+		
+		
+		
+		
+		//========================ajax
 		$("#act1").click(function(){
 			var url = "/dbmon/searchAct1";
 			//var params = "act=실내돕기";
@@ -175,8 +183,8 @@
 	<br/><br/><br/>
 	</div>
 	 <c:forEach var="vo" items="${list}">
-	<div class="wrapper2" Onclick="location.href='parentView'">
-	<ul class="list-group">
+	<div class="wrapper2"  Onclick="location.href='parentView'">
+	<ul class="list-group" id="${vo.no}">
 		<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
 				<li class="list-group-item border-0 col-2">
@@ -184,6 +192,7 @@
 						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 				</li>
 				<li class="list-group-item border-0 col-10">
+						<h6>${vo.no}</h6>
 						<h6><b>${vo.username}</b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
 						<h6>${vo.area1}</h6>
 						<h6>20세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}</h6>
