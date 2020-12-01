@@ -54,8 +54,6 @@ public class BoardController {
 		
 		String nowPageTxt = req.getParameter("nowPage");
 		
-		
-		//System.out.println(nowPageTxt);
 		if(nowPageTxt!=null) {
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
 		}
@@ -249,18 +247,24 @@ public class BoardController {
 		vo.setFilename1(fileNames[0]);
 		vo.setFilename2(fileNames[1]);
 		
-		
 		vo.setIp(req.getRemoteAddr());	//ip 구하기
 		vo.setUserid((String)ses.getAttribute("userid"));	
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		int result = dao.freeBoardInsert(vo);
 		
 		ModelAndView mav = new ModelAndView();
+		int result = dao.freeBoardInsert(vo);
 		
-		if(result>0) {
+		if(result>0) {	//레코드 추가 성공
 			mav.setViewName("redirect:freeBoard");
-		}else {
+		}else {	//레코드 추가 실패
+			//파일 삭제
+			for(int j=0; j<fileNames.length; j++) {
+				if(fileNames[j]!=null) {
+					File ff = new File(path, fileNames[j]);
+					ff.delete();
+				}
+			}
 			mav.setViewName("freeBoard/result");	
 		}
 		return mav;

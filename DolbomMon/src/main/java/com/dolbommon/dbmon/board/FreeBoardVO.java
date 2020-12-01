@@ -14,7 +14,6 @@ public class FreeBoardVO {
 	private String head;
 	private String filename1;
 	private String filename2;
-	private MultipartFile filename;
 	private int ref;
 	private int step;
 	private int lvl;
@@ -167,12 +166,6 @@ public class FreeBoardVO {
 	}
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
-	}
-	public MultipartFile getFilename() {
-		return filename;
-	}
-	public void setFilename(MultipartFile filename) {
-		this.filename = filename;
 	}
 	public int getRef() {
 		return ref;

@@ -72,11 +72,12 @@
 		<thead>
 			<tr id="head">
 				<th width="70">글번호</th>
-				<th width="140">말머리</th>
+				<th width="130">말머리</th>
 				<th>글제목</th>
 				<th width="90">작성자</th>
 				<th width="100">등록일</th>
 				<th width="70">조회수</th>
+				<th width="70">첨부파일</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -102,6 +103,7 @@
 					<td align="center">${vo.userid}</td>
 					<td align="center">${vo.writedate}</td>
 					<td align="center">${vo.hit}</td>
+					<td align="center">${vo.filename1}, ${vo.filename2}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -152,7 +154,7 @@
 				</li>
 				
 				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onePageNumCount-1}">
-					<c:if test="${p<=pVo.totalPage }">
+					<c:if test="${p<=pVo.totalPage}">
 						<li class="page-item">
 						<a class="page-link" href="/dbmon/freeBoard?nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${prevWord}</c:if>"><span <c:if test="${p==pVo.nowPage}">style="color:red"</c:if>>${p}</span></a>
 					</c:if>
