@@ -16,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ChatController {
-	int cnt = 0; //반복중지
-	
 	@Autowired
 	SqlSession sqlSession;
 
@@ -37,6 +35,19 @@ public class ChatController {
 		return mav;
 	}
 
+	//방 시간 갱신 최상단에오게.
+	@RequestMapping(value="/newRoom")
+	@ResponseBody
+	public String newRoom(ChatRoomDTO room, HttpSession session) {
+		String userid = (String) session.getAttribute("userid");
+		room.setUserid("test3"); // 글, 프로필 대상
+		chatdao.roomTimeUpdate(userid, room.getUserid());
+		
+		return "ok";
+	}
+	
+	
+	
 	//////////////
 	// 방만들기 and 채팅방열기
 	@RequestMapping(value = "/makeRoom", method = RequestMethod.POST)
@@ -45,8 +56,7 @@ public class ChatController {
 
 		String userid = (String) session.getAttribute("userid");
 
-		room.setUserid("test9"); // 글, 프로필 대상
-		//userid를 전역변수로 저장하고 새로 받은것이 같지 않을때 cnt값을 0으로 세팅(갱신한번만)
+		room.setUserid("test3"); // 글, 프로필 대상
 		
 		
 		//방갯수확인
@@ -54,11 +64,7 @@ public class ChatController {
 		List<ChatRoomDTO> resultRoomDTO = null;
 		if(userid!=null && !userid.equals("")) {
 			if (result >= 1) {
-				//방 시간 갱신 최상단에오게.
-				if(cnt==0) {
-					chatdao.roomTimeUpdate(userid, room.getUserid());
-					cnt++;
-				}
+
 				resultRoomDTO = chatdao.selectAllRoom(userid);
 				return resultRoomDTO;
 			}

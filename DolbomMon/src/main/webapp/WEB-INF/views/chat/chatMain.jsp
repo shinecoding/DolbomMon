@@ -35,7 +35,9 @@
 		});
 		
 		$("#room2").click(function(){
+			newRoom();
 			$(".container").css("display","block");
+			 
 		});
 		$("#hiddenChat").click(function(){
 			$(".container").css("display","none");
@@ -92,6 +94,19 @@
 		$("#room2").click(function(){
 			makeRoom();
 		})
+		
+		//해당 게시글 대상 아이디로 방목록 최상단 갱신
+		function newRoom(){
+			$.ajax({
+				url : "newRoom",
+				success : function(result){
+					
+				}
+			})
+		}
+		
+		
+		//방만들기 버튼 클릭시
 		var roomseq;
 		function makeRoom(){
 			$.ajax({
