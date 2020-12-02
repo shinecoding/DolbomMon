@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.parent.ParentDaoImp">
+	<insert id="insertDbmSearch" >
+		insert into parent_list(job_board_no, userid, care_addr, time_type, pw_activity, wish_wage, consultation, wish_age, wish_gender, content) 
+			values(member_sq.nextval, #{dsVO.userid}, #{dsVO.care_addr}, #{dsVO.time_type}, #{dsVO.pw_activity}, #{dsVO.wish_wage}, #{dsVO.consultation}, #{dsVO.wish_age}, #{dsVO.wish_gender}, #{dsVO.content})
+	</insert>
+	<insert id="insertDsChildInfo">
+		insert into add_child(job_board_no, child_name, child_birth, child_gender) 
+			values(member_sq.currval, #{cVO.child_name}, #{cVO.child_birth}, #{cVO.child_gender})
+	</insert>
+	<insert id="insertDsSpecificDate">
+		insert into specific_day(userid, select_date, start_time, end_time)
+			values(#{dsVO.userid}, #{sdVO.select_date}, #{sdVO.start_time}, #{sdVO.end_time})
+	</insert>
+	<insert id="insertDsRegularDate">
+		insert into regular_date(userid, yoil, start_time, end_time, start_date, end_date)
+			values(#{dsVO.userid}, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date})
+	</insert>
+
+</mapper>

@@ -22,6 +22,7 @@
 		/////////////////// 페이지 로딩 시 //////////////////////
 		$(document).ready(function(){
 			
+			
 			$(".title").next("div").css("display", "none");
 			$("#activityTypeDiv").css("display", "inline-block");
 			
@@ -112,8 +113,6 @@
 					$("label[for="+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
-			
-			
 			/////////////////// 페이지 로딩 시 //////////////////////
 		});
 		
@@ -141,7 +140,6 @@
 				$("#timeDiv").css("display", "none");
 			}
 		});
-		
 		
 		////////////////////div on off ///////////////// 
 		$(".title").click(function(){
@@ -202,8 +200,6 @@
 			
 		});
 		
-		
-		
 		$("#childrenInfo>input[type=radio]").change(function(){
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
@@ -220,9 +216,8 @@
 				}
 			}
 		});
-		$("#child_birthBtn").click(function(){
-			console.log("클릭");
-		});
+		
+		
 		///////////////////////////////////// 자녀 생년월일 ///////////////////////
 		$("#child_birthBtn").datepicker({ // 시작일 데이트피커
 			showAnim : "show",
@@ -235,7 +230,6 @@
 			},
 			altFormat:"yyyy-mm-dd"
 		});
-		
 		
 		var lng;
 		var lat;
@@ -282,10 +276,7 @@
 		    }).open();
 		});
 		
-		
-		
 		///////////////////////////// 지도 생성 ////////////////////////////////
-		
 		
 		///////////////////////////// 지도 생성 ////////////////////////////////
 		
@@ -441,7 +432,7 @@
 </style>
 <body>
 	<div class="container">
-		<form id="writeFrm" method="post" action="<%=request.getContextPath()%>/dbmSearchWriteFormOk">
+		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
 			</div>
@@ -478,11 +469,11 @@
 					<label for="g3">무관</label>
 				</div>
 				<div id="ageDiv">
-					<input type="checkbox" id="20" name="wish_age" value="20대" checked="checked"/>
-					<input type="checkbox" id="30" name="wish_age" value="30대" checked="checked"/>
-					<input type="checkbox" id="40" name="wish_age" value="40대" checked="checked"/>
-					<input type="checkbox" id="50" name="wish_age" value="50대" />
-					<input type="checkbox" id="60" name="wish_age" value="60대" />
+					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
+					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
+					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
+					<input type="checkbox" id="50" name="wish_age" value="50" />
+					<input type="checkbox" id="60" name="wish_age" value="60" />
 					<ul>
 						<li><label for="20">20</label></li>
 						<li><label for="30">30</label></li>
@@ -530,15 +521,15 @@
 			
 			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
 			<div id="timeTypeDiv">
-				<input type="radio" id="timeType1" name="time_Type" value="S"/>
-				<input type="radio" id="timeType2" name="time_Type" value="R"/>
+				<input type="radio" id="timeType1" name="time_type" value="S"/>
+				<input type="radio" id="timeType2" name="time_type" value="R"/>
 				<label for="timeType1">특정날에만</label>
 				<label for="timeType2">정기적으로</label>
 				
 				<div id="specificDateDiv">
 					<div id="title">특정날에만</div>
 					<div id="specificDateCal"></div>
-					<br/><input type="hidden" id="select_date" />
+					<br/><input type="hidden" id="select_date" name="select_date" />
 				</div>
 				
 				<div id="regularDateDiv">
@@ -588,12 +579,13 @@
 			<div id="paymentDiv">
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
-					<input type="number" inputmode="numeric" id="desired_wage" name="desired_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
+					<input type="number" inputmode="numeric" id="desired_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
 				</div>
 				<span id="minWage" style="color:orange">
 					
 				</span>
-				<label for="avgWage" style="width:100%;"><input type="checkbox" id="avgWage"  style="width:10%;"/><span style="width:90%;">평균시급 적용</span></label>
+				<label for="avgWage" style="width:100%;"><input type="checkbox" id="avgWage" style="width:5%;"/><span style="width:90%;">평균시급 적용</span></label>
+				<label for="conYN" style="width:100%;"><input type="checkbox" id="consultation" style="width:5%;" name="consultation" value="Y"/><span style="width:90%;">협의 가능</span></label>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
@@ -607,7 +599,9 @@
 			</div>
 			
 			<div class="title">입력한 정보를 확인 후 등록해주세요</div>
-			<div style="text-align:center;width:50%"><input type="submit" value="등록하기" /></div>
+			<div style="text-align:center;width:50%">
+				<input type="submit" value="등록하기" />
+			</div>
 			
 			<div id="footer"></div>
 		</form>
