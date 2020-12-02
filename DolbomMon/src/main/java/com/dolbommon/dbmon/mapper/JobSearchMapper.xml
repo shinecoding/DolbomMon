@@ -5,7 +5,7 @@
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
 
 	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select m.username, m.gender, m.birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion from teacher t join member m on t.userid= m.userid where who = 'T'
+		select t.userid, m.username, m.gender, m.birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion from teacher t join member m on t.userid= m.userid where who = 'T'
 
 	</select>
 	<select id="selectTMem" resultType="com.dolbommon.dbmon.search.TeacherVO">
