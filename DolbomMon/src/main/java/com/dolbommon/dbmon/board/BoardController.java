@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -104,18 +106,13 @@ public class BoardController {
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		FreeBoardVO preVo = dao.preRecordSelect(vo.getNo());
-		//System.out.println(preVo.getPreNo());
-		//System.out.println(preVo.getPreSubject());
-		
-		
-		
+	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("no", preVo.getPreNo());
 		mav.setViewName("redirect:freeBoardView");
 		
 		return mav;
 	}
-	
 	
 	//다음글 선택
 	@RequestMapping("/nextContentView")
@@ -126,8 +123,6 @@ public class BoardController {
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		FreeBoardVO nextVo = dao.nextRecordSelect(vo.getNo());
-		//System.out.println(nextVo.getNextNo());
-		//System.out.println(nextVo.getNextSubject());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("no", nextVo.getNextNo());
@@ -135,8 +130,6 @@ public class BoardController {
 		
 		return mav;
 	}
-			
-			
 	
 	//게시판 글쓰기 폼으로 이동ok
 	@RequestMapping("/freeBoardWrite")
@@ -348,8 +341,6 @@ public class BoardController {
 		
 		FreeBoardVO preVo = dao.preRecordSelect(vo.getNo());	//현재 글번호 넣어서 이전글 선택
 		FreeBoardVO nextVo = dao.nextRecordSelect(vo.getNo());	//현재 글번호 넣어서 다음글 선택
-		System.out.println("다음글"+nextVo.getNextNo()+nextVo.getNextSubject());
-		System.out.println("이전글"+preVo.getPreNo()+preVo.getPreSubject());
 		
 		FreeBoardVO resultVo = dao.freeBoardSelect(vo.getNo());
 		
@@ -374,6 +365,101 @@ public class BoardController {
 		
 		return mav;
 	}
+	//글 수정
+	@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)
+	public ModelAndView freeBoardEditOk(HttpServletRequest req, HttpServletResponse res, HttpSession ses) throws ServletException, IOException {
+
+		String path = ses.getServletContext().getRealPath("/upload");
+		int maxSize = 1024*1024*1024;
+		DefaultFileRenamePolicy pol = new DefaultFileRenamePolicy();
+		
+		MultipartRequest mr = new MultipartRequest(req, path, maxSize, "UTF-8", pol);
+		
+		FreeBoardVO vo = new FreeBoardVO();
+		
+		vo.setNo(Integer.parseInt(mr.getParameter("no")));		
+		vo.setTitle(mr.getParameter("title"));
+		vo.setContent(mr.getParameter("content"));
+		
+		//삭제할 파일명
+		vo.setDelfile(mr.getParameterValues("delfile"));
+		
+		//새로 업로드한 파일
+		int idx = 0;
+		String fileName[] = new String[2];
+		Enumeration fileList = mr.getFileNames();
+		
+		while(fileList.hasMoreElements()) {
+			String old = (String)fileList.nextElement();
+			String newFile = mr.getFilesystemName(old);
+			
+			if(newFile!=null) {
+				fileName[idx++] = newFile;
+				
+			}	
+		}	
+		String[] del = vo.getDelfile();
+		DataDAO dao = new DataDAO();
+		
+		if(idx<2) {	//이전에 업로드한 파일을 다 지울 때
+			//데이터 베이스에 있는 원래 파일명 얻어오기
+			String dbFile[] = dao.getFileName(vo.getNo());	
+			if(del!=null) {	//삭제할 파일이 있는 경우
+				for(String dbFilename : dbFile) {
+					int chk = 0;
+					for(String delFile : del) {
+						if(dbFilename!=null && dbFilename.equals(delFile)) {
+							chk++;
+						}
+					}
+					if(chk==0) {
+						fileName[idx++] = dbFilename;
+					}
+				}
+			}else {	//삭제할 파일이 없는 경우
+				for(String dbFilename : dbFile) {
+					if(dbFilename!=null) {
+						fileName[idx++] = dbFilename;
+					}
+				}
+			}
+		}
+		
+		vo.setFilename(fileName);
+		int cnt = dao.dataUpdate(vo);
+		if(cnt>0 && del!=null) {
+			//이전 파일 삭제
+			for(String d : del) {
+				File f = new File(path, d);
+				f.delete();
+			}
+		}
+		req.setAttribute("cnt", cnt);
+		req.setAttribute("no", vo.getNo());
+		return "/data/dataEditOk.jsp";
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//자유게시판 글 수정ok
 	@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)

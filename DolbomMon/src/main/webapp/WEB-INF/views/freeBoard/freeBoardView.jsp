@@ -142,7 +142,6 @@
 	
 	//글내용보기 댓글 표시
 	replyListSelect();
-	
 
 </script>
 </head>
@@ -200,14 +199,18 @@
 				</c:if>
 			</tbody>
 			<tfoot>
+			<c:if test="${preVo.preSubject!=null}">
 				<tr>
 					<th scope="col">이전글</th>
-					<td><a href="/dbmon/preContentView?no=${vo.no}">이전글 이전글 이전글</a></td>	
+					<td><a href="/dbmon/preContentView?no=${vo.no}">${preVo.preSubject}</a></td>	
 				</tr>
+			</c:if>
+			<c:if test="${nextVo.nextSubject!=null}">
 				<tr>
 					<th scope="col">다음글</th>
-					<td><a href="/dbmon/nextContentView?no=${vo.no}">다음글 다음글 다음글</a></td>	
+					<td><a href="/dbmon/nextContentView?no=${vo.no}">${nextVo.nextSubject}</a></td>	
 				</tr>
+			</c:if>
 			</tfoot>
 		</table>
 		<hr/>

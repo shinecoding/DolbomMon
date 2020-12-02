@@ -31,7 +31,14 @@
 </style>
 <script>
 $(function(){
-	CKEDITOR.replace("content");
+	CKEDITOR.replace("content",{filebrowserUploadUrl:'/dbmon/imageUpload.do'});
+	
+	$("b").click(function(){
+		$(this).parent().next().attr("type", "file");
+		$(this).parent().next().next().attr("name", "delfile");
+		
+		$(this).parent().remove();	
+	});
 	
 	$("#freeBoardEditFrm").submit(function(){
 		if($("#subject").val()==""){
@@ -78,17 +85,33 @@ $(function(){
 				<textarea class="form-control" id="content" name="content">${vo.content}</textarea>
 			</div>
 			<br/>
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary" type="button" id="inputGroupFile">Upload</button>
-				</div>
-				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="inputFile" aria-describedby="inputGroupFileAddon03">
-					<label class="custom-file-label" for="inputFile">파일을 선택하세요</label>
-				</div>
-			</div>			
-			<!-- <input type="submit" id="post" class="btn btn-warning" value="등록"/> -->
-		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="등록"/>
+			
+			<!-- 첫번째 첨부파일이 있을 때 -->			
+			<c:if test="${vo.filename1!=null}">
+				<div>${vo.filename1} <b>X</b></div>
+				<input type="hidden" name="filename1" id="filename1"/>
+				<input type="hidden" id="delfile1" value="${vo.filename1}"/>
+			</c:if>
+			<br/>
+			<!-- 두번째 첨부파일이 있을 때 -->
+			<c:if test="${vo.filename2!=null}">
+				<div>${vo.filename2} <b>X</b></div>
+				<input type="hidden" name="filename2" id="filename2"/>
+				<input type="hidden" id="delfile2" value="${vo.filename2}"/>		
+			</c:if>
+			<!-- 두번째 첨부파일이 없을 때 -->
+			<c:if test="${vo.filename2==null}">
+				<input type="file" name="filename2" id="filename2"/>
+			</c:if>
+			<br/>
+			<!-- 
+			<div>
+				<input type="file" id="filename" name="filename">
+				<input type="file" id="filename" name="filename">
+			</div>
+			 -->
+			<br/>
+		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>
 	</form>
 </div>
