@@ -74,6 +74,9 @@
 	float:left; 
 	display:block;
 	}
+	i{
+	color:orange;
+	}
 </style>
 
 <script>
@@ -209,12 +212,20 @@
 						<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
 						<c:otherwise>${vo.last_edit}분</c:otherwise>
 					</c:choose>
-				</span></h5>
+				</span>
+			<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">
+				</h5>
 							
-				<h6 class="loc">${vo.area1}</h6>
-				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | 협의유무: ${vo.discussion}</h6>
-				<h6>${vo.birth}세 | 돌봄가능아이 수 : ${vo.headcount}명</h6>
+				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
+				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
+				<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 수 : ${vo.headcount}명</h6>
+		<hr/>
+		
+		<h6>인증<div class="badge badge-pill badge-warning">등초본</div></h6>
 		</div>	
+		
+			
+		
 	</div>
 	</c:forEach>
 	
