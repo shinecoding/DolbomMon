@@ -152,8 +152,8 @@
 <input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 
 <form class="form-inline">
-  <label class="mt-2" for="inlineFormCustomSelectPref"></label>
-  <select class="custom-select border-warning mt-2 mb-2" id="inlineFormCustomSelectPref" style="width:100%;">
+  
+  <select class="custom-select border-warning mt-2 mb-2" style="width:100%;">
     <option selected>돌봄 유형을 선택하시면, 맞춤시터를 보여드려요</option>
     <option value="1">2~10세 정기 돌봄</option>
     <option value="2">신생아/영아 정기 돌봄</option>
@@ -214,8 +214,7 @@
 				<h6 class="loc">${vo.area1}</h6>
 				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | 협의유무: ${vo.discussion}</h6>
 				<h6>${vo.birth}세 | 돌봄가능아이 수 : ${vo.headcount}명</h6>
-		</div>
-		
+		</div>	
 	</div>
 	</c:forEach>
 	
