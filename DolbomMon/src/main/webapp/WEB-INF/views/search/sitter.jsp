@@ -44,15 +44,38 @@
 
 	 .list-group-item {
 	 	width:1000px;
-	 	margin:0 auto;
+	 	margin:10px auto;
 	 }
 	   
-	   
 
- input[type=text]{
-  width:100%;
- }
+
+	 input[type=text]{
+	  width:100%;
+	 }
+	 /*#mapBox{
+	 width:100%;
+	 height: 610px;
+	   display:none;
+	 }*/
+	#map{
+	width:100%;
+	height:500px;
+	border-bottom-left-radius:20px;
+	border-bottom-right-radius:20px;
+	
+	}
+	
+	
+	.card{
+	margin: 17px; 
+	width:30%; 
+	border:1px orange solid; 
+	border-radius:20px; 
+	float:left; 
+	display:block;
+	}
 </style>
+
 <script>
 	$(function(){
 		
@@ -66,17 +89,21 @@
 	    	  var item = document.getElementbyClassName("wrapper2");
 		for(i=0;item)
 	      }*/
-	    
+	      $(document).on("click", "#mapBtn", function(){
+				$("#map").toggle();
+			});
+			
 	    $(document).on("keyup", "#locFilter", function(){
 	    	var value = $(this).val().toLowerCase();
-	    	$(".wrapper2>ul").filter(function(){
-	    		$(this).toggle($(this).text().toLowerCase().indexOf(value)>-1);
+	    	$(".loc").filter(function(){
+	    		$(this).parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
+				    		
 	    	});
 	    });
 	    
 	
-		
-		//========================ajax
+		/*
+		//========================ajax=========
 		$("#act1").click(function(){
 			var url = "/dbmon/searchAct1";
 			//var params = "act=실내돕기";
@@ -89,20 +116,7 @@
 					var tag = "";
 					
 					$result.each(function(idx, tvo){
-						tag = "<ul class='list-group'>";
-						tag += "<li class='list-group-item'>";
-						tag += "<ul class='list-group list-group-horizontal'>";
-						tag += "<li class='list-group-item border-0 col-2'>";
-						tag += "<img src='img/profilepic.png' class='rounded-circle'/><br/>";
-						tag += "<div class='badge badge-warning badge-pill ml-3' ><span>0</span>명 지원</div>";
-						tag += "</li>";
-						tag += "<li class="list-group-item border-0 col-10">";
-						tag += "<h6><b>${vo.username }</b></h6><h7>3분전 작성</h7><br/>";
-						tag += "<h6>서울시 강남구</h6>";
-						tag += "<h6>20세 | <i class='fas fa-coins mr-1'></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}<br/>";
-						tag += "<h7>돌봄가능아이 수 : ${vo.headcount}</h7><br/><br/>";
-						tag += "</li>";
-						tag += "</ul></li></ul>";
+						
 						
 					});
 					$("").html(tag);
@@ -112,7 +126,7 @@
 			})
 		})//에이잭스
 		
-		
+		*/
 	});//제이쿼리
 </script>
 </head>
@@ -122,15 +136,20 @@
 <%@include file="/WEB-INF/views/top.jsp"%>
 <hr/><br/>
 </div>
-<!-- --------------------------- -->
-
 <div class="container">
 
+<!-- ---------------------필터들------ -->
 
-<button type="button" class="btn btn-warning btn-lg btn-block">어떤 돌봄몬을 찾으세요?</button>
-<button type="button" class="btn btn-warning btn-lg btn-block"  onclick="location.href='teacherSearchMap?userid=${vo.userid}'">가까운 돌봄몬 찾기</button>
-
-<input type="text" class="form-control border-warning mt-2" id="locFilter" onkeyup="filterLoc()" placeholder="돌봄 지역을 입력해주세요">
+<button type="button" class="btn btn-warning btn-lg btn-block mb-2">어떤 돌봄몬을 찾으세요?</button>
+<div>
+	<button id="mapBtn" class="btn btn-warning btn-lg btn-block">가까운 돌봄몬 찾기
+	
+	
+	</button>
+	<div id="map">
+	</div>
+</div>
+<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 
 <form class="form-inline">
   <label class="mt-2" for="inlineFormCustomSelectPref"></label>
@@ -164,67 +183,121 @@
  
 <!-- ------------------------------- -->
  
-   <div class="row d-inline-block m-2">
-	<div class="float-left"> 총 게시물 수 : ${totalRecord} </div>
-	<div class="float-right">후기순
+   <div class="d-inline-block m-2" style="width:100%;">
+	<div class="float-left" > 총 돌봄몬 수 : ${totalRecord} </div>
+	<div class="float-right" style="cursor:pointer">후기순
 		<i class="fas fa-arrow-circle-down"></i>
 	</div>
 	</div>
-	
 <!-- ------------------------------- -->
-	
-	<div class="wrapper2">
+	<div id="cardBox" class="d-inline-block" style="width:100%;">
 	<c:forEach var="vo" items="${list}">
-	<ul class="list-group" id="${vo.userid}" onclick="location.href='teacherView?userid=${vo.userid}'">
-		<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-				<li class="list-group-item border-0 col-2">
-						<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> class="rounded-circle"/><br/>
-						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-				</li>
-				<li class="list-group-item border-0 col-10">
-						<span class="fa-stack fa-2x float-right">
-							<i class="far fa-circle fa-stack-2x"></i>
-							<i class="far fa-heart fa-stack-1x"></i>
-						</span>
-						<h6><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b><span class="ml-2" style="font-size:0.8em">
-							<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
-							<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.last_edit/43200}"/>
-							<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
-							<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
-						<c:choose>
-							<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
-							<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
-							<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
-							<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
-							<c:otherwise>${vo.last_edit}분</c:otherwise>
-						</c:choose>
-			
-						
-						</span></h6>
-						
-						<h6 class="loc">${vo.area1}</h6>
-						<h6>${vo.birth}세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | 협의유무: ${vo.discussion}</h6>
-						<h6>돌봄가능아이 수 : ${vo.headcount}명</h6>
-				</li>
-				</ul>
-
-			</li>
-		</ul>
-		<hr/>
-		</c:forEach> 
+		<div class="card" onclick="location.href='teacherView?userid=${vo.userid}'" >
+			<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if>  style="width:100%; height:300px;border-top-left-radius:20px; border-top-right-radius:20px;" alt="${vo.userid}"/><br/>
+			<div class="card-body">
+				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
+				<!-- 마지막 업데이트일 -->
+				<span class="ml-2" style="font-size:0.7em">
+						<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.last_edit/43200}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
+					<c:choose>
+						<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
+						<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
+						<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
+						<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
+						<c:otherwise>${vo.last_edit}분</c:otherwise>
+					</c:choose>
+				</span></h5>
+							
+				<h6 class="loc">${vo.area1}</h6>
+				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | 협의유무: ${vo.discussion}</h6>
+				<h6>${vo.birth}세 | 돌봄가능아이 수 : ${vo.headcount}명</h6>
+		</div>
+		
 	</div>
+	</c:forEach>
 	
-	
+	</div>
 
-
-	
 	<br/><br/>
 
 
+<!-- =================지도======================================== -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng("${mvo.lat}", "${mvo.lng}"), // 지도의 중심좌표
+        level: 8 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+	<c:forEach var="vo" items="${hash}">
+    {
+        content: '<div style="padding:5px;">${vo.username}<br/><a href="teacherView">프로필보기</a></div>', 
+        latlng: new kakao.maps.LatLng("${vo.lat}", "${vo.lng}")
+    },
+    </c:forEach>
+];
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        //title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+
+  //  var iwContent = '<div style="padding:5px;">Hello World! <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+	    content : positions[i].content 
+	});
+  
+// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+//infowindow.open(map, marker); 
 
 
- </div>
+
+// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(map, 'click', makeOutListener(infowindow));
+}//for문
+
+//인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+function makeOverListener(map, marker, infowindow) {
+return function() {
+    infowindow.open(map, marker);
+};
+}
+
+//인포윈도우를 닫는 클로저를 만드는 함수입니다 
+function makeOutListener(infowindow) {
+return function() {
+    infowindow.close();
+};
+}
+
+</script>
 
 
 

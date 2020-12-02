@@ -497,7 +497,7 @@ public class TeacherController {
 		}
 		return mav;		
 	}
-
+/*
 	//학부모가 선생 찾을 때 보는 지도
 	@RequestMapping("/teacherSearchMap")
 	public ModelAndView teacherSearchMap(HttpSession ses) {
@@ -512,7 +512,7 @@ public class TeacherController {
 		mav.setViewName("/teacher/teacherSearchMap");
 		return mav;
 	}
-	
+	*/
 	//선생 개인 위치 수정용 지도
 	@RequestMapping("/teacherMap")
 	public ModelAndView teacherMap(HttpSession ses) {
