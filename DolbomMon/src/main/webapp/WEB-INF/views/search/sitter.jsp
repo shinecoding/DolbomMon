@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +78,16 @@
     text-align: left;
     color: white;
 }
- 
+
+.heart{
+ color:orange; 
+ height:30px; 
+ width:30px; 
+ float:right;
+}
+ input[type=text]{
+  width:100%;
+ }
 </style>
 <script>
 	$(function(){
@@ -86,13 +96,21 @@
 	    //  $(document).on("click",".wrapper2>ul", function(){
 	     //     location.href="teacherView?userid="+$(this).attr('id');   
 	    //   });
-	      
-	    $("#locFilter").on("keyup", function(){
+	    /* 
+	    function filterLoc(){
+	    	  var value = document.getElementById("locFilter").value.toLowerCase();
+	    	  var item = document.getElementbyClassName("wrapper2");
+		for(i=0;item)
+	      }*/
+	    
+	    $(document).on("keyup", "#locFilter", function(){
 	    	var value = $(this).val().toLowerCase();
-	    	$(".loc").filter(function(){
-	    		$(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+	    	$(".wrapper2>ul").filter(function(){
+	    		$(this).toggle($(this).text().toLowerCase().indexOf(value)>-1);
 	    	});
-	    })
+	    });
+	    
+	
 		
 		//========================ajax
 		$("#act1").click(function(){
@@ -122,15 +140,16 @@
 						tag += "</li>";
 						tag += "</ul></li></ul>";
 						
-					})
+					});
+					$("").html(tag);
 				}, error: function(){
 					console.log("리스트 받기 에러");
 				}
 			})
-		})
+		})//에이잭스
 		
 		
-	});
+	});//제이쿼리
 </script>
 </head>
 <body>
@@ -146,7 +165,7 @@
 </div>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:white;"> 
 <div id="filterbox" >
-<input class="form-control" id="locFilter" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요">
+<input type="text" class="form-control" id="locFilter" onkeyup="filterLoc()" placeholder="돌봄 지역을 입력해주세요">
 <form class="form-inline">
   <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
   <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
@@ -156,8 +175,8 @@
     <option value="3">긴급 돌봄</option>
     <option value="4">모든 돌봄 유형 보기</option>
   </select>
-  </form>
-  </div>
+ </form>
+ </div>
   
 
   <div style="overflow: scroll hidden; width: 100%; height: 50px; white-space: nowrap; 
@@ -188,29 +207,49 @@
 	</div>
 	<br/><br/><br/>
 	</div>
-	 <c:forEach var="vo" items="${list}">
+	
+	
+	
 	<div class="wrapper2"  >
+	<c:forEach var="vo" items="${list}">
 	<ul class="list-group" id="${vo.userid}" onclick="location.href='teacherView?userid=${vo.userid}'">
 		<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
 				<li class="list-group-item border-0 col-2">
-						<img src="img/profilepic.png" class="rounded-circle"/><br/>
+						<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> class="rounded-circle"/><br/>
 						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
 				</li>
 				<li class="list-group-item border-0 col-10">
-						<h6><b>${vo.username}</b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
+						<img class="heart" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites">
+						<h6><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b><span class="ml-2" style="font-size:0.8em">
+							<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
+							<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.last_edit/43200}"/>
+							<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
+							<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
+						<c:choose>
+							<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
+							<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
+							<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
+							<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
+							<c:otherwise>${vo.last_edit}분</c:otherwise>
+						</c:choose>
+			
+						
+						</span></h6>
+						
 						<h6 class="loc">${vo.area1}</h6>
-						<h6>20세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}</h6>
-						<h6>돌봄가능아이 수 : ${vo.headcount }</h6>
+						<h6>${vo.birth}세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | 협의유무: ${vo.discussion}</h6>
+						<h6>돌봄가능아이 수 : ${vo.headcount}명</h6>
 				</li>
 				</ul>
 
 			</li>
 		</ul>
+		<hr/>
+		</c:forEach> 
 	</div>
-	<hr/>
-	<br/>
-	</c:forEach> 
+	
+	
 
 
 	
