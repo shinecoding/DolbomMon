@@ -22,6 +22,29 @@
 		/////////////////// 페이지 로딩 시 //////////////////////
 		$(document).ready(function(){
 			
+			$(".title").next("div").css("display", "none");
+			$("#activityTypeDiv").css("display", "inline-block");
+			
+			/////////////////////// 시간 설정 //////////////////////
+			if($("#timeType1").is(":checked")){
+				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
+				$("#specificDateDiv").css("display", "inline-block");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("#regularDateDiv").css("display", "none");
+				$("#timeDiv").css("display", "inline-block");
+			}else if($("#timeType2").is(":checked")){
+				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
+				$("#regularDateDiv").css("display", "inline-block");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("#specificDateDiv").css("display", "none");
+				$("#timeDiv").css("display", "inline-block");
+			}else{
+				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("#specificDateDiv").css("display", "none");
+				$("#regularDateDiv").css("display", "none");
+				$("#timeDiv").css("display", "none");
+			}
 			///////////////////////////// 정기적으로 날짜 설정 요일 //////////////////////////////
 			startTime(); // selectBox 설정
 			for(var i=1;i<8;i++){
@@ -94,18 +117,39 @@
 			/////////////////// 페이지 로딩 시 //////////////////////
 		});
 		
-		////////////////////div on off ///////////////// 
-		$(".divOnOff").click(function(){
-			var selectedData = $(this).attr("for");
-			console.log("sd => " + selectedData);
-			var divStatus = $("#"+selectedData).css("display");
-			console.log("ds => " + divStatus);
-			if(divStatus != "none"){
-				$("#"+selectedData).css("display", "none");
+		$("#timeTypeDiv >input[type=radio]").change(function(){
+			if($("#timeType1").is(":checked")){
+				console.log("1번 라디오 들어옴");
+				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
+				$("#specificDateDiv").css("display", "inline-block");
+				$("#timeDiv").css("display", "inline-block");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("#regularDateDiv").css("display", "none");
+				
+			}else if($("#timeType2").is(":checked")){
+				console.log("2번 라디오 들어옴");
+				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
+				$("#regularDateDiv").css("display", "inline-block");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("#specificDateDiv").css("display", "none");
+				$("#timeDiv").css("display", "inline-block");
 			}else{
-				$("#"+selectedData).css("display", "inline-block");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("#specificDateDiv").css("display", "none");
+				$("#regularDateDiv").css("display", "none");
+				$("#timeDiv").css("display", "none");
 			}
 		});
+		
+		
+		////////////////////div on off ///////////////// 
+		$(".title").click(function(){
+			$(".title").next("div").css("display", "none");
+			$(this).next("div").css("display", "inline-block");
+			
+		});
+		
 		
 		// 돌봄 유형 선택 시 색상 변경
 		$("input[name=pw_activity]").change(function(){
@@ -158,6 +202,8 @@
 			
 		});
 		
+		
+		
 		$("#childrenInfo>input[type=radio]").change(function(){
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
@@ -165,7 +211,7 @@
 					$("#childrenDetail").html("");
 					var tag = ""
 					tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
-					tag += "<span class='cb'>자녀 생년월일</span><input class='cbtext' type='date' name='child_birth' /></li>";
+					tag += "<input type='button' id='child_birthBtn' class='cb' value='자녀 생년월일'/><input class='cbtext' type='text' name='child_birth' /></li>";
 					for(var j=0;j<i;j++){
 						$("#childrenDetail").append(tag);
 					}
@@ -174,6 +220,23 @@
 				}
 			}
 		});
+		$("#child_birthBtn").click(function(){
+			console.log("클릭");
+		});
+		///////////////////////////////////// 자녀 생년월일 ///////////////////////
+		$("#child_birthBtn").datepicker({ // 시작일 데이트피커
+			showAnim : "show",
+			changeMonth : true,
+			changeYear : true,
+			yearRange : 'c-15:c',
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$(this).val("자녀 생년월일");
+			},
+			altFormat:"yyyy-mm-dd"
+		});
+		
+		
 		var lng;
 		var lat;
 		$("#zipcodeBtn").click(function(){
@@ -250,17 +313,27 @@
 		////////////////////////// 정기적으로 ////////////////////////// 
 		$("#regularDateDiv #startDateBtn").datepicker({ // 시작일 데이트피커
 			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			yearRange : 'c-100:c',
+			minDate : "0",
+			maxDate : "30d",
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #start_date").val(dateText);
-				$("#regularDateDiv #startDateBtn").val("활동 시작일 선택");
+				$("#regularDateDiv #startDateBtn").val("돌봄 시작일");
 			},
 			altFormat:"yyyy-mm-dd"
 		});
 		
+		$("#regularDateDiv #endDateBtn").datepicker({ // 종료일 데이트피커
+			showAnim : "show",
+			minDate : "+14d",
+			maxDate : "+6m",
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$("#regularDateDiv #end_date").val(dateText);
+				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+			},
+			altFormat:"yyyy-mm-dd"
+		});
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
 			var selectedData = $(this).attr("id");
@@ -363,7 +436,8 @@
 <style>
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
- 	 
+ 	.divOff{display:none;}
+ 	.divOn{display:inline-block;}
 </style>
 <body>
 	<div class="container">
@@ -456,10 +530,10 @@
 			
 			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
 			<div id="timeTypeDiv">
-				<input type="radio" id="timeType1" name="time_Type" value="R"/>
-				<input type="radio" id="timeType2" name="time_Type" value="S"/>
-				<label for="timeType1">정기적으로</label>
-				<label for="timeType2">특정날에만</label>
+				<input type="radio" id="timeType1" name="time_Type" value="S"/>
+				<input type="radio" id="timeType2" name="time_Type" value="R"/>
+				<label for="timeType1">특정날에만</label>
+				<label for="timeType2">정기적으로</label>
 				
 				<div id="specificDateDiv">
 					<div id="title">특정날에만</div>
@@ -471,7 +545,10 @@
 					<div id="title">정기적으로</div>
 					<div id="startDateDiv">
 						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
+						<input type="button" id="endDateBtn" value="돌봄 종료일 선택" />
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
+						<input type="text" id="end_date" name="end_date" readonly="readonly" />
+						
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -530,7 +607,7 @@
 			</div>
 			
 			<div class="title">입력한 정보를 확인 후 등록해주세요</div>
-			<div style="text-align:center;"><input type="submit" value="등록하기" /></div>
+			<div style="text-align:center;width:50%"><input type="submit" value="등록하기" /></div>
 			
 			<div id="footer"></div>
 		</form>
