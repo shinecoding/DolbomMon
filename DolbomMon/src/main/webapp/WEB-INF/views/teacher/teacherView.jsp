@@ -28,6 +28,7 @@ h5{
  font-size:60px;
  margin: 8px;
 }
+
 .boldFont{
 color:orange;
 font-weight:bold;
