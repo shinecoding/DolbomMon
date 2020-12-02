@@ -258,7 +258,7 @@ width:50%;
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">
-   		<c:forEach var="evo" items="${hash}">
+   		<c:forEach var="evo" items="${list}">
    			<b>${evo.exp_content}</b><br/>
    			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
    		</c:forEach>	

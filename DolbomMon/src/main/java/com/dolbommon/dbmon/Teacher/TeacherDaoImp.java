@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.util.HashSet;
+import java.util.List;
 
 public interface TeacherDaoImp {
 	
@@ -13,11 +14,11 @@ public interface TeacherDaoImp {
 	public int updateAge(TeacherVO vo);
 	public int updateActivity(TeacherVO vo);
 	public int updateCCTV(TeacherVO vo);
-	public HashSet<ExperienceVO> selectExp(String userid);
+	public List<ExperienceVO> selectExp(String userid);
 	public int hitCount(TeacherVO vo);
 	public int findIdT(ExperienceVO vo);
 	public int updateExp(ExperienceVO evo);
-	public int insertExp(ExperienceVO evo);
+	public int insertExp(String userid);
 	public int deleteExp(ExperienceVO evo);
 	public int selectLastEdit(String userid);
 	//선생 지도 받기

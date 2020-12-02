@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -78,7 +80,7 @@ public class TeacherController {
 		mvo.setUsername(hideName);
 		
 		
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
 		CertificationVO cvo = cdao.selectCert(userid);
 		ModelAndView mav = new ModelAndView();
@@ -87,7 +89,7 @@ public class TeacherController {
 		mav.addObject("vo", vo);
 		mav.addObject("mvo", mvo);
 		mav.addObject("cvo", cvo);
-		mav.addObject("hash", hash);
+		mav.addObject("list", list);
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
@@ -107,11 +109,11 @@ public class TeacherController {
 		String userid = (String) ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
-		mav.addObject("hash", hash);
+		mav.addObject("hash", list);
 		mav.setViewName("teacher/teacherEdit");
 		return mav;
 	}
@@ -260,15 +262,89 @@ public class TeacherController {
 	public ModelAndView teacherExp(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("hash", hash);
+		mav.addObject("list", list);
 		mav.setViewName("teacher/teacherExp");
 		
 		return mav;
 	}
 	
+	//경험추가
+	@RequestMapping("/teacherAddExp")
+	@ResponseBody
+	public String teacherAddExp(HttpSession ses, HttpServletRequest req) {
+		String result="fail";
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int cnt = 0;
+		cnt = dao.insertExp(userid);
+		if(userid!=null && !userid.equals("")) {
+			if(cnt>=1) {
+				result="pass";
+			}
+		}	
+		return result;
+	}
+	
+	//경험삭제
+	@RequestMapping("/teacherDelExp")
+	@ResponseBody
+	public String teacherDelExp(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
+		String result="fail";
+		String userid = (String)ses.getAttribute("userid");
+		evo.setUserid(userid);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int cnt = 0;
+		cnt = dao.deleteExp(evo);
+		if(userid!=null && !userid.equals("")) {
+			if(cnt>=1) {
+				result="pass";
+			}
+		}	
+		return result;
+	}
+	
+	//경험저장
+	@RequestMapping(value="/teacherSaveExp", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String teacherSaveExp(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
+		String result="fail";
+		String userid = (String)ses.getAttribute("userid");
+		evo.setUserid(userid);
+		String exp_no[] = evo.getExp_no().split(",");
+		String exp_content[] = evo.getExp_content().split(",");
+		String exp_start[] = evo.getExp_start().split(",");
+		String exp_end[] = evo.getExp_end().split(",");
+		
+		ExperienceVO resultVO = new ExperienceVO();
+		resultVO.setUserid(userid);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int cnt = 0;
+		for(int i=0; i<exp_no.length; i++ ) {
+			resultVO.setExp_no(exp_no[i]);
+			resultVO.setExp_start(exp_start[i]);
+			resultVO.setExp_end(exp_end[i]);
+			resultVO.setExp_content(exp_content[i]);
+			
+			try {
+				cnt = dao.updateExp(resultVO);
+			}catch(Exception e) {
+				System.out.println("경험저장 쿼리 에러"+e.getMessage());
+			}
+			
+		}
+
+		if(userid!=null && !userid.equals("")) {
+			if(cnt>=1) {
+				result="pass";
+			}
+		}	
+		return result;
+	}
+	
+	/*
 	@RequestMapping(value="/teacherExpOk", method=RequestMethod.POST)
 	public ModelAndView teacherExpOk(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
 		HashSet<ExperienceVO> hash = new HashSet<ExperienceVO>();
@@ -368,6 +444,8 @@ public class TeacherController {
 		
 		return mav;
 	}
+	
+	*/
 	/*
 
 	@RequestMapping("/teacherDelExp")

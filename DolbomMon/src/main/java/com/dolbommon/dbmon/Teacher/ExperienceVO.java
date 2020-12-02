@@ -1,11 +1,18 @@
 package com.dolbommon.dbmon.Teacher;
 
 public class ExperienceVO {
+	private String exp_no;
 	private String userid;
 	private String exp_content;
 	private String exp_start;
 	private String exp_end;
 	
+	public String getExp_no() {
+		return exp_no;
+	}
+	public void setExp_no(String exp_no) {
+		this.exp_no = exp_no;
+	}
 	public String getUserid() {
 		return userid;
 	}
