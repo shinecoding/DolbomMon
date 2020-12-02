@@ -317,30 +317,33 @@ public class TeacherController {
 		String exp_content[] = evo.getExp_content().split(",");
 		String exp_start[] = evo.getExp_start().split(",");
 		String exp_end[] = evo.getExp_end().split(",");
-		
 		ExperienceVO resultVO = new ExperienceVO();
 		resultVO.setUserid(userid);
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		int cnt = 0;
-		for(int i=0; i<exp_no.length; i++ ) {
-			resultVO.setExp_no(exp_no[i]);
-			resultVO.setExp_start(exp_start[i]);
-			resultVO.setExp_end(exp_end[i]);
-			resultVO.setExp_content(exp_content[i]);
-			
-			try {
-				cnt = dao.updateExp(resultVO);
-			}catch(Exception e) {
-				System.out.println("경험저장 쿼리 에러"+e.getMessage());
+		try {
+			for(int i=0; i<exp_no.length; i++ ) {
+				resultVO.setExp_no(exp_no[i]);
+				resultVO.setExp_start(exp_start[i]);
+				resultVO.setExp_end(exp_end[i]);
+				resultVO.setExp_content(exp_content[i]);
+				
+				try {
+					cnt = dao.updateExp(resultVO);
+				}catch(Exception e) {
+					System.out.println("경험저장 쿼리 에러"+e.getMessage());
+				}
+				
 			}
-			
+			if(userid!=null && !userid.equals("")) {
+				if(cnt>=1) {
+					result="pass";
+				}
+			}	
+		}catch(ArrayIndexOutOfBoundsException ai) {
+			result="경험 내용을 입력하세요.";
 		}
 
-		if(userid!=null && !userid.equals("")) {
-			if(cnt>=1) {
-				result="pass";
-			}
-		}	
 		return result;
 	}
 	

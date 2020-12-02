@@ -127,6 +127,8 @@
 							alert("수정되었습니다.")
 							window.scrollTo(0, 0);
 							document.location.reload(true);
+						}else if(result=="경험 내용을 입력하세요."){
+							alert(result+" 경험 내용이 없으면 등록하실 수 없습니다.");
 						}else{
 							alert("경험 저장에 실패하였습니다. 로그인 상태를 확인하세요.");
 						}
