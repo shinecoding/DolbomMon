@@ -103,9 +103,9 @@ public class BoardController {
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		FreeBoardVO preVo = dao.preContentSelect(vo.getNo());
-		System.out.println(preVo.getPreNo());
-		System.out.println(preVo.getPreSubject());
+		FreeBoardVO preVo = dao.preRecordSelect(vo.getNo());
+		//System.out.println(preVo.getPreNo());
+		//System.out.println(preVo.getPreSubject());
 		
 		
 		
@@ -125,9 +125,9 @@ public class BoardController {
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		FreeBoardVO nextVo = dao.nextContentSelect(vo.getNo());
-		System.out.println(nextVo.getNextNo());
-		System.out.println(nextVo.getNextSubject());
+		FreeBoardVO nextVo = dao.nextRecordSelect(vo.getNo());
+		//System.out.println(nextVo.getNextNo());
+		//System.out.println(nextVo.getNextSubject());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("no", nextVo.getNextNo());
@@ -340,14 +340,23 @@ public class BoardController {
 		
 		FreeBoardVO vo = new FreeBoardVO();
 		
+		
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		dao.hitCount(vo.getNo());
+		
+		FreeBoardVO preVo = dao.preRecordSelect(vo.getNo());	//현재 글번호 넣어서 이전글 선택
+		FreeBoardVO nextVo = dao.nextRecordSelect(vo.getNo());	//현재 글번호 넣어서 다음글 선택
+		System.out.println("다음글"+nextVo.getNextNo()+nextVo.getNextSubject());
+		System.out.println("이전글"+preVo.getPreNo()+preVo.getPreSubject());
+		
 		FreeBoardVO resultVo = dao.freeBoardSelect(vo.getNo());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", resultVo);
+		mav.addObject("preVo", preVo);
+		mav.addObject("nextVo", nextVo);
 		mav.setViewName("freeBoard/freeBoardView");
 	
 		return mav;

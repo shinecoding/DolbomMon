@@ -11,9 +11,9 @@ public interface FreeBoardDaoImp {
 	//레코드 한개 선택
 	public FreeBoardVO freeBoardSelect(int no);
 	//이전글 선택
-	public FreeBoardVO preContentSelect(int no);
+	public FreeBoardVO preRecordSelect(int no);
 	//다음글 선택
-	public FreeBoardVO nextContentSelect(int no);
+	public FreeBoardVO nextRecordSelect(int no);
 	//조회수 증가
 	public int hitCount(int no);
 	//자유게시판 글쓰기
