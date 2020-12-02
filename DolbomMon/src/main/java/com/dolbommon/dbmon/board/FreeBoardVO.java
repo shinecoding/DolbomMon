@@ -14,6 +14,8 @@ public class FreeBoardVO {
 	private String filename2;
 	private int nextNo;
 	private int preNo;
+	private String nextSubject;
+	private String preSubject;
 	private int ref;
 	private int step;
 	private int lvl;
@@ -177,6 +179,18 @@ public class FreeBoardVO {
 	}
 	public void setPreNo(int preNo) {
 		this.preNo = preNo;
+	}
+	public String getNextSubject() {
+		return nextSubject;
+	}
+	public void setNextSubject(String nextSubject) {
+		this.nextSubject = nextSubject;
+	}
+	public String getPreSubject() {
+		return preSubject;
+	}
+	public void setPreSubject(String preSubject) {
+		this.preSubject = preSubject;
 	}
 	public int getRef() {
 		return ref;

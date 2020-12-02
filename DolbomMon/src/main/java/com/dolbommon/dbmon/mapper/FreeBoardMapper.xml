@@ -50,7 +50,7 @@
 	
 	<select id="preContentSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
 		select * from(
-			select no, lag(no, 1) over (order by no) preNo
+			select no, lag(no, 1) over (order by no) preNo, lag(subject, 1) over (order by no) preSubject
         	from freeBoard where step=0
     		)
     	where no=#{no}
@@ -59,7 +59,7 @@
 
 	<select id="nextContentSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
 		select * from(
-			select no, lead(no, 1) over (order by no) nextNo
+			select no, lead(no, 1) over (order by no) nextNo, lead(subject, 1) over (order by no) nextSubject
         	from freeBoard where step=0
     		)
     	where no=#{no}

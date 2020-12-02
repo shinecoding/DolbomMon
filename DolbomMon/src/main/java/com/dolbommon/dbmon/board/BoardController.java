@@ -103,17 +103,18 @@ public class BoardController {
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		FreeBoardVO resultVo = dao.preContentSelect(vo.getNo());
+		FreeBoardVO preVo = dao.preContentSelect(vo.getNo());
+		System.out.println(preVo.getPreNo());
+		System.out.println(preVo.getPreSubject());
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("no", resultVo.getPreNo());
+		mav.addObject("no", preVo.getPreNo());
 		mav.setViewName("redirect:freeBoardView");
 		
 		return mav;
 	}
-	
-	
-	
 	
 	
 	//다음글 선택
@@ -124,10 +125,12 @@ public class BoardController {
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		FreeBoardVO resultVo = dao.nextContentSelect(vo.getNo());
+		FreeBoardVO nextVo = dao.nextContentSelect(vo.getNo());
+		System.out.println(nextVo.getNextNo());
+		System.out.println(nextVo.getNextSubject());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("no", resultVo.getNextNo());
+		mav.addObject("no", nextVo.getNextNo());
 		mav.setViewName("redirect:freeBoardView");
 		
 		return mav;
