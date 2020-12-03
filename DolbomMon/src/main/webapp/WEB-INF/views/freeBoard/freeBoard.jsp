@@ -13,7 +13,7 @@
 	.container{
 		width: 900px;	
 	}
-	#top{
+	#top_freeboard{
 		margin: 15px;
 		padding: 15px;
 		text-align: center;
@@ -41,9 +41,9 @@
 
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<hr/>
 <div class="container">
-<div id="top">
+<div id="top_freeboard">
 <b>자유게시판</b>
 </div>
 <div>

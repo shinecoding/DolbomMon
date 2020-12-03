@@ -3,7 +3,6 @@ package com.dolbommon.dbmon.Teacher;
 import org.springframework.web.multipart.MultipartFile;
 
 public class TeacherVO {
-
 	private String userid;
 	private String pic;
 	private String care_type;

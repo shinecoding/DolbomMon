@@ -28,6 +28,7 @@ EDIT ON
      }
      #topmenu-button{
      	-webkit-padding-start:0px;
+     	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
      }
 
       #containertoptoptop {
@@ -40,10 +41,11 @@ EDIT ON
 		 width: 263px;
 		 height: 48px;
 		 text-align:center;
-	   	background-color: white;
+		 background-color: white;
 		 position: relative;
 		 z-index:1000;
 		 list-style-type: none;
+		 -webkit-padding-start:0px;
 		
 		 }
       ul.mainTopmenu li a{
@@ -53,26 +55,28 @@ EDIT ON
 		 line-height: 48px;
 		 font-weight:bold;
 		 overflow:hidden;
-		/*  color: #f6a21c; */
 		 color:gray;
 		 text-decoration: none;
 		 font-family:"Noto Sans KR";
 		 text-align:center;
 		 list-style-type: none;
+		 
 		 margin-left:0px;
 		 }
 	  ul.mainTopmenu li {
 		width: calc(100%/6);
+		height:50px;
 		
 		}
 	  ul.mainTopmenu ul.subMain li {
 	    width: 100%;
 	    -webkit-padding-start:0px;
+	    height:50px;
 	    }
 	  
 	  
       ul.mainTopmenu li a:hover{
-	     background-color: #ffefd5;
+      	 color:orange;
 	     opacity:50;
 		 }
       ul.mainTopmenu li ul.subMain{
@@ -81,6 +85,7 @@ EDIT ON
       ul.mainTopmenu{
 	     zoom: 1;
 	     margin-bottom:0;
+	     height:60px;
 		 }
       ul.mainTopmenu:after{
 	     height: 0;
@@ -89,14 +94,16 @@ EDIT ON
 		 display: block;
 		 clear: both;
 		 }
-		.logo{
-	      width:180px;
-	      height:80px;
-	      margin-left:0;
-	      
+		
+	  .logo{
+	      width:100px;
+	      height:50px;
+	      margin-top:30px; 
 	   }
+	   
 	   header#topHeader{
-	   		margin-left:0px;
+	   		margin-left:50px;
+	   		
 	   		
 	   }
 	   a.btn{
@@ -106,7 +113,9 @@ EDIT ON
 	   }
 	   #fixtopLogo:after { clear:both; } 
 	   .mainTopmenu>li *{
-	   width:100%
+	   -webkit-padding-start:0px;
+	   width:100%;
+	   
 	   }
 	   
    </style>
@@ -116,7 +125,7 @@ EDIT ON
 
  <div class="clearfix" id="fixtopLogo">
 	 <header id="topHeader">
-	 <img src="<%=request.getContextPath()%>/img/DOL02.PNG" 
+	 <img src="<%=request.getContextPath()%>/img/mylogo.png" 
 	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
 	        Onclick="location.href='/dbmon'"/>
 
@@ -173,3 +182,4 @@ EDIT ON
 		</ul>
    </ul>
    </div>
+   

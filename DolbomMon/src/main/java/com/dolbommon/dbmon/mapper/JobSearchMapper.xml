@@ -4,25 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
 
+	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.TeacherVO">
+		select t.userid, m.username, m.gender, m.birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion from teacher t join member m on t.userid= m.userid where who = 'T'
 
-	<update id="hitCount" parameterType="com.dolbommon.dbmon.search.teacherVO" >
-		update teacher set hit= hit+1 where userid= #{userid}
-	</update>
-	
-	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.teacherVO">
-		select no, head, subject, content, userid, hit, writedate
-		from teacher where no=#{param1}
 	</select>
-	
-	<update id="hitCount" parameterType="int">
-		update teacher set hit=hit+1 where no=#{param1}
-	</update>
-	
-	
-	
+	<select id="selectTMem" resultType="com.dolbommon.dbmon.search.TeacherVO">
+		select username, birth, no, round((sysdate - last_edit) *1440) as last_edit from member
+	</select>
+	<select id="getTotalRecord" resultType="int">	
 
+		select count(userid) from teacher
+	</select>
 	<select id="selectTAct1" resultType="com.dolbommon.dbmon.search.TeacherVO">
 		select userid from teacher where activity_type like '%실내놀이%'
 	</select>
-
 </mapper>

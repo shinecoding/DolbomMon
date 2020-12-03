@@ -31,5 +31,9 @@ public class ParentController {
 	public String parentWage() {
 		return "/parents/parentWage";
 	}
+	@RequestMapping("/scheduleEdit")
+	public String scheduleEdit() {
+		return "/parents/scheduleEdit";
+	}
 
 }

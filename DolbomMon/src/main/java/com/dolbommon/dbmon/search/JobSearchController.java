@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.dolbommon.dbmon.Teacher.TeacherVO;
 @Controller
 public class JobSearchController {
-	@Autowired
 	SqlSession sqlSession;
 	
 	public SqlSession getSqlSession() {
@@ -37,6 +34,8 @@ public class JobSearchController {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchBoardList();
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
+		
+		
 		
 		ModelAndView mav = new ModelAndView();
 		

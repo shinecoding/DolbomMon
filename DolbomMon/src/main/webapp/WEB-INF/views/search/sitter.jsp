@@ -9,11 +9,13 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	* {
 		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
-		font-family: Noto Sans KR,sans-serif!important; 
+		font-family: 'Nanum Myeongjo', serif;
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 
 	#all{ 
@@ -27,8 +29,6 @@
 	}
 	img{ height:110px; width:110px;}
 	.list
-	
-
     div{
         margin:0 auto;
         width:600px;
@@ -71,16 +71,30 @@
 	    line-height: 1.375;
 	}
 	.review_rate {
-    display: flex;
-    font-size: 12px;
-    font-weight: 500;
-    text-align: left;
-    color: white;
+	    display: flex;
+	    font-size: 12px;
+	    font-weight: 500;
+	    text-align: left;
+	    color: white;
 }
  
 </style>
 <script>
 	$(function(){
+		
+	
+	    //  $(document).on("click",".wrapper2>ul", function(){
+	     //     location.href="teacherView?userid="+$(this).attr('id');   
+	    //   });
+	      
+	    $("#locFilter").on("keyup", function(){
+	    	var value = $(this).val().toLowerCase();
+	    	$(".loc").filter(function(){
+	    		$(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+	    	});
+	    })
+		
+		//========================ajax
 		$("#act1").click(function(){
 			var url = "/dbmon/searchAct1";
 			//var params = "act=실내돕기";
@@ -128,11 +142,11 @@
 <div class="all_wrapper">
 <div>
 <button type="button" class="btn btn-warning btn-lg btn-block">어떤 돌봄몬을 찾으세요?</button>
-<button type="button" class="btn btn-light btn-lg" style="width:100%">가까운 돌봄몬 찾기</button><br/><br/>
+<a href="/dbmon/teacherSearchMap" class="btn btn-light btn-lg" style="width:100%">가까운 돌봄몬 찾기</a><br/><br/>
 </div>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:white;"> 
 <div id="filterbox" >
-<input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요">
+<input class="form-control" id="locFilter" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요">
 <form class="form-inline">
   <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
   <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
@@ -146,21 +160,21 @@
   </div>
   
 
-  <div style="overflow: scroll hidden; width: 100%; height: 50px; white-space: nowrap; 
+  <div style="width: 100%; height: 100px; white-space: nowrap; 
   display: inline-block; vertical-align: top;">
-  <button class="btn1" id="act1">실내놀이</button>
-  <button class="btn1" id="act2">등하원 돕기</button>
-  <button class="btn1" id="act3">책 읽기</button>
-  <button class="btn1" id="act4">야외활동</button>
-  <button class="btn1" id="act5">한글놀이</button>
-  <button class="btn1" id="act6">영어놀이</button>
-  <button class="btn1" id="act7">학습지도</button>
-  <button class="btn1" id="act8">체육놀이</button>
-  <button class="btn1" id="act9">간단청소</button>
-  <button class="btn1" id="act10">밥챙겨주기</button>
-  <button class="btn1" id="act11">간단설거지</button>
-  <button class="btn1" id="act12">장기입주</button>
-  <button class="btn1" id="act13">단기입주</button>
+  <button class="btn1 btn-warning" id="act1">실내놀이</button>
+  <button class="btn1 btn-warning" id="act2">등하원 돕기</button>
+  <button class="btn1 btn-warning" id="act3">책 읽기</button>
+  <button class="btn1 btn-warning" id="act4">야외활동</button>
+  <button class="btn1 btn-warning" id="act5">한글놀이</button>
+  <button class="btn1 btn-warning" id="act6">영어놀이</button>
+  <button class="btn1 btn-warning" id="act7">학습지도</button>
+  <button class="btn1 btn-warning" id="act8">체육놀이</button>
+  <button class="btn1 btn-warning" id="act9">간단청소</button>
+  <button class="btn1 btn-warning" id="act10">밥챙겨주기</button>
+  <button class="btn1 btn-warning" id="act11">간단설거지</button><br/>
+  <button class="btn1 btn-warning" id="act12">장기입주</button>
+  <button class="btn1 btn-warning" id="act13">단기입주</button>
 
   </div>
  
@@ -175,8 +189,8 @@
 	<br/><br/><br/>
 	</div>
 	 <c:forEach var="vo" items="${list}">
-	<div class="wrapper2" Onclick="location.href='parentView'">
-	<ul class="list-group">
+	<div class="wrapper2"  >
+	<ul class="list-group" id="${vo.userid}" onclick="location.href='teacherView?userid=${vo.userid}'">
 		<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">
 				<li class="list-group-item border-0 col-2">
@@ -185,7 +199,7 @@
 				</li>
 				<li class="list-group-item border-0 col-10">
 						<h6><b>${vo.username}</b><span class="ml-2" style="font-size:0.8em">3분전 작성</span></h6>
-						<h6>${vo.area1}</h6>
+						<h6 class="loc">${vo.area1}</h6>
 						<h6>20세 | <i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage} | 협의유무: ${vo.discussion}</h6>
 						<h6>돌봄가능아이 수 : ${vo.headcount }</h6>
 				</li>
@@ -199,7 +213,7 @@
 	</c:forEach> 
 
 
-	<hr/>
+	
 	<br/><br/>
 
 

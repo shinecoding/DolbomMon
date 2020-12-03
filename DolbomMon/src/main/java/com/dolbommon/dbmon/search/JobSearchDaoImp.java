@@ -11,11 +11,9 @@ public interface JobSearchDaoImp {
 	public TeacherVO jobSearchBoardSelect(int no);
 	
 	//글번호 구하기
-
 	public List<TeacherVO> selectTMem(); 
 	
 	public List<TeacherVO> selectTAct1();
-
 	
 }
 

@@ -17,7 +17,7 @@
 	}
 	
 	#all{
-		margin:0 auto;background-color:white;
+		margin:0 auto; background-color:white;
 		
 	}
 	.all_wrapper{
@@ -71,11 +71,11 @@
 	    line-height: 1.375;
 	}
 	.review_rate {
-    display: flex;
-    font-size: 12px;
-    font-weight: 500;
-    text-align: left;
-    color: white;
+	    display: flex;
+	    font-size: 12px;
+	    font-weight: 500;
+	    text-align: left;
+	    color: white;
 }
 	
  

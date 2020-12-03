@@ -32,11 +32,20 @@ public class TeacherController {
 		this.sqlSession = sqlSession;
 	}
 
+	@RequestMapping("/teacherList")
+	public String teacherList() {
+		return "/teacher/teacherList";
+	}
 	
-	public ModelAndView teacherView(HttpSession ses) {//
-
+	@RequestMapping("/teacherView")
+	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
+		
 		String userid = (String) ses.getAttribute("userid");
-
+		if(req.getParameter("userid")!=null) {
+			userid = req.getParameter("userid");
+		};
+		
+		System.out.println("test"+userid);
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
