@@ -546,6 +546,7 @@
 					<div id="startDateDiv">
 						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
 						<input type="button" id="endDateBtn" value="돌봄 종료일 선택" />
+						<hr/>
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
 						<input type="text" id="end_date" name="end_date" readonly="readonly" />
 						
