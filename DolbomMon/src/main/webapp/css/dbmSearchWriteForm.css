@@ -97,9 +97,10 @@
 	
 	/* ==================== 정기적으로 - 날짜 설정 =================== */
 	#regularDateDiv {display:inline-block; width:60%; text-align:center;}
-	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:70%; border:2px solid gray; border-radius:20%; margin-right:20px;}
+	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:70%; border:2px solid gray; border-radius:20%; margin-right:30px;}
 	#regularDateDiv #startDateDiv>input{width:35%; height:40px; margin:0 5%; text-align:center; border:1px solid gray; border-radius:15px;}
 	#regularDateDiv #startDateDiv>hr{position:relative; left:100%;width:50%;border:0;height:10px;background-color:gray;}
+	#regularDateDiv #startDateDiv>img{display:none;position:relative;left:130%;bottom:50px;width:50px;height:50px;}
 	#regularDateDiv #startDateDiv>input[type=text]{font-weight:bold;}
 	/* ===================== =====================*/
 	#regularDateDiv #selectDayDiv{width:100%; overflow:hidden; height:auto; border:2px solid gray; border-radius:40%;}
@@ -137,6 +138,7 @@
 	#specificDateDiv>div{display:inline-block; width:100%;}
 	/* ========================= 특정날짜 선택 ======================== */
 	
+	#submitDiv{display:inline-block; text-align:center;width:50%}
 	input[type=submit]{width:100%; height:40px; border:none; border-radius:10px; background-color:#ff5400; color:#EFEFEF; margin:30px 0;}
 	
 	#footer{margin-bottom:300px;}

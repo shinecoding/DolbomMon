@@ -336,6 +336,8 @@
 		});
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
+			$("#boom").fadeIn(100);
+			$("#boom").fadeOut(100);
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
@@ -546,7 +548,7 @@
 					<div id="startDateDiv">
 						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
 						<input type="button" id="endDateBtn" value="돌봄 종료일 선택" />
-						<hr/>
+						<hr/><img src="<%=request.getContextPath()%>/img/boom.png" id="boom"/>
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
 						<input type="text" id="end_date" name="end_date" readonly="readonly" />
 						
@@ -609,7 +611,7 @@
 			</div>
 			
 			<div class="title">입력한 정보를 확인 후 등록해주세요</div>
-			<div style="text-align:center;width:50%">
+			<div id="submitDiv" >
 				<input type="submit" value="등록하기" />
 			</div>
 			
