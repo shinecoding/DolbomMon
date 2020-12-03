@@ -97,8 +97,9 @@
 	
 	/* ==================== 정기적으로 - 날짜 설정 =================== */
 	#regularDateDiv {display:inline-block; width:60%; text-align:center;}
-	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:20px; width:70%; border:2px solid gray; border-radius:20%;}
+	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:70%; border:2px solid gray; border-radius:20%; margin-right:20px;}
 	#regularDateDiv #startDateDiv>input{width:35%; height:40px; margin:0 5%; text-align:center; border:1px solid gray; border-radius:15px;}
+	#regularDateDiv #startDateDiv>hr{position:relative; left:100%;width:50%;border:0;height:10px;background-color:gray;}
 	#regularDateDiv #startDateDiv>input[type=text]{font-weight:bold;}
 	/* ===================== =====================*/
 	#regularDateDiv #selectDayDiv{width:100%; overflow:hidden; height:auto; border:2px solid gray; border-radius:40%;}
