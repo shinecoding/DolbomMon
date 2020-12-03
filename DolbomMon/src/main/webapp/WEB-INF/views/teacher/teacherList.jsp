@@ -60,7 +60,10 @@
 </style>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container" >
 <a href="teacherSearchMap">선생님 지도로 찾기</a><br/>
 <a href="payment">결제시스템</a>

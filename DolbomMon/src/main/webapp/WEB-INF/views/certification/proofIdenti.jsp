@@ -113,6 +113,10 @@
 </script>	
 </head>
 <body>
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="title">
 	   		<div id="titlefont">등초본 인증</div>

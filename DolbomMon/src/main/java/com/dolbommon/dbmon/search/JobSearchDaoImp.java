@@ -1,5 +1,6 @@
 package com.dolbommon.dbmon.search;
 
+import java.util.HashSet;
 import java.util.List;
 
 public interface JobSearchDaoImp {
@@ -14,6 +15,9 @@ public interface JobSearchDaoImp {
 	public List<TeacherVO> selectTMem(); 
 	
 	public List<TeacherVO> selectTAct1();
-	
+	//모든 선생 위치
+	public HashSet<TeacherVO> selectAllTeacher();
+	//내 위치
+	public TeacherVO selectTTMap(String userid);
 }
 
