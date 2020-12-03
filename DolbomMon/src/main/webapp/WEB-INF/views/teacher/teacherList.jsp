@@ -85,7 +85,7 @@
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">계정관리</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
 
