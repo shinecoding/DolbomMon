@@ -85,7 +85,7 @@ $(function(){
 				<textarea class="form-control" id="content" name="content">${vo.content}</textarea>
 			</div>
 			<br/>
-			
+			<!-- 
 			<!-- 첫번째 첨부파일이 있을 때 -->			
 			<c:if test="${vo.filename1!=null}">
 				<div>${vo.filename1} <b>X</b></div>
@@ -110,6 +110,7 @@ $(function(){
 				<input type="file" id="filename" name="filename">
 			</div>
 			 -->
+			  -->
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>
