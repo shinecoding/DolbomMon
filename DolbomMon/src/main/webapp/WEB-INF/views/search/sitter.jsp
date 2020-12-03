@@ -114,18 +114,22 @@
 	
 		
 		//========================ajax=========
-	    $(document).on("click", "#act1", (function(){
-			var url = "/dbmon/searchAct1";
+	    $(document).on("click", "#actBox>button", (function(){
+	    	var activity_type = $(this).text();
+	    	console.log(activity_type);
+	    	var url = "/dbmon/searchAct1";
 			//var params = "activity_type=실내놀이";
 			$.ajax({
 				url:url,
 				//data:params,
 				type:'GET',
 				success:function(result){
+					
 					var $result = $(result);
 					var tag = "";
 					
 					$result.each(function(idx, vo){
+					
 						tag +="<div>"+vo.userid+"</div>";
 
 						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
@@ -177,12 +181,18 @@
 						
 					});
 					tag += "";
-						$("#cardBox").html(tag);
+						$("#cardBox").html(tag); 
 						}, error: function(){
-					console.log("리스트 받기 에러");';
+					console.log("리스트 받기 에러");
 					}
-					})
-				});
+						
+	    	
+	    	
+	    	
+	    	
+				})
+				
+	    }));
 			
 			
 			
@@ -225,7 +235,7 @@
   
 
    <div id="actBox">
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1">실내놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책 읽기</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>

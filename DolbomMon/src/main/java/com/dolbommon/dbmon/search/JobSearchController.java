@@ -72,10 +72,26 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchAct1() {
-		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.selectTAct1();
+	public ModelAndView searchAct1(HttpSession ses) {
 		
-		return list;
+		String userid = (String)ses.getAttribute("userid");
+		
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
+		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
+		TeacherVO mvo = dao.selectTTMap(userid); //내 위치
+		int totalRecord = dao.getTotalRecord();	//총 게시물 수
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("hash", hash);
+		mav.addObject("mvo", mvo);
+		mav.addObject("totalRecord", totalRecord);//총 게시물 수
+		mav.setViewName("search/sitter");
+		
+		return mav;
 	}
 }
