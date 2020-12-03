@@ -22,26 +22,20 @@
 	}
 	#userBox{
 		margin: 0 auto;
-		width: 700px;
-		float: left;
+		width: 500px;
 	}
-	#typeBox{
+	#typeBox, #idBox, #telBox{
+		margin: 0 auto;
 		float: left;
-		margin-left: 120px;
-		width: 230px;
+		width: 500px;
+		
 		padding: 5px;
 	}
-	#categ{
-		float: right;
-		margin-right: 120px;
-		width: 230px;
-		padding: 5px;
-	}
-	.categDiv{
+	.positionDiv{
 		width: 300px;
 		padding: 5px;
 	}
-	.typeDiv{
+	.positionBox{
 		position: relative;
 		width: 300px;
 		padding: 5px;
@@ -67,27 +61,29 @@
 	<div id="top">
 	<b>계정관리</b>
 	</div>
-	<c:forEach var="vo" items="${list}">
-		<div id="userBox">
-			
+	<div id="userBox">
+		<c:forEach var="vo" items="${list}">
 		 	<div id="typeBox">
-		 		<div class="typeDiv">회원 유형</div>
-		 		<div class="typeDiv">사용중인 아이디</div>
-		 		<div class="typeDiv">가입한 휴대폰 번호</div>
-		 	</div>	
-		 	<div id="categ">
-			 	<c:if test="${vo.who=='T'}">
-			 		<div class="categDiv">선생님 맘시터</div>
-			 	</c:if>
-		 		<c:if test="${vo.who!='T'}">
-		 			<div class="categDiv">부모님 회원</div>
+		 		<div class="positionBox">회원 유형</div>
+		 		<c:if test="${vo.who=='T'}">
+		 			<div class="positionDiv">선생님 맘시터</div>
 		 		</c:if>
-		 		<div class="categDiv">${vo.userid}</div>
-		 		<div class="categDiv">${vo.tel1}</div>
+		 		<c:if test="${vo.who!='T'}">
+		 			<div class="positionDiv">부모님 회원</div>
+		 		</c:if>
+		 	</div>
+			<div id="idBox">
+		 		<div class="positionBox">사용중인 아이디</div>
+		 		<div class="positionDiv">${vo.userid}</div>
 		 	</div>	
-	
-		</div>
-	</c:forEach>
+			<div id="telBox">
+		 		<div class="positionBox">가입한 휴대폰 번호</div>
+		 		<div class="positionDiv">${vo.tel1}</div>
+		 	</div>	
+		
+		</c:forEach>
+		
+	</div>
 	<div id="space"></div>
 	<div class="list-group1">
 		<a href="#" class="list-group-item list-group-item-action"><b>회원정보 수정</b></a>
