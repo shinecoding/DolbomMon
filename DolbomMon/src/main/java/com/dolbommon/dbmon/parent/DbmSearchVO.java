@@ -8,9 +8,10 @@ public class DbmSearchVO {
 	private String pw_activity;
 	private int wish_wage;
 	private String consultation;
-	private int wish_age;
+	private String wish_age;
 	private String wish_gender;
 	private String content;
+	private String writedate;
 	
 	public int getJob_board_no() {
 		return job_board_no;
@@ -54,10 +55,10 @@ public class DbmSearchVO {
 	public void setConsultation(String consultation) {
 		this.consultation = consultation;
 	}
-	public int getWish_age() {
+	public String getWish_age() {
 		return wish_age;
 	}
-	public void setWish_age(int wish_age) {
+	public void setWish_age(String wish_age) {
 		this.wish_age = wish_age;
 	}
 	public String getWish_gender() {
@@ -72,4 +73,11 @@ public class DbmSearchVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	
 }

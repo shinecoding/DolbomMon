@@ -108,12 +108,7 @@ public class MemberController {
 			return mav;
 		}
 		
-		// 아이디 중복검사 창
-		@RequestMapping("/idCheck")
-		public String idCheckWindow() {
-			return "register/idCheck";
-		}
-		
+		// 아이디 중복검사 
 		@RequestMapping(value = "/idCheckAjax", method = RequestMethod.POST)
 		@ResponseBody
 		public int useridChk(@RequestParam("userid") String userid) {
@@ -123,10 +118,14 @@ public class MemberController {
 			return result;
 		}
 		
-		// SMS 인증창 
-		@RequestMapping("/smsIdentity")
-		public String smsIdentity() {
-			return "register/sendSMS";
+		// 연락처 중복검사
+		@RequestMapping(value = "/telCheckAjax", method = RequestMethod.POST)
+		@ResponseBody
+		public int usertelChk(@RequestParam("tel1") String tel1) {
+			System.out.println("ㅠㅠ");
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			int result = dao.memberUsertelChk(tel1);
+			return result;
 		}
 		
 		@RequestMapping(value = "/sendSms", method = RequestMethod.POST)
@@ -140,7 +139,7 @@ public class MemberController {
 		       
 		    HashMap<String, String> set = new HashMap<String, String>();
 
-		    set.put("to", (String)request.getParameter("to")); // 받는 사람
+		    set.put("to", (String)request.getParameter("tel1")); // 받는 사람
 		    set.put("from", "01096801682"); // 발신번호
 		    set.put("text", "돌봄몬 본인인증 \n 인증번호는 ["+(String)request.getParameter("text")+"]입니다"); // 문자내용
 		    set.put("type", "sms"); // 문자 타입

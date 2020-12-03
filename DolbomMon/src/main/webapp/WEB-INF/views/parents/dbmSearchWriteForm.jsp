@@ -293,10 +293,20 @@
 		});
 		
 		$("input[id=avgWage]").change(function(){
+			var wage = $("#wish_wage").val;
+			
+			if(wage<8590){
+				$("#wish_wage").css("color", "gray");
+				$("#minWage").html("최저시급(8590원)이상의 시급을 입력해주세요");
+			}else {
+				$("#wish_wage").css("color", "white");
+				$("#minWage").html("")
+			}
+			
 			if(this.checked){
-				$("#desired_wage").val("8600").attr("readonly", "readonly");
+				$("#wish_wage").val("8600").attr("readonly", "readonly");
 			}else{
-				$("#desired_wage").prop("readonly", false);
+				$("#wish_wage").prop("readonly", false);
 			}
 		});
 		
@@ -355,12 +365,12 @@
 		
 		/////////////////////////// 등록하기 버튼 누를 시 ////////////////////////
 		$("#writeFrm").submit(function(){
-			var wage = $("#desired_wage").val();
+			var wage = $("#wish_wage").val();
 			if(wage==null || wage==""){
-				alert("시급을 입력해주세요");
+				alert("희망시급을 입력해주세요");
 				return false;
 			}else if(wage<8590){
-				alert("시급은 최소 8590원 이상이어야합니다.");
+				alert("희망시급은 최소 8590원 이상이어야합니다.");
 				return false;
 			}
 			return true;
@@ -579,7 +589,7 @@
 			<div id="paymentDiv">
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
-					<input type="number" inputmode="numeric" id="desired_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
+					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
 				</div>
 				<span id="minWage" style="color:orange">
 					

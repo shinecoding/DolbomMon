@@ -70,21 +70,23 @@ public class ParentController {
 		TransactionStatus status = transactionManager.getTransaction(def);
 		
 		dsVO.setUserid((String)ses.getAttribute("userid"));
+		
+		String consultation = (String)dsVO.getConsultation();
+		if(consultation==null || consultation=="") {
+			dsVO.setConsultation("N");
+		}
+		System.out.println("consultation =>" + dsVO.getConsultation());
+		
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
-		String time_type = req.getParameter("time_type");
+		String time_type = (String)dsVO.getTime_type();
 		int result = 0;
 		
 		try {
-			System.out.println("typetype => " + time_type);
-			System.out.println("DB작업 ===>");
 			dao.insertDbmSearch(dsVO);
-			System.out.println("글 테이블 등록완료");
 			dao.insertDsChildInfo(dsVO, cVO);
-			System.out.println("글, 자녀 테이블 등록완료");
-			if(time_type=="S") {
-				System.out.println("timeTyep ㅅㅂ");
+			if(time_type.equals("S")) {
 				result = dao.insertDsSpecificDate(dsVO, sdVO);
 			}else {
 				result = dao.insertDsRegularDate(dsVO, rdVO);
