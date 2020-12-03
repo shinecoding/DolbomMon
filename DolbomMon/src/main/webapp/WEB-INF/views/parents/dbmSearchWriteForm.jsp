@@ -118,7 +118,6 @@
 		
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
-				console.log("1번 라디오 들어옴");
 				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
 				$("#specificDateDiv").css("display", "inline-block");
 				$("#timeDiv").css("display", "inline-block");
@@ -126,7 +125,6 @@
 				$("#regularDateDiv").css("display", "none");
 				
 			}else if($("#timeType2").is(":checked")){
-				console.log("2번 라디오 들어옴");
 				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
 				$("#regularDateDiv").css("display", "inline-block");
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
