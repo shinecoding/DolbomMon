@@ -20,7 +20,7 @@ public class ChatDAO {
 		try {
 			result = dao.insertRoom(room);
 		}catch(Exception e) {
-			System.out.println("룸 생성 에러"+e.getMessage());
+			//System.out.println("룸 생성 에러"+e.getMessage());
 			return result;
 		}
 		return result;
@@ -35,7 +35,7 @@ public class ChatDAO {
 			result = dao.roomCheck(userid, userid_t);
 			
 		}catch(Exception e) {
-			System.out.println("룸 체크 에러"+e.getMessage());
+			//System.out.println("룸 체크 에러"+e.getMessage());
 			return result;
 		}
 		return result;
@@ -49,7 +49,7 @@ public class ChatDAO {
 		try {
 			result = dao.selectAllRoom(userid);
 		}catch(Exception e) {
-			System.out.println("방 목록 전체 가져오기 에러"+e.getMessage());
+			//System.out.println("방 목록 전체 가져오기 에러"+e.getMessage());
 			return result;
 		}
 		return result;
@@ -63,7 +63,7 @@ public class ChatDAO {
 		try {
 			result = dao.selectRoom(roomNo);
 		}catch(Exception e) {
-			System.out.println("메시지 가져오기 에러"+e.getMessage());
+			//System.out.println("메시지 가져오기 에러"+e.getMessage());
 			return result;
 		}
 		
@@ -76,7 +76,7 @@ public class ChatDAO {
 		try {
 			result = dao.insertChat(chat);
 		}catch(Exception e) {
-			System.out.println("채팅입력 에러"+e.getMessage());
+			//System.out.println("채팅입력 에러"+e.getMessage());
 			return result;
 		}		
 		return result;
@@ -89,7 +89,7 @@ public class ChatDAO {
 		try {
 			result = dao.updateNewChat(roomseq, lastChat, userCheck);
 		}catch(Exception e) {
-			System.out.println("새로운 채팅 등록 에러"+e.getMessage());
+			//System.out.println("새로운 채팅 등록 에러"+e.getMessage());
 			return result;
 		}
 		return result;
@@ -102,7 +102,7 @@ public class ChatDAO {
 		try {
 			result = dao.updateChatCheck(roomseq,userCheck);
 		}catch(Exception e) {
-			System.out.println("채팅 확인 등록 에러"+e.getMessage());
+			//System.out.println("채팅 확인 등록 에러"+e.getMessage());
 			return result;
 		}
 		return result;
@@ -115,7 +115,7 @@ public class ChatDAO {
 		try {
 			resultDTO = dao.selectNewchat(room);
 		}catch(Exception e) {
-			System.out.println("접속자 확인 에러"+e.getMessage());
+			//System.out.println("접속자 확인 에러"+e.getMessage());
 			return resultDTO;
 		}
 		
@@ -129,7 +129,7 @@ public class ChatDAO {
 		try {
 			result = dao.roomTimeUpdate(userid, userid_t);
 		}catch(Exception e) {
-			System.out.println("채팅룸 시간 갱신 에러"+e.getMessage());
+			//System.out.println("채팅룸 시간 갱신 에러"+e.getMessage());
 			return result;
 		}
 		return result;
@@ -142,7 +142,7 @@ public class ChatDAO {
 		try {
 			result = dao.roomDelete(userid, userid_t);
 		}catch(Exception e) {
-			System.out.println("채팅룸 시간 갱신 에러"+e.getMessage());
+			//System.out.println("채팅룸 시간 갱신 에러"+e.getMessage());
 			return result;
 		}
 		return result;
