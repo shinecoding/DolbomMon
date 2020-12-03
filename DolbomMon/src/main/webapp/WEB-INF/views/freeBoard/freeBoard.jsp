@@ -13,7 +13,7 @@
 	.container{
 		width: 900px;	
 	}
-	#top{
+	#top_freeboard{
 		margin: 15px;
 		padding: 15px;
 		text-align: center;
@@ -33,8 +33,11 @@
 	a:link, a:visited, a:hover{
 	 	color: black;
 	 }
-	body{
+	/* body{
 	 	font-size: 0.9em;
+
+	 }	 */
+	 
 	 }
 	 ul, li{
 		margin: 0px;
@@ -57,23 +60,27 @@
 		text-align: center;
 		font-size: 1.3em;
 	}	-->
+
 </style>
 </head>
 
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
+
+
 <hr/><br/>
 
+
 <div class="container">
-<div id="top">
+<div id="top_freeboard">
 <b>자유게시판</b>
 </div>
 <div>
 	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
 </div>
-<div><br/>총 게시물 수 : ${totalRecord}</div>
-<div id="board">
+<div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
+<div id="board" style="font-size: 0.9em;">
 <br/>
 	<table class="table table-hover">
 		<thead>

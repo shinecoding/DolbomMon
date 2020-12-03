@@ -1,4 +1,4 @@
-package com.dolbommon.dbmon.Teacher;
+package com.dolbommon.dbmon.search;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,8 +23,126 @@ public class TeacherVO {
 	private String last_edit;
 	private int headcount;
 	private String discussion;
+	private int no;
+	private String userpwd;
+	private String username;
+	private String gender;
+	private String birth;
+	private String tel1;
+	//private String tel2;
+	private String email;
+	private String email1;
+	private String email2;
+	private String addr;
+	private String addrdetail;
+	private String zipcode;
+	private String regdate;
+	private String memo;
+	private String lat;
+	private String lng;
+	private String identi_status;
+	private String school_status;
+	private String license_status;
+	private String crime_status;
 
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getUserpwd() {
+		return userpwd;
+	}
+	public void setUserpwd(String userpwd) {
+		this.userpwd = userpwd;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getBirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getTel1() {
+		return tel1;
+	}
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
+	}
+	public String getEmail() {
+		email = email1 + "@" + email2;
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getEmail1() {
+		return email1;
+	}
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+	public String getEmail2() {
+		return email2;
+	}
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String address) {
+		this.addr = address;
+	}
+	public String getAddrdetail() {
+		return addrdetail;
+	}
+	public void setAddrdetail(String addrdetail) {
+		this.addrdetail = addrdetail;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
 	public MultipartFile getFilename() {
 		return filename;
 	}
@@ -145,7 +263,30 @@ public class TeacherVO {
 	public void setDiscussion(String discussion) {
 		this.discussion = discussion;
 	}
-	
+	public String getIdenti_status() {
+		return identi_status;
+	}
+	public void setIdenti_status(String identi_status) {
+		this.identi_status = identi_status;
+	}
+	public String getSchool_status() {
+		return school_status;
+	}
+	public void setSchool_status(String school_status) {
+		this.school_status = school_status;
+	}
+	public String getLicense_status() {
+		return license_status;
+	}
+	public void setLicense_status(String license_status) {
+		this.license_status = license_status;
+	}
+	public String getCrime_status() {
+		return crime_status;
+	}
+	public void setCrime_status(String crime_status) {
+		this.crime_status = crime_status;
+	}
 	
 	
 	
