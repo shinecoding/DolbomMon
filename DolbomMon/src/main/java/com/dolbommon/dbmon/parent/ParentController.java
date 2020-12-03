@@ -55,7 +55,12 @@ public class ParentController {
 	public String parentWage() {
 		return "/parents/parentWage";
 	}
-	
+
+	@RequestMapping("/scheduleEdit")
+	public String scheduleEdit() {
+		return "/parents/scheduleEdit";
+
+	}
 	@RequestMapping("/dbmSearchWriteForm")
 	public String dbmSearchWriteForm() {
 		return "/parents/dbmSearchWriteForm";
@@ -100,6 +105,7 @@ public class ParentController {
 		mav.setViewName("/parents/writeResult");
 		
 		return mav;
+
 	}
 
 }

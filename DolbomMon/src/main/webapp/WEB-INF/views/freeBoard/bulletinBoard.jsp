@@ -37,9 +37,15 @@
 	
 </style>
 </head>
-<jsp:include page="../top.jsp"/>
+
 <body>
+<div id="topMain">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/>
+</div>
 <div class="container">
+<!-- -------------------상단메뉴------------- -->
+
 <div id="top">
 <b>신고게시판</b>
 </div>

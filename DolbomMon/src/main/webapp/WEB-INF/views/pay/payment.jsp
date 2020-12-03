@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
 function paymentTest(){
+
 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp05848718');
 

@@ -1,13 +1,12 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,19 +38,20 @@ public class TeacherController {
 		this.sqlSession = sqlSession;
 	}
 
-	// =======================================================
-
 	@RequestMapping("/teacherList")
 	public String teacherList() {
 		return "/teacher/teacherList";
 	}
-
-
+	
 	@RequestMapping("/teacherView")
-	public ModelAndView teacherView(HttpSession ses) {//
-
+	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
+		
 		String userid = (String) ses.getAttribute("userid");
-
+		if(req.getParameter("userid")!=null) {
+			userid = req.getParameter("userid");
+		};
+		
+		System.out.println("test"+userid);
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
@@ -93,6 +93,7 @@ public class TeacherController {
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
+
 
 	@RequestMapping("/teacherHeart")
 	public String teacherHeart() {
@@ -581,7 +582,7 @@ public class TeacherController {
 		}
 		return mav;		
 	}
-
+/*
 	//학부모가 선생 찾을 때 보는 지도
 	@RequestMapping("/teacherSearchMap")
 	public ModelAndView teacherSearchMap(HttpSession ses) {
@@ -596,7 +597,7 @@ public class TeacherController {
 		mav.setViewName("/teacher/teacherSearchMap");
 		return mav;
 	}
-	
+	*/
 	//선생 개인 위치 수정용 지도
 	@RequestMapping("/teacherMap")
 	public ModelAndView teacherMap(HttpSession ses) {

@@ -25,7 +25,6 @@ public interface TeacherDaoImp {
 	public MemberVO selectTMap(String userid);
 	public int updateTMap(MemberVO mvo);
 	public int updateArea(TeacherVO vo);
-	//모든 선생 위치
-	public HashSet<MemberVO> selectAllTeacher();
+	
 }
 
