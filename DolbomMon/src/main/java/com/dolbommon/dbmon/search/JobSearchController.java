@@ -70,12 +70,11 @@ public class JobSearchController {
 	
 	}
 	
-	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchAct1(TeacherVO vo) {
+	public List<TeacherVO> searchAct1() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.selectTAct1();
-		
 		
 		return list;
 	}

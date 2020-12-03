@@ -65,10 +65,17 @@
 	
 	}
 	
+	.card>.profilepic {
+	width:100%; 
+	height:300px;
+	border-top-left-radius:20px; 
+	border-top-right-radius:20px;
+	}
 	
 	.card{
-	margin: 17px; 
+	margin: 20px 17px; 
 	width:30%; 
+	height: 500px;
 	border:1px orange solid; 
 	border-radius:20px; 
 	float:left; 
@@ -105,11 +112,11 @@
 	    });
 	    
 	
-		/*
+		
 		//========================ajax=========
-		$("#act1").click(function(){
+	    $(document).on("click", "#act1", (function(){
 			var url = "/dbmon/searchAct1";
-			//var params = "act=실내돕기";
+			//var params = "activity_type=실내놀이";
 			$.ajax({
 				url:url,
 				//data:params,
@@ -118,18 +125,67 @@
 					var $result = $(result);
 					var tag = "";
 					
-					$result.each(function(idx, tvo){
-						
+					$result.each(function(idx, vo){
+						tag +="<div>"+vo.userid+"</div>";
+
+						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+						tag += '<img class="profilepic" src=';
+						if(vo.pic==null){
+							tag +='"img/profilepic.png"';
+						} else {
+							tag +='"upload/' +vo.pic+ '"';
+						}
+						tag += '/><br/>';
+						tag += '<div class="card-body">';
+							tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
+							
+							tag += '<span class="ml-2" style="font-size:0.7em">';
+							if(vo.last_edit>525600){
+								tag += vo.last_edit/525600+'년';
+							} else if(vo.last_edit>43200){
+								tag += vo.last_edit/43200 +'달';
+							} else if(vo.last_edit>1440){
+								tag += vo.last_edit/1440 +'일';
+							} else if(vo.last_edit>60){
+								tag += vo.last_edit/60 +'시간';
+							} else {
+								tag += vo.last_edit +'분';
+							}
+							tag += '</span>';
+							tag += '<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">';
+							tag += '</h5>';
+										
+							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
+							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
+							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+							
+							if(vo.identi_status.equals("Y") || vo.license_status.equals("Y") || vo.school_status.equals("Y") || vo.crime_status.equals("Y")){
+								tag += '<hr/>';
+							}
+							if(vo.identi_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+							} else if(vo.license_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+							} else if(vo.school_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+							} else if(vo.crime_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+							}
+							
+							tag += '</div>';
+							tag += '</div>';
 						
 					});
-					$("").html(tag);
-				}, error: function(){
-					console.log("리스트 받기 에러");
-				}
-			})
-		})//에이잭스
-		
-		*/
+					tag += "";
+						$("#cardBox").html(tag);
+						}, error: function(){
+					console.log("리스트 받기 에러");';
+					}
+					})
+				});
+			
+			
+			
 	});//제이쿼리
 </script>
 </head>
@@ -170,18 +226,18 @@
 
    <div id="actBox">
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1">실내놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act2">등하원 돕기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act3">책 읽기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act4">야외활동</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act5">한글놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act6">영어놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act7">학습지도</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act8">체육놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act9">간단 청소</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act10">밥 챙겨주기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act11">간단 설거지</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act12">장기입주</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" id="act13">단기입주</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책 읽기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act5">한글놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act6">영어놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act7">학습지도</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act8">체육놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act9">간단 청소</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act10">밥 챙겨주기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단 설거지</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
   </div>
  
 <!-- ------------------------------- -->
@@ -196,7 +252,7 @@
 	<div id="cardBox" class="d-inline-block" style="width:100%;">
 	<c:forEach var="vo" items="${list}">
 		<div class="card" onclick="location.href='teacherView?userid=${vo.userid}'" >
-			<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if>  style="width:100%; height:300px;border-top-left-radius:20px; border-top-right-radius:20px;" alt="${vo.userid}"/><br/>
+			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
 			<div class="card-body">
 				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
 				<!-- 마지막 업데이트일 -->
@@ -213,20 +269,22 @@
 						<c:otherwise>${vo.last_edit}분</c:otherwise>
 					</c:choose>
 				</span>
-			<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">
+				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">
 				</h5>
 							
 				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
 				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
-				<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 수 : ${vo.headcount}명</h6>
-		<hr/>
+				<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 		
-		<h6>인증<div class="badge badge-pill badge-warning">등초본</div></h6>
-		</div>	
-		
-			
-		
-	</div>
+				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
+				<hr/>
+				</c:if>
+				<c:if test="${vo.identi_status == 'Y' }"><div class="badge badge-pill badge-warning align-top mr-1">등초본</div></c:if>
+				<c:if test="${vo.license_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">선생님</div></c:if>
+				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
+				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄클린</div></c:if>
+			</div>	
+		</div>
 	</c:forEach>
 	
 	</div>
