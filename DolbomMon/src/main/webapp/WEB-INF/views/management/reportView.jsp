@@ -10,15 +10,24 @@
 <link rel="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<script>
+	$(function(){
+		$(document).on("click",".btn-outline-info",function(){
+			document.reportForm.submit();
+		})
+		
+	});
+
+</script>
 <style>
 	*, html{
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	html {
-    color: #222;
-    font-weight: 100;
-    font-size: 1em;
-    line-height: 1.375;
+	    color: #222;
+	    font-weight: 100;
+	    font-size: 1em;
+	    line-height: 1.375;
 	}
 
 	body{
@@ -237,12 +246,14 @@
 			<button class="btn btn-outline-info">제출</button>
 		</div>
 	</div>
+	<form name="reportForm" method="post" action="/dbmon/reportInsert">
 	<div style="padding:0px 20px;">
 		<div style="text-align:center; margin:20px 0;">
 			<img src="icon/m-general.png" style="border-radius:60px; margin-bottom:10px; height:60px; width:60px;"><br/>
-			<span style="font-size:14px; color:#585858;">no.322312</span>
-			<span id="nameSpan">이○현</span>
+			<span style="font-size:14px; color:#585858;">no.${vo.no}</span>
+			<span id="nameSpan">${firstName}○${lastName}</span>
 		</div>
+	
 		<div class="middleDiv">
 			<span style="font-weight:900; margin:15px 0;">신고 유형을 선택해주세요.</span>
 			<div class="radioBtn" style="margin-top:5px;">
@@ -277,8 +288,9 @@
 		</div>
 	</div>
 		<div class="middleDiv2">
-			<textarea placeholder="예). 부적절한 사진이 올라가 있습니다."></textarea>
-		</div>		
+			<textarea name="content" placeholder="예). 부적절한 사진이 올라가 있습니다."></textarea>
+		</div>	
+	</form>	
 		<p class="bottomDiv">
 			* 이 회원이 신고대상에 해당하는지 다시 한번 확인하여 주시기 바랍니다. <br/><br/>
 			* 신고 내용이 등록되면, 돌봄몬팀이 조사에 들어갈 것입니다. <br/><br/>
