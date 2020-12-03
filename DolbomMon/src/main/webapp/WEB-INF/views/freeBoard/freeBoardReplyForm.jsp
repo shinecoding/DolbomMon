@@ -57,6 +57,8 @@ $(function(){
 </script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 <div class="container">
 <div id="top">
 <b>답글 쓰기</b>
@@ -82,15 +84,6 @@ $(function(){
 				<textarea class="form-control" id="content" name="content" placeholder="글내용을 입력하세요"></textarea>
 			</div>
 			<br/>
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Upload</button>
-				</div>
-				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
-					<label class="custom-file-label" for="inputGroupFile03">파일을 선택하세요</label>
-				</div>
-			</div>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="등록"/>
 		</div>
 	</form>

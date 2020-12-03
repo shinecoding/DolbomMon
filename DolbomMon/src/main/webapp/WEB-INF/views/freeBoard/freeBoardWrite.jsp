@@ -39,7 +39,6 @@
 $(function(){
 	//ckeditor를 textarea와 연결하기
 	CKEDITOR.replace("content",{filebrowserUploadUrl:'/dbmon/imageUpload.do'});
-	
 	//데이터 입력유무 확인
 	$("#freeBoardFrm").submit(function(){
 		if($("#subject").val()==""){
@@ -60,11 +59,13 @@ $(function(){
 </script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 <div class="container">
 <div id="top">
 <b>게시판 글쓰기</b>
 </div>
-	<form method="post" action="/dbmon/freeBoardWriteOk" id="freeBoardFrm">
+	<form method="post" action="/dbmon/freeBoardWriteOk" id="freeBoardFrm" enctype="multipart/form-data">
 		<div class="form-group">
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -80,20 +81,16 @@ $(function(){
 	 		<label for="subject">제목</label>
 			<input type="text" maxlength="60" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요"><br/>
 			<div>
-			<label for="content">글내용</label><br/>
+				<label for="content">글내용</label><br/>
 				<textarea class="form-control" id="content" name="content" placeholder="글내용을 입력하세요"></textarea>
 			</div>
 			<br/>
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Upload</button>
-				</div>
-				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
-					<label class="custom-file-label" for="inputGroupFile03">파일을 선택하세요</label>
-				</div>
-			</div>			
-			<!-- <input type="submit" id="post" class="btn btn-warning" value="등록"/> -->
+			<div>
+				<input type="file" id="filename" name="filename">
+				<input type="file" id="filename" name="filename">
+			</div>
+			
+			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="등록"/>
 		</div>
 	</form>

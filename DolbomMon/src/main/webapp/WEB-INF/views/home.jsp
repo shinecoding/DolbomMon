@@ -5,12 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Dolbommon</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" /><%
-String manager = (String)session.getAttribute("managerStatus");
-if(manager!="Y"){
-%>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<%} %>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>

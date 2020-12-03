@@ -12,6 +12,14 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+	$(function(){
+		$(document).on("click", "#report", function(){
+			location.href="/dbmon/report?userid=${vo.userid}";
+		})
+		
+	});
+</script>
 <style>
 .container{width:800px;}
 i{color:gray;}
@@ -36,6 +44,9 @@ font-weight:bold;
 img{
 width:50%;
 }
+#report{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -44,7 +55,7 @@ width:50%;
 <hr/><br/>
 </div>
 <div class="container">
-	<div class="badge badge-warning badge-pill float-right mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
+	<div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
    <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
    <ul class="list-group">
    		
@@ -265,7 +276,7 @@ width:50%;
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">
-   		<c:forEach var="evo" items="${hash}">
+   		<c:forEach var="evo" items="${list}">
    			<b>${evo.exp_content}</b><br/>
    			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
    		</c:forEach>	

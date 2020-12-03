@@ -93,6 +93,7 @@
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">계정관리</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
    </ul>
 </div>
 

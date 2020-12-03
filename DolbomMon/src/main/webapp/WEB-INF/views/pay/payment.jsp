@@ -16,39 +16,39 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
 function paymentTest(){
-   var IMP = window.IMP; // 생략가능
-   IMP.init('imp05848718');
+	var IMP = window.IMP; // 생략가능
+	IMP.init('imp05848718');
 
-      IMP.request_pay({
-          pg : 'inicis', // version 1.1.0부터 지원.
-          pay_method : 'card',
-          merchant_uid : 'merchant_' + new Date().getTime(),
-          name : '돌봄몬 결제',
-          amount : 100, //판매 가격
-          buyer_email : '${mvo.email}',
-          buyer_name : '${mvo.username}',
-          buyer_tel : '${mvo.tel1}',
-          buyer_addr : '${mvo.addr}',
-          buyer_postcode : '${mvo.zipcode}',
-          m_redirect_url : 'http://localhost:9090/dbmon/'
-      }, function(rsp) {
-          if ( rsp.success ) {
-                var msg = '결제가 완료되었습니다.';
-                 msg += '고유ID : ' + rsp.imp_uid;
-                 msg += '상점 거래ID : ' + rsp.merchant_uid;
-                 msg += '결제 금액 : ' + rsp.paid_amount;
-                 msg += '카드 승인번호 : ' + rsp.apply_num;
-                  alert(msg);
-                   location.href="http://localhost:9090/dbmon/"
-          } else {
-              var msg = '결제에 실패하였습니다.';
-              msg += '에러내용 : ' + rsp.error_msg;
-              alert(msg);
-          }
-          
-      });
-      
-   }
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '돌봄몬 결제',
+		    amount : 100, //판매 가격
+		    buyer_email : '${mvo.email}',
+		    buyer_name : '${mvo.username}',
+		    buyer_tel : '${mvo.tel1}',
+		    buyer_addr : '${mvo.addr}',
+		    buyer_postcode : '${mvo.zipcode}',
+		    m_redirect_url : 'http://localhost:9090/dbmon/'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		    	   var msg = '결제가 완료되었습니다.';
+		           msg += '고유ID : ' + rsp.imp_uid;
+		           msg += '상점 거래ID : ' + rsp.merchant_uid;
+		           msg += '결제 금액 : ' + rsp.paid_amount;
+		           msg += '카드 승인번호 : ' + rsp.apply_num;
+		   	   	alert(msg);
+			   	 	location.href="http://localhost:9090/dbmon/"
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        alert(msg);
+		    }
+		    
+		});
+		
+	}
 
 </script>
 </head>
