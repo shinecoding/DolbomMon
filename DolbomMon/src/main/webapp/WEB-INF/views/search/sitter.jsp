@@ -10,13 +10,18 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
+
 	.container{width:1100px;}
 
+
 	img{ height:110px; width:110px;}
+
 	
 	<!-- 액션 캡슐 버튼 -->
+
 	.btn1{
 	    color: #434343;
 	    padding: 10px 14px;
@@ -84,6 +89,8 @@
 	i{
 	color:orange;
 	}
+
+
 </style>
 
 <script>
@@ -93,6 +100,7 @@
 	    //  $(document).on("click",".wrapper2>ul", function(){
 	     //     location.href="teacherView?userid="+$(this).attr('id');   
 	    //   });
+
 	    /* 
 	    function filterLoc(){
 	    	  var value = document.getElementById("locFilter").value.toLowerCase();
@@ -119,6 +127,7 @@
 	    	console.log(activity_type);
 	    	var url = "/dbmon/searchAct1";
 			//var params = "activity_type=실내놀이";
+
 			$.ajax({
 				url:url,
 				//data:params,
@@ -220,6 +229,7 @@
 </div>
 <input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 
+
 <form class="form-inline">
   
   <select class="custom-select border-warning mt-2 mb-2" style="width:100%;">
@@ -233,6 +243,7 @@
  
 <!-- ------------------------------- -->
   
+
 
    <div id="actBox">
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
@@ -248,6 +259,7 @@
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단 설거지</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
+
   </div>
  
 <!-- ------------------------------- -->
@@ -258,6 +270,7 @@
 		<i class="fas fa-arrow-circle-down"></i>
 	</div>
 	</div>
+
 <!-- ------------------------------- -->
 	<div id="cardBox" class="d-inline-block" style="width:100%;">
 	<c:forEach var="vo" items="${list}">
@@ -297,9 +310,8 @@
 		</div>
 	</c:forEach>
 	
-	</div>
 
-	<br/><br/>
+	</div>
 
 
 <!-- =================지도======================================== -->

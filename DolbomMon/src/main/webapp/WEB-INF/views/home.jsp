@@ -10,8 +10,9 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
-
-
+<link href="<%=request.getContextPath() %>css/style.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>css/demo.css" rel="stylesheet">
+<script src="<%=request.getContextPath() %>css/ScrollTrigger.min.js"></script>
 </head>
 
 <script>
@@ -67,7 +68,7 @@ margin: 0px;
 padding: 0px;
 list-style-type: none;
 cursor:pointer;
-font-family:"Noto Sans KR";
+
        }
    body{
       background-color:white; 
@@ -111,11 +112,18 @@ font-family:"Noto Sans KR";
           color:white;
     }
 
-
+	h3{
+		margin-top:30px;margin-bottom:30px;
+	
+	}
+	#homeWrap_ALL{width:100%;}
+	.lead{font-size:17px; /* font-weight:bold; */ color:#6c757d}
 
 </style>
 
 <body>
+<div id="homeWrap_ALL" >
+
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
@@ -130,8 +138,8 @@ font-family:"Noto Sans KR";
  <!--================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
-  <div id="list" style="max-width: 1000px; margin:0 auto;">
-  <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; margin:0 auto;">
+  <div id="list" class="block" style="width: 100%; margin:0 auto;">
+  <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; max-width:1000px; margin:0 auto;">
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
@@ -139,7 +147,7 @@ font-family:"Noto Sans KR";
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
-  <br/><br/><hr/>
+  <br/><br/><hr class="featurette-divider">
   
 <div id="teacher_chart">
 <%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 
@@ -147,9 +155,9 @@ font-family:"Noto Sans KR";
 
 
     <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7">
+<div id="mainContents4">
+    <div class="row featurette" style="width:800px; margin:0 auto;">
+      <div class="col-md-7" >
         <h2 class="featurette-heading">DOLBOMMON GUIDE<br/>Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
         <p class="lead">가장 빨리, 원하는 조건의 <br/>아이 돌보미를 구할 수 있는 <br/>
@@ -163,7 +171,7 @@ font-family:"Noto Sans KR";
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
+    <div class="row featurette" style="width:800px; margin:0 auto;">
       <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
@@ -182,7 +190,7 @@ font-family:"Noto Sans KR";
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
+    <div class="row featurette" style="width:800px; margin:0 auto;">
       <div class="col-md-7">
         <h2 class="featurette-heading"><br/>Step 03.<br/><br/>
         <span class="text-muted">Have an interview</span></h2>
@@ -199,14 +207,14 @@ font-family:"Noto Sans KR";
        <img src="img/guide03.png" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
       </div>
     </div>
-
+</div> <!-- Maincontents4 -->
     <hr class="featurette-divider">
 
     <!-- /END THE FEATURETTES -->
 
   </div><!-- /.container -->
     
-
+</div><!-- </homeWrap_ALL> -->
 
 
 </body>

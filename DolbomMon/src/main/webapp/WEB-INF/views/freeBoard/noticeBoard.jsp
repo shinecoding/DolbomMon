@@ -30,6 +30,10 @@
 </style>
 </head>
 <body>
+<div id="topMain">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/>
+</div>
 <div class="container">
 <div id="top">
 <b>공지사항</b>
