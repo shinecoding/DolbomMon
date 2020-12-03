@@ -19,6 +19,7 @@ public class MemberVO {
 	private String memo;
 	private String lat;
 	private String lng;
+	private String who;
 	public int getNo() {
 		return no;
 	}
@@ -121,5 +122,11 @@ public class MemberVO {
 	}
 	public void setLng(String lng) {
 		this.lng = lng;
+	}
+	public String getWho() {
+		return who;
+	}
+	public void setWho(String who) {
+		this.who = who;
 	}
 }

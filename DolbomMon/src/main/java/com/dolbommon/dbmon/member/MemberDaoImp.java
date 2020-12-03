@@ -16,4 +16,7 @@ public interface MemberDaoImp {
 	
 	//아이디 중복검사 (아이디 존재여부)
 	public int memberUseridChk(String userid);
+	
+	//연락처 중복검사
+	public int memberUsertelChk(String tel1);
 }
