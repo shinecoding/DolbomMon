@@ -115,21 +115,21 @@
 			}
 			/////////////////// 페이지 로딩 시 //////////////////////
 		});
-		
+		////////////////////////////////////////////////////
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
 				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
-				$("#specificDateDiv").css("display", "inline-block");
-				$("#timeDiv").css("display", "inline-block");
+				$("#specificDateDiv").fadeIn();
+				$("#timeDiv").fadeIn();;
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#regularDateDiv").css("display", "none");
 				
 			}else if($("#timeType2").is(":checked")){
 				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
-				$("#regularDateDiv").css("display", "inline-block");
+				$("#regularDateDiv").fadeIn();
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#specificDateDiv").css("display", "none");
-				$("#timeDiv").css("display", "inline-block");
+				$("#timeDiv").fadeIn();
 			}else{
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
@@ -141,8 +141,9 @@
 		
 		////////////////////div on off ///////////////// 
 		$(".title").click(function(){
+		/* 	$(this).next("div").css("display", "inline-block"); */
 			$(".title").next("div").css("display", "none");
-			$(this).next("div").css("display", "inline-block");
+			$(this).next("div").fadeIn();
 			
 		});
 		
