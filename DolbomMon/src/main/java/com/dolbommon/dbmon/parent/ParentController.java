@@ -60,7 +60,7 @@ public class ParentController {
 	public String scheduleEdit() {
 		return "/parents/scheduleEdit";
 
-	
+	}
 	@RequestMapping("/dbmSearchWriteForm")
 	public String dbmSearchWriteForm() {
 		return "/parents/dbmSearchWriteForm";

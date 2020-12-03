@@ -126,7 +126,7 @@ EDIT ON
 
  <div class="clearfix">
     <header id="topHeader">
-    <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
+    <img src="<%=request.getContextPath()%>/img/mylogo.png" 
            class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
            Onclick="location.href='/dbmon'"/>
 
