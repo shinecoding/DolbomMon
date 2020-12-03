@@ -10,6 +10,14 @@
 <link rel="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<script>
+	$(function(){
+		$(document).on("click","#topBtn",function(){
+			location.href="/dbmon/";
+		});
+		
+	});
+</script>
 <style>
 	*, html{
 		font-family: 'Noto Sans KR', sans-serif;
@@ -186,8 +194,8 @@
 	    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	    cursor: pointer;
 	    text-decoration: none;
-	    margin: 0px;
-	    padding: 0px;
+	    margin: 10px 0px;
+	    padding: 5px 0px;
 	    outline: none;
 	    font-size: 16px;
 	    font-weight: inherit;
@@ -197,6 +205,9 @@
 	    line-height: 16px;
 	    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 	    background: none;
+    }
+    .topSpan:hover{
+    	background-color:#F1F3F4;
     }
 </style>
 </head>
@@ -215,29 +226,48 @@
 		</div>
 		
 	</div>
+	<c:forEach var="vo" items="${list}">
 	<span class="topSpan">
 	<div>
 		<div class="reportList">
 			<div class="listTop">
-				<div class="name">이○현</div>
+				<div class="name">${vo.firstName}○${vo.lastName}</div>
 				<div>
 					<div class="reason">
-						<span>기타</span>
+						<span>${vo.shingo_reason}</span>
 					</div>
 				</div>
 			</div>
 			<div>
 				<span class="reportDate">
-					신고일시 : 2020.12.02 15:12
+					<b>신고일시 : ${vo.shingo_date}</b>
 				</span>
 			</div>
 			<div class="reasonDetail">
-				신고내용 세부사항
+				${vo.shingo_detail }
 			</div>
 			<img src="icon/w-student.png"/>
 		</div>
 	</div>
+	<div style="border-top:1px dashed lightgray; width:80%; margin:0 auto; padding:5px;">
+		<c:if test='${vo.shingo_status.equals("W")}'>
+			<div class="reason" style="display:inline-block; background-color:#875AF1;">
+				<span style="color:#fff">신고 접수</span>
+			</div>
+		</c:if>
+		<c:if test='${vo.shingo_status.equals("D")}'>
+			<div class="reason" style="display:inline-block; background-color:#41D583;">
+				<span>처리 완료</span>
+			</div>
+		</c:if>
+		<div style="margin-top:10px; padding:5px;">
+			<span>${vo.shingo_response}</span>
+		</div>
+	</div>
+	<br/>
 	</span>
+	
+	</c:forEach>
 </div>
 </body>
 </html>

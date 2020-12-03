@@ -15,6 +15,9 @@
 		$(document).on("click",".btn-outline-info",function(){
 			document.reportForm.submit();
 		})
+		$(document).on("click","#topBtn",function(){
+			history.back();
+		});
 		
 	});
 
@@ -198,13 +201,13 @@
 	.option-input.radio::after {
 	  border-radius: 50%;
 	}
-	.radioBtn{
+	.shingo_reason{
 	  display: -webkit-box;
 	  display: -moz-box;
 	  display: -ms-flexbox;
 	  display: box;
 	}
-	.radioBtn label{
+	.shingo_reason label{
 		margin-bottom:1px;
 		font-size:14px;
 		font-weight:600;
@@ -253,32 +256,32 @@
 			<span style="font-size:14px; color:#585858;">no.${vo.no}</span>
 			<span id="nameSpan">${firstName}○${lastName}</span>
 		</div>
-	
+		<input type="hidden" name="shingo_id" value="${vo.userid }"/>
 		<div class="middleDiv">
 			<span style="font-weight:900; margin:15px 0;">신고 유형을 선택해주세요.</span>
-			<div class="radioBtn" style="margin-top:5px;">
+			<div class="shingo_reason" style="margin-top:5px;">
 			  <label>
-			  	<input type="radio" class="option-input radio" name="radioBtn" checked />
+			  	<input type="radio" class="option-input radio" name="shingo_reason" value="허위정보를 기재하였습니다." checked />
 			  	허위정보를 기재하였습니다.
 			  </label><br/>
 			  <label>
-			  	<input type="radio" class="option-input radio" name="radioBtn" />
+			  	<input type="radio" class="option-input radio" name="shingo_reason" value="부적절한 사진입니다."  />
 			  	부적절한 사진입니다.
 			  </label><br/>
 			  <label>
-			    <input type="radio" class="option-input radio" name="radioBtn" />
+			    <input type="radio" class="option-input radio" name="shingo_reason" value="부적절한 내용입니다."  />
 			    부적절한 내용입니다.
 			  </label><br/>
 			  <label>
-			    <input type="radio" class="option-input radio" name="radioBtn" checked />
+			    <input type="radio" class="option-input radio" name="shingo_reason" value="규정을 위반하였습니다." checked />
 			    규정을 위반하였습니다.
 			  </label><br/>
 			  <label>
-			    <input type="radio" class="option-input radio" name="radioBtn" />
+			    <input type="radio" class="option-input radio" name="shingo_reason" value="돌봄몬 회원 자격이 없습니다."  />
 			    돌봄몬 회원 자격이 없습니다.
 			  </label><br/>
 			  <label>
-			    <input type="radio" class="option-input radio" name="radioBtn" />
+			    <input type="radio" class="option-input radio" name="shingo_reason" value="기타"  />
 			    기타
 			  </label>
 			</div>
@@ -288,7 +291,7 @@
 		</div>
 	</div>
 		<div class="middleDiv2">
-			<textarea name="content" placeholder="예). 부적절한 사진이 올라가 있습니다."></textarea>
+			<textarea name="shingo_detail" placeholder="예). 부적절한 사진이 올라가 있습니다."></textarea>
 		</div>	
 	</form>	
 		<p class="bottomDiv">
