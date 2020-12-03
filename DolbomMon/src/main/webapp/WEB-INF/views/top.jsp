@@ -123,63 +123,69 @@ EDIT ON
 <body>
  <div id="containertoptoptop" >
 
- <div class="clearfix" id="fixtopLogo">
-	 <header id="topHeader">
-	 <img src="<%=request.getContextPath()%>/img/mylogo.png" 
-	        class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
-	        Onclick="location.href='/dbmon'"/>
 
-	        <span style="float:right">
-	        <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	        <button class="btn btn-primary">쪽지</button></a>
-	        <a href="/dbmon/temporaryLogin">
-	        <button class="btn btn-info">임시로그인</button></a>
-	        </span>
-	        
-	        
-	 		<a class="btn" style="float:right">	
-			<input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
-			<c:if test="${logStatus == null || logStatus=='N'}">
-	 		<input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
- 			</c:if>
- 	
- 	
-			<c:if test="${logStatus != null || logStatus=='Y'}">
-			${userid } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>  			
-			</c:if>
+ <div class="clearfix">
+    <header id="topHeader">
+    <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
+           class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
+           Onclick="location.href='/dbmon'"/>
 
-	</a> 				
-	</header>
+
+           <span style="float:right">
+           <a href="javascript:void(window.open('/dbmon/chat','message','width=1200,height=1000,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
+           <button class="btn btn-primary">채팅</button></a>
+           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
+           <button class="btn btn-primary">쪽지</button></a>
+           <a href="/dbmon/temporaryLogin">
+           <button class="btn btn-info">임시로그인</button></a>
+           </span>
+           
+           
+          <a class="btn" style="float:right">   
+         <input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
+         <c:if test="${logStatus == null || logStatus=='N'}">
+          <input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
+          </c:if>
+    
+    
+         <c:if test="${logStatus != null || logStatus=='Y'}">
+         ${userid } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
+         </c:if>
+
+   </a>             
+   </header>
+
+
 </div> 
 
    <ul class="mainTopmenu" id="topmenu-button">
        
        <li><a href="#">고객센터</a>
-	     <ul class="subMain">
-		    <li><a href="/dbmon/brandIntro">회사소개</a></li>
-			<li><a href="#">신고하기</a></li>			
-		 </ul>
-		 </li>
-	    <li><a href="/dbmon/noticeBoard">공지사항</a>
-	    <ul class="subMain">    
-	    
-		</ul>
-		</li>
-		<li><a href="/dbmon/freeBoard">자유게시판</a>
 
-		</li>
-		<li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
-		</li>
-		<li><a href="/dbmon/sitter_list">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
-	    
-		</li>
-		<li><a href="#">My Menu</a>
-	    <ul class="subMain">
-		    <li><a href="/dbmon/join">결제조회</a></li>
-			<li><a href="/dbmon/login">서브메뉴</a></li>
-			<li><a href="teacherList">선생님페이지</a></li>
-			<li><a href="mypage">부모님페이지</a></li>
-		</ul>
-   </ul>
-   </div>
-   
+        <ul class="subMain">
+          <li><a href="/dbmon/brandIntro">회사소개</a></li>
+         <li><a href="#">신고하기</a></li>         
+       </ul>
+       </li>
+       <li><a href="/dbmon/noticeBoard">공지사항</a>
+       <ul class="subMain">    
+       
+      </ul>
+      </li>
+      <li><a href="/dbmon/freeBoard">자유게시판</a>
+
+
+      </li>
+      <li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
+      </li>
+      <li><a href="/dbmon/sitter_list">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+       
+      </li>
+      <li><a href="#">My Menu</a>
+       <ul class="subMain">
+         <li><a href="teacherList">선생님페이지</a></li>
+         <li><a href="mypage">부모님페이지</a></li>
+      </ul>
+ </ul>
+
+ </div>

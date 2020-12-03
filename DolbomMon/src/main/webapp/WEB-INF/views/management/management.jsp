@@ -211,7 +211,7 @@
 <div class="area"></div><nav class="main-menu">
             <ul id="top-ul">
                 <li style="">
-                    <a href="javascript:memberPage('/dbmon/');">
+                    <a href="/dbmon/">
                         <i class="fa fa-home fa-2x"></i>
                         <span class="nav-text">
                             돌봄몬 메인
