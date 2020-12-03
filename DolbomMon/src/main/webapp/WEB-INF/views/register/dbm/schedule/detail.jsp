@@ -6,8 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
 <style>
 	*{margin:0; padding:0; list-style:none;}
 	.container{width:518px; padding:0;}
@@ -15,9 +19,8 @@
 	#headerDiv{width:100%; height:auto; text-align:center; margin-top:50px; border-bottom:1px solid #EFEFEF;}
 	input[type=radio], input[type=checkbox]{display:none;}
 	/* ==================== 시작 날짜 =================== */
-	#startDateDiv{padding:10px 0;}
-	#startDateDiv>input[type=date]{width:100%;}
-	
+	#startDateDiv{text-align:center; padding:10px 0; }
+	#startDateDiv>input{width:30%; margin:0 5%;}
 	/* ===================== =====================*/
 	#selectDayDiv{width:100%; overflow:hidden; height:auto; border-bottom:1px solid gray; padding-bottom:20px; margin-bottom:30px;}
 	#selectDayDiv li>label{
@@ -28,12 +31,12 @@
 		margin:0;
 	}
 	#selectDayDiv li{
-		width:60px; 
+		width:12.28%; 
 		height:60px; 
 		line-height:60px; 
 		border-radius:50%; 
 		text-align:center; 
-		float:left; margin:7px; 
+		float:left; margin:1%; 
 	}	
 	/* ===================== =====================*/
 	
@@ -66,9 +69,9 @@
 		$(document).ready(function(){
 			for(var i=1;i<8;i++){
 				if($("input[id="+i+"]").is(":checked")){
-					$("label[for="+i+"]").css("background-color", "rgb(255, 222, 89)");//노랑
+					$("label[for="+i+"]").css("background-color", "#ff5400").css("color", "white");
 				}else{
-					$("label[for="+i+"]").css("background-color", "#EFEFEF");//회색
+					$("label[for="+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 			
@@ -82,14 +85,27 @@
 			
 		});
 		
+		$("#startDateBtn").datepicker({
+			showAnim : "show",
+			changeMonth : true,
+			changeYear : true,
+			yearRange : 'c-100:c',
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$("#start_date").val(dateText);
+				$("#startDateBtn").val("활동 시작일 선택");
+			},
+			altFormat:"yyyy-mm-dd"
+		});
+		
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
-				$("label[for="+selectedData+"]").css("background-color", "rgb(255, 222, 89)");//노랑
+				$("label[for="+selectedData+"]").css("background-color", "#ff5400").css("color", "white");//노랑
 			}else{
-				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");//회색
+				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF").css("color", "black");//회색
 			}
 		});
 		
@@ -211,8 +227,8 @@
 		<form method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 		<div id="headerDiv"><h2>원하는 시간 직접 입력하기</h2></div>
 		<div id="startDateDiv">
-			<span>활동 시작일</span><br/>
-			<input type="date" id="start_date" name="start_date" />
+			<input type="button" id="startDateBtn" value="활동 시작일 선택" />
+			<input type="text" id="start_date" name="start_date" readonly="readonly" />
 		</div>
 		<div id="selectDayDiv">
 			<input type="checkbox" id="1" name="yoil" value="월" />
@@ -247,7 +263,7 @@
 			</div>
 		</div>
 		<div id="periodDiv">
-			<input type="text" id="end_date" name="end_date" placeholder="end_date" />
+			<input type="hidden" id="end_date" name="end_date" placeholder="end_date" />
 			<h6>이 일정으로 얼마나 일할 수 있나요?</h6>
 			<ul id="periodList">
 				<li><label for="p1"><input type="radio" id="p1" name="asdf" />1주일 이상</label></li>

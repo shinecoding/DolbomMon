@@ -12,12 +12,21 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+	$(function(){
+		$(document).on("click", "#report", function(){
+			location.href="/dbmon/report?userid=${vo.userid}";
+		})
+		
+	});
+</script>
 <style>
 .container{width:800px;}
 i{color:gray;}
 #profimg{
-	width:70%;
-	height:500px;
+	width:400px;
+	height:400px;
+	text-align:center;
 }
 h5{
 	padding: 20px 0px 0px 0px;
@@ -34,16 +43,19 @@ font-weight:bold;
 img{
 width:50%;
 }
+#report{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-	<div class="badge badge-warning badge-pill float-right mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
+	<div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
    <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
    <ul class="list-group">
-   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">홍O동</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><br/>
-   		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="ml-2">no.798521</span></li>
+   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><br/>
+   		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    </ul>
    <br/>
    <ul class="list-group list-group-horizontal-sm">
@@ -79,7 +91,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.license_status=='N' || cvo.identi_status=='S'}">
+	   	<c:if test="${cvo.license_status=='N' || cvo.license_status=='S'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.license_status=='Y'}">
@@ -91,7 +103,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.school_status=='N' || cvo.identi_status=='S'}">
+	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.school_status=='Y'}">
@@ -103,7 +115,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.crime_status=='N' || cvo.identi_status=='S'}">
+	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S'}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.crime_status=='Y'}">
@@ -137,7 +149,7 @@ width:50%;
    	<li class="list-group-item">
 	   	<ul class="list-group list-group-horizontal-sm" >
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src=
-			<c:if test = "${ !fn:contains(str, '신생아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-newborn-baby-n.svg"</c:if>
+			<c:if test = "${!fn:contains(str, '신생아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-newborn-baby-n.svg"</c:if>
 			<c:if test = "${fn:contains(str, '신생아')}">"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/sitter-newborn-baby-s.svg"</c:if> 
 			alt="신생아" /><br/>신생아</li>
 		   	<li class="list-group-item col-3" style="text-align:center; border:none;"><img src=
@@ -252,12 +264,12 @@ width:50%;
    	</ul>	
 		<h5>활동 가능 지역</h5>
 		<ul class="list-group">
-		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> 서울특별시 마포구 마포동</li>
+		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> ${vo.area1}</li>
 		</ul>
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">
-   		<c:forEach var="evo" items="${hash}">
+   		<c:forEach var="evo" items="${list}">
    			<b>${evo.exp_content}</b><br/>
    			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
    		</c:forEach>	

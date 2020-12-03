@@ -19,7 +19,7 @@
 	#paymentDiv span{margin-left:1%; font-size:14px;}
 	#paymentDiv label{margin:2% 0;}
 	#paymentDiv p{display:inline-block; width:70%; margin-bottom:30px; font-size:14px; font-weight:bold; color:gray;}
-	input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+	#paymentDiv input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 	/* ========================= 희망시급 ============================*/
 	
 	hr{height:3px; background-color:#CCC; margin:30px 0;}

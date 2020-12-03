@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.Teacher.TeacherDaoImp">
 	<select id="selectTeacher" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit from teacher where userid=#{userid}
+		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit, area1, area2, area3 from teacher where userid=#{userid}
+	</select>
+	<select id="selectTMember" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.MemberVO">
+		select username, email, tel1, addr, zipcode, gender, birth, no from member where userid = #{userid}
 	</select>
 	<update id="updateIntro" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set intro = #{intro}, last_edit = sysdate where userid = #{userid}
@@ -28,19 +31,20 @@
 		update teacher set cctv= #{cctv}, last_edit = sysdate where userid= #{userid}
 	</update>
 	<select id="selectExp" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.ExperienceVO" >
-		select exp_content, to_char(exp_start, 'YYYY-MM-DD') as exp_start, to_char(exp_end, 'YYYY-MM-DD') as exp_end from experience where userid= #{userid}
+		select exp_no, exp_content, to_char(exp_start, 'YYYY-MM-DD') as exp_start, to_char(exp_end, 'YYYY-MM-DD') as exp_end, case when DBMS_LOB.SUBSTR(exp_content, DBMS_LOB.GETLENGTH(exp_content))is null then '1' else '0' end PRIORITY 
+   		from experience where userid= #{userid} order by PRIORITY asc, exp_start desc
 	</select>
 	<select id="findIdT" parameterType="com.dolbommon.dbmon.Teacher.ExperienceVO">
 		select count(#{userid}) from experience
 	</select>
 	<update id="updateExp" parameterType="com.dolbommon.dbmon.Teacher.ExperienceVO">
-		update experience set exp_content=#{exp_content} where userid= #{userid} 
+		update experience set exp_content=#{exp_content}, exp_start=#{exp_start}, exp_end=#{exp_end} where userid= #{userid} and exp_no=#{exp_no} 
 	</update>
-	<insert id="insertExp" parameterType="com.dolbommon.dbmon.Teacher.ExperienceVO">
-		insert into experience(userid, exp_no, exp_content, exp_start, exp_end) values(#{userid}, exp_sq.nextval, #{exp_content}, #{exp_start}, #{exp_end})
+	<insert id="insertExp" parameterType="String">
+		insert into experience(userid, exp_no, exp_start, exp_end) values(#{userid}, exp_sq.nextval, sysdate, sysdate)
 	</insert>
 	<delete id="deleteExp" parameterType="com.dolbommon.dbmon.Teacher.ExperienceVO">
-		delete from experience where userid= #{userid} and exp_content = #{exp_content}
+		delete from experience where userid= #{userid} and exp_no=${exp_no}
 	</delete>
 	<update id="hitCount" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO" >
 		update teacher set hit= hit+1 where userid= #{userid}
@@ -54,4 +58,10 @@
 	<update id="updateTMap" parameterType="com.dolbommon.dbmon.Teacher.MemberVO" >
 		update member set lat= #{lat}, lng=#{lng} where userid = #{userid}
 	</update>
+	<update id="updateArea" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
+		update teacher set area1= #{area1} where userid = #{userid}
+	</update>
+	<select id="selectAllTeacher" resultType="com.dolbommon.dbmon.Teacher.MemberVO">
+		select userid, username, lat, lng, addr from member where lat is not null and lng is not null
+	</select>
 </mapper>

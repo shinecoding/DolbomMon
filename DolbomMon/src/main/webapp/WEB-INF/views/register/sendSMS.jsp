@@ -10,40 +10,35 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script>
 $(document).ready(function() {
-
+	
     $("#send").click(function() {
        
        	var number = Math.floor(Math.random() * 100000) + 100000;
       	if(number>100000){
         	number = number - 10000;
         }
-
-        $("#text").val(number); 
        
-      	var to = $("#to").val();
-      	var telReg = /^01(?:0)\d{8}$/;
-       	if(!telReg.test(to)){
-          	alert("010으로 시작하는 전화번호만 인증가능합니다.");
-       	} else {
-			var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
+      	var to = $("#tel1").val();
+      	
+		var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
           
-       		if(con_test == true){
-               $.ajax({
-                   url:"sendSms",
-                   type:"post",
-                   data:{to: $("#to").val(),
-                        text: $("#text").val()
-                        },
-                 success:function(){
-                   alert("해당 휴대폰으로 인증번호를 발송했습니다");
-                   }, error:function(){
+       	if(con_test == true){
+       		$("#text").val(number);
+          	$.ajax({
+            	url:"sendSms",
+            	type:"post",
+                data:{to: $("#tel1").val(),
+                  	text: $("#text").val()
+                    },
+                 	success:function(){
+                   		alert("해당 휴대폰으로 인증번호를 발송했습니다");
+                   	}, error:function(){
                       
-                   }
+                   	}
                 });
-          	}else{
+      	}else{
         	  
-          	}
-      	}   
+       	}
     });
     
 	$("#enterBtn").click(function() {  
