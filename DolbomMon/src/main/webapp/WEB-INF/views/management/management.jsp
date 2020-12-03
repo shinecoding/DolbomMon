@@ -59,11 +59,12 @@
 		padding:0;
 	}
 	#topBar{
-		height:100px;
-		background-color:lightblue;
+		display:flex;
+		background-color:#24292E;
 		font-size:2em;
 		line-height:2em;
 		text-align:center;
+		padding:16px;
 	}
 	#mainPage{
 		position:absolute;
@@ -306,7 +307,7 @@
 
 <!-- ============================= -->
 <!-- <div id="topBar" id="topBar"><a href="javascript:openNewWindow()"><button class="btn btn-primary">쪽지</button></a></div> --> <!-- 돌봄몬 사이트 네비게이션 위치 --> 
-<div id="topBar" id="topBar"><a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))"><button class="btn btn-primary">쪽지</button></a></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
+<div id="topBar" id="topBar"><a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))" style="margin:0 auto;"><button class="btn btn-primary">쪽지</button></a></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
 <div id="mainPage"></div>
 </body>
 </html>
