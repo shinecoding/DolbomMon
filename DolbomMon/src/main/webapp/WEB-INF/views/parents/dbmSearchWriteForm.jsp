@@ -16,6 +16,7 @@
 <script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
 <script src="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <script>
 	$(function(){
@@ -152,9 +153,16 @@
 		$("input[name=pw_activity]").change(function(){
 			var selectedData = $(this).attr("id");
 			var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
+			$("label[for="+selectedData+"]").children("img").fadeOut(200);
+			$("label[for="+selectedData+"]").children("img").fadeIn(200);
+			$("label[for="+selectedData+"]").children("img").fadeOut(100);
+			$("label[for="+selectedData+"]").children("img").fadeIn(100);
+			$("label[for="+selectedData+"]").children("img").fadeOut(50);
+			$("label[for="+selectedData+"]").children("img").fadeIn(50);
 			if($(this).is(":checked")){
 				if(selectedData=="2"){
 					var changeImg = nowImg.replace("-n@", "-s@"); 
+					$("label[for="+selectedData+"]").children("img").attr("src");
 					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
 					$("label[for="+selectedData+"]").css("background-color", "#ff5400");
 				}else{
@@ -175,6 +183,7 @@
 			}
 		});
 		
+		/////////// 성별 변경 ///////////
 		$("input[name=wish_gender]").change(function(){
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
@@ -185,6 +194,7 @@
 			}
 		});
 		
+		//////////// 나이 변경 ///////////////
 		$("input[name=wish_age]").change(function(){
 			
 			var selectedData = $(this).attr("id");
@@ -199,6 +209,8 @@
 			
 		});
 		
+		
+		//////////// 자녀 정보 //////////////
 		$("#childrenInfo>input[type=radio]").change(function(){
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
@@ -218,7 +230,7 @@
 		
 		
 		///////////////////////////////////// 자녀 생년월일 ///////////////////////
-		$("#child_birthBtn").datepicker({ // 시작일 데이트피커
+		$(".cb").datepicker({ // 시작일 데이트피커
 			showAnim : "show",
 			changeMonth : true,
 			changeYear : true,
@@ -338,6 +350,8 @@
 		$("input[name=yoil]").change(function(){
 			$("#boom").fadeIn(100);
 			$("#boom").fadeOut(100);
+			$("#fatman").fadeIn(50);
+			$("#fatman").fadeOut(1200);
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
@@ -374,7 +388,82 @@
 				alert("희망시급은 최소 8590원 이상이어야합니다.");
 				return false;
 			}
-			return true;
+			var pw_activityCnt = $("input[name=pw_activity]:checked").length;
+			if(pw_activityCnt==0){
+				swal({
+					title : "돌봄유형",
+					text : "원하는 돌봄유형을 입력해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var wish_genderCnt = $("input[name=wish_gender]:checked").length;
+			if(wish_genderCnt==0){
+				swal({
+					title : "선생님 성별",
+					text : "원하는 선생님 성별을 입력해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var wish_ageCnt = $("input[name=wish_age]:checked").length;
+			if(wish_ageCnt==0){
+				swal({
+					title : "선생님 나이",
+					text : "원하는 선생님 나이대를 입력해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var time_type = $("input[name=time_type]").val();
+			if(time_type=="S"){ // 특정날에만
+				var select_date = $("#select_date").val();
+				if(select_date==null || select_date==""){
+					swal({
+						title : "돌봄 날짜 선택",
+						text : "돌봄 날짜를 선택해주세요",
+						icon : "info"
+					});
+				}
+			} else { // 정기적으로  
+				var start_date = $("#start_date").val();
+				var end_date = $("#end_date").val();
+				if(start_date==null || start_date==""){
+					swal({
+						title : "돌봄 날짜 선택",
+						text : "돌봄 시작날짜를 선택해주세요",
+						icon : "info"
+					});
+				}else if(end_date==null || end_date==""){
+					swal({
+						title : "돌봄 날짜 선택",
+						text : "돌봄 종료날짜를 선택해주세요",
+						icon : "info"
+					});
+				}
+			}
+			
+			var start_time = $("#start_time").val();
+			var end_time = $("#end_time").val();
+			if(start_time==null || start_time==""){
+				swal({
+					title : "돌봄 시간 선택",
+					text : "돌봄 시작시간을 선택해주세요",
+					icon : "icon"
+				});
+			} else if(end_time==null || end_time=="") {
+				swal({
+					title : "돌봄 시간 선택",
+					text : "돌봄 종료시간을 선택해주세요",
+					icon : "icon"
+				});
+			}
+			
+			
+			return false;
 		});
 		
 		// 포커스 없애기
@@ -551,7 +640,6 @@
 						<hr/><img src="<%=request.getContextPath()%>/img/boom.png" id="boom"/>
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
 						<input type="text" id="end_date" name="end_date" readonly="readonly" />
-						
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -585,6 +673,7 @@
 						</select>
 					</div>
 				</div>
+				<img src="<%=request.getContextPath()%>/img/fatman.png" id="fatman"/>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="paymentDiv">희망시급을 입력해주세요</label></div>
