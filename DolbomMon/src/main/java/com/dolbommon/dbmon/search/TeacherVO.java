@@ -40,6 +40,12 @@ public class TeacherVO {
 	private String memo;
 	private String lat;
 	private String lng;
+	private String identi_status;
+	private String school_status;
+	private String license_status;
+	private String crime_status;
+
+	
 	public int getNo() {
 		return no;
 	}
@@ -256,6 +262,30 @@ public class TeacherVO {
 	}
 	public void setDiscussion(String discussion) {
 		this.discussion = discussion;
+	}
+	public String getIdenti_status() {
+		return identi_status;
+	}
+	public void setIdenti_status(String identi_status) {
+		this.identi_status = identi_status;
+	}
+	public String getSchool_status() {
+		return school_status;
+	}
+	public void setSchool_status(String school_status) {
+		this.school_status = school_status;
+	}
+	public String getLicense_status() {
+		return license_status;
+	}
+	public void setLicense_status(String license_status) {
+		this.license_status = license_status;
+	}
+	public String getCrime_status() {
+		return crime_status;
+	}
+	public void setCrime_status(String crime_status) {
+		this.crime_status = crime_status;
 	}
 	
 	
