@@ -219,8 +219,8 @@
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ff5400");
 					$("#childrenDetail").html("");
 					var tag = ""
-					tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
-					tag += "<input type='button' id='child_birthBtn' class='cb' value='자녀 생년월일'/><input class='cbtext' type='text' name='child_birth' /></li>";
+					tag += "<li>";
+					tag += "<input type='button' class='cb' value='자녀생년월일'><input type='date' id='child_birth' name='child_birth' /></li>";
 					for(var j=0;j<i;j++){
 						$("#childrenDetail").append(tag);
 					}
@@ -230,19 +230,22 @@
 			}
 		});
 		
-		
-		///////////////////////////////////// 자녀 생년월일 ///////////////////////
-		$(".cb").datepicker({ // 시작일 데이트피커
-			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			yearRange : 'c-15:c',
-			dateFormat : "yy-mm-dd",
-			onSelect:function(dateText){
-				$(this).val("자녀 생년월일");
-			},
-			altFormat:"yyyy-mm-dd"
+		$(".ui-datepicker-trigger").remove();
+		//$(".selectDt").removeClass('hasDatepicker').datepicker();
+
+		$(".cb").on('click', function(){
+			console.log("클릭");
 		});
+		
+		$(document).find(".cb").removeClass('hasDatepicker').datepicker({
+		    dateFormat: "yy-mm-dd",
+		    defaultDate: "+1w",
+		    numberOfMonths: 1,
+		    changeMonth: true,
+		    showMonthAfterYear: true ,
+		    changeYear: true
+		});
+
 		
 		var lng;
 		var lat;
@@ -604,10 +607,13 @@
  	.divOn{display:inline-block;}
 </style>
 <body>
+	<div id="top">
+		<%@include file="/WEB-INF/views/top.jsp"%>
+	</div>
 	<div class="container">
 		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
 			<div id="header">
-				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
+				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
 			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
 			<div id="activityTypeDiv" class="mainDiv">
