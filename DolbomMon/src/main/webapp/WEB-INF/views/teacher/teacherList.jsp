@@ -60,7 +60,10 @@
 </style>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container" >
 <a href="teacherSearchMap">선생님 지도로 찾기</a><br/>
 <a href="payment">결제시스템</a>
@@ -87,7 +90,7 @@
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">계정관리</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
 

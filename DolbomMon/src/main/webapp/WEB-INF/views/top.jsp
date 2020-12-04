@@ -5,17 +5,15 @@
    <script type="text/javascript">
    
          $(function(){
+	     $("ul.subMain").hide();
+		 $("ul.mainTopmenu li").hover(function(){
+		    $("ul:not(:animated)",this).slideDown("fast");
+			},
+			function(){
+			   $("ul",this).slideUp("fast");
+			});
 
-	        $("ul.subMain").hide();
-	        $("ul.mainTopmenu li").hover(function(){
-	        	$("ul:not(:animated)",this).slideDown("fast");
-	         },
-	         function(){
-	            $("ul",this).slideUp("fast");
-	         });
-
-	      });   
-
+      });	
    </script>
 
    
@@ -24,111 +22,111 @@ HTML CSSResult
 EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-
-
-
      #menu-button{
      	-webkit-padding-start:0px;
      	
      }
-
      #topmenu-button{
      	-webkit-padding-start:0px;
-     	
+     	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
      }
-   
-     #topmenu-button{
-        -webkit-padding-start:0px;
-     }
-   
 
-      #container {
-
+      #containertoptoptop {
         width: 100%;
       }
 
       ul.mainTopmenu li{ 
-        float: left;
-        width:100%;
-       width: 263px;
-       height: 48px;
-       text-align:center;
-       background-color: white;
-        /*border:1px solid #f6a21c; */
-       position: relative;
-       z-index:1000;
-       list-style-type: none;
-      
-       }
+	     float: left;
+	     width:100%;
+		 width: 263px;
+		 height: 48px;
+		 text-align:center;
+		 background-color: white;
+		 position: relative;
+		 z-index:1000;
+		 list-style-type: none;
+		 -webkit-padding-start:0px;
+		
+		 }
       ul.mainTopmenu li a{
-        display: block;
-       width: 100%;
-       height: 100%;
-       line-height: 48px;
-       font-weight:bold;
-       overflow:hidden;
-      /*  color: #f6a21c; */
-       color:gray;
-       text-decoration: none;
-       font-family:"Noto Sans KR";
-       text-align:center;
-       list-style-type: none;
-       margin-left:0px;
-       }
-     ul.mainTopmenu li {
-      width: calc(100%/6);
-      
-      }
-     ul.mainTopmenu ul.subMain li {
-       width: 100%;
-       -webkit-padding-start:0px;
-       }
-     
-     
+	     display: block;
+		 width: 100%;
+		 height: 100%;
+		 line-height: 48px;
+		 font-weight:bold;
+		 overflow:hidden;
+		 color:gray;
+		 text-decoration: none;
+		 font-family:"Noto Sans KR";
+		 text-align:center;
+		 list-style-type: none;
+		 
+		 margin-left:0px;
+		 }
+	  ul.mainTopmenu li {
+		width: calc(100%/6);
+		height:50px;
+		
+		}
+	  ul.mainTopmenu ul.subMain li {
+	    width: 100%;
+	    -webkit-padding-start:0px;
+	    height:50px;
+	    }
+	  
+	  
       ul.mainTopmenu li a:hover{
-        background-color: #ffefd5;
-        opacity:50;
-       }
+      	 color:orange;
+	     opacity:50;
+		 }
       ul.mainTopmenu li ul.subMain{
-        position: absolute;
-       }
+	     position: absolute;
+		 }
       ul.mainTopmenu{
-        zoom: 1;
-       }
+	     zoom: 1;
+	     margin-bottom:0;
+	     height:60px;
+		 }
       ul.mainTopmenu:after{
-        height: 0;
-       visibility: hidden;
-       content: ".";
-       display: block;
-       clear: both;
-       }
-      .logo{
-         width:180px;
-         height:80px;
-         margin-left:0;
-         
-      }
-      header#topHeader{
-            margin-left:0px;
-      }
-      a.btn{
-            float:right;
-            margin-right:180px;
-            
-      }
-      .clearfix:after { clear:both; } 
-      .mainTopmenu>li *{
-      width:100%
-      }
-
+	     height: 0;
+		 visibility: hidden;
+		 content: ".";
+		 display: block;
+		 clear: both;
+		 }
+		
+	  .logo{
+	      width:100px;
+	      height:50px;
+	      margin-top:30px; 
+	   }
+	   
+	   header#topHeader{
+	   		margin-left:50px;
+	   		
+	   		
+	   }
+	   a.btn{
+	   		float:right;
+	   		margin-right:180px;
+	   		
+	   }
+	   #fixtopLogo:after { clear:both; } 
+	   .mainTopmenu>li *{
+	   -webkit-padding-start:0px;
+	   width:100%;
+	   
+	   }
+	   
    </style>
 </head>
 <body>
  <div id="containertoptoptop" >
 
+
  <div class="clearfix">
     <header id="topHeader">
-    <img src="<%=request.getContextPath()%>/img/DOL03.PNG" 
+    <img src="<%=request.getContextPath()%>/img/mylogo.png" 
            class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
            Onclick="location.href='/dbmon'"/>
 
@@ -157,6 +155,7 @@ EDIT ON
    </a>             
    </header>
 
+
 </div> 
 
    <ul class="mainTopmenu" id="topmenu-button">
@@ -175,6 +174,7 @@ EDIT ON
       </li>
       <li><a href="/dbmon/freeBoard">자유게시판</a>
 
+
       </li>
       <li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
       </li>
@@ -183,8 +183,6 @@ EDIT ON
       </li>
       <li><a href="#">My Menu</a>
        <ul class="subMain">
-          <li><a href="/dbmon/join">결제조회</a></li>
-         <li><a href="/dbmon/login">서브메뉴</a></li>
          <li><a href="teacherList">선생님페이지</a></li>
          <li><a href="mypage">부모님페이지</a></li>
       </ul>

@@ -22,6 +22,10 @@
 </style>
 </head>
 <body>
+<div id="topMain">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="top">
 			<b>공지사항 게시글 보기</b>
