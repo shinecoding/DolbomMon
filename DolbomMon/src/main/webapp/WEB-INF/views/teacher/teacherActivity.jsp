@@ -241,6 +241,7 @@ width:55px;
 			<input type="submit" class="btn btn-warning" value="저장" />
 			</form>
 		</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 
