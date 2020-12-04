@@ -139,8 +139,6 @@
 					
 					$result.each(function(idx, vo){
 					
-						tag +="<div>"+vo.userid+"</div>";
-
 						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
@@ -172,7 +170,7 @@
 							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
 							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
 							
-							if(vo.identi_status.equals("Y") || vo.license_status.equals("Y") || vo.school_status.equals("Y") || vo.crime_status.equals("Y")){
+							if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
 								tag += '<hr/>';
 							}
 							if(vo.identi_status == "Y"){

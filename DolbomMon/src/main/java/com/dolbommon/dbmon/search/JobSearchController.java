@@ -71,28 +71,17 @@ public class JobSearchController {
 	
 	}
 	
-	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public ModelAndView searchAct1(HttpSession ses, String activity_type) {
+	public List<TeacherVO> searchAct1(HttpSession ses, String activity_type) {
 		
 		String userid = (String)ses.getAttribute("userid");
 		
-		System.out.println(activity_type);
+		System.out.println("액티비티 타입"+activity_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchBoardList2(activity_type); //선생님 리스트
-		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
-		TeacherVO mvo = dao.selectTTMap(userid); //내 위치
-		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("list", list);
-		mav.addObject("hash", hash);
-		mav.addObject("mvo", mvo);
-		mav.addObject("totalRecord", totalRecord);//총 게시물 수
-	
-		return mav;
+		return list;
 	}
 }
