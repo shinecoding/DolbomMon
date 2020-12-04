@@ -53,53 +53,6 @@ public class RecruitBoardController {
 		return mav;
 	}
 
-	///////////// 돌봄몬 구하기 글쓰기폼으로 이동
-	@RequestMapping("/dbmSearchWriteForm")
-	public String dbmSearchWriteForm() {
-		return "/parents/dbmSearchWriteForm";
-	}
-	
-	//// 돌봄몬 구하기 글쓰기 
-	@RequestMapping(value="/dbmSearchWriteFormOk", method = RequestMethod.POST)
-	public ModelAndView dbmSearchWriteFormOk(HttpServletRequest req, HttpSession ses, DbmSearchVO dsVO, ChildrenVO cVO, SpecificDateVO sdVO, RegularDateVO rdVO) {
-		
-		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
-		
-		TransactionStatus status = transactionManager.getTransaction(def);
-		
-		dsVO.setUserid((String)ses.getAttribute("userid"));
-		
-		String consultation = (String)dsVO.getConsultation();
-		if(consultation==null || consultation=="") {
-			dsVO.setConsultation("N");
-		}
-		
-		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
-		ModelAndView mav = new ModelAndView();
-		
-		String time_type = (String)dsVO.getTime_type();
-		int result = 0;
-		
-		try {
-			dao.insertDbmSearch(dsVO);
-			dao.insertDsChildInfo(dsVO, cVO);
-			if(time_type.equals("S")) {
-				result = dao.insertDsSpecificDate(dsVO, sdVO);
-			}else {
-				result = dao.insertDsRegularDate(dsVO, rdVO);
-			}
-			transactionManager.commit(status);
-		}catch(Exception e) {
-			transactionManager.rollback(status);
-		}
-		
-		mav.addObject("result", result);
-		mav.setViewName("/parents/writeResult");
-		
-		return mav;
-	
-	}
 }
 
 
