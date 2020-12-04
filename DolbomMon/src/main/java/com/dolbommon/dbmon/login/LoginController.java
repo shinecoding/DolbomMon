@@ -66,6 +66,7 @@ public class LoginController {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("logStatus", "Y");
+			System.out.println(resultVO.getUsername());
 			
 			//자동로그인 선택시 쿠키 생성
 			if(req.getParameter("loginCookie")!=null) {
