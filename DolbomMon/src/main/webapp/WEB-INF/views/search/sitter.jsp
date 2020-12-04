@@ -152,15 +152,15 @@
 							
 							tag += '<span class="ml-2" style="font-size:0.7em">';
 							if(vo.last_edit>525600){
-								tag += vo.last_edit/525600+'년';
+								tag += Math.round(vo.last_edit/525600)+'년';
 							} else if(vo.last_edit>43200){
-								tag += vo.last_edit/43200 +'달';
+								tag += Math.round(vo.last_edit/43200) +'달';
 							} else if(vo.last_edit>1440){
-								tag += vo.last_edit/1440 +'일';
+								tag += Math.round(vo.last_edit/1440) +'일';
 							} else if(vo.last_edit>60){
-								tag += vo.last_edit/60 +'시간';
+								tag += Math.round(vo.last_edit/60) +'시간';
 							} else {
-								tag += vo.last_edit +'분';
+								tag += Math.round(vo.last_edit) +'분';
 							}
 							tag += '</span>';
 							tag += '<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">';
