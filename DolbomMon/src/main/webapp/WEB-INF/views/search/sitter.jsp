@@ -126,11 +126,11 @@
 	    	var activity_type = $(this).text();
 	    	console.log(activity_type);
 	    	var url = "/dbmon/searchAct1";
-			//var params = "activity_type=실내놀이";
+			var params = "activity_type="+activity_type;
 
 			$.ajax({
 				url:url,
-				//data:params,
+				data:params,
 				type:'GET',
 				success:function(result){
 					
@@ -194,11 +194,7 @@
 						}, error: function(){
 					console.log("리스트 받기 에러");
 					}
-						
-	    	
-	    	
-	    	
-	    	
+
 				})
 				
 	    }));
