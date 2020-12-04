@@ -532,7 +532,7 @@
 				return false;
 			}
 			
-			return false;
+			return true;
 		});
 		
 		// 포커스 없애기
