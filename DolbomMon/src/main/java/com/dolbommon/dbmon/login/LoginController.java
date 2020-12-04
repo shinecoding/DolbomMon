@@ -66,13 +66,15 @@ public class LoginController {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("logStatus", "Y");
+			System.out.println(resultVO.getUsername());
 			
 			//자동로그인 선택시 쿠키 생성
 			if(req.getParameter("loginCookie")!=null) {
-				Cookie loginCookie = new Cookie("loginCookie", ses.getId());
+				Cookie loginCookie = new Cookie("loginCookie", (String)ses.getAttribute("userid"));
 				loginCookie.setPath("/dbmon");
 				loginCookie.setMaxAge(60*60*24*7);
 				res.addCookie(loginCookie);
+				System.out.println(loginCookie.getValue());
 			}
 			mav.setViewName("redirect:/");
 		}
