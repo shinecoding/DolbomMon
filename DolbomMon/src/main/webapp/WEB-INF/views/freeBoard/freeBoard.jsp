@@ -13,7 +13,9 @@
 	.container{
 		width: 900px;	
 	}
+
 	#top_freeboard{
+
 		margin: 15px;
 		padding: 15px;
 		text-align: center;
@@ -73,7 +75,9 @@
 
 
 <div class="container">
+
 <div id="top_freeboard">
+
 <b>자유게시판</b>
 </div>
 <div>
