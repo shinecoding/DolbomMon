@@ -5,6 +5,7 @@
 	input[type=checkbox]{display:none;}
 	input[type=radio]{display:none;}
 	#writeFrm{text-align:center;}
+	.next{width:30%; height:40px; margin:20px 0;}
 	/* ============= 초기화 ==============  */
 	
 	/* ============= 헤더 =============== */
@@ -51,7 +52,7 @@
 	}
 	
 	/* ===================== 자녀 세부정보 ==================== */
-	#childrenInfoDiv{display:inline-block; width:70%}
+	#childrenInfoDiv{display:inline-block; width:70%; text-align:center;}
 	#childrenDetailDiv{width:100%; overflow:hidden; height:auto;}
 	#childrenDetail{width:100%; overflow:hidden; height:auto;}
 	#childrenDetail li{width:100%; overflow:hidden; height:auto; padding:10px; margin:10px 0; border:1px solid black; }
@@ -111,6 +112,8 @@
 		border:1px solid gray; border-radius:50%; 
 		background-color:#EFEFEF; 
 		margin:0;
+		-webkit-transition:background-color 2s;
+		transition:background-color 2s;
 	}
 	#regularDateDiv #selectDayDiv li{
 		width:12.28%; 

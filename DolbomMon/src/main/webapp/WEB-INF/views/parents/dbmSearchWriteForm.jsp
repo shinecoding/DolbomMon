@@ -321,6 +321,14 @@
 			}
 		});
 		
+		//////////////////////// 다음 버튼 클릭 /////////////////////////////
+		$(".next").click(function(){
+			console.log("다음버튼 클릭");
+			$(this).parents(".mainDiv").next().next().fadeIn();
+			$(this).parents(".mainDiv").fadeOut();
+			
+		});
+		
 		
 		////////////////////////// 정기적으로 ////////////////////////// 
 		$("#regularDateDiv #startDateBtn").datepicker({ // 시작일 데이트피커
@@ -418,17 +426,26 @@
 				return false;
 			}
 			
-			var time_type = $("input[name=time_type]").val();
+			if($("input[name=time_type]:checked").length<1){
+				swal({
+					title : "돌봄 날짜 선택",
+					text : "선생님을 만나고 싶은 날을 선택해주세요",
+					icon : "info"
+				});
+			}
+			
+			var time_type = $("input[name=time_type]:checked").val();
 			if(time_type=="S"){ // 특정날에만
+				console.log("특정날에만");
 				var select_date = $("#select_date").val();
 				if(select_date==null || select_date==""){
 					swal({
-						title : "돌봄 날짜 선택",
-						text : "돌봄 날짜를 선택해주세요",
+						title : "돌봄 날짜를 선택 해주세요",
 						icon : "info"
 					});
 				}
-			} else { // 정기적으로  
+			} else if(time_type=="R"){ // 정기적으로 
+				console.log("정기적으로");
 				var start_date = $("#start_date").val();
 				var end_date = $("#end_date").val();
 				if(start_date==null || start_date==""){
@@ -444,23 +461,50 @@
 						icon : "info"
 					});
 				}
+				
+				var yoil = $("input[name=yoil]:checked").length;
+				if(yoil < 1) {
+					swal({
+						title : "돌봄 날짜 선택",
+						text : "선생님을 만나고 싶은 요일을 선택해주세요",
+						icon : "info"
+					});
+				}
 			}
 			
 			var start_time = $("#start_time").val();
 			var end_time = $("#end_time").val();
-			if(start_time==null || start_time==""){
-				swal({
-					title : "돌봄 시간 선택",
-					text : "돌봄 시작시간을 선택해주세요",
-					icon : "icon"
-				});
-			} else if(end_time==null || end_time=="") {
+			console.log("stime => " + start_time);
+			console.log("etime => " + end_time);
+			
+			if(end_time==null || end_time=="종료시간") {
 				swal({
 					title : "돌봄 시간 선택",
 					text : "돌봄 종료시간을 선택해주세요",
-					icon : "icon"
+					icon : "info"
 				});
 			}
+			
+			var childCnt = $("input[name=childrenCnt]:checked").length;
+			if(childCnt < 1) {
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 정보를 입력해주세요",
+					icon : "info"
+				});
+			}
+			
+			$("input[name=child_birth]").each(function(){
+				var cbtext = $(this).val();
+				console.log("cb =>" + cbtext);
+				if(cbtext == null || cbtext == ""){
+					swal({
+						title : "자녀 정보 입력",
+						text : "자녀의 생년월일을 입력해주세요",
+						icon : "info"
+					});
+				}
+			});
 			
 			
 			return false;
@@ -537,7 +581,7 @@
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
 			</div>
 			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
-			<div id="activityTypeDiv">
+			<div id="activityTypeDiv" class="mainDiv">
 				<input type="checkbox" id="pa1" name="pw_activity" value="실내놀이"/>		
 				<input type="checkbox" id="pa2" name="pw_activity" value="등하원돕기"/>		
 				<input type="checkbox" id="pa3" name="pw_activity" value="영어놀이"/>	
@@ -547,19 +591,20 @@
 				<input type="checkbox" id="pa7" name="pw_activity" value="밥챙겨주기"/>	
 				<input type="checkbox" id="pa8" name="pw_activity" value="책읽기"/>
 				<div id="activityListDiv">
-					<div><label for="pa1" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-indooricon-n.svg"/></label><span>실내놀이</span></div>
-					<div><label for="pa2" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-guideicon-n@3x.png" style="width:38px; height:38px;"/></label><span>등하원돕기</span></div>
-					<div><label for="pa3" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-englishicon-n.svg"/></label><span>영어놀이</span></div>
-					<div><label for="pa4" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-koreanicon-n.svg"/></label><span>한글놀이</span></div>
-					<div><label for="pa5" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-koreanicon-n.svg"/></label><span>학습지도</span></div>
-					<div><label for="pa6" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-ousideicon-n.svg"/></label><span>야외활동</span></div>
-					<div><label for="pa7" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-eaticon-n.svg"/></label><span>밥챙겨주기</span></div>
-					<div><label for="pa8" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-readicon-n.svg"/></label><span>책읽기</span></div>
+					<div><label class="label label-warning" for="pa1" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-indooricon-n.svg"/></label><span>실내놀이</span></div>
+					<div><label class="label label-warning" for="pa2" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-guideicon-n@3x.png" style="width:38px; height:38px;"/></label><span>등하원돕기</span></div>
+					<div><label class="label label-warning" for="pa3" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-englishicon-n.svg"/></label><span>영어놀이</span></div>
+					<div><label class="label label-warning" for="pa4" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-koreanicon-n.svg"/></label><span>한글놀이</span></div>
+					<div><label class="label label-warning" for="pa5" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-koreanicon-n.svg"/></label><span>학습지도</span></div>
+					<div><label class="label label-warning" for="pa6" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-ousideicon-n.svg"/></label><span>야외활동</span></div>
+					<div><label class="label label-warning" for="pa7" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-eaticon-n.svg"/></label><span>밥챙겨주기</span></div>
+					<div><label class="label label-warning" for="pa8" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-readicon-n.svg"/></label><span>책읽기</span></div>
 				</div>
+				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
-			<div id="ageAndGenderDiv">
+			<div id="ageAndGenderDiv" class="mainDiv">
 				<div id="genderDiv"> 
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
@@ -582,10 +627,11 @@
 						<li><label for="60">60</label></li>
 					</ul>
 				</div>
+				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">자녀의 정보를 입력해주세요</label></div>
-			<div id="childrenInfoDiv">
+			<div id="childrenInfoDiv" class="mainDiv">
 				<div id="childrenInfo">
 					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
 					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
@@ -600,13 +646,14 @@
 					<div id="childrenDetailDiv">
 						<ul id="childrenDetail"></ul>
 					</div>
+					<button type="button" class="btn btn-warning next">다음</button>
 				</div>
 			</div>
 			
 			<div class="title">
 				<label class="divOnOff" for="addrDiv">돌봄 장소를 입력해주세요</label>
 			</div>
-			<div id="addrDiv">
+			<div id="addrDiv" class="mainDiv">
 				<div style="margin:10px 0;">
 					<input type="text" id="dong_addr" />
 					<input type="text" id="care_addr" name="care_addr" />
@@ -617,10 +664,11 @@
 				<div id="zidcodeBtnDiv">
 					<input type="button" id="zipcodeBtn" value="돌봄 장소" />
 				</div>
+				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
-			<div id="timeTypeDiv">
+			<div id="timeTypeDiv" class="mainDiv">
 				<input type="radio" id="timeType1" name="time_type" value="S"/>
 				<input type="radio" id="timeType2" name="time_type" value="R"/>
 				<label for="timeType1">특정날에만</label>
@@ -673,11 +721,12 @@
 						</select>
 					</div>
 				</div>
+				<button type="button" class="btn btn-warning next">다음</button>
 				<img src="<%=request.getContextPath()%>/img/fatman.png" id="fatman"/>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="paymentDiv">희망시급을 입력해주세요</label></div>
-			<div id="paymentDiv">
+			<div id="paymentDiv" class="mainDiv">
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
 					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
@@ -691,15 +740,15 @@
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
 				</p>
+				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
-			<div id="descriptionDiv">
+			<div id="descriptionDiv" class="mainDiv">
 				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
 			
-			<div class="title">입력한 정보를 확인 후 등록해주세요</div>
 			<div id="submitDiv" >
 				<input type="submit" value="등록하기" />
 			</div>
