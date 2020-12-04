@@ -122,13 +122,14 @@
 	
 		$(document).on('click', '#reportTable td',function() {
 			  var val = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+			  var val2 = $(this).closest('tr').find('td:eq(7)').text();
 			  console.log(val);
+			  console.log(val2);
 			  tag="";
-			  tag+='<td colspan="3" style=><a name="3" id="third"><textarea cols:50; rows:50;></textarea></td>';
-			  tag+='<td colspan="3" style=><a name="3" id="third"></a>글 내용3</a></td>';
+			  tag+='<td colspan="3" style=><a name="3" id="third"><textarea cols="50"; rows="10";></textarea></td>';
+			  tag+='<td colspan="3" style=><a name="3" id="third"></a>글번호 = '+val+'</a></td>';
 			  $(this).closest('tr').after(tag);
 		});
-		
 		
 		
 	})
@@ -152,6 +153,7 @@
         </tr>
     </thead>
 </table>
+
 </div>
 
 </body>
