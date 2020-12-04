@@ -112,7 +112,7 @@
 				{ targets: 1, width: 170 },
 				{ targets: 2, width: 80 },
 				{ targets: 3, width: 80 },
-				{ targets: 4, width: 130 },
+				{ targets: 4, width: 140 },
 				{ targets: 5, width: 80 },
 				{ targets: 6, searchable:false, width: 130 },
 				{ targets: 7, searchable:false, width: 80}
@@ -125,27 +125,32 @@
 	$(function(){
 		var val2;
 		$(document).on('click', '#reportTable td',function() {
-			  var val = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
-			 var val3 = $(this).closest('tr').find('td:eq(6)').text();
-			  
-			  console.log(val);
-			  console.log(val2);
-			  tag="";
-			  tag+='<td colspan="1"><a name="3" id="third2"></a>글번호 = '+val+'</a></td>';
-			  tag+='<td colspan="3"><a name="3" id="third3"><textarea style="white-space:normal; background:#FAFAFA; border:1px solid gray; height:110px; overflow:scroll; width:100%">'+val3+'</textarea></td>';
-			  tag+='<td colspan="3"><a name="4" id="third1"><textarea cols="55"; rows="5";></textarea></td>';
-			  tag+='<td colspan="1"><button class="btn btn-info">답변완료</button></td>';
-			  
-			  //중복클릭 방지 생각할것
-			  if(val!=val2){
-				  $(this).closest('tr').after(tag);
-				  val2 = $(this).closest('tr').find('td:eq(0)').text();
-			  }
-			  
-			  
+			var val = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+			var val3 = $(this).closest('tr').find('td:eq(6)').text();
+			var val4 = $(this).closest('tr').find('td:eq(7)').text();
+			console.log(val);
+			console.log(val2);
+			tag="";
+			tag+='<td colspan="1"><a name="3" id="third2"></a>글번호 = '+val+'</a></td>';
+			tag+='<td colspan="3"><a name="3" id="third3"><textarea style="white-space:normal; background:#FAFAFA; border:1px solid gray; height:110px; overflow:scroll; width:100%">'+val3+'</textarea></td>';
+			tag+='<td colspan="3"><a name="4" id="third1"><textarea cols="55"; rows="5";>'+val4+'</textarea></td>';
+			tag+='<td colspan="1"><button class="btn btn-info answerBtn">답변완료</button></td>';
+			
+			//중복클릭 방지 생각할것
+			if(val!=val2){
+			 $(this).closest('tr').after(tag);
+			 val2 = $(this).closest('tr').find('td:eq(0)').text();
+			}
 		});
+/* 		
+		$(document).on('click',".answerBtn",function(){
+			$.ajax({
+				url:"";
+			});
+			
+		})
 		
-		
+		 */
 	})
 </script>
 </head>

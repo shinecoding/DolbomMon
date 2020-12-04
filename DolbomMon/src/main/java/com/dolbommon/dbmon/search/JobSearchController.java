@@ -71,17 +71,26 @@ public class JobSearchController {
 	
 	}
 	
-	@RequestMapping(value="/searchAct1", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	@RequestMapping(value="/searchAct", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchAct1(HttpSession ses, String activity_type) {
-		
-		String userid = (String)ses.getAttribute("userid");
+	public List<TeacherVO> searchAct(String activity_type) {
 		
 		System.out.println("액티비티 타입"+activity_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList2(activity_type); //선생님 리스트
-		
+		List<TeacherVO> list = dao.jobSearchActType(activity_type);
 		
 		return list;
 	}
+	
+	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<TeacherVO> searchCare(String care_type) {
+		
+		System.out.println("케어타입=="+care_type);
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.jobSearchCareType(care_type); 
+
+		return list;
+	}
+
 }
