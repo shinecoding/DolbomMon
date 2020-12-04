@@ -145,10 +145,11 @@ EDIT ON
 	           </span>
 	           
 	       
-		 	
-		 	
-	          <a class="btn" style="float:right">   
-	         <input type="button" value="가입하기" class="btn btn-outline-warning" style="color:#ff7928;" Onclick="location.href='/dbmon/join'"/>
+		<a class="btn" style="float:right"> 
+		 	<c:if test="${logStatus == null || logStatus=='N'}">
+			  
+	        <input type="button" value="가입하기" class="btn btn-outline-warning" style="color:#ff7928;" Onclick="location.href='/dbmon/join'"/>
+	        </c:if>
 	         <c:if test="${logStatus == null || logStatus=='N'}">
 	          <input type="button" value="로그인" class="btn btn-outline-warning" style="color:#ff7928;" Onclick="location.href='/dbmon/login'"/> 
 	          </c:if>
@@ -157,10 +158,9 @@ EDIT ON
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
 	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
 	         </c:if>
-	         <c:if test="${logStatus != null || logStatus=='Y'}">
-	         </c:if>
+	         
 	
-	   </a>             
+	  		</a>             
 	   </header>
 	
 	

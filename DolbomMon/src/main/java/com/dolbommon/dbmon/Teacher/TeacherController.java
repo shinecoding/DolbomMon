@@ -2,10 +2,13 @@ package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
 import java.util.HashSet;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.member.RegularDateVO;
+import com.dolbommon.dbmon.member.SpecificDateVO;
 
 
 @Controller
@@ -648,8 +653,41 @@ public class TeacherController {
 		}
 		return mav;
 	}
-
+	
+	@RequestMapping(value="/teacherSchedule")
+	public String teacherSchedule(HttpSession ses, RegularDateVO rdVO, SpecificDateVO sdVO) {
+		
+		String userid = (String)ses.getAttribute("userid");
+		
+		
+		
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		
+		
+		return "teacher/teacherSchedule";
+	}
+	
+	
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

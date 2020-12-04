@@ -18,13 +18,13 @@
 	$(function(){
 		$("#parent").click(function(){
 			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/parentJoin");
-			$("#who").val("P")
+			$("#who").val("P");
 			$("#submit").click();
 		});	
 		
 		$("#dbm").click(function(){
 			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/dbmJoin");
-			$("#who").val("T")
+			$("#who").val("T");
 			$("#submit").click();
 		});
 	});

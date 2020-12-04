@@ -126,11 +126,11 @@
 	    	var activity_type = $(this).text();
 	    	console.log(activity_type);
 	    	var url = "/dbmon/searchAct1";
-			//var params = "activity_type=실내놀이";
+			var params = "activity_type="+activity_type;
 
 			$.ajax({
 				url:url,
-				//data:params,
+				data:params,
 				type:'GET',
 				success:function(result){
 					
@@ -139,8 +139,6 @@
 					
 					$result.each(function(idx, vo){
 					
-						tag +="<div>"+vo.userid+"</div>";
-
 						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
@@ -154,15 +152,15 @@
 							
 							tag += '<span class="ml-2" style="font-size:0.7em">';
 							if(vo.last_edit>525600){
-								tag += vo.last_edit/525600+'년';
+								tag += Math.round(vo.last_edit/525600)+'년';
 							} else if(vo.last_edit>43200){
-								tag += vo.last_edit/43200 +'달';
+								tag += Math.round(vo.last_edit/43200) +'달';
 							} else if(vo.last_edit>1440){
-								tag += vo.last_edit/1440 +'일';
+								tag += Math.round(vo.last_edit/1440) +'일';
 							} else if(vo.last_edit>60){
-								tag += vo.last_edit/60 +'시간';
+								tag += Math.round(vo.last_edit/60) +'시간';
 							} else {
-								tag += vo.last_edit +'분';
+								tag += Math.round(vo.last_edit) +'분';
 							}
 							tag += '</span>';
 							tag += '<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">';
@@ -172,7 +170,7 @@
 							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
 							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
 							
-							if(vo.identi_status.equals("Y") || vo.license_status.equals("Y") || vo.school_status.equals("Y") || vo.crime_status.equals("Y")){
+							if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
 								tag += '<hr/>';
 							}
 							if(vo.identi_status == "Y"){
@@ -194,11 +192,7 @@
 						}, error: function(){
 					console.log("리스트 받기 에러");
 					}
-						
-	    	
-	    	
-	    	
-	    	
+
 				})
 				
 	    }));

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.login.LoginDaoImp">
 	<select id="loginOk" resultType="com.dolbommon.dbmon.login.LoginVO">
-		select userid from member where userid=#{userid} and userpwd=#{userpwd}
+		select userid, username from member where userid=#{userid} and userpwd=#{userpwd}
 	</select>
 <!--  	
 	<update id="keepLogin">
@@ -22,4 +22,8 @@
 	<update id="pwdChange" parameterType="com.dolbommon.dbmon.login.LoginVO">
 		update member set userpwd=#{userpwd} where username=#{username} and birth=#{birth} and tel1=#{tel1}
 	</update>
+	
+	<select id="getMemberType" resultType="com.dolbommon.dbmon.member.MemberVO">
+		select who from member where userid = #{param1}
+	</select> 
 </mapper>

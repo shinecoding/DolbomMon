@@ -84,17 +84,38 @@ public class MemberController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
+			String yoil = (String)ses.getAttribute("yoil");
+			String sd = (String)ses.getAttribute("start_date");
+			String ed = (String)ses.getAttribute("end_date");
+			String st = (String)ses.getAttribute("start_time");
+			String et = (String)ses.getAttribute("end_time");
+			rdVo.setYoil(yoil);
+			rdVo.setStart_date(sd);
+			rdVo.setEnd_date(ed);
+			rdVo.setStart_time(st);
+			rdVo.setEnd_time(et);
+			
+			System.out.println("yoil => " + yoil);
+			System.out.println("sd = > " + sd);
+			System.out.println("ed => " + ed);
+			System.out.println("st => " + st);
+			System.out.println("et => " + et);
+			
 			String who = (String)ses.getAttribute("who");
+			System.out.println("who=>"+ who);
 			int result = 0;
 			
 			try {
-				if(who=="T") {
+				if(who.equals("T")) {
+					System.out.println("선생님 들어옴");
 					dao.memberReg(mVo);
-					
+					System.out.println("회원테이블 들어감");
 					dao.memberRegTeacher(mVo, tVo);
-					
+					System.out.println("선생님 테이블 들어감");
 					result = dao.memberRegRegular(mVo, rdVo);
+					System.out.println("결과 =>" + result);
 				}else {
+					System.out.println("학부모 들어옴");
 					result = dao.memberReg(mVo);
 				}
 				transactionManager.commit(status);
