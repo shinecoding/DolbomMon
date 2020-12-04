@@ -383,24 +383,24 @@
 <body>
 	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
-	<c:if test="${who==T }" >
-		<input type="hidden" name="care_type" value="${care_type }" />
-		<input type="hidden" name="child_age" value="${child_age }" />
-		<input type="hidden" name="activity_type" value="${activity_type }" />
-		<input type="hidden" name="yoil" value="${yoil }" />
-		<input type="hidden" name="start_time" value="${start_time }" />
-		<input type="hidden" name="end_time" value="${end_time }" />
-		<input type="hidden" name="start_date" value="${start_date }" />
-		<input type="hidden" name="end_date" value="${end_date }" />
-		<input type="hidden" name="desired_wage" value="${desired_wage }" />
-		<input type="hidden" name="cctv" value="${cctv }" />
-		<input type="hidden" name="pic" value="${pic }" />
-		<input type="hidden" name="intro" value="${intro }" />
+	<c:if test="${who=='T' }" >
+		<input type="text" name="care_type" value="${care_type }" />
+		<input type="text" name="child_age" value="${child_age }" />
+		<input type="text" name="activity_type" value="${activity_type }" />
+		<input type="text" name="yoil" value="${yoil }" />
+		<input type="text" name="start_time" value="${start_time }" />
+		<input type="text" name="end_time" value="${end_time }" />
+		<input type="text" name="start_date" value="${start_date }" />
+		<input type="text" name="end_date" value="${end_date }" />
+		<input type="text" name="desired_wage" value="${desired_wage }" />
+		<input type="text" name="cctv" value="${cctv }" />
+		<input type="text" name="pic" value="${pic }" />
+		<input type="text" name="intro" value="${intro }" />
 	</c:if>
-		<input type="hidden" name="who" value="${who }" />
-		<input type="hidden" id="lat" name="lat" />
-		<input type="hidden" id="lng" name="lng" />
-		<input type="hidden" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
+		<input type="text" name="who" value="${who }" />
+		<input type="text" id="lat" name="lat" />
+		<input type="text" id="lng" name="lng" />
+		<input type="text" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
 		
 		<div id="headerDiv">
 			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />

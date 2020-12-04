@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +57,8 @@
 					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
-			///////////////////////////// 정기적으로 날짜 설정 요일 //////////////////////////////
 			
+			///////////////////// 돌봄유형 //////////////////
 			for(var i=1;i<9;i++){
 				var nowImg = $("label[for=pa"+i+"]").children("img").attr("src");
 				if($("input[id=pa"+i+"]").is(":checked")){
@@ -114,9 +115,10 @@
 					$("label[for="+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
-			/////////////////// 페이지 로딩 시 //////////////////////
+			/////////////////// 페이지 로딩 시 //////////////////////end
 		});
-		////////////////////////////////////////////////////
+		
+		////////////////////// 정기적으로, 특정날에만 선택//////////////////////////////
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
 				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
@@ -391,9 +393,11 @@
 			var wage = $("#wish_wage").val();
 			if(wage==null || wage==""){
 				alert("희망시급을 입력해주세요");
+				$.divOnOff(this);
 				return false;
 			}else if(wage<8590){
 				alert("희망시급은 최소 8590원 이상이어야합니다.");
+				$.divOnOff(this);
 				return false;
 			}
 			var pw_activityCnt = $("input[name=pw_activity]:checked").length;
@@ -403,6 +407,7 @@
 					text : "원하는 돌봄유형을 입력해주세요",
 					icon : "info"
 				});
+				$.divOnOff("input[name=pw_activity]");
 				return false;
 			}
 			
@@ -413,6 +418,7 @@
 					text : "원하는 선생님 성별을 입력해주세요",
 					icon : "info"
 				});
+				$.divOnOff("input[name=wish_gender]");
 				return false;
 			}
 			
@@ -423,8 +429,34 @@
 					text : "원하는 선생님 나이대를 입력해주세요",
 					icon : "info"
 				});
+				$.divOnOff("input[name=wish_age]");
 				return false;
 			}
+			
+			var childCnt = $("input[name=childrenCnt]:checked").length;
+			if(childCnt < 1) {
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 정보를 입력해주세요",
+					icon : "info"
+				});
+				$.divOnOff("input[name=childrenCnt]");
+				return false;
+			}
+			
+			$("input[name=child_birth]").each(function(){
+				var cbtext = $(this).val();
+				if(cbtext == null || cbtext == ""){
+					console.log("cb =>" + cbtext);
+					swal({
+						title : "자녀 정보 입력",
+						text : "자녀의 생년월일을 입력해주세요",
+						icon : "info"
+					});
+					$.divOnOff("input[name=child_birth]");
+					return false;
+				}
+			});
 			
 			if($("input[name=time_type]:checked").length<1){
 				swal({
@@ -432,6 +464,8 @@
 					text : "선생님을 만나고 싶은 날을 선택해주세요",
 					icon : "info"
 				});
+				$.divOnOff("input[name=time_type]");
+				return false;
 			}
 			
 			var time_type = $("input[name=time_type]:checked").val();
@@ -443,6 +477,8 @@
 						title : "돌봄 날짜를 선택 해주세요",
 						icon : "info"
 					});
+					$.divOnOff("input[name=time_type]");
+					return false;
 				}
 			} else if(time_type=="R"){ // 정기적으로 
 				console.log("정기적으로");
@@ -454,12 +490,16 @@
 						text : "돌봄 시작날짜를 선택해주세요",
 						icon : "info"
 					});
+					$.divOnOff("#start_date");
+					return false;
 				}else if(end_date==null || end_date==""){
 					swal({
 						title : "돌봄 날짜 선택",
 						text : "돌봄 종료날짜를 선택해주세요",
 						icon : "info"
 					});
+					$.divOnOff("#end_date");
+					return false;
 				}
 				
 				var yoil = $("input[name=yoil]:checked").length;
@@ -469,6 +509,8 @@
 						text : "선생님을 만나고 싶은 요일을 선택해주세요",
 						icon : "info"
 					});
+					$.divOnOff("input[name=yoil]");
+					return false;
 				}
 			}
 			
@@ -483,29 +525,9 @@
 					text : "돌봄 종료시간을 선택해주세요",
 					icon : "info"
 				});
+				$.divOnOff("#end_time");
+				return false;
 			}
-			
-			var childCnt = $("input[name=childrenCnt]:checked").length;
-			if(childCnt < 1) {
-				swal({
-					title : "자녀 정보 입력",
-					text : "자녀의 정보를 입력해주세요",
-					icon : "info"
-				});
-			}
-			
-			$("input[name=child_birth]").each(function(){
-				var cbtext = $(this).val();
-				console.log("cb =>" + cbtext);
-				if(cbtext == null || cbtext == ""){
-					swal({
-						title : "자녀 정보 입력",
-						text : "자녀의 생년월일을 입력해주세요",
-						icon : "info"
-					});
-				}
-			});
-			
 			
 			return false;
 		});
@@ -517,6 +539,13 @@
 </script>
 
 <script>
+	$.divOnOff = function(a){
+		$(".mainDiv").fadeOut();
+		var divLocation = $(a).parents(".mainDiv").offset();
+		console.log("요소의 위치 => " + divLocation);
+		$(a).parents(".mainDiv").fadeIn();
+	}
+	
 	function startTime(){ // 시작 시간
 		var time = new Date(2020, 0, 1);
 		var tag="";
@@ -720,7 +749,7 @@
 							<option>종료시간</option>
 						</select>
 					</div>
-				</div>
+				</div><br/>
 				<button type="button" class="btn btn-warning next">다음</button>
 				<img src="<%=request.getContextPath()%>/img/fatman.png" id="fatman"/>
 			</div>

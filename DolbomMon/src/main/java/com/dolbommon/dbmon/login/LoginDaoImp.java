@@ -2,6 +2,8 @@ package com.dolbommon.dbmon.login;
 
 import javax.xml.crypto.Data;
 
+import com.dolbommon.dbmon.member.MemberVO;
+
 public interface LoginDaoImp {
 	//로그인
 	public LoginVO loginOk(LoginVO vo);
@@ -13,6 +15,6 @@ public interface LoginDaoImp {
 	public LoginVO findUserid(LoginVO vo);
 	//비밀번호 변경
 	public int pwdChange(LoginVO vo);
-	
-	
+	//로그인 유형 (선생님, 학부모)
+	public MemberVO getMemberType(String userid);
 }

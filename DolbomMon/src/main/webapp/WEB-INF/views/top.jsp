@@ -149,7 +149,7 @@ EDIT ON
     
     
          <c:if test="${logStatus != null || logStatus=='Y'}">
-         ${userid } <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
+         ${userid }<input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
          </c:if>
 
    </a>             
