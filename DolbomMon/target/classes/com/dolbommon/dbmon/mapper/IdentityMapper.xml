@@ -6,6 +6,10 @@
 	<select id="getIdentity" resultType="com.dolbommon.dbmon.identity.IdentityVO">
 		select * from member where userid=#{userid}
 	</select>
+	
+	<update id="indentityEdit">
+		update member set userpwd=#{userpwd}, tel1=#{tel1}, email=#{email}, zipcode=#{zipcode}, addr=#{addr}, addrDetail=#{addrDetail} where userid=#{userid}
+	</update>
 
 
 

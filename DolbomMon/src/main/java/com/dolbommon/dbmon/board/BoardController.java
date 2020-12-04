@@ -327,6 +327,9 @@ public class BoardController {
 		return mav;
 	}
 	
+	
+	
+	
 	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
 	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
