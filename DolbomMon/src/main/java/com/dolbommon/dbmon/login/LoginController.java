@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.member.MemberVO;
+
 @Controller
 public class LoginController {
 
@@ -51,13 +53,16 @@ public class LoginController {
 		}
 
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
+		
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
 		
 		if(resultVO==null) {	//실패
 			mav.setViewName("login/loginResult");			
 		}else {
+			MemberVO mVo = dao.getMemberType(vo.getUserid());
 			//로그인 성공시 세션 만들기
+			ses.setAttribute("who", mVo.getWho());
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("logStatus", "Y");

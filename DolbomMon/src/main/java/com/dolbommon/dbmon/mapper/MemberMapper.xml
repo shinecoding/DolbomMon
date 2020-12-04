@@ -8,12 +8,12 @@
 				values(member_sq.nextval, #{mVo.userid}, #{mVo.userpwd}, #{mVo.username}, #{mVo.birth}, #{mVo.gender}, #{mVo.tel1}, #{mVo.email}, #{mVo.addr}, #{mVo.addrdetail}, #{mVo.zipcode}, #{mVo.lat}, #{mVo.lng}, #{mVo.who})
 	</insert>
 	<insert id="memberRegTeacher">
-		insert into teacher(userid, pic, care_type, child_age, activity_type, desired_wage, intro, cctv) 
-				values(#{mVo.userid}, #{tVo.pic}, #{tVo.care_type}, #{tVo.child_age}, #{tVo.activity_type}, #{tVo.desired_wage}, #{tVo.intro}, #{tVo.cctv})
+		insert into teacher(userid, pic, care_type, child_age, activity_type, desired_wage, intro, cctv, last_edit) 
+				values(#{mVo.userid}, #{tVo.pic}, #{tVo.care_type}, #{tVo.child_age}, #{tVo.activity_type}, #{tVo.desired_wage}, #{tVo.intro}, #{tVo.cctv}, sysdate)
 	</insert>
 	<insert id="memberRegRegular">
 		insert into regular_date(userid, yoil, start_time, end_time, start_date, end_date)
-					values(#{mVo.userid}, #{rdVo.yoil}, #{rdVo.start_time}, #{rdVo.end_time}, #{rdVo.start_date}, #{rdVo.end_date})
+				values(#{mVo.userid}, #{rdVo.yoil}, #{rdVo.start_time}, #{rdVo.end_time}, #{rdVo.start_date}, #{rdVo.end_date})
 	</insert>
 	
 	<select id="memberUseridChk" resultType="int">
@@ -23,6 +23,4 @@
 	<select id="memberUsertelChk" resultType="int">
 		select count(tel1) from member where tel1 = #{param1}
 	</select>
-	
-
 </mapper>
