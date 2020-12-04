@@ -11,7 +11,8 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	.container{
-		width: 700px;	
+		width: 800px;
+		margin: 0 auto;	
 	}
 	#top{
 		margin: 15px;
@@ -22,22 +23,22 @@
 	}
 	#userBox{
 		margin: 0 auto;
-		width: 700px;
+		width: 800px;
 		float: left;
 	}
 	#typeBox{
 		float: left;
-		margin-left: 120px;
+		margin-left: 140px;
 		width: 230px;
 		padding: 5px;
 	}
-	#categ{
+	#catego{
 		float: right;
-		margin-right: 120px;
+		margin-right: 100px;
 		width: 230px;
 		padding: 5px;
 	}
-	.categDiv{
+	.categoDiv{
 		width: 300px;
 		padding: 5px;
 	}
@@ -49,53 +50,59 @@
 	}
 	#space{
 		margin: 0 auto;	
-		width: 700px;
+		width: 800px;
 		height: 15px;
 		background-color: lightgray;
 		position: absolute;
-		top: 350px;
+		top: 480px;
 	}
-	.list-group1{
+	.list-group{
 		position: absolute;
-		top: 363px;
-		width: 700px;
+		top: 494px;
+		width: 800px;
 	}
+	#logoLink{
+		padding: 30px;
+		width: 50%;
+		display: block;
+		margin: 0 auto;
+	}
+
 </style>
 </head>
 <body>
 <div class="container">
+	<div>
+	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logoLink" align="middle"/></a>	
+	</div>
 	<div id="top">
 	<b>계정관리</b>
 	</div>
 	<c:forEach var="vo" items="${list}">
-		<div id="userBox">
-			
+		<div id="userBox">		
 		 	<div id="typeBox">
 		 		<div class="typeDiv">회원 유형</div>
 		 		<div class="typeDiv">사용중인 아이디</div>
 		 		<div class="typeDiv">가입한 휴대폰 번호</div>
 		 	</div>	
-		 	<div id="categ">
+		 	<div id="catego">
 			 	<c:if test="${vo.who=='T'}">
-			 		<div class="categDiv">선생님 맘시터</div>
+			 		<div class="categoDiv">선생님 맘시터</div>
 			 	</c:if>
 		 		<c:if test="${vo.who!='T'}">
-		 			<div class="categDiv">부모님 회원</div>
+		 			<div class="categoDiv">부모님 회원</div>
 		 		</c:if>
-		 		<div class="categDiv">${vo.userid}</div>
-		 		<div class="categDiv">${vo.tel1}</div>
+		 		<div class="categoDiv">${vo.userid}</div>
+		 		<div class="categoDiv">${vo.tel1}</div>
 		 	</div>	
-	
 		</div>
 	</c:forEach>
 	<div id="space"></div>
-	<div class="list-group1">
-		<a href="#" class="list-group-item list-group-item-action"><b>회원정보 수정</b></a>
+	<div class="list-group">
+		<a href="identityEdit" class="list-group-item list-group-item-action"><b>회원정보 수정</b></a>
 		<a href="#" class="list-group-item list-group-item-action"><b>회원 탈퇴 신청</b></a>
 		<a href="#" class="list-group-item list-group-item-action"><b>돌봄몬 서비스 이용동의</b></a>
 	</div>
-
-	
 </div>
 </body>
 </html>

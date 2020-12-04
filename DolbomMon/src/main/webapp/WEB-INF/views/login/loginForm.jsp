@@ -23,7 +23,7 @@
 		color: gray;
 	}
 	#logo{
-		padding: 20px;
+		padding: 30px;
 		width: 50%;
 		display: block;
 		margin: 0px auto;
@@ -45,11 +45,7 @@ $(function(){
 			return false;
 		}
 		return true;
-	});
-	
-	
-	
-	
+	});	
 });
 
 </script>
@@ -57,8 +53,7 @@ $(function(){
 <body>
 <div class="container">
 	<div>
-	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/dbLogo.png" id="logo" align="middle"/></a>
-	
+	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logo" align="middle"/></a>
 	</div>
 	<form method="post" action="loginOk" id="loginFrm">
 		<div class="form-group">

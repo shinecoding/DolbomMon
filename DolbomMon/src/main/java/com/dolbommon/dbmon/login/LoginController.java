@@ -64,10 +64,11 @@ public class LoginController {
 			
 			//자동로그인 선택시 쿠키 생성
 			if(req.getParameter("loginCookie")!=null) {
-				Cookie loginCookie = new Cookie("loginCookie", ses.getId());
+				Cookie loginCookie = new Cookie("loginCookie", (String)ses.getAttribute("userid"));
 				loginCookie.setPath("/dbmon");
 				loginCookie.setMaxAge(60*60*24*7);
 				res.addCookie(loginCookie);
+				System.out.println(loginCookie.getValue());
 			}
 			mav.setViewName("redirect:/");
 		}

@@ -65,8 +65,6 @@
     	where no=#{no}
 	</select>	
 	
-	
-	
 	<update id="hitCount" parameterType="int">
 		update freeBoard set hit=hit+1 where no=#{param1}
 	</update>
@@ -92,6 +90,7 @@
 		</choose>
 		)
 	</insert>
+	
 	<delete id="freeBoardDel">
 		delete from freeBoard where no=#{param1} and userid=#{param2}
 	</delete>
