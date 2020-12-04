@@ -171,7 +171,7 @@ font-weight:bold;
    	</li>
    	<h5>활동 가능 시간</h5>
    	<li class="list-group-item">
-	   	<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
+	   	<i class="fas fa-pen"><a class="editBtn" href="teacherSchedule"></a></i>
 	   	스케쥴차트</li>
    	<h5>돌봄 가능 연령</h5>
    	 <c:set var = "str" value = "${vo.child_age}"/>
