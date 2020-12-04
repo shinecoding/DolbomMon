@@ -89,11 +89,16 @@
 	i{
 	color:orange;
 	}
-	select optgroup, select option{
-	height:10px;
+
+	#orderDropdown {
+	border:none;
+	
 	}
-
-
+	#orderDropdown>option{
+	text-align:right;
+	}
+	
+	
 </style>
 
 <script>
@@ -276,8 +281,91 @@
 				
 	    });//ajax
 			
+	    
+	    
+	//====================최신순 필터=========================
+		
+		$(document).on("change", "#orderDropdown", function(){
+				var order = $(this).val();
+				console.log("정렬="+order);
+					
+				var url = "/dbmon/filterOrder";
+				var params = "order="+order;
+				
+				console.log("파라미터="+params);
+				$.ajax({
+					url:url,
+					data:params,
+					type:'GET',
+					success:function(result){
+						
+ 						var $result = $(result);
+						var tag = "";
+						
+						$result.each(function(idx, vo){
+						
+							tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+							tag += '<img class="profilepic" src=';
+							if(vo.pic==null){
+								tag +='"img/profilepic.png"';
+							} else {
+								tag +='"upload/' +vo.pic+ '"';
+							}
+							tag += '/><br/>';
+							tag += '<div class="card-body">';
+								tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
+								
+								tag += '<span class="ml-2" style="font-size:0.7em">';
+								if(vo.last_edit>525600){
+									tag += Math.round(vo.last_edit/525600)+'년';
+								} else if(vo.last_edit>43200){
+									tag += Math.round(vo.last_edit/43200) +'달';
+								} else if(vo.last_edit>1440){
+									tag += Math.round(vo.last_edit/1440) +'일';
+								} else if(vo.last_edit>60){
+									tag += Math.round(vo.last_edit/60) +'시간';
+								} else {
+									tag += Math.round(vo.last_edit) +'분';
+								}
+								tag += '</span>';
+								tag += '<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">';
+								tag += '</h5>';
+											
+								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
+								tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
+								tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+								
+								if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+									tag += '<hr/>';
+								}
+								if(vo.identi_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+								} else if(vo.license_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+								} else if(vo.school_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+								} else if(vo.crime_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+								}
+								
+								tag += '</div>';
+								tag += '</div>';							
+						});
+						tag += "";
+						console.log("tag=",tag);
+						$("#cardBox").html(tag);  
+					},
+					error:function(error){
+						console.log("리스트 받기 에러-->"+ error.responseText);
+					}
+			});
 			
-			
+   	 	});//ajax 
+		
+		
+		
+		
+		
 	});//제이쿼리
 </script>
 </head>
@@ -319,7 +407,7 @@
     <optgroup label="긴급/단기 돌봄"></optgroup>
     <option value="긴급/단기">긴급/단기</option>
     
-    <option value="/">모든 돌봄 유형 보기</option>
+    <option value="">모든 돌봄 유형 보기</option>
     
 	</select>
  </form>
@@ -345,17 +433,33 @@
 
   </div>
  
-<!-- ------------------------------- -->
- 
+<!-- -------------------------순서 정렬--------------------- -->
+
    <div class="d-inline-block m-2" style="width:100%;">
 	<div class="float-left" > 총 돌봄몬 수 : ${totalRecord} </div>
-	<div id="wageFilter" class="float-right" style="cursor:pointer">
-	최신 순
-	<i class="fas fa-arrow-circle-down"></i>
+	
+	<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
+		<select id="orderDropdown">
+			<option value="last_edit">최신 순</option>
+			<option value="certi_cnt">인증 수 순</option>
+			<option value="wage_low">시급 낮은 순</option>
+			<option value="wage_high">시급 높은 순</option>
+		</select>
+		
+		<i class="fas fa-arrow-circle-down"></i>
 	</div>
 	</div>
 
-<!-- ------------------------------- -->
+
+
+
+
+
+
+
+
+
+<!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
 		<div class="card" onclick="location.href='teacherView?userid=${vo.userid}'" >
@@ -398,7 +502,7 @@
 	</div>
 
 
-<!-- =================지도======================================== -->
+<!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
