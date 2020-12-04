@@ -9,7 +9,7 @@ public class RecruitBoardVO {
 		private String pw_activity; //원하는 활동
 		private int wish_wage; //희망시급
 		private String consultation; //협의유무
-		private int wish_age; //원하는 선생님나이
+		private String wish_age; //원하는 선생님나이
 		private String wish_gender; //원하는 선생님 성별
 		private String content; //요청사항
 		private String writedate; //글 등록일
@@ -58,10 +58,10 @@ public class RecruitBoardVO {
 		public void setConsultation(String consultation) {
 			this.consultation = consultation;
 		}
-		public int getWish_age() {
+		public String getWish_age() {
 			return wish_age;
 		}
-		public void setWish_age(int wish_age) {
+		public void setWish_age(String wish_age) {
 			this.wish_age = wish_age;
 		}
 		public String getWish_gender() {
