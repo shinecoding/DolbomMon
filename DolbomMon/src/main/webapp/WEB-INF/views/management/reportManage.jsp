@@ -114,8 +114,8 @@
 				{ targets: 3, width: 80 },
 				{ targets: 4, width: 130 },
 				{ targets: 5, width: 80 },
-				//{ targets: 6, width: 130 },
-				{ targets: 7, width: 80}
+				{ targets: 6, searchable:false, width: 130 },
+				{ targets: 7, searchable:false, width: 80}
 			]
 	    });
 	   $('.dt-button').addClass('btn btn-outline-info');
