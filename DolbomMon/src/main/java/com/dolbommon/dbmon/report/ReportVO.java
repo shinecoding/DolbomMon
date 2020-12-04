@@ -3,9 +3,9 @@ package com.dolbommon.dbmon.report;
 public class ReportVO {
 	private String shingo_no;
 	private String userid; //신고자아이디
+	private String shingo_detail;
 	private String shingo_reason;
 	private String shingo_date;
-	private String shingo_detail;
 	private String shingo_id; //신고당한 아이디
 	private String shingo_status; //신고처리상태
 	private String shingo_response; //신고 답변메시지

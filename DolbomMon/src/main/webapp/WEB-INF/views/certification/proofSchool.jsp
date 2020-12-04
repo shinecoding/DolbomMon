@@ -187,7 +187,7 @@
 				똑같이 입력해 주세요.<br/></div>
 			
 			<img src="img/ex-cert-enrollment-2.png"/>
-			<div>발급일자</div>
+			<div style="text-align:center;">발급일자</div>
 			<div id="certTime">
 				<select name="school_year">
 				<% for(int i=2020; i>1900; i--){ %>
@@ -208,5 +208,6 @@
 				<input type="submit" class="btn btn-warning" value="신청" />
 		</form>
 </div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

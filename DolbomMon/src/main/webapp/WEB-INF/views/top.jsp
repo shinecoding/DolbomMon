@@ -5,15 +5,17 @@
    <script type="text/javascript">
    
          $(function(){
-	     $("ul.subMain").hide();
-		 $("ul.mainTopmenu li").hover(function(){
-		    $("ul:not(:animated)",this).slideDown("fast");
-			},
-			function(){
-			   $("ul",this).slideUp("fast");
-			});
 
-      });	
+	        $("ul.subMain").hide();
+	        $("ul.mainTopmenu li").hover(function(){
+	        	$("ul:not(:animated)",this).slideDown("fast");
+	         },
+	         function(){
+	            $("ul",this).slideUp("fast");
+	         });
+
+	      });   
+
    </script>
 
    
@@ -22,16 +24,28 @@ HTML CSSResult
 EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
+
      #menu-button{
      	-webkit-padding-start:0px;
      	
      }
+
      #topmenu-button{
      	-webkit-padding-start:0px;
-     	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-     }
 
-      #containertoptoptop {
+     	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+     }
+   
+     #topmenu-button{
+        -webkit-padding-start:0px;
+     }
+   
+
+      #container {
+
         width: 100%;
       }
 
@@ -79,9 +93,10 @@ EDIT ON
       	 color:orange;
 	     opacity:50;
 		 }
+
       ul.mainTopmenu li ul.subMain{
-	     position: absolute;
-		 }
+        position: absolute;
+       }
       ul.mainTopmenu{
 	     zoom: 1;
 	     margin-bottom:0;
@@ -106,7 +121,7 @@ EDIT ON
 	   		
 	   		
 	   }
-	   a.btn{
+	   a.ppp{
 	   		float:right;
 	   		margin-right:180px;
 	   		
@@ -118,11 +133,11 @@ EDIT ON
 	   
 	   }
 	   
+
    </style>
 </head>
 <body>
  <div id="containertoptoptop" >
-
 
  <div class="clearfix">
     <header id="topHeader">
@@ -133,23 +148,23 @@ EDIT ON
 
            <span style="float:right">
            <a href="javascript:void(window.open('/dbmon/chat','message','width=1200,height=1000,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-           <button class="btn btn-primary">채팅</button></a>
+           <button class="btn btn-primary ppp">채팅</button></a>
            <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-           <button class="btn btn-primary">쪽지</button></a>
+           <button class="btn btn-primary ppp">쪽지</button></a>
            <a href="/dbmon/temporaryLogin">
-           <button class="btn btn-info">임시로그인</button></a>
+           <button class="btn btn-info ppp">임시로그인</button></a>
            </span>
            
            
           <a class="btn" style="float:right">   
-         <input type="button" value="가입하기" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
+         <input type="button" value="가입하기" class="btn btn-outline-warning ppp" style="color:ff6400" Onclick="location.href='/dbmon/join'"/>
          <c:if test="${logStatus == null || logStatus=='N'}">
-          <input type="button" value="로그인" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
+          <input type="button" value="로그인" class="btn btn-outline-warning ppp" style="color:ff6400" Onclick="location.href='/dbmon/login'"/> 
           </c:if>
     
     
          <c:if test="${logStatus != null || logStatus=='Y'}">
-         ${userid }<input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
+         ${userid } <input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
          </c:if>
 
    </a>             
@@ -188,4 +203,6 @@ EDIT ON
       </ul>
  </ul>
 
+
  </div>
+
