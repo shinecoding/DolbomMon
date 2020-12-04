@@ -75,15 +75,14 @@ public class ManagmentController {
 	}
 	
 	@RequestMapping(value = "/reportList")
-	 public @ResponseBody Object getRecordList(HttpServletRequest request,
-	   HttpServletResponse response,
-	   @ModelAttribute("ReportVO") ReportVO boardVO){
-		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
-	  Map<String, Object> mp = new HashMap<String, Object>();
-	  mp.put("data", dao.selectReport(boardVO));
+	@ResponseBody 
+	public Map<String, Object> getRecordList(ReportVO boardVO){
+	ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+	Map<String, Object> mp = new HashMap<String, Object>();
+	mp.put("data", dao.selectReport(boardVO));
 
-	  Object result = mp;
+//	Object result = mp;
 	  
-	  return result;
+	return mp;
 	}
 }
