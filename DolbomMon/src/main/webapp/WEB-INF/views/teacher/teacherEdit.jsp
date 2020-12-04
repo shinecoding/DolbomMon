@@ -326,7 +326,7 @@ font-weight:bold;
 </div>
 
 
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

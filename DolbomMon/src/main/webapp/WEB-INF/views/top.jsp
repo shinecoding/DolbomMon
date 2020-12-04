@@ -5,15 +5,17 @@
    <script type="text/javascript">
    
          $(function(){
-	     $("ul.subMain").hide();
-		 $("ul.mainTopmenu li").hover(function(){
-		    $("ul:not(:animated)",this).slideDown("fast");
-			},
-			function(){
-			   $("ul",this).slideUp("fast");
-			});
 
-      });	
+	        $("ul.subMain").hide();
+	        $("ul.mainTopmenu li").hover(function(){
+	        	$("ul:not(:animated)",this).slideDown("fast");
+	         },
+	         function(){
+	            $("ul",this).slideUp("fast");
+	         });
+
+	      });   
+
    </script>
 
    
@@ -22,16 +24,28 @@ HTML CSSResult
 EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
+
      #menu-button{
      	-webkit-padding-start:0px;
      	
      }
+
      #topmenu-button{
      	-webkit-padding-start:0px;
-     	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-     }
 
-      #containertoptoptop {
+     	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+     }
+   
+     #topmenu-button{
+        -webkit-padding-start:0px;
+     }
+   
+
+      #container {
+
         width: 100%;
       }
 
@@ -79,9 +93,10 @@ EDIT ON
       	 color:orange;
 	     opacity:50;
 		 }
+
       ul.mainTopmenu li ul.subMain{
-	     position: absolute;
-		 }
+        position: absolute;
+       }
       ul.mainTopmenu{
 	     zoom: 1;
 	     margin-bottom:0;
@@ -118,11 +133,11 @@ EDIT ON
 	   
 	   }
 	   
+
    </style>
 </head>
 <body>
  <div id="containertoptoptop" >
-
 
  <div class="clearfix">
     <header id="topHeader">
@@ -188,4 +203,6 @@ EDIT ON
       </ul>
  </ul>
 
+
  </div>
+
