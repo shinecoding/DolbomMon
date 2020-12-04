@@ -36,6 +36,7 @@ h5{
  font-size:60px;
  margin: 8px;
 }
+
 .boldFont{
 color:orange;
 font-weight:bold;
@@ -49,14 +50,20 @@ width:50%;
 </style>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container">
 	<div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
    <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
    <ul class="list-group">
-   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><br/>
+   		
+   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><button name="shinchung" class="btn btn-warning float-right">신청</button><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
+   		
    </ul>
+   
    <br/>
    <ul class="list-group list-group-horizontal-sm">
    		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>${vo.hit}</div></li>
@@ -70,7 +77,7 @@ width:50%;
    			<span class="fa-stack fa-2x">
    			<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.identi_status=='Y'}">style="color:orange" </c:if> ></i>
 		   	
-		   	<c:if test="${cvo.identi_status=='N' || cvo.identi_status=='S'}">
+		   	<c:if test="${cvo.identi_status=='N' || cvo.identi_status=='S' || cvo.identi_status==null}">
 		   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 		   	</c:if>
 		   	<c:if test="${cvo.identi_status=='Y'}">
@@ -91,7 +98,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.license_status=='N' || cvo.license_status=='S'}">
+	   	<c:if test="${cvo.license_status=='N' || cvo.license_status=='S' || cvo.license_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.license_status=='Y'}">
@@ -103,7 +110,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'}">
+	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'|| cvo.school_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.school_status=='Y'}">
@@ -115,7 +122,7 @@ width:50%;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S'}">
+	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S' || cvo.school_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.crime_status=='Y'}">
@@ -277,7 +284,7 @@ width:50%;
    		</ul>
    <br/>
 </div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

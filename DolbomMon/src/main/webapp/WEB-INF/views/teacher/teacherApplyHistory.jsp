@@ -37,6 +37,10 @@
 </style>
 </head>
 <body>
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container">
 	<div id="title">
    		<div id="titlefont">내 구직현황</div>
@@ -128,5 +132,6 @@
 		</div>
 	</div>
 </div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

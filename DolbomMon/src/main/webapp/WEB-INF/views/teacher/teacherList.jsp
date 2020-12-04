@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <script>
 	$(function(){
-		$("a").hover(function(){
+		$("#tMenuList a", "#tBottomList a").hover(function(){
 			  $(this).css("text-decoration", "none").css("color", "black");
 			  }, function(){
 			  $(this).css("text-decoration", "none").css("color", "black");
@@ -45,7 +45,7 @@
 	#dividebar{
 	margin: 0px 5px; 
 	}
-	a{
+	#tMenuList a, #tBottomList a{
 	text-decoration: none; cursor:pointer;
 	color:black;
 	}
@@ -60,7 +60,10 @@
 </style>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container" >
 <a href="teacherSearchMap">선생님 지도로 찾기</a><br/>
 <a href="payment">결제시스템</a>
@@ -74,7 +77,7 @@
 	   </div>
 	</div>   
  <br/>
-   <ul class="list-group list-group-flush">
+   <ul id="tMenuList" class="list-group list-group-flush">
    		<li class="list-group-item list-group-item-action"><a href="teacherApplyHistory"><i class="fas fa-clipboard mx-2"></i> 내 구직현황</a><i class="fas fa-angle-right float-right mt-1 mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherHeart"><i class="fas fa-heart mx-2"></i> 찜한 일자리</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherView"><i class="fas fa-user-circle mx-2"></i> 내 프로필 보기</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
@@ -84,13 +87,13 @@
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/myReport"><i class="fas fa-exclamation-triangle mx-2"></i> 신고내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    </ul>
    <br/>
-   <ul class="list-group">
+   <ul id="tBottomList" class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

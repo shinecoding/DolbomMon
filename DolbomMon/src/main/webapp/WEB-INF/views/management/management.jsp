@@ -8,14 +8,27 @@
 <title>DolbomMon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" />
-<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" /><link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" type="text/css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" type="text/css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
 <script src="https://kit.fontawesome.com/74c16632e0.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery.bxslider.css" type="text/css"/>
+
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript" ></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js" type="text/javascript" ></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript" ></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js" type="text/javascript" ></script>
+<script src="<%=request.getContextPath() %>/css/pdfmake.min.js" type="text/javascript" ></script>
+<script src="<%=request.getContextPath() %>/css/vfs_fonts.js" type="text/javascript" ></script>
+
 <script>
 	
 
@@ -59,11 +72,13 @@
 		padding:0;
 	}
 	#topBar{
-		height:100px;
-		background-color:lightblue;
+		display:flex;
+		background-color:#24292E;
 		font-size:2em;
 		line-height:2em;
 		text-align:center;
+		padding:16px;
+		height:70px;
 	}
 	#mainPage{
 		position:absolute;
@@ -280,7 +295,7 @@
                 </li>
  		-->           
                 <li>
-                    <a href="#">
+                    <a href="javascript:memberPage('/dbmon/reportManage');">
                        <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                             신고처리
@@ -306,7 +321,7 @@
 
 <!-- ============================= -->
 <!-- <div id="topBar" id="topBar"><a href="javascript:openNewWindow()"><button class="btn btn-primary">쪽지</button></a></div> --> <!-- 돌봄몬 사이트 네비게이션 위치 --> 
-<div id="topBar" id="topBar"><a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))"><button class="btn btn-primary">쪽지</button></a></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
+<div id="topBar" id="topBar"></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
 <div id="mainPage"></div>
 </body>
 </html>

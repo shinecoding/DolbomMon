@@ -43,6 +43,10 @@
 </style>	
 </head>
 <body>
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="title">
 	   		<div id="titlefont">자기 소개 수정</div>
@@ -56,6 +60,6 @@
 			</div>
 		</form>
 	</div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

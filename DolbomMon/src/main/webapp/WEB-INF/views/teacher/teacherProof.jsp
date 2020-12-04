@@ -38,6 +38,10 @@
 </style>
 </head>
 <body>
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container">
 	<div id="title">
    		<div id="titlefont">내 인증 관리</div>
@@ -260,5 +264,6 @@
 		</li>
 	</ul>
 	</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

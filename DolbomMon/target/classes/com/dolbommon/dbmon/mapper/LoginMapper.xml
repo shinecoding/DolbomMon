@@ -22,4 +22,8 @@
 	<update id="pwdChange" parameterType="com.dolbommon.dbmon.login.LoginVO">
 		update member set userpwd=#{userpwd} where username=#{username} and birth=#{birth} and tel1=#{tel1}
 	</update>
+	
+	<select id="getMemberType" resultType="com.dolbommon.dbmon.member.MemberVO">
+		select who from member where userid = #{param1}
+	</select> 
 </mapper>
