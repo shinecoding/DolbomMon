@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,70 +28,84 @@
 		vertical-align: bottom;
 		text-align:center;
 	}
+	#orderDropdown {
+	border:none;
+	}
 </style>
 </head>
 <body>
 	<div class="container">
 	
 	<div id="title">
-   		<div id="titlefont">내 구인현황</div>
+   		<div id="titlefont">찜한 돌봄몬</div>
 	</div>
 	<div class="mb-3"><i class="fas fa-circle"></i>전체 <i class="fas fa-circle"></i>구인중 일자리만
-	<span class="float-right">찜한 순<i class="fas fa-angle-down"></i></span>
-		</div>
+		<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
+		<select id="orderDropdown">
+			<option value="last_edit">찜한 순</option>
+			<option value="certi_cnt">인증 수 순</option>
+			<option value="wage_low">시급 낮은 순</option>
+			<option value="wage_high">시급 높은 순</option>
+		</select>
+	</div>
+	</div>
+	<c:forEach var="vo" items="${list}">
+		
 		<ul class="list-group">
 			<li class="list-group-item">
 				<ul class="list-group list-group-horizontal">
 					<li class="list-group-item border-0 col-2">
-						<img src="img/profilepic.png" class="rounded-circle"/><br/>
-						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
+						<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}" class="rounded-circle"/><br/>
+						<div class="badge badge-warning badge-pill ml-3" >신청하기</div>
 					</li>
 					<li class="list-group-item border-0 col-10">
-						<h6><b>신생아 1명, 유아 1명</b> | 3분전</h6>
-						<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
-						<h7>경북 구미시 | 홍O동 | 11/18 시작</h7>
-						<h6><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 <b>협의가능</b></h6>
+						<h6><b>${vo.username.substring(0,1)}O${vo.username.substring(2)}</b>
+						<span class="ml-2" style="font-size:0.7em">
+								<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
+								<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.last_edit/43200}"/>
+								<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
+								<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
+							<c:choose>
+								<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
+								<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
+								<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
+								<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
+								<c:otherwise>${vo.last_edit}분</c:otherwise>
+							</c:choose>
+						</span>
+						</h6>
+						<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
+						<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
+						<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 					</li>
 					
 				</ul>
-			<hr/>
+		
 			
-			<div class="float-left">
+	<!--스케쥴api가 완성되고 요일 데이터를 집어넣을 경우! 아니면 그냥 인증정보 표시
+		<div class="float-left">
 				단기 - 12 동안
 		</div>
 		<c:forEach var="day" items="월, 화, 수, 목, 금, 토, 일">
 			<div class="badge badge-warning badge-round">${day}</div>
 		</c:forEach>
+		-->
+				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
+				<hr/>
+				</c:if>
+				<c:if test="${vo.identi_status == 'Y' }"><div class="badge badge-pill badge-warning align-top mr-1">등초본</div></c:if>
+				<c:if test="${vo.license_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">선생님</div></c:if>
+				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
+				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div></c:if>
+		
 		<div class="float-right"><i class="far fa-trash-alt"></i></div>
 	</ul>
 	<br/>
+	</c:forEach>
 	
 	
-			<ul class="list-group">
-			<li class="list-group-item">
-				<ul class="list-group list-group-horizontal">
-					<li class="list-group-item border-0 col-2">
-						<img src="img/profilepic.png" class="rounded-circle"/><br/>
-						<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-					</li>
-					<li class="list-group-item border-0 col-10">
-						<h6><b>신생아 1명, 유아 1명</b> | 3분전</h6>
-						<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
-						<h7>경북 구미시 | 홍O동 | 11/18 시작</h7>
-						<h6><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 <b>협의가능</b></h6>
-					</li>
-					
-				</ul>
-			<hr/>
-			
-			<div class="float-left">
-				단기 - 12 동안
-		</div>
-		<c:forEach var="day" items="월, 화, 수, 목, 금, 토, 일">
-			<div class="badge badge-warning badge-round">${day}</div>
-		</c:forEach>
-		<div class="float-right"><i class="far fa-trash-alt"></i></div>
-	</ul>
+	
+		
 	<br/>
 	</div>
 	

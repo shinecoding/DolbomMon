@@ -34,10 +34,7 @@ public class ParentController {
 	public String mypage() {
 		return "/parents/mypage";
 	}
-	@RequestMapping("/parentHeart") //�������
-	public String parentHeart() {
-		return "/parents/parentHeart";
-	}
+	
 	@RequestMapping("/parentApplyHistory") //���γ���
 	public String parentApplyHistory() {
 		return "/parents/parentApplyHistory";

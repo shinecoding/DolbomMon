@@ -23,7 +23,9 @@ public interface JobSearchDaoImp {
 	public int getTotalRecord();
 	//레코드 한개 선택
 	public TeacherVO jobSearchBoardSelect(int no);
-	
+	//
+	public List<TeacherVO> selectHeart();
+	public int insertHeart(LiketVO vo);
 	//글번호 구하기
 	public List<TeacherVO> selectTMem(); 
 	

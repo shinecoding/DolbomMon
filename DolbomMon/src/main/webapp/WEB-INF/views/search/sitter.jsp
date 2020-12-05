@@ -95,9 +95,6 @@
 	border:none;
 	
 	}
-	#orderDropdown>option{
-	text-align:right;
-	}
 	.emptyHeart{
 	cursor:pointer;
 	}
@@ -359,12 +356,7 @@
 			});
 			
    	 	});//ajax 
-	});//제이쿼리
-		</script>
-	 <script>	
-   	//========================성별=================
-	   
-	    $(function(){
+
 	    $(document).on("click", "#genderBox>button", function(){
 	    	var gender = $(this).val();
 	    	console.log(gender);
@@ -441,12 +433,17 @@
 	    });//ajax
 		
 	    
-	    
+	});//제이쿼리
+	</script>
+ <script>	
+	//========================성별=================
+   
+    $(function(){	    
 	    //좋아요 찜기능
-	  /*
+	  
 	    $(document).on("click", ".emptyHeart", function(){
 	    	
-	    	var url = "/dbmon/updateHeart";
+	    	var url = "/dbmon/insertHeart";
 			
 			$.ajax({
 				url:url,
@@ -461,7 +458,7 @@
 	    })
 			
 	    });//ajax
-	*/
+	
 		
 		
 	});//제이쿼리

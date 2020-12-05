@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.Teacher.TeacherDaoImp;
+
 @Controller
 public class JobSearchController {
 	SqlSession sqlSession;
@@ -100,6 +102,7 @@ public class JobSearchController {
 		
 	}
 	
+
 	@RequestMapping(value="/filterOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public List<TeacherVO> filterOrder(String order){
@@ -134,4 +137,30 @@ public class JobSearchController {
 		return 1;
 	}
 	*/
+	
+	@RequestMapping("/parentHeart") //부모 찜리스트에 보여지는 선생님 정보
+	public ModelAndView parentHeart() {
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.selectHeart();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("parents/parentHeart");
+		return mav;
+	}
+	
+	@RequestMapping(value="/insertHeartT", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public int insertHeartT(HttpSession ses, String cardid) {
+		String userid = (String)ses.getAttribute("userid");
+		LiketVO vo = new LiketVO();
+		vo.setUserid(userid);
+		vo.setCardid(cardid);
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		int result = dao.insertHeart(vo);
+		
+		return result;
+	}
+	
+	
 }
