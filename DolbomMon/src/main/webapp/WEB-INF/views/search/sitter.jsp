@@ -87,7 +87,7 @@
 	float:left; 
 	display:block;
 	}
-	i{
+	.iconColor i{
 	color:orange;
 	}
 
@@ -97,7 +97,9 @@
 	}
 	.emptyHeart{
 	cursor:pointer;
+	
 	}
+	
 	
 </style>
 
@@ -436,27 +438,37 @@
 	});//제이쿼리
 	</script>
  <script>	
-	//========================성별=================
+	//========================찜기능=================
    
     $(function(){	    
 	    //좋아요 찜기능
 	  
 	    $(document).on("click", ".emptyHeart", function(){
-	    	
-	    	var url = "/dbmon/insertHeart";
-			
+	    	var cardid = $(this).children().val();
+	    	$(this).children("i").css("color","orange");
+	    	console.log("카드 아이디="+cardid);
+	    	var url = "/dbmon/insertHeartT";
+			var params = "cardid="+cardid;
+			console.log("파람="+params);
 			$.ajax({
 				url:url,
-				//data:params,
+				data:params,
 				type:'GET',
 				success:function(result){
-				$(".emptyHeart").css("color","gray");	
+					console.log(result);
 					var $result = $(result);
-				}, error:function(error){
+					if(result=="1"){
+						console.log("성공");
+							
+					}else if(result=="0"){
+						console.log("insert문 실패");
 					}
-				}
-	    })
-			
+				}, error:function(){
+					console.log("리스트 받기 에러");
+					}
+				
+	   
+	    });
 	    });//ajax
 	
 		
@@ -560,11 +572,11 @@
 
 
 
-
+// onclick="location.href='teacherView?userid=${vo.userid}'" 
 <!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
-		<div class="card" onclick="location.href='teacherView?userid=${vo.userid}'" >
+		<div class="card">
 			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
 			<div class="card-body">
 				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
@@ -585,14 +597,15 @@
 				
 				<!-- 빈 하트 -->
 				<span class="emptyHeart" style="height:30px; width:30px; float:right;">
-				<i class="fab fa-gratipay" ></i>
+					<input type="hidden" value="${vo.userid}" />
+					<i class="fab fa-gratipay" ></i>
 				</span>
 				</h5>
-							
+				<span class="iconColor">							
 				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
 				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
 				<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
-		
+				</span>
 				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
 				<hr/>
 				</c:if>
@@ -606,8 +619,6 @@
 	
 
 	</div>
-
-<!-- ==========================좋아요===================================== -->
 
 
 

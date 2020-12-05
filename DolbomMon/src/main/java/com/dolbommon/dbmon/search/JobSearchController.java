@@ -149,15 +149,15 @@ public class JobSearchController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/insertHeartT", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	@RequestMapping(value="/insertHeartT", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
 	@ResponseBody
-	public int insertHeartT(HttpSession ses, String cardid) {
+	public String insertHeartT(HttpSession ses, String cardid) {
 		String userid = (String)ses.getAttribute("userid");
 		LiketVO vo = new LiketVO();
 		vo.setUserid(userid);
 		vo.setCardid(cardid);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		int result = dao.insertHeart(vo);
+		String result = dao.insertHeart(vo) +"";
 		
 		return result;
 	}
