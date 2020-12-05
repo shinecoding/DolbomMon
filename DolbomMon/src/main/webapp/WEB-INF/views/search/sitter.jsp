@@ -444,31 +444,55 @@
 	    //좋아요 찜기능
 	  
 	    $(document).on("click", ".emptyHeart", function(){
+	    	
 	    	var cardid = $(this).children().val();
-	    	$(this).children("i").css("color","orange");
-	    	console.log("카드 아이디="+cardid);
-	    	var url = "/dbmon/insertHeartT";
-			var params = "cardid="+cardid;
-			console.log("파람="+params);
-			$.ajax({
-				url:url,
-				data:params,
-				type:'GET',
-				success:function(result){
-					console.log(result);
-					var $result = $(result);
-					if(result=="1"){
-						console.log("성공");
-							
-					}else if(result=="0"){
-						console.log("insert문 실패");
-					}
-				}, error:function(){
-					console.log("리스트 받기 에러");
-					}
-				
-	   
-	    });
+	    	console.log($(this).children("i").css("color"));
+	    	if($(this).children("i").css("color")=="rgb(33, 37, 41)"){
+		    	$(this).children("i").css("color","orange");
+		    	console.log("카드 아이디="+cardid);
+		    	var url = "/dbmon/insertHeartT";
+				var params = "cardid="+cardid;
+				console.log("파람="+params);
+				$.ajax({
+					url:url,
+					data:params,
+					type:'GET',
+					success:function(result){
+						console.log(result);
+						var $result = $(result);
+						if(result=="1"){
+							console.log("성공");
+								
+						}else if(result=="0"){
+							console.log("insert문 실패");
+						}
+					}, error:function(){
+						console.log("스트링 받기 에러");
+						}
+					
+		   
+		    });//$.ajax
+	    	}else if($(this).children("i").css("color")=="rgb(255, 165, 0)"){
+	    		$(this).children("i").css("color","rgb(33, 37, 41)");
+	    		var url = "/dbmon/deleteHeartT";
+	    		var params = "cardid="+cardid;
+	    		$.ajax({
+	    			url:url,
+	    			data:params,
+	    			type:'GET',
+	    			success:function(result){
+	    				
+	    				if(result=="1"){
+	    					console.log("성공");
+	    				}else if(result=="0"){
+	    					console.log("delete문 실패");
+	    				}
+	    			},error:function(){
+	    				console.log("스트링 받기 에러");
+	    			}
+	    		});//$.ajax
+	    		
+	    	}//elseif
 	    });//ajax
 	
 		

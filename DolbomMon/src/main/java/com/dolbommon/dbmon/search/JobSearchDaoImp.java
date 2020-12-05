@@ -26,6 +26,8 @@ public interface JobSearchDaoImp {
 	//
 	public List<TeacherVO> selectHeart();
 	public int insertHeart(LiketVO vo);
+	public int deleteHeart(LiketVO vo);
+	
 	//글번호 구하기
 	public List<TeacherVO> selectTMem(); 
 	

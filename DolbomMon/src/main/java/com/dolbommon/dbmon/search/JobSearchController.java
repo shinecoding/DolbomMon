@@ -162,5 +162,19 @@ public class JobSearchController {
 		return result;
 	}
 	
+	@RequestMapping(value="/deleteHeartT", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHeartT(HttpSession ses, String cardid) {
+		String userid = (String)ses.getAttribute("userid");
+		LiketVO vo = new LiketVO();
+		vo.setUserid(userid);
+		vo.setCardid(cardid);
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		String result = dao.deleteHeart(vo) +"";
+		
+		return result;
+	}
+	
+	
 	
 }
