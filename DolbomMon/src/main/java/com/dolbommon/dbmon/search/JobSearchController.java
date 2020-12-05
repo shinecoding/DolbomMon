@@ -71,12 +71,15 @@ public class JobSearchController {
 	
 	}
 	
+	//=========================필터들===================================================
+	
 	@RequestMapping(value="/searchAct", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public List<TeacherVO> searchAct(String activity_type) {
 		System.out.println("액티비티 타입"+activity_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchActType(activity_type);
+		
 		return list;
 	}
 	
@@ -84,8 +87,16 @@ public class JobSearchController {
 	@ResponseBody
 	public List<TeacherVO> searchCare(String care_type) {			
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchCareType(care_type); 
-		return list;	
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		
+		if(care_type.equals("all")) {
+			list = dao.jobSearchBoardList();
+		}else {
+			list = dao.jobSearchCareType(care_type); 	
+		}
+		
+		return list;
+		
 		
 	}
 	
@@ -105,9 +116,22 @@ public class JobSearchController {
 			list = dao.filterWageLow();
 		} else if(order.equals("wage_high")){
 			list = dao.filterWageHigh();
+		} else if(order.equals("F")) {
+			list = dao.filterGender("F");
+		} else if(order.equals("M")) {
+			list = dao.filterGender("M");
+		} else if(order.equals("all")) {
+			list = dao.jobSearchBoardList();
 		}
 		
 		return list;
 	}
-	
+	/*
+	@RequestMapping(value="/updateHeart", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int updateHeart() {
+		
+		return 1;
+	}
+	*/
 }

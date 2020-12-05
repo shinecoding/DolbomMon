@@ -17,6 +17,8 @@ public interface JobSearchDaoImp {
 	public List<TeacherVO> filterWageLow();
 	public List<TeacherVO> filterWageHigh();
 	
+	public List<TeacherVO> filterGender(String gender);
+	
 	//총 게시물 수 구하기
 	public int getTotalRecord();
 	//레코드 한개 선택
