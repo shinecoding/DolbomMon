@@ -110,7 +110,13 @@
 	    //  $(document).on("click",".wrapper2>ul", function(){
 	     //     location.href="teacherView?userid="+$(this).attr('id');   
 	    //   });
+	    
+	    
+	    $(document).on("click", ".card", function(){
+	    	location.href="teacherView?userid="+$(this).attr('id');
+	    });
 
+	    // onclick="location.href='teacherView?userid=${vo.userid}'" 
 	      $(document).on("click", "#mapBtn", function(){
 				$("#map").toggle();
 			});
@@ -600,7 +606,7 @@
 <!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
-		<div class="card">
+		<div class="card" id=${vo.userid}>
 			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
 			<div class="card-body">
 				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
@@ -622,7 +628,10 @@
 				<!-- 빈 하트 -->
 				<span class="emptyHeart" style="height:30px; width:30px; float:right;">
 					<input type="hidden" value="${vo.userid}" />
+					
+					
 					<i class="fab fa-gratipay" ></i>
+					
 				</span>
 				</h5>
 				<span class="iconColor">							
