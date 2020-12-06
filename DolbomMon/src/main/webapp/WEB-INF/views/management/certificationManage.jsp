@@ -151,7 +151,7 @@ var certiTable;
 					}else if( data=="S"){
 						data = '<a class="xBtn" href="#" id="identi_status"><img src="/dbmon/icon/xbutton.png" title="보충"></a>'+"&nbsp &nbsp"+'<a class="yBtn" href="#" id="identi_status"><img src="/dbmon/icon/ybutton.png" title="통과"></a>'
 					}else if( data=="Y"){
-						data = '<img src="/dbmon/icon/certibutton.png" title="통과">'
+						data = '<img src="/dbmon/icon/certibutton.png" title="통과"><span style="color:orange"> 패스</span>'
 					}else if( data=="X"){
 						data = "<span style='color:red'>보충필요</span>";
 					}
@@ -189,7 +189,7 @@ var certiTable;
 					}else if( data=="S"){
 						data = '<a class="xBtn" href="#" id="school_status"><img src="/dbmon/icon/xbutton.png" title="보충"></a>'+"&nbsp &nbsp"+'<a class="yBtn" href="#" id="school_status"><img src="/dbmon/icon/ybutton.png" title="통과"></a>'
 					}else if( data=="Y"){
-						data = '<img src="/dbmon/icon/certibutton.png" title="통과">'
+						data = '<img src="/dbmon/icon/certibutton.png" title="통과"><span style="color:orange"> 패스</span>'
 					}else if( data=="X"){
 						data = "<span style='color:red'>보충필요</span>";
 					}
@@ -227,7 +227,7 @@ var certiTable;
 					}else if( data=="S"){
 						data = '<a class="xBtn" href="#" id="license_status"><img src="/dbmon/icon/xbutton.png" title="보충"></a>'+"&nbsp &nbsp"+'<a class="yBtn" href="#" id="license_status"><img src="/dbmon/icon/ybutton.png" title="통과"></a>'
 					}else if( data=="Y"){
-						data = '<img src="/dbmon/icon/certibutton.png" title="통과">'
+						data = '<img src="/dbmon/icon/certibutton.png" title="통과"><span style="color:orange"> 패스</span>'
 					}else if( data=="X"){
 						data = "<span style='color:red'>보충필요</span>";
 					}
@@ -258,7 +258,7 @@ var certiTable;
 					}else if( data=="S"){
 						data = '<a class="xBtn" href="#" id="crime_status"><img src="/dbmon/icon/xbutton.png" title="보충"></a>'+"&nbsp &nbsp"+'<a class="yBtn" href="#" id="crime_status"><img src="/dbmon/icon/ybutton.png" title="통과"></a>'
 					}else if( data=="Y"){
-						data = '<img src="/dbmon/icon/certibutton.png" title="통과">'
+						data = '<img src="/dbmon/icon/certibutton.png" title="통과"><span style="color:orange"> 패스</span>'
 					}else if( data=="X"){
 						data = "<span style='color:red'>보충필요</span>";
 					}
