@@ -6,10 +6,12 @@
 	<select id="loginOk" resultType="com.dolbommon.dbmon.login.LoginVO">
 		select userid from member where userid=#{userid} and userpwd=#{userpwd}
 	</select>
-<!--  	
-	<update id="keepLogin">
-		update member set sessionKey=#{sessionId}, sessionLimit=#{sessionLimit} where userid=#{userid}
+	
+	<update id="keepLogin" parameterType="com.dolbommon.dbmon.login.LoginVO">
+		update member set sessionKey=#{sessionKey}, sessionLimit=(CURRENT_TIMESTAMP)+7 where userid=#{userid}
 	</update>
+
+<!--  	
 	
 	<select id="">
 		select * from member where sessionKey=#{value}

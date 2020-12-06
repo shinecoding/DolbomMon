@@ -1,5 +1,8 @@
 package com.dolbommon.dbmon.login;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -69,16 +72,18 @@ public class LoginController {
 			
 			//자동로그인 선택시 쿠키 생성
 			if(req.getParameter("loginCookie")!=null) {
-				Cookie loginCookie = new Cookie("loginCookie", (String)ses.getAttribute("userid"));
+				Cookie loginCookie = new Cookie("loginCookie", ses.getId());
+				vo.setSessionKey(ses.getId());
 				loginCookie.setPath("/dbmon");
 				loginCookie.setMaxAge(60*60*24*7);
 				res.addCookie(loginCookie);
-				System.out.println(loginCookie.getValue());
+				dao.keepLogin(vo);	//세션아이디와 유효기간을 vo에 저장
 			}
 			mav.setViewName("redirect:/");
 		}
 		return mav;
 	}
+	
 	
 	//로그아웃
 	@RequestMapping("/logout")
