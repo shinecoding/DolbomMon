@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dolbommon.dbmon.ManageDaoImp">
-	<select id="selectReport" resultType="com.dolbommon.dbmon.report.ReportVO">
-		select SHINGO_NO, SHINGO_REASON, SHINGO_DETAIL, USERID, SHINGO_ID, to_char(SHINGO_DATE, 'YYYY-MM-DD HH24:MI:SS') shingo_date, SHINGO_STATUS, SHINGO_RESPONSE, shingo_name from shingo	
-	</select>
-</mapper>
