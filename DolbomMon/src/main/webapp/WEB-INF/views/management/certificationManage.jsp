@@ -53,7 +53,7 @@ var certiTable;
 				{
 					extend: 'excel',
 					text: '엑셀',
-					filename: '신고내역 EXCEL',
+					filename: '인증내역 EXCEL',
 					title: '인증 처리 현황 데이터베이스입니다.'
 				},
 				{
