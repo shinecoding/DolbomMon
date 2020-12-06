@@ -2,6 +2,8 @@ package com.dolbommon.dbmon.report;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dolbommon.dbmon.member.MemberVO;
 
 public interface ReportDaoImp {
@@ -17,4 +19,7 @@ public interface ReportDaoImp {
 	
 	//신고회원 이름조회
 	public String selectName(String userid);
+	
+	//신고정보 업데이트
+	public int editResponse(@Param("shingo_response")String shingo_response, @Param("no")String no);
 }
