@@ -9,10 +9,10 @@ public interface LoginDaoImp {
 	public LoginVO loginOk(LoginVO vo);
 	//쿠키 저장
 	public int keepLogin(LoginVO vo);
+	//쿠키 삭제
+	public int cookieReset(String userid);
 	//자동 로그인
-	//public void keepLogin(String userid, String sessionId, Data sessionLimit);
-	
-	//public LoginVO checkLoginBefore(String value);
+	public LoginVO checkLoginBefore(String value);
 	//아이디 찾기
 	public LoginVO findUserid(LoginVO vo);
 	//비밀번호 변경

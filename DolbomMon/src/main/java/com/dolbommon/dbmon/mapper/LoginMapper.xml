@@ -10,13 +10,16 @@
 	<update id="keepLogin" parameterType="com.dolbommon.dbmon.login.LoginVO">
 		update member set sessionKey=#{sessionKey}, sessionLimit=(CURRENT_TIMESTAMP)+7 where userid=#{userid}
 	</update>
-
-<!--  	
 	
-	<select id="">
-		select * from member where sessionKey=#{value}
-	</select>	
- -->	
+	<update id="cookieReset">
+		update member set sessionKey=null, sessionLimit=null where userid=#{userid}
+	</update>
+	
+	<select id="checkLoginBefore" resultType="com.dolbommon.dbmon.login.LoginVO">
+		select userid, username from member where sessionKey=#{value}
+	</select>
+
+
 	<select id="findUserid" resultType="com.dolbommon.dbmon.login.LoginVO">
 		select userid, username, birth, tel1, email from member where username=#{username} and tel1=#{tel1} and birth=#{birth}
 	</select>

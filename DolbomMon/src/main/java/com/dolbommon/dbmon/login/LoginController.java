@@ -1,8 +1,5 @@
 package com.dolbommon.dbmon.login;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -24,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.dolbommon.dbmon.member.MemberVO;
 
@@ -87,9 +85,25 @@ public class LoginController {
 	
 	//로그아웃
 	@RequestMapping("/logout")
-	public String logout(HttpSession ses) {
-		ses.invalidate();
+	public String logout(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {	
 		
+		ses.invalidate();
+		/*if(ses.getAttribute("userid")!=null) {
+			
+			vo.setUserid((String)ses.getAttribute("userid"));
+			System.out.println(vo.getUserid());
+			LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
+			
+			Cookie loginCookie = WebUtils.getCookie(req, "loginCookie");
+			if (loginCookie != null) {
+				
+				loginCookie = new Cookie("loginCookie", null);
+				loginCookie.setMaxAge(0);
+				loginCookie.setPath("/");
+			    res.addCookie(loginCookie);
+				dao.cookieReset(vo.getUserid());
+				//ses.invalidate();
+			}*/
 		return "home";
 	}
 	

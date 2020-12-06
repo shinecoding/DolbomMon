@@ -61,7 +61,7 @@ h5{
       <h5>선호하는 돌봄유형</h5>
       <li class="list-group-item p-5" style="text-align:center">"저는 <span>놀이/학습</span>실내놀이가 가능한 돌봄몬을 찾습니다."</li>
       <h5>돌봄 기간/시간</h5>
-      <li class="list-group-item">스케쥴차트</li>
+      <li class="list-group-item">스케쥴 차트</li>
       <h5>돌봄 아이 연령</h5>
       <li class="list-group-item">
          <ul class="list-group list-group-horizontal-sm" >
