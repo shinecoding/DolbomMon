@@ -27,9 +27,9 @@
 	}
 </style>
 <script>
-var shingoTable;
+var certiTable;
 	$(document).ready(function() {
-	   shingoTable = $('#certiTable').DataTable({
+	   certiTable = $('#certiTable').DataTable({
 	    	"order"        : [[ 2, "desc" ]], //정렬을 indate로 바꿔야한다. 업데이트 할때마다 indate sysdate 등록하게 해야함.
 	    	"destroy" : true,
 	    	"scrollX" : true,
@@ -77,12 +77,19 @@ var shingoTable;
 	        	{"data" : "userid",
 					 "render": function(data, type, row){
 		                    if(type=='display'){
-		                        data ='<a href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
+		                        data ='<a class="selectId" href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
 		                    }
 		                    return data;	
 				
 				}},
-				{"data" : "no"},
+				{"data" : "no",
+					 "render": function(data, type, row){
+		                    if(type=='display'){
+		                        data ='<span id="'+data+'">' + data + '</span>';
+		                    }
+		                    return data;	
+				
+				}},
 	        	{"data" : "indate"},
 	        	{"data" : "school",
 					"render":  function (data, type, row) {
@@ -338,7 +345,6 @@ var shingoTable;
 	
 	
 	function openMessage(userid){
-		
 	    window.open('/dbmon/messageWrite?receiveId='+userid,'message','width=1200,height=1000,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120');  
 	}  
 	
@@ -360,10 +366,14 @@ var shingoTable;
 					certi:"X",
 					type:type,
 				},success : function(){
-					location.href="/dbmon/management?type=certiManage"
+					location.href="/dbmon/management?type=certiManage?no="+no;
 				}
 			})
 		}
+	});
+	$(document).on("click",".selectId",function(){
+		$('tr').css("background-color","#fff");
+		$(this).closest('tr').css("background-color","antiquewhite");
 	});
 	
 	$(document).on("click",".yBtn",function(){
@@ -379,7 +389,7 @@ var shingoTable;
 					certi:"Y",
 					type:type,
 				},success : function(){
-					location.href="/dbmon/management?type=certiManage"
+					location.href="/dbmon/management?type=certiManage?no="+no;
 				}
 			})
 		}
@@ -394,7 +404,13 @@ var shingoTable;
 			$(".dataTables_scrollBody").scrollLeft(-wheelDelta + $(".dataTables_scrollBody").scrollLeft());
 		}
 	});
-
+	
+	
+	//색깔 쿠키에 기록? 온로드 안먹힘
+	function trColor(no){
+		$("'#"+no+"'").closest('tr').css("background-color","antiquewhite");
+		console.log("'#"+no+"'");
+	}
 	
 </script>
 </head>

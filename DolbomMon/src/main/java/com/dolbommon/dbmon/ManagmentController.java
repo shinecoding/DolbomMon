@@ -31,8 +31,10 @@ public class ManagmentController {
 	public ModelAndView management(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String type = (String)req.getParameter("type");
+		String no = (String)req.getParameter("no");
 		
 		mav.addObject("type", type);
+		mav.addObject("no", no);
 		mav.setViewName("management/management");
 		return mav;
 	}
