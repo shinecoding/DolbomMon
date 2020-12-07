@@ -445,7 +445,7 @@ var certiTable;
             <th>성범죄<br/>인증상태</th>
             <th>개인정보<br/>제공동의서</th>
             <th>개인정보제공<br/>동의서신청일자</th>
-            <th>개인정보<br/>동의상태</th>
+            <th>개인정보<br/>	동의상태</th>
             <th>인증 갯수</th>
         </tr>
     </thead>
