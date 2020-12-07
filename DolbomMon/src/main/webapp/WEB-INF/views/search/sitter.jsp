@@ -176,17 +176,18 @@
 								} else {
 									tag += Math.round(vo.last_edit) +'분';
 								}
-								tag += '</span class="emptyHeart">';
+								tag += '</span>';
+								tag += '<span class="emptyHeart">';
 								tag += '<input type="hidden" value="'+ vo.userid +'" />';
 								tag += '<i class="fab fa-gratipay" style=';
 								if(vo.userid!=vo.cardid){
-									tag += '"color:black"';
+									tag += '"color:gray"';
 								} else if(vo.userid == vo.cardid){
 									tag += '"color:orange"';
 								}
 								tag += '></i>';
 								tag += '</span>';
-								
+								tag += '</h5>';
 											
 								tag += '<span class="iconColor">';
 								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
@@ -264,17 +265,18 @@
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
-							tag += '</span class="emptyHeart">';
+							tag += '</span>';
+							tag += '<span class="emptyHeart">';
 							tag += '<input type="hidden" value="'+ vo.userid +'" />';
 							tag += '<i class="fab fa-gratipay" style=';
 							if(vo.userid!=vo.cardid){
-								tag += '"color:black"';
+								tag += '"color:gray"';
 							} else if(vo.userid == vo.cardid){
 								tag += '"color:orange"';
 							}
 							tag += '></i>';
 							tag += '</span>';
-							
+							tag += '</h5>';
 										
 							tag += '<span class="iconColor">';
 							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
@@ -357,17 +359,18 @@
 								} else {
 									tag += Math.round(vo.last_edit) +'분';
 								}
-								tag += '</span class="emptyHeart">';
+								tag += '</span>';
+								tag += '<span class="emptyHeart">';
 								tag += '<input type="hidden" value="'+ vo.userid +'" />';
 								tag += '<i class="fab fa-gratipay" style=';
 								if(vo.userid!=vo.cardid){
-									tag += '"color:black"';
+									tag += '"color:gray"';
 								} else if(vo.userid == vo.cardid){
 									tag += '"color:orange"';
 								}
 								tag += '></i>';
 								tag += '</span>';
-								
+								tag += '</h5>';
 											
 								tag += '<span class="iconColor">';
 								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
@@ -444,17 +447,18 @@
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
-							tag += '</span class="emptyHeart">';
+							tag += '</span>';
+							tag += '<span class="emptyHeart">';
 							tag += '<input type="hidden" value="'+ vo.userid +'" />';
 							tag += '<i class="fab fa-gratipay" style=';
 							if(vo.userid!=vo.cardid){
-								tag += '"color:black"';
+								tag += '"color:gray"';
 							} else if(vo.userid == vo.cardid){
 								tag += '"color:orange"';
 							}
 							tag += '></i>';
 							tag += '</span>';
-							
+							tag += '</h5>';
 							
 							tag += '<span class="iconColor">';
 							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
@@ -499,9 +503,9 @@
 	  
 	    $(document).on("click", ".emptyHeart", function(){
 	    	
-	    	var cardid = $(this).children().val();
+	    	var cardid = $(this).children("input").val();
 	    	console.log($(this).children("i").css("color"));
-	    	if($(this).children("i").css("color")=="rgb(33, 37, 41)"){
+	    	if($(this).children("i").css("color")=="rgb(128, 128, 128)"){
 		    	$(this).children("i").css("color","orange");
 		    	console.log("카드 아이디="+cardid);
 		    	var url = "/dbmon/insertHeartT";
@@ -527,7 +531,7 @@
 		   
 		    });//$.ajax
 	    	}else if($(this).children("i").css("color")=="rgb(255, 165, 0)"){
-	    		$(this).children("i").css("color","rgb(33, 37, 41)");
+	    		$(this).children("i").css("color","gray");
 	    		var url = "/dbmon/deleteHeartT";
 	    		var params = "cardid="+cardid;
 	    		$.ajax({
@@ -672,11 +676,11 @@
 						<c:otherwise>${vo.last_edit}분</c:otherwise>
 					</c:choose>
 				</span>
-				
+				<!-- style="height:30px; width:30px; float:right;" -->
 				<!-- 빈 하트 -->
-				<span class="emptyHeart" style="height:30px; width:30px; float:right;">
+				<span class="emptyHeart"  >
 					<input type="hidden" value="${vo.userid}" />
-					<i class="fab fa-gratipay" style=<c:if test="${vo.userid!=vo.cardid}">"color:black"</c:if> <c:if test="${vo.userid==vo.cardid}">"color:orange"</c:if> ></i>
+					<i class="fab fa-gratipay" style=<c:if test="${vo.userid!=vo.cardid}">"color:gray"</c:if> <c:if test="${vo.userid==vo.cardid}">"color:orange"</c:if> ></i>
 				</span>
 				</h5>
 				<span class="iconColor">							
