@@ -29,21 +29,24 @@ public class RecruitBoardController {
 	//구인페이지로 이동하기
 	@RequestMapping("/parent_list") 
 	public ModelAndView parent() {
+		
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
+		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		List<MemberVO> mvoList = dao.selectTMemNo();
+		//List<MemberVO> mvoList = dao.selectTMemNo();
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("mvoList", mvoList);
+		//mav.addObject("mvoList", mvoList);
 		mav.addObject("list2", list2);
 		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");
-		
+
 		return mav;
+		}
+	
 	}
 
-}
 
 
 	
