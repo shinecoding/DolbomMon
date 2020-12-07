@@ -44,7 +44,24 @@ public class TeacherVO {
 	private String school_status;
 	private String license_status;
 	private String crime_status;
-
+	private String cardid;
+	private int like_check;
+	
+	
+	public String getCardid() {
+		return cardid;
+	}
+	public void setCardid(String cardid) {
+		this.cardid = cardid;
+	}
+	public int getLike_check() {
+		return like_check;
+	}
+	public void setLike_check(int like_check) {
+		this.like_check = like_check;
+	}
+	
+	
 	
 	public int getNo() {
 		return no;

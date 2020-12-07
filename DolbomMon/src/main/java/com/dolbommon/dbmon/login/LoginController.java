@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.dolbommon.dbmon.member.MemberVO;
 
@@ -66,26 +67,45 @@ public class LoginController {
 			ses.setAttribute("userid", resultVO.getUserid());
 			ses.setAttribute("username", resultVO.getUsername());
 			ses.setAttribute("logStatus", "Y");
+			System.out.println(mVo.getWho());
 			System.out.println(resultVO.getUsername());
 			
 			//자동로그인 선택시 쿠키 생성
 			if(req.getParameter("loginCookie")!=null) {
-				Cookie loginCookie = new Cookie("loginCookie", (String)ses.getAttribute("userid"));
+				Cookie loginCookie = new Cookie("loginCookie", ses.getId());
+				vo.setSessionKey(ses.getId());
 				loginCookie.setPath("/dbmon");
 				loginCookie.setMaxAge(60*60*24*7);
 				res.addCookie(loginCookie);
-				System.out.println(loginCookie.getValue());
+				dao.keepLogin(vo);	//세션아이디와 유효기간을 vo에 저장
 			}
 			mav.setViewName("redirect:/");
 		}
 		return mav;
 	}
 	
+	
 	//로그아웃
 	@RequestMapping("/logout")
-	public String logout(HttpSession ses) {
-		ses.invalidate();
+	public String logout(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {	
 		
+		ses.invalidate();
+		/*if(ses.getAttribute("userid")!=null) {
+			
+			vo.setUserid((String)ses.getAttribute("userid"));
+			System.out.println(vo.getUserid());
+			LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
+			
+			Cookie loginCookie = WebUtils.getCookie(req, "loginCookie");
+			if (loginCookie != null) {
+				
+				loginCookie = new Cookie("loginCookie", null);
+				loginCookie.setMaxAge(0);
+				loginCookie.setPath("/");
+			    res.addCookie(loginCookie);
+				dao.cookieReset(vo.getUserid());
+				//ses.invalidate();
+			}*/
 		return "home";
 	}
 	
@@ -195,6 +215,7 @@ public class LoginController {
 		}
 		return mav;	
 	}
+	
 	
 	//임시로그인버튼 작동.. 추후 삭제 요망
 	@RequestMapping("/temporaryLogin")

@@ -2,6 +2,7 @@ package com.dolbommon.dbmon.search;
 
 public class RecruitBoardVO {
 		//구인게시판
+
 		private int job_board_no; //구인글 번호
 		private String userid; //아이디
 		private String care_addr; //돌봄장소
@@ -13,6 +14,8 @@ public class RecruitBoardVO {
 		private String wish_gender; //원하는 선생님 성별
 		private String content; //요청사항
 		private String writedate; //글 등록일
+		private String lat;
+		private String lng;
 		private int hit; //조회수
 		
 		
@@ -85,10 +88,23 @@ public class RecruitBoardVO {
 		public int getHit() {
 			return hit;
 		}
+		public String getLat() {
+			return lat;
+		}
+		public void setLat(String lat) {
+			this.lat = lat;
+		}
+		public String getLng() {
+			return lng;
+		}
+		public void setLng(String lng) {
+			this.lng = lng;
+		}
 		public void setHit(int hit) {
 			this.hit = hit;
 		}
-		
+
 	}
+
 
 
