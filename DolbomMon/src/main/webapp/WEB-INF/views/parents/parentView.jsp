@@ -58,13 +58,68 @@
 </style>
 
 <script>
+
+
 	// 신생아 0-6개월, 영아 7-36개월, 유아 4-7세, 초딩
 	var pw_activityStr = '${rbVO.pw_activity }';
-	var cb = '${cVO.child_birth}';
 	var care_addr = "${rbVO.care_addr}";
+	var cb = '${cVO.child_birth}';
 	var child_age1;
 	var child_age2;
+	
+	function getAge(a){
+		var today = new Date();
+		var birthDay = new Date(a);
+		
+		var time = Math.floor((today - birthDay) / 86400000);
+		var year = Math.floor(time/365)+1;
+		var month = Math.ceil(time/30);
+		if(month >= 96 && year < 14){
+			console.log("초딩"+year+"세");
+			child_age2 = "초등학생";
+			child_age1 = year+"세";
+		}else if(month<96 && month>=37){
+			console.log("유아"+year+"세");
+			child_age2 = "유아";
+			child_age1 = year+"세";
+		}else if(month<=36 && month>=7){
+			console.log("영아"+month+"개월");
+			child_age2 = "영아";
+			child_age1 = month + "개월";
+		}else{
+			console.log("신생아"+month+"개월");
+			child_age2 = "신생아";
+			child_age1 = month + "개월";
+		}
+	}
+	
+	$(function(){
+		////////////////////자녀 정보 /////////////////////
+		var cbArr = cb.split(",");
+		for(var i=0; i<cbArr.length;i++){
+			console.log("cbArr => " + cbArr[i]);
+			var childYMD = cbArr[i].split("-");
+			var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+			console.log("child_birth => " + child_birth);
+			getAge(child_birth);
+			
+			if(child_age2 == "초등학생"){
+				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-child.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
+			}else if(child_age2 == "유아"){
+				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-elementary.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
+			}else if(child_age2 == "영아"){
+				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-infant.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
+			}else if(child_age2 == "신생아"){
+				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-newborn.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
+			}
+		}
+	});
+	
+	
+	
 	var sd = "${sdVO.select_date}";
+	
+	
 	
 	$(function(){
 		
@@ -121,28 +176,6 @@
 				}
 			}
 		});
-		
-		//////////////////// 자녀 정보 /////////////////////
-		var cbArr = cb.split(",");
-		for(var i=0; i<cbArr.length;i++){
-			console.log("cbArr => " + cbArr[i]);
-			var childYMD = cbArr[i].split("-");
-			var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
-			console.log("child_birth => " + child_birth);
-			getAge(child_birth);
-			
-			if(child_age2 == "초등학생"){
-				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-child.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
-			}else if(child_age2 == "유아"){
-				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-elementary.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
-			}else if(child_age2 == "영아"){
-				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-infant.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
-			}else if(child_age2 == "신생아"){
-				$("#childList").append('<li class="list-group-item col-3" style="text-align:center; border:none;"><img src="icon/profile-newborn.png" style="width:50px; height:50px;"/><br/>'+child_age1+'</li>');
-			}
-		}
-		
-		
 		
 	});
 	$(function(){
@@ -362,31 +395,7 @@
 		
 	});
 	
-	function getAge(a){
-		var today = new Date();
-		var birthDay = new Date(a);
-		
-		var time = Math.floor((today - birthDay) / 86400000);
-		var year = Math.floor(time/365)+1;
-		var month = Math.ceil(time/30);
-		if(month >= 96 && year < 14){
-			console.log("초딩"+year+"세");
-			child_age2 = "초등학생";
-			child_age1 = year+"세";
-		}else if(month<96 && month>=37){
-			console.log("유아"+year+"세");
-			child_age2 = "유아";
-			child_age1 = year+"세";
-		}else if(month<=36 && month>=7){
-			console.log("영아"+month+"개월");
-			child_age2 = "영아";
-			child_age1 = month + "개월";
-		}else{
-			console.log("신생아"+month+"개월");
-			child_age2 = "신생아";
-			child_age1 = month + "개월";
-		}
-	}
+	
 	
 </script>
 </head>

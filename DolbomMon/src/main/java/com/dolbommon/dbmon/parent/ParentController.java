@@ -45,10 +45,19 @@ public class ParentController {
 
 
 	@RequestMapping("/parentApplyHistory") // 내가, 내게 지원한
-	public String parentApplyHistory(HttpSession ses) {
+	public ModelAndView parentApplyHistory(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		
-		return "/parents/parentApplyHistory";
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
+		List<ParentHistoryVO> list = dao.selectAllRdBoard(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.setViewName("/parents/parentApplyHistory");
+		
+		return mav;
 	}
 	@RequestMapping("/parentView") //
 	public ModelAndView parentView(int no, HttpSession ses) {
