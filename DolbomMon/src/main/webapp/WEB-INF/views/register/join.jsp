@@ -40,8 +40,7 @@
 			<img id="dbm" src="<%=request.getContextPath()%>/img/dbm.png"/>
 		</div>
 	</div>
-	<input id="submit" type="submit" />
-	<input type="hidden" name="intro"/>
+	<input id="submit" type="submit" style="display:none;"/>
 	<input type="hidden" id="who" name="who" value=""/>
 	</form>
 </body>
