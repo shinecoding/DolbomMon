@@ -176,7 +176,7 @@ public class BoardController {
             
             out = new FileOutputStream(new File(ckUploadPath));
             out.write(bytes);
-            out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
+            out.flush(); // outputStream에 저장된 데이터를 전송하고 초기화
             
             String callback = request.getParameter("CKEditorFuncNum");
             printWriter = response.getWriter();
@@ -254,7 +254,6 @@ public class BoardController {
 	
 		//파일을 저장할 위치
 		String path = ses.getServletContext().getRealPath("/upload");
-		System.out.println(path);
 		//파일 업로드를 하기 위해 req에서 MultipartHttpServletRequest를 생성한다.
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		//mr에서 MultipartFile 객체를 얻어온다.	--> List

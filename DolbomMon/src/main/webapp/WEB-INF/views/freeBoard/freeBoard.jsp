@@ -115,7 +115,7 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</c:forEach>
 						<c:if test="${vo.step>0}">
-							☞
+							➥
 						</c:if>
 						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
 					<td scope="row" align="center">${vo.userid}</td>

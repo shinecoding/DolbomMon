@@ -11,6 +11,8 @@
 		update member set userpwd=#{userpwd}, tel1=#{tel1}, email=#{email}, zipcode=#{zipcode}, addr=#{addr}, addrDetail=#{addrDetail} where userid=#{userid}
 	</update>
 
-
+	<update id="withdraw">
+		update member set activity='N' where userid=#{userid}
+	</update>
 
 </mapper>
