@@ -25,7 +25,7 @@
 			from add_child where job_board_no=#{param1}
 	</select>
 	<select id="jobSearchRegularDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.RegularDateVO">
-		select job_board_no, start_date, end_date, start_time, end_time
+		select job_board_no, yoil, start_date, end_date, start_time, end_time
 			from jb_regular_date where job_board_no=#{param1}
 	</select>
 	<select id="jobSearchSpecificDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.SpecificDateVO">
