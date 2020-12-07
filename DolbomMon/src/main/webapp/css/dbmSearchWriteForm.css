@@ -18,22 +18,24 @@
 	/* ============= 헤더 =============== */
 	
 	/* ============= 돌봄 유형 목록 ============== */
-	#activityTypeDiv{display:inline-block; width:60%;}
+	#activityTypeDiv{display:inline-block; width:60%; margin-top:30px;}
 	#activityListDiv{display:inline-block; overflow:hidden; height:auto;}
-	#activityListDiv div{overflow:hidden; width:25%; height:105px; text-align:center; float:left; padding:23px 40px;}
-	#activityListDiv img{margin-top:10px;}
-	#activityListDiv label{width:100%; height:100%; margin:0; text-align:center; background-color:#EFEFEF; border-radius:50%;}
+	#activityListDiv label{display:inline-block;width:50%; height:100%; margin:0; text-align:center; border-radius:50%;}
+	#activityListDiv div{display:inline-block; overflow:hidden; width:25%; height:105px; text-align:center; float:left; padding:23px auto;}
+	#activityListDiv img{}
 	#activityListDiv>div span{font-size:12px;}
 	/* ============= 돌봄 유형 목록 ============== */
 	
 	/* ============= 원하는 선생님 나이 선택 ================ */
 	#ageAndGenderDiv{display:inline-block; width:70%;}
 	
+	#genderDiv{display:inline-block; width:35%; margin-right:20px; border:2px solid gray; border-radius:20% 20% 5% 5%;}
+	#dadadada{display:none;}
 	#genderDiv input{display:none;}
 	#genderDiv label{display:inline-block; width:50px; height:50px; line-height:50px; margin:0 5px; border-radius:50%; border:1px solid gray; background-color:#EFEFEF;}
-	
-	#ageDiv{width:100%; overflow:hidden; height:auto; margin-top:40px;}
-	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto;}
+	#ageAndGenderDiv hr{position:relative; left:65%;bottom:25px;width:20%; margin:0;border:0;height:10px;background-color:gray;}
+	#ageDiv{width:100%; overflow:hidden; height:auto; }
+	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto; border:2px solid gray; border-radius:35%;}
 	#ageDiv li{width:20%; height:50px; line-height:50px; float:left; margin:10px 0; border:none; border-radius:45%; background-color:#EFEFEF; color:black; font-weight:bold; }
 	#ageDiv label{width:100%; height:100%; text-align:center; }
 	/* ============= 원하는 선생님 나이 선택 ================ */

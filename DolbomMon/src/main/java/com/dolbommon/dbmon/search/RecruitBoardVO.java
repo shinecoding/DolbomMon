@@ -13,6 +13,8 @@ public class RecruitBoardVO {
 		private String wish_gender; //원하는 선생님 성별
 		private String content; //요청사항
 		private String writedate; //글 등록일
+		private String lat;
+		private String lng;
 		private int hit; //조회수
 		
 		
@@ -84,6 +86,18 @@ public class RecruitBoardVO {
 		}
 		public int getHit() {
 			return hit;
+		}
+		public String getLat() {
+			return lat;
+		}
+		public void setLat(String lat) {
+			this.lat = lat;
+		}
+		public String getLng() {
+			return lng;
+		}
+		public void setLng(String lng) {
+			this.lng = lng;
 		}
 		public void setHit(int hit) {
 			this.hit = hit;
