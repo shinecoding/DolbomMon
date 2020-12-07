@@ -6,4 +6,12 @@
 	<select id="selectReport" resultType="com.dolbommon.dbmon.report.ReportVO">
 		select SHINGO_NO, SHINGO_REASON, SHINGO_DETAIL, USERID, SHINGO_ID, to_char(SHINGO_DATE, 'YYYY-MM-DD HH24:MI:SS') shingo_date, SHINGO_STATUS, SHINGO_RESPONSE, shingo_name from shingo	
 	</select>
+	
+	<select id="selectCerti" resultType="com.dolbommon.dbmon.certification.CertificationVO">
+		select USERID, SCHOOL, DEPARTMENT, DEGREE, STATUS, GRADE, to_char(SCHOOL_DATE, 'YYYY-MM-DD') SCHOOL_DATE, SCHOOL_PROOF, LICENSE, to_char(LICENSE_DATE, 'YYYY-MM-DD') LICENSE_DATE, LICENSE_PROOF, IDENTI, to_char(IDENTI_DATE, 'YYYY-MM-DD') IDENTI_DATE, IDENTI_ADDR, CRIME, to_char(CRIME_DATE, 'YYYY-MM-DD') CRIME_DATE, PRIVACY, to_char(PRIVACY_DATE, 'YYYY-MM-DD') PRIVACY_DATE, NO, IDENTI_STATUS, SCHOOL_STATUS, LICENSE_STATUS, CRIME_STATUS, PRIVACY_STATUS, CERTI_CNT, to_char(indate, 'YYYY-MM-DD HH24:MI:SS') indate from certification
+	</select>
+	
+	<update id="editCerti" parameterType="map">
+		update certification set ${type}=#{certi} where no=#{no}
+	</update>
 </mapper>

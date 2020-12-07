@@ -291,7 +291,7 @@
 		</div>
 	</div>
 		<div class="middleDiv2">
-			<textarea name="shingo_detail" placeholder="예). 부적절한 사진이 올라가 있습니다."></textarea>
+			<textarea name="shingo_detail" placeholder="예). 부적절한 사진이 올라가 있습니다. &#13;&#10;&#13;&#10;게시글일 경우 URL을 포함하여 신고해 주시기 바랍니다."></textarea>
 		</div>	
 	</form>	
 		<p class="bottomDiv">

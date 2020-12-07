@@ -4,18 +4,17 @@
 <style>
  .footer {
      width:100%;
-     height:250px;
+     height:200px;
      text-align:left;
      font-size:.85em;
      margin-bottom:0px;
      background: #555;
-     color: #fff;
-     padding: 10px 0;
+     color: #C2C2C2;
+     padding: 18px 0;
 }
 
 </style>
-<footer class="footer">
-<hr/>
+<footer class="footer" style="margin-top:100px;">
 <br/>	
 	<div id="footer_textarea" style="margin-left:200px;">
 	<img src="<%=request.getContextPath()%>/img/mylogogray.png" 
