@@ -78,6 +78,9 @@
 	border-top-right-radius:20px;
 	cursor:pointer;
 	}
+	.card-title>b{
+	cursor:pointer;
+	}
 	
 	.card{
 	margin: 20px 17px; 
@@ -98,34 +101,33 @@
 	}
 	.emptyHeart{
 	cursor:pointer;
-	
+	height:30px;
+	width:30px;
+	float:right;
 	}
-	
 	
 </style>
 
 <script>
 	$(function(){
 		
-	
-	    //  $(document).on("click",".wrapper2>ul", function(){
-	     //     location.href="teacherView?userid="+$(this).attr('id');   
-	    //   });
-	    
-	    
+	    //프로필 들어가기
 	    $(document).on("click", ".card>.profilepic", function(){
 	    	location.href="teacherView?userid="+$(this).parent().attr('id');
 	    });
-
-	    // onclick="location.href='teacherView?userid=${vo.userid}'" 
+		$(document).on("click", ".card-title>b", function(){
+			location.href="teacherView?userid="+$(this).parent().parent().parent('div').attr('id');
+		})
+	   
+		//지도 토글
 	      $(document).on("click", "#mapBtn", function(){
 				$("#map").toggle();
 			});
-			
+		//검색창	
 	    $(document).on("keyup", "#locFilter", function(){
 	    	var value = $(this).val().toLowerCase();
 	    	$(".loc").filter(function(){
-	    		$(this).parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
+	    		$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
 				    		
 	    	});
 	    });
@@ -144,6 +146,8 @@
 					type:'GET',
 					success:function(result){
 						
+						$("#Tcnt").text(result.length);
+
  						var $result = $(result);
 						var tag = "";
 						
@@ -172,13 +176,23 @@
 								} else {
 									tag += Math.round(vo.last_edit) +'분';
 								}
+								tag += '</span class="emptyHeart">';
+								tag += '<input type="hidden" value="'+ vo.userid +'" />';
+								tag += '<i class="fab fa-gratipay" style=';
+								if(vo.userid!=vo.cardid){
+									tag += '"color:black"';
+								} else if(vo.userid == vo.cardid){
+									tag += '"color:orange"';
+								}
+								tag += '></i>';
 								tag += '</span>';
-								tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
-								tag += '</h5>';
+								
 											
+								tag += '<span class="iconColor">';
 								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
 								tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
 								tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+								tag += '</span>';
 								
 								if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
 									tag += '<hr/>';
@@ -220,12 +234,13 @@
 				data:params,
 				type:'GET',
 				success:function(result){
-					
+					console.log("갯수="+result.length);
+					$("#Tcnt").text(result.length);
 					var $result = $(result);
 					var tag = "";
 					
 					$result.each(function(idx, vo){
-					
+						
 						tag += '<div class="card" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
@@ -249,13 +264,23 @@
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
+							tag += '</span class="emptyHeart">';
+							tag += '<input type="hidden" value="'+ vo.userid +'" />';
+							tag += '<i class="fab fa-gratipay" style=';
+							if(vo.userid!=vo.cardid){
+								tag += '"color:black"';
+							} else if(vo.userid == vo.cardid){
+								tag += '"color:orange"';
+							}
+							tag += '></i>';
 							tag += '</span>';
-							tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
-							tag += '</h5>';
+							
 										
+							tag += '<span class="iconColor">';
 							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
 							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
 							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+							tag += '</span>';
 							
 							if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
 								tag += '<hr/>';
@@ -271,12 +296,13 @@
 							}
 							
 							tag += '</div>';
-							tag += '</div>';
-						
+							tag += '</div>';							
 					});
 					tag += "";
-						$("#cardBox").html(tag); 
-						}, error: function(){
+					
+					$("#cardBox").html(tag);
+					
+				}, error: function(){
 					console.log("리스트 받기 에러");
 					}
 
@@ -302,6 +328,7 @@
 					type:'GET',
 					success:function(result){
 						
+
  						var $result = $(result);
 						var tag = "";
 												
@@ -330,13 +357,23 @@
 								} else {
 									tag += Math.round(vo.last_edit) +'분';
 								}
+								tag += '</span class="emptyHeart">';
+								tag += '<input type="hidden" value="'+ vo.userid +'" />';
+								tag += '<i class="fab fa-gratipay" style=';
+								if(vo.userid!=vo.cardid){
+									tag += '"color:black"';
+								} else if(vo.userid == vo.cardid){
+									tag += '"color:orange"';
+								}
+								tag += '></i>';
 								tag += '</span>';
-								tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
-								tag += '</h5>';
+								
 											
+								tag += '<span class="iconColor">';
 								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
 								tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
 								tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+								tag += '</span>';
 								
 								if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
 									tag += '<hr/>';
@@ -355,7 +392,7 @@
 								tag += '</div>';							
 						});
 						tag += "";
-						console.log("tag=",tag);
+						
 						$("#cardBox").html(tag);
 						
 					},
@@ -377,7 +414,8 @@
 				data:params,
 				type:'GET',
 				success:function(result){
-					
+					$("#Tcnt").text(result.length);
+
 					var $result = $(result);
 					var tag = "";
 					
@@ -406,14 +444,23 @@
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
+							tag += '</span class="emptyHeart">';
+							tag += '<input type="hidden" value="'+ vo.userid +'" />';
+							tag += '<i class="fab fa-gratipay" style=';
+							if(vo.userid!=vo.cardid){
+								tag += '"color:black"';
+							} else if(vo.userid == vo.cardid){
+								tag += '"color:orange"';
+							}
+							tag += '></i>';
 							tag += '</span>';
-							tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
-							tag += '</h5>';
-										
+							
+							
+							tag += '<span class="iconColor">';
 							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
 							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
 							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
-							
+							tag += '</span>'
 							if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
 								tag += '<hr/>';
 							}
@@ -607,7 +654,7 @@
 <!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
-		<div class="card" id=${vo.userid}>
+		<div class="card" id=${vo.userid}>		
 			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
 			<div class="card-body">
 				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
@@ -629,17 +676,15 @@
 				<!-- 빈 하트 -->
 				<span class="emptyHeart" style="height:30px; width:30px; float:right;">
 					<input type="hidden" value="${vo.userid}" />
-					
-					
-					<i class="fab fa-gratipay" style=<c:if test="">"color:black"</c:if> <c:if test="${vo.userid==vo.cardid}">"color:orange"</c:if> ></i>
-					
+					<i class="fab fa-gratipay" style=<c:if test="${vo.userid!=vo.cardid}">"color:black"</c:if> <c:if test="${vo.userid==vo.cardid}">"color:orange"</c:if> ></i>
 				</span>
 				</h5>
 				<span class="iconColor">							
-				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
-				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
-				<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
+					<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
+					<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
+					<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 				</span>
+				
 				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
 				<hr/>
 				</c:if>
