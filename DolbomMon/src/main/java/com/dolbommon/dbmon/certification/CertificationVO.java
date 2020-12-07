@@ -38,6 +38,8 @@ public class CertificationVO {
 	private String privacy_date;
 	private String privacy_status;
 	private MultipartFile filename;
+	private int certi_cnt;
+	private String indate;
 	
 	public String getUserid() {
 		return userid;
@@ -247,6 +249,18 @@ public class CertificationVO {
 	}
 	public void setPrivacy_status(String privacy_status) {
 		this.privacy_status = privacy_status;
+	}
+	public int getCerti_cnt() {
+		return certi_cnt;
+	}
+	public void setCerti_cnt(int certi_cnt) {
+		this.certi_cnt = certi_cnt;
+	}
+	public String getIndate() {
+		return indate;
+	}
+	public void setIndate(String indate) {
+		this.indate = indate;
 	}
 	
 	
