@@ -51,7 +51,8 @@
  		text-align:center;
  	}
  	#regularDate .dateCls{text-align:center;}
- 	.tilebar{width:50px;text-align:center;background-color:green;}
+ 	#timebarDiv {position:relative;width:0px;height:0px;}
+ 	.tilebar{width:50px;position:relative;top:210px;  text-align:center;background-color:green;}
  	
  	
 </style>
@@ -207,7 +208,7 @@
 		               		alert("취소하였습니다");
 		               		location.reload();
 		               	}else{
-		               		
+		               		2
 		               	}
 		            }, error:function(){
 		                    
@@ -223,10 +224,34 @@
 		});
 		var start_time = "${rdVO.start_time}";
 		var end_time = "${rdVO.end_time}";
+		var start_date = "${rdVO.start_date}";
+		var end_date = "${rdVO.end_date}";
 		var syoil = "${rdVO.yoil}";
 		var selectedYoil = syoil.split(",");
+		
+		for(var i=0;i<7;i++){
+			if(selectedYoil[i] == "일"){
+				selectedYoil[i] = 0;
+			}else if(selectedYoil[i] == "월"){
+				selectedYoil[i] = 1;
+			}else if(selectedYoil[i] == "화"){
+				selectedYoil[i] = 2;
+			}else if(selectedYoil[i] == "수"){
+				selectedYoil[i] = 3;
+			}else if(selectedYoil[i] == "목"){
+				selectedYoil[i] = 4;
+			}else if(selectedYoil[i] == "금"){
+				selectedYoil[i] = 5;
+			}else if(selectedYoil[i] == "토"){
+				selectedYoil[i] = 6;
+			}
+		}
+		
 		var tag = "";
 		var today = new Date();
+		
+		
+		
 		for(var i=0; i<120; i++){
 			console.log("st => " + start_time);
 			console.log("et => " + end_time);
@@ -252,6 +277,7 @@
 			}else if(day==6){
 				yoil = "토";
 			}
+			
 			tag += "<div class='dateCls' style='width:50px;height:50px;float:left;'><span class='yoilCls'>"+yoil+"</span><br/>"+month+"/"+date+"</div>"
 		}
 		
@@ -350,7 +376,7 @@
 				<div id="regularDate" style="overflow:scroll;">
 					<div id="timeDiv" style="width:50px; height:570px; float:left;">
 						<div id="dateDiv" style="width:6050px;">
-							<div class="tilebar">dd</div>
+							<div id="timebarDiv"></div>
 						</div>
 						<div class="settime" style="margin-top:50px;">00:00</div>
 						<div class="settime">02:00</div>

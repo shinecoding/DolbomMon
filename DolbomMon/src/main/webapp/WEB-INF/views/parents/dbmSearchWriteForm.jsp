@@ -588,9 +588,9 @@
 				tag += "<option id='rt"+i+"'>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()<10 && time.getMinutes()!=0){
 				tag += "<option id='rt"+i+"'>0"+time.getHours()+":"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>10 && time.getMinutes()==0){
+			}else if(time.getHours()>=10 && time.getMinutes()==0){
 				tag += "<option id='rt"+i+"'>"+time.getHours()+":0"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>10 && time.getMinutes()!=0){
+			}else if(time.getHours()>=10 && time.getMinutes()!=0){
 				tag += "<option id='rt"+i+"'>"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}
 			time.setMinutes(time.getMinutes()+30);
