@@ -10,12 +10,23 @@ public interface JobSearchDaoImp {
 	public List<TeacherVO> jobSearchActType(String activity_type);
 	//구직게시판 care_type필터
 	public List<TeacherVO> jobSearchCareType(String care_type);
-	//구직게시판 care_type필터
-	public List<TeacherVO> jobSearchLastEdit();
+	
+	//구직게시판 정렬
+	public List<TeacherVO> filterLastEdit();
+	public List<TeacherVO> filterCertiCnt();
+	public List<TeacherVO> filterWageLow();
+	public List<TeacherVO> filterWageHigh();
+	
+	public List<TeacherVO> filterGender(String gender);
+	
 	//총 게시물 수 구하기
 	public int getTotalRecord();
 	//레코드 한개 선택
 	public TeacherVO jobSearchBoardSelect(int no);
+	//
+	public List<TeacherVO> selectHeart();
+	public int insertHeart(LiketVO vo);
+	public int deleteHeart(LiketVO vo);
 	
 	//글번호 구하기
 	public List<TeacherVO> selectTMem(); 

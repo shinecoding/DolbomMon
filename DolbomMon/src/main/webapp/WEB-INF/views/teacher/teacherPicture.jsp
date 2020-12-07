@@ -94,7 +94,26 @@
 	margin-top:30px;
 	}
 	
-</style>	
+</style>
+<script>
+	$(function(){
+		var url2 = "/dbmon/showPic";
+		var params2 = "care_type="+care_type;
+	
+		$.ajax({
+			url:url,
+			data:params,
+			type:'GET',
+			success:function(result){
+				
+			}, error:function(error){
+				
+			}
+				
+		
+	});
+	});
+</script>	
 </head>
 <body>
 <div id="top">

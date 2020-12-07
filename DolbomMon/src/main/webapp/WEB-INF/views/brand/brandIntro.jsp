@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <style>
 
    body,ul,li{margin:0; padding:0; text-align:center;}
@@ -36,9 +38,16 @@
    <br/><br/>
    <h2 style="color:gray">놀이부터 배움까지 선생님 매칭 웹</h2>
    <h2 style="font-weight:bold;">아이돌봄 웹 서비스</h2><br/><br/><br/>
-   <img src="img/pic2.png"/>
-   <img src="img/intro1.png" style="margin-top: 4rem;max-width: 786px;padding: 0 15px; margin: 50 auto;"/>
+   <img src="img/pic2.png" data-aos="flip-left"/>
+   <img src="img/intro1.png" data-aos="flip-left" style="margin-top: 4rem;max-width: 786px;padding: 0 15px; margin: 50 auto;"/>
 </div>
+<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 2000
+    });
+ 
+</script>
 </body>
 <!-- ------------------footer------------- -->
 <hr/>
