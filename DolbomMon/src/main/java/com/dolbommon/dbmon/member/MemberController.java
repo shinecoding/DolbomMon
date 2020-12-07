@@ -95,11 +95,6 @@ public class MemberController {
 			rdVo.setStart_time(st);
 			rdVo.setEnd_time(et);
 			
-			System.out.println("yoil => " + yoil);
-			System.out.println("sd = > " + sd);
-			System.out.println("ed => " + ed);
-			System.out.println("st => " + st);
-			System.out.println("et => " + et);
 			
 			String who = (String)ses.getAttribute("who");
 			System.out.println("who=>"+ who);
@@ -143,7 +138,6 @@ public class MemberController {
 		@RequestMapping(value = "/telCheckAjax", method = RequestMethod.POST)
 		@ResponseBody
 		public int usertelChk(@RequestParam("tel1") String tel1) {
-			System.out.println("ㅠㅠ");
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			int result = dao.memberUsertelChk(tel1);
 			return result;
