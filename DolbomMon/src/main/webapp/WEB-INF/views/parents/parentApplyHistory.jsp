@@ -156,14 +156,23 @@
 										});
 									</script>
 							</div>
-							<div class="col-5">
-								
+							<c:if test="${list.tcnt > 0}">
+							<div class="col-5" style="background-color:orange; opacity:0.5; cursor:pointer;" onclick="location.href='parentView?no=${list.job_board_no}'" >
+									${list.tcnt }명의 선생님이 답변을 기다리고 있습니다.
 							</div>	
+							</c:if>
+							<c:if test="${list.tcnt == 0}">
+								<div class="col-5">아직 지원한 선생님이 없습니다.
+									<input type="button" class="btn btn-warning" value="삭제하기"/>
+									<input type="button" class="btn btn-warning" value="수정하기"/>
+								</div>
+							</c:if>
 						</div>
 					</li>
 				</c:forEach>
 			</ul>
 		</div>
+		<div style="margin-bottom:200px;"></div>
 	</div>
 </div>
 </body>

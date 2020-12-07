@@ -15,6 +15,7 @@ public class ParentHistoryVO {
 	private String lat;
 	private String lng;
 	private String child_birth;
+	private int tcnt;
 	
 	public int getJob_board_no() {
 		return job_board_no;
@@ -99,6 +100,12 @@ public class ParentHistoryVO {
 	}
 	public void setChild_birth(String child_birth) {
 		this.child_birth = child_birth;
+	}
+	public int getTcnt() {
+		return tcnt;
+	}
+	public void setTcnt(int tcnt) {
+		this.tcnt = tcnt;
 	}
 	
 	

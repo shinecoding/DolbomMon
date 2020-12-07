@@ -53,7 +53,7 @@
  	}
  	#regularDate .dateCls{text-align:center;}
  	#timebarDiv {position:relative;width:0px;height:0px;}
- 	.timebar{position:absolute;top:50px; background-color:blue; width:50px;}
+ 	.timebar{position:absolute;top:50px; background-color:orange;opacity:0.7; width:50px;}
  	
 </style>
 
@@ -261,66 +261,124 @@
 		var end_date = "${rdVO.end_date}";
 		var syoil = "${rdVO.yoil}";
 		var selectedYoil = syoil.split(",");
-		
-		for(var i=0;i<7;i++){
-			if(selectedYoil[i] == "일"){
-				selectedYoil[i] = 0;
-			}else if(selectedYoil[i] == "월"){
-				selectedYoil[i] = 1;
-			}else if(selectedYoil[i] == "화"){
-				selectedYoil[i] = 2;
-			}else if(selectedYoil[i] == "수"){
-				selectedYoil[i] = 3;
-			}else if(selectedYoil[i] == "목"){
-				selectedYoil[i] = 4;
-			}else if(selectedYoil[i] == "금"){
-				selectedYoil[i] = 5;
-			}else if(selectedYoil[i] == "토"){
-				selectedYoil[i] = 6;
-			}
-		}
-		
+		console.log("start_date =>" + start_date);
 		var tag = "";
 		var today = new Date();
 		var startday = new Date(start_date);
 		var endday = new Date(end_date);
 		
+		var getYoil = new Array();
+		for(var i=0;i<7;i++){
+			if(selectedYoil[i] == "일"){
+				getYoil[i] = 7;
+			}else if(selectedYoil[i] == "월"){
+				getYoil[i] = 1;
+			}else if(selectedYoil[i] == "화"){
+				getYoil[i] = 2;
+			}else if(selectedYoil[i] == "수"){
+				getYoil[i] = 3;
+			}else if(selectedYoil[i] == "목"){
+				getYoil[i] = 4;
+			}else if(selectedYoil[i] == "금"){
+				getYoil[i] = 5;
+			}else if(selectedYoil[i] == "토"){
+				getYoil[i] = 6;
+			}
+		}
+		
+		console.log("입력받은 요일 => " + selectedYoil);
+		
+		for(var i=0;i<getYoil.length;i++){
+			if(getYoil[i]==startday.getDay()){
+				console.log("쿠궁 => " + startday.getDay());
+				console.log("두둥 => " + getYoil[i]);
+				console.log("인덱스 => " + i);
+				for(var j=0;j<i;j++){
+					getYoil.push(getYoil[j]);
+					getYoil.shift();
+				}
+			}
+		} 		
+		
+		var first = getYoil[0];
+		var mn = 0;
+		if(getYoil[0]==1){
+			mn=0;
+		}else if(getYoil[0]==2){
+			mn=1;
+		}else if(getYoil[0]==3){
+			mn=2;
+		}else if(getYoil[0]==4){
+			mn=3;
+		}else if(getYoil[0]==5){
+			mn=4;
+		}else if(getYoil[0]==6){
+			mn=5;
+		}else if(getYoil[0]==7){
+			mn=6;
+		}
+		
+		for(var i=0;i<getYoil.length;i++){
+			if((getYoil[i]-mn)==0){
+				getYoil[i] = 7;
+			}else if((getYoil[i]-mn)==-1){
+				getYoil[i] = 6;
+			}else if((getYoil[i]-mn)==-2){
+				getYoil[i] = 5;
+			}else if((getYoil[i]-mn)==-3){
+				getYoil[i] = 4;
+			}else if((getYoil[i]-mn)==-4){
+				getYoil[i] = 3;
+			}else if((getYoil[i]-mn)==-5){
+				getYoil[i] = 2;
+			}else if((getYoil[i]-mn)==-6){
+				getYoil[i] = 1;
+			}else {
+				getYoil[i] = getYoil[i] - mn;
+			}
+		}
+		
+		console.log("정렬 후 => " + getYoil);
+		
 		var sd = startday.getTime() - today.getTime();
-		var sdl = Math.floor(sd/1000/60/60/24)+1;
-		console.log("옹 => " + sdl);
+		var sdl = Math.floor(sd/1000/60/60/24)-1;
 		
 		var ed = endday.getTime() - startday.getTime();
 		var edl = Math.floor(ed/1000/60/60/24);
 		edll = Math.floor(edl/7);
-		console.log("옹 => " + edll);
-		
-		for(var i=0; i<120; i++){
-			var nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate()+i);
-			var year = nextDay.getFullYear();
-			var month = nextDay.getMonth()+1;
-			var date = nextDay.getDate();
-			var day = nextDay.getDay();
-			var yoil = "";
-			if(day==0){
-				yoil = "일";
-			}else if(day==1){
-				yoil = "월";
-			}else if(day==2){
-				yoil = "화";
-			}else if(day==3){
-				yoil = "수";
-			}else if(day==4){
-				yoil = "목";
-			}else if(day==5){
-				yoil = "금";
-			}else if(day==6){
-				yoil = "토";
+		for(var j=0; j<8; j++){
+			if(startday.getDay()==first){
+				break;
+			}else {
+				startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+1); 
 			}
-			
-			tag += "<div class='dateCls' style='width:50px;height:50px;float:left;'><span class='yoilCls'>"+yoil+"</span><br/>"+month+"/"+date+"</div>"
+		}
+		for(var i=0; i<120; i++){
+				var nextDay = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+i);
+				var year = nextDay.getFullYear();
+				var month = nextDay.getMonth()+1;
+				var date = nextDay.getDate();
+				var day = nextDay.getDay();
+				var yoil = "";
+				if(day==0){
+					yoil = "일";
+				}else if(day==1){
+					yoil = "월";
+				}else if(day==2){
+					yoil = "화";
+				}else if(day==3){
+					yoil = "수";
+				}else if(day==4){
+					yoil = "목";
+				}else if(day==5){
+					yoil = "금";
+				}else if(day==6){
+					yoil = "토";
+				}
+				
+				tag += "<div class='dateCls' style='width:50px;height:50px;float:left;'><span class='yoilCls'>"+yoil+"</span><br/>"+month+"/"+date+"</div>"
 		}
 		
-		var timebar = "";
 		$("#regularDate #dateDiv").append(tag);
 		
 		var stArr = start_time.split(":");
@@ -344,51 +402,43 @@
 		}		
 		endDivLoc = etH*2;
 		
+		console.log("입력받은 요일 => " + getYoil);
+		console.log("배열 길이 => " + getYoil.length);
+		
+		var timebar = "";
 		
 		
 		for(var j=0;j<edll;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
-			for(var i=0;i<7;i++){
-				if(selectedYoil[i] == 1){ //월
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*0)+Number(sdl*50);
+			for(var i=0;i<getYoil.length;i++){
+				var height = (endDivLoc - startDivLoc)*10;
+				var top = startDivLoc*10+50+startDivLoc/4;
+				if(getYoil[i] == 1){
+					var left = Number(350*j)+Number(50*0);
 					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
-				}else if(selectedYoil[i] == 2){
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*1)+Number(sdl*50);
+				}else if(getYoil[i] == 2){
+					var left = Number(350*j)+Number(50*1);
 					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
-				}else if(selectedYoil[i] == 3){
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*2)+Number(sdl*50);
+				}else if(getYoil[i] == 3){
+					var left = Number(350*j)+Number(50*2);
 					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
-				}else if(selectedYoil[i] == 4){
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*3)+Number(sdl*50);
+				}else if(getYoil[i] == 4){
+					var left = Number(350*j)+Number(50*3);
 					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
-				}else if(selectedYoil[i] == 5){
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*4)+Number(sdl*50);
+				}else if(getYoil[i] == 5){
+					var left = Number(350*j)+Number(50*4);
 					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
-				}else if(selectedYoil[i] == 6){
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*5)+Number(sdl*50);
+				}else if(getYoil[i] == 6){
+					var left = Number(350*j)+Number(50*5);
 					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
-				}else if(selectedYoil[i] == 0){ //일
-					var height = (endDivLoc - startDivLoc)*10;
-					var top = startDivLoc*10+50;
-					var left = Number(350*j)+Number(50*6)+Number(sdl*50);
-					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height="+height+"px'></div>"
+				}else if(getYoil[i] === 0){ //일
+					var left = Number(350*j)+Number(50*6);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
 				}
 			}
 		}
-		
-		
 		$("#timebarDiv").append(timebar);
+		
+		
 		
 		
 		//////////////////////////////////////////////////////////////////////////
@@ -460,23 +510,35 @@
 			</c:if>
 			<c:if test="${rbVO.time_type=='R' }">
 				<div id="regularDate" style="overflow:scroll;">
-					<div id="timeDiv" style="width:50px; height:570px; float:left;">
+					<div id="timeDiv" style="width:50px; height:590px; float:left;">
 						<div id="dateDiv" style="width:6050px;">
 							<div id="timebarDiv">
 							</div>
 						</div>
 						<div class="settime" style="margin-top:50px;">00:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">02:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">04:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">06:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">08:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">10:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">12:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">14:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">16:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">18:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">20:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">22:00</div>
+						<hr style="width:6100px;margin:0px;border:0;height:1px;background:#EFEFEF"/>
 						<div class="settime">00:00</div>
 					</div>
 				</div>

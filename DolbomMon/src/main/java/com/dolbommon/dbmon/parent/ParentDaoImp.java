@@ -20,4 +20,7 @@ public interface ParentDaoImp {
 	
 	// 내게(학부모) 신청한 - 선생님 정보
 	public List<ApplyToParentInfoVO> applyDbmSelect(String userid);
+	
+	// 구인글에 신청한 선생님 수
+	public int applyDbmCnt(int no);
 }
