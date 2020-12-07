@@ -41,16 +41,17 @@
  	
  	
  	#regularDate{
- 		
+ 		display:inline-block;
+ 		width:100%;
  	}
  	#regularDate #timeDiv{width:50px;float:left;}
  	#regularDate #dateDiv{float:left; margin-left:50px;}
  	#regularDate .settime{
- 		height:30px; 
+ 		height:40px; 
  		text-align:center;
  	}
  	#regularDate .dateCls{text-align:center;}
- 	
+ 	.tilebar{width:50px;text-align:center;background-color:green;}
  	
  	
 </style>
@@ -220,11 +221,18 @@
 			var deleteConfirm = confirm("삭제하시겠습니까?");
 			location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
 		});
-		
+		var start_time = "${rdVO.start_time}";
+		var end_time = "${rdVO.end_time}";
+		var syoil = "${rdVO.yoil}";
+		var selectedYoil = syoil.split(",");
 		var tag = "";
 		var today = new Date();
 		for(var i=0; i<120; i++){
+			console.log("st => " + start_time);
+			console.log("et => " + end_time);
+			console.log("yoil => " + selectedYoil);
 			var nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate()+i);
+			var year = nextDay.getFullYear();
 			var month = nextDay.getMonth()+1;
 			var date = nextDay.getDate();
 			var day = nextDay.getDay();
@@ -325,7 +333,7 @@
 		</script>
       	</li>
       	<h5>돌봄 기간/시간</h5>
-      	<div style="display:inline-block; border:1px solid #EFEFEF; height:auto; width:690px;">
+      	<div style="display:inline-block; border:1px solid #EFEFEF; height:auto; width:100%;;">
       		
       		<c:if test="${rbVO.time_type=='S' }" >
 				<div id="specificDate">
@@ -340,8 +348,10 @@
 			</c:if>
 			<c:if test="${rbVO.time_type=='R' }">
 				<div id="regularDate" style="overflow:scroll;">
-					<div id="timeDiv" style="width:50px; height:440px; float:left;">
-						<div id="dateDiv" style="width:6050px;"></div>
+					<div id="timeDiv" style="width:50px; height:570px; float:left;">
+						<div id="dateDiv" style="width:6050px;">
+							<div class="tilebar">dd</div>
+						</div>
 						<div class="settime" style="margin-top:50px;">00:00</div>
 						<div class="settime">02:00</div>
 						<div class="settime">04:00</div>
@@ -365,6 +375,8 @@
       	</div>
       	
       	<h5>자녀 정보</h5>
+      				<input class="" type="text" value="${rdVO.start_time }" readonly="readonly"/>
+					<input class="" type="text" value="${rdVO.end_time }" readonly="readonly"/>
       	<li class="list-group-item">
 		<ul id="childList" class="list-group list-group-horizontal-sm" >
          	
