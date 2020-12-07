@@ -215,9 +215,7 @@
 					</c:if>
 				</form>
 				</div>
-				
 			</div>
-			
 		</li>
 	</ul>
 	
