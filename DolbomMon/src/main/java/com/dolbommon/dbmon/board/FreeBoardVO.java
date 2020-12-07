@@ -12,6 +12,7 @@ public class FreeBoardVO {
 	private String head;
 	private String filename1;
 	private String filename2;
+	private String delfile;
 	private int nextNo;
 	private int preNo;
 	private String nextSubject;
@@ -167,6 +168,12 @@ public class FreeBoardVO {
 	}
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
+	}
+	public String getDelfile() {
+		return delfile;
+	}
+	public void setDelfile(String delfile) {
+		this.delfile = delfile;
 	}
 	public int getNextNo() {
 		return nextNo;

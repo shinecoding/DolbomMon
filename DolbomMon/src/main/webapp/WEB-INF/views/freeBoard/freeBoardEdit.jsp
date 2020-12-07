@@ -64,7 +64,7 @@ $(function(){
 <div id="top">
 <b>게시판 글 수정하기</b>
 </div>
-	<form method="post" action="/dbmon/freeBoardEditOk" id="freeBoardEditFrm">
+	<form method="post" action="/dbmon/freeBoardEditOk" id="freeBoardEditFrm" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="${vo.no}"/>
 		<div class="form-group">
 			<div class="input-group mb-3">
@@ -110,7 +110,6 @@ $(function(){
 				<input type="file" id="filename" name="filename">
 			</div>
 			 -->
-			  -->
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>

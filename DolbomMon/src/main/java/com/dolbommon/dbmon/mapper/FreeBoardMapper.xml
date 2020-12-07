@@ -75,6 +75,8 @@
 			<when test='filename1!=null and !filename1.equals("")'>
 			, filename1
 			</when>
+		</choose>
+		<choose>
 			<when test='filename2!=null and !filename2.equals("")'>
 			, filename2
 			</when>
@@ -84,6 +86,8 @@
 			<when test='filename1!=null and !filename1.equals("")'>
 			, #{filename1}
 			</when>
+		</choose>
+		<choose>
 			<when test='filename2!=null and !filename2.equals("")'>
 			, #{filename2}
 			</when>

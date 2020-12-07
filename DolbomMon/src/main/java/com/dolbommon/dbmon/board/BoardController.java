@@ -34,6 +34,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 @Controller
 public class BoardController {
 
@@ -254,6 +256,7 @@ public class BoardController {
 	
 		//파일을 저장할 위치
 		String path = ses.getServletContext().getRealPath("/upload");
+		System.out.println(path);
 		//파일 업로드를 하기 위해 req에서 MultipartHttpServletRequest를 생성한다.
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		//mr에서 MultipartFile 객체를 얻어온다.	--> List
@@ -299,7 +302,6 @@ public class BoardController {
 				}	//if
 			}	//for
 		}
-		
 		vo.setFilename1(fileNames[0]);
 		vo.setFilename2(fileNames[1]);
 		
@@ -325,9 +327,6 @@ public class BoardController {
 		}
 		return mav;
 	}
-	
-	
-	
 	
 	//게시글 보기ok
 	@RequestMapping("/freeBoardView")
@@ -367,53 +366,26 @@ public class BoardController {
 		
 		return mav;
 	}
-	/*
-	 * //글 수정
-	 * 
-	 * @RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST) public
-	 * ModelAndView freeBoardEditOk(HttpServletRequest req, HttpServletResponse res,
-	 * HttpSession ses) throws ServletException, IOException {
-	 * 
-	 * String path = ses.getServletContext().getRealPath("/upload"); int maxSize =
-	 * 1024*1024*1024; DefaultFileRenamePolicy pol = new DefaultFileRenamePolicy();
-	 * 
-	 * MultipartRequest mr = new MultipartRequest(req, path, maxSize, "UTF-8", pol);
-	 * 
-	 * FreeBoardVO vo = new FreeBoardVO();
-	 * 
-	 * vo.setNo(Integer.parseInt(mr.getParameter("no")));
-	 * vo.setTitle(mr.getParameter("title"));
-	 * vo.setContent(mr.getParameter("content"));
-	 * 
-	 * //삭제할 파일명 vo.setDelfile(mr.getParameterValues("delfile"));
-	 * 
-	 * //새로 업로드한 파일 int idx = 0; String fileName[] = new String[2]; Enumeration
-	 * fileList = mr.getFileNames();
-	 * 
-	 * while(fileList.hasMoreElements()) { String old =
-	 * (String)fileList.nextElement(); String newFile = mr.getFilesystemName(old);
-	 * 
-	 * if(newFile!=null) { fileName[idx++] = newFile;
-	 * 
-	 * } } String[] del = vo.getDelfile(); DataDAO dao = new DataDAO();
-	 * 
-	 * if(idx<2) { //이전에 업로드한 파일을 다 지울 때 //데이터 베이스에 있는 원래 파일명 얻어오기 String dbFile[] =
-	 * dao.getFileName(vo.getNo()); if(del!=null) { //삭제할 파일이 있는 경우 for(String
-	 * dbFilename : dbFile) { int chk = 0; for(String delFile : del) {
-	 * if(dbFilename!=null && dbFilename.equals(delFile)) { chk++; } } if(chk==0) {
-	 * fileName[idx++] = dbFilename; } } }else { //삭제할 파일이 없는 경우 for(String
-	 * dbFilename : dbFile) { if(dbFilename!=null) { fileName[idx++] = dbFilename; }
-	 * } } }
-	 * 
-	 * vo.setFilename(fileName); int cnt = dao.dataUpdate(vo); if(cnt>0 &&
-	 * del!=null) { //이전 파일 삭제 for(String d : del) { File f = new File(path, d);
-	 * f.delete(); } } req.setAttribute("cnt", cnt); req.setAttribute("no",
-	 * vo.getNo()); return "/data/dataEditOk.jsp"; } }
-	 */
 	
-	
-	//자유게시판 글 수정ok
+	//글 수정
+	 
 	@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)
+	public void freeBoardEditOk(HttpServletRequest req, HttpServletResponse res,
+			 							 HttpSession ses) throws ServletException, IOException {
+		 
+	String path = ses.getServletContext().getRealPath("/upload");
+	int maxSize = 1024*1024*1024;
+	DefaultFileRenamePolicy pol = new DefaultFileRenamePolicy();
+	MultipartRequest multi = new MultipartRequest(req, path, maxSize, "utf-8", pol);
+	
+	 }
+			 
+			 
+			 
+			 
+	//자유게시판 글 수정ok
+	
+	 /*@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)
 	public ModelAndView freeBoardEditOk(FreeBoardVO vo, HttpSession ses) {
 		vo.setUserid((String)ses.getAttribute("userid"));
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
@@ -427,7 +399,7 @@ public class BoardController {
 			mav.setViewName("board/result");
 		}
 		return mav;
-	}
+	}*/
 	
 	//자유게시판 글 삭제ok
 	@RequestMapping("/freeBoardDel")
