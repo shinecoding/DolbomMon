@@ -212,7 +212,7 @@
 								tag += '</div>';							
 						});
 						tag += "";
-						console.log("tag=",tag);
+						
 						$("#cardBox").html(tag);  
 					},
 					error:function(error){
@@ -517,7 +517,7 @@
 					type:'GET',
 					success:function(result){
 						console.log(result);
-						var $result = $(result);
+						//var $result = $(result);
 						if(result=="1"){
 							console.log("성공");
 								

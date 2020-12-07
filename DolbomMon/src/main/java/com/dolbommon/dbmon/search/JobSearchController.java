@@ -129,26 +129,43 @@ public class JobSearchController {
 		
 		return list;
 	}
-	/*
-	@RequestMapping(value="/updateHeart", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
-	@ResponseBody
-	public int updateHeart() {
-		
-		return 1;
-	}
-	*/
 	
-	@RequestMapping("/parentHeart") //부모 찜리스트에 보여지는 선생님 정보
-	public ModelAndView parentHeart() {
-		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.selectHeart();
+	@RequestMapping(value="/likeOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<TeacherVO> likeOrder(String order){
 		
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		
+		if(order.equals("like_order")){
+			list = dao.filterLastEdit();
+		} else if(order.equals("certi_cnt")){
+			list = dao.filterCertiCnt();
+		} else if(order.equals("wage_low")){
+			list = dao.filterWageLow();
+		} else if(order.equals("wage_high")){
+			list = dao.filterWageHigh();
+		}
+		
+		return list;
+	}
+
+
+	@RequestMapping("/parentHeart") //부모 찜리스트에 보여지는 선생님 정보
+	public ModelAndView parentHeart(HttpSession ses) {
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		
+		String userid = (String)ses.getAttribute("userid");
+		System.out.println("세션 아이디"+userid);
+		List<TeacherVO> list = dao.selectHeart(userid);
+		System.out.println("리스트"+list);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
-		mav.setViewName("parents/parentHeart");
+		mav.setViewName("/parents/parentHeart");
 		return mav;
 	}
-	
+
 	@RequestMapping(value="/insertHeartT", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
 	@ResponseBody
 	public String insertHeartT(HttpSession ses, String cardid) {

@@ -31,7 +31,66 @@
 	#orderDropdown {
 	border:none;
 	}
+	.trash {
+	cursor:pointer;
+	}
 </style>
+<script>
+$(function(){
+	$(document).on("click", ".trash", function(){
+		var cardid = $(this).parent().parent().attr("id");
+		$(this).parent().parent().hide();
+		console.log(cardid);
+		var url = "/dbmon/deleteHeartT";
+		var params = "cardid="+cardid;
+		
+		$.ajax({
+			url:url,
+			data:params,
+			type:'GET',
+			success:function(result){
+				
+				if(result=="1"){
+					console.log("성공");
+					
+					
+				}else if(result="0"){
+					console.log("실패");
+				}
+				
+			}, error:function(){
+				console.log("AJAX 받기 에러");
+			}
+		})
+		
+	});//trash삭제
+	
+	$(document).on("change", "#orderDropdown", function(){
+		var order = $(this).val();
+		console.log("정렬="+order);
+		var url = "/dbmon/likeOrder";
+		var params = "order="+order;
+		console.log("파람="+params);
+		
+		$.ajax({
+			url:url,
+			data:params,
+			type:'GET',
+			success:function(result){
+				
+				console.log("성공");
+				
+			}, error:function(error){
+				console.log("ajax 받기 에러-->" + error.responseText);
+			}
+		})
+		
+	});
+	
+	
+	
+});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -42,16 +101,22 @@
 	<div class="mb-3"><i class="fas fa-circle"></i>전체 <i class="fas fa-circle"></i>구인중 일자리만
 		<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
 		<select id="orderDropdown">
-			<option value="last_edit">찜한 순</option>
+			<option value="like_order">찜한 순</option>
 			<option value="certi_cnt">인증 수 순</option>
 			<option value="wage_low">시급 낮은 순</option>
 			<option value="wage_high">시급 높은 순</option>
 		</select>
 	</div>
 	</div>
+	
+	<!--<c:if test="${list==null}">
+		<div style="text-align:center;">찜한 돌봄몬이 없습니다.</div>					
+	</c:if>
+	-->
+	
 	<c:forEach var="vo" items="${list}">
 		
-		<ul class="list-group">
+		<ul class="list-group" id="${vo.userid}">
 			<li class="list-group-item">
 				<ul class="list-group list-group-horizontal">
 					<li class="list-group-item border-0 col-2">
@@ -98,7 +163,8 @@
 				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
 				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div></c:if>
 		
-		<div class="float-right"><i class="far fa-trash-alt"></i></div>
+		<span class="trash"><i class="far fa-trash-alt float-right"></i></span>
+		</li>
 	</ul>
 	<br/>
 	</c:forEach>

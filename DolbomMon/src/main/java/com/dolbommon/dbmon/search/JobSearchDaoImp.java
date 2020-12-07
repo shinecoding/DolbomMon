@@ -23,8 +23,8 @@ public interface JobSearchDaoImp {
 	public int getTotalRecord();
 	//레코드 한개 선택
 	public TeacherVO jobSearchBoardSelect(int no);
-	//
-	public List<TeacherVO> selectHeart();
+	//찜기능
+	public List<TeacherVO> selectHeart(String userid);
 	public int insertHeart(LiketVO vo);
 	public int deleteHeart(LiketVO vo);
 	
