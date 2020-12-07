@@ -44,6 +44,7 @@
 	white-space: nowrap; 
   	display: inline-block; 
   	vertical-align: top;
+  	text-align:center;
   	}
   	
 
@@ -75,6 +76,7 @@
 	height:300px;
 	border-top-left-radius:20px; 
 	border-top-right-radius:20px;
+	cursor:pointer;
 	}
 	
 	.card{
@@ -86,14 +88,20 @@
 	float:left; 
 	display:block;
 	}
-	i{
+	.iconColor i{
 	color:orange;
 	}
-	select optgroup, select option{
-	height:10px;
+
+	#orderDropdown {
+	border:none;
+	
 	}
-
-
+	.emptyHeart{
+	cursor:pointer;
+	
+	}
+	
+	
 </style>
 
 <script>
@@ -103,13 +111,13 @@
 	    //  $(document).on("click",".wrapper2>ul", function(){
 	     //     location.href="teacherView?userid="+$(this).attr('id');   
 	    //   });
+	    
+	    
+	    $(document).on("click", ".card>.profilepic", function(){
+	    	location.href="teacherView?userid="+$(this).parent().attr('id');
+	    });
 
-	    /* 
-	    function filterLoc(){
-	    	  var value = document.getElementById("locFilter").value.toLowerCase();
-	    	  var item = document.getElementbyClassName("wrapper2");
-		for(i=0;item)
-	      }*/
+	    // onclick="location.href='teacherView?userid=${vo.userid}'" 
 	      $(document).on("click", "#mapBtn", function(){
 				$("#map").toggle();
 			});
@@ -135,13 +143,13 @@
 					data:params2,
 					type:'GET',
 					success:function(result){
-						console.log(111111111);
+						
  						var $result = $(result);
 						var tag = "";
 						
 						$result.each(function(idx, vo){
 						
-							tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+							tag += '<div class="card" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -165,7 +173,7 @@
 									tag += Math.round(vo.last_edit) +'분';
 								}
 								tag += '</span>';
-								tag += '<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">';
+								tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
 								tag += '</h5>';
 											
 								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
@@ -218,7 +226,7 @@
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+						tag += '<div class="card" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -242,7 +250,7 @@
 								tag += Math.round(vo.last_edit) +'분';
 							}
 							tag += '</span>';
-							tag += '<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">';
+							tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
 							tag += '</h5>';
 										
 							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
@@ -276,8 +284,226 @@
 				
 	    });//ajax
 			
+	    
+	    
+	//====================최신순 필터=========================
+		
+		$(document).on("change", "#orderDropdown", function(){
+				var order = $(this).val();
+				console.log("정렬="+order);
+					
+				var url = "/dbmon/filterOrder";
+				var params = "order="+order;
+				
+				console.log("파라미터="+params);
+				$.ajax({
+					url:url,
+					data:params,
+					type:'GET',
+					success:function(result){
+						
+ 						var $result = $(result);
+						var tag = "";
+												
+						$result.each(function(idx, vo){
+						
+							tag += '<div class="card" >';
+							tag += '<img class="profilepic" src=';
+							if(vo.pic==null){
+								tag +='"img/profilepic.png"';
+							} else {
+								tag +='"upload/' +vo.pic+ '"';
+							}
+							tag += '/><br/>';
+							tag += '<div class="card-body">';
+								tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
+								
+								tag += '<span class="ml-2" style="font-size:0.7em">';
+								if(vo.last_edit>525600){
+									tag += Math.round(vo.last_edit/525600)+'년';
+								} else if(vo.last_edit>43200){
+									tag += Math.round(vo.last_edit/43200) +'달';
+								} else if(vo.last_edit>1440){
+									tag += Math.round(vo.last_edit/1440) +'일';
+								} else if(vo.last_edit>60){
+									tag += Math.round(vo.last_edit/60) +'시간';
+								} else {
+									tag += Math.round(vo.last_edit) +'분';
+								}
+								tag += '</span>';
+								tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
+								tag += '</h5>';
+											
+								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
+								tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
+								tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+								
+								if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+									tag += '<hr/>';
+								}
+								if(vo.identi_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+								} else if(vo.license_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+								} else if(vo.school_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+								} else if(vo.crime_status == "Y"){
+									tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+								}
+								
+								tag += '</div>';
+								tag += '</div>';							
+						});
+						tag += "";
+						console.log("tag=",tag);
+						$("#cardBox").html(tag);
+						
+					},
+					error:function(error){
+						console.log("리스트 받기 에러-->"+ error.responseText);
+					}
+			});
 			
-			
+   	 	});//ajax 
+
+	    $(document).on("click", "#genderBox>button", function(){
+	    	var gender = $(this).val();
+	    	console.log(gender);
+	    	var url = "/dbmon/filterOrder";
+			var params = "order="+gender;
+			console.log("파람="+params);
+			$.ajax({
+				url:url,
+				data:params,
+				type:'GET',
+				success:function(result){
+					
+					var $result = $(result);
+					var tag = "";
+					
+					$result.each(function(idx, vo){
+					
+						tag += '<div class="card">';
+						tag += '<img class="profilepic" src=';
+						if(vo.pic==null){
+							tag +='"img/profilepic.png"';
+						} else {
+							tag +='"upload/' +vo.pic+ '"';
+						}
+						tag += '/><br/>';
+						tag += '<div class="card-body">';
+							tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
+							
+							tag += '<span class="ml-2" style="font-size:0.7em">';
+							if(vo.last_edit>525600){
+								tag += Math.round(vo.last_edit/525600)+'년';
+							} else if(vo.last_edit>43200){
+								tag += Math.round(vo.last_edit/43200) +'달';
+							} else if(vo.last_edit>1440){
+								tag += Math.round(vo.last_edit/1440) +'일';
+							} else if(vo.last_edit>60){
+								tag += Math.round(vo.last_edit/60) +'시간';
+							} else {
+								tag += Math.round(vo.last_edit) +'분';
+							}
+							tag += '</span>';
+							tag += '<i class="emptyHeart fab fa-gratipay" style="height:30px; width:30px; float:right;"></i>';
+							tag += '</h5>';
+										
+							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
+							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
+							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+							
+							if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+								tag += '<hr/>';
+							}
+							if(vo.identi_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+							} else if(vo.license_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+							} else if(vo.school_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+							} else if(vo.crime_status == "Y"){
+								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+							}
+							
+							tag += '</div>';
+							tag += '</div>';
+						
+					});
+					tag += "";
+						$("#cardBox").html(tag); 
+						}, error: function(){
+					console.log("리스트 받기 에러");
+					}
+
+				});
+				
+	    });//ajax
+		
+	    
+	});//제이쿼리
+	</script>
+ <script>	
+	//========================찜기능=================
+   
+    $(function(){	    
+	    //좋아요 찜기능
+	  
+	    $(document).on("click", ".emptyHeart", function(){
+	    	
+	    	var cardid = $(this).children().val();
+	    	console.log($(this).children("i").css("color"));
+	    	if($(this).children("i").css("color")=="rgb(33, 37, 41)"){
+		    	$(this).children("i").css("color","orange");
+		    	console.log("카드 아이디="+cardid);
+		    	var url = "/dbmon/insertHeartT";
+				var params = "cardid="+cardid;
+				console.log("파람="+params);
+				$.ajax({
+					url:url,
+					data:params,
+					type:'GET',
+					success:function(result){
+						console.log(result);
+						var $result = $(result);
+						if(result=="1"){
+							console.log("성공");
+								
+						}else if(result=="0"){
+							console.log("insert문 실패");
+						}
+					}, error:function(){
+						console.log("스트링 받기 에러");
+						}
+					
+		   
+		    });//$.ajax
+	    	}else if($(this).children("i").css("color")=="rgb(255, 165, 0)"){
+	    		$(this).children("i").css("color","rgb(33, 37, 41)");
+	    		var url = "/dbmon/deleteHeartT";
+	    		var params = "cardid="+cardid;
+	    		$.ajax({
+	    			url:url,
+	    			data:params,
+	    			type:'GET',
+	    			success:function(result){
+	    				
+	    				if(result=="1"){
+	    					console.log("성공");
+	    				}else if(result=="0"){
+	    					console.log("delete문 실패");
+	    				}
+	    			},error:function(){
+	    				console.log("스트링 받기 에러");
+	    			}
+	    		});//$.ajax
+	    		
+	    	}//elseif
+	    });//ajax
+	
+		
+		
 	});//제이쿼리
 </script>
 </head>
@@ -319,12 +545,21 @@
     <optgroup label="긴급/단기 돌봄"></optgroup>
     <option value="긴급/단기">긴급/단기</option>
     
-    <option value="/">모든 돌봄 유형 보기</option>
+    <option value="all">모든 돌봄 유형 보기</option>
     
 	</select>
  </form>
  
-<!-- ------------------------------- -->
+ 
+ 
+ 
+ <!-- -------------성별------------------- -->
+ <div id="genderBox" class="row" style= "width:100%; margin:0 0 10px 0">
+	 <button class="btn btn-outline-warning col-4 rounded pt-1 pb-1 px-2" id="all" value="all" >전체 보기</button>
+	 <button class="btn btn-outline-warning col-4 rounded pt-1 pb-1 px-2" id="F" value="F">여자 돌봄몬</button>
+	 <button class="btn btn-outline-warning col-4 rounded pt-1 pb-1 px-2" id="M" value="M">남자 돌본몬</button>
+ </div>
+<!-- ----------------활동--------------- -->
   
 
 
@@ -345,20 +580,34 @@
 
   </div>
  
-<!-- ------------------------------- -->
- 
+<!-- -------------------------순서 정렬--------------------- -->
+
    <div class="d-inline-block m-2" style="width:100%;">
-	<div class="float-left" > 총 돌봄몬 수 : ${totalRecord} </div>
-	<div id="wageFilter" class="float-right" style="cursor:pointer">
-	최신 순
-	<i class="fas fa-arrow-circle-down"></i>
+	<div class="float-left" > 총 돌봄몬 수 : <span id="Tcnt">${totalRecord}</span></div>
+	
+	<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
+		<select id="orderDropdown">
+			<option value="last_edit">최신 순</option>
+			<option value="certi_cnt">인증 수 순</option>
+			<option value="wage_low">시급 낮은 순</option>
+			<option value="wage_high">시급 높은 순</option>
+		</select>
 	</div>
 	</div>
 
-<!-- ------------------------------- -->
+
+
+
+
+
+
+
+
+
+<!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
-		<div class="card" onclick="location.href='teacherView?userid=${vo.userid}'" >
+		<div class="card" id=${vo.userid}>
 			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
 			<div class="card-body">
 				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
@@ -376,20 +625,28 @@
 						<c:otherwise>${vo.last_edit}분</c:otherwise>
 					</c:choose>
 				</span>
-				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">
+				
+				<!-- 빈 하트 -->
+				<span class="emptyHeart" style="height:30px; width:30px; float:right;">
+					<input type="hidden" value="${vo.userid}" />
+					
+					
+					<i class="fab fa-gratipay" style=<c:if test="">"color:black"</c:if> <c:if test="${vo.userid==vo.cardid}">"color:orange"</c:if> ></i>
+					
+				</span>
 				</h5>
-							
+				<span class="iconColor">							
 				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
 				<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
 				<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
-		
+				</span>
 				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
 				<hr/>
 				</c:if>
 				<c:if test="${vo.identi_status == 'Y' }"><div class="badge badge-pill badge-warning align-top mr-1">등초본</div></c:if>
 				<c:if test="${vo.license_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">선생님</div></c:if>
 				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
-				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄클린</div></c:if>
+				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div></c:if>
 			</div>	
 		</div>
 	</c:forEach>
@@ -398,7 +655,8 @@
 	</div>
 
 
-<!-- =================지도======================================== -->
+
+<!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  

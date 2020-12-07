@@ -42,10 +42,8 @@ public class ParentController {
 	public String mypage() {
 		return "/parents/mypage";
 	}
-	@RequestMapping("/parentHeart") //�������
-	public String parentHeart() {
-		return "/parents/parentHeart";
-	}
+
+
 	@RequestMapping("/parentApplyHistory") // 내가, 내게 지원한
 	public String parentApplyHistory(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
