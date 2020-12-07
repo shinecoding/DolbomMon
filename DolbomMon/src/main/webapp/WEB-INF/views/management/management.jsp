@@ -38,7 +38,6 @@
 
 	}); */
 
-
 	
  
     function memberPage(url){
@@ -222,7 +221,9 @@
 </style>
 
 </head>
-<body>
+<body<c:if test="${type!=null}"> onload="memberPage('/dbmon/${type}');"</c:if>>
+
+
 <div class="area"></div><nav class="main-menu">
             <ul id="top-ul">
                 <li style="">
@@ -293,9 +294,17 @@
                         </span>
                     </a>
                 </li>
- 		-->           
+-->                
+				<li>
+                   <a href="/dbmon/management?type=certiManage">
+                       <i class="fa fa-table fa-2x"></i>
+                        <span class="nav-text">
+                            인증관리
+                        </span>
+                    </a>
+                </li>
                 <li>
-                    <a href="javascript:memberPage('/dbmon/reportManage');">
+                    <a href="/dbmon/management?type=reportManage">
                        <i class="fa fa-info fa-2x"></i>
                         <span class="nav-text">
                             신고처리
