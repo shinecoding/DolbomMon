@@ -214,6 +214,7 @@ public class LoginController {
 		return mav;	
 	}
 	
+	
 	//임시로그인버튼 작동.. 추후 삭제 요망
 	@RequestMapping("/temporaryLogin")
 	public ModelAndView temporaryLogin(LoginVO vo, HttpSession ses) {
