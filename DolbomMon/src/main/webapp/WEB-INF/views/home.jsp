@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,10 +65,10 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 <style type="text/css">
 
 *{
-margin: 0px;
-padding: 0px;
-list-style-type: none;
-cursor:pointer;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	cursor:pointer;
 
        }
    body{
@@ -117,7 +118,7 @@ cursor:pointer;
 	
 	}
 	#homeWrap_ALL{width:100%;}
-	.lead{font-size:17px; /* font-weight:bold; */ color:#6c757d}
+	.lead{font-size:17px; font-family: 'Noto Sans KR', sans-serif; font-weight:bold; color:#6c757d;}
 
 </style>
 
@@ -125,7 +126,7 @@ cursor:pointer;
 <div id="homeWrap_ALL" >
 
 <!-- -------------------상단메뉴------------- -->
-<div id="top">
+<div id="top" style="height:150px;">
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
 
@@ -157,8 +158,8 @@ cursor:pointer;
     <hr class="featurette-divider">
 <div id="mainContents4">
     <div class="row featurette" style="width:800px; margin:0 auto;">
-      <div class="col-md-7" >
-        <h2 class="featurette-heading">DOLBOMMON GUIDE<br/>Step 01.<br/><br/>
+      <div class="col-md-7" ><br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive;">DOLBOMMON GUIDE</span><br/><br/>Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
         <p class="lead">가장 빨리, 원하는 조건의 <br/>아이 돌보미를 구할 수 있는 <br/>
                  돌봄몬을 이용하기 위해<br/> 빠르고 간편한 회원가입을 진행해주세요.
@@ -172,8 +173,8 @@ cursor:pointer;
     <hr class="featurette-divider">
 
     <div class="row featurette" style="width:800px; margin:0 auto;">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Step 02.<br/><br/>
+      <div class="col-md-7 order-md-2"><br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
       </span></h2>
          <p class="lead"> 
@@ -192,15 +193,14 @@ cursor:pointer;
 
     <div class="row featurette" style="width:800px; margin:0 auto;">
       <div class="col-md-7">
-        <h2 class="featurette-heading"><br/>Step 03.<br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><br/>Step 03.<br/><br/>
         <span class="text-muted">Have an interview</span></h2>
         <p class="lead">
-      먼저, 내가 직접 지역, 요일, 시간 등 <br/>다양하게 검색해서 마음에 쏙 드는 시터님을 <br/>찾아보세요.<br/>
+      먼저, 내가 직접 지역, 요일, 시간 등 다양하게 검색해서  <br/>마음에 쏙 드는 시터님을 찾아보세요.<br/>
       연락해보고 싶은 시터님이 있다면, <br/>인터뷰를 신청해보세요.<br/>
-      내가 신청한 시터님이 3시간 안에 <br/>수락 또는 조율 응답을 하는 경우, <br/>시터님의 연락처가 부모님에게 공개됩니다. <br/>
+      내가 신청한 시터님이 3시간 안에 <br/>수락 또는 조율 응답을 하는 경우, 시터님의 연락처가 부모님에게 공개됩니다. <br/>
       (마이페이지 > 구직현황에서 확인할 수 있습니다.)<br/>
-      Tip.<br/>
-      완료된 인증 수, 채용횟수, 후기 수가 많을수록 <br/>성실한 시터님일 확률이 높습니다.
+      <span style="color:#ff7942">Tip. 완료된 인증 수, 채용횟수, 후기 수가 많을수록 <br/>성실한 시터님일 확률이 높습니다.</span>
         </p>
       </div>
       <div class="col-md-5">
@@ -208,7 +208,7 @@ cursor:pointer;
       </div>
     </div>
 </div> <!-- Maincontents4 -->
-    <hr class="featurette-divider">
+    
 
     <!-- /END THE FEATURETTES -->
 

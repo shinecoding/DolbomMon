@@ -141,7 +141,9 @@
 	
 	</div>
 	<c:forEach var="vo" items="${list2}">
+
 	<div class="wrapper2" onclick="location.href='parentView'">
+
 	<ul class="list-group">
 	<li class="list-group-item"><i class="fas fa-star"></i>
 	<ul class="list-group list-group-horizontal">

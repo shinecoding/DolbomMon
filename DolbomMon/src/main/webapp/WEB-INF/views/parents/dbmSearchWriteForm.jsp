@@ -59,27 +59,29 @@
 			}
 			
 			///////////////////// 돌봄유형 //////////////////
-			for(var i=1;i<9;i++){
+			for(var i=1;i<14;i++){
 				var nowImg = $("label[for=pa"+i+"]").children("img").attr("src");
 				if($("input[id=pa"+i+"]").is(":checked")){
 					if(i=="2"){
 						var changeImg = nowImg.replace("-n@", "-s@"); 
 						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
-						$("label[for=pa"+i+"]").css("background-color", "#ff5400");
+					}else if(i=="5"){
+						var changeImg = nowImg.replace("-n-","-s-");
+						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
 					}else{
 						var changeImg = nowImg.replace("-n.", "-s."); 
 						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
-						$("label[for=pa"+i+"]").css("background-color", "#ff5400");
 					}
 				}else{
 					if(i=="2") {
 						var changeImg = nowImg.replace("-s@", "-n@"); 
 						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
-						$("label[for=pa"+i+"]").css("background-color", "#EFEFEF");
+					}else if(i=="5"){
+						var changeImg = nowImg.replace("-s-", "-n-");
+						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
 					}else{
 						var changeImg = nowImg.replace("-s.", "-n."); 
 						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
-						$("label[for=pa"+i+"]").css("background-color", "#EFEFEF");
 					}
 				}
 			}
@@ -123,7 +125,7 @@
 			if($("#timeType1").is(":checked")){
 				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
 				$("#specificDateDiv").fadeIn();
-				$("#timeDiv").fadeIn();;
+				$("#timeDiv").fadeIn();
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#regularDateDiv").css("display", "none");
 				
@@ -162,25 +164,26 @@
 			$("label[for="+selectedData+"]").children("img").fadeOut(50);
 			$("label[for="+selectedData+"]").children("img").fadeIn(50);
 			if($(this).is(":checked")){
-				if(selectedData=="2"){
+				if(selectedData=="pa2"){
 					var changeImg = nowImg.replace("-n@", "-s@"); 
-					$("label[for="+selectedData+"]").children("img").attr("src");
 					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-					$("label[for="+selectedData+"]").css("background-color", "#ff5400");
+				}else if(selectedData == "pa5"){
+					var changeImg = nowImg.replace("-n-","-s-");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);	
 				}else{
 					var changeImg = nowImg.replace("-n.", "-s."); 
 					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-					$("label[for="+selectedData+"]").css("background-color", "#ff5400");
 				}
 			}else{
-				if(selectedData=="2") {
+				if(selectedData=="pa2") {
 					var changeImg = nowImg.replace("-s@", "-n@"); 
 					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-					$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");
+				}else if(selectedData=="pa5"){
+					var changeImg = nowImg.replace("-s-","-n-");
+					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
 				}else{
 					var changeImg = nowImg.replace("-s.", "-n."); 
 					$("label[for="+selectedData+"]").children("img").attr("src", changeImg);
-					$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");
 				}
 			}
 		});
@@ -198,7 +201,10 @@
 		
 		//////////// 나이 변경 ///////////////
 		$("input[name=wish_age]").change(function(){
-			
+			for(var i=0;i<20;i++){
+				$("#dadadada").fadeIn(30);
+				$("#dadadada").fadeOut(30);
+			}
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
@@ -219,8 +225,8 @@
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ff5400");
 					$("#childrenDetail").html("");
 					var tag = ""
-					tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
-					tag += "<input type='button' id='child_birthBtn' class='cb' value='자녀 생년월일'/><input class='cbtext' type='text' name='child_birth' /></li>";
+					tag += "<li>";
+					tag += "<input type='button' class='cb' value='자녀생년월일'><input type='date' id='child_birth' name='child_birth' /></li>";
 					for(var j=0;j<i;j++){
 						$("#childrenDetail").append(tag);
 					}
@@ -230,19 +236,44 @@
 			}
 		});
 		
-		
-		///////////////////////////////////// 자녀 생년월일 ///////////////////////
-		$(".cb").datepicker({ // 시작일 데이트피커
-			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			yearRange : 'c-15:c',
-			dateFormat : "yy-mm-dd",
-			onSelect:function(dateText){
-				$(this).val("자녀 생년월일");
-			},
-			altFormat:"yyyy-mm-dd"
+		$(".ui-datepicker-trigger").remove();
+		//$(".selectDt").removeClass('hasDatepicker').datepicker();
+
+		$(".cb").on('click', function(){
+			console.log("클릭");
 		});
+		
+		$(document).find(".cb").removeClass('hasDatepicker').datepicker({
+		    dateFormat: "yy-mm-dd",
+		    defaultDate: "+1w",
+		    numberOfMonths: 1,
+		    changeMonth: true,
+		    showMonthAfterYear: true ,
+		    changeYear: true
+		});
+		
+		$(document).find(".cb").removeClass('hasDatepicker').datepicker();
+		
+		$(".cb").datepicker({
+			dateFormat: "yy-mm-dd",
+		    defaultDate: "+1w",
+		    numberOfMonths: 1,
+		    changeMonth: true,
+		    showMonthAfterYear: true ,
+		    changeYear: true
+		});
+		
+		$(document).on('click', '.cb',function(){
+			$(".cb").datepicker({
+				dateFormat: "yy-mm-dd",
+			    defaultDate: "+1w",
+			    numberOfMonths: 1,
+			    changeMonth: true,
+			    showMonthAfterYear: true ,
+			    changeYear: true
+			});
+		});
+			
 		
 		var lng;
 		var lat;
@@ -267,6 +298,9 @@
 							
 							console.log("경도=> " + result[0].x);
 							console.log("위도=> " + result[0].y);
+							
+							$("#lng").val(result[0].x);
+							$("#lat").val(result[0].y);
 							
 							$("#care_addr").val(data.address);
 							$("#dong_addr").val(dongJuso);
@@ -529,7 +563,7 @@
 				return false;
 			}
 			
-			return false;
+			return true;
 		});
 		
 		// 포커스 없애기
@@ -604,37 +638,52 @@
  	.divOn{display:inline-block;}
 </style>
 <body>
+	<div id="top">
+		<%@include file="/WEB-INF/views/top.jsp"%>
+	</div>
 	<div class="container">
 		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
 			<div id="header">
-				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/logo.png"/></a>
+				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
 			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
 			<div id="activityTypeDiv" class="mainDiv">
-				<input type="checkbox" id="pa1" name="pw_activity" value="실내놀이"/>		
-				<input type="checkbox" id="pa2" name="pw_activity" value="등하원돕기"/>		
-				<input type="checkbox" id="pa3" name="pw_activity" value="영어놀이"/>	
-				<input type="checkbox" id="pa4" name="pw_activity" value="한글놀이"/>		
-				<input type="checkbox" id="pa5" name="pw_activity" value="학습지도"/>	
-				<input type="checkbox" id="pa6" name="pw_activity" value="야외활동"/>	
-				<input type="checkbox" id="pa7" name="pw_activity" value="밥챙겨주기"/>	
-				<input type="checkbox" id="pa8" name="pw_activity" value="책읽기"/>
+				<input type="checkbox" id="pa1" value="실내놀이" name="pw_activity"/>
+				<input type="checkbox" id="pa2" value="등하원돕기" name="pw_activity" />
+				<input type="checkbox" id="pa3" value="책읽기" name="pw_activity" />
+				<input type="checkbox" id="pa4" value="야외활동" name="pw_activity" />
+				<input type="checkbox" id="pa5" value="한글놀이" name="pw_activity" />
+				<input type="checkbox" id="pa6" value="영어놀이" name="pw_activity" />
+				<input type="checkbox" id="pa7" value="학습지도" name="pw_activity" />
+				<input type="checkbox" id="pa8" value="체육놀이" name="pw_activity" />
+				<input type="checkbox" id="pa9" value="간단청소" name="pw_activity" />
+				<input type="checkbox" id="pa10" value="밥챙겨주기" name="pw_activity" />
+				<input type="checkbox" id="pa11" value="간단설거지" name="pw_activity" />
+				<input type="checkbox" id="pa12" value="장기입주" name="pw_activity" />
+				<input type="checkbox" id="pa13" value="단기입주" name="pw_activity" />
 				<div id="activityListDiv">
-					<div><label class="label label-warning" for="pa1" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-indooricon-n.svg"/></label><span>실내놀이</span></div>
-					<div><label class="label label-warning" for="pa2" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-guideicon-n@3x.png" style="width:38px; height:38px;"/></label><span>등하원돕기</span></div>
-					<div><label class="label label-warning" for="pa3" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-englishicon-n.svg"/></label><span>영어놀이</span></div>
-					<div><label class="label label-warning" for="pa4" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-koreanicon-n.svg"/></label><span>한글놀이</span></div>
-					<div><label class="label label-warning" for="pa5" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-koreanicon-n.svg"/></label><span>학습지도</span></div>
-					<div><label class="label label-warning" for="pa6" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-ousideicon-n.svg"/></label><span>야외활동</span></div>
-					<div><label class="label label-warning" for="pa7" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-eaticon-n.svg"/></label><span>밥챙겨주기</span></div>
-					<div><label class="label label-warning" for="pa8" ><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/p-membership-2-readicon-n.svg"/></label><span>책읽기</span></div>
+					<div><label for="pa1"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-indoorplay-n.svg"/><br/><span>실내놀이</span></label></div>
+					<div><label for="pa2"><img src="<%=request.getContextPath()%>/icon/join-walk-n@2x.png" style="width:56px; height:56px;"/><br/><span>등하원돕기</span></label></div>
+					<div><label for="pa3"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-read-n.svg"/><br/><span>책읽기</span></label></div>
+					<div><label for="pa4"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-outdooractivities-n.svg"/><br/><span>야외활동</span></label></div>
+					<div><label for="pa5"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/p-membership-2-koreanicon-n-2.svg"/><br/><span>한글놀이</span></label></div>
+					<div><label for="pa6"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-english-n.svg"/><br/><span>영어놀이</span></label></div>
+					<div><label for="pa7"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-specially-n.svg"/><br/><span>학습지도</span></label></div>
+					<div><label for="pa8"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-pe-n.svg"/><br/><span>체육놀이</span></label></div>
+					<div><label for="pa9"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-n.svg"/><br/><span>간단 청소</span></label></div>
+					<div><label for="pa10"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-n.svg"/><br/><span>밥 챙겨주기</span></label></div>
+					<div><label for="pa11"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-n.svg"/><br/><span>간단 설거지</span></label></div>
+					<div></div>
+					<div><label for="pa12"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-n.svg"/><br/><span>장기입주</span></label></div>
+					<div><label for="pa13"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/><span>단기입주</span></label></div>
 				</div>
 				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
 			<div id="ageAndGenderDiv" class="mainDiv">
-				<div id="genderDiv"> 
+				<div style="margin-top:30px;"><img src="<%=request.getContextPath() %>/icon/dududududu.png" style="width:40px;height:40px;"/><img id="dadadada" src="<%=request.getContextPath() %>/icon/dadadada.png" style="width:10px;height:10x;"/></div>
+				<div id="genderDiv">
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
 					<input type="radio" id="g3" name="wish_gender" value="A"/>
@@ -642,6 +691,7 @@
 					<label for="g2">남자</label>
 					<label for="g3">무관</label>
 				</div>
+				<hr/>
 				<div id="ageDiv">
 					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
 					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
@@ -649,11 +699,11 @@
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
 					<ul>
-						<li><label for="20">20</label></li>
-						<li><label for="30">30</label></li>
-						<li><label for="40">40</label></li>
-						<li><label for="50">50</label></li>
-						<li><label for="60">60</label></li>
+						<li><label for="20">20대</label></li>
+						<li><label for="30">30대</label></li>
+						<li><label for="40">40대</label></li>
+						<li><label for="50">50대</label></li>
+						<li><label for="60">60대</label></li>
 					</ul>
 				</div>
 				<button type="button" class="btn btn-warning next">다음</button>
@@ -684,8 +734,10 @@
 			</div>
 			<div id="addrDiv" class="mainDiv">
 				<div style="margin:10px 0;">
-					<input type="text" id="dong_addr" />
-					<input type="text" id="care_addr" name="care_addr" />
+					<input type="text" id="dong_addr" name="dong_addr"/>
+					<input type="text" id="care_addr" name="care_addr" /><br/>
+					<input type="text" id="lat" name="lat"/>
+					<input type="text" id="lng" name="lng"/>
 				</div>
 				<div id="map">
 					

@@ -19,14 +19,18 @@
 		overflow:hidden;
 		text-overflow: ellipsis;
 	}
-
+	.clickTr:hover{
+		background-color: #efefef;
+	}
 </style>
 <script>
+var shingoTable;
 	$(document).ready(function() {
-	    $('#reportTable').DataTable({
+	   shingoTable = $('#reportTable').DataTable({
 	    	"order"        : [[ 0, "desc" ]],
 	    	"lengthMenu": [10, 25, 50],
 		    "autoWidth" : "false",
+		    "bStateSave" : "true", //쿠키저장
 		    dom: 'Bfrtip',
 			buttons: [
 				/*'copy', 'csv', 'excel', 'pdf'*/
@@ -34,7 +38,6 @@
 				{
 					extend: 'pageLength',
 					text: '표시할 레코드수',
-					//className: 'btn btn-sm btn-primary' 
 				},
 				{
 					extend: 'copy',
@@ -58,7 +61,9 @@
 					text: 'PDF',
 					filename: '신고내역 데이터베이스 PDF입니다.'
 				}
-			],
+			],createdRow: function (row, data, dataIndex) {
+			    $(row).addClass('clickTr');
+			},
 		ajax: {
 			"type" : "POST",
 			"url" : "reportList",
@@ -69,12 +74,19 @@
 				{"data" : "userid",
 					 "render": function(data, type, row){
 		                    if(type=='display'){
-		                        data = '<a href="'+ data + '">' + data + '</a>';
+		                        data ='<a href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
 		                    }
 		                    return data;	
 				
 				}},
-				{"data" : "shingo_id"},
+				{"data" : "shingo_id",
+					 "render": function(data, type, row){
+		                    if(type=='display'){
+		                        data ='<a href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
+		                    }
+		                    return data;	
+				
+				}},
 				{"data" : "shingo_date"},
 				{"data" : "shingo_status",
 					 "render": function(data, type, row){
@@ -86,7 +98,6 @@
 		                    return data;	
 				
 				}},
-				{"data" : "shingo_response"},
 				{"data" : "shingo_detail",
 					"render":  function (data, type, row) {
 							if ( data == null ) {
@@ -94,6 +105,7 @@
 							}
 							return data;
 				}},
+				{"data" : "shingo_response"},
 			],"language":{
 	            "emptyTable": "데이터가 없습니다.",
 	            "lengthMenu": "페이지당 _MENU_ 개씩 보기",
@@ -109,28 +121,53 @@
 	                "previous": "이전"
 	            }
 			},columnDefs: [
-				{ targets: 1, width: 200 },
-				{ targets: 4, width: 130 },
-				{ targets: 7, searchable:false, visible:false }
+				{ targets: 0, width: 50 },
+				{ targets: 1, width: 170 },
+				{ targets: 2, width: 80 },
+				{ targets: 3, width: 80 },
+				{ targets: 4, width: 140 },
+				{ targets: 5, width: 80 },
+				{ targets: 6, searchable:false, width: 130 },
+				{ targets: 7, searchable:false, width: 80}
 			]
 	    });
 	   $('.dt-button').addClass('btn btn-outline-info');
-	   $('.dt-button').removeClass('dt-button')
+	   $('.dt-button').removeClass('dt-button');
 	});
 	
 	$(function(){
-	
-		$(document).on('click', '#reportTable td',function() {
-			  var val = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
-			  var val2 = $(this).closest('tr').find('td:eq(7)').text();
-			  console.log(val);
-			  console.log(val2);
-			  tag="";
-			  tag+='<td colspan="3" style=><a name="3" id="third"><textarea cols="50"; rows="10";></textarea></td>';
-			  tag+='<td colspan="3" style=><a name="3" id="third"></a>글번호 = '+val+'</a></td>';
-			  $(this).closest('tr').after(tag);
+		$(document).on('click', '.clickTr',function() {
+			$('.delTr').remove();
+			var val = $(this).closest('tr').find('td:eq(0)').text(); // amend the index as needed
+			var val3 = $(this).closest('tr').find('td:eq(6)').text();
+			var val4 = $(this).closest('tr').find('td:eq(7)').text();
+			tag="<tr class='delTr'>";
+			tag+='<td colspan="1"><a name="3" id="third2"></a>글번호 = '+val+'</a></td>';
+			tag+='<td colspan="3"><a name="3" id="third3"><textarea style="white-space:normal; background:#FAFAFA; border:1px solid gray; height:110px; overflow:scroll; width:100%; overflow-x: hidden;">'+val3+'</textarea></td>';
+			tag+='<td colspan="3"><a name="4" id="third1"><textarea class="shingo_response" cols="55"; rows="5";>'+val4+'</textarea></td>';
+			tag+='<td colspan="1"><button class="btn btn-info answerBtn" id='+val+'>답변완료</button></td></tr>';
+			
+			$(this).closest('tr').after(tag);
 		});
-		
+		$(document).on('click',".answerBtn",function(){
+			//$(this).closest('tr').prev().find('td:eq(5)').html("처리완료");
+			var no = $(".answerBtn").attr('id');
+			var shingo_response = $(".shingo_response").val();
+			$.ajax({
+				url:"updateShingoRow",
+				async : false,
+				type:"POST",
+				data : {
+					no:no,
+					shingo_response:shingo_response,
+				},success : function(){
+					location.href="/dbmon/management?type=reportManage"
+				}
+				
+			})
+			
+		});
+
 		
 	})
 </script>
@@ -148,8 +185,8 @@
             <th>대상회원</th>
             <th>날짜</th>
             <th>처리상태</th>
-            <th>답변</th>
             <th>내용</th>
+            <th>답변</th>
         </tr>
     </thead>
 </table>
