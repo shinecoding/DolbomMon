@@ -8,7 +8,8 @@ public class LoginVO {
 	private String birth;
 	private String tel1;
 	private String email;
-	private String loginCookie;
+	private String sessionKey;
+	private String sessionLimit;
 	
 	public String getUserid() {
 		return userid;
@@ -46,10 +47,16 @@ public class LoginVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getLoginCookie() {
-		return loginCookie;
+	public String getSessionKey() {
+		return sessionKey;
 	}
-	public void setLoginCookie(String loginCookie) {
-		this.loginCookie = loginCookie;
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+	public String getSessionLimit() {
+		return sessionLimit;
+	}
+	public void setSessionLimit(String sessionLimit) {
+		this.sessionLimit = sessionLimit;
 	}
 }
