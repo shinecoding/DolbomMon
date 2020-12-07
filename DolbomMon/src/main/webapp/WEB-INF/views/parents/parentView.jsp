@@ -48,12 +48,12 @@
  	#regularDate #dateDiv{float:left; margin-left:50px;}
  	#regularDate .settime{
  		height:40px; 
+ 		line-height:40px;
  		text-align:center;
  	}
  	#regularDate .dateCls{text-align:center;}
  	#timebarDiv {position:relative;width:0px;height:0px;}
- 	.tilebar{width:50px;position:relative;top:210px;  text-align:center;background-color:green;}
- 	
+ 	.timebar{position:absolute;top:50px; background-color:blue; width:50px;}
  	
 </style>
 
@@ -95,9 +95,6 @@
 	});
 	
 	$(document).ready(function(){
-		
-		
-		
 		
 		
 		///////////////////////////////////
@@ -222,6 +219,9 @@
 			var deleteConfirm = confirm("삭제하시겠습니까?");
 			location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
 		});
+		
+		
+		///////////////////////////////////////////////////
 		var start_time = "${rdVO.start_time}";
 		var end_time = "${rdVO.end_time}";
 		var start_date = "${rdVO.start_date}";
@@ -249,13 +249,19 @@
 		
 		var tag = "";
 		var today = new Date();
+		var startday = new Date(start_date);
+		var endday = new Date(end_date);
 		
+		var sd = startday.getTime() - today.getTime();
+		var sdl = Math.floor(sd/1000/60/60/24)+1;
+		console.log("옹 => " + sdl);
 		
+		var ed = endday.getTime() - startday.getTime();
+		var edl = Math.floor(ed/1000/60/60/24);
+		edll = Math.floor(edl/7);
+		console.log("옹 => " + edll);
 		
 		for(var i=0; i<120; i++){
-			console.log("st => " + start_time);
-			console.log("et => " + end_time);
-			console.log("yoil => " + selectedYoil);
 			var nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate()+i);
 			var year = nextDay.getFullYear();
 			var month = nextDay.getMonth()+1;
@@ -281,7 +287,78 @@
 			tag += "<div class='dateCls' style='width:50px;height:50px;float:left;'><span class='yoilCls'>"+yoil+"</span><br/>"+month+"/"+date+"</div>"
 		}
 		
+		var timebar = "";
 		$("#regularDate #dateDiv").append(tag);
+		
+		var stArr = start_time.split(":");
+		var etArr = end_time.split(":");
+		
+		var stH = Number(stArr[0]);
+		var stM = Number(stArr[1]);
+		
+		var etH = Number(etArr[0]);
+		var etM = Number(etArr[1]);
+		
+		var startDivLoc = 0;
+		if(stM == 30){
+			startDivLoc = stH*2 + 1;
+		}
+		startDivLoc = stH*2;
+		
+		var endDivLoc = 0;
+		if(etM == 30){
+			endDivLoc = etH*2 +1;
+		}		
+		endDivLoc = etH*2;
+		
+		
+		
+		for(var j=0;j<edll;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
+			for(var i=0;i<7;i++){
+				if(selectedYoil[i] == 1){ //월
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*0)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
+				}else if(selectedYoil[i] == 2){
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*1)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
+				}else if(selectedYoil[i] == 3){
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*2)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
+				}else if(selectedYoil[i] == 4){
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*3)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
+				}else if(selectedYoil[i] == 5){
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*4)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
+				}else if(selectedYoil[i] == 6){
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*5)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height:"+height+"px'></div>"
+				}else if(selectedYoil[i] == 0){ //일
+					var height = (endDivLoc - startDivLoc)*10;
+					var top = startDivLoc*10+50;
+					var left = Number(350*j)+Number(50*6)+Number(sdl*50);
+					timebar += "<div class='timebar' style='left:"+left+"px;top:"+top+"px;height="+height+"px'></div>"
+				}
+			}
+		}
+		
+		
+		$("#timebarDiv").append(timebar);
+		
+		
+		//////////////////////////////////////////////////////////////////////////
 		
 	});
 	
@@ -376,7 +453,8 @@
 				<div id="regularDate" style="overflow:scroll;">
 					<div id="timeDiv" style="width:50px; height:570px; float:left;">
 						<div id="dateDiv" style="width:6050px;">
-							<div id="timebarDiv"></div>
+							<div id="timebarDiv">
+							</div>
 						</div>
 						<div class="settime" style="margin-top:50px;">00:00</div>
 						<div class="settime">02:00</div>
@@ -392,7 +470,6 @@
 						<div class="settime">22:00</div>
 						<div class="settime">00:00</div>
 					</div>
-					
 				</div>
 			</c:if>
 			<div>
@@ -401,8 +478,8 @@
       	</div>
       	
       	<h5>자녀 정보</h5>
-      				<input class="" type="text" value="${rdVO.start_time }" readonly="readonly"/>
-					<input class="" type="text" value="${rdVO.end_time }" readonly="readonly"/>
+      				<input class="" type="text" value="${rdVO.start_date }" readonly="readonly"/>
+					<input class="" type="text" value="${rdVO.end_date }" readonly="readonly"/>
       	<li class="list-group-item">
 		<ul id="childList" class="list-group list-group-horizontal-sm" >
          	
