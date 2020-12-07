@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -84,13 +83,12 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchCare(String care_type) {
-		
+	public List<TeacherVO> searchCare(String care_type) {			
 		System.out.println("케어타입=="+care_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchCareType(care_type); 
-
-		return list;
+		System.out.println("size="+list.size());
+		return list;	
+		
 	}
-
 }
