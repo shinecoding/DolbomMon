@@ -1,12 +1,21 @@
 package com.dolbommon.dbmon.member;
 
 public class RegularDateVO {
+	private int job_board_no;
 	private String userid;
 	private String yoil;
 	private String start_time;
 	private String end_time;
 	private String start_date;
 	private String end_date;
+	
+	
+	public int getJob_board_no() {
+		return job_board_no;
+	}
+	public void setJob_board_no(int job_board_no) {
+		this.job_board_no = job_board_no;
+	}
 	public String getUserid() {
 		return userid;
 	}

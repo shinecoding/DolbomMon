@@ -9,14 +9,14 @@
      font-size:.85em;
      margin-bottom:0px;
      background: #555;
-     color: #fff;
-     padding: 10px 0;
-     margin-top:100px;
+
+     color: #C2C2C2;
+     padding: 18px 0;
+
 }
 
 </style>
-<footer class="footer">
-<hr/>
+<footer class="footer" style="margin-top:100px;">
 <br/>	
 	<div id="footer_textarea" style="margin-left:200px;">
 	<img src="<%=request.getContextPath()%>/img/mylogogray.png" 
@@ -27,7 +27,7 @@
 		<a style="margin-left:100px;">@ 2020 Dolbommon 대표 : 이승현 <br/></a>
 		<a style="margin-left:100px;">소재지 : 서울시 마포구 백범로 비트캠프 3층 | 사업자 등록번호 : 11111222000<br/></a>
 		<a style="margin-left:100px;">Copyright © 2020 Dolbommon.co.,Ltd. All rights reserved.<br/></a>
-		<a style="margin-left:100px;">Contact Dolbommon for more information.<br/></a>
+		<a style="margin-left:200px;">Contact Dolbommon for more information.<br/></a>
 		<a style="margin-left:200px;">02-1234-5678 | dolbommon00@gmail.com</a>
 		
 	

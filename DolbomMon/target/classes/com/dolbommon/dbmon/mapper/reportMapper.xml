@@ -19,4 +19,8 @@
 	<select id="selectName" resultType="String">
 		select username from member where userid=#{userid}
 	</select>
+	
+	<update id="editResponse" parameterType="map">
+		update shingo set shingo_status='D', shingo_response=#{shingo_response} where shingo_no=#{no}
+	</update>
 </mapper>

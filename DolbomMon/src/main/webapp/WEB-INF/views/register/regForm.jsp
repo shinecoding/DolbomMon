@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -365,7 +364,7 @@
 			var smsIdentityYN = $("#smsIdentityYN").val();
 			if(smsIdentityYN=="N" || smsIdentityYN==null){
 				alert("휴대폰 본인인증을 해주세요");
-				return false;
+				return true;
 			}
 			
 			var idStatus = $("#idStatus").val();
@@ -384,26 +383,26 @@
 	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
 	<c:if test="${who=='T' }" >
-		<input type="text" name="care_type" value="${care_type }" />
-		<input type="text" name="child_age" value="${child_age }" />
-		<input type="text" name="activity_type" value="${activity_type }" />
-		<input type="text" name="yoil" value="${yoil }" />
-		<input type="text" name="start_time" value="${start_time }" />
-		<input type="text" name="end_time" value="${end_time }" />
-		<input type="text" name="start_date" value="${start_date }" />
-		<input type="text" name="end_date" value="${end_date }" />
-		<input type="text" name="desired_wage" value="${desired_wage }" />
-		<input type="text" name="cctv" value="${cctv }" />
-		<input type="text" name="pic" value="${pic }" />
-		<input type="text" name="intro" value="${intro }" />
+		<input type="hidden" name="care_type" value="${care_type }" />
+		<input type="hidden" name="child_age" value="${child_age }" />
+		<input type="hidden" name="activity_type" value="${activity_type }" />
+		<input type="hidden" name="yoil" value="${yoil }" />
+		<input type="hidden" name="start_time" value="${start_time }" />
+		<input type="hidden" name="end_time" value="${end_time }" />
+		<input type="hidden" name="start_date" value="${start_date }" />
+		<input type="hidden" name="end_date" value="${end_date }" />
+		<input type="hidden" name="desired_wage" value="${desired_wage }" />
+		<input type="hidden" name="cctv" value="${cctv }" />
+		<input type="hidden" name="pic" value="${pic }" />
+		<input type="hidden" name="intro" value="${intro }" />
 	</c:if>
-		<input type="text" name="who" value="${who }" />
-		<input type="text" id="lat" name="lat" />
-		<input type="text" id="lng" name="lng" />
-		<input type="text" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
+		<input type="hidden" name="who" value="${who }" />
+		<input type="hidden" id="lat" name="lat" />
+		<input type="hidden" id="lng" name="lng" />
+		<input type="hidden" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
 		
 		<div id="headerDiv">
-			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />
+			<img src="<%=request.getContextPath()%>/img/mylogo.png" />
 			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
 		</div>
 		<div id="useridDiv">

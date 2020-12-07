@@ -1,11 +1,18 @@
 package com.dolbommon.dbmon.member;
 
 public class SpecificDateVO {
+	private int job_board_no;
 	private String userid;
 	private String select_date;
 	private String start_time;
 	private String end_time;
 	
+	public int getJob_board_no() {
+		return job_board_no;
+	}
+	public void setJob_board_no(int job_board_no) {
+		this.job_board_no = job_board_no;
+	}
 	public String getUserid() {
 		return userid;
 	}

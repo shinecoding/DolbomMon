@@ -112,7 +112,7 @@ EDIT ON
 	   		
 	   		
 	   }
-	   a.btn{
+	   a.ppp{
 	   		float:right;
 	   		margin-right:180px;
 	   		
@@ -138,26 +138,28 @@ EDIT ON
 	
 	           <span style="float:right">
 	           <a href="javascript:void(window.open('/dbmon/chat','message','width=1200,height=1000,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	           <button class="btn btn-primary">채팅</button></a>
+	           <button class="btn btn-primary ppp">채팅</button></a>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	           <button class="btn btn-primary">쪽지</button></a>
+	           <button class="btn btn-primary ppp">쪽지</button></a>
 	           <a href="/dbmon/temporaryLogin">
-	           <button class="btn btn-info">임시로그인</button></a>
+	           <button class="btn btn-info ppp">임시로그인</button></a>
 	           </span>
 	           
 	       
 		<a class="btn" style="float:right"> 
 		 	<c:if test="${logStatus == null || logStatus=='N'}">
 			  
-	        <input type="button" value="가입하기" class="btn btn-outline-warning" style="color:#ff7928;" Onclick="location.href='/dbmon/join'"/>
+	        <input type="button" value="가입하기" class="btn btn-outline-warning ppp" style="color:#ff7928;" Onclick="location.href='/dbmon/join'"/>
 	        </c:if>
 	         <c:if test="${logStatus == null || logStatus=='N'}">
-	          <input type="button" value="로그인" class="btn btn-outline-warning" style="color:#ff7928;" Onclick="location.href='/dbmon/login'"/> 
+	          <input type="button" value="로그인" class="btn btn-outline-warning ppp" style="color:#ff7928;" Onclick="location.href='/dbmon/login'"/> 
 	          </c:if>
 	    
 	    
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
-	         ${username }님  <input type="button" value="로그아웃" class="btn btn-outline-warning" style="color:ff6400; margin-left:10px;" Onclick="location.href='/dbmon/logout'"/>           
+
+	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
+
 	         </c:if>
 	         
 	
