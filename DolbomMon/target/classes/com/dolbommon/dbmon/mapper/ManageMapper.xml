@@ -12,6 +12,10 @@
 	</select>
 	
 	<update id="editCerti" parameterType="map">
-		update certification set ${type}=#{certi} where no=#{no}
+		update certification set ${type}=#{certi}
+		<if test='certi.equals("Y")'>
+			, certi_cnt=certi_cnt+1
+		</if>
+		 where no=#{no}
 	</update>
 </mapper>

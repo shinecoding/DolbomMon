@@ -83,7 +83,8 @@
 		position:absolute;
 		left:60px;
 		width: -webkit-calc(100% - 60px);
-		height: -webkit-calc(100% - 100px);
+		height: -webkit-calc(100% - 70px);
+		
 		
 	}
 	/*
@@ -215,6 +216,7 @@
 	}
 	#mainPage{
 		overflow: scroll;
+		overflow-x:hidden;
 	}
 
 	
