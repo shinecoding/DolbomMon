@@ -247,7 +247,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="javascript:memberPage('/dbmon/memberManage');">
+                    <a href="/dbmon/management?type=memberManage">
                        <i class="fa fa-list fa-2x"></i>
                         <span class="nav-text">
                             회원 관리

@@ -71,7 +71,7 @@ var certiTable;
 			},
 		ajax: {
 			"type" : "POST",
-			"url" : "certificationList",
+			"url" : "certificationManageList",
 			"dataType": "JSON"
 	         },columns: [
 	        	{"data" : "userid",
@@ -156,7 +156,7 @@ var certiTable;
 						data = "<span style='color:red'>보충필요</span>";
 					}
 					return data;
-		}},
+			}},
 	        	{"data" : "license",
 					"render":  function (data, type, row) {
 						if ( data == null ) {

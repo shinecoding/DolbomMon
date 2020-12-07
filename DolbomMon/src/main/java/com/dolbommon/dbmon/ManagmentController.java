@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.member.MemberVO;
 import com.dolbommon.dbmon.report.ReportDaoImp;
 import com.dolbommon.dbmon.report.ReportVO;
 
@@ -103,13 +104,20 @@ public class ManagmentController {
 		return mp;
 	}
 	
-	@RequestMapping(value = "/certificationList")
+	@RequestMapping(value = "/certificationManageList")
 	@ResponseBody 
-	public Map<String, Object> certificationList(CertificationVO boardVO){
+	public Map<String, Object> certificationManageList(CertificationVO boardVO){
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
 		Map<String, Object> mp = new HashMap<String, Object>();
 		mp.put("data", dao.selectCerti(boardVO));
-
+		return mp;
+	}
+	@RequestMapping(value = "/memberManageList")
+	@ResponseBody 
+	public Map<String, Object> memberManageList(MemberVO boardVO){
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("data", dao.selectMember(boardVO));
 		return mp;
 	}
 	
@@ -133,6 +141,46 @@ public class ManagmentController {
 		dao.editCerti(certi, no, type);
 		
 		return "";
+	}
+	@RequestMapping("/goMyPage")
+	public ModelAndView goMyPage(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String userid = (String)req.getParameter("userid");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		//선생검색
+		int cnt = dao.countTeacher(userid);
+		if(cnt>=1) {
+			mav.addObject("userid", userid);
+			mav.setViewName("redirect:teacherView");
+			return mav;
+		}else {
+			mav.addObject("userid", userid);
+			mav.setViewName("redirect:parentView");
+			return mav;
+		}
+	}
+	
+	@RequestMapping("/memberMemo")
+	public ModelAndView memberMemo(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String no = (String)req.getParameter("no");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		String memo = dao.selectMemo(no);
+		
+		mav.addObject("no", no);
+		mav.addObject("memo", memo);
+		mav.setViewName("management/memberMemo");
+		return mav;
+	}
+	@RequestMapping("/memoInsert")
+	@ResponseBody
+	public String memoInsert(HttpServletRequest req) {
+		String no = (String)req.getParameter("no");
+		String memo = (String)req.getParameter("memo");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		int result = dao.insertMemo(no, memo);
+		
+		return "ok";
 	}
 	
 }
