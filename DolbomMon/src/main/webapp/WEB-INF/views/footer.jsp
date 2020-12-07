@@ -4,13 +4,14 @@
 <style>
  .footer {
      width:100%;
-     height:250px;
+     height:200px;
      text-align:left;
      font-size:.85em;
      margin-bottom:0px;
      background: #555;
      color: #fff;
      padding: 10px 0;
+     margin-top:100px;
 }
 
 </style>
