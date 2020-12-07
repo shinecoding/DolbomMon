@@ -9,8 +9,10 @@
      font-size:.85em;
      margin-bottom:0px;
      background: #555;
+
      color: #C2C2C2;
      padding: 18px 0;
+
 }
 
 </style>

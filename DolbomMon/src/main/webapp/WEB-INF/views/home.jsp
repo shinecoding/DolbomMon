@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
 <link href="<%=request.getContextPath() %>css/style.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>css/demo.css" rel="stylesheet">
-<script src="<%=request.getContextPath() %>css/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <script>
@@ -150,15 +151,17 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
   </ul>
   <br/><br/><hr class="featurette-divider">
   
-<div id="teacher_chart">
+<div id="teacher_chart" data-aos="flip-left">
 <%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 
 </div>
 
-
+<div id="advertise" >
+<%@ include file="/WEB-INF/views/advertiseDolbom.jsp" %>
+</div>
     <hr class="featurette-divider">
-<div id="mainContents4">
-    <div class="row featurette" style="width:800px; margin:0 auto;">
-      <div class="col-md-7" ><br/><br/>
+<div id="mainContents4" >
+    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="flip-left">
+      <div class="col-md-7"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive;">DOLBOMMON GUIDE</span><br/><br/>Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
         <p class="lead">가장 빨리, 원하는 조건의 <br/>아이 돌보미를 구할 수 있는 <br/>
@@ -172,7 +175,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider">
 
-    <div class="row featurette" style="width:800px; margin:0 auto;">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-left">
       <div class="col-md-7 order-md-2"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
@@ -191,7 +194,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider">
 
-    <div class="row featurette" style="width:800px; margin:0 auto;">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-left">
       <div class="col-md-7">
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><br/>Step 03.<br/><br/>
         <span class="text-muted">Have an interview</span></h2>
@@ -215,7 +218,13 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
   </div><!-- /.container -->
     
 </div><!-- </homeWrap_ALL> -->
-
+<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 2000
+    });
+ 
+</script>
 
 </body>
 

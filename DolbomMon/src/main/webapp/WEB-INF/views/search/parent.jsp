@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	* {
-		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
+		padding:0; list-style-type:none; box-sizing:border-box; 
 		font-family: Noto Sans KR,sans-serif!important;
 	}
 	
@@ -22,8 +22,9 @@
 	}
 	.all_wrapper{
 		margin-top:70px;
-		width:1100px;
+		width:1000px;
 		background-color:white;
+		margin:0 auto;
 	}
 	img{ height:110px; width:110px;}
 	.list
@@ -48,7 +49,7 @@
 	    color: #434343;
 	    padding: 10px 14px;
 	    border-radius: 16px;
-	    border: 1px solid #ddd;
+	    border: 1px solid gold;
 	    margin: 5px 6px 10px 0;
 	    display: inline-block;
 	    cursor: pointer;
@@ -119,8 +120,8 @@
   <div class="btn1" role="button">학습지도</div>
   <div class="btn1" role="button">체육놀이</div>
   <div class="btn1" role="button">간단청소</div>
-  <div class="btn1" role="button">밥챙겨주기</div>
-  <div class="btn1" role="button">간단설거지</div><br/>
+  <div class="btn1" role="button">밥챙겨주기</div><br/>
+  <div class="btn1" role="button">간단설거지</div>
   <div class="btn1" role="button">장기입주</div>
   <div class="btn1" role="button">단기입주</div>
   </div>
