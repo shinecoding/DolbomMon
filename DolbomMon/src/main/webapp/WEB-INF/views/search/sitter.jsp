@@ -76,6 +76,7 @@
 	height:300px;
 	border-top-left-radius:20px; 
 	border-top-right-radius:20px;
+	cursor:pointer;
 	}
 	
 	.card{
@@ -112,8 +113,8 @@
 	    //   });
 	    
 	    
-	    $(document).on("click", ".card", function(){
-	    	location.href="teacherView?userid="+$(this).attr('id');
+	    $(document).on("click", ".card>.profilepic", function(){
+	    	location.href="teacherView?userid="+$(this).parent().attr('id');
 	    });
 
 	    // onclick="location.href='teacherView?userid=${vo.userid}'" 
@@ -148,7 +149,7 @@
 						
 						$result.each(function(idx, vo){
 						
-							tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+							tag += '<div class="card" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -225,7 +226,7 @@
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+						tag += '<div class="card" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -306,7 +307,7 @@
 												
 						$result.each(function(idx, vo){
 						
-							tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+							tag += '<div class="card" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -382,7 +383,7 @@
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card" onclick="location.href="teacherView?userid='+vo.userid+'"" >';
+						tag += '<div class="card">';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -602,7 +603,7 @@
 
 
 
-// onclick="location.href='teacherView?userid=${vo.userid}'" 
+
 <!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
@@ -630,7 +631,7 @@
 					<input type="hidden" value="${vo.userid}" />
 					
 					
-					<i class="fab fa-gratipay" ></i>
+					<i class="fab fa-gratipay" style=<c:if test="">"color:black"</c:if> <c:if test="${vo.userid==vo.cardid}">"color:orange"</c:if> ></i>
 					
 				</span>
 				</h5>
