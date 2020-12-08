@@ -118,9 +118,12 @@ font-weight:bold;
 			$(this).siblings().css("background-color", "white").css("font-weight", "normal");
 	
 		});
+		$(document).on("click", "#cctvLst>label", function(){
 			
+			
+		});//cctv클릭
 		
-	});
+	});//제이쿼리
 </script>
 </head>
 <body>

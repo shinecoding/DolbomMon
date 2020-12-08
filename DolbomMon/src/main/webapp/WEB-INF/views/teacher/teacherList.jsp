@@ -149,11 +149,13 @@ input:checked + .slider:before {
 			var active = "";
 			if($(this).children("input").is(":checked")==false){
 				active = "N";
-				$(this).siblings().css("color", "#ddd");
+				$(this).siblings().css("color", "white");
+				$(this).parent().parent().css("background-color", "#ddd");
 				$(this).siblings().text("구직 종료");
 			}else if($(this).children("input").is(":checked")==true){
 				active = "Y";
 				$(this).siblings().css("color", "white");
+				$(this).parent().parent().css("background-color", "orange");
 				$(this).siblings().text("구직 중");
 			}
 			
@@ -194,12 +196,12 @@ input:checked + .slider:before {
 	</div>   
  <br/>
  
- <div id="myBox"  >
+ <div id="myBox"  <c:if test="${vo.active=='Y'}">style="background-color:orange"</c:if> <c:if test="${vo.active=='N' || vo.active==null }">style="background-color:#ddd"</c:if>  >
     <img id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
 	<span><b>${mvo.username}</b></span>
 	<span id ="switchTxt" class="float-right">
 		<c:if test="${vo.active=='Y'}"><span style="color:white"> 구직 중</span></c:if>
-		<c:if test="${vo.active=='N' || vo.active==null }"><span style="color:#ddd"> 구직 종료</span></c:if>
+		<c:if test="${vo.active=='N' || vo.active==null }"><span style="color:white"> 구직 종료</span></c:if>
 	
 		<label class="switch">
 		  <input name="activeCheck" type="checkbox" <c:if test="${vo.active=='Y'}"> checked </c:if> >
