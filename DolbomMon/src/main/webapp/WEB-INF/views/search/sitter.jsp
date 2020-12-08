@@ -111,9 +111,11 @@
 <script>
 	$(function(){
 		
+
 	    //프로필 들어가기
 	    $(document).on("click", ".card>.profilepic", function(){
 	    	location.href="teacherView?userid="+$(this).parent().attr('id');
+
 	    });
 		$(document).on("click", ".card-title>b", function(){
 			location.href="teacherView?userid="+$(this).parent().parent().parent('div').attr('id');
