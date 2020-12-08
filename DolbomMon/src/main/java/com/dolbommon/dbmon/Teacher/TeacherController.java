@@ -579,24 +579,22 @@ public class TeacherController {
 		return mav;
 	}
 	
-	@RequestMapping("/cctvOk")
-	public ModelAndView cctvOk(TeacherVO vo, HttpSession ses, HttpServletRequest req) {
+	@RequestMapping(value="/cctvOk", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String cctvOk(TeacherVO vo, HttpSession ses, String cctv) {
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
-		vo.setCctv((String)req.getParameter("cctv"));
+		/*여기 변형*/
+		if(cctv.equals("cctvAgree")) {
+			vo.setCctv("Y");
+		} else if (cctv.equals("cctvDisagree")) {
+			vo.setCctv("N");
+		}
 		
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		int result = dao.updateCCTV(vo);
+		String result = dao.updateCCTV(vo) + "";
 		
-		ModelAndView mav = new ModelAndView();
-		
-		if(result>0) {
-			mav.addObject("vo", vo);
-			mav.setViewName("redirect:teacherEdit");
-		}else {
-			mav.setViewName("teacher/teacherResult");
-		}
-		return mav;		
+		return result;		
 	}
 /*
 	//학부모가 선생 찾을 때 보는 지도

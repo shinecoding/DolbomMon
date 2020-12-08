@@ -119,6 +119,28 @@ font-weight:bold;
 	
 		});
 		$(document).on("click", "#cctvLst>label", function(){
+			console.log($(this).attr("for"));
+			var cctv = $(this).attr("for");
+			var url = "/dbmon/cctvOk";
+			var params = "cctv="+cctv;
+			
+			$.ajax({
+				url:url,
+				data:params,
+				type:'GET',
+				success:function(result){
+					if(result=="1"){
+						console.log("성공");
+												
+					}else if(result="0"){
+						console.log("실패");
+					}
+				}, error:function(){
+					console.log("AJAX 받기 에러");
+				}//error
+				
+			});//ajax
+			
 			
 			
 		});//cctv클릭
@@ -309,14 +331,14 @@ font-weight:bold;
 		
 			<li id="cctvLst" class="list-group-item" >
 				<div id="cctvHidden">
-					<input type="submit" name="cctv" id="cctvDisagree" value="N"/>
-				    <input type="submit" name="cctv" id="cctvAgree" value="Y"/>	    
+					<input type="radio" name="cctv" id="cctvDisagree" <c:if test="${vo.cctv=='N'}"> checked</c:if> value="N"/>
+				    <input type="radio" name="cctv" id="cctvAgree" <c:if test="${vo.cctv=='Y'}"> checked</c:if> value="Y"/>	    
 			    </div>
-					 <label for="cctvDisagree" class="rounded"  <c:if test="${vo.cctv=='N'}"> style="background-color:orange" </c:if>>   
+					 <label for="cctvDisagree" class="rounded"  <c:if test="${vo.cctv=='N'}"> style="background-color:orange; font-weight:bold;" </c:if>>   
 				    CCTV촬영을<br/> 원치 않습니다.<br/>
 				    	<i id="cctvCheck1" class="fas fa-check-circle"></i>
 				    </label>
-				    <label for="cctvAgree" class="rounded" <c:if test="${vo.cctv=='Y'}"> style="background-color:orange" </c:if>>
+				    <label for="cctvAgree" class="rounded" <c:if test="${vo.cctv=='Y'}"> style="background-color:orange; font-weight:bold;" </c:if>>
 				    CCTV가 있어도<br/>당당히 일할 수 있습니다.<br/>
 				    	<i id="cctvCheck2" class="fas fa-check-circle"></i>
 					</label>
