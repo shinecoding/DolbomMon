@@ -15,6 +15,10 @@
 		select NO, USERID, USERNAME, GENDER, to_char(BIRTH, 'YYYY-MM-DD') BIRTH, TEL1, TEL2, EMAIL, ADDR,  ADDRDETAIL, ZIPCODE, to_char(REGDATE, 'YYYY-MM-DD') REGDATE, MEMO, activity, BANK_NAME, BANK_ACCOUNT_NO, LAT, LNG, WHO, REASONTOLEAVE, to_char(leavedate, 'YYYY-MM-DD') leavedate from member
 	</select>
 	
+	<select id="selectManager" resultType="com.dolbommon.dbmon.ManagerVO">
+		select NO, USERID, MANAGER_JOIN_AUTHORITY, MEMBER_INACTIVITY_AUTHORITY, PAGE_AUTHORITY, DEPARTMENT, POSITION, USERNAME, TEL, to_char(REGDATE, 'YYYY-MM-DD') REGDATE from manager
+	</select>
+	
 	<select id="countTeacher" resultType="int" parameterType="String">
 		select count(userid) from teacher where userid=#{userid}
 	</select>
@@ -51,4 +55,27 @@
 		update member set ${type}=#{certi} where no=#{no}
 	</update>
 
+	<insert id="insertManager" parameterType="com.dolbommon.dbmon.ManagerVO">
+		insert into manager(no, userid, 
+		<if test='manager_join_authority!=null'>
+			manager_join_authority, 
+		</if>
+		<if test='member_inactivity_authority!=null'>
+		member_inactivity_authority,
+		</if>
+		<if test='page_authority!=null'>
+		page_authority,  
+		</if>
+		department, position, tel, regdate, userpwd, email, username) values(manager_sq.nextval, #{userid}, 
+		<if test='manager_join_authority!=null'>
+		#{manager_join_authority}, 
+		</if>
+		<if test='member_inactivity_authority!=null'>
+		#{member_inactivity_authority}, 
+		</if>
+		<if test='page_authority!=null'>
+		#{page_authority}, 
+		</if>		
+		#{department}, #{position}, #{tel}, sysdate, #{userpwd}, #{email}, #{username})
+	</insert>
 </mapper>

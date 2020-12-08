@@ -120,6 +120,14 @@ public class ManagmentController {
 		mp.put("data", dao.selectMember(boardVO));
 		return mp;
 	}
+	@RequestMapping(value = "/managerList")
+	@ResponseBody 
+	public Map<String, Object> managerList(ManagerVO boardVO){
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("data", dao.selectManager(boardVO));
+		return mp;
+	}
 	
 	@RequestMapping("/updateShingoRow")
 	@ResponseBody
@@ -182,6 +190,7 @@ public class ManagmentController {
 		
 		return "ok";
 	}
+
 	@RequestMapping("/reasonInsert")
 	@ResponseBody
 	public String reasonInsert(HttpServletRequest req) {
@@ -227,4 +236,14 @@ public class ManagmentController {
 		mav.setViewName("management/leaveReason");
 		return mav;
 	}
+	
+	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String managerRegister(ManagerVO vo, HttpServletRequest req) {
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		//int result = dao.insertManager(vo);
+		System.out.println("test");
+		return "ok";
+	}
+	
 }

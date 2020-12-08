@@ -12,6 +12,15 @@ public class ManagerVO {
 	private String username;
 	private String tel;
 	private String regdate;
+	private String email;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getNo() {
 		return no;
 	}

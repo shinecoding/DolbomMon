@@ -47,24 +47,24 @@ var memberTable;
 				{
 					extend: 'copy',
 					text: '복사',
-					title: '인증 내역 데이터베이스입니다.',
+					title: '회원정보 데이터베이스입니다.',
 					//className: 'btn btn-sm btn-primary' 
 				},
 				{
 					extend: 'excel',
 					text: '엑셀',
-					filename: '인증내역 EXCEL',
-					title: '인증 처리 현황 데이터베이스입니다.'
+					filename: '회원정보 EXCEL',
+					title: '회원정보 데이터베이스입니다.'
 				},
 				{
 					extend: 'csv',
 					text: 'CSV',
-					filename: '인증내역 CSV(UTF-8->MS엑셀에서 바로 열면 인코딩문제가 생깁니다. CSV불러오기로 가져오세요.)'
+					filename: '회원정보 CSV(UTF-8->MS엑셀에서 바로 열면 인코딩문제가 생깁니다. CSV불러오기로 가져오세요.)'
 				},
 				{
 					extend: 'pdf',
 					text: 'PDF',
-					filename: '인증내역 데이터베이스 PDF입니다.'
+					filename: '회원정보 데이터베이스 PDF입니다.'
 				}
 			],createdRow: function (row, data, dataIndex) {
 			    $(row).addClass('clickTr');

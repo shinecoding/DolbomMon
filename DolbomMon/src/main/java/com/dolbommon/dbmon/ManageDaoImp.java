@@ -19,6 +19,9 @@ public interface ManageDaoImp {
 	//회원 리스트 불러오기
 	public List<MemberVO> selectMember(MemberVO data);
 	
+	//매니저 리스트 불러오기
+	public List<MemberVO> selectManager(ManagerVO data);
+	
 	//마이페이지 분류
 	public int countTeacher(String userid);
 	
@@ -42,5 +45,8 @@ public interface ManageDaoImp {
 	
 	//회원 활동정지 
 	public int updateActivity(@Param("certi")String certi, @Param("no")String no, @Param("type")String type);
+	
+	//매니저 등록
+	public int insertManager(ManagerVO vo);
 	
 }
