@@ -332,7 +332,6 @@
 					type:'GET',
 					success:function(result){
 						
-
  						var $result = $(result);
 						var tag = "";
 												
@@ -645,7 +644,7 @@
 			<option value="wage_low">시급 낮은 순</option>
 			<option value="wage_high">시급 높은 순</option>
 		</select>
-	</diDv>
+	</div>
 	</div>
 
 

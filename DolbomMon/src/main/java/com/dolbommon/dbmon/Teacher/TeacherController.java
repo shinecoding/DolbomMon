@@ -678,6 +678,17 @@ public class TeacherController {
 		return "teacher/teacherSchedule";
 	}
 	
+	@RequestMapping(value="/updateActive", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String updateActive(HttpSession ses, String active) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherVO vo = new TeacherVO();
+		vo.setUserid(userid);
+		vo.setActive(active);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		String result = dao.updateActive(vo) + "";
+		return result;
+	}
 	
 	
 }

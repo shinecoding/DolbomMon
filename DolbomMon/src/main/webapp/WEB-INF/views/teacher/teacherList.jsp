@@ -48,7 +48,9 @@
 	}
 	#myBox{
 	width:100%; 
-	background-color: #fef8f2;
+	/*background-color: #fef8f2;*/
+	background-color: orange;
+	color:white;
 	border-radius:20px; 
 	margin-bottom:10px;
 	height:100px;
@@ -61,6 +63,7 @@
 	margin-left:30px;
 	margin-right:5px;
 	}
+	/*==================================================*/
 /* 아래 다 토글 버튼 */
 .switch {
   position: relative;
@@ -85,7 +88,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: white; /*구직종료 백그라운드 색-흰색*/
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -97,17 +100,22 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  /*background-color: white;*/
+  background-color: #ddd; /*동그라미-체크 안 했을 때*/
+  
   -webkit-transition: .4s;
   transition: .4s;
 }
+.slider:after{
+background-color: red;
+}
 
-input:checked + .slider {
-  background-color: orange;
+input:checked + .slider:before {
+  background-color: orange; /*동그라미-체크했을 때*/
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #orange;
+  box-shadow: 0 0 1px #white;
 }
 
 input:checked + .slider:before {
@@ -136,8 +144,35 @@ input:checked + .slider:before {
 			  $(this).css("text-decoration", "none").css("color", "black");
 			});
 		
+		//토글
+		$(document).on("change", ".switch", function(){
+			var active = "";
+			if($(this).children("input").is(":checked")==false){
+				active = "N";
+				$(this).siblings().css("color", "#ddd");
+				$(this).siblings().text("구직 종료");
+			}else if($(this).children("input").is(":checked")==true){
+				active = "Y";
+				$(this).siblings().css("color", "white");
+				$(this).siblings().text("구직 중");
+			}
+			
+			console.log("액티브->"+active);
+		var url = "/dbmon/updateActive";
+		var params = "active="+ active;
+		console.log("파람->"+ params);
+			$.ajax({
+				url:url,
+				data:params,
+				type:'GET',
+				success:function(result){
+					console.log("ajax 성공");
+				}, error:function(){
+					console.log("ajax 실패");
+				}
+			})
 		
-		
+		});
 	});//제이쿼리
 </script>
 
@@ -162,14 +197,14 @@ input:checked + .slider:before {
  <div id="myBox"  >
     <img id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
 	<span><b>${mvo.username}</b></span>
-	<span class="float-right">
-		<c:if test="${vo.active=='Y'}"><span style="color:orange"> 구직 중</c:if>
-		<c:if test="${vo.active=='N' || vo.active==null }"><span style="color:gray"> 구직 종료</c:if>
-		</span>
-	<label class="switch">
-	  <input name="activeCheck" type="checkbox" <c:if test="${vo.active=='Y'}"> checked </c:if> >
-	  <span class="slider round"></span>
-	</label>
+	<span id ="switchTxt" class="float-right">
+		<c:if test="${vo.active=='Y'}"><span style="color:white"> 구직 중</span></c:if>
+		<c:if test="${vo.active=='N' || vo.active==null }"><span style="color:#ddd"> 구직 종료</span></c:if>
+	
+		<label class="switch">
+		  <input name="activeCheck" type="checkbox" <c:if test="${vo.active=='Y'}"> checked </c:if> >
+		  <span class="slider round"></span>
+		</label>
 	</span>
  </div>
    <ul id="tMenuList" class="list-group list-group-flush">

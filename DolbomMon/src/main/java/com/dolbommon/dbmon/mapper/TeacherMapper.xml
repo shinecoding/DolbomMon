@@ -61,4 +61,7 @@
 	<update id="updateArea" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set area1= #{area1} where userid = #{userid}
 	</update>
+	<update id="updateActive" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
+		update teacher set active = #{active} where userid = #{userid}
+	</update>
 </mapper>
