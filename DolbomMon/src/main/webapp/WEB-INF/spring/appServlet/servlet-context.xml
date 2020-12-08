@@ -60,6 +60,7 @@
 	<beans:bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
+	
 	<!--  Transaction 설정-->
 	<beans:bean name="transactionManager" 
 				class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

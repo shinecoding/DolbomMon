@@ -1,6 +1,6 @@
 package com.dolbommon.dbmon.board;
 
-public class FreeBoardVO {
+public class NoticeBoardVO {
 
 	private int no;
 	private String userid;
@@ -9,19 +9,15 @@ public class FreeBoardVO {
 	private int hit;
 	private String writedate;
 	private String ip;
-	private String head;
 	private String filename1;
 	private String filename2;
-	
 	private String delfile[];
 	private int nextNo;
 	private int preNo;
 	private String nextSubject;
 	private String preSubject;
-	private int ref;
-	private int step;
-	private int lvl;
-	private int replyCount;
+	private String expose;
+	
 	//페이징
 	private int nowPage = 1;	//현재 페이지
 	private int totalRecord;	//총 레코드 수
@@ -31,11 +27,102 @@ public class FreeBoardVO {
 	private int startPageNum = 1;	//페이지 번호의 시작페이지
 	private int lastPageRecordCount = 20;	//마지막 페이지의 선택 레코드 수
 	private int currentPageRecord = nowPage*onePageRecord;
-	
+		
 	//검색어
 	private String searchKey;
 	private String searchWord;
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public String getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(String writedate) {
+		this.writedate = writedate;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getFilename1() {
+		return filename1;
+	}
+	public void setFilename1(String filename1) {
+		this.filename1 = filename1;
+	}
+	public String getFilename2() {
+		return filename2;
+	}
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
+	}
+	public String[] getDelfile() {
+		return delfile;
+	}
+	public void setDelfile(String[] delfile) {
+		this.delfile = delfile;
+	}
+	public int getNextNo() {
+		return nextNo;
+	}
+	public void setNextNo(int nextNo) {
+		this.nextNo = nextNo;
+	}
+	public int getPreNo() {
+		return preNo;
+	}
+	public void setPreNo(int preNo) {
+		this.preNo = preNo;
+	}
+	public String getNextSubject() {
+		return nextSubject;
+	}
+	public void setNextSubject(String nextSubject) {
+		this.nextSubject = nextSubject;
+	}
+	public String getPreSubject() {
+		return preSubject;
+	}
+	public void setPreSubject(String preSubject) {
+		this.preSubject = preSubject;
+	}
+	public String getExpose() {
+		return expose;
+	}
+	public void setExpose(String expose) {
+		this.expose = expose;
+	}
+	//페이징
 	public int getNowPage() {
 		return nowPage;
 	}
@@ -108,120 +195,5 @@ public class FreeBoardVO {
 	}
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
-	}
-	/////////////////////////////////////////
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-	public String getWritedate() {
-		return writedate;
-	}
-	public void setWritedate(String writedate) {
-		this.writedate = writedate;
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	public String getHead() {
-		return head;
-	}
-	public void setHead(String head) {
-		this.head = head;
-	}
-	public String getFilename1() {
-		return filename1;
-	}
-	public void setFilename1(String filename1) {
-		this.filename1 = filename1;
-	}
-	public String getFilename2() {
-		return filename2;
-	}
-	public void setFilename2(String filename2) {
-		this.filename2 = filename2;
-	}
-	public String[] getDelfile() {
-		return delfile;
-	}
-	public void setDelfile(String[] delfile) {
-		this.delfile = delfile;
-	}
-	public int getNextNo() {
-		return nextNo;
-	}
-	public void setNextNo(int nextNo) {
-		this.nextNo = nextNo;
-	}
-	public int getPreNo() {
-		return preNo;
-	}
-	public void setPreNo(int preNo) {
-		this.preNo = preNo;
-	}
-	public String getNextSubject() {
-		return nextSubject;
-	}
-	public void setNextSubject(String nextSubject) {
-		this.nextSubject = nextSubject;
-	}
-	public String getPreSubject() {
-		return preSubject;
-	}
-	public void setPreSubject(String preSubject) {
-		this.preSubject = preSubject;
-	}
-	public int getRef() {
-		return ref;
-	}
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-	public int getStep() {
-		return step;
-	}
-	public void setStep(int step) {
-		this.step = step;
-	}
-	public int getLvl() {
-		return lvl;
-	}
-	public void setLvl(int lvl) {
-		this.lvl = lvl;
-	}
-	public int getReplyCount() {
-		return replyCount;
-	}
-	public void setReplyCount(int replyCount) {
-		this.replyCount = replyCount;
 	}
 }

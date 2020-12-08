@@ -106,8 +106,8 @@
 	<br/>
 	<form id="withdrawForm" method="post" action="withdraw">
 		<div class="form-group">
-		    <label for="withdraw"><b>탈퇴 사유</b></label>
-		    <input type="text" class="form-control" id="withdrawBox" aria-describedby="emailHelp" placeholder="탈퇴 사유를 적어주세요.">
+		    <label for="reasontoleave"><b>탈퇴 사유</b></label>
+		    <input type="text" class="form-control" id="reasontoleave" name="reasontoleave" aria-describedby="emailHelp" placeholder="탈퇴 사유를 적어주세요.">
 	 	</div>
 	 	<div class="checkList">
 		 	<br/>

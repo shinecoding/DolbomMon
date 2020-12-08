@@ -80,14 +80,27 @@
 
 <b>자유게시판</b>
 </div>
-<div>
-	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
+<div style="float: right;">
+	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>
 </div>
 <div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board" style="font-size: 0.9em;">
 <br/>
+	<table class="table" style="margin: 0px;">
+  	<tbody>
+  		<c:forEach var="notice" items="${list2}">
+	  		<tr>
+	  			<th><span class="badge rounded-pill bg-warning ">공지</span>&nbsp;&nbsp;<a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></th>
+	  			
+	  			
+	  		</tr>
+  		</c:forEach>
+  	</tbody>
+	</table>
+
 	<table class="table table-hover">
 		<thead>
+		
 			<tr id="head">
 				<th width="80">글번호</th>
 				<th width="150">말머리</th>
@@ -99,6 +112,8 @@
 			</tr>
 		</thead>
 		<tbody>
+		
+	
 			<c:forEach var="vo" items="${list}">
 				<tr>
 					<c:if test="${vo.step<=0}">
@@ -166,7 +181,7 @@
 			</ul>
 		</nav>
 	<br/>
-	<form method="get" action="/dbmon/freeBoard" id="searchFrm">
+	<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
 		<div class="input-group mb-3">
 			<div id="searchDiv">
 				<select class="custom-select" name="searchKey" id="searchKey">

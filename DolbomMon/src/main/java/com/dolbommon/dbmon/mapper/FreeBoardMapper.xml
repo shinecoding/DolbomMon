@@ -95,12 +95,27 @@
 		)
 	</insert>
 	
+	<select id="getFileName">
+		select filename1, filename2 from freeBoard where no=#{no}
+	</select>
+	
 	<delete id="freeBoardDel">
 		delete from freeBoard where no=#{param1} and userid=#{param2}
 	</delete>
 	
 	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		update freeBoard set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid}
+		update freeBoard set subject=#{subject}, content=#{content} where no=#{no} 
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, filename1=#{filename1}
+			</when>
+		</choose>
+		<choose>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, filename2=#{filename2} 
+			</when>
+		</choose>
+		and userid=#{userid}
 	</update>
 	
 	<select id="optionSelect" resultType="com.dolbommon.dbmon.board.FreeBoardVO">

@@ -83,20 +83,17 @@ public class IdentityController {
 
 	//회원탈퇴 신청
 	@RequestMapping("/withdraw")
-	public ModelAndView withdraw(LoginVO vo, HttpSession ses) {
+	public ModelAndView withdraw(IdentityVO vo, HttpSession ses) {
 		
 		vo.setUserid((String)ses.getAttribute("userid"));
-		IdentityDaoImp dao = sqlSession.getMapper(IdentityDaoImp.class);
-		dao.withdraw(vo.getUserid());
 		
+		IdentityDaoImp dao = sqlSession.getMapper(IdentityDaoImp.class);
+		dao.withdraw(vo);
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("identity/withdrawResult");
 		
 		return mav;
 	}
-	
-	
-	
-	
+
 }

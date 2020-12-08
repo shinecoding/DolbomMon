@@ -9,6 +9,6 @@ public interface IdentityDaoImp {
 	//회원정보 수정
 	public int indentityEdit(IdentityVO vo);
 	//회원탈퇴
-	public int withdraw(String userid);
+	public int withdraw(IdentityVO vo);
 	
 }
