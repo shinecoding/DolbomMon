@@ -23,8 +23,17 @@ public class TeacherVO {
 	private String last_edit;
 	private int headcount;
 	private String discussion;
+	private String active;
+	
+	
 
 	
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
+	}
 	public MultipartFile getFilename() {
 		return filename;
 	}

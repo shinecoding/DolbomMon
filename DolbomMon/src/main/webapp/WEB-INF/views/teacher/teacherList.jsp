@@ -10,16 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<script>
-	$(function(){
-		$("#tMenuList a", "#tBottomList a").hover(function(){
-			  $(this).css("text-decoration", "none").css("color", "black");
-			  }, function(){
-			  $(this).css("text-decoration", "none").css("color", "black");
-			});
-		
-	});
-</script>
+
 <style>
 	.container{width:800px;}
 	#title{
@@ -55,9 +46,101 @@
 	float:right;
 	
 	}
-	
+	#myBox{
+	width:100%; 
+	background-color: #fef8f2;
+	border-radius:20px; 
+	margin-bottom:10px;
+	height:100px;
+	line-height:100px;
+	}
+	#profimg{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	margin-left:30px;
+	margin-right:5px;
+	}
+/* 아래 다 토글 버튼 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-right: 30px;
+  top:33px;
+  margin-left:5px;
+}
 
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: orange;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #orange;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
+
+
+
+<script>
+	$(function(){
+		$("#tMenuList a", "#tBottomList a").hover(function(){
+			  $(this).css("text-decoration", "none").css("color", "black");
+			  }, function(){
+			  $(this).css("text-decoration", "none").css("color", "black");
+			});
+		
+		
+		
+	});//제이쿼리
+</script>
+
 </head>
 <body>
 <div id="top">
@@ -65,8 +148,6 @@
 <hr/><br/>
 </div>
 <div class="container" >
-<a href="teacherSearchMap">선생님 지도로 찾기</a><br/>
-<a href="payment">결제시스템</a>
    <div id="title">
    		<div id="titlefont">마이페이지</div>
    		<div class="rightlog">   
@@ -77,6 +158,20 @@
 	   </div>
 	</div>   
  <br/>
+ 
+ <div id="myBox"  >
+    <img id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
+	<span><b>${mvo.username}</b></span>
+	<span class="float-right">
+		<c:if test="${vo.active=='Y'}"><span style="color:orange"> 구직 중</c:if>
+		<c:if test="${vo.active=='N' || vo.active==null }"><span style="color:gray"> 구직 종료</c:if>
+		</span>
+	<label class="switch">
+	  <input name="activeCheck" type="checkbox" <c:if test="${vo.active=='Y'}"> checked </c:if> >
+	  <span class="slider round"></span>
+	</label>
+	</span>
+ </div>
    <ul id="tMenuList" class="list-group list-group-flush">
    		<li class="list-group-item list-group-item-action"><a href="teacherApplyHistory"><i class="fas fa-clipboard mx-2"></i> 내 구직현황</a><i class="fas fa-angle-right float-right mt-1 mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherHeart"><i class="fas fa-heart mx-2"></i> 찜한 일자리</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
@@ -89,7 +184,6 @@
    <br/>
    <ul id="tBottomList" class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>

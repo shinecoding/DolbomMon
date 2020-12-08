@@ -44,8 +44,19 @@ public class TeacherController {
 	}
 
 	@RequestMapping("/teacherList")
-	public String teacherList() {
-		return "/teacher/teacherList";
+	public ModelAndView teacherList(HttpSession ses) {
+		
+		String userid = (String) ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		TeacherVO vo = dao.selectTeacher(userid);
+		MemberVO mvo = dao.selectTMember(userid);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.addObject("mvo", mvo);
+		mav.setViewName("/teacher/teacherList");
+		return mav;
 	}
 	
 	@RequestMapping("/teacherView")

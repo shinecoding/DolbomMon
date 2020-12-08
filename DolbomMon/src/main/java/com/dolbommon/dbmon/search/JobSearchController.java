@@ -132,20 +132,21 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/likeOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> likeOrder(String order){
+	public List<TeacherVO> likeOrder(String order, HttpSession ses){
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		String userid = (String)ses.getAttribute("userid");
 		
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(order.equals("like_order")){
-			list = dao.filterLastEdit();
+			list = dao.likeOrder(userid);
 		} else if(order.equals("certi_cnt")){
-			list = dao.filterCertiCnt();
+			list = dao.likeCertiCnt(userid);
 		} else if(order.equals("wage_low")){
-			list = dao.filterWageLow();
+			list = dao.likeWageLow(userid);
 		} else if(order.equals("wage_high")){
-			list = dao.filterWageHigh();
+			list = dao.likeWageHigh(userid);
 		}
 		
 		return list;

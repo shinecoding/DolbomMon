@@ -28,11 +28,17 @@
 		vertical-align: bottom;
 		text-align:center;
 	}
-	#orderDropdown {
+	#likeFilter, #likeDropdown {
 	border:none;
 	}
 	.trash {
 	cursor:pointer;
+	}
+	
+	#likeBox {
+	display: inline-block;
+	width:100%;
+	min-height:300px;
 	}
 </style>
 <script>
@@ -65,7 +71,7 @@ $(function(){
 		
 	});//trash삭제
 	
-	$(document).on("change", "#orderDropdown", function(){
+	$(document).on("change", "#likeDropdown", function(){
 		var order = $(this).val();
 		console.log("정렬="+order);
 		var url = "/dbmon/likeOrder";
@@ -77,19 +83,79 @@ $(function(){
 			data:params,
 			type:'GET',
 			success:function(result){
+				console.log("리턴="+result);
+				var $result = $(result);
+				var tag = "";
 				
-				console.log("성공");
+				$result.each(function(idx, vo){
+					tag += '<ul class="list-group" id="'+vo.userid+'">';
+					tag += '<li class="list-group-item">';
+					tag += '<ul class="list-group list-group-horizontal">';
+					tag += '<li class="list-group-item border-0 col-2">';
+					tag += '<img src=';
+					if(vo.pic==null){
+						tag += '"img/profilepic.png"';
+					}else if (vo.pic!=null){
+						tag += '"upload/'+vo.pic+'"';
+					}		
+					
+					tag+= ' class="rounded-circle"/><br/>';
+					
+					tag+= '<div class="badge badge-warning badge-pill ml-3" >신청하기</div>';
+					tag+= '</li>';
+					tag+= '<li class="list-group-item border-0 col-10">';
+					tag+= '<h6><b>' +vo.username.substring(0,1)+ 'O' + vo.username.substring(2)+ '</b>';
+					
+					tag+= '<span class="ml-2" style="font-size:0.7em">';
+							if(vo.last_edit>525600){
+								tag+= Math.round(vo.last_edit/525600) +'년';
+							} else if(vo.last_edit>43200){
+								tag+= Math.round(vo.last_edit/43200) +'달';
+							} else if(vo.last_edit>1440){
+								tag+= Math.round(vo.last_edit/1440) +'일';
+							} else if(vo.last_edit>60){
+								tag+= Math.round(vo.last_edit/60) +'시간';
+							} else {
+								tag+= Math.round(vo.last_edit) +'분';
+							}
+							
+					tag+= '</span></h6>';
+							
+								
+					tag+= '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+vo.area1+'</h6>';
+					tag+= '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+vo.desired_wage + '원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion+ '</h6>';
+					tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
+					tag+= '</li>';
+					tag+= '</ul>';
+						
+					if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+						tag += '<hr/>';
+					}
+					if(vo.identi_status == "Y"){
+						tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+					} else if(vo.license_status == "Y"){
+						tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+					} else if(vo.school_status == "Y"){
+						tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+					} else if(vo.crime_status == "Y"){
+						tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+					}
+					tag += '<span class="trash"><i class="far fa-trash-alt float-right"></i></span>';
+					tag += '</li></ul><br/>';
+									
+				});
 				
+				$("#likeBox").html(tag);
 			}, error:function(error){
 				console.log("ajax 받기 에러-->" + error.responseText);
 			}
 		})
 		
-	});
+	});//찜
 	
 	
 	
-});
+});//제이쿼리
 </script>
 </head>
 <body>
@@ -99,9 +165,9 @@ $(function(){
    		<div id="titlefont">찜한 돌봄몬</div>
 	</div>
 	<div class="mb-3"><i class="fas fa-circle"></i>전체 <i class="fas fa-circle"></i>구인중 일자리만
-		<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
-		<select id="orderDropdown">
-			<option value="like_order">찜한 순</option>
+		<div id="likeFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
+		<select id="likeDropdown">
+			<option value="like_order">업데이트 순</option>
 			<option value="certi_cnt">인증 수 순</option>
 			<option value="wage_low">시급 낮은 순</option>
 			<option value="wage_high">시급 높은 순</option>
@@ -113,7 +179,7 @@ $(function(){
 		<div style="text-align:center;">찜한 돌봄몬이 없습니다.</div>					
 	</c:if>
 	-->
-	
+	<div id="likeBox">
 	<c:forEach var="vo" items="${list}">
 		
 		<ul class="list-group" id="${vo.userid}">
@@ -143,7 +209,6 @@ $(function(){
 						<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
 						<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 					</li>
-					
 				</ul>
 		
 			
@@ -169,7 +234,7 @@ $(function(){
 	<br/>
 	</c:forEach>
 	
-	
+	</div>
 	
 		
 	<br/>
