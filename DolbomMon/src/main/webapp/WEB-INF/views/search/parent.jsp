@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	* {
-		margin:0 auto; padding:0; list-style-type:none; box-sizing:border-box; 
+		padding:0; list-style-type:none; box-sizing:border-box; 
 		font-family: Noto Sans KR,sans-serif!important;
 	}
 	
@@ -22,8 +22,9 @@
 	}
 	.all_wrapper{
 		margin-top:70px;
-		width:1100px;
+		width:1000px;
 		background-color:white;
+		margin:0 auto;
 	}
 	img{ height:110px; width:110px;}
 	.list
@@ -48,7 +49,7 @@
 	    color: #434343;
 	    padding: 10px 14px;
 	    border-radius: 16px;
-	    border: 1px solid #ddd;
+	    border: 1px solid gold;
 	    margin: 5px 6px 10px 0;
 	    display: inline-block;
 	    cursor: pointer;
@@ -119,8 +120,8 @@
   <div class="btn1" role="button">학습지도</div>
   <div class="btn1" role="button">체육놀이</div>
   <div class="btn1" role="button">간단청소</div>
-  <div class="btn1" role="button">밥챙겨주기</div>
-  <div class="btn1" role="button">간단설거지</div><br/>
+  <div class="btn1" role="button">밥챙겨주기</div><br/>
+  <div class="btn1" role="button">간단설거지</div>
   <div class="btn1" role="button">장기입주</div>
   <div class="btn1" role="button">단기입주</div>
   </div>
@@ -170,55 +171,6 @@
 	<br/>
 	</c:forEach> 
 
-	<!-- 
-	
-	
-	<div id="offerBox" class="d-inline-block" style="width:100%;">
-	<c:forEach var="vo" items="${list2}">
-		<div class="card" onclick="location.href='parentView'">
-			<img class="profilepic" src="img/baby.png" alt="${vo.userid}"/><br/>
-			<div class="card-body">
-				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
-				//마지막 업데이트일
-				<span class="ml-2" style="font-size:0.7em">
-						<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
-						<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.last_edit/43200}"/>
-						<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
-						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
-					<c:choose>
-						<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
-						<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
-						<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
-						<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
-						<c:otherwise>${vo.last_edit}분</c:otherwise>
-					</c:choose>
-				</span>
-				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">
-				</h5>
-							
-				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>지역</h6>
-				<h6><i class="fas fa-coins mr-1"></i>희망시급 : 원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
-				<h6><i class="fas fa-child"></i>나이 | <i class="fas fa-baby-carriage"></i>유아 2명</h6>
-		
-				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
-				<hr/>
-				</c:if>
-				<c:if test="${vo.identi_status == 'Y' }"><div class="badge badge-pill badge-warning align-top mr-1">등초본</div></c:if>
-				<c:if test="${vo.license_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">선생님</div></c:if>
-				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
-				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄클린</div></c:if>
-			</div>	
-		</div>
-	</c:forEach>
-	
-
-	</div>
-
-	
-	
-	
-	
-	 -->
 
 <hr/>
 <br/>

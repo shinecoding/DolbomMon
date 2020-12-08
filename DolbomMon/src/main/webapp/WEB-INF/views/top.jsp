@@ -27,7 +27,7 @@ EDIT ON
      	
      }
      #topmenu-button{
-     	-webkit-padding-start:0px;
+     	-webkit-padding-start:250px;
      	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
      }
 
@@ -69,8 +69,9 @@ EDIT ON
 		 margin-left:0px;
 		 }
 	  ul.mainTopmenu li {
-		width: calc(100%/6);
+		width: calc(80%/6);
 		height:50px;
+		
 		
 		}
 	  ul.mainTopmenu ul.subMain li {
@@ -116,7 +117,7 @@ EDIT ON
 	   		margin-right:180px;
 	   		
 	   }
-	   #fixtopLogo:after { clear:both; } 
+	   #fixtopLogo:after { clear:both;} 
 	   .mainTopmenu>li *{
 	   -webkit-padding-start:0px;
 	   width:100%;
@@ -128,10 +129,10 @@ EDIT ON
 <body>
 <div style="height:150px">
  <div id="fixed-menu" >
-	 <div class="clearfix">
+	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1295px;">
 	    <header id="topHeader">
 	    <img src="<%=request.getContextPath()%>/img/mylogo.png" 
-	           class="logo" alt="Logo" src="home" style="margin-left:10px; float:left;" 
+	           class="logo" alt="Logo" src="home" style="margin-bottom:20px; float:left;" 
 	           Onclick="location.href='/dbmon'"/>
 	
 	
@@ -156,7 +157,9 @@ EDIT ON
 	    
 	    
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
+
 	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
+
 	         </c:if>
 	         
 	
