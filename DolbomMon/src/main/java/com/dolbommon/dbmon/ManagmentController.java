@@ -239,11 +239,14 @@ public class ManagmentController {
 	
 	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
 	@ResponseBody
-	public String managerRegister(ManagerVO vo, HttpServletRequest req) {
+	public ModelAndView managerRegister(ManagerVO vo, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
 		//int result = dao.insertManager(vo);
-		System.out.println("test");
-		return "ok";
+		System.out.println("test ddddddddddddd");
+		int result = 1;
+		mav.addObject("ok", result);
+		return mav;
 	}
 	
 }

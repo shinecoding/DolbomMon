@@ -526,36 +526,77 @@
 			)
 	*/
 	
+	$('#subBtn').click(function(){
+		alert("test");		
+	});
+	
 	$(function(){
 		$('.form-card').submit(
+			//$('#subBtn').click(
 				function ajaxtest(){	
-					var params = $(".form-card").serialize();
+					var params = $("form[name=form-card]").serialize();
+					alert(params);	
+				
 					$.ajax({
 						url:"/dbmon/managerInsert",
 						data:params,
 						type:"POST",
 						success : function(){
-							alert("성공적으로 관리자가 등록되었습니다.");
 					    	opener.location.reload();
 					        window.close();
-						}, error : function(){
-							alert("실패");
+						}, error : function(request,status,error){
 					    	opener.location.reload();
-					        window.close();
+					       	window.close();
 						}
 					});
 				}
-			)
+		)
 	});
 	
-	
+	// 서브밋 새로고침 없게 만들기. ajax로 보낼때 새로고침이 생기기때문에 success로 가기전에 데이터가 날아간다. ajax쓸때는 submit버튼을 쓰면 안되지만 유효성검사 편하게 하려고 어거지로 되게 만듬.
+	//아이디 중복검사만 만들기.
+	const toDoForm = document.querySelector('.js-toDoForm'),
+	  toDoInput = toDoForm.querySelector('input'),
+	  toDoList = document.querySelector('.js-toDoList')
+	const TODOS_LS = 'toDos'
+
+	function paintToDo(text) {
+	  const li = document.createElement('li')
+	  const delBtn = document.createElement('button')
+	  delBtn.innerText = '❌'
+	  const span = document.createElement('span')
+	  span.innerText = text
+	  li.appendChild(delBtn)
+	  li.appendChild(span)
+	  toDoList.appendChild(li)
+	}
+
+	function handleSubmit(event) {
+	  event.preventDefault()
+	  const currentValue = toDoInput.value
+	  paintToDo(currentValue)
+	  toDoInput.value = '' //submit처럼 값을 보냈을때 input창에 있는 값 초기화
+	}
+
+	function loadToDos() {
+	  const toDos = localStorage.getItem(TODOS_LS)
+	  if (toDos !== null) {
+	  }
+	}
+	function init() {
+	  loadToDos()
+	  //input 태그에 submit 이벤트가 발생했을 경우
+	  toDoForm.addEventListener('submit', handleSubmit)
+	}
+
+	init()
 </script>
 </head>
 <body>
 <video width="1280" height="720" class="background" autoplay muted loop>
   <source src="https://codepen.jonnitto.ch/BackgroundVideo.mp4" type="video/mp4">
 </video>
-<form class="form-card" id="managerForm" method="post" action="/dbmon/managerInsert">
+<form class="form-card" name="form-card" id="managerForm"> <!--  method="post" action="/dbmon/managerInsert" -->
     <fieldset class="form-fieldset">
         <legend class="form-legend">관리자 등록</legend>
         <div class="form-checkbox form-checkbox-inline">
@@ -632,7 +673,7 @@
         </div>
     </fieldset>
     <div class="form-actions">
-        <button class="form-btn" type="submit">등록</button>
+        <button class="form-btn" id="subBtn" type="submit">등록</button>
         <button class="form-btn-cancel -nooutline" type="reset">취소</button>
     </div>
 </form>
