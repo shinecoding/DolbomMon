@@ -91,6 +91,7 @@ $(function(){
 				var tag = "";
 				
 				$result.each(function(idx, vo){
+					console.log("액티브"+vo);
 					if(vo.active=="Y"){
 						tag += '<ul class="list-group" id="'+vo.userid+'">';
 						tag += '<li class="list-group-item">';
@@ -166,7 +167,7 @@ $(function(){
 						tag += '</ul>';
 						tag += '<span class="trash"><i class="far fa-trash-alt float-right" style="color:gray"></i></span>';
 						tag += '</li>';
-						tag += '</ul>';
+						tag += '</ul><br/>';
 					}//else		
 					
 					
@@ -202,6 +203,9 @@ $(function(){
 					var tag = "";
 					
 					$result.each(function(idx, vo){
+						
+					console.log("액티브"+vo);
+					if(vo.active=="Y"){	
 						tag += '<ul class="list-group" id="'+vo.userid+'">';
 						tag += '<li class="list-group-item">';
 						tag += '<ul class="list-group list-group-horizontal">';
@@ -256,8 +260,30 @@ $(function(){
 						}
 						tag += '<span class="trash"><i class="far fa-trash-alt float-right"></i></span>';
 						tag += '</li></ul><br/>';
-										
-					});
+								
+						
+					} else if(vo.active=="N") {
+						
+						tag += '<ul class="list-group" id="'+vo.userid+'">';
+						tag += '<li class="list-group-item">';
+						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';
+						tag += '<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>';
+						tag += '</li>';
+						tag += '<li class="list-group-item border-0 col-10" style="color:gray">';
+						tag += '<h6><b>비공개</b>';
+						tag += '</h6>';
+						tag += '<h6 class="loc"><i class="fas fa-map-marker-alt" style="color:gray"></i>'+vo.area1+'</h6>';
+						tag += '<h6><i class="fas fa-coins mr-1" style="color:gray"></i>희망시급 : '+vo.desired_wage+'원 | <i class="fas fa-hands-helping" style="color:gray"></i>협의유무: '+vo.discussion+'</h6>';
+						tag += '<h6><i class="fas fa-child" style="color:gray"></i>'+vo.birth+'세 | <i class="fas fa-baby-carriage" style="color:gray"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
+						tag += '</li>';
+						tag += '</ul>';
+						tag += '<span class="trash"><i class="far fa-trash-alt float-right" style="color:gray"></i></span>';
+						tag += '</li>';
+						tag += '</ul><br/>';
+					}//else		
+					});//result
 					
 					$("#likeBox").html(tag);
 				}, error:function(){
