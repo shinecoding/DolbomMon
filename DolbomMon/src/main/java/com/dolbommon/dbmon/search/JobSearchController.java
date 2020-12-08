@@ -166,7 +166,23 @@ public class JobSearchController {
 		mav.setViewName("/parents/parentHeart");
 		return mav;
 	}
-
+	@RequestMapping("/selectActive") //찜리스트 전체&구인중
+	@ResponseBody
+	public List<TeacherVO> selectActive(HttpSession ses, String active) {
+		
+		String userid = (String)ses.getAttribute("userid");
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		
+		if(active.equals("allActive")) {
+			list = dao.selectHeart(userid);
+		}else if(active.equals("onlyActive")) {
+			list = dao.selectHeartActive(userid);
+		}
+		
+		return list;
+	}
+	
 	@RequestMapping(value="/insertHeartT", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
 	@ResponseBody
 	public String insertHeartT(HttpSession ses, String cardid) {

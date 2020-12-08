@@ -31,7 +31,7 @@
 	</select>
 	<!-- 좋아요 -->
 	<select id="selectHeart" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T'
+		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T'
 	</select>
 	<insert id="insertHeart" parameterType="com.dolbommon.dbmon.search.LiketVO">
 		insert into liket(userid, cardid) values(#{userid}, #{cardid})
@@ -39,6 +39,9 @@
 	<delete id="deleteHeart" parameterType="com.dolbommon.dbmon.search.LiketVO">
 		delete from liket where userid = #{userid} and cardid = #{cardid}
 	</delete>
+	<select id="selectHeartActive" resultType="com.dolbommon.dbmon.search.TeacherVO">
+		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' and t.active = 'Y'
+	</select>
 	<select id="likeOrder" resultType="com.dolbommon.dbmon.search.TeacherVO">
 		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' order by last_edit
 	</select>
