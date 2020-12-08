@@ -23,6 +23,9 @@ public class MemberVO {
 	private String bank_account_no;
 	private String who;
 	private String activity;
+	private String reason;
+	private String reasontoleave;
+	private String leavedate;
 	public int getNo() {
 		return no;
 	}
@@ -155,6 +158,24 @@ public class MemberVO {
 	}
 	public void setActivity(String activity) {
 		this.activity = activity;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public String getReasontoleave() {
+		return reasontoleave;
+	}
+	public void setReasontoleave(String reasontoleave) {
+		this.reasontoleave = reasontoleave;
+	}
+	public String getLeavedate() {
+		return leavedate;
+	}
+	public void setLeavedate(String leavedate) {
+		this.leavedate = leavedate;
 	}
 	
 	

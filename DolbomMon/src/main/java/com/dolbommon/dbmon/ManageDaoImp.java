@@ -25,9 +25,22 @@ public interface ManageDaoImp {
 	//메모창 오픈
 	public String selectMemo(String no);
 	
+	//사유등록창 오픈
+	public String selectReason(String no);
+	
+	//회원탈퇴사유 오픈
+	public String selectleaveReason(String no);
+	
 	//인증 업데이트
 	public int editCerti(@Param("certi")String certi, @Param("no")String no, @Param("type")String type);
 	
 	//메모 등록
 	public int insertMemo(@Param("no")String no, @Param("memo")String memo);
+	
+	//사유 등록
+	public int reasonInsert(@Param("no")String no, @Param("reason")String reason);
+	
+	//회원 활동정지 
+	public int updateActivity(@Param("certi")String certi, @Param("no")String no, @Param("type")String type);
+	
 }

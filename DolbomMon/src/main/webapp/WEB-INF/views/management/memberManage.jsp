@@ -22,8 +22,8 @@
 		background-color: #efefef;
 	}
 	td img{
-		width:25px;
-		height:25px;
+		width:20px;
+		height:20px;
 	}
 </style>
 <script>
@@ -93,14 +93,30 @@ var memberTable;
 						}
 						return data;
 				}},
+				{"data" : "reasontoleave",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}else{
+							data = '<a class="lBtn" href="#")><img src="/dbmon/icon/leaveicon.png" title="탈퇴사유">사유확인</a>'
+						}
+						return data;
+				}},
+				{"data" : "leavedate",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}
+						return data;
+				}},
 				{"data" : "activity",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
 						 return '';
 						}else if( data == 'Y'){
-							data = '<span style="color:green">활동회원</span>';
+							data = '<span style="color:green">활동회원</span> <a class="xBtn" href="#" id="activity"><img src="/dbmon/icon/ybutton.png" title="활동정지"></a>';
 						}else if( data == 'N'){
-							data = '<span style="color:red">정지회원</span>';
+							data = '<span style="color:red">정지회원</span> <a class="yBtn" href="#" id="activity"><img src="/dbmon/icon/returnicon.png" title="정지해제"></a>';
 						}
 						return data;
 				}},
@@ -245,11 +261,13 @@ var memberTable;
 				{ targets: 11, width: 70 },
 				{ targets: 12, width: 70 },
 				{ targets: 13, width: 70 },
-				{ targets: 14, width: 120 },
+				{ targets: 14, width: 70 },
 				{ targets: 15, width: 70 },
-				{ targets: 16, width: 70 },
+				{ targets: 16, width: 120 },
 				{ targets: 17, width: 70 },
 				{ targets: 18, width: 70 },
+				{ targets: 19, width: 70 },
+				{ targets: 20, width: 70 },
 			] 
 	    });
 	   $('.dt-button').addClass('btn btn-outline-info');
@@ -263,20 +281,18 @@ var memberTable;
 	
 	//재업로드 하면 상태가 S로 바뀌게 만들기.
 	$(document).on("click",".xBtn",function(){
-		if(confirm("서류에 보충이 필요합니까?")){
-		alert("사유를 입력하세요.");
-		var userid = $(this).closest('tr').find('td:eq(0)').text();
-		openMessage(userid);
-		var no = $(this).closest('tr').find('td:eq(1)').text();
+		if(confirm("이 회원을 활동 정지시키겠습니까?")){
+
+		var no = $(this).closest('tr').find('td:eq(0)').text();
 		var type= $(this).attr('id');
-		
+		reason(no);
 		$.ajax({
-				url:"updateCerti",
+				url:"updateActivity",
 				async : false,
 				type:"POST",
 				data : {
 					no:no,
-					certi:"X",
+					certi:"N",
 					type:type,
 				},success : function(){
 					location.href="/dbmon/management?type=memberManage?no="+no;
@@ -284,15 +300,46 @@ var memberTable;
 			})
 		}
 	});
+	$(document).on("click",".yBtn",function(){
+		if(confirm("이 회원의 활동 정지를 해제하시겠습니까?")){
+		var no = $(this).closest('tr').find('td:eq(0)').text();
+		var type= $(this).attr('id');
+		
+		$.ajax({
+				url:"updateActivity",
+				async : false,
+				type:"POST",
+				data : {
+					no:no,
+					certi:"Y",
+					type:type,
+				},success : function(){
+					location.href="/dbmon/management?type=memberManage?no="+no;
+				}
+			})
+		}
+	});
+	function reason(no){
+		console.log("test")
+		var win = window.open("/dbmon/inactivityReason?no="+no, '', '_blank'); 
+	}
+	
 	$(document).on("click","tr",function(){
 		$('tr').css("background-color","#fff");
 		$(this).closest('tr').css("background-color","antiquewhite");
 	});
 	
 	$(document).on("click",".mBtn",function(){
-		console.log("test")
 		var no = $(this).closest('tr').find('td:eq(0)').text();
 		var win = window.open("/dbmon/memberMemo?no="+no, '', '_blank'); 
+		//location.href="/dbmon/memberMemo?no="+no;
+
+	});
+	
+	$(document).on("click",".lBtn",function(){
+		var no = $(this).closest('tr').find('td:eq(0)').text();
+		console.log(no)
+		var win = window.open("/dbmon/leaveReason?no="+no, '', '_blank'); 
 		//location.href="/dbmon/memberMemo?no="+no;
 
 	});
@@ -325,6 +372,8 @@ var memberTable;
         <tr>
             <th>번호</th>
             <th>회원분류</th>
+            <th>회원탈퇴<br/>신청사유</th>
+            <th>회원탈퇴<br/>신청일자</th>
             <th>활동허용</th>
             <th>아이디</th>
             <th>회원메모</th>

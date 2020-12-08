@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="selectMember" resultType="com.dolbommon.dbmon.member.MemberVO">
-		select NO, USERID, USERNAME, GENDER, to_char(BIRTH, 'YYYY-MM-DD') BIRTH, TEL1, TEL2, EMAIL, ADDR,  ADDRDETAIL, ZIPCODE, to_char(REGDATE, 'YYYY-MM-DD') REGDATE, MEMO, activity, BANK_NAME, BANK_ACCOUNT_NO, LAT, LNG, WHO from member
+		select NO, USERID, USERNAME, GENDER, to_char(BIRTH, 'YYYY-MM-DD') BIRTH, TEL1, TEL2, EMAIL, ADDR,  ADDRDETAIL, ZIPCODE, to_char(REGDATE, 'YYYY-MM-DD') REGDATE, MEMO, activity, BANK_NAME, BANK_ACCOUNT_NO, LAT, LNG, WHO, REASONTOLEAVE, to_char(leavedate, 'YYYY-MM-DD') leavedate from member
 	</select>
 	
 	<select id="countTeacher" resultType="int" parameterType="String">
@@ -23,8 +23,20 @@
 		select memo from member where no=#{no}
 	</select>
 	
+	<select id="selectReason" resultType="String" parameterType="String">
+		select reason from member where no=#{no}
+	</select>
+	
+	<select id="selectleaveReason" resultType="String" parameterType="String">
+		select reasontoleave from member where no=#{no}
+	</select>
+	
 	<update id="insertMemo" parameterType="map">
 		update member set memo=#{memo} where no=#{no}
+	</update>
+	
+	<update id="reasonInsert" parameterType="map">
+		update member set reason=#{reason} where no=#{no}
 	</update>
 	
 	<update id="editCerti" parameterType="map">
@@ -34,4 +46,9 @@
 		</if>
 		 where no=#{no}
 	</update>
+	
+	<update id="updateActivity" parameterType="map">
+		update member set ${type}=#{certi} where no=#{no}
+	</update>
+
 </mapper>

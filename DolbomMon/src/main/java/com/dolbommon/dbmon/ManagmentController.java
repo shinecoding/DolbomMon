@@ -182,5 +182,49 @@ public class ManagmentController {
 		
 		return "ok";
 	}
+	@RequestMapping("/reasonInsert")
+	@ResponseBody
+	public String reasonInsert(HttpServletRequest req) {
+		String no = (String)req.getParameter("no");
+		String reason = (String)req.getParameter("memo");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		int result = dao.reasonInsert(no, reason);
+		
+		return "ok";
+	}
+	@RequestMapping("/updateActivity")
+	@ResponseBody
+	public String updateActivity(HttpServletRequest req) {
+		String certi = (String)req.getParameter("certi");
+		String no = (String)req.getParameter("no");
+		String type = (String)req.getParameter("type");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		dao.updateActivity(certi, no, type);
+		return "";
+	}
 	
+	@RequestMapping("/inactivityReason")
+	public ModelAndView inactivityReason(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String no = (String)req.getParameter("no");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		String reason = dao.selectReason(no);
+		
+		mav.addObject("no", no);
+		mav.addObject("reason", reason);
+		mav.setViewName("management/inactivityReason");
+		return mav;
+	}
+	@RequestMapping("/leaveReason")
+	public ModelAndView leaveReason(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String no = (String)req.getParameter("no");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		String reason = dao.selectleaveReason(no);
+		
+		mav.addObject("no", no);
+		mav.addObject("reason", reason);
+		mav.setViewName("management/leaveReason");
+		return mav;
+	}
 }

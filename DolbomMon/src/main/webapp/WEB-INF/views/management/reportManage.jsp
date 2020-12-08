@@ -143,8 +143,8 @@ var shingoTable;
 			var val4 = $(this).closest('tr').find('td:eq(7)').text();
 			tag="<tr class='delTr'>";
 			tag+='<td colspan="1"><a name="3" id="third2"></a>글번호 = '+val+'</a></td>';
-			tag+='<td colspan="3"><a name="3" id="third3"><textarea style="white-space:normal; background:#FAFAFA; border:1px solid gray; height:110px; overflow:scroll; width:100%; overflow-x: hidden;">'+val3+'</textarea></td>';
-			tag+='<td colspan="3"><a name="4" id="third1"><textarea class="shingo_response" cols="55"; rows="5";>'+val4+'</textarea></td>';
+			tag+='<td colspan="3"><a name="3" id="third3"><textarea class="form-control" style="white-space:normal; background:#FAFAFA; border:1px solid gray; height:110px; overflow:scroll; width:100%; overflow-x: hidden;">'+val3+'</textarea></td>';
+			tag+='<td colspan="3"><a name="4" id="third1"><textarea class="shingo_response form-control" cols="55"; style="height:110px;">'+val4+'</textarea></td>';
 			tag+='<td colspan="1"><button class="btn btn-info answerBtn" id='+val+'>답변완료</button></td></tr>';
 			
 			$(this).closest('tr').after(tag);
