@@ -22,6 +22,25 @@ HTML CSSResult
 EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@media (max-width:1250px){
+	#fixed-menu{
+		display:none;
+	}
+	#menu-button{
+		display:none;
+	}
+	#topmenu-button{
+		display:none;
+	}
+	.clearfix{
+		display:none;
+	}
+	ul.mainTopmenu {
+		display:none;
+	}
+}
+
+
      #menu-button{
      	-webkit-padding-start:0px;
      	
@@ -59,6 +78,7 @@ EDIT ON
 		 height: 100%;
 		 line-height: 48px;
 		 font-weight:bold;
+		 font-size:18px;
 		 overflow:hidden;
 		 color:gray;
 		 text-decoration: none;
@@ -84,6 +104,7 @@ EDIT ON
       ul.mainTopmenu li a:hover{
       	 color:orange;
 	     opacity:50;
+	     background:rgb(244,244,244);
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
@@ -160,7 +181,7 @@ EDIT ON
 	    
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
 
-	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff6400" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         
