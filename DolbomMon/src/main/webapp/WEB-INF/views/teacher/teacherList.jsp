@@ -188,10 +188,10 @@ input:checked + .slider:before {
    <div id="title">
    		<div id="titlefont">마이페이지</div>
    		<div class="rightlog">   
-			   <a id="lgt">로그아웃</a>
+			   <a id="lgt" href="/dbmon/logout">로그아웃</a>
 			   <div id="dividebar">|</div>
-			   <a id="pwdchg">비밀번호 변경</a>
-			   <i class="fas fa-pen"></i>
+			   <a id="pwdchg" href="/dbmon/identityEdit"><i class="fas fa-pen"></i>비밀번호 변경</a>
+			   
 	   </div>
 	</div>   
  <br/>

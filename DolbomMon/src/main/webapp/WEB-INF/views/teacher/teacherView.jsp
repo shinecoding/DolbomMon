@@ -285,7 +285,7 @@ border-radius:10px;
 		<c:if test="${mvo.userid!=paramid}">
 		<h5>출발 위치</h5>
 		<div id="map"></div>
-		<span style="font:0.8em gray; text-align:center;">돌봄몬의 개인정보보호를 위해 대략적인 위치만 표시됩니다.</span>
+		<div style="font:0.8em gray; text-align:center; width:100%;" >※돌봄몬의 개인정보보호를 위해 대략적인 위치만 표시됩니다.</div>
 		</c:if>
 		
 		
@@ -313,6 +313,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+
+    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+    map.setZoomable(false);    
+
 
 var imageSrc = 'img/orangeMarker.png', // 마커이미지의 주소입니다    
     imageSize = new kakao.maps.Size(90, 90), // 마커이미지의 크기입니다

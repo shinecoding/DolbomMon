@@ -416,21 +416,21 @@ $(function(){
 			<li class="page-item">
 				<!-- 이전페이지 -->
 				<c:if test="${hvo.nowPage>1}">
-				<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/parentHeart?nowPage=${hvo.nowPage-1}" aria-label="Previous">
+				<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/parentHeart?nowPage=${hvo.nowPage-1}" style="color:gray" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span></a>
 				</c:if>
 			</li>
 			<c:forEach var="p" begin="${hvo.startPageNum}" end="${hvo.startPageNum+ hvo.onePageNumCount -1}">
 				<c:if test="${p<=hvo.totalPage}">
 				<li	class="page-item">
-					<a class="page-link" href="/dbmon/parentHeart?nowPage=${p}" ><span <c:if test="${p == hvo.nowPage}" >style="color:orange;"</c:if> >${p}</span></a>
+					<a class="page-link" href="/dbmon/parentHeart?nowPage=${p}" style="color:gray"><span <c:if test="${p == hvo.nowPage}" >style="color:orange;"</c:if> >${p}</span></a>
 				</li>
 				</c:if>
 			</c:forEach>			
 			<li class="page-item">
 				<!-- 다음페이지 -->
 				<c:if test="${hvo.nowPage < hvo.totalPage}">
-				<a class="page-link" href="/dbmon/parentHeart?nowPage=${hvo.nowPage+1}"><span aria-hidden="true">&raquo;</span></a>
+				<a class="page-link" href="/dbmon/parentHeart?nowPage=${hvo.nowPage+1}" style="color:gray"><span aria-hidden="true">&raquo;</span></a>
 				</c:if>
 			</li>
 		</ul>
