@@ -551,13 +551,14 @@
 				</div>
 			</c:if>
 			<c:if test="${rbVO.time_type=='R' }">
-				<div id="regularDate" style="overflow:scroll;">
+				<div id="regularDate" style="overflow:scroll;overflow-y:hidden;">
 					<div id="timeDiv" style="width:50px; height:570px; float:left;">
 						<div id="dateDiv" style="width:6050px;">
 							<div id="timebarDiv">
 							</div>
 						</div>
-						<div class="settime" style="margin-top:50px;">00:00</div>
+						<hr style="width:6100px;margin:0;margin-top:50px;border:0;height:0.1px;background:#EFEFEF"/>
+						<div class="settime">00:00</div>
 						<hr style="width:6100px;margin:0px;border:0;height:0.1px;background:#EFEFEF"/>
 						<div class="settime">02:00</div>
 						<hr style="width:6100px;margin:0px;border:0;height:0.1px;background:#EFEFEF"/>
