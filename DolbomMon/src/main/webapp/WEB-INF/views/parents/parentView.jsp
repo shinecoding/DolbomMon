@@ -505,7 +505,7 @@
    <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
    <ul class="list-group">
          <li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${rbVO.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">학부모</span><br/>
-         <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span class="ml-2">no.${rbVO.job_board_no }</span></li>
+         <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span class="ml-2">${rbVO.job_board_no }</span></li>
    </ul>
    <br/>
    <ul class="list-group list-group-horizontal-sm">
