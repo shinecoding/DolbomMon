@@ -49,12 +49,15 @@ public class LoginController {
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
-		System.out.println("암호확인"+vo.getUserpwd());
+
+		
 	      //암호화
 		 String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
+
 	      vo.setUserpwd(encryPassword);
-	      System.out.println("암호화 된 패스워드"+vo.getUserpwd());
+	    
 		//기존 세션값 제거
+		
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	
 		}
@@ -90,13 +93,36 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res){
+		/*
+		Cookie[] cookies = req.getCookies(); // 모든 쿠키의 정보를 cookies에 저장
 	
+			if(cookies != null){ 
+	
+			for(int i=0; i< cookies.length; i++){ 
+	
+			cookies[i].setMaxAge(0); 
+	
+			res.addCookie(cookies[i]); 
+	
+			}
+		}
+		*/
+		Cookie cookie = new Cookie("loginCookie", null);
+		cookie.setMaxAge(0);
+		res.addCookie(cookie);
+		ses.invalidate();
+		return "home";
+	}
+	
+	/*
 	//로그아웃
 	@RequestMapping("/logout")
 	public String logout(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {	
 		
-		ses.invalidate();
-		/*if(ses.getAttribute("userid")!=null) {
+		
+		if(ses.getAttribute("userid")!=null) {
 			
 			vo.setUserid((String)ses.getAttribute("userid"));
 			System.out.println(vo.getUserid());
@@ -111,9 +137,10 @@ public class LoginController {
 			    res.addCookie(loginCookie);
 				dao.cookieReset(vo.getUserid());
 				//ses.invalidate();
-			}*/
+			}
 		return "home";
 	}
+	*/
 	
 	//계정찾기 폼으로 이동
 	@RequestMapping("/searchId")

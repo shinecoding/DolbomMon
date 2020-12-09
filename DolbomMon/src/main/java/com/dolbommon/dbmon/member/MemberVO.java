@@ -8,7 +8,7 @@ public class MemberVO {
 	private String gender;
 	private String birth;
 	private String tel1;
-	//private String tel2;
+	private String tel2;
 	private String email;
 	private String email1;
 	private String email2;
@@ -19,7 +19,13 @@ public class MemberVO {
 	private String memo;
 	private String lat;
 	private String lng;
+	private String bank_name;
+	private String bank_account_no;
 	private String who;
+	private String activity;
+	private String reason;
+	private String reasontoleave;
+	private String leavedate;
 	public int getNo() {
 		return no;
 	}
@@ -129,4 +135,48 @@ public class MemberVO {
 	public void setWho(String who) {
 		this.who = who;
 	}
+	public String getTel2() {
+		return tel2;
+	}
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
+	}
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
+	}
+	public String getBank_account_no() {
+		return bank_account_no;
+	}
+	public void setBank_account_no(String bank_account_no) {
+		this.bank_account_no = bank_account_no;
+	}
+	public String getActivity() {
+		return activity;
+	}
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public String getReasontoleave() {
+		return reasontoleave;
+	}
+	public void setReasontoleave(String reasontoleave) {
+		this.reasontoleave = reasontoleave;
+	}
+	public String getLeavedate() {
+		return leavedate;
+	}
+	public void setLeavedate(String leavedate) {
+		this.leavedate = leavedate;
+	}
+	
+	
 }

@@ -27,7 +27,7 @@
 		<a style="margin-left:100px;">@ 2020 Dolbommon 대표 : 이승현 <br/></a>
 		<a style="margin-left:100px;">소재지 : 서울시 마포구 백범로 비트캠프 3층 | 사업자 등록번호 : 11111222000<br/></a>
 		<a style="margin-left:100px;">Copyright © 2020 Dolbommon.co.,Ltd. All rights reserved.<br/></a>
-		<a style="margin-left:200px;">Contact Dolbommon for more information.<br/></a>
+		<a style="margin-left:100px;">Contact Dolbommon for more information.<br/></a>
 		<a style="margin-left:200px;">02-1234-5678 | dolbommon00@gmail.com</a>
 		
 	
