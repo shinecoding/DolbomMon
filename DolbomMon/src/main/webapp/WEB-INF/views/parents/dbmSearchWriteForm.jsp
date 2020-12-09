@@ -28,20 +28,20 @@
 			
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#ffc207");
 				$("#specificDateDiv").css("display", "inline-block");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "inline-block");
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#ffc207");
 				$("#regularDateDiv").css("display", "inline-block");
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "inline-block");
 			}else{
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "none");
@@ -50,7 +50,7 @@
 			
 			for(var i=1;i<8;i++){
 				if($("input[id=rd"+i+"]").is(":checked")){
-					$("label[for=rd"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=rd"+i+"]").css("background-color", "#ffc207");
 				}else{
 					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
 				}
@@ -87,17 +87,17 @@
 			/////////////// 성별 설정 /////////////////
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
-					$("label[for=g"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=g"+i+"]").css("background-color", "#ffc207");
 				}else{
-					$("label[for=g"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for=g"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 			/////////////// 나이대 설정 ////////////
 			for(var i=2;i<7;i++){
 				if($("input[id="+i+"0]").is(":checked")){
-					$("label[for="+i+"0]").parent().css("background-color", "#ffc207").css("color", "white");
+					$("label[for="+i+"0]").parent().css("background-color", "#ffc207");
 				}else{
-					$("label[for="+i+"0]").parent().css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for="+i+"0]").parent().css("background-color", "#EFEFEF");
 				}
 			}
 			
@@ -121,21 +121,21 @@
 		////////////////////// 정기적으로, 특정날에만 선택//////////////////////////////
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#ffc207");
 				$("#specificDateDiv").fadeIn();
 				$("#timeDiv").fadeIn();
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#regularDateDiv").css("display", "none");
 				
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#ffc207");
 				$("#regularDateDiv").fadeIn();
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#timeDiv").fadeIn();
 			}else{
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "none");
@@ -181,9 +181,9 @@
 		$("input[name=wish_gender]").change(function(){
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
-					$("label[for=g"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=g"+i+"]").css("background-color", "#ffc207");
 				}else{
-					$("label[for=g"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for=g"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 		});
@@ -198,10 +198,10 @@
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
 				
-				$("label[for="+selectedData+"]").parent().css("background-color", "#ffc207").css("color", "white");
+				$("label[for="+selectedData+"]").parent().css("background-color", "#ffc207");
 			}else{
 				
-				$("label[for="+selectedData+"]").parent().css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for="+selectedData+"]").parent().css("background-color", "#EFEFEF");
 			}
 			
 		});
@@ -231,30 +231,28 @@
 		$(document).on('keyup','input[inputmode=numeric]',function(event){
 			this.value = this.value.replace(/[^0-9]/g,'');  
 			this.value = this.value.replace(/,/g,'');  
+			$("input[id=avgWage]").prop("checked", false);
 			if(this.value<8590){
 				$(this).css("color", "gray");
 				$("#minWage").html("최저시급(8590원)이상의 시급을 입력해주세요");
 			}else {
-				$(this).css("color", "white");
-				$("#minWage").html("")
+				$("#minWage").html("");
+				$(this).css("color", "black");
 			}
 		});
 		
 		$("input[id=avgWage]").change(function(){
 			var wage = $("#wish_wage").val;
-			
 			if(wage<8590){
 				$("#wish_wage").css("color", "gray");
 				$("#minWage").html("최저시급(8590원)이상의 시급을 입력해주세요");
 			}else {
-				$("#wish_wage").css("color", "white");
+				$("#wish_wage").css("color", "black");
 				$("#minWage").html("")
 			}
 			
 			if(this.checked){
-				$("#wish_wage").val("8600").attr("readonly", "readonly");
-			}else{
-				$("#wish_wage").prop("readonly", false);
+				$("#wish_wage").val("8600");
 			}
 		});
 		////////////////////////// 정기적으로 ////////////////////////// 
@@ -265,51 +263,26 @@
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #start_date").val(dateText);
-				console.log(dateText);
 				$("#regularDateDiv #startDateBtn").val("돌봄 시작일");
-				setEndDate(3);
+				$("#regularDateDiv #endDateBtn").datepicker("option", "minDate", dateText);
+				console.log(dateTxt);
+				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
 			},
 			altFormat:"yyyy-mm-dd"
 		});
-		function setEndDate(i){
-			var date = new Date();
-			var startDate = document.getElementById("start_date").value;
-			var data = startDate.split("-");
-			var endDate;
-			var setEndDate;
-			var month = Number(data[1]);
-			if(i==1){
-				endDate = new Date(data[0], data[1], Number(data[2])+7);
-				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-			}else if(i==2){
-				if(month+1==12){
-					endDate = new Date(data[0], month+1, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+1, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}else if(i==3){
-				if(month+3==12){
-					endDate = new Date(data[0], month+3, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+3, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}else if(i==4){
-				if(month+6==12){
-					endDate = new Date(data[0], month+6, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+6, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}
-			document.getElementById("end_date").value = setEndDate;
-		}
 		
-		
+		//////////////////////////정기적으로 ////////////////////////// 
+		$("#regularDateDiv #endDateBtn").datepicker({ // 시작일 데이트피커
+			showAnim : "show",
+			maxDate : "4m",
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$("#regularDateDiv #end_date").val(dateText);
+				
+				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+			},
+			altFormat:"yyyy-mm-dd"
+		});
 		
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
@@ -317,9 +290,9 @@
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
-				$("label[for="+selectedData+"]").css("background-color", "#ffc207").css("color", "white");//노랑
+				$("label[for="+selectedData+"]").css("background-color", "#ffc207");//노랑
 			}else{
-				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF").css("color", "black");//회색
+				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");//회색
 			}
 			
 		});
@@ -546,8 +519,8 @@
 						            });
 						           	window.close();
 						        },theme:{
-						        	searchBgColor: "#ff5400", //검색창 배경색
-						            queryTextColor: "#FFFFFF" //검색창 글자색
+						        	searchBgColor: "#ffc207", //검색창 배경색
+						            queryTextColor: "#black" //검색창 글자색
 						        }
 						    }).open();
 						});
@@ -676,10 +649,7 @@
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
 					<input type="radio" id="g3" name="wish_gender" value="A"/>
-					<div>
-						
-					</div>
-					<label for="g1">여자</label>
+					<label class="label" for="g1">여자</label>
 					<label for="g2">남자</label>
 					<label for="g3">무관</label>
 				</div>
@@ -733,7 +703,7 @@
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
-					<input type="button" id="zipcodeBtn" value="돌봄 장소" />
+					<input class="btn btn-warning" type="button" id="zipcodeBtn" value="돌봄 장소" />
 					<input type="hidden" id="care_addr" name="care_addr"/>
 					<input type="hidden" id="dong_addr" name="dong_addr"/>
 					<input type="hidden" id="lat" name="lat"/>
@@ -759,9 +729,10 @@
 				<div id="regularDateDiv">
 					<div id="title">정기적으로</div>
 					<div id="startDateDiv">
-						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
+						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
+						<input class="btn btn-warning" type="button" id="endDateBtn" value="돌봄 종료일" />
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
-						<input type="hidden" id="end_date" name="end_date"  />
+						<input type="text" id="end_date" name="end_date" readonly="readonly" />
 						
 					</div>
 					<div id="selectDayDiv">
@@ -809,10 +780,10 @@
 					<span id="minWage" style="color:red"></span>
 				</div>
 				<div id="wageDiv">
-					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
+					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590"/><span>원/1시간</span>
 				</div>
-				<label for="avgWage" style="width:100%;"><input type="checkbox" id="avgWage" style="width:5%;"/><span style="width:90%;">평균시급 적용</span></label>
-				<label for="conYN" style="width:100%;"><input type="checkbox" id="consultation" style="width:5%;" name="consultation" value="Y"/><span style="width:90%;">협의 가능</span></label>
+				<label for="avgWage" style="width:50%;cursor:pointer;"><input type="checkbox" id="avgWage" style="width:5%;"/><span style="width:90%;">평균시급 적용</span></label>
+				<label for="consultation" style="width:50%;cursor:pointer;"><input type="checkbox" id="consultation" style="width:5%;" name="consultation" value="Y"/><span style="width:90%;">시급 협의 가능</span></label>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
@@ -827,7 +798,7 @@
 			</div>
 			
 			<div id="submitDiv" >
-				<input type="submit" value="등록하기" />
+				<input class="btn btn-warning" type="submit" value="등록하기" />
 			</div>
 			
 			<div id="footer"></div>
