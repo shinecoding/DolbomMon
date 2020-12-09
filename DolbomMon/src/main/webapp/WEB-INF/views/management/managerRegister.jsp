@@ -543,13 +543,9 @@
 					data:params,
 					type:"POST",
 					success : function(){
-						if(resultString=="true"){
-							alert("관리자 등록에 성공하였습니다.");
-					    	opener.location.reload();
-					        window.close();	
-						}else{
-							alert("관리자 등록에 실패하였습니다. 양식을 다시 확인해주세요.");
-						}
+						alert("관리자 등록에 성공하였습니다.");
+				    	opener.location.reload();
+				        window.close();	
 					}, error : function(request,status,error){
 						alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 						alert("관리자 등록에 실패하였습니다.")
@@ -557,7 +553,7 @@
 				       	window.close();
 					}
 				});
-				return false;
+				return false; //매우중요. 
 			});
 	});
 		

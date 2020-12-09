@@ -258,15 +258,13 @@ public class ManagmentController {
 	@ResponseBody
 	public String managerRegister(ManagerVO vo, HttpServletRequest req) {
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
-		int result = dao.insertManager(vo);
-		String resultString;
-		if(result>=1) {
-			resultString = "true";
-		}else {
-			resultString = "flase";
-		}
-		//mav.setViewName("management/joinResultPage");
-		return resultString;
+		System.out.println("암호확인"+vo.getUserpwd());
+		//암호화
+		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
+		vo.setUserpwd(encryPassword);
+		System.out.println("암호화 된 패스워드"+vo.getUserpwd());
+		//dao.insertManager(vo);
+		return "";
 	}
 	
 }
