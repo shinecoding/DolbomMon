@@ -52,8 +52,6 @@ public class ParentController {
 		
 		List<ParentHistoryVO> list = dao.selectAllRdBoard(userid);
 		
-		
-		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list", list);
