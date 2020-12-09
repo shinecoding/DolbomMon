@@ -176,7 +176,7 @@
       <div class="card-body">
       <div style="float:left;"><img src="img/tea1.PNG" class="rounded-circle"/></div>
       <div style="float:right; padding: 5px;">
-        <h5 class="card-title">돌봄몬을 찾습니다</h5>
+        <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
         <p class="card-text">신생아 1명, 유아 1명</p>
         <p class="card-text">충북 청주시 청원구</p>
         <p class="card-text">희망시급 10,000원 | 협의가능 | 12월 12일 시작</p>
@@ -184,12 +184,25 @@
         <a href="#" class="btn btn-warning">신청하기</a>
       </div>
     </div>
+   </div>
+   <div class="col-sm-6" style="padding: 10px;">
+    <div class="card">
+      <div class="card-body">
+      <div style="float:left; padding: 5px;"><img src="img/tea1.PNG" class="rounded-circle"/></div>
+      <div style="float:right; padding: 5px;">
+        <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
+        <p class="card-text">no. 123
+        <br/>신생아 1명, 유아 1명
+        <br/>충북 청주시 청원구
+        <br/>희망시급 10,000원 | 협의가능 | 12월 12일 시작
+        </p>
+        
+        </div>
+        <a href="#" class="btn btn-warning" style="align: center; border: 1px solid red;">신청하기</a>
+      </div>
+    </div>
   </div>
 
-  
-</div>
-	
-	
 	
 	
 	
