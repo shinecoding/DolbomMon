@@ -19,4 +19,7 @@ public interface MemberDaoImp {
 	
 	//연락처 중복검사
 	public int memberUsertelChk(String tel1);
+	
+	//학부모 이미지 업로드
+	public int parentImageUpload(String pic, String userid);
 }

@@ -24,19 +24,17 @@
 		/////////////////// 페이지 로딩 시 //////////////////////
 		$(document).ready(function(){
 			
-			
-			$(".title").next("div").css("display", "none");
-			$("#activityTypeDiv").css("display", "inline-block");
+			startTime();
 			
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
 				$("#specificDateDiv").css("display", "inline-block");
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "inline-block");
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
 				$("#regularDateDiv").css("display", "inline-block");
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#specificDateDiv").css("display", "none");
@@ -49,10 +47,10 @@
 				$("#timeDiv").css("display", "none");
 			}
 			///////////////////////////// 정기적으로 날짜 설정 요일 //////////////////////////////
-			startTime(); // selectBox 설정
+			
 			for(var i=1;i<8;i++){
 				if($("input[id=rd"+i+"]").is(":checked")){
-					$("label[for=rd"+i+"]").css("background-color", "#ff5400").css("color", "white");
+					$("label[for=rd"+i+"]").css("background-color", "#ffc207").css("color", "white");
 				}else{
 					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
 				}
@@ -89,7 +87,7 @@
 			/////////////// 성별 설정 /////////////////
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
-					$("label[for=g"+i+"]").css("background-color", "#ff5400").css("color", "white");
+					$("label[for=g"+i+"]").css("background-color", "#ffc207").css("color", "white");
 				}else{
 					$("label[for=g"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
 				}
@@ -97,7 +95,7 @@
 			/////////////// 나이대 설정 ////////////
 			for(var i=2;i<7;i++){
 				if($("input[id="+i+"0]").is(":checked")){
-					$("label[for="+i+"0]").parent().css("background-color", "#ff5400").css("color", "white");
+					$("label[for="+i+"0]").parent().css("background-color", "#ffc207").css("color", "white");
 				}else{
 					$("label[for="+i+"0]").parent().css("background-color", "#EFEFEF").css("color", "black");
 				}
@@ -105,7 +103,7 @@
 			
 			for(var i=1;i<5;i++){
 				if($("#childrenInfo>input[id=childrenCnt"+i+"]").is(":checked")){
-					$("label[for=childrenCnt"+i+"]").css("background-color", "#ff5400");
+					$("label[for=childrenCnt"+i+"]").css("background-color", "#ffc207");
 					$("#childrenDetail").html("");
 					var tag = ""
 					tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
@@ -123,14 +121,14 @@
 		////////////////////// 정기적으로, 특정날에만 선택//////////////////////////////
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
 				$("#specificDateDiv").fadeIn();
 				$("#timeDiv").fadeIn();
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#regularDateDiv").css("display", "none");
 				
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
 				$("#regularDateDiv").fadeIn();
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#specificDateDiv").css("display", "none");
@@ -143,15 +141,6 @@
 				$("#timeDiv").css("display", "none");
 			}
 		});
-		
-		////////////////////div on off ///////////////// 
-		$(".title").click(function(){
-		/* 	$(this).next("div").css("display", "inline-block"); */
-			$(".title").next("div").css("display", "none");
-			$(this).next("div").fadeIn();
-			
-		});
-		
 		
 		// 돌봄 유형 선택 시 색상 변경
 		$("input[name=pw_activity]").change(function(){
@@ -192,7 +181,7 @@
 		$("input[name=wish_gender]").change(function(){
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
-					$("label[for=g"+i+"]").css("background-color", "#ff5400").css("color", "white");
+					$("label[for=g"+i+"]").css("background-color", "#ffc207").css("color", "white");
 				}else{
 					$("label[for=g"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
 				}
@@ -209,7 +198,7 @@
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
 				
-				$("label[for="+selectedData+"]").parent().css("background-color", "#ff5400").css("color", "white");
+				$("label[for="+selectedData+"]").parent().css("background-color", "#ffc207").css("color", "white");
 			}else{
 				
 				$("label[for="+selectedData+"]").parent().css("background-color", "#EFEFEF").css("color", "black");
@@ -217,12 +206,11 @@
 			
 		});
 		
-		
 		//////////// 자녀 정보 //////////////
 		$("#childrenInfo>input[type=radio]").change(function(){
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
-					$("label[for=childrenCnt"+i+"]").css("background-color", "#ff5400");
+					$("label[for=childrenCnt"+i+"]").css("background-color", "#ffc207");
 					$("#childrenDetail").html("");
 					var tag = ""
 					tag += "<li>";
@@ -234,93 +222,6 @@
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
-		});
-		
-		$(".ui-datepicker-trigger").remove();
-		//$(".selectDt").removeClass('hasDatepicker').datepicker();
-
-		$(".cb").on('click', function(){
-			console.log("클릭");
-		});
-		
-		$(document).find(".cb").removeClass('hasDatepicker').datepicker({
-		    dateFormat: "yy-mm-dd",
-		    defaultDate: "+1w",
-		    numberOfMonths: 1,
-		    changeMonth: true,
-		    showMonthAfterYear: true ,
-		    changeYear: true
-		});
-		
-		$(document).find(".cb").removeClass('hasDatepicker').datepicker();
-		
-		$(".cb").datepicker({
-			dateFormat: "yy-mm-dd",
-		    defaultDate: "+1w",
-		    numberOfMonths: 1,
-		    changeMonth: true,
-		    showMonthAfterYear: true ,
-		    changeYear: true
-		});
-		
-		$(document).on('click', '.cb',function(){
-			$(".cb").datepicker({
-				dateFormat: "yy-mm-dd",
-			    defaultDate: "+1w",
-			    numberOfMonths: 1,
-			    changeMonth: true,
-			    showMonthAfterYear: true ,
-			    changeYear: true
-			});
-		});
-			
-		
-		var lng;
-		var lat;
-		$("#zipcodeBtn").click(function(){
-			new daum.Postcode({
-		        oncomplete: function(data) {
-		        	console.log("우편번호 => " + data.zonecode );
-		        	console.log("도로명 주소 " + data.address )
-		            console.log("시, 도 =>" + data.sido);
-		            console.log("시군구 =>" + data.sigungu);
-		            console.log("법정동명(동) => " + data.bname);
-		            console.log("법정동명(읍, 면, 리) => " + data.bname1);
-		            
-		            var dongJuso = data.sido + " " + data.sigungu + " " + data.bname + " " + data.bname1;
-		            console.log("동주소 =>" + dongJuso);
-		            var geocoder = new kakao.maps.services.Geocoder();
-		            
-		            geocoder.addressSearch(dongJuso, function(result, status) {
-
-		                // 정상적으로 검색이 완료됐으면 
-		                 if (status === kakao.maps.services.Status.OK) {
-							
-							console.log("경도=> " + result[0].x);
-							console.log("위도=> " + result[0].y);
-							
-							$("#lng").val(result[0].x);
-							$("#lat").val(result[0].y);
-							
-							$("#care_addr").val(data.address);
-							$("#dong_addr").val(dongJuso);
-							
-							var mapContainer = 
-								document.getElementById('map'), // 지도를 표시할 div  
-					  			mapOption = { 
-					        		center: new kakao.maps.LatLng(lng, lat), // 지도의 중심좌표
-					        		level: 3 // 지도의 확대 레벨
-					    		};
-							var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-							
-		                } 
-		            });
-		           	window.close();
-		        },theme:{
-		        	searchBgColor: "#ff5400", //검색창 배경색
-		            queryTextColor: "#FFFFFF" //검색창 글자색
-		        }
-		    }).open();
 		});
 		
 		///////////////////////////// 지도 생성 ////////////////////////////////
@@ -356,16 +257,6 @@
 				$("#wish_wage").prop("readonly", false);
 			}
 		});
-		
-		//////////////////////// 다음 버튼 클릭 /////////////////////////////
-		$(".next").click(function(){
-			console.log("다음버튼 클릭");
-			$(this).parents(".mainDiv").next().next().fadeIn();
-			$(this).parents(".mainDiv").fadeOut();
-			
-		});
-		
-		
 		////////////////////////// 정기적으로 ////////////////////////// 
 		$("#regularDateDiv #startDateBtn").datepicker({ // 시작일 데이트피커
 			showAnim : "show",
@@ -374,36 +265,66 @@
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #start_date").val(dateText);
+				console.log(dateText);
 				$("#regularDateDiv #startDateBtn").val("돌봄 시작일");
+				setEndDate(3);
 			},
 			altFormat:"yyyy-mm-dd"
 		});
+		function setEndDate(i){
+			var date = new Date();
+			var startDate = document.getElementById("start_date").value;
+			var data = startDate.split("-");
+			var endDate;
+			var setEndDate;
+			var month = Number(data[1]);
+			if(i==1){
+				endDate = new Date(data[0], data[1], Number(data[2])+7);
+				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+			}else if(i==2){
+				if(month+1==12){
+					endDate = new Date(data[0], month+1, data[2]);
+					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
+				}else{
+					endDate = new Date(data[0], month+1, data[2]);
+					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+				}
+			}else if(i==3){
+				if(month+3==12){
+					endDate = new Date(data[0], month+3, data[2]);
+					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
+				}else{
+					endDate = new Date(data[0], month+3, data[2]);
+					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+				}
+			}else if(i==4){
+				if(month+6==12){
+					endDate = new Date(data[0], month+6, data[2]);
+					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
+				}else{
+					endDate = new Date(data[0], month+6, data[2]);
+					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
+				}
+			}
+			document.getElementById("end_date").value = setEndDate;
+		}
 		
-		$("#regularDateDiv #endDateBtn").datepicker({ // 종료일 데이트피커
-			showAnim : "show",
-			minDate : "+14d",
-			maxDate : "+6m",
-			dateFormat : "yy-mm-dd",
-			onSelect:function(dateText){
-				$("#regularDateDiv #end_date").val(dateText);
-				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
-			},
-			altFormat:"yyyy-mm-dd"
-		});
+		
+		
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
-			$("#boom").fadeIn(100);
-			$("#boom").fadeOut(100);
-			$("#fatman").fadeIn(50);
-			$("#fatman").fadeOut(1200);
+			
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
-				$("label[for="+selectedData+"]").css("background-color", "#ff5400").css("color", "white");//노랑
+				$("label[for="+selectedData+"]").css("background-color", "#ffc207").css("color", "white");//노랑
 			}else{
 				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF").css("color", "black");//회색
 			}
+			
 		});
+		
+		
 		////////////////////////// 정기적으로 ////////////////////////// 
 		
 		////////////////////////// 특정날선택 //////////////////////////
@@ -571,7 +492,68 @@
 	});
 
 </script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87"></script>
+<script>
+					$(function(){
+						var lng;
+						var lat;
+						$("#zipcodeBtn").click(function(){
+							console.log("클릭");
+							new daum.Postcode({
+						        oncomplete: function(data) {
+						        	console.log("우편번호 => " + data.zonecode );
+						        	console.log("도로명 주소 " + data.address )
+						            console.log("시, 도 =>" + data.sido);
+						            console.log("시군구 =>" + data.sigungu);
+						            console.log("법정동명(동) => " + data.bname);
+						            console.log("법정동명(읍, 면, 리) => " + data.bname1);
+						            
+						            var dongJuso = data.sido + " " + data.sigungu + " " + data.bname + " " + data.bname1;
+						            console.log("동주소 =>" + dongJuso);
+						            var geocoder = new kakao.maps.services.Geocoder();
+						            
+						            geocoder.addressSearch(dongJuso, function(result, status) {
+				
+						                // 정상적으로 검색이 완료됐으면 
+						                 if (status === kakao.maps.services.Status.OK) {
+											
+											console.log("경도=> " + result[0].x);
+											console.log("위도=> " + result[0].y);
+											
+											lat = result[0].y;
+											lng = result[0].x;
+											
+											var coords = new kakao.maps.LatLng(lat, lng);
+											
+											$("#lng").val(result[0].x);
+											$("#lat").val(result[0].y);
+											
+											$("#care_addr").val(data.address);
+											$("#dong_addr").val(dongJuso);
+											
+											console.log("지도생성 시작");
+											var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+										    mapOption = {
+										        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+										        level: 3 // 지도의 확대 레벨
+										    };  
+											// 지도를 생성합니다    
+											$("#mapImgDiv").fadeOut(10);
+											$("#mapDiv").fadeIn();
+											var map = new kakao.maps.Map(mapContainer, mapOption);
+											map.setCenter(coords);
+						                } 
+						            });
+						           	window.close();
+						        },theme:{
+						        	searchBgColor: "#ff5400", //검색창 배경색
+						            queryTextColor: "#FFFFFF" //검색창 글자색
+						        }
+						    }).open();
+						});
+					});
+									
+				</script>
 <script>
 	$.divOnOff = function(a){
 		$(".mainDiv").fadeOut();
@@ -588,9 +570,9 @@
 				tag += "<option id='rt"+i+"'>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()<10 && time.getMinutes()!=0){
 				tag += "<option id='rt"+i+"'>0"+time.getHours()+":"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>10 && time.getMinutes()==0){
+			}else if(time.getHours()>=10 && time.getMinutes()==0){
 				tag += "<option id='rt"+i+"'>"+time.getHours()+":0"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>10 && time.getMinutes()!=0){
+			}else if(time.getHours()>=10 && time.getMinutes()!=0){
 				tag += "<option id='rt"+i+"'>"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}
 			time.setMinutes(time.getMinutes()+30);
@@ -599,7 +581,7 @@
 	}
 	
 	$(function(){
-		$("#start_time").on('change' ,function(){
+		$(document).on('change',"#start_time" ,function(){
 			var test = $("#start_time").val();
 			var i=1;
 			for(i;i<=48;i++){
@@ -619,9 +601,9 @@
 				tag += "<option>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()<10 && time.getMinutes()!=0){
 				tag += "<option>0"+time.getHours()+":"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>10 && time.getMinutes()==0){
+			}else if(time.getHours()>=10 && time.getMinutes()==0){
 				tag += "<option>"+time.getHours()+":0"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>10 && time.getMinutes()!=0){
+			}else if(time.getHours()>=10 && time.getMinutes()!=0){
 				tag += "<option>"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}else if(time.getHours()>=24){
 				break;
@@ -634,6 +616,7 @@
 <style>
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
+ 	.ui-state-active{background-color:#FFC207;}
  	.divOff{display:none;}
  	.divOn{display:inline-block;}
 </style>
@@ -647,6 +630,11 @@
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
 			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
+			<div>
+				<img src="<%=request.getContextPath()%>/img/actImg.png" style="width:170px;height:170px;" />
+			</div>
+			
+			
 			<div id="activityTypeDiv" class="mainDiv">
 				<input type="checkbox" id="pa1" value="실내놀이" name="pw_activity"/>
 				<input type="checkbox" id="pa2" value="등하원돕기" name="pw_activity" />
@@ -677,21 +665,24 @@
 					<div><label for="pa12"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-n.svg"/><br/><span>장기입주</span></label></div>
 					<div><label for="pa13"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/><span>단기입주</span></label></div>
 				</div>
-				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
 			<div id="ageAndGenderDiv" class="mainDiv">
-				<div style="margin-top:30px;"><img src="<%=request.getContextPath() %>/icon/dududududu.png" style="width:40px;height:40px;"/><img id="dadadada" src="<%=request.getContextPath() %>/icon/dadadada.png" style="width:10px;height:10x;"/></div>
 				<div id="genderDiv">
+					<div>
+						<img src="<%=request.getContextPath()%>/img/genderImg.png" style="width:200px;height:150px; margin:30px 0"/>
+					</div>
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
 					<input type="radio" id="g3" name="wish_gender" value="A"/>
+					<div>
+						
+					</div>
 					<label for="g1">여자</label>
 					<label for="g2">남자</label>
 					<label for="g3">무관</label>
 				</div>
-				<hr/>
 				<div id="ageDiv">
 					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
 					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
@@ -706,12 +697,14 @@
 						<li><label for="60">60대</label></li>
 					</ul>
 				</div>
-				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">자녀의 정보를 입력해주세요</label></div>
 			<div id="childrenInfoDiv" class="mainDiv">
 				<div id="childrenInfo">
+					<div>
+						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
+					</div>
 					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
 					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
 					<input type="radio" id="childrenCnt3" name="childrenCnt"/>
@@ -725,7 +718,6 @@
 					<div id="childrenDetailDiv">
 						<ul id="childrenDetail"></ul>
 					</div>
-					<button type="button" class="btn btn-warning next">다음</button>
 				</div>
 			</div>
 			
@@ -733,23 +725,26 @@
 				<label class="divOnOff" for="addrDiv">돌봄 장소를 입력해주세요</label>
 			</div>
 			<div id="addrDiv" class="mainDiv">
-				<div style="margin:10px 0;">
-					<input type="text" id="dong_addr" name="dong_addr"/>
-					<input type="text" id="care_addr" name="care_addr" /><br/>
-					<input type="text" id="lat" name="lat"/>
-					<input type="text" id="lng" name="lng"/>
+				<div id="mapImgDiv" style="margin:30px 0;">
+					<div>아직 장소를 입력하지 않았습니다.</div>
+					<img src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
-				<div id="map">
-					
+				<div id="mapDiv" style="margin:30px 0; display:none;">
+					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
 					<input type="button" id="zipcodeBtn" value="돌봄 장소" />
+					<input type="hidden" id="care_addr" name="care_addr"/>
+					<input type="hidden" id="dong_addr" name="dong_addr"/>
+					<input type="hidden" id="lat" name="lat"/>
+					<input type="hidden" id="lng" name="lng"/>
 				</div>
-				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
+			
 			<div id="timeTypeDiv" class="mainDiv">
+				<div><img src="<%=request.getContextPath() %>/img/calImg.png" style="width:270px;height:250px;"/></div>
 				<input type="radio" id="timeType1" name="time_type" value="S"/>
 				<input type="radio" id="timeType2" name="time_type" value="R"/>
 				<label for="timeType1">특정날에만</label>
@@ -765,10 +760,9 @@
 					<div id="title">정기적으로</div>
 					<div id="startDateDiv">
 						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
-						<input type="button" id="endDateBtn" value="돌봄 종료일 선택" />
-						<hr/><img src="<%=request.getContextPath()%>/img/boom.png" id="boom"/>
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
-						<input type="text" id="end_date" name="end_date" readonly="readonly" />
+						<input type="hidden" id="end_date" name="end_date"  />
+						
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -801,31 +795,33 @@
 							<option>종료시간</option>
 						</select>
 					</div>
-				</div><br/>
-				<button type="button" class="btn btn-warning next">다음</button>
-				<img src="<%=request.getContextPath()%>/img/fatman.png" id="fatman"/>
+				</div>
 			</div>
+			
+			
 			
 			<div class="title"><label class="divOnOff" for="paymentDiv">희망시급을 입력해주세요</label></div>
 			<div id="paymentDiv" class="mainDiv">
-				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
 				<div>
+					<img src="<%=request.getContextPath() %>/img/payImg.png" style="width:170px;height:150px;margin:20px 0" />
+				</div>
+				<div>
+					<span id="minWage" style="color:red"></span>
+				</div>
+				<div id="wageDiv">
 					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
 				</div>
-				<span id="minWage" style="color:orange">
-					
-				</span>
 				<label for="avgWage" style="width:100%;"><input type="checkbox" id="avgWage" style="width:5%;"/><span style="width:90%;">평균시급 적용</span></label>
 				<label for="conYN" style="width:100%;"><input type="checkbox" id="consultation" style="width:5%;" name="consultation" value="Y"/><span style="width:90%;">협의 가능</span></label>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
 				</p>
-				<button type="button" class="btn btn-warning next">다음</button>
 			</div>
 			
 			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
 			<div id="descriptionDiv" class="mainDiv">
+				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
 				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>

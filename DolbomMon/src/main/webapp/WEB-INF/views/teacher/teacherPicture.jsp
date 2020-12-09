@@ -124,7 +124,8 @@
 		<div id="title">
 	   		<div id="titlefont">내 사진 수정</div>
 	 	</div>
-		<form name="picForm" method="post"  action="/dbmon/teacherPictureOk" enctype="multipart/form-data" >
+	 	
+		<form id="picForm" name="picForm" method="post"  action="/dbmon/teacherPictureOk" enctype="multipart/form-data" >
 			<div id="profBox">
 				<img class="rounded-circle mx-auto d-block" id="profIcon" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if>
 				<c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if>/>

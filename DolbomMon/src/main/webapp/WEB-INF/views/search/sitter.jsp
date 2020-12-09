@@ -12,6 +12,8 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <style>
 
 	.container{width:1100px;}
@@ -654,12 +656,10 @@
 
 
 
-
-
 <!-- ----------------------------카드 디자인------------------------------ -->
-	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
+	<div id="cardBox"  class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
-		<div class="card" id=${vo.userid}>		
+		<div class="card"  id="${vo.userid}"  data-aos="fade-up" >		
 			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
 			<div class="card-body">
 				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
@@ -785,6 +785,12 @@ return function() {
 
 
 </div><!-- container -->
-<jsp:include page="../footer.jsp"/>
+<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 2000
+    });
+</script>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
