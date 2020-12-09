@@ -34,13 +34,19 @@ public class JobSearchController {
 	//구인페이지로 이동하기
 
 	@RequestMapping("/sitter_list") 
-	public ModelAndView sitter(HttpSession ses) {
+	public ModelAndView sitter(HttpSession ses, HttpServletRequest req) {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
-		TeacherVO mvo = dao.selectTTMap(userid); //내 위치
+		TeacherVO mvo = null;
+		if(req.getParameter("userid")==null) {
+			//로그인 안 했을 때 지도 위치 지정 >test1계정의 위치 띄워줌
+			mvo = dao.selectTTMap("test1");
+		} else {
+		mvo = dao.selectTTMap(userid); //내 위치
+		}
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		
 		

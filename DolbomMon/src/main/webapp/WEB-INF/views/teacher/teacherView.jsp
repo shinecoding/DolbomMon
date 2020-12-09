@@ -278,7 +278,7 @@ border-radius:10px;
    	</ul>	
 		<h5>활동 가능 지역</h5>
 		<ul class="list-group">
-		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> ${vo.area1}</li>
+		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> ${vo.area1} </li>
 		</ul>
 		
 		<!-- 타인에게만 보여주는 지도 -->
