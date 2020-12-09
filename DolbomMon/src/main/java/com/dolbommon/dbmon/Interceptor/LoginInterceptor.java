@@ -31,16 +31,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		
+		//자동로그인 인터셉터
 		HttpSession ses = request.getSession();
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 			if (loginCookie != null) {		
 				LoginVO vo = dao.checkLoginBefore(loginCookie.getValue());
 				
-				System.out.println(loginCookie.getValue());
-				if (vo != null)
+				if (vo!=null)
 					ses.setAttribute("userid", vo.getUserid());
-					//ses.setAttribute("username", vo.getUsername());
+					ses.setAttribute("username", vo.getUsername());
 					ses.setAttribute("logStatus", "Y");
 			}
 		return true;
