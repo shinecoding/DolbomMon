@@ -62,17 +62,10 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
 }
 */
-$(function() {
+	$(function() {
 	  AOS.init({
 	    duration: 1200
 	  });
-
-	  $('.test').on('click', function() {
-	    //var $content = $(this).next('.redution');
-	    
-	    $(".redution").fadeOut()
-	  });
-
 	  onElementHeightChange(document.body, function(){
 	    AOS.refresh();
 	  });
