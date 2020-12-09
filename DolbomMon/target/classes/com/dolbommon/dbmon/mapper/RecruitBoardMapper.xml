@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select job_board_no, userid, care_addr, wish_age, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate from parent_list order by job_board_no desc
+		select job_board_no, userid, care_addr, wish_age, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
+			from parent_list order by job_board_no desc
 	</select>
 	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
@@ -16,18 +17,22 @@
 	</select>
 	
 	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select job_board_no, userid, care_addr, time_type, pw_activity, wish_wage, consultation, wish_age, wish_gender, content, lat, lng, hit, writedate
-			from parent_list where job_board_no=#{param1}
+		select p.job_board_no, p.userid, m.username, p.care_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate,
+			(select count(t_userid) from t_p_table where  p.job_board_no = #{param1}) tcnt
+			from parent_list p, member m 
+			where p.job_board_no=#{param1} and p.userid = m.userid
 	</select>
 	
 	<select id="jobSearchChildSelect" parameterType="int" resultType="com.dolbommon.dbmon.parent.ChildrenVO">
 		select job_board_no, child_birth
 			from add_child where job_board_no=#{param1}
 	</select>
+	
 	<select id="jobSearchRegularDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.RegularDateVO">
 		select job_board_no, yoil, start_date, end_date, start_time, end_time
 			from jb_regular_date where job_board_no=#{param1}
 	</select>
+	
 	<select id="jobSearchSpecificDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.SpecificDateVO">
 		select job_board_no, select_date, start_time, end_time
 			from jb_specific_day where job_board_no=#{param1}
