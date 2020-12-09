@@ -192,6 +192,14 @@ $(function(){
 			console.log(active);
 			var url = "/dbmon/selectActive";
 			var params ="active="+active;
+			if(active=="allActive"){
+				$(this).children("i").css("color", "orange");
+				$(this).next("span").children("i").css("color", "gray");
+			} else if(active=="onlyActive"){
+				$(this).children("i").css("color", "orange");
+				$(this).prev("span").children("i").css("color", "gray");
+			}
+			
 			
 			$.ajax({
 				url:url,
@@ -305,7 +313,7 @@ $(function(){
 	<div id="title">
    		<div id="titlefont">찜한 돌봄몬</div>
 	</div>
-	<div id="activeBox" class="mb-3"><span id="allActive"><i class="fas fa-circle" ></i>전체</span> <span id="onlyActive"><i class="fas fa-circle"></i>구인중 일자리만</span>
+	<div id="activeBox" class="mb-3"><span id="allActive"><i class="fas fa-circle" ></i>전체</span> <span id="onlyActive"><i class="fas fa-circle" style="color:gray;"></i>구인중 일자리만</span>
 		<div id="likeFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
 		<select id="likeDropdown">
 			<option value="like_order">업데이트 순</option>
@@ -398,11 +406,39 @@ $(function(){
 	</c:if>
 	</c:forEach>
 	
-	</div>
+	</div><!-- likeBox -->
+	
+	
+	
+	
+	<nav id="heartPaging" aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item">
+				<!-- 이전페이지 -->
+				<c:if test="${hvo.nowPage>1}">
+				<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/parentHeart?nowPage=${hvo.nowPage-1}" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span></a>
+				</c:if>
+			</li>
+			<c:forEach var="p" begin="${hvo.startPageNum}" end="${hvo.startPageNum+ hvo.onePageNumCount -1}">
+				<c:if test="${p<=hvo.totalPage}">
+				<li	class="page-item">
+					<a class="page-link" href="/dbmon/parentHeart?nowPage=${p}" ><span <c:if test="${p == hvo.nowPage}" >style="color:orange;"</c:if> >${p}</span></a>
+				</li>
+				</c:if>
+			</c:forEach>			
+			<li class="page-item">
+				<!-- 다음페이지 -->
+				<c:if test="${hvo.nowPage < hvo.totalPage}">
+				<a class="page-link" href="/dbmon/parentHeart?nowPage=${hvo.nowPage+1}"><span aria-hidden="true">&raquo;</span></a>
+				</c:if>
+			</li>
+		</ul>
+	</nav>
 	
 		
 	<br/>
-	</div>
+	</div><!-- Container -->
 	
 </body>
 </html>
