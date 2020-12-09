@@ -34,6 +34,9 @@
    }
 
 </style>
+<script>
+
+</script>
 </head>
 <jsp:include page="../top.jsp"/>
 <body>
@@ -41,7 +44,7 @@
 <div id="upper">
 
    
-   <video src='img/video.mp4' width='100%' autoplay loop>
+   <video class="redution" src='img/video.mp4' width='100%' autoplay loop>
 </video>
  <div class="jb-text">
         <p>사업소개</p>
