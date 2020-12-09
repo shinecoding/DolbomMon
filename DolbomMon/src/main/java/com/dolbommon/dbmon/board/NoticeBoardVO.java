@@ -9,8 +9,12 @@ public class NoticeBoardVO {
 	private int hit;
 	private String writedate;
 	private String ip;
+	
 	private String filename1;
 	private String filename2;
+	
+	private String filenames[] = new String[2];
+	
 	private String delfile[];
 	private int nextNo;
 	private int preNo;
@@ -85,6 +89,14 @@ public class NoticeBoardVO {
 	}
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
+	}
+	public String[] getFilenames() {
+		return filenames;
+	}
+	public void setFilenames(String[] filenames) {
+		this.filenames = filenames;
+		this.filename1 = filenames[0];
+		this.filename2 = filenames[1];	
 	}
 	public String[] getDelfile() {
 		return delfile;

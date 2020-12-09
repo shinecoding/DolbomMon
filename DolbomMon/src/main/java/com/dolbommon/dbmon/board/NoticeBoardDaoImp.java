@@ -22,6 +22,9 @@ public interface NoticeBoardDaoImp {
 	public int noticeBoardDel(int no, String userid);
 	//오픈글 보여주기
 	public List<NoticeBoardVO> exposeNotice();
-	
+	//공지사항 게시글 수정
+	public int noticeBoardEditOk(NoticeBoardVO vo);
+	//파일명 얻어오기
+	public NoticeBoardVO getNoticeFileName(int no);
 	
 }

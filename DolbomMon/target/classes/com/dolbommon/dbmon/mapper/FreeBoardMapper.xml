@@ -95,7 +95,7 @@
 		)
 	</insert>
 	
-	<select id="getFileName" resultType="String">
+	<select id="getFileName" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
 		select filename1, filename2 from freeBoard where no=#{no}
 	</select>
 	
@@ -105,8 +105,26 @@
 	
 	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
 		update freeBoard set subject=#{subject}, content=#{content} 	
-			, filename1=#{filename1}	
-			, filename2=#{filename2} 	
+			<choose>
+				<when test='filename1 neq null and !filename1.equals("")'>
+				, filename1=#{filename1}
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 neq null and !filename2.equals("")'>
+				, filename2=#{filename2}
+				</when>	
+			</choose>
+			<choose>
+				<when test='filename1 eq null or filename1.equals("")'>
+				, filename1=null
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 eq null or filename2.equals("")'>
+				, filename2=null
+				</when>	
+			</choose>
 		where no=#{no} and userid=#{userid}
 	</update>
 	

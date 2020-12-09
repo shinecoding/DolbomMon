@@ -386,7 +386,7 @@ public class BoardController {
 		vo.setNo(Integer.parseInt(mr.getParameter("no")));
 		vo.setDelfile(mr.getParameterValues("delfile"));
 
-		String fileNames[] = new String[files.size()];	//2개
+		String fileNames[] = new String[2];	//2개
 		int idx = 0;
 		
 		if(files!=null) {	//첨부파일이 있을때
@@ -434,27 +434,34 @@ public class BoardController {
 		
 		if(idx<2) {	//이전에 업로드한 파일을 다 지울 때
 			//데이터 베이스에 있는 원래 파일명 얻어오기
-			String dbFile[] = dao.getFileName(vo.getNo());	
-			if(del!=null) {	//삭제할 파일이 있는 경우
-				for(String dbFilename : dbFile) {
-					int chk = 0;
-					for(String delFile : del) {
-						if(dbFilename!=null && dbFilename.equals(delFile)) {
-							chk++;
+			FreeBoardVO resultVo = dao.getFileName(vo.getNo());
+			
+			if(resultVo != null) {
+				String dbFile[] = new String[2];
+				dbFile[0] = resultVo.getFilename1();
+				dbFile[1] = resultVo.getFilename2();
+				if(del!=null) {	//삭제할 파일이 있는 경우
+					for(String dbFilename : dbFile) {
+						int chk = 0;
+						for(String delFile : del) {
+							if(dbFilename!=null && dbFilename.equals(delFile)) {
+								chk++;
+							}
+						}
+						if(chk==0) {
+							fileNames[idx++] = dbFilename;
 						}
 					}
-					if(chk==0) {
-						fileNames[idx++] = dbFilename;
+				}else {	//삭제할 파일이 없는 경우
+					for(String dbFilename : dbFile) {
+						if(dbFilename!=null) {
+							fileNames[idx++] = dbFilename;
+						}
 					}
 				}
-			}else {	//삭제할 파일이 없는 경우
-				for(String dbFilename : dbFile) {
-					if(dbFilename!=null) {
-						fileNames[idx++] = dbFilename;
-					}
-				}
-			}
+			}	
 		}
+		System.out.println(fileNames.length);
 		vo.setFilenames(fileNames);
 		for(String f:fileNames) {
 			System.out.println("f="+f);
@@ -699,37 +706,190 @@ public class BoardController {
 	}
 	
 	//이전글 선택
-		@RequestMapping("/preNoticeView")
-		public ModelAndView preNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {
+	@RequestMapping("/preNoticeView")
+	public ModelAndView preNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {
 			
-			NoticeBoardVO vo = new NoticeBoardVO();
-			vo.setNo(Integer.parseInt(req.getParameter("no")));
+		NoticeBoardVO vo = new NoticeBoardVO();
+		vo.setNo(Integer.parseInt(req.getParameter("no")));
 			
-			NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
-			NoticeBoardVO preVo = dao.preNoticeSelect(vo.getNo());
-			System.out.println(preVo.getNo());
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("no", preVo.getPreNo());
-			mav.setViewName("redirect:noticeBoardView");
+		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
+		NoticeBoardVO preVo = dao.preNoticeSelect(vo.getNo());
+		System.out.println(preVo.getNo());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("no", preVo.getPreNo());
+		mav.setViewName("redirect:noticeBoardView");
 			
-			return mav;
-		}
+		return mav;
+	}
 		
-		//다음글 선택
-		@RequestMapping("/nextNoticeView")
-		public ModelAndView nextNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {
+	//다음글 선택
+	@RequestMapping("/nextNoticeView")
+	public ModelAndView nextNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {
 			
-			NoticeBoardVO vo = new NoticeBoardVO();
-			vo.setNo(Integer.parseInt(req.getParameter("no")));
+		NoticeBoardVO vo = new NoticeBoardVO();
+		vo.setNo(Integer.parseInt(req.getParameter("no")));
 			
-			NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
-			NoticeBoardVO nextVo = dao.nextNoticeSelect(vo.getNo());
+		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
+		NoticeBoardVO nextVo = dao.nextNoticeSelect(vo.getNo());
 			
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("no", nextVo.getNextNo());
-			mav.setViewName("redirect:noticeBoardView");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("no", nextVo.getNextNo());
+		mav.setViewName("redirect:noticeBoardView");
 			
-			return mav;
+		return mav;
+	}
+		
+	//공지사항 게시판 글 삭제ok
+	@RequestMapping("/noticeBoardDel")
+	public ModelAndView noticeBoardDel(int no, HttpSession ses) {
+		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
+		int result = dao.noticeBoardDel(no, (String)ses.getAttribute("userid"));
+			
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			mav.setViewName("redirect:noticeBoard");
+		}else {
+			mav.setViewName("freeBoard/result");
 		}
+		return mav;
+	}
+		
+	//자유게시판 글 수정폼으로 이동ok
+	@RequestMapping("/noticeBoardEdit")
+	public ModelAndView noticeBoardEdit(int no) {
+		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
+			
+		NoticeBoardVO vo = dao.noticeBoardSelect(no);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.setViewName("freeBoard/noticeBoardEdit");
+			
+		return mav;
+	}
+		
+	//글 수정
+	@RequestMapping(value="/noticeBoardEditOk", method=RequestMethod.POST)
+	public ModelAndView noticeBoardEditOk(NoticeBoardVO vo, HttpServletRequest req, HttpSession ses) {
+		//파일을 저장할 위치
+		String path = ses.getServletContext().getRealPath("/upload");
+		System.out.println(path);
+		//파일 업로드를 하기 위해 req에서 MultipartHttpServletRequest를 생성한다.
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
+		//mr에서 MultipartFile 객체를 얻어온다.	--> List
+		List<MultipartFile> files = mr.getFiles("filename");
+			
+		vo.setUserid((String)ses.getAttribute("userid"));
+		vo.setNo(Integer.parseInt(mr.getParameter("no")));
+		vo.setDelfile(mr.getParameterValues("delfile"));
+
+		String fileNames[] = new String[2];	//2개
+		int idx = 0;
+			
+		if(files!=null) {	//첨부파일이 있을때
+				
+			for(int i=0; i<files.size(); i++) {		
+				MultipartFile mf = files.get(i);
+				String fName = mf.getOriginalFilename();	//폼의 파일명 얻어오기
+					
+				if(fName!=null && !fName.equals("")) {				
+					//원래의 파일명 중 확장자를 제외한 앞부분
+					String oriFileName = fName.substring(0, fName.lastIndexOf("."));
+					//확장자명 구하기
+					String oriExt = fName.substring(fName.lastIndexOf(".")+1);
+					//이름 바꾸기
+					File f = new File(path, fName);
+						
+					if(f.exists()) {	//원래의 파일 객체가 서버에 있으면 실행
+							
+						for(int renameNum=1; ; renameNum++) {	//무한루프
+							String renameFile = oriFileName + renameNum + "." + oriExt;	//변경된 파일명
+							f = new File(path, renameFile);
+							
+							if(!f.exists()) {	//파일이 있으면 true, 없으면 false
+								//같은 이름의 파일이 없을때 파일명 적용
+								fName = renameFile;
+								break;				
+							}			
+						}	//for
+					}
+					try {
+						mf.transferTo(f);	
+					}catch(Exception e) {
+						e.printStackTrace();	
+					}
+					fileNames[idx++] = fName;
+				}	//if
+			}	//for
+		}
+			
+		System.out.println(fileNames[0]);
+		System.out.println(fileNames[1]);
+			
+		String[] del = vo.getDelfile();
+		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
+			
+		if(idx<2) {	//이전에 업로드한 파일을 다 지울 때
+			//데이터 베이스에 있는 원래 파일명 얻어오기
+			NoticeBoardVO resultVo = dao.getNoticeFileName(vo.getNo());
+				
+			if(resultVo != null) {
+				String dbFile[] = new String[2];
+				dbFile[0] = resultVo.getFilename1();
+				dbFile[1] = resultVo.getFilename2();
+				if(del!=null) {	//삭제할 파일이 있는 경우
+					for(String dbFilename : dbFile) {
+						int chk = 0;
+						for(String delFile : del) {
+							if(dbFilename!=null && dbFilename.equals(delFile)) {
+								chk++;
+							}
+						}
+						if(chk==0) {
+							fileNames[idx++] = dbFilename;
+						}
+					}
+				}else {	//삭제할 파일이 없는 경우
+					for(String dbFilename : dbFile) {
+						if(dbFilename!=null) {
+							fileNames[idx++] = dbFilename;
+						}
+					}
+				}
+			}	
+		}
+		System.out.println(fileNames.length);
+		vo.setFilenames(fileNames);
+		for(String f:fileNames) {
+			System.out.println("f="+f);
+		}
+			
+		String sql = sqlSession.getConfiguration().getMappedStatement("noticeBoardEditOk").getBoundSql(vo).getSql();
+		System.out.print(sql);
+		int result = dao.noticeBoardEditOk(vo);
+		
+		if(result>0 && del!=null) {	//수정 성공
+			//이전 파일 삭제
+			for(String d : del) {
+				File f = new File(path, d);
+				f.delete();
+			}
+		}
+			
+		ModelAndView mav = new ModelAndView();
+			
+		if(result>0) {
+			mav.addObject("no", vo.getNo());
+			mav.setViewName("redirect:noticeBoard");
+		}else {
+			mav.setViewName("freeboard/result");
+		}
+		return mav;
+	}
+		
+		
+		
+		
+		
+		
 	
 }

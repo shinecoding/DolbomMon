@@ -108,7 +108,34 @@
 		select * from noticeBoard where expose='Y' order by no desc
 	</select>
 	
+	<select id="getNoticeFileName" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select filename1, filename2 from noticeBoard where no=#{no}
+	</select>
 	
+	<update id="noticeBoardEditOk" parameterType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		update noticeBoard set subject=#{subject}, content=#{content} 	
+			<choose>
+				<when test='filename1 neq null and !filename1.equals("")'>
+				, filename1=#{filename1}
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 neq null and !filename2.equals("")'>
+				, filename2=#{filename2}
+				</when>	
+			</choose>
+			<choose>
+				<when test='filename1 eq null or filename1.equals("")'>
+				, filename1=null
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 eq null or filename2.equals("")'>
+				, filename2=null
+				</when>
+			</choose>
+		where no=#{no} and userid=#{userid}
+	</update>
 	
 	
 </mapper>
