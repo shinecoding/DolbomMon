@@ -142,7 +142,9 @@ EDIT ON
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	           <button class="btn btn-primary ppp">쪽지</button></a>
 	           <a href="/dbmon/temporaryLogin">
-	           <button class="btn btn-info ppp">임시로그인</button></a>
+	           <button class="btn btn-info ppp">임시선생로그인</button></a>
+	           <a href="/dbmon/temporaryLoginP">
+	           <button class="btn btn-info ppp">임시부모로그인</button></a>
 	           </span>
 	           
 	       
