@@ -2,7 +2,7 @@ package com.dolbommon.dbmon.parent;
 
 public class ChildrenVO {
 	private int job_board_no;
-	private String userid;
+	private String child_name;
 	private String child_birth;
 	private String child_gender;
 	
@@ -12,11 +12,11 @@ public class ChildrenVO {
 	public void setJob_board_no(int job_board_no) {
 		this.job_board_no = job_board_no;
 	}
-	public String getUserid() {
-		return userid;
+	public String getChild_name() {
+		return child_name;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setChild_name(String child_name) {
+		this.child_name = child_name;
 	}
 	public String getChild_birth() {
 		return child_birth;

@@ -44,26 +44,14 @@ public class TeacherController {
 	}
 
 	@RequestMapping("/teacherList")
-	public ModelAndView teacherList(HttpSession ses) {
-		
-		String userid = (String) ses.getAttribute("userid");
-		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		TeacherVO vo = dao.selectTeacher(userid);
-		MemberVO mvo = dao.selectTMember(userid);
-		
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", vo);
-		mav.addObject("mvo", mvo);
-		mav.setViewName("/teacher/teacherList");
-		return mav;
+	public String teacherList() {
+		return "/teacher/teacherList";
 	}
 	
 	@RequestMapping("/teacherView")
 	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
 		
 		String userid = (String) ses.getAttribute("userid");
-		String paramid = req.getParameter("userid");
 		if(req.getParameter("userid")!=null) {
 			userid = req.getParameter("userid");
 		};
@@ -102,7 +90,6 @@ public class TeacherController {
 		CertificationVO cvo = cdao.selectCert(userid);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
 		mav.addObject("mvo", mvo);
@@ -581,22 +568,24 @@ public class TeacherController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/cctvOk", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
-	@ResponseBody
-	public String cctvOk(TeacherVO vo, HttpSession ses, String cctv) {
+	@RequestMapping("/cctvOk")
+	public ModelAndView cctvOk(TeacherVO vo, HttpSession ses, HttpServletRequest req) {
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
-		/*여기 변형*/
-		if(cctv.equals("cctvAgree")) {
-			vo.setCctv("Y");
-		} else if (cctv.equals("cctvDisagree")) {
-			vo.setCctv("N");
-		}
+		vo.setCctv((String)req.getParameter("cctv"));
 		
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		String result = dao.updateCCTV(vo) + "";
+		int result = dao.updateCCTV(vo);
 		
-		return result;		
+		ModelAndView mav = new ModelAndView();
+		
+		if(result>0) {
+			mav.addObject("vo", vo);
+			mav.setViewName("redirect:teacherEdit");
+		}else {
+			mav.setViewName("teacher/teacherResult");
+		}
+		return mav;		
 	}
 /*
 	//학부모가 선생 찾을 때 보는 지도
@@ -678,19 +667,9 @@ public class TeacherController {
 		return "teacher/teacherSchedule";
 	}
 	
-	@RequestMapping(value="/updateActive", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
-	@ResponseBody
-	public String updateActive(HttpSession ses, String active) {
-		String userid = (String)ses.getAttribute("userid");
-		TeacherVO vo = new TeacherVO();
-		vo.setUserid(userid);
-		vo.setActive(active);
-		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		String result = dao.updateActive(vo) + "";
-		return result;
-	}
 	
 	
+
 }
 
 

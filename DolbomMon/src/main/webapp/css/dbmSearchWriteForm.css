@@ -10,9 +10,9 @@
 	
 	/* ============= 헤더 =============== */
 	#header{ padding:10px;}
-	#header img{width:350px; height:270px; display:block; margin:0 auto;}
+	#header img{width:50%; height:130px; display:block; margin:0 auto;}
 	#header>div{text-align:center; font-size:2em; }
-	.title{display:inline-block; width:70%; height:50px; line-height:50px; border-top:3px solid #EFEFEF; border-bottom:3px solid #EFEFEF; margin:30px 0;}
+	.title{display:inline-block; width:70%; height:50px; line-height:50px; border-top:3px solid #EFEFEF; border-bottom:3px solid #EFEFEF; margin:10px 0;}
 	.title>label{width:100%; height:100%; cursor:pointer;}
 	#ageAndGenderDiv{display:none;}
 	/* ============= 헤더 =============== */
@@ -29,13 +29,14 @@
 	/* ============= 원하는 선생님 나이 선택 ================ */
 	#ageAndGenderDiv{display:inline-block; width:70%;}
 	
-	#genderDiv{display:inline-block; width:35%; }
+	#genderDiv{display:inline-block; width:35%; margin-right:20px; border:2px solid gray; border-radius:20% 20% 5% 5%;}
 	#dadadada{display:none;}
 	#genderDiv input{display:none;}
 	#genderDiv label{display:inline-block; width:50px; height:50px; line-height:50px; margin:0 5px; border-radius:50%; border:1px solid gray; background-color:#EFEFEF;}
-	#ageDiv{width:100%; text-align:center; overflow:hidden; height:auto; margin:50px 0; }
-	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto;}
-	#ageDiv li{width:20%; height:50px; line-height:50px; float:left; margin:10px 0; border:none; border-radius:50%; background-color:#EFEFEF; color:black; font-weight:bold; }
+	#ageAndGenderDiv hr{position:relative; left:65%;bottom:25px;width:20%; margin:0;border:0;height:10px;background-color:gray;}
+	#ageDiv{width:100%; overflow:hidden; height:auto; }
+	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto; border:2px solid gray; border-radius:35%;}
+	#ageDiv li{width:20%; height:50px; line-height:50px; float:left; margin:10px 0; border:none; border-radius:45%; background-color:#EFEFEF; color:black; font-weight:bold; }
 	#ageDiv label{width:100%; height:100%; text-align:center; }
 	/* ============= 원하는 선생님 나이 선택 ================ */
 	/* ====================== 자녀 수 ========================= */
@@ -67,11 +68,11 @@
 	#zidcodeBtnDiv> input[type=button]{width:40%; height:40px; padding:3px 10px; border-radius:10px; border:none;}
 	
 	#paymentDiv{display:inline-block; width:70%; overflow:hidden; height:auto; text-align:center;}
-	#paymentDiv #wageDiv{display:inline-block; width:70%; overflow:hidden; height:auto; text-align:center; border-radius:10px; background-color:#ffc207;}
-	#paymentDiv img{width:35%;height:150px;}
-	#paymentDiv input{width:35%; font-size:20px; text-align:right; padding:5px 10px; margin:1% 0; background-color:#ffc207; border:none;}
+	#paymentDiv img{width:30%; height:104px; margin:15px 0;}
+	#paymentDiv div{display:inline-block; width:70%; overflow:hidden; height:auto; text-align:center; background-color:#ff5400;}
+	#paymentDiv input{width:20%; font-size:20px; text-align:right; padding:5px 10px; margin:1% 0; background-color:#ff5400; border:none;}
 	#paymentDiv input[type=checkbox]{display:inline-block;}
-	#paymentDiv span{;margin-left:1%; font-size:14px;}
+	#paymentDiv span{margin-left:1%; font-size:14px;}
 	#paymentDiv label{margin:2% 0;}
 	#paymentDiv p{display:inline-block; width:70%; margin-bottom:30px; font-size:14px; font-weight:bold; color:gray;}
 	#paymentDiv input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
@@ -99,12 +100,14 @@
 	
 	/* ==================== 정기적으로 - 날짜 설정 =================== */
 	#regularDateDiv {display:inline-block; width:60%; text-align:center;}
-	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:70%;}
+	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:70%; border:2px solid gray; border-radius:20%; margin-right:30px;}
 	#regularDateDiv #startDateDiv>input{width:35%; height:40px; margin:0 5%; text-align:center; border:1px solid gray; border-radius:15px;}
+	#regularDateDiv #startDateDiv>hr{position:relative; left:100%;width:50%; margin:0;border:0;height:10px;background-color:gray;}
+	#regularDateDiv #startDateDiv>img{display:none;position:relative;left:130%;bottom:50px;width:50px;height:50px;}
 	#regularDateDiv #startDateDiv>input[type=text]{font-weight:bold;}
 	#fatman{display:none; position:relative; left:80%; bottom:500px;}
 	/* ===================== =====================*/
-	#regularDateDiv #selectDayDiv{width:100%; overflow:hidden; height:auto; }
+	#regularDateDiv #selectDayDiv{width:100%; overflow:hidden; height:auto; border:2px solid gray; border-radius:40%;}
 	#regularDateDiv #selectDayDiv li>label{
 		display:block; 
 		width:100%; height:100%; 
@@ -141,7 +144,7 @@
 	/* ========================= 특정날짜 선택 ======================== */
 	
 	#submitDiv{display:inline-block; text-align:center;width:50%}
-	input[type=submit]{width:100%; height:40px; border:none; border-radius:10px; background-color:#ffc207; color:#EFEFEF; margin:30px 0;}
+	input[type=submit]{width:100%; height:40px; border:none; border-radius:10px; background-color:#ff5400; color:#EFEFEF; margin:30px 0;}
 	
 	label{-webkit-transition:background-color 1s;
 		transition:background-color 1s;}

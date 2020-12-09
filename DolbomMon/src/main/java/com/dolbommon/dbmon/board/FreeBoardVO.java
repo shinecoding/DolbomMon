@@ -10,13 +10,8 @@ public class FreeBoardVO {
 	private String writedate;
 	private String ip;
 	private String head;
-	
 	private String filename1;
 	private String filename2;
-	
-	private String filenames[] = new String[2];
-	
-	private String delfile[];
 	private int nextNo;
 	private int preNo;
 	private String nextSubject;
@@ -24,7 +19,7 @@ public class FreeBoardVO {
 	private int ref;
 	private int step;
 	private int lvl;
-	private int replyCount;
+	
 	//페이징
 	private int nowPage = 1;	//현재 페이지
 	private int totalRecord;	//총 레코드 수
@@ -173,20 +168,6 @@ public class FreeBoardVO {
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
 	}
-	public String[] getFilenames() {
-		return filenames;
-	}
-	public void setFilenames(String[] filenames) {
-		this.filenames = filenames;
-		this.filename1 = filenames[0];
-		this.filename2 = filenames[1];	
-	}
-	public String[] getDelfile() {
-		return delfile;
-	}
-	public void setDelfile(String[] delfile) {
-		this.delfile = delfile;
-	}
 	public int getNextNo() {
 		return nextNo;
 	}
@@ -228,11 +209,5 @@ public class FreeBoardVO {
 	}
 	public void setLvl(int lvl) {
 		this.lvl = lvl;
-	}
-	public int getReplyCount() {
-		return replyCount;
-	}
-	public void setReplyCount(int replyCount) {
-		this.replyCount = replyCount;
 	}
 }

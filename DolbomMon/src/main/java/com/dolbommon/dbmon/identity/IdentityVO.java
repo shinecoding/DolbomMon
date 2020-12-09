@@ -12,8 +12,6 @@ public class IdentityVO {
 	private String addrDetail;
 	private String zipcode;
 	private String who;
-	private String reasontoleave;
-	private String leavedate;
 	
 	public int getNo() {
 		return no;
@@ -74,17 +72,5 @@ public class IdentityVO {
 	}
 	public void setWho(String who) {
 		this.who = who;
-	}
-	public String getReasontoleave() {
-		return reasontoleave;
-	}
-	public void setReasontoleave(String reasontoleave) {
-		this.reasontoleave = reasontoleave;
-	}
-	public String getLeavedate() {
-		return leavedate;
-	}
-	public void setLeavedate(String leavedate) {
-		this.leavedate = leavedate;
 	}
 }

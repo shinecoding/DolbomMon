@@ -256,14 +256,12 @@ public class CertificationVO {
 	public void setCerti_cnt(int certi_cnt) {
 		this.certi_cnt = certi_cnt;
 	}
-
 	public String getIndate() {
 		return indate;
 	}
 	public void setIndate(String indate) {
 		this.indate = indate;
 	}
-
 	
 	
 	

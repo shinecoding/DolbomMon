@@ -13,16 +13,3 @@
 		history.back();
 	</script>
 </c:if>
-
-<c:if test="${imgresult>0 }">
-	<script>
-		alert("이미지 업로드 성공");
-		location.href = "<%=request.getContextPath()%>/";
-	</script>
-</c:if>
-<c:if test="${imgresult<=0 }">
-	<script>
-		alert("이미지 업로드 실패");
-		history.back();
-	</script>
-</c:if>

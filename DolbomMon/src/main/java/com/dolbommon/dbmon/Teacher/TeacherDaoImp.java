@@ -26,7 +26,5 @@ public interface TeacherDaoImp {
 	public int updateTMap(MemberVO mvo);
 	public int updateArea(TeacherVO vo);
 	
-	public int updateActive(TeacherVO vo);
-	
 }
 

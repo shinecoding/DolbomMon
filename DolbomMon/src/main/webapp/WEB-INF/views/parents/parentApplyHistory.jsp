@@ -49,7 +49,7 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link px-5" id="nav-inbox-tab" href="#nav-inbox" data-toggle="tab" role="tab">
-				내가 작성한 글 보기</a>
+				내게 신청한</a>
 			</li>
 		</ul>
 	</nav>
@@ -89,90 +89,43 @@
 			</ul>
 		</div>
 		<div class="tab-pane fade" id="nav-inbox" role="tabpanel">
-			<ul class="list-group list-group-flush">
-				<c:forEach var="list" items="${list }">
-					<li class="list-group-item">
-						<div class="row">
-							<div class="col-1">
-									<img src="img/profilepic.png" class="rounded-circle"/>
-								</div>	
-							<div class="col-6" onclick="location.href='parentView?no=${list.job_board_no}'" style="cursor:pointer;">
-									<b>글 번호 ${list.job_board_no }</b><i class="fas fa-search ml-1"></i><br/>
-									희망시급: ${list.wish_wage }원<br/>
-									신청시간: ${list.writedate }<br/>
-									자녀정보
-									<div id="${list.job_board_no }" ></div>
-									<script>
-										
-										$(function(){
-											var cb = '${list.child_birth}';
-											var child_age1;
-											var child_age2;
-											
-											function getAge(a){
-												var today = new Date();
-												var birthDay = new Date(a);
-												
-												var time = Math.floor((today - birthDay) / 86400000);
-												var year = Math.floor(time/365)+1;
-												var month = Math.ceil(time/30);
-												if(month >= 96 && year < 14){
-													console.log("초딩"+year+"세");
-													child_age2 = "초등학생";
-													child_age1 = year+"세";
-												}else if(month<96 && month>=37){
-													console.log("유아"+year+"세");
-													child_age2 = "유아";
-													child_age1 = year+"세";
-												}else if(month<=36 && month>=7){
-													console.log("영아"+month+"개월");
-													child_age2 = "영아";
-													child_age1 = month + "개월";
-												}else{
-													console.log("신생아"+month+"개월");
-													child_age2 = "신생아";
-													child_age1 = month + "개월";
-												}
-											}
-											////////////////////자녀 정보 /////////////////////
-											var cbArr = cb.split(",");
-											for(var i=0; i<cbArr.length;i++){
-												console.log("cbArr => " + cbArr[i]);
-												var childYMD = cbArr[i].split("-");
-												var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
-												console.log("child_birth => " + child_birth);
-												getAge(child_birth);
-												
-												if(child_age2 == "초등학생"){
-													$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><img src="icon/profile-child.png" style="width:40px; height:40px;"/>'+child_age1+'</div>');
-												}else if(child_age2 == "유아"){
-													$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><img src="icon/profile-elementary.png" style="width:40px; height:40px;"/>'+child_age1+'</div>');
-												}else if(child_age2 == "영아"){
-													$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><img src="icon/profile-infant.png" style="width:40px; height:40px; "/>'+child_age1+'</div>');
-												}else if(child_age2 == "신생아"){
-													$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><img src="icon/profile-newborn.png" style="width:40px; height:40px;"/>'+child_age1+'</div>');
-												}
-											}
-										});
-									</script>
-							</div>
-							<c:if test="${list.tcnt > 0}">
-							<div class="col-5" style="background-color:orange; opacity:0.5; cursor:pointer;" onclick="location.href='parentView?no=${list.job_board_no}'" >
-									${list.tcnt }명의 선생님이 답변을 기다리고 있습니다.
+		<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-1">
+								<img src="img/profilepic.png" class="rounded-circle"/>
 							</div>	
-							</c:if>
-							<c:if test="${list.tcnt == 0}">
-								<div class="col-5">아직 지원한 선생님이 없습니다.
-									<input type="button" class="btn btn-warning" value="삭제하기"/>
-									<input type="button" class="btn btn-warning" value="수정하기"/>
-								</div>
-							</c:if>
-						</div>
-					</li>
-				</c:forEach>
+						<div class="col-11">
+								<b>이O현 선생님</b><i class="fas fa-search ml-1"></i><br/>
+								희망시급: 10,000원<br/>
+								신청시간: 2018.09.26 16:59<br/>
+								<i class="far fa-check-circle"></i>
+								<i class="far fa-times-circle"></i><br/>
+								선생님에게 응답하지 않았습니다.<br/>
+						</div>	
+					</div>
+				</li>
+				
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-1">
+								<img src="img/profilepic.png" class="rounded-circle"/>
+							</div>	
+						<div class="col-11">
+								<b>최O은 선생님</b><i class="fas fa-search ml-1"></i><br/>
+								희망시급: 10,000원<br/>
+								신청시간: 2018.09.26 16:59<br/>
+								<b>-거절완료-</b><br/>
+								선생님에게 내 거절의사를 전달하였습니다.<br/>
+						</div>	
+					</div>
+				</li>
+				
 			</ul>
+		
+		
+		
 		</div>
-		<div style="margin-bottom:200px;"></div>
 	</div>
 </div>
 </body>

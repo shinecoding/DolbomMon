@@ -1,16 +1,16 @@
 package com.dolbommon.dbmon.login;
 
+import javax.xml.crypto.Data;
+
 import com.dolbommon.dbmon.member.MemberVO;
 
 public interface LoginDaoImp {
 	//로그인
 	public LoginVO loginOk(LoginVO vo);
-	//쿠키 저장
-	public int keepLogin(LoginVO vo);
-	//쿠키 삭제
-	public int cookieReset(String userid);
 	//자동 로그인
-	public LoginVO checkLoginBefore(String value);
+	//public void keepLogin(String userid, String sessionId, Data sessionLimit);
+	//
+	//public LoginVO checkLoginBefore(String value);
 	//아이디 찾기
 	public LoginVO findUserid(LoginVO vo);
 	//비밀번호 변경

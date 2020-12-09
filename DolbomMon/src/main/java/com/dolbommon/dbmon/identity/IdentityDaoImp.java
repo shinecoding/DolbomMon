@@ -8,7 +8,6 @@ public interface IdentityDaoImp {
 	public List<IdentityVO> getIdentity(String userid);
 	//회원정보 수정
 	public int indentityEdit(IdentityVO vo);
-	//회원탈퇴
-	public int withdraw(IdentityVO vo);
+	
 	
 }

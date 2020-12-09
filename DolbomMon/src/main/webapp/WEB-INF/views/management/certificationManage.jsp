@@ -71,7 +71,7 @@ var certiTable;
 			},
 		ajax: {
 			"type" : "POST",
-			"url" : "certificationManageList",
+			"url" : "certificationList",
 			"dataType": "JSON"
 	         },columns: [
 	        	{"data" : "userid",
@@ -156,7 +156,7 @@ var certiTable;
 						data = "<span style='color:red'>보충필요</span>";
 					}
 					return data;
-			}},
+		}},
 	        	{"data" : "license",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
@@ -445,7 +445,7 @@ var certiTable;
             <th>성범죄<br/>인증상태</th>
             <th>개인정보<br/>제공동의서</th>
             <th>개인정보제공<br/>동의서신청일자</th>
-            <th>개인정보<br/>	동의상태</th>
+            <th>등초본<br/>인증상태</th>
             <th>인증 갯수</th>
         </tr>
     </thead>

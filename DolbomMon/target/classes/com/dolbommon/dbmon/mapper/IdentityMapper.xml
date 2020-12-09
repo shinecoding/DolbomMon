@@ -11,8 +11,6 @@
 		update member set userpwd=#{userpwd}, tel1=#{tel1}, email=#{email}, zipcode=#{zipcode}, addr=#{addr}, addrDetail=#{addrDetail} where userid=#{userid}
 	</update>
 
-	<update id="withdraw" parameterType="com.dolbommon.dbmon.identity.IdentityVO">
-		update member set reasontoleave=#{reasontoleave}, leavedate=sysdate where userid=#{userid}
-	</update>
+
 
 </mapper>

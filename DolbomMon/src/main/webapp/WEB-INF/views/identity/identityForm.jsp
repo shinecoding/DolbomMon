@@ -73,10 +73,10 @@
 <body>
 <div class="container">
 	<div>
-		<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logoLink" align="middle"/></a>	
+	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logoLink" align="middle"/></a>	
 	</div>
 	<div id="top">
-		<b>계정관리</b>
+	<b>계정관리</b>
 	</div>
 	<c:forEach var="vo" items="${list}">
 		<div id="userBox">		
@@ -100,7 +100,7 @@
 	<div id="space"></div>
 	<div class="list-group">
 		<a href="identityEdit" class="list-group-item list-group-item-action"><b>회원정보 수정</b></a>
-		<a href="withdrawForm" class="list-group-item list-group-item-action"><b>회원 탈퇴 신청</b></a>
+		<a href="#" class="list-group-item list-group-item-action"><b>회원 탈퇴 신청</b></a>
 		<a href="#" class="list-group-item list-group-item-action"><b>돌봄몬 서비스 이용동의</b></a>
 	</div>
 </div>

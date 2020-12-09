@@ -20,13 +20,13 @@
 		$(document).ready(function(){
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
 				$("#specificDateDiv").css("display", "inline-block");
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "inline-block");
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
 				$("#regularDateDiv").css("display", "inline-block");
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#specificDateDiv").css("display", "none");
@@ -38,11 +38,12 @@
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "none");
 			}
+			
 			///////////////////////////// 정기적으로 날짜 설정 요일 //////////////////////////////
 			startTime(); // selectBox 설정
 			for(var i=1;i<8;i++){
 				if($("input[id=rd"+i+"]").is(":checked")){
-					$("label[for=rd"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=rd"+i+"]").css("background-color", "#ff5400").css("color", "white");
 				}else{
 					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
 				}
@@ -54,14 +55,14 @@
 		//////////////////////정기적으로, 특정날에만 선택//////////////////////////////
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#FF5400").css("color", "white");
 				$("#specificDateDiv").fadeIn();
-				$("#timeDiv").fadeIn();
+				$("#timeDiv").fadeIn();;
 				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#regularDateDiv").css("display", "none");
 				
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#FF5400").css("color", "white");
 				$("#regularDateDiv").fadeIn();
 				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
 				$("#specificDateDiv").css("display", "none");
@@ -74,32 +75,6 @@
 				$("#timeDiv").css("display", "none");
 			}
 		});
-		
-		//////////////////////정기적으로, 특정날에만 선택//////////////////////////////
-		$("#timeTypeDiv >input[type=radio]").change(function(){
-			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
-				$("#specificDateDiv").fadeIn();
-				$("#timeDiv").fadeIn();
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
-				$("#regularDateDiv").css("display", "none");
-				
-			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
-				$("#regularDateDiv").fadeIn();
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
-				$("#specificDateDiv").css("display", "none");
-				$("#timeDiv").fadeIn();
-			}else{
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
-				$("#specificDateDiv").css("display", "none");
-				$("#regularDateDiv").css("display", "none");
-				$("#timeDiv").css("display", "none");
-			}
-		});
-		
-		
 		
 		//////////////////////////정기적으로 ////////////////////////// 
 		$("#regularDateDiv #startDateBtn").datepicker({ // 시작일 데이트피커
@@ -109,51 +84,22 @@
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #start_date").val(dateText);
-				console.log(dateText);
 				$("#regularDateDiv #startDateBtn").val("돌봄 시작일");
-				setEndDate(3);
 			},
 			altFormat:"yyyy-mm-dd"
 		});
-		function setEndDate(i){
-			var date = new Date();
-			var startDate = document.getElementById("start_date").value;
-			var data = startDate.split("-");
-			var endDate;
-			var setEndDate;
-			var month = Number(data[1]);
-			if(i==1){
-				endDate = new Date(data[0], data[1], Number(data[2])+7);
-				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-			}else if(i==2){
-				if(month+1==12){
-					endDate = new Date(data[0], month+1, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+1, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}else if(i==3){
-				if(month+3==12){
-					endDate = new Date(data[0], month+3, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+3, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}else if(i==4){
-				if(month+6==12){
-					endDate = new Date(data[0], month+6, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+6, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}
-			document.getElementById("end_date").value = setEndDate;
-		}
 		
-		
+		$("#regularDateDiv #endDateBtn").datepicker({ // 종료일 데이트피커
+			showAnim : "show",
+			minDate : "+14d",
+			maxDate : "+6m",
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$("#regularDateDiv #end_date").val(dateText);
+				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+			},
+			altFormat:"yyyy-mm-dd"
+		});
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
 			$("#boom").fadeIn(100);
@@ -199,9 +145,9 @@
 				tag += "<option id='rt"+i+"'>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()<10 && time.getMinutes()!=0){
 				tag += "<option id='rt"+i+"'>0"+time.getHours()+":"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>=10 && time.getMinutes()==0){
+			}else if(time.getHours()>10 && time.getMinutes()==0){
 				tag += "<option id='rt"+i+"'>"+time.getHours()+":0"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>=10 && time.getMinutes()!=0){
+			}else if(time.getHours()>10 && time.getMinutes()!=0){
 				tag += "<option id='rt"+i+"'>"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}
 			time.setMinutes(time.getMinutes()+30);
@@ -230,9 +176,9 @@
 				tag += "<option>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()<10 && time.getMinutes()!=0){
 				tag += "<option>0"+time.getHours()+":"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>=10 && time.getMinutes()==0){
+			}else if(time.getHours()>10 && time.getMinutes()==0){
 				tag += "<option>"+time.getHours()+":0"+time.getMinutes()+"</option>";
-			}else if(time.getHours()>=10 && time.getMinutes()!=0){
+			}else if(time.getHours()>10 && time.getMinutes()!=0){
 				tag += "<option>"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}else if(time.getHours()>=24){
 				break;
@@ -245,7 +191,7 @@
 <style>
 	*{margin:0;padding:0; list-style:none; }
 	input[type=radio], input[type=checkbox]{display:none;}
-	#timeTypeDiv{display:inline-block; width:100%; text-align:center; margin-top:100px;}
+	#timeTypeDiv{width:80%; text-align:center; margin-top:100px;}
 	#timeTypeDiv> label{display:inline-block; width:30%; height:40px; line-height:40px; margin:0 5%; border-radius:10px; border:none; background-color:#EFEFEF;}
 	#timeTypeDiv #title{margin:20px 0; width:100%;}
 	
@@ -292,65 +238,66 @@
 	#specificDateDiv{display:inline-block; width:60%; text-align:center;}
 	#specificDateDiv>div{display:inline-block; width:100%;}
 	/* ========================= 특정날짜 선택 ======================== */
-	.ui-datepicker-inline{width:100%;}
+	.ui-datepicker:nth-of-type(1){width:100%;}
 </style>
 <body>
 	<form>
 	<div class="container">
 		<div id="timeTypeDiv" class="mainDiv">
-				<div><img src="<%=request.getContextPath() %>/img/calImg.png" style="width:270px;height:250px;"/></div>
-				<input type="radio" id="timeType1" name="time_type" value="S"/>
-				<input type="radio" id="timeType2" name="time_type" value="R"/>
-				<label for="timeType1">특정날에만</label>
-				<label for="timeType2">정기적으로</label>
-				
-				<div id="specificDateDiv">
-					<div id="title">특정날에만</div>
-					<div id="specificDateCal"></div>
-					<br/><input type="hidden" id="select_date" name="select_date" />
+			<input type="radio" id="timeType1" name="time_type" value="S"/>
+			<input type="radio" id="timeType2" name="time_type" value="R"/>
+			<label for="timeType1">특정날에만</label>
+			<label for="timeType2">정기적으로</label>
+					
+			<div id="specificDateDiv">
+				<div id="title">특정날에만</div>
+				<div id="specificDateCal"></div>
+				<br/><input type="hidden" id="select_date" name="select_date" />
+			</div>
+					
+			<div id="regularDateDiv">
+				<div id="title">정기적으로</div>
+				<div id="startDateDiv">
+					<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
+					<input type="button" id="endDateBtn" value="돌봄 종료일 선택" />
+					<hr/><img src="<%=request.getContextPath()%>/img/boom.png" id="boom"/>
+					<input type="text" id="start_date" name="start_date" readonly="readonly" />
+					<input type="text" id="end_date" name="end_date" readonly="readonly" />
 				</div>
-				
-				<div id="regularDateDiv">
-					<div id="title">정기적으로</div>
-					<div id="startDateDiv">
-						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
-						<input type="text" id="start_date" name="start_date" readonly="readonly" />
-						<input type="hidden" id="end_date" name="end_date"  />
-						
-					</div>
-					<div id="selectDayDiv">
-						<input type="checkbox" id="rd1" name="yoil" value="월" />
-						<input type="checkbox" id="rd2" name="yoil" value="화" />
-						<input type="checkbox" id="rd3" name="yoil" value="수" />
-						<input type="checkbox" id="rd4" name="yoil" value="목" />
-						<input type="checkbox" id="rd5" name="yoil" value="금" />
-						<input type="checkbox" id="rd6" name="yoil" value="토" />
-						<input type="checkbox" id="rd7" name="yoil" value="일" />
-						<ul>
-							<li><label for="rd1">월</label></li>
-							<li><label for="rd2">화</label></li>
-							<li><label for="rd3">수</label></li>
-							<li><label for="rd4">목</label></li>
-							<li><label for="rd5">금</label></li>
-							<li><label for="rd6">토</label></li>
-							<li><label for="rd7">일</label></li>
-						</ul>
-					</div>
-				</div>
-				<div id="timeDiv">
-					<div id="startDiv">
-						<span>시작 시간</span><br/>		
-						<select id="start_time" name="start_time" onselect="endTime();">
-						</select>
-					</div>
-					<div id="endDiv">
-						<span>종료 시간</span><br/>
-						<select id="end_time" name="end_time">
-							<option>종료시간</option>
-						</select>
-					</div>
+				<div id="selectDayDiv">
+					<input type="checkbox" id="rd1" name="yoil" value="월" />
+					<input type="checkbox" id="rd2" name="yoil" value="화" />
+					<input type="checkbox" id="rd3" name="yoil" value="수" />
+					<input type="checkbox" id="rd4" name="yoil" value="목" />
+					<input type="checkbox" id="rd5" name="yoil" value="금" />
+					<input type="checkbox" id="rd6" name="yoil" value="토" />
+					<input type="checkbox" id="rd7" name="yoil" value="일" />
+					<ul>
+						<li><label for="rd1">월</label></li>
+						<li><label for="rd2">화</label></li>
+						<li><label for="rd3">수</label></li>
+						<li><label for="rd4">목</label></li>
+						<li><label for="rd5">금</label></li>
+						<li><label for="rd6">토</label></li>
+						<li><label for="rd7">일</label></li>
+					</ul>
 				</div>
 			</div>
+			<div id="timeDiv">
+				<div id="startDiv">
+					<span>시작 시간</span><br/>		
+					<select id="start_time" name="start_time" onselect="endTime();">
+					</select>
+				</div>
+				<div id="endDiv">
+					<span>종료 시간</span><br/>
+					<select id="end_time" name="end_time">
+						<option>종료시간</option>
+					</select>
+				</div>
+			</div><br/>
+			<button type="button" class="btn btn-warning next">저장</button>
+			<img src="<%=request.getContextPath()%>/img/fatman.png" id="fatman"/>
 		</div>
 	</div>
 	</form>

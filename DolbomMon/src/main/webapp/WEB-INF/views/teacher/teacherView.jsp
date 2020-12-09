@@ -14,8 +14,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script>
 	$(function(){
-		
-		//신고버튼
 		$(document).on("click", "#report", function(){
 			location.href="/dbmon/report?userid=${vo.userid}";
 		})
@@ -49,11 +47,6 @@ width:50%;
 #report{
 	cursor: pointer;
 }
-#map {
-width:100%;
-height:200px;
-border-radius:10px;
-}
 </style>
 </head>
 <body>
@@ -62,11 +55,11 @@ border-radius:10px;
 <hr/><br/>
 </div>
 <div class="container">
-	<c:if test="${mvo.userid!=paramid}"><div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div></c:if>
+	<div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
    <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
    <ul class="list-group">
    		
-   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
+   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><button name="shinchung" class="btn btn-warning float-right">신청</button><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    		
    </ul>
@@ -278,18 +271,8 @@ border-radius:10px;
    	</ul>	
 		<h5>활동 가능 지역</h5>
 		<ul class="list-group">
-		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> ${vo.area1} </li>
+		<li class="list-group-item p-4"><span class="badge badge-warning">1순위</span> ${vo.area1}</li>
 		</ul>
-		
-		<!-- 타인에게만 보여주는 지도 -->
-		<c:if test="${mvo.userid!=paramid}">
-		<h5>출발 위치</h5>
-		<div id="map"></div>
-		<div style="font:0.8em gray; text-align:center; width:100%;" >※돌봄몬의 개인정보보호를 위해 대략적인 위치만 표시됩니다.</div>
-		</c:if>
-		
-		
-		
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">
@@ -300,51 +283,8 @@ border-radius:10px;
    		</li>
    		</ul>
    <br/>
-   
-   
-   <!-- ================================지도======================================== -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
-
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(${mvo.lat}, ${mvo.lng}), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
-    };
-
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-
-    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
-    map.setZoomable(false);    
-
-
-var imageSrc = 'img/orangeMarker.png', // 마커이미지의 주소입니다    
-    imageSize = new kakao.maps.Size(90, 90), // 마커이미지의 크기입니다
-    imageOption = {offset: new kakao.maps.Point(27, 45)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-      
-// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-    markerPosition = new kakao.maps.LatLng(${mvo.lat}, ${mvo.lng}); // 마커가 표시될 위치입니다
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition, 
-    image: markerImage // 마커이미지 설정 
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);  
-</script>
-
-
-   
 </div>
-
-
-
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 
-<jsp:include page="../footer.jsp"/>

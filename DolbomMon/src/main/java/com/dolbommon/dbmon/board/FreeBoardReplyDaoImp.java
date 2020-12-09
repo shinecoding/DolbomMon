@@ -12,5 +12,4 @@ public interface FreeBoardReplyDaoImp {
 	public int replyUpdate(FreeBoardReplyVO vo);
 	//댓글 삭제
 	public int replyDelete(int re_no);
-
 }

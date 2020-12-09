@@ -197,7 +197,7 @@
                 data:{userid: $("#userid").val()
                      },
               success:function(result){
-            	  if(result>=1){
+            	  if(result==1){
             		  alert("이미 사용중인 아이디입니다.");
             	  }else if(result==0){
             		  if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){

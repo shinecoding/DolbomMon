@@ -20,31 +20,28 @@
  	input[type=file]{display:none;}
 </style>
 <script>
-$(function(){
-	$("#plusBtn").click(function(e){
-		$("#pic").click();
+	$(function(){
+		$("#plusBtn").click(function(e){
+			console.log("1");
+			$("#pic").click();
+		});
 	});
 	
+	function laterUpload(){
+		document.getElementById("pic").value = "";
+	}
 	
-	$("#uploadFrm").submit(function(){
-		var pic = $("#pic").val();
-		if(pic==null || pic==""){
-			alert("이미지를 설정해주세요");
-			return false;
-		}
-		return false;
-	});
-});
 
-function laterUpload(){
-	location.href="<%=request.getContextPath()%>/";
-}
+	
+	function nextTime(){
+		location.href="<%=request.getContextPath()%>/dbm/introduce";
+	}
 
 </script>
 
 </head>
 <body>
-	<form id="uploadFrm" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/dbm/profileImageOk">
+	<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/dbm/profileImageOk">
 			<input id="pic" type="file" name="pic" />
 	<div class="container">
 		<h3>내 프로필 사진<span>(선택사항)</span></h3>
@@ -54,7 +51,7 @@ function laterUpload(){
 		</div>
 		<p>내 사진을 올리면 부모회원의 선택을 <span>5배 더 많이</span> 받을 수 있습니다.</p>		
 		<input type="submit" value="지금 올리기" />
-		<input id="later" type="button" value="나중에 하기" onclick="laterUpload();"/>
+		<input id="later" type="submit" value="나중에 하기" onclick="laterUpload();"/>
 	</div>
 	</form>
 </body>
