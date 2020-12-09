@@ -75,6 +75,8 @@
 			<when test='filename1!=null and !filename1.equals("")'>
 			, filename1
 			</when>
+		</choose>
+		<choose>
 			<when test='filename2!=null and !filename2.equals("")'>
 			, filename2
 			</when>
@@ -84,6 +86,8 @@
 			<when test='filename1!=null and !filename1.equals("")'>
 			, #{filename1}
 			</when>
+		</choose>
+		<choose>
 			<when test='filename2!=null and !filename2.equals("")'>
 			, #{filename2}
 			</when>
@@ -91,12 +95,37 @@
 		)
 	</insert>
 	
+	<select id="getFileName" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select filename1, filename2 from freeBoard where no=#{no}
+	</select>
+	
 	<delete id="freeBoardDel">
 		delete from freeBoard where no=#{param1} and userid=#{param2}
 	</delete>
 	
 	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		update freeBoard set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid}
+		update freeBoard set subject=#{subject}, content=#{content} 	
+			<choose>
+				<when test='filename1 neq null and !filename1.equals("")'>
+				, filename1=#{filename1}
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 neq null and !filename2.equals("")'>
+				, filename2=#{filename2}
+				</when>	
+			</choose>
+			<choose>
+				<when test='filename1 eq null or filename1.equals("")'>
+				, filename1=null
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 eq null or filename2.equals("")'>
+				, filename2=null
+				</when>	
+			</choose>
+		where no=#{no} and userid=#{userid}
 	</update>
 	
 	<select id="optionSelect" resultType="com.dolbommon.dbmon.board.FreeBoardVO">

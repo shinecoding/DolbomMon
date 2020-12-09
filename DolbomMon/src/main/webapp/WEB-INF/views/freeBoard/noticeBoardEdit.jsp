@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 글 수정하기</title>
+<title>공지사항 수정하기</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -36,7 +36,7 @@ $(function(){
 		$(this).parent().remove();	
 	});
 	
-	$("#freeBoardEditFrm").submit(function(){
+	$("#noticeBoardEditFrm").submit(function(){
 		if($("#subject").val()==""){
 			alert("글제목을 입력하세요.");
 			$("#subject").focus();
@@ -60,20 +60,9 @@ $(function(){
 <div id="top">
 <b>게시판 글 수정하기</b>
 </div>
-	<form method="post" action="/dbmon/freeBoardEditOk" id="freeBoardEditFrm" enctype="multipart/form-data">
+	<form method="post" action="/dbmon/noticeBoardEditOk" id="noticeNoticeEditFrm" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="${vo.no}"/>
 		<div class="form-group">
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary" type="button">말머리</button>
-				</div>
-				<select class="custom-select" name="head" id="head" aria-label="Example select with button addon">	
-					<option selected>부모님 이야기</option>
-					<option>선생님 이야기</option>
-					<option>아이들 이야기</option>
-					<option>사담</option>
-				</select>
-			</div>
 	 		<label for="subject">제목</label>
 			<input type="text" maxlength="60" class="form-control" id="subject" name="subject" value="${vo.subject}"><br/>
 			<div>
@@ -104,7 +93,13 @@ $(function(){
 				<input type="file" name="filename" id="filename4"/>
 			</c:if>
 			<br/>
-
+			<div class="form-check">
+			<br/>
+			<input class="form-check-input" type="checkbox" value="Y" id="expose" name="expose">
+			<label class="form-check-label" for="expose">
+			전체 게시판 등록하기
+			</label>
+			</div>
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>
