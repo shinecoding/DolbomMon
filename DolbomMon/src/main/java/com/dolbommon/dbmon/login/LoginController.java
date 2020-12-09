@@ -97,8 +97,10 @@ public class LoginController {
 		res.addCookie(cookie);
 		ses.invalidate();
 		
+		
 		return "home";
 	}
+
 	
 	// 계정찾기 폼으로 이동
 	@RequestMapping("/searchId")

@@ -13,7 +13,7 @@
 $(function(){
 	
 	$(document).ready(function(){
-		window.resizeTo(496,668);
+		window.resizeTo(525,630);
 	})
 	
 });
@@ -40,7 +40,7 @@ $(function(){
 </style>
 </head>
 <body onload="">
-<div id="mainPage">
+<div id="mainPage" style="margin:0 auto;">
 	<form action="/dbmon/messageWriteOk" method="post">
 		<input type="hidden" name="userid_w" value="${userid_w}"/>
 	    <div class="form-group">
