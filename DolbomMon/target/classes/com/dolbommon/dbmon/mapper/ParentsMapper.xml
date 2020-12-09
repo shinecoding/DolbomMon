@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.parent.ParentDaoImp">
 	<insert id="insertDbmSearch" >
-		insert into parent_list(job_board_no, userid, care_addr, time_type, pw_activity, wish_wage, consultation, wish_age, wish_gender, content, lat, lng, writedate, hit) 
-			values(member_sq.nextval, #{userid}, #{care_addr}, #{time_type}, #{pw_activity}, #{wish_wage}, #{consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0)
+		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit) 
+			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0)
 	</insert>
 	<insert id="insertDsChildInfo">
 		insert into add_child(job_board_no, child_birth, userid) 

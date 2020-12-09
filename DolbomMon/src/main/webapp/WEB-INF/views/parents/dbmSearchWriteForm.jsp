@@ -104,15 +104,10 @@
 			for(var i=1;i<5;i++){
 				if($("#childrenInfo>input[id=childrenCnt"+i+"]").is(":checked")){
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ffc207");
-					$("#childrenDetail").html("");
-					var tag = ""
-					tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
-					tag += "<span class='cb'>자녀 생년월일</span><input class='cbtext' type='date' name='child_birth' /></li>";
-					for(var j=0;j<i;j++){
-						$("#childrenDetail").append(tag);
-					}
+					$("#childcnt"+i).fadeIn(700);
 				}else{
 					$("label[for="+i+"]").css("background-color", "#EFEFEF");
+					$("#childcnt"+i).css("display", "none");
 				}
 			}
 			/////////////////// 페이지 로딩 시 //////////////////////end
@@ -191,8 +186,6 @@
 		//////////// 나이 변경 ///////////////
 		$("input[name=wish_age]").change(function(){
 			for(var i=0;i<20;i++){
-				$("#dadadada").fadeIn(30);
-				$("#dadadada").fadeOut(30);
 			}
 			var selectedData = $(this).attr("id");
 			
@@ -208,22 +201,34 @@
 		
 		//////////// 자녀 정보 //////////////
 		$("#childrenInfo>input[type=radio]").change(function(){
+			$(".child_birth").val("");
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ffc207");
-					$("#childrenDetail").html("");
-					var tag = ""
-					tag += "<li>";
-					tag += "<input type='button' class='cb' value='자녀생년월일'><input type='date' id='child_birth' name='child_birth' /></li>";
-					for(var j=0;j<i;j++){
-						$("#childrenDetail").append(tag);
-					}
+					$("#childcnt"+i).fadeIn(700);
 				}else{
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#EFEFEF");
+					$("#childcnt"+i).css("display", "none");
 				}
 			}
 		});
-		
+		var todayday = new Date();
+		$(".childBtn").datepicker({
+			showAnim : "show",
+			changeMonth : true,
+			changeYear : true,
+			minDate : new Date(todayday.getFullYear()-15, todayday.getMonth(), todayday.getDate()),
+			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()-1, todayday.getDate()),
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				var tname = $(this).val();
+				console.log("fd => " + tname);
+				$(this).val("자녀 생년월일");
+				$(this).next().val(tname);
+			},
+			altFormat:"yyyy-mm-dd"
+		});
+		////////////자녀 정보 //////////////
 		///////////////////////////// 지도 생성 ////////////////////////////////
 		
 		///////////////////////////// 지도 생성 ////////////////////////////////
@@ -259,27 +264,31 @@
 		$("#regularDateDiv #startDateBtn").datepicker({ // 시작일 데이트피커
 			showAnim : "show",
 			minDate : "0",
-			maxDate : "30d",
+			maxDate : "15d",
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #start_date").val(dateText);
 				$("#regularDateDiv #startDateBtn").val("돌봄 시작일");
-				$("#regularDateDiv #endDateBtn").datepicker("option", "minDate", dateText);
-				console.log(dateTxt);
+				var startDate = new Date(dateText);
+				var minDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()+14);
+				var maxDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()+16);
+				$("#regularDateDiv #endDateBtn").datepicker("option", "minDate", minDate);
+				$("#regularDateDiv #endDateBtn").datepicker("option", "maxDate", maxDate);
 				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+				$("#regularDateDiv #end_date").val("");
 			},
 			altFormat:"yyyy-mm-dd"
 		});
 		
 		//////////////////////////정기적으로 ////////////////////////// 
-		$("#regularDateDiv #endDateBtn").datepicker({ // 시작일 데이트피커
+		$("#regularDateDiv #endDateBtn").datepicker({ // 종료일 데이트피커
 			showAnim : "show",
-			maxDate : "4m",
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #end_date").val(dateText);
 				
 				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+				
 			},
 			altFormat:"yyyy-mm-dd"
 		});
@@ -316,16 +325,28 @@
 			altFormat:"yyyy-mm-dd"
 		});
 		
+		$("input[name=period_week]").change(function(){
+			var selectedData = $(this).attr("id");
+			console.log("selectedData => " + selectedData);
+			for(var i=2;i<5;i++){
+				if(selectedData==("week"+i)){
+					setEndDate(i);
+					$(this).parent("label").css("background-color", "#FFC207");
+				}else{
+					$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
+				}
+				
+			}
+		});
+		
 		/////////////////////////// 등록하기 버튼 누를 시 ////////////////////////
 		$("#writeFrm").submit(function(){
 			var wage = $("#wish_wage").val();
 			if(wage==null || wage==""){
 				alert("희망시급을 입력해주세요");
-				$.divOnOff(this);
 				return false;
 			}else if(wage<8590){
 				alert("희망시급은 최소 8590원 이상이어야합니다.");
-				$.divOnOff(this);
 				return false;
 			}
 			var pw_activityCnt = $("input[name=pw_activity]:checked").length;
@@ -335,7 +356,6 @@
 					text : "원하는 돌봄유형을 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=pw_activity]");
 				return false;
 			}
 			
@@ -346,7 +366,6 @@
 					text : "원하는 선생님 성별을 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=wish_gender]");
 				return false;
 			}
 			
@@ -357,7 +376,6 @@
 					text : "원하는 선생님 나이대를 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=wish_age]");
 				return false;
 			}
 			
@@ -368,23 +386,26 @@
 					text : "자녀의 정보를 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=childrenCnt]");
 				return false;
 			}
 			
-			$("input[name=child_birth]").each(function(){
-				var cbtext = $(this).val();
-				if(cbtext == null || cbtext == ""){
-					console.log("cb =>" + cbtext);
-					swal({
-						title : "자녀 정보 입력",
-						text : "자녀의 생년월일을 입력해주세요",
-						icon : "info"
-					});
-					$.divOnOff("input[name=child_birth]");
-					return false;
+			var cnttt = 0;
+			$(".child_birth").each(function(){
+				var cb = $(this).val();
+				if(cb==null || cb==""){
+					cnttt = cnttt+1;
+					console.log("cnttt => " + cnttt);
 				}
 			});
+			if(cnttt == 0){
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 생년월일을 입력해주세요",
+					icon : "info"
+				});
+				cnttt = 0;
+				return false;
+			}
 			
 			if($("input[name=time_type]:checked").length<1){
 				swal({
@@ -392,7 +413,6 @@
 					text : "선생님을 만나고 싶은 날을 선택해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=time_type]");
 				return false;
 			}
 			
@@ -405,7 +425,6 @@
 						title : "돌봄 날짜를 선택 해주세요",
 						icon : "info"
 					});
-					$.divOnOff("input[name=time_type]");
 					return false;
 				}
 			} else if(time_type=="R"){ // 정기적으로 
@@ -418,7 +437,6 @@
 						text : "돌봄 시작날짜를 선택해주세요",
 						icon : "info"
 					});
-					$.divOnOff("#start_date");
 					return false;
 				}else if(end_date==null || end_date==""){
 					swal({
@@ -426,7 +444,6 @@
 						text : "돌봄 종료날짜를 선택해주세요",
 						icon : "info"
 					});
-					$.divOnOff("#end_date");
 					return false;
 				}
 				
@@ -437,7 +454,6 @@
 						text : "선생님을 만나고 싶은 요일을 선택해주세요",
 						icon : "info"
 					});
-					$.divOnOff("input[name=yoil]");
 					return false;
 				}
 			}
@@ -453,7 +469,6 @@
 					text : "돌봄 종료시간을 선택해주세요",
 					icon : "info"
 				});
-				$.divOnOff("#end_time");
 				return false;
 			}
 			
@@ -470,7 +485,7 @@
 					$(function(){
 						var lng;
 						var lat;
-						$("#zipcodeBtn").click(function(){
+						$(".zipcodeBtn").click(function(){
 							console.log("클릭");
 							new daum.Postcode({
 						        oncomplete: function(data) {
@@ -559,7 +574,7 @@
 			var i=1;
 			for(i;i<=48;i++){
 				if($("#start_time option[id=rt"+i+"]").val()==test){
-					endTime(i);
+					endTime(i); 	
 				}
 			}
 		});
@@ -584,6 +599,21 @@
 			time.setMinutes(time.getMinutes()+30);
 		}
 		document.getElementById("end_time").innerHTML = tag;
+	}
+	
+	function setEndDate(i){
+		var date = new Date();
+		var startDate = document.getElementById("start_date").value;
+		console.log("startDate => " + startDate);
+		var data = new Date(startDate);
+		var endDate;
+		var setEndDate;
+		var month = Number(data[1]);
+		console.log(i);
+		endDate = new Date(data.getFullYear(), data.getMonth(), data.getDate()+(7*i));
+		console.log("end_date => " + endDate);
+		setEndDate = endDate.getFullYear()+"-"+(endDate.getMonth()+1)+"-"+endDate.getDate();
+		document.getElementById("end_date").value = setEndDate;
 	}
 </script>
 <style>
@@ -686,7 +716,24 @@
 						<div><label for="childrenCnt4">4명</label></div>
 					</div>
 					<div id="childrenDetailDiv">
-						<ul id="childrenDetail"></ul>
+						<ul id="childcnt1">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt2">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt3">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt4">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀4 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -697,15 +744,15 @@
 			<div id="addrDiv" class="mainDiv">
 				<div id="mapImgDiv" style="margin:30px 0;">
 					<div>아직 장소를 입력하지 않았습니다.</div>
-					<img src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
+					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
-				<div id="mapDiv" style="margin:30px 0; display:none;">
+				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">
+					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" style="display:inline-block;border:none;"/></div>
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
-					<input class="btn btn-warning" type="button" id="zipcodeBtn" value="돌봄 장소" />
+					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소" />
 					<input type="hidden" id="care_addr" name="care_addr"/>
-					<input type="hidden" id="dong_addr" name="dong_addr"/>
 					<input type="hidden" id="lat" name="lat"/>
 					<input type="hidden" id="lng" name="lng"/>
 				</div>
@@ -728,12 +775,11 @@
 				
 				<div id="regularDateDiv">
 					<div id="title">정기적으로</div>
+						<input type="hidden" id="end_date" name="end_date" readonly="readonly" />
 					<div id="startDateDiv">
 						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
 						<input class="btn btn-warning" type="button" id="endDateBtn" value="돌봄 종료일" />
 						<input type="text" id="start_date" name="start_date" readonly="readonly" />
-						<input type="text" id="end_date" name="end_date" readonly="readonly" />
-						
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -753,6 +799,13 @@
 							<li><label for="rd7">일</label></li>
 						</ul>
 					</div>
+					<hr/>
+					<div id="periodDiv">
+						<div>기간을 선택해주세요.</div>
+						<label for="week2"><input type="radio" id="week2" name="period_week" value="2"/>2주</label>
+						<label for="week3"><input type="radio" id="week3" name="period_week" value="3"/>3주</label>
+						<label for="week4"><input type="radio" id="week4" name="period_week" value="4"/>4주</label>
+					</div>
 				</div>
 				<div id="timeDiv">
 					<div id="startDiv">
@@ -765,6 +818,10 @@
 						<select id="end_time" name="end_time">
 							<option>종료시간</option>
 						</select>
+					</div>
+					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
+    					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
 			</div>
@@ -782,8 +839,14 @@
 				<div id="wageDiv">
 					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590"/><span>원/1시간</span>
 				</div>
-				<label for="avgWage" style="width:50%;cursor:pointer;"><input type="checkbox" id="avgWage" style="width:5%;"/><span style="width:90%;">평균시급 적용</span></label>
-				<label for="consultation" style="width:50%;cursor:pointer;"><input type="checkbox" id="consultation" style="width:5%;" name="consultation" value="Y"/><span style="width:90%;">시급 협의 가능</span></label>
+					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
+    					<input type="checkbox" class="custom-control-input" id="avgWage">
+    					<label class="custom-control-label" for="avgWage">평균시급 적용</label>
+					</div>
+					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
+    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation">
+    					<label class="custom-control-label" for="consultation">시급 협의가능</label>
+					</div>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의

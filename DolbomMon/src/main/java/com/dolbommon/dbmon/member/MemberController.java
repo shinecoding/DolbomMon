@@ -325,8 +325,8 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="/dbm/profileImageOk", method = RequestMethod.POST)
-		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses,
-				@RequestParam("userid") String uesrid) {
+		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses
+				) {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			
 			String path = ses.getServletContext().getRealPath("/upload");
@@ -374,9 +374,9 @@ public class MemberController {
 				if(who.equals("T")) {
 					ses.setAttribute("pic", fileNames[i]);
 				}else {
-					System.out.println(uesrid);
+					String userid = (String)ses.getAttribute("userid");
 					System.out.println("파일명 => " + fileNames[i]);
-					imgresult = dao.parentImageUpload(fileNames[i], uesrid);
+					imgresult = dao.parentImageUpload(fileNames[i], userid);
 				}
 			}
 			ModelAndView mav = new ModelAndView();

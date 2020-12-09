@@ -11,7 +11,7 @@
 <style>
 	.container{width:700px; text-align:center;}
 	
-	h4{margin:30px 0;}
+	h4{margin:100px 0 30px 0;}
 	h4>span{color:lightblue; font-size:18px; line-height:28px;}
 	
 	textarea{
@@ -30,7 +30,7 @@
 	#warningDiv img{width:17px; height:17px;}
 	#warningDiv p{display:inline-block; width:auto; font-size:13px; color:gray; margin:0;}
 	
-	input[type=submit]{width:90%; height:40px; margin:30px 0; border:1px solid gray; border-radius:10px;}
+	input[type=submit]{width:90%; height:40px; margin:30px 0; background-color:orange; border:1px solid gray; color:#EFEFEF; border-radius:10px;}
 </style>
 <script>
 	
@@ -43,7 +43,7 @@
 			<h4>간단 자기소개<span>(선택사항)</span></h4>
 			<textarea name="intro" placeholder="간단한 자기소개 작성 시 부모님에게 2배 더 많은 신청을 받게 됩니다."></textarea>
 			<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
-			<input type="submit" value="다음"/>
+			<input type="submit" class="btn" value="다음"/>
 		</form>
 	</div>
 </body>

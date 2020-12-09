@@ -65,8 +65,8 @@ public class ParentController {
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		dao.hitCount(no);
 		List<ApplyToParentInfoVO> tlist = dao.applyDbmSelect(no);
-		RecruitBoardVO rbVO = dao.jobSearchBoardSelect(no);
-		ChildrenVO cVO = dao.jobSearchChildSelect(no);
+		RecruitBoardVO rbVO = dao.recruitBoardSelect(no);
+		ChildrenVO cVO = dao.recruitChildSelect(no);
 		
 		
 		
@@ -82,10 +82,10 @@ public class ParentController {
 		
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {
-			SpecificDateVO sdVO = dao.jobSearchSpecificDateSelect(no);
+			SpecificDateVO sdVO = dao.recruitSpecificDateSelect(no);
 			mav.addObject("sdVO", sdVO);
 		}else if(timeType.equals("R")){
-			RegularDateVO rdVO = dao.jobSearchRegularDateSelect(no);
+			RegularDateVO rdVO = dao.recruitRegularDateSelect(no);
 			mav.addObject("rdVO", rdVO);
 		}
 		
@@ -147,20 +147,20 @@ public class ParentController {
 	
 	@RequestMapping(value = "/refusalDbm", method = RequestMethod.POST)
 	@ResponseBody
-	public int refusalDbm(@RequestParam("dbmid") String dbmid) {
+	public int refusalDbm(@RequestParam("dbmid") String dbmid, @RequestParam("no") int no) {
 		
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
-		int result = dao.refusalDbm(dbmid);
+		int result = dao.refusalDbm(dbmid, no);
 		
 		return result;
 	}
 
 	@RequestMapping(value = "/applyCancel", method = RequestMethod.POST)
 	@ResponseBody
-	public int applyCancel(@RequestParam("dbmid") String dbmid) {
+	public int applyCancel(@RequestParam("dbmid") String dbmid, @RequestParam("no") int no) {
 		
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
-		int result = dao.applyCancel(dbmid);
+		int result = dao.applyCancel(dbmid, no);
 		
 		return result;
 	}
@@ -186,6 +186,23 @@ public class ParentController {
 		if(consultation==null || consultation=="") {
 			rbVO.setConsultation("N");
 		}
+		String time_consultation = (String)rbVO.getTime_consultation();
+		if(time_consultation==null || time_consultation=="") {
+			rbVO.setConsultation("N");
+		}
+		
+		String childb = cVO.getChild_birth();
+		String childbArr[] = childb.split(",");
+		
+		String child_birthStr = "";
+		for(int i=0;i<childbArr.length;i++) {
+			if(!childbArr[i].equals("")) {
+				child_birthStr += childbArr[i]+",";
+			}
+		}
+		String child_birth = child_birthStr.substring(0, child_birthStr.length()-1);
+		System.out.println("자녀 생년월일 => " + child_birth);
+		cVO.setChild_birth(child_birth);
 		
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		ModelAndView mav = new ModelAndView();

@@ -202,11 +202,12 @@
 		
 		$(document).on('click', '#refusalBtn', function(){
 			var dbmid = $(this).parents("#dbmDiv").children("#dbmid").val();
-			
+			var jobNo = $("#jobNo").text();
 			$.ajax({
 	          	url:"refusalDbm",
 	          	type:"post",
-	            data:{dbmid: dbmid
+	            data:{dbmid: dbmid,
+	            	no : jobNo
 	            },
 	            success:function(result){
 	            	console.log("result => " + result);
@@ -225,12 +226,14 @@
 		$(document).on('click', '#cancleBtn', function(){
 			var cancleQna = confirm("정말 취소하시겠습니까?");
 			var dbmid = $(this).parents("#dbmDiv").children("#dbmid").val();
-			
+			var jobNo = $("#jobNo").text();
+			console.log("jobNo => " + jobNo);
 			if(cancleQna){
 				$.ajax({
 		          	url:"applyCancel",
 		          	type:"post",
-		            data:{dbmid: dbmid
+		            data:{dbmid: dbmid,
+		            	no : jobNo
 		            },
 		            success:function(result){
 		            	console.log("result => " + result);
@@ -238,7 +241,7 @@
 		               		alert("취소하였습니다");
 		               		location.reload();
 		               	}else{
-		               		2
+		               		
 		               	}
 		            }, error:function(){
 		                    
@@ -261,7 +264,10 @@
 		var end_date = "${rdVO.end_date}";
 		var syoil = "${rdVO.yoil}";
 		var selectedYoil = syoil.split(",");
-		console.log("start_date =>" + start_date);
+		console.log("start_date => " + start_date);
+		console.log("end_date => " + end_date);
+		console.log("start_time => " + start_time);
+		console.log("end_time => " + end_time);
 		var tag = "";
 		var today = new Date();
 		var startday = new Date(start_date);
@@ -290,43 +296,70 @@
 		
 		console.log("입력받은 요일 => " + selectedYoil);
 		console.log("시작일의 요일 => " + startday.getDay());
-		console.log("정렬 전전 => " + getYoil);
-		var cnt = 0;
+		console.log("정렬 전 => " + getYoil);
+		var cnt = 0; // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
 		for(var i=0;i<getYoil.length;i++){
 			if(getYoil[i]==(startday.getDay())){
-				first = getYoil[i];
-				console.log("getDay => " + startday.getDay());
-				console.log("getYoil => " + getYoil[i]);
-				console.log("인덱스 => " + i);
 				cnt = 1;
 				var idx = getYoil.indexOf(getYoil[i]);
-				console.log("?" + idx);
+				console.log("삭제할 배열의 인덱스 =>" + idx);
 				getYoil.splice(idx,1);
-				console.log("지우기" +  getYoil);
+				console.log("삭제 후 => " +  getYoil);
 				getYoil.unshift(startday.getDay());
 			}
 		}
 		console.log("정렬 후 => " + getYoil);
-		var data;
+		
+		var pdata;
+		var mdata;
+		
 		if(cnt == 0){
+			console.log("선택날짜에 해당요일이 없는 경우");
 			lbl :
-			for(var i=0;i<getYoil.length;i++){
+			for(var i=0;i<7;i++){
 				for(var j=0;j<7;j++){
-					data = getYoil[j]+i;
-					if(data == 7){
-						data = 1;
-					}else if(data == 8){
-						data = 2;
-					}else if(data == 9){
-						data = 3;
+					mdata = getYoil[j]-i;
+					pdata = getYoil[j]+i;
+					console.log("mdata 확인 => " + mdata);
+					console.log("pdata 확인 => " + pdata);
+					if(pdata == 7){
+						pdata = 1;
+					}else if(pdata == 8){
+						pdata = 2;
+					}else if(pdata == 9){
+						pdata = 3;
+					}else if(pdata == 10){
+						pdata = 4;
 					}
-					if(data==startday.getDay()){
-						console.log("james => " + data);
+					
+					if(mdata == 0){
+						mdata = 7;
+					}else if(mdata == -1){
+						mdata = 6;
+					}else if(mdata == -2){
+						mdata = 5;
+					}else if(mdata == -3){
+						mdata = 4;
+					}
+					
+					console.log("시작일 확인 =>" + startday.getDay());
+					if(mdata==startday.getDay()){
+						console.log("mdata로 설정됨 => " + mdata);
 						first = first+i;
+						console.log("이동할 날짜  => " + first);
+						break lbl; 
+					}
+					
+					if(pdata==startday.getDay()){
+						console.log("pdata로 설정됨 => " + pdata);
+						first = first+i;
+						console.log("이동할 날짜  => " + first);
 						break lbl;
 					}
 				}
+				
 			}
+			
 			startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+first);
 			
 			for(var i=0;i<getYoil.length;i++){
@@ -387,12 +420,6 @@
 		
 		console.log("변환 후 => " + getYoil);
 		
-		var sd = startday.getTime() - today.getTime();
-		
-		var ed = endday.getTime() - startday.getTime();
-		var edl = Math.floor(ed/1000/60/60/24);
-		edll = Math.floor(edl/7);
-		
  		for(var i=0; i<120; i++){
 				var nextDay = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+i);
 				var year = nextDay.getFullYear();
@@ -436,9 +463,9 @@
 		
 		if(stM == '30'){
 			startDivLoc = stH*2 + 1;
-			console.log("분 => " + startDivLoc)
+			console.log("시작 시간 분 O => " + startDivLoc)
 		}
-		console.log("분 x => " + startDivLoc)
+		console.log("시작 시간 분 x => " + startDivLoc)
 		
 		var endDivLoc = 0;
 		
@@ -446,17 +473,30 @@
 		
 		if(etM == '30'){
 			endDivLoc = etH*2 +1;
-			console.log("종료시간 => " + endDivLoc)
+			console.log("종료시간 분 O => " + endDivLoc)
 		}		
-		console.log("종료시간 m x=> " + endDivLoc)
-		
+		console.log("종료시간 분 X => " + endDivLoc)
+		console.log("총 일할 시간 =>" + (endDivLoc - startDivLoc));
 		console.log("입력받은 요일 => " + getYoil);
-		console.log("배열 길이 => " + getYoil.length);
+		
+		var sd = startday.getTime() - today.getTime();
+		var sdd = new Date(start_date);
+		console.log("dsd=>" + sdd);
+		var ed = endday.getTime() - startday.getTime();
+		var edd = new Date(end_date);
+		var edl = Math.floor(ed/1000/60/60/24)+1;
+		edll = Math.floor(edl/7);
+		var edlll = edl%7;
+		
+		
+		console.log("두 날짜 사이의 일 수 => " + edl);
+		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
+		console.log("마지막 날짜 => " + edd);
+		
 		
 		var timebar = "";
 		
-		
-		for(var j=0;j<edll;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
+		for(var j=0;j<edll+1;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
 			for(var i=0;i<getYoil.length;i++){
 				var height = (endDivLoc - startDivLoc)*10;
 				var top = startDivLoc*10+50+1;
@@ -489,7 +529,6 @@
 		
 		
 		
-		
 		//////////////////////////////////////////////////////////////////////////
 		
 	});
@@ -505,7 +544,7 @@
    <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
    <ul class="list-group">
          <li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${rbVO.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">학부모</span><br/>
-         <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span class="ml-2">${rbVO.job_board_no }</span></li>
+         <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span id="jobNo" class="ml-2">${rbVO.job_board_no }</span></li>
    </ul>
    <br/>
    <ul class="list-group list-group-horizontal-sm">
@@ -516,7 +555,7 @@
     <h5>신청 내용</h5>
     <li class="list-group-item p-5" style="text-align:center"><c:if test="${rbVO.content==null || rbVO.content=='' }" >아직 작성하지 않았습니다.</c:if><c:if test="${rbVO.content!=null || rbVO.content!='' }">${rbVO.content }</c:if></li>
     <h5>돌봄 장소</h5>
-   	<li class="list-group-item p-4"><span class="badge badge-warning">${rbVO.care_addr }</span> 
+   	<li class="list-group-item p-4"><span style="color:orange;">*${rbVO.dong_addr }</span> 
       	<div id="map" style="width:100%;height:300px;"></div>
     	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87"></script>
 		<script>
@@ -531,11 +570,11 @@
       	</li>
       	<h5>돌봄 기간/시간</h5>
 	      	<li class="list-group-item" style="border-bottom:none;">
-	      		<c:if test="${rbVO.consultation == 'Y'}">
-	      			*이 일정은 선생님에 맞춰 얼마든지 조절할 수 있습니다.
+	      		<c:if test="${rbVO.time_consultation == 'Y'}">
+	      			<span style="color:orange;">*이 일정은 선생님에 맞춰 얼마든지 조절할 수 있습니다.</span>
 	      		</c:if>
-	      		<c:if test="${rbVO.consultation == 'N'}">
-	      			아래 표시된 날짜만 돌봐주세요.
+	      		<c:if test="${rbVO.time_consultation == 'N'}">
+	      			<span style="color:orange;">아래 표시된 날짜만 돌봐주세요.</span>
 	      		</c:if>
 	      	</li>
       	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;;">
