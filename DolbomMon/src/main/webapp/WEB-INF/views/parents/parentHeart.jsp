@@ -324,10 +324,7 @@ $(function(){
 	</div>
 	</div>
 	
-	<!--<c:if test="${list==null}">
-		<div style="text-align:center;">찜한 돌봄몬이 없습니다.</div>					
-	</c:if>
-	-->
+	
 	<div id="likeBox">
 	<c:forEach var="vo" items="${list}">
 		<c:if test="${vo.active == 'Y'}">
