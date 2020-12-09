@@ -89,15 +89,15 @@ $(function(){
 			<!-- 첫번째 첨부파일이 있을 때 -->			
 			<c:if test="${vo.filename1!=null}">
 				<div>${vo.filename1} <b>X</b></div>
-				<input type="hidden" name="filename1" id="filename1"/>
-				<input type="hidden" id="delfile1" value="${vo.filename1}"/>
+				<input type="hidden" name="filename" id="filename1"/>
+				<input type="hidden" name="" id="delfile1" value="${vo.filename1}"/>
 			</c:if>
 			<br/>
 			<!-- 두번째 첨부파일이 있을 때 -->
 			<c:if test="${vo.filename2!=null}">
 				<div>${vo.filename2} <b>X</b></div>
-				<input type="hidden" name="filename2" id="filename2"/>
-				<input type="hidden" id="delfile2" value="${vo.filename2}"/>		
+				<input type="hidden" name="filename" id="filename2"/>
+				<input type="hidden" name="" id="delfile2" value="${vo.filename2}"/>		
 			</c:if>
 			<!-- 두번째 첨부파일이 없을 때 -->
 			<c:if test="${vo.filename2==null}">

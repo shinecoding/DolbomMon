@@ -382,28 +382,55 @@ public class BoardController {
 		//mr에서 MultipartFile 객체를 얻어온다.	--> List
 		List<MultipartFile> files = mr.getFiles("filename");
 		
-		vo.setUserid((String)mr.getParameter("userid"));
+		vo.setUserid((String)ses.getAttribute("userid"));
 		vo.setNo(Integer.parseInt(mr.getParameter("no")));
 		vo.setDelfile(mr.getParameterValues("delfile"));
-		
-		int idx = 0;
-		String fileName[] = new String[2];
-		//Enumeration fileList = mr.getFileNames();
-		Iterator fileList = mr.getFileNames();
-		
 
-		while(fileList.hasNext()) {
-			//String old = (String)fileList.next();
-			String newFile = mr.getLocalName();
+		String fileNames[] = new String[files.size()];	//2개
+		int idx = 0;
+		
+		if(files!=null) {	//첨부파일이 있을때
 			
-			if(newFile!=null) {
-				fileName[idx++] = newFile;
+			for(int i=0; i<files.size(); i++) {		
+				MultipartFile mf = files.get(i);
+				String fName = mf.getOriginalFilename();	//폼의 파일명 얻어오기
 				
-			}	
-		}	
+				if(fName!=null && !fName.equals("")) {				
+					//원래의 파일명 중 확장자를 제외한 앞부분
+					String oriFileName = fName.substring(0, fName.lastIndexOf("."));
+					//확장자명 구하기
+					String oriExt = fName.substring(fName.lastIndexOf(".")+1);
+					//이름 바꾸기
+					File f = new File(path, fName);
+					
+					if(f.exists()) {	//원래의 파일 객체가 서버에 있으면 실행
+						
+						for(int renameNum=1; ; renameNum++) {	//무한루프
+							String renameFile = oriFileName + renameNum + "." + oriExt;	//변경된 파일명
+							f = new File(path, renameFile);
+							
+							if(!f.exists()) {	//파일이 있으면 true, 없으면 false
+								//같은 이름의 파일이 없을때 파일명 적용
+								fName = renameFile;
+								break;				
+							}			
+						}	//for
+					}
+					try {
+						mf.transferTo(f);	
+					}catch(Exception e) {
+						e.printStackTrace();	
+					}
+					fileNames[idx++] = fName;
+				}	//if
+			}	//for
+		}
+		
+		System.out.println(fileNames[0]);
+		System.out.println(fileNames[1]);
+		
 		String[] del = vo.getDelfile();
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		
 		
 		if(idx<2) {	//이전에 업로드한 파일을 다 지울 때
 			//데이터 베이스에 있는 원래 파일명 얻어오기
@@ -417,21 +444,24 @@ public class BoardController {
 						}
 					}
 					if(chk==0) {
-						fileName[idx++] = dbFilename;
+						fileNames[idx++] = dbFilename;
 					}
 				}
 			}else {	//삭제할 파일이 없는 경우
 				for(String dbFilename : dbFile) {
 					if(dbFilename!=null) {
-						fileName[idx++] = dbFilename;
+						fileNames[idx++] = dbFilename;
 					}
 				}
 			}
 		}
+		vo.setFilenames(fileNames);
+		for(String f:fileNames) {
+			System.out.println("f="+f);
+		}
 		
-		//vo.setFilename(fileName);
-		
-		
+		String sql = sqlSession.getConfiguration().getMappedStatement("freeBoardEditOk").getBoundSql(vo).getSql();
+		System.out.print(sql);
 		int result = dao.freeBoardEditOk(vo);
 		
 		if(result>0 && del!=null) {	//수정 성공
@@ -442,23 +472,8 @@ public class BoardController {
 			}
 		}
 		
-
 		ModelAndView mav = new ModelAndView();
-		return mav;
-	}
-			 
-			 
-			 
-			 
-	//자유게시판 글 수정ok
-	
-	 /*@RequestMapping(value="/freeBoardEditOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardEditOk(FreeBoardVO vo, HttpSession ses) {
-		vo.setUserid((String)ses.getAttribute("userid"));
-		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		int result = dao.freeBoardEditOk(vo);
 		
-		ModelAndView mav = new ModelAndView();
 		if(result>0) {
 			mav.addObject("no", vo.getNo());
 			mav.setViewName("redirect:freeBoard");
@@ -466,7 +481,7 @@ public class BoardController {
 			mav.setViewName("board/result");
 		}
 		return mav;
-	}*/
+	}
 	
 	//자유게시판 글 삭제ok
 	@RequestMapping("/freeBoardDel")

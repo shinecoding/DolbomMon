@@ -169,67 +169,38 @@
 	<hr/>
 	<br/>
 	</c:forEach> 
+	
+	<div class="row">
+  <div class="col-sm-6" style="padding: 10px;">
+    <div class="card">
+      <div class="card-body">
+      <div style="float:left;"><img src="img/tea1.PNG" class="rounded-circle"/></div>
+      <div style="float:right; padding: 5px;">
+        <h5 class="card-title">돌봄몬을 찾습니다</h5>
+        <p class="card-text">신생아 1명, 유아 1명</p>
+        <p class="card-text">충북 청주시 청원구</p>
+        <p class="card-text">희망시급 10,000원 | 협의가능 | 12월 12일 시작</p>
+        </div>
+        <a href="#" class="btn btn-warning">신청하기</a>
+      </div>
+    </div>
+  </div>
 
-	<!-- 
-	
-	
-	<div id="offerBox" class="d-inline-block" style="width:100%;">
-	<c:forEach var="vo" items="${list2}">
-		<div class="card" onclick="location.href='parentView'">
-			<img class="profilepic" src="img/baby.png" alt="${vo.userid}"/><br/>
-			<div class="card-body">
-				<h5 class="card-title"><b>${vo.username.substring(0,1)}O${vo.username.substring(2)} </b>
-				//마지막 업데이트일
-				<span class="ml-2" style="font-size:0.7em">
-						<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
-						<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.last_edit/43200}"/>
-						<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
-						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
-					<c:choose>
-						<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
-						<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
-						<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
-						<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>
-						<c:otherwise>${vo.last_edit}분</c:otherwise>
-					</c:choose>
-				</span>
-				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorite" style="height:30px; width:30px; float:right;">
-				</h5>
-							
-				<h6 class="loc"><i class="fas fa-map-marker-alt"></i>지역</h6>
-				<h6><i class="fas fa-coins mr-1"></i>희망시급 : 원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
-				<h6><i class="fas fa-child"></i>나이 | <i class="fas fa-baby-carriage"></i>유아 2명</h6>
-		
-				<c:if test="${vo.identi_status =='Y' || vo.license_status == 'Y' || vo.school_status == 'Y' || vo.crime_status == 'Y'}">
-				<hr/>
-				</c:if>
-				<c:if test="${vo.identi_status == 'Y' }"><div class="badge badge-pill badge-warning align-top mr-1">등초본</div></c:if>
-				<c:if test="${vo.license_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">선생님</div></c:if>
-				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
-				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄클린</div></c:if>
-			</div>	
-		</div>
-	</c:forEach>
-	
-
-	</div>
-
+  
+</div>
 	
 	
 	
 	
-	 -->
-
-<hr/>
-<br/>
-
+	
+	
+	
 <hr/>
 <br/>
 
 
 
  </div>
-</div>
 <jsp:include page="../footer.jsp"/>
 </body>
 </html>

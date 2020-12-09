@@ -12,7 +12,7 @@ public class FreeBoardVO {
 	private String head;
 	private String filename1;
 	private String filename2;
-	
+	private String filenames[];
 	private String delfile[];
 	private int nextNo;
 	private int preNo;
@@ -170,6 +170,19 @@ public class FreeBoardVO {
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
 	}
+	
+	public String[] getFilenames() {
+		return filenames;
+	}
+	public void setFilenames(String[] filenames) {
+		this.filenames = new String[filenames.length];
+		this.filenames=filenames;
+		for(int i=0; i<filenames.length;i++) {
+			if(i==0) this.filename1 = filenames[i];
+			if(i==1) this.filename2 = filenames[i];
+		}
+	}
+	
 	public String[] getDelfile() {
 		return delfile;
 	}
