@@ -388,7 +388,6 @@
 		console.log("변환 후 => " + getYoil);
 		
 		var sd = startday.getTime() - today.getTime();
-		var sdl = Math.floor(sd/1000/60/60/24)-1;
 		
 		var ed = endday.getTime() - startday.getTime();
 		var edl = Math.floor(ed/1000/60/60/24);
