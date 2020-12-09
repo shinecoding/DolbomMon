@@ -32,15 +32,21 @@
 <body>
 <div id="topMain">
 <%@include file="/WEB-INF/views/top.jsp"%>
+</div>
+
+
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
+	    	<a href="#"></a></div>
+	    	<img src="img/141.png" style="width:100%; height:400px; "/>
 <hr/>
-</div>
 <div class="container">
-<div id="top">
+<!-- <div id="top">
 <b>공지사항</b>
-</div>
+</div> -->
 <div>
 	<!-- 관리자만 볼 수 있게 숨기기 -->
-	<a class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
+	<a class="btn btn-warning" href="noticeBoardWrite" role="button" style="float:right; margin-bottom:30px;">글쓰기</a>
 </div>
 <div id="notice">
 <br/>
