@@ -754,7 +754,7 @@ public class BoardController {
 		return mav;
 	}
 		
-	//자유게시판 글 수정폼으로 이동ok
+	//공지사항 글 수정폼으로 이동ok
 	@RequestMapping("/noticeBoardEdit")
 	public ModelAndView noticeBoardEdit(int no) {
 		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
@@ -767,7 +767,7 @@ public class BoardController {
 		return mav;
 	}
 		
-	//글 수정
+	//공지사항 글 수정
 	@RequestMapping(value="/noticeBoardEditOk", method=RequestMethod.POST)
 	public ModelAndView noticeBoardEditOk(NoticeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 		//파일을 저장할 위치
@@ -862,9 +862,10 @@ public class BoardController {
 		for(String f:fileNames) {
 			System.out.println("f="+f);
 		}
-			
-		String sql = sqlSession.getConfiguration().getMappedStatement("noticeBoardEditOk").getBoundSql(vo).getSql();
-		System.out.print(sql);
+		vo.setExpose(req.getParameter("expose"));
+		System.out.println("vo.expose"+vo.getExpose());
+		//String sql = sqlSession.getConfiguration().getMappedStatement("noticeBoardEditOk").getBoundSql(vo).getSql();
+		//System.out.print(sql);
 		int result = dao.noticeBoardEditOk(vo);
 		
 		if(result>0 && del!=null) {	//수정 성공

@@ -175,7 +175,7 @@
   <div class="col-sm-6" style="padding: 10px;">
     <div class="card">
       <div class="card-body">
-      <div style="float:left;"><img src="img/tea1.PNG" class="rounded-circle"/></div>
+      <div style="float:left;"><img src="img/tea1.PNG" class="rounded"/></div>
       <div style="float:right; padding: 5px;">
         <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
         <p class="card-text">신생아 1명, 유아 1명</p>
@@ -199,7 +199,7 @@
         </p>
         
         </div>
-        <a href="#" class="btn btn-warning" style="align: center; border: 1px solid red;">신청하기</a>
+        <a href="#" class="btn btn-warning" style="border: 1px solid red;">신청하기</a>
       </div>
     </div>
   </div>

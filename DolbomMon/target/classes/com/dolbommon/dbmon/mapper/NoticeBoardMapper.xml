@@ -116,22 +116,32 @@
 		update noticeBoard set subject=#{subject}, content=#{content} 	
 			<choose>
 				<when test='filename1 neq null and !filename1.equals("")'>
-				, filename1=#{filename1}
+					, filename1=#{filename1}
 				</when>
 			</choose>
 			<choose>
 				<when test='filename2 neq null and !filename2.equals("")'>
 				, filename2=#{filename2}
-				</when>	
+					</when>	
 			</choose>
 			<choose>
 				<when test='filename1 eq null or filename1.equals("")'>
-				, filename1=null
+					, filename1=null
 				</when>
 			</choose>
 			<choose>
 				<when test='filename2 eq null or filename2.equals("")'>
-				, filename2=null
+					, filename2=null
+				</when>
+			</choose>	
+			<choose>
+				<when test='expose!=null and expose.equals("Y")'>
+					, expose='Y'
+				</when>
+			</choose>
+			<choose>
+				<when test='expose==null and !expose.equals("Y")'>
+					, expose=null
 				</when>
 			</choose>
 		where no=#{no} and userid=#{userid}
