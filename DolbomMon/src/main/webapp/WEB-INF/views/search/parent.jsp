@@ -169,7 +169,8 @@
 	</div>
 	<hr/>
 	<br/>
-	</c:forEach>
+	</c:forEach> 
+
 
 <hr/>
 <br/>

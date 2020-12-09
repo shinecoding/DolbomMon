@@ -50,9 +50,7 @@ public class ParentController {
 		
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		
-		List<ParentHistoryVO> list = dao.selectAllRdBoard(userid);
-		
-		
+		List<ParentHistoryVO> list = dao.selectMyRdBoard(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -69,6 +67,8 @@ public class ParentController {
 		List<ApplyToParentInfoVO> tlist = dao.applyDbmSelect(no);
 		RecruitBoardVO rbVO = dao.jobSearchBoardSelect(no);
 		ChildrenVO cVO = dao.jobSearchChildSelect(no);
+		
+		
 		
 		String who = (String)ses.getAttribute("who");
 		String userid = (String)ses.getAttribute("userid");
@@ -191,13 +191,19 @@ public class ParentController {
 		ModelAndView mav = new ModelAndView();
 		
 		String time_type = (String)rbVO.getTime_type();
+		System.out.println("type_type => " + time_type);
 		int result = 0;
 		try {
+			System.out.println("in");
 			dao.insertDbmSearch(rbVO);
+			System.out.println("parent_list 데이터 등록 됨");
 			dao.insertDsChildInfo(rbVO, cVO);
+			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
+				System.out.println("S");
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
+				System.out.println("R");
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);
