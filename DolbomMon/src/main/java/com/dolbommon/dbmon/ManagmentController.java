@@ -236,7 +236,7 @@ public class ManagmentController {
 		mav.setViewName("management/leaveReason");
 		return mav;
 	}
-	
+	/*
 	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
 	@ResponseBody
 	public ModelAndView managerRegister(ManagerVO vo, HttpServletRequest req) {
@@ -244,9 +244,29 @@ public class ManagmentController {
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
 		//int result = dao.insertManager(vo);
 		System.out.println("test ddddddddddddd");
-		int result = 1;
-		mav.addObject("ok", result);
+		int result = 0;
+		if(result>=1) {
+			mav.addObject("msg", "true");
+		}else {
+			mav.addObject("msg", "false");
+		}
+		//mav.setViewName("management/joinResultPage");
 		return mav;
+	}
+	*/
+	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String managerRegister(ManagerVO vo, HttpServletRequest req) {
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		int result = dao.insertManager(vo);
+		String resultString;
+		if(result>=1) {
+			resultString = "true";
+		}else {
+			resultString = "flase";
+		}
+		//mav.setViewName("management/joinResultPage");
+		return resultString;
 	}
 	
 }

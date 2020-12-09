@@ -157,10 +157,16 @@ var test='<%=(String)session.getAttribute("userid")%>';
 	var popupHeight = 1300;
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
 	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	
 	$(document).on("click","#joinBtn",function(){
 		window.open('/dbmon/managerRegister', '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
-
 	});
+	/* iframe으로 열기
+	function onPopupWindow(){
+		var win =  window.open(null, '_blank', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		win.document.write('<iframe width="100%", height="100%" src="/dbmon/managerRegister" frameborder="0" allowfullscreen></iframe>')
+	}
+	*/
 	//마우스 휠 방향전환
 	$("#managerTable").on('mousewheel',function(e){
 		var wheelDelta = e.originalEvent.wheelDelta;
@@ -188,7 +194,7 @@ var test='<%=(String)session.getAttribute("userid")%>';
 
 <div class="container">
 <div class="clearfix" style="height:50px;">
-<button class="btn btn-outline-warning" id="joinBtn"style="float:right; margin-top:6px;">관리자 등록</button>
+<button class="btn btn-outline-warning" id="joinBtn"style="float:right; margin-top:6px;" >관리자 등록</button> <!-- onclick=" onPopupWindow()" iframe으로열기 -->
 </div>
 <table id="managerTable"  class="table hover">
     <thead>
