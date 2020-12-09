@@ -32,7 +32,7 @@
 				alert("이미지를 설정해주세요");
 				return false;
 			}
-			return false;
+			return true;
 		});
 	});
 	

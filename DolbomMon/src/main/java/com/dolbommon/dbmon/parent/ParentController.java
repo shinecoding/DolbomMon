@@ -50,7 +50,7 @@ public class ParentController {
 		
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		
-		List<ParentHistoryVO> list = dao.selectAllRdBoard(userid);
+		List<ParentHistoryVO> list = dao.selectMyRdBoard(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -67,6 +67,8 @@ public class ParentController {
 		List<ApplyToParentInfoVO> tlist = dao.applyDbmSelect(no);
 		RecruitBoardVO rbVO = dao.jobSearchBoardSelect(no);
 		ChildrenVO cVO = dao.jobSearchChildSelect(no);
+		
+		
 		
 		String who = (String)ses.getAttribute("who");
 		String userid = (String)ses.getAttribute("userid");

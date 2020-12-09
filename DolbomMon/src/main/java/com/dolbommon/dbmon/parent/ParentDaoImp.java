@@ -16,7 +16,7 @@ public interface ParentDaoImp {
 	public int insertDsRegularDate(@Param("rbVO")RecruitBoardVO rbVO, @Param("rdVO")RegularDateVO rdVO); // 선생님 구하기 - 정기적으로
 	
 	// 학부모 - 구인글 목록
-	public List<ParentHistoryVO> selectAllRdBoard(String userid);
+	public List<ParentHistoryVO> selectMyRdBoard(String userid);
 	
 	// 내게(학부모) 신청한 - 선생님 정보
 	public List<ApplyToParentInfoVO> applyDbmSelect(String userid);

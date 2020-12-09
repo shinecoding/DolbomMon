@@ -16,6 +16,7 @@ public class ParentHistoryVO {
 	private String lng;
 	private String child_birth;
 	private int tcnt;
+	private String pic;
 	
 	public int getJob_board_no() {
 		return job_board_no;
@@ -106,6 +107,12 @@ public class ParentHistoryVO {
 	}
 	public void setTcnt(int tcnt) {
 		this.tcnt = tcnt;
+	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 	
 	
