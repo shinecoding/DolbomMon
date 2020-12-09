@@ -8,8 +8,8 @@
 			values(member_sq.nextval, #{userid}, #{care_addr}, #{time_type}, #{pw_activity}, #{wish_wage}, #{consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0)
 	</insert>
 	<insert id="insertDsChildInfo">
-		insert into add_child(job_board_no, child_birth) 
-			values(member_sq.currval, #{cVO.child_birth})
+		insert into add_child(job_board_no, child_birth, userid) 
+			values(member_sq.currval, #{cVO.child_birth}, #{rbVO.userid})
 	</insert>
 	<insert id="insertDsSpecificDate">
 		insert into jb_specific_day(job_board_no, select_date, start_time, end_time)
@@ -20,9 +20,35 @@
 			values(member_sq.currval, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date})
 	</insert>
 	
-	<select id="applyDbmSelect" parameterType="String" resultType="com.dolbommon.dbmon.parent.ApplyToParentVO" >
-			select member.username, member.tel1, member.birth, member.gender, teacher.desired_wage, teacher.cctv 
-			from member, apply_to_parent, teacher 
-	    	where member.userid = apply_to_parent.userid and apply_to_parent.userid = teacher.userid and parent_list.userid = #{param1}
+	<select id="selectAllRdBoard" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
+		select p.job_board_no, p.userid, p.care_addr, p.time_type, p.pw_activity, p.wish_age, p.wish_wage, p.consultation, p.wish_gender, p.content, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate,
+		 p.lat, p.lng, c.child_birth, (select count(t_userid) from t_p_table where  job_board_no = p.job_board_no) tcnt
+			from parent_list p, add_child c
+    		where c.userid = #{param1} and c.userid = p.userid and p.job_board_no = c.job_board_no
+    		order by tcnt desc
 	</select>
+	
+	<select id="applyDbmSelect" parameterType="String" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO" >
+		select t_p_table.job_board_no, member.username, member.tel1, member.birth, member.gender, teacher.desired_wage, teacher.cctv 
+			from member, t_p_table, teacher 
+	    	where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and parent_list.userid = #{param1}
+	</select>
+	
+	<select id="applyDbmCnt" >
+		select count(t_userid) from t_p_table where job_board_no = #{param1}
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

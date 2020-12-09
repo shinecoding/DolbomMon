@@ -70,20 +70,18 @@
 
 <%@include file="/WEB-INF/views/top.jsp"%>
 
-<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
-            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
-	    	<a href="#"></a></div>
-	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
-<hr/>
 
+<hr/><br/>
 
 
 <div class="container">
 
 <div id="top_freeboard">
+
+<b>자유게시판</b>
 </div>
 <div>
-	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button" style="float:right;">글쓰기</a>
+	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
 </div>
 <div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board" style="font-size: 0.9em;">

@@ -50,13 +50,13 @@ public class LoginController {
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
 
-		
 	      //암호화
 		 String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
 
 	      vo.setUserpwd(encryPassword);
 	    
 		//기존 세션값 제거
+		
 		
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	
