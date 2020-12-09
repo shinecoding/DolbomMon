@@ -20,31 +20,32 @@
  	input[type=file]{display:none;}
 </style>
 <script>
-$(function(){
-	$("#plusBtn").click(function(e){
-		$("#pic").click();
-	});
-	
-	
-	$("#uploadFrm").submit(function(){
-		var pic = $("#pic").val();
-		if(pic==null || pic==""){
-			alert("이미지를 설정해주세요");
+	$(function(){
+		$("#plusBtn").click(function(e){
+			$("#pic").click();
+		});
+		
+		
+		$("#uploadFrm").submit(function(){
+			var pic = $("#pic").val();
+			if(pic==null || pic==""){
+				alert("이미지를 설정해주세요");
+				return false;
+			}
 			return false;
-		}
-		return false;
+		});
 	});
-});
-
-function laterUpload(){
-	location.href="<%=request.getContextPath()%>/";
-}
+	
+	function laterUpload(){
+		location.href="<%=request.getContextPath()%>/";
+	}
 
 </script>
 
 </head>
 <body>
 	<form id="uploadFrm" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/dbm/profileImageOk">
+			<input id="userid" type="hidden" name="userid" value="${userid }" />
 			<input id="pic" type="file" name="pic" />
 	<div class="container">
 		<h3>내 프로필 사진<span>(선택사항)</span></h3>
@@ -52,8 +53,8 @@ function laterUpload(){
 			<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/join/sitter-join-student.svg" />
 			<img id="plusBtn" style="cursor:pointer;" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/profile/profile-add-bt.svg" />
 		</div>
-		<p>내 사진을 올리면 부모회원의 선택을 <span>5배 더 많이</span> 받을 수 있습니다.</p>		
-		<input type="submit" value="지금 올리기" />
+		<p>회원가입 완료하였습니다. 프로필 사진을 등록해주세요</p>		
+		<input id="uploadSubmit" type="submit" value="지금 올리기" onclick="imgUpload();" />
 		<input id="later" type="button" value="나중에 하기" onclick="laterUpload();"/>
 	</div>
 	</form>

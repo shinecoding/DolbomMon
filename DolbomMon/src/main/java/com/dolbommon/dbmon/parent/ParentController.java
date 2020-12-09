@@ -191,13 +191,19 @@ public class ParentController {
 		ModelAndView mav = new ModelAndView();
 		
 		String time_type = (String)rbVO.getTime_type();
+		System.out.println("type_type => " + time_type);
 		int result = 0;
 		try {
+			System.out.println("in");
 			dao.insertDbmSearch(rbVO);
+			System.out.println("parent_list 데이터 등록 됨");
 			dao.insertDsChildInfo(rbVO, cVO);
+			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
+				System.out.println("S");
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
+				System.out.println("R");
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);
