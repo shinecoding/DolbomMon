@@ -46,8 +46,17 @@ public class TeacherVO {
 	private String crime_status;
 	private String cardid;
 	private int like_check;
+	private String active;
 	
 	
+	
+	
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
+	}
 	public String getCardid() {
 		return cardid;
 	}

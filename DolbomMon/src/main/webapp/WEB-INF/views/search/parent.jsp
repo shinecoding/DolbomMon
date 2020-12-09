@@ -143,7 +143,7 @@
 	</div>
 	<c:forEach var="vo" items="${list2}">
 
-	<div class="wrapper2" onclick="location.href='parentView?no=${vo.job_board_no}'">
+	<div class="wrapper2" onclick="location.href='parentView'">
 
 	<ul class="list-group">
 	<li class="list-group-item"><i class="fas fa-star"></i>
@@ -169,7 +169,8 @@
 	</div>
 	<hr/>
 	<br/>
-	</c:forEach>
+	</c:forEach> 
+
 
 <hr/>
 <br/>

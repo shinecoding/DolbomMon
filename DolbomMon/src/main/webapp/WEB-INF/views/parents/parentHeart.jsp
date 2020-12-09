@@ -28,10 +28,276 @@
 		vertical-align: bottom;
 		text-align:center;
 	}
-	#orderDropdown {
+	#likeFilter, #likeDropdown {
 	border:none;
 	}
+	.trash {
+	cursor:pointer;
+	}
+	
+	#likeBox {
+	display: inline-block;
+	width:100%;
+	min-height:300px;
+	}
+	#allActive, #onlyActive{
+	cursor:pointer;
+	}
 </style>
+<script>
+$(function(){
+	$(document).on("click", ".trash", function(){
+		var cardid = $(this).parent().parent().attr("id");
+		$(this).parent().parent().hide();
+		console.log(cardid);
+		var url = "/dbmon/deleteHeartT";
+		var params = "cardid="+cardid;
+		
+		$.ajax({
+			url:url,
+			data:params,
+			type:'GET',
+			success:function(result){
+				
+				if(result=="1"){
+					console.log("성공");
+					
+					
+				}else if(result="0"){
+					console.log("실패");
+				}
+				
+			}, error:function(){
+				console.log("AJAX 받기 에러");
+			}
+		})
+		
+	});//trash삭제
+	
+	$(document).on("change", "#likeDropdown", function(){
+		var order = $(this).val();
+		console.log("정렬="+order);
+		var url = "/dbmon/likeOrder";
+		var params = "order="+order;
+		console.log("파람="+params);
+		
+		$.ajax({
+			url:url,
+			data:params,
+			type:'GET',
+			success:function(result){
+				console.log("리턴="+result);
+				var $result = $(result);
+				var tag = "";
+				
+				$result.each(function(idx, vo){
+					console.log("액티브"+vo);
+					if(vo.active=="Y"){
+						tag += '<ul class="list-group" id="'+vo.userid+'">';
+						tag += '<li class="list-group-item">';
+						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<img src=';
+						if(vo.pic==null){
+							tag += '"img/profilepic.png"';
+						}else if (vo.pic!=null){
+							tag += '"upload/'+vo.pic+'"';
+						}		
+						
+						tag+= ' class="rounded-circle"/><br/>';
+						
+						tag+= '<div class="badge badge-warning badge-pill ml-3" >신청하기</div>';
+						tag+= '</li>';
+						tag+= '<li class="list-group-item border-0 col-10">';
+						tag+= '<h6><b>' +vo.username.substring(0,1)+ 'O' + vo.username.substring(2)+ '</b>';
+						
+						tag+= '<span class="ml-2" style="font-size:0.7em">';
+								if(vo.last_edit>525600){
+									tag+= Math.round(vo.last_edit/525600) +'년';
+								} else if(vo.last_edit>43200){
+									tag+= Math.round(vo.last_edit/43200) +'달';
+								} else if(vo.last_edit>1440){
+									tag+= Math.round(vo.last_edit/1440) +'일';
+								} else if(vo.last_edit>60){
+									tag+= Math.round(vo.last_edit/60) +'시간';
+								} else {
+									tag+= Math.round(vo.last_edit) +'분';
+								}
+								
+						tag+= '</span></h6>';
+								
+									
+						tag+= '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+vo.area1+'</h6>';
+						tag+= '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+vo.desired_wage + '원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion+ '</h6>';
+						tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
+						tag+= '</li>';
+						tag+= '</ul>';
+							
+						if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+							tag += '<hr/>';
+						}
+						if(vo.identi_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+						} else if(vo.license_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+						} else if(vo.school_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+						} else if(vo.crime_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+						}
+						tag += '<span class="trash"><i class="far fa-trash-alt float-right"></i></span>';
+						tag += '</li></ul><br/>';
+						
+					} else if(vo.active=="N") {
+						
+						tag += '<ul class="list-group" id="'+vo.userid+'">';
+						tag += '<li class="list-group-item">';
+						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';
+						tag += '<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>';
+						tag += '</li>';
+						tag += '<li class="list-group-item border-0 col-10" style="color:gray">';
+						tag += '<h6><b>비공개</b>';
+						tag += '</h6>';
+						tag += '<h6 class="loc"><i class="fas fa-map-marker-alt" style="color:gray"></i>'+vo.area1+'</h6>';
+						tag += '<h6><i class="fas fa-coins mr-1" style="color:gray"></i>희망시급 : '+vo.desired_wage+'원 | <i class="fas fa-hands-helping" style="color:gray"></i>협의유무: '+vo.discussion+'</h6>';
+						tag += '<h6><i class="fas fa-child" style="color:gray"></i>'+vo.birth+'세 | <i class="fas fa-baby-carriage" style="color:gray"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
+						tag += '</li>';
+						tag += '</ul>';
+						tag += '<span class="trash"><i class="far fa-trash-alt float-right" style="color:gray"></i></span>';
+						tag += '</li>';
+						tag += '</ul><br/>';
+					}//else		
+					
+					
+					
+
+					
+					
+				});//result
+				
+				$("#likeBox").html(tag);
+			}, error:function(error){
+				console.log("ajax 받기 에러-->" + error.responseText);
+			}
+		})
+		
+	});//찜
+	
+	//=============================활성화만 ========================//
+		$(document).on("click", "#activeBox>span", function(){
+			
+			var active= $(this).attr("id");
+			console.log(active);
+			var url = "/dbmon/selectActive";
+			var params ="active="+active;
+			
+			$.ajax({
+				url:url,
+				data:params,
+				type:'GET',
+				success:function(result){
+					console.log("리턴="+result);
+					var $result = $(result);
+					var tag = "";
+					
+					$result.each(function(idx, vo){
+						
+					console.log("액티브"+vo);
+					if(vo.active=="Y"){	
+						tag += '<ul class="list-group" id="'+vo.userid+'">';
+						tag += '<li class="list-group-item">';
+						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<img src=';
+						if(vo.pic==null){
+							tag += '"img/profilepic.png"';
+						}else if (vo.pic!=null){
+							tag += '"upload/'+vo.pic+'"';
+						}		
+						
+						tag+= ' class="rounded-circle"/><br/>';
+						
+						tag+= '<div class="badge badge-warning badge-pill ml-3" >신청하기</div>';
+						tag+= '</li>';
+						tag+= '<li class="list-group-item border-0 col-10">';
+						tag+= '<h6><b>' +vo.username.substring(0,1)+ 'O' + vo.username.substring(2)+ '</b>';
+						
+						tag+= '<span class="ml-2" style="font-size:0.7em">';
+								if(vo.last_edit>525600){
+									tag+= Math.round(vo.last_edit/525600) +'년';
+								} else if(vo.last_edit>43200){
+									tag+= Math.round(vo.last_edit/43200) +'달';
+								} else if(vo.last_edit>1440){
+									tag+= Math.round(vo.last_edit/1440) +'일';
+								} else if(vo.last_edit>60){
+									tag+= Math.round(vo.last_edit/60) +'시간';
+								} else {
+									tag+= Math.round(vo.last_edit) +'분';
+								}
+								
+						tag+= '</span></h6>';
+								
+									
+						tag+= '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+vo.area1+'</h6>';
+						tag+= '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+vo.desired_wage + '원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion+ '</h6>';
+						tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
+						tag+= '</li>';
+						tag+= '</ul>';
+							
+						if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+							tag += '<hr/>';
+						}
+						if(vo.identi_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+						} else if(vo.license_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+						} else if(vo.school_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+						} else if(vo.crime_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+						}
+						tag += '<span class="trash"><i class="far fa-trash-alt float-right"></i></span>';
+						tag += '</li></ul><br/>';
+								
+						
+					} else if(vo.active=="N") {
+						
+						tag += '<ul class="list-group" id="'+vo.userid+'">';
+						tag += '<li class="list-group-item">';
+						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';
+						tag += '<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>';
+						tag += '</li>';
+						tag += '<li class="list-group-item border-0 col-10" style="color:gray">';
+						tag += '<h6><b>비공개</b>';
+						tag += '</h6>';
+						tag += '<h6 class="loc"><i class="fas fa-map-marker-alt" style="color:gray"></i>'+vo.area1+'</h6>';
+						tag += '<h6><i class="fas fa-coins mr-1" style="color:gray"></i>희망시급 : '+vo.desired_wage+'원 | <i class="fas fa-hands-helping" style="color:gray"></i>협의유무: '+vo.discussion+'</h6>';
+						tag += '<h6><i class="fas fa-child" style="color:gray"></i>'+vo.birth+'세 | <i class="fas fa-baby-carriage" style="color:gray"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
+						tag += '</li>';
+						tag += '</ul>';
+						tag += '<span class="trash"><i class="far fa-trash-alt float-right" style="color:gray"></i></span>';
+						tag += '</li>';
+						tag += '</ul><br/>';
+					}//else		
+					});//result
+					
+					$("#likeBox").html(tag);
+				}, error:function(){
+					console.log("ajax실패");
+				}
+				
+			})
+			
+		});
+	
+	
+	
+});//제이쿼리
+</script>
 </head>
 <body>
 	<div class="container">
@@ -39,19 +305,25 @@
 	<div id="title">
    		<div id="titlefont">찜한 돌봄몬</div>
 	</div>
-	<div class="mb-3"><i class="fas fa-circle"></i>전체 <i class="fas fa-circle"></i>구인중 일자리만
-		<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
-		<select id="orderDropdown">
-			<option value="last_edit">찜한 순</option>
+	<div id="activeBox" class="mb-3"><span id="allActive"><i class="fas fa-circle" ></i>전체</span> <span id="onlyActive"><i class="fas fa-circle"></i>구인중 일자리만</span>
+		<div id="likeFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
+		<select id="likeDropdown">
+			<option value="like_order">업데이트 순</option>
 			<option value="certi_cnt">인증 수 순</option>
 			<option value="wage_low">시급 낮은 순</option>
 			<option value="wage_high">시급 높은 순</option>
 		</select>
 	</div>
 	</div>
+	
+	<!--<c:if test="${list==null}">
+		<div style="text-align:center;">찜한 돌봄몬이 없습니다.</div>					
+	</c:if>
+	-->
+	<div id="likeBox">
 	<c:forEach var="vo" items="${list}">
-		
-		<ul class="list-group">
+		<c:if test="${vo.active == 'Y'}">
+		<ul class="list-group" id="${vo.userid}">
 			<li class="list-group-item">
 				<ul class="list-group list-group-horizontal">
 					<li class="list-group-item border-0 col-2">
@@ -78,7 +350,6 @@
 						<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
 						<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 					</li>
-					
 				</ul>
 		
 			
@@ -98,12 +369,36 @@
 				<c:if test="${vo.school_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">학교</div></c:if>
 				<c:if test="${vo.crime_status == 'Y'}"><div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div></c:if>
 		
-		<div class="float-right"><i class="far fa-trash-alt"></i></div>
+		<span class="trash"><i class="far fa-trash-alt float-right"></i></span>
+		</li>
 	</ul>
 	<br/>
+	</c:if>
+	<!-- ---------------비활성화된 회원-------------- -->
+	<c:if test="${vo.active == 'N'}">
+		<ul class="list-group" id="${vo.userid}">
+			<li class="list-group-item">
+				<ul class="list-group list-group-horizontal">
+					<li class="list-group-item border-0 col-2">
+						<img src="img/profilepic.png" alt="${vo.userid}" class="rounded-circle"/><br/>
+						<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>
+					</li>
+					<li class="list-group-item border-0 col-10" style="color:gray">
+						<h6><b>비공개</b>
+						</h6>
+						<h6 class="loc"><i class="fas fa-map-marker-alt" style="color:gray"></i>${vo.area1}</h6>
+						<h6><i class="fas fa-coins mr-1" style="color:gray"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping" style="color:gray"></i>협의유무: ${vo.discussion}</h6>
+						<h6><i class="fas fa-child" style="color:gray"></i>${vo.birth}세 | <i class="fas fa-baby-carriage" style="color:gray"></i>돌봄가능아이 : ${vo.headcount}명</h6>
+					</li>
+				</ul>
+		<span class="trash"><i class="far fa-trash-alt float-right" style="color:gray"></i></span>
+		</li>
+	</ul>
+	<br/>
+	</c:if>
 	</c:forEach>
 	
-	
+	</div>
 	
 		
 	<br/>
