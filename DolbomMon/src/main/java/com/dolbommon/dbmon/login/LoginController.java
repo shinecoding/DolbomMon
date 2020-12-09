@@ -49,12 +49,14 @@ public class LoginController {
 	//로그인 화면
 	@RequestMapping(value="/loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
-		 System.out.println("암호확인"+vo.getUserpwd());
+		
+		System.out.println("암호확인"+vo.getUserpwd());
 	      //암호화
 	      String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
 	      vo.setUserpwd(encryPassword);
 	      System.out.println("암호화 된 패스워드"+vo.getUserpwd());
 		//기존 세션값 제거
+		
 		
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	

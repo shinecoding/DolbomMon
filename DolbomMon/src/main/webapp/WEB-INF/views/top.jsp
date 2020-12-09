@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    <script type="text/javascript">
    
          $(function(){
@@ -22,25 +22,6 @@ HTML CSSResult
 EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-@media (max-width:1250px){
-	#fixed-menu{
-		display:none;
-	}
-	#menu-button{
-		display:none;
-	}
-	#topmenu-button{
-		display:none;
-	}
-	.clearfix{
-		display:none;
-	}
-	ul.mainTopmenu {
-		display:none;
-	}
-}
-
-
      #menu-button{
      	-webkit-padding-start:0px;
      	
@@ -78,7 +59,6 @@ EDIT ON
 		 height: 100%;
 		 line-height: 48px;
 		 font-weight:bold;
-		 font-size:18px;
 		 overflow:hidden;
 		 color:gray;
 		 text-decoration: none;
@@ -104,7 +84,6 @@ EDIT ON
       ul.mainTopmenu li a:hover{
       	 color:orange;
 	     opacity:50;
-	     background:rgb(244,244,244);
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
