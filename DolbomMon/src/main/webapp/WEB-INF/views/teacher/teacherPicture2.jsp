@@ -97,17 +97,21 @@
 </style>
 <script>
 	$(function(){
-		var url2 = "/dbmon/showPic";
-		var params2 = "care_type="+care_type;
-	
+		var url = "/dbmon/showPic";
+		var formData = new FormData($("#picForm")[0]);
 		$.ajax({
 			url:url,
-			data:params,
-			type:'GET',
+			data:formData,
+			type:'POST',
+			processData: false, //필수
+			contentType: false, //필수
 			success:function(result){
+				console.log("성공");
+				
+				
 				
 			}, error:function(error){
-				
+				console.log("사진 ajax 실패");
 			}
 				
 		
@@ -139,8 +143,13 @@
 				</div>
 				<input type="submit" class="btn btn-warning" value="저장" />
 			
+		<!-- 	<input type="file" multiple id="photo_upload" name="filename" accept="image/*, video/*"> -->
 		</form>
 		
+		
+		<div id="fileList">
+		
+		</div>
 		
 	</div>
 <jsp:include page="../footer.jsp"/>

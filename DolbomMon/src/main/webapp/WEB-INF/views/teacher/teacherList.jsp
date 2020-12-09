@@ -185,6 +185,7 @@ input:checked + .slider:before {
 <hr/><br/>
 </div>
 <div class="container" >
+	<a href="/dbmon/teacherPicture2" >프로필 사진 업로드</a>
    <div id="title">
    		<div id="titlefont">마이페이지</div>
    		<div class="rightlog">   
@@ -224,7 +225,8 @@ input:checked + .slider:before {
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
-<jsp:include page="../footer.jsp"/>
+
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
 

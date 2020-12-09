@@ -277,6 +277,88 @@ public class TeacherController {
 		return mav;
 	}
 
+	@RequestMapping("/teacherPicture2")
+	public ModelAndView teacherPicture2(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		TeacherVO vo = dao.selectTeacher(userid);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("vo", vo);
+		mav.setViewName("/teacher/teacherPicture2");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/teacherPictureOk2", method = RequestMethod.POST)
+	public ModelAndView teacherPictureOk2(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses,
+			HttpServletRequest req) {
+
+		// folder where the pic will be saved
+		String path = ses.getServletContext().getRealPath("/upload");
+		System.out.println(path);
+		
+		// get the file from teacherPicture.jsp input name=
+		MultipartFile mf = mtfRequest.getFile("filename");
+
+		String pic = null;
+
+		if (mf != null) { // renaming
+			String fName = mf.getOriginalFilename();
+			if (fName != null && !fName.equals("")) {
+				String oriFileName = fName.substring(0, fName.lastIndexOf("."));
+				String oriExt = fName.substring(fName.lastIndexOf(".") + 1);
+
+				File f = new File(path, fName);
+				if (f.exists()) {
+					for (int renameNum = 1;; renameNum++) { // 1,2,3,4...
+						String renameFile = oriFileName + renameNum + "." + oriExt;
+						f = new File(path, renameFile);
+
+						if (!f.exists()) {
+							fName = renameFile;
+							break;
+						}
+					} // for
+				}
+
+				try {
+					mf.transferTo(f); // create file
+				} catch (Exception e) {
+				}
+				pic = fName; // "hi.jpg"
+
+			} // if fName
+
+		} // if mf!=Null
+
+		vo.setUserid((String) ses.getAttribute("userid")); // session id
+		vo.setPic(pic); // putting the picture in
+
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int result = dao.updatePic(vo); // query
+		ModelAndView mav = new ModelAndView();
+
+		if (result <= 0) {
+			// if the picture is not completely uploaded, then erase the picture from the
+			// upload folder
+			if (pic != null) {
+				File ff = new File(path, pic);
+				ff.delete();
+			}
+			// fail
+			//mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
+			mav.setViewName("/teacher/teacherResult");
+		} else { // success
+			mav.setViewName("redirect:teacherEdit");
+		}
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/teacherExp")
 	public ModelAndView teacherExp(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
@@ -289,6 +371,7 @@ public class TeacherController {
 		
 		return mav;
 	}
+	
 	
 	//경험추가
 	@RequestMapping("/teacherAddExp")
