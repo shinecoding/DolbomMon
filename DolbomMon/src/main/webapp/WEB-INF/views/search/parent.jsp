@@ -127,17 +127,24 @@
   </div>
  
    <div class="wrapper1" style="display:inline">
-	<div class="total" style="float:left"> 총 ${totalRecords} 명 </div>
-	<div class="float-right" style="float:right">후기순
-	<svg class="arrow-down-square-fill" width="1em" height="1em" viewBox="0 0 16 16"  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
- 	 <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-	</svg>
+	<div class="total" style="float:left"> 총 ${totalRecords}건의 일자리 찾기가 있습니다</div>
+	<!-- <div class="float-right" style="float:right">후기순 -->
+	<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:20%; float: right;">
+	    <option selected>최신순</option>
+	    <option value="1">후기순</option>
+	    <option value="2">높은 시급순</option>
+	    <option value="3">낮은 시급순</option>
+	</select>
+	<br/>
+
 	</div>
 	<br/><br/><br/>
 	
 	</div>
 	<c:forEach var="vo" items="${list2}">
-<div class="wrapper2" onclick="location.href='parentView?no=${vo.job_board_no}'">
+
+	<div class="wrapper2" onclick="location.href='parentView?no=${vo.job_board_no}'">
+
 	<ul class="list-group">
 	<li class="list-group-item"><i class="fas fa-star"></i>
 	<ul class="list-group list-group-horizontal">
@@ -159,56 +166,52 @@
 		</li>
 			
 	</ul>
-</div>
+	</div>
+	<hr/>
+	<br/>
+	</c:forEach> 
+	
+	<div class="row">
+  <div class="col-sm-6" style="padding: 10px;">
+    <div class="card">
+      <div class="card-body">
+      <div style="float:left;"><img src="img/tea1.PNG" class="rounded"/></div>
+      <div style="float:right; padding: 5px;">
+        <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
+        <p class="card-text">신생아 1명, 유아 1명</p>
+        <p class="card-text">충북 청주시 청원구</p>
+        <p class="card-text">희망시급 10,000원 | 협의가능 | 12월 12일 시작</p>
+        </div>
+        <a href="#" class="btn btn-warning">신청하기</a>
+      </div>
+    </div>
+   </div>
+   <div class="col-sm-6" style="padding: 10px;">
+    <div class="card">
+      <div class="card-body">
+      <div style="float:left; padding: 5px;"><img src="img/tea1.PNG" class="rounded-circle"/></div>
+      <div style="float:right; padding: 5px;">
+        <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
+        <p class="card-text">no. 123
+        <br/>신생아 1명, 유아 1명
+        <br/>충북 청주시 청원구
+        <br/>희망시급 10,000원 | 협의가능 | 12월 12일 시작
+        </p>
+        
+        </div>
+        <a href="#" class="btn btn-warning" style="border: 1px solid red;">신청하기</a>
+      </div>
+    </div>
+  </div>
+
+	
+
 <hr/>
 <br/>
-</c:forEach> 
-
-<div class="wrapper2">
-	<ul class="list-group">
-	<li class="list-group-item">
-	<ul class="list-group list-group-horizontal">
-		<li class="list-group-item border-0 col-2">
-			<img src="img/profilepic.png" class="rounded-circle"/><br/>
-			<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-		</li>
-		<li class="list-group-item border-0 col-10">
-			<h6><b>신생아 1명, 유아 1명</b> | 3분전</h6>
-			<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
-			<h7>경북 구미시 | 홍O동 | 11/18 시작</h7>
-			<h6><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 <b>협의가능</b></h6>
-		</li>
-			
-	</ul>
-</div>
-<hr/>
-<br/>
-<div class="wrapper2">
-	<ul class="list-group">
-	<li class="list-group-item">
-	<ul class="list-group list-group-horizontal">
-		<li class="list-group-item border-0 col-2">
-			<img src="img/profilepic.png" class="rounded-circle"/><br/>
-			<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-		</li>
-		<li class="list-group-item border-0 col-10">
-			<h6><b>신생아 1명, 유아 1명</b> | 3분전</h6>
-			<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
-			<h7>경북 구미시 | 홍O동 | 11/18 시작</h7>
-			<h6><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 <b>협의가능</b></h6>
-		</li>
-			
-	</ul>
-</div>
-<hr/>
-<br/>
-
-
 
 
 
  </div>
-</div>
 <jsp:include page="../footer.jsp"/>
 </body>
 </html>

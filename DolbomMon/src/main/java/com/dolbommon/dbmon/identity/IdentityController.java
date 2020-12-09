@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.board.FreeBoardVO;
+import com.dolbommon.dbmon.login.LoginVO;
 
 @Controller
 public class IdentityController {
@@ -73,11 +74,26 @@ public class IdentityController {
 		}
 		return mav;
 	}
-	
-	
-	//회원탈퇴
-	
-	
-	
-	
+	//회원탈퇴 폼으로 이동
+	@RequestMapping("/withdrawForm")
+	public String withdrawform() {
+
+		return "identity/withdraw";	
+	}
+
+	//회원탈퇴 신청
+	@RequestMapping("/withdraw")
+	public ModelAndView withdraw(IdentityVO vo, HttpSession ses) {
+		
+		vo.setUserid((String)ses.getAttribute("userid"));
+		
+		IdentityDaoImp dao = sqlSession.getMapper(IdentityDaoImp.class);
+		dao.withdraw(vo);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("identity/withdrawResult");
+		
+		return mav;
+	}
+
 }

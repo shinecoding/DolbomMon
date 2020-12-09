@@ -65,19 +65,12 @@
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
-<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
-            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">마이페이지</h1>
-	    	<a href="#"></a></div>
-	    	<img src="img/bx1.png" style="width:100%; height:400px; "/>
-
-
-
 <body>
 
 
 <div class="container" >
    <div id="title">
-   		<div id="titlefont"></div>
+   		<div id="titlefont">마이페이지</div>
    		<div class="rightlog">   
 			   <a id="lgt">로그아웃</a>
 			   <div id="dividebar">|</div>
@@ -99,7 +92,7 @@
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">계정관리</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
    </ul>
 </div>

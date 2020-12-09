@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.Teacher.TeacherVO;
 
 @Controller
@@ -84,11 +85,16 @@ public class MemberController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
+			
+		    String encryPassword = PwdSha256.encrypt(mVo.getUserpwd());
+		    mVo.setUserpwd(encryPassword);
+			
 			String yoil = (String)ses.getAttribute("yoil");
 			String sd = (String)ses.getAttribute("start_date");
 			String ed = (String)ses.getAttribute("end_date");
 			String st = (String)ses.getAttribute("start_time");
 			String et = (String)ses.getAttribute("end_time");
+			
 			rdVo.setYoil(yoil);
 			rdVo.setStart_date(sd);
 			rdVo.setEnd_date(ed);
@@ -102,15 +108,10 @@ public class MemberController {
 			
 			try {
 				if(who.equals("T")) {
-					System.out.println("선생님 들어옴");
 					dao.memberReg(mVo);
-					System.out.println("회원테이블 들어감");
 					dao.memberRegTeacher(mVo, tVo);
-					System.out.println("선생님 테이블 들어감");
 					result = dao.memberRegRegular(mVo, rdVo);
-					System.out.println("결과 =>" + result);
 				}else {
-					System.out.println("학부모 들어옴");
 					result = dao.memberReg(mVo);
 				}
 				transactionManager.commit(status);
@@ -118,8 +119,19 @@ public class MemberController {
 				transactionManager.rollback(status);
 			}
 			
-			mav.addObject("result", result);
-			mav.setViewName("register/regResult");
+				if(who.equals("P")) {
+					if(result==1) {
+						String userid = mVo.getUserid();
+						mav.addObject("userid", userid);
+						mav.setViewName("register/parent/profileImage");
+					}else {
+						mav.addObject("result", result);
+						mav.setViewName("register/result");
+					}
+				}else {
+					mav.addObject("result", result);
+					mav.setViewName("register/regResult");
+				}
 			
 			return mav;
 		}
@@ -312,13 +324,14 @@ public class MemberController {
 			return "register/dbm/profileImage";
 		}
 		
-		@RequestMapping(value="/dbm/profileImageOk")
-		public String dbmProfileImageOk(HttpServletRequest req, HttpSession ses
-				) {
+		@RequestMapping(value="/dbm/profileImageOk", method = RequestMethod.POST)
+		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses,
+				@RequestParam("userid") String uesrid) {
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			
 			String path = ses.getServletContext().getRealPath("/upload");
 			// 파일 업로드를 하기위해서 req에서 MultipartHttpServletRequest 를 생성한다.
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-			
 			// mr에서 MultipartFile객체를 얻어온다.	-> List
 			List<MultipartFile> files = mr.getFiles("pic");
 			
@@ -354,11 +367,31 @@ public class MemberController {
 					}
 				}//for 111
 			}
-			for(int i=0; i<fileNames.length; i++) {
-				ses.setAttribute("pic", fileNames[i]);
+			String who = (String)ses.getAttribute("who");
+			System.out.println("image who => " + who);
+			int imgresult = 0;
+			for(int i=0; i<fileNames.length;i++) {
+				if(who.equals("T")) {
+					ses.setAttribute("pic", fileNames[i]);
+				}else {
+					System.out.println(uesrid);
+					System.out.println("파일명 => " + fileNames[i]);
+					imgresult = dao.parentImageUpload(fileNames[i], uesrid);
+				}
+			}
+			ModelAndView mav = new ModelAndView();
+			if(who.equals("T")) {
+				System.out.println("들어옴  TTTTTTT" );
+				mav.setViewName("register/dbm/introduce");
+				return mav;
+			}else {
+				System.out.println("들어옴 PPPPPPP" );
+				System.out.println("결과 => " + imgresult);
+				mav.addObject("imgresult", imgresult);
+				mav.setViewName("register/regResult");
+				return mav;
 			}
 			
-			return "register/dbm/introduce";
 		}
 		
 		// 돌봄몬 - 간단 자기소개입력 폼 >>

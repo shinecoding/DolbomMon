@@ -23,11 +23,7 @@
 	#content{
 		height: 300px;
 	}
-	#post{
-		width: 80px;
-		display: block;
-		margin: 0 auto;
-	}
+
 </style>
 <script>
 $(function(){
@@ -64,7 +60,7 @@ $(function(){
 <div id="top">
 <b>게시판 글 수정하기</b>
 </div>
-	<form method="post" action="/dbmon/freeBoardEditOk" id="freeBoardEditFrm">
+	<form method="post" action="/dbmon/freeBoardEditOk" id="freeBoardEditFrm" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="${vo.no}"/>
 		<div class="form-group">
 			<div class="input-group mb-3">
@@ -89,28 +85,26 @@ $(function(){
 			<!-- 첫번째 첨부파일이 있을 때 -->			
 			<c:if test="${vo.filename1!=null}">
 				<div>${vo.filename1} <b>X</b></div>
-				<input type="hidden" name="filename1" id="filename1"/>
-				<input type="hidden" id="delfile1" value="${vo.filename1}"/>
+				<input type="hidden" name="filename" id="filename1"/>
+				<input type="hidden" name="" id="delfile1" value="${vo.filename1}"/>
+			</c:if>
+			<!-- 첫번째 첨부파일이 없을 때 -->
+			<c:if test="${vo.filename1==null}">
+				<input type="file" name="filename" id="filename3"/>
 			</c:if>
 			<br/>
 			<!-- 두번째 첨부파일이 있을 때 -->
 			<c:if test="${vo.filename2!=null}">
 				<div>${vo.filename2} <b>X</b></div>
-				<input type="hidden" name="filename2" id="filename2"/>
-				<input type="hidden" id="delfile2" value="${vo.filename2}"/>		
+				<input type="hidden" name="filename" id="filename2"/>
+				<input type="hidden" name="" id="delfile2" value="${vo.filename2}"/>		
 			</c:if>
 			<!-- 두번째 첨부파일이 없을 때 -->
 			<c:if test="${vo.filename2==null}">
-				<input type="file" name="filename2" id="filename2"/>
+				<input type="file" name="filename" id="filename4"/>
 			</c:if>
 			<br/>
-			<!-- 
-			<div>
-				<input type="file" id="filename" name="filename">
-				<input type="file" id="filename" name="filename">
-			</div>
-			 -->
-			  -->
+
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>
