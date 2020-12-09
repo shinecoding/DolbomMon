@@ -2,6 +2,7 @@ package com.dolbommon.dbmon.search;
 
 public class RecruitBoardVO {
 		//구인게시판
+
 		private int job_board_no; //구인글 번호
 		private String userid; //아이디
 		private String care_addr; //돌봄장소
@@ -102,7 +103,8 @@ public class RecruitBoardVO {
 		public void setHit(int hit) {
 			this.hit = hit;
 		}
-		
+
 	}
+
 
 

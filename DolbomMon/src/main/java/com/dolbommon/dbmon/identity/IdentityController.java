@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.board.FreeBoardVO;
+import com.dolbommon.dbmon.login.LoginVO;
 
 @Controller
 public class IdentityController {
@@ -74,8 +75,21 @@ public class IdentityController {
 		return mav;
 	}
 	
-	
-	//회원탈퇴
+	//회원탈퇴 신청
+	@RequestMapping("/withdraw")
+	public ModelAndView withdraw(LoginVO vo, HttpSession ses) {
+		
+		ses.getAttribute("userid");
+		System.out.println(ses.getAttribute("userid"));
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("identity/withdraw");
+		
+		return mav;
+		
+		
+	}
 	
 	
 	

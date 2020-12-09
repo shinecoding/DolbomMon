@@ -83,7 +83,8 @@
 		position:absolute;
 		left:60px;
 		width: -webkit-calc(100% - 60px);
-		height: -webkit-calc(100% - 100px);
+		height: -webkit-calc(100% - 70px);
+		
 		
 	}
 	/*
@@ -215,6 +216,7 @@
 	}
 	#mainPage{
 		overflow: scroll;
+		overflow-x:hidden;
 	}
 
 	
@@ -245,7 +247,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="javascript:memberPage('/dbmon/memberManage');">
+                    <a href="/dbmon/management?type=memberManage">
                        <i class="fa fa-list fa-2x"></i>
                         <span class="nav-text">
                             회원 관리
