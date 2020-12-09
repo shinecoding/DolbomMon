@@ -236,34 +236,14 @@ public class ManagmentController {
 		mav.setViewName("management/leaveReason");
 		return mav;
 	}
-	/*
-	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
-	@ResponseBody
-	public ModelAndView managerRegister(ManagerVO vo, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
-		//int result = dao.insertManager(vo);
-		System.out.println("test ddddddddddddd");
-		int result = 0;
-		if(result>=1) {
-			mav.addObject("msg", "true");
-		}else {
-			mav.addObject("msg", "false");
-		}
-		//mav.setViewName("management/joinResultPage");
-		return mav;
-	}
-	*/
 	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
 	@ResponseBody
 	public String managerRegister(ManagerVO vo, HttpServletRequest req) {
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
-		System.out.println("암호확인"+vo.getUserpwd());
 		//암호화
 		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
 		vo.setUserpwd(encryPassword);
-		System.out.println("암호화 된 패스워드"+vo.getUserpwd());
-		//dao.insertManager(vo);
+		dao.insertManager(vo);
 		return "";
 	}
 	

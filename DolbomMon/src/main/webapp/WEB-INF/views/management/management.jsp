@@ -256,7 +256,7 @@
                     
                 </li>
                 <li class="has-subnav">
-                    <a href="javascript:memberPage('/dbmon/managerManage');">
+                    <a href="/dbmon/management?type=managerManage">
                        <i class="fa fa-folder-open fa-2x"></i>
                         <span class="nav-text">
                             매니저 관리

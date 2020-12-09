@@ -246,7 +246,7 @@ public class LoginController {
 	public ModelAndView temporaryLogin(LoginVO vo, HttpSession ses) {
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		vo.setUserid("test1");
-		vo.setUserpwd("1234");
+		vo.setUserpwd("03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4");
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
 		

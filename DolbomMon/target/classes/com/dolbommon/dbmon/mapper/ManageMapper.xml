@@ -78,4 +78,8 @@
 		</if>		
 		#{department}, #{position}, #{tel}, sysdate, #{userpwd}, #{email}, #{username})
 	</insert>
+	
+	<select id="selectManagerId" parameterType="String" resultType="int">
+		select count(userid) from manager where userid=#{userid}
+	</select>
 </mapper>

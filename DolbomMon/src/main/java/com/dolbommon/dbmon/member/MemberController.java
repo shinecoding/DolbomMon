@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.ManageDaoImp;
 import com.dolbommon.dbmon.Teacher.TeacherVO;
 
 @Controller
@@ -130,7 +131,10 @@ public class MemberController {
 		public int useridChk(@RequestParam("userid") String userid) {
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberUseridChk(userid);
+			ManageDaoImp dao2 = sqlSession.getMapper(ManageDaoImp.class);
+			int result2 = dao.memberUseridChk(userid);
+			int result3 = dao2.selectManagerId(userid);
+			int result = result2 + result3;
 			return result;
 		}
 		

@@ -537,11 +537,6 @@
 	
 	$(function(){
 		$('.form-card').submit(function(){	
-			var idStatus = $("#idStatus").val();
-			if(idStatus=="N"){
-				alert("아이디 중복검사를 해주세요");
-				return false;
-			}
 			var params = $("form[name=form-card]").serialize();
 				$.ajax({
 					url:"/dbmon/managerInsert",
@@ -572,48 +567,7 @@
 				}
 		});
 		
-	
-		$("#idChkBtn").click(function(){
-	        var userid = $("#userid").val();
-	        if(userid==""){
-	        	alert("공백은 사용 불가능합니다.");
-	        	return false;
-	        }
-	        $.ajax({
-                url:"idCheckAjax",
-                type:"post",
-                data:{userid: $("#userid").val()
-                     },
-              success:function(result){
-            	  if(result>=1){
-            		  alert("이미 사용중인 아이디입니다.");
-            	  }else if(result==0){
-            		  if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
-            			  $("#idStatus").val("Y");
-            		  }else{
-            			  $("#idStatus").val("N");
-            		  }
-            	  }
-                }, error:function(){
-                   
-                }
-             });
-	    });
-		
-
-		$("#userid").keyup(function(){
-			$("#idStatus").val("N");
-		});
-		
-		
 	});
-		
-	
-	
-		
-		
-	// 서브밋 새로고침 없게 만들기. ajax로 보낼때 새로고침이 생기기때문에 success로 가기전에 데이터가 날아간다. ajax쓸때는 submit버튼을 쓰면 안되지만 유효성검사 편하게 하려고 어거지로 되게 만듬.
-	//아이디 중복검사만 만들기.
 
 </script>
 </head>
@@ -642,23 +596,11 @@
                 <span>웹페이지관리권한</span>
             </label>
             <small class="form-element-hint">관리권한 설정은 필수입니다.</small>
-        </div><div style="height:1px; float:right;"><button id="idChkBtn" class="btn btn-info" style="position:relative; top:0px;">중복검사</button></div>
+        </div>
         <div class="form-element form-input">
-            <input id="userid" name="userid" class="form-element-field" placeholder="아이디" type="text" required autocomplete="off"/>
+            <input id="userid" name="userid" class="form-element-field" placeholder="아이디" type="text" required autocomplete="off" readonly/>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="userid">관리자 ID</label>
-            <input type="hidden" id="idStatus" value="N"/>
-        </div>
-        <div class="form-element form-input">
-            <input id="password" name="userpwd" class="form-element-field" placeholder="패스워드" type="password" required autocomplete="off"/>
-            <div class="form-element-bar"></div>
-            <label class="form-element-label" for="password">관리자 패스워드</label>
-        </div>
-        <div class="form-element form-input"  style="margin-bottom:16px;">
-            <input id="passwordChk" class="form-element-field" placeholder="패스워드" type="password" required autocomplete="off"/>
-            <div class="form-element-bar"></div>
-            <label class="form-element-label" for="password">패스워드 확인</label>
-            <small class="form-element-hint" id="passChk">비밀번호를 확인해주세요.</small>
         </div>
         <div class="form-element form-select" style="margin-top:23px;">
             <select name="department" id="department" class="form-element-field" required>

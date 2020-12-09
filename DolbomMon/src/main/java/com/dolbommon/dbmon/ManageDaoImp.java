@@ -49,4 +49,7 @@ public interface ManageDaoImp {
 	//매니저 등록
 	public int insertManager(ManagerVO vo);
 	
+	//매니저 아이디 중복확인
+	public int selectManagerId(String userid);
+	
 }
