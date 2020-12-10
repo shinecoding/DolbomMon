@@ -1,5 +1,7 @@
 package com.dolbommon.dbmon.search;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
@@ -45,7 +48,7 @@ public class RecruitBoardController {
 		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		//List<MemberVO> mvoList = dao.selectTMemNo();
+		
 		ModelAndView mav = new ModelAndView();
 		
 		//mav.addObject("mvoList", mvoList);

@@ -62,6 +62,23 @@ $(function(){
 </div>
 	<form method="post" action="/dbmon/noticeBoardEditOk" id="noticeNoticeEditFrm" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="${vo.no}"/>
+			<div style="float: right; margin: 10px;">
+				<div class="form-check">
+					<input class="form-check-input" type="radio" value="Y" id="expose1" name="expose">
+					<label class="form-check-label" for="expose">
+						공지사항 등록하기
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" value="N" id="expose2" name="expose" checked>
+					<label class="form-check-label" for="expose">
+						공지사항 숨기기
+					</label>
+				</div>
+			</div>
+			<br/>
+			<br/>
+			<br/>
 		<div class="form-group">
 	 		<label for="subject">제목</label>
 			<input type="text" maxlength="60" class="form-control" id="subject" name="subject" value="${vo.subject}"><br/>
@@ -80,6 +97,7 @@ $(function(){
 			<!-- 첫번째 첨부파일이 없을 때 -->
 			<c:if test="${vo.filename1==null}">
 				<input type="file" name="filename" id="filename3"/>
+				<br/>
 			</c:if>
 			<br/>
 			<!-- 두번째 첨부파일이 있을 때 -->
@@ -91,15 +109,8 @@ $(function(){
 			<!-- 두번째 첨부파일이 없을 때 -->
 			<c:if test="${vo.filename2==null}">
 				<input type="file" name="filename" id="filename4"/>
+				<br/>
 			</c:if>
-			<br/>
-			<div class="form-check">
-			<br/>
-			<input class="form-check-input" type="checkbox" value="Y" id="expose" name="expose">
-			<label class="form-check-label" for="expose">
-			전체 게시판 등록하기
-			</label>
-			</div>
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>

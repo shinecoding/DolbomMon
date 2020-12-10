@@ -66,6 +66,23 @@ $(function(){
 <b>게시판 글쓰기</b>
 </div>
 	<form method="post" action="/dbmon/noticeBoardWriteOk" id="noticeBoardFrm" enctype="multipart/form-data">
+		<div style="float: right; margin: 10px;">
+			<div class="form-check">
+				<input class="form-check-input" type="radio" value="Y" id="expose1" name="expose">
+				<label class="form-check-label" for="expose">
+					공지사항 등록하기
+				</label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" value="N" id="expose2" name="expose" checked>
+				<label class="form-check-label" for="expose">
+					공지사항 숨기기
+				</label>
+			</div>
+			</div>
+			<br/>
+			<br/>
+			<br/>
 		<div class="form-group">
 	 		<label for="subject">제목</label>
 			<input type="text" maxlength="60" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요"><br/>
@@ -77,13 +94,6 @@ $(function(){
 			<div>
 				<input type="file" id="filename" name="filename">
 				<input type="file" id="filename" name="filename">
-			</div>
-			<div class="form-check">
-			<br/>
-			<input class="form-check-input" type="checkbox" value="Y" id="expose" name="expose">
-			<label class="form-check-label" for="expose">
-			전체 게시판 등록하기
-			</label>
 			</div>
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="등록"/>

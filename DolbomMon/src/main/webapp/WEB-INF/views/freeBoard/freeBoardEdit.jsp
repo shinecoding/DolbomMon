@@ -91,6 +91,7 @@ $(function(){
 			<!-- 첫번째 첨부파일이 없을 때 -->
 			<c:if test="${vo.filename1==null}">
 				<input type="file" name="filename" id="filename3"/>
+				<br/>
 			</c:if>
 			<br/>
 			<!-- 두번째 첨부파일이 있을 때 -->
@@ -102,9 +103,8 @@ $(function(){
 			<!-- 두번째 첨부파일이 없을 때 -->
 			<c:if test="${vo.filename2==null}">
 				<input type="file" name="filename" id="filename4"/>
+				<br/>
 			</c:if>
-			<br/>
-
 			<br/>
 		 	<input type="submit" class="btn btn-warning btn-lg btn-block" value="수정"/>
 		</div>

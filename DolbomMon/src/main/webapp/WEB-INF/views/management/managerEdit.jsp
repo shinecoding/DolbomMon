@@ -508,33 +508,6 @@
 		    element.classList[element.value ? "add" : "remove"]("-hasvalue");
 		  }
 	});
-	
-	
-	$('.form-card').submit(function(){	
-			var params = $("form[name=form-card]").serialize();
-				alert(params);	
-			
-				$.ajax({
-					url:"/dbmon/managerInsert",
-					data:params,
-					type:"POST",
-					success : function(){
-				    	opener.location.reload();
-				        window.close();
-					}, error : function(request,status,error){
-				    	opener.location.reload();
-				       	window.close();
-					}
-				});
-				return false;
-			});
-	
-	/*
-	$('#subBtn').click(function(){
-		alert("test");		
-	});
-	*/
-	
 	$(function(){
 		$('.form-card').submit(function(){	
 			var idStatus = $("#idStatus").val();
@@ -544,76 +517,26 @@
 			}
 			var params = $("form[name=form-card]").serialize();
 				$.ajax({
-					url:"/dbmon/managerInsert",
+					url:"/dbmon/managerEdit",
 					data:params,
 					type:"POST",
 					success : function(){
-						alert("관리자 등록에 성공하였습니다.");
+						alert("관리자 수정에 성공하였습니다.");
 				    	opener.location.reload();
 				        window.close();	
 					}, error : function(request,status,error){
 						alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-						alert("관리자 등록에 실패하였습니다.")
+						alert("관리자 수정에 실패하였습니다.")
 				    	opener.location.reload();
 				       	window.close();
 					}
 				});
 				return false; //매우중요. 
 			});
-		
-		$("#passwordChk").keyup(function(){
-			console.log("test")
-			var userpwd = $("#password").val();
-			var userpwdChk = $(this).val();
-			if(!(userpwd==userpwdChk)){
-				$("#passChk").html("비밀번호가 일치하지 않습니다.").css("color", "#ff0000");
-				}else{
-					$("#passChk").html("비밀번호가 일치합니다.").css("color", "green");
-				}
-		});
-		
-	
-		$("#idChkBtn").click(function(){
-	        var userid = $("#userid").val();
-	        if(userid==""){
-	        	alert("공백은 사용 불가능합니다.");
-	        	return false;
-	        }
-	        $.ajax({
-                url:"idCheckAjax",
-                type:"post",
-                data:{userid: $("#userid").val()
-                     },
-              success:function(result){
-            	  if(result>=1){
-            		  alert("이미 사용중인 아이디입니다.");
-            	  }else if(result==0){
-            		  if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
-            			  $("#idStatus").val("Y");
-            		  }else{
-            			  $("#idStatus").val("N");
-            		  }
-            	  }
-                }, error:function(){
-                   
-                }
-             });
-	    });
-		
-
-		$("#userid").keyup(function(){
-			$("#idStatus").val("N");
-		});
-		
-		
 	});
 		
 	
 	
-		
-		
-	// 서브밋 새로고침 없게 만들기. ajax로 보낼때 새로고침이 생기기때문에 success로 가기전에 데이터가 날아간다. ajax쓸때는 submit버튼을 쓰면 안되지만 유효성검사 편하게 하려고 어거지로 되게 만듬.
-	//아이디 중복검사만 만들기.
 
 </script>
 </head>
@@ -627,78 +550,64 @@
         <div class="form-checkbox form-checkbox-inline">
             <div class="form-checkbox-legend"><h5 style="margin-left:1px;">권한 설정</h5></div>
             <label class="form-checkbox-label">
-                <input name="manager_join_authority" class="form-checkbox-field" type="checkbox"  value="Y"/>
+                <input name="manager_join_authority" class="form-checkbox-field" type="checkbox" <c:if test="${vo.manager_join_authority=='Y'}">checked</c:if> value="Y"/>
                 <i class="form-checkbox-button"></i>
                 <span>관리자등록권한</span>
             </label><br/>
             <label class="form-checkbox-label">
-                <input name="member_inactivity_authority" class="form-checkbox-field" type="checkbox" value="Y" />
+                <input name="member_inactivity_authority" class="form-checkbox-field" type="checkbox" <c:if test="${vo.member_inactivity_authority=='Y'}">checked</c:if> value="Y" />
                 <i class="form-checkbox-button"></i>
                 <span>회원비활성화권한</span>
             </label><br/>
             <label class="form-checkbox-label">
-                <input name="page_authority" class="form-checkbox-field" type="checkbox" value="Y" />
+                <input name="page_authority" class="form-checkbox-field" type="checkbox" <c:if test="${vo.page_authority=='Y'}">checked</c:if> value="Y" />
                 <i class="form-checkbox-button"></i>
                 <span>웹페이지관리권한</span>
             </label>
             <small class="form-element-hint">관리권한 설정은 필수입니다.</small>
-        </div><div style="height:1px; float:right;"><button id="idChkBtn" class="btn btn-info" style="position:relative; top:0px;">중복검사</button></div>
+        </div>
         <div class="form-element form-input">
-            <input id="userid" name="userid" class="form-element-field" placeholder="아이디" type="text" required autocomplete="off"/>
+            <input id="userid" name="userid" class="form-element-field" placeholder="아이디" type="text" required autocomplete="off" value="${vo.userid}" readonly/>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="userid">관리자 ID</label>
-            <input type="hidden" id="idStatus" value="N"/>
-        </div>
-        <div class="form-element form-input">
-            <input id="password" name="userpwd" class="form-element-field" placeholder="패스워드" type="password" required autocomplete="off"/>
-            <div class="form-element-bar"></div>
-            <label class="form-element-label" for="password">관리자 패스워드</label>
-        </div>
-        <div class="form-element form-input"  style="margin-bottom:16px;">
-            <input id="passwordChk" class="form-element-field" placeholder="패스워드" type="password" required autocomplete="off"/>
-            <div class="form-element-bar"></div>
-            <label class="form-element-label" for="password">패스워드 확인</label>
-            <small class="form-element-hint" id="passChk">비밀번호를 확인해주세요.</small>
         </div>
         <div class="form-element form-select" style="margin-top:23px;">
-            <select name="department" id="department" class="form-element-field" required>
-                <option disabled selected value="" class="form-select-placeholder"></option>
-                <option value="전산운영팀">전산운영팀</option>
-                <option value="정보기획팀">정보기획팀</option>
-                <option value="개발팀">개발팀</option>
-                <option value="CS팀">CS팀</option>
-                <option value="감사팀">감사팀</option>
+            <select name="department" id="department" class="form-element-field -hasvalue" required>
+                <option value="전산운영팀" <c:if test="${vo.department=='전산운영팀'}">selected</c:if>>전산운영팀</option>
+                <option value="정보기획팀" <c:if test="${vo.department=='정보기획팀'}">selected</c:if>>정보기획팀</option>
+                <option value="개발팀" <c:if test="${vo.department=='개발팀'}">selected</c:if>>개발팀</option>
+                <option value="CS팀" <c:if test="${vo.department=='CS팀'}">selected</c:if>>CS팀</option>
+                <option value="감사팀" <c:if test="${vo.department=='감사팀'}">selected</c:if>>감사팀</option>
             </select>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="field-be1h8i-ll2hpg-q4efzm-nfjj1e-udkw5r">부서명</label>
         </div>
          <div class="form-element form-select">
-            <select name="position" id="position" class="form-element-field" required>
-                <option disabled selected value="" class="form-select-placeholder"></option>
-                <option value="인턴">인턴</option>
-                <option value="사원">사원</option>
-                <option value="대리">대리</option>
-                <option value="계장">계장</option>
-                <option value="과장">과장</option>
-                <option value="차장">차장</option>
-                <option value="부장">부장</option>
+            <select name="position" id="position" class="form-element-field -hasvalue" required>
+                <option value="인턴" <c:if test="${vo.position=='인턴'}">selected</c:if>>인턴</option>
+                <option value="사원" <c:if test="${vo.position=='사원'}">selected</c:if>>사원</option>
+                <option value="대리" <c:if test="${vo.position=='대리'}">selected</c:if>>대리</option>
+                <option value="계장" <c:if test="${vo.position=='계장'}">selected</c:if>>계장</option>
+                <option value="과장" <c:if test="${vo.position=='과장'}">selected</c:if>>과장</option>
+                <option value="차장" <c:if test="${vo.position=='차장'}">selected</c:if>>차장</option>
+                <option value="부장" <c:if test="${vo.position=='부장'}">selected</c:if>>부장</option>
             </select>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="field-be1h8i-ll2hpg-q4efzm-nfjj1e-udkw5r">직위</label>
         </div>
         <div class="form-element form-input">
-            <input id="username" name="username" class="form-element-field" placeholder="이름" type="text" required autocomplete="off"/>
+            <input id="username" name="username" class="form-element-field" placeholder="이름" type="text" required autocomplete="off" value="${vo.username}"/>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="username">이름</label>
         </div>
         <div class="form-element form-input" style="margin-bottom:16px;">
-            <input id="tel" name="tel" class="form-element-field" placeholder="연락처" type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required autocomplete="off"/>
+            <input id="tel" name="tel" class="form-element-field" placeholder="연락처" type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required autocomplete="off" value="${vo.tel}"/>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="tel">연락처</label>
             <small class="form-element-hint">ex)010-0000-0000</small>
         </div>
         <div class="form-element form-input" style="margin-top:23px;">
-            <input name="email" id="email" class="form-element-field" placeholder="이메일" type="email" required autocomplete="off"/>
+            <input name="email" id="email" class="form-element-field" placeholder="이메일" type="email" required autocomplete="off" value="${vo.email}"/>
             <div class="form-element-bar"></div>
             <label class="form-element-label" for="email">Email</label>
             <small class="form-element-hint">업무용 이메일을 입력해주세요.</small>

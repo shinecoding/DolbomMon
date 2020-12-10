@@ -78,4 +78,25 @@
 		</if>		
 		#{department}, #{position}, #{tel}, sysdate, #{userpwd}, #{email}, #{username})
 	</insert>
+	
+	<select id="selectManagerId" parameterType="String" resultType="int">
+		select count(userid) from manager where userid=#{userid}
+	</select>
+	
+	<select id="choiceManager" parameterType="String" resultType="com.dolbommon.dbmon.ManagerVO">
+		select userid, manager_join_authority, member_inactivity_authority, page_authority, department, position, tel, userpwd, email, username from manager where userid=#{userid}
+	</select>
+	
+	<update id="updateManaer" parameterType="com.dolbommon.dbmon.ManagerVO">
+		update manager set manager_join_authority=#{manager_join_authority}, member_inactivity_authority=#{member_inactivity_authority}, page_authority=#{page_authority}, department=#{department}, position=#{position}, 
+		tel=#{tel}, email=#{email}, username=#{username} where userid=#{userid}
+	</update>
+	
+	<select id="mangerLogin" parameterType="com.dolbommon.dbmon.ManagerVO" resultType="int">
+		select count(userid) from manager where userid=#{userid} and userpwd=#{userpwd}
+	</select>
+	
+	<select id="getDepartment" resultType="com.dolbommon.dbmon.ManagerVO" parameterType="String">
+		select department, username from manager where userid=#{userid}
+	</select>
 </mapper>

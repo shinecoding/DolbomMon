@@ -29,19 +29,42 @@ public class ManagmentController {
 	SqlSession sqlSession;
 	
 	@RequestMapping("/management")
-	public ModelAndView management(HttpServletRequest req) {
+	public ModelAndView management(ManagerVO vo, HttpServletRequest req, HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
 		String type = (String)req.getParameter("type");
 		String no = (String)req.getParameter("no");
+		String userid = (String)ses.getAttribute("managerId");
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		vo = dao.getDepartment(userid);
 		
 		mav.addObject("type", type);
 		mav.addObject("no", no);
+		mav.addObject("vo", vo);
 		mav.setViewName("management/management");
 		return mav;
 	}
-	@RequestMapping("/managerLogin") //인터셉터용
-	public String login() {
+	@RequestMapping("/managerLogin")
+	public String managerLogin() {
 		return "management/managerLogin";
+	}
+	
+	@RequestMapping(value="/managerLoginOk", method=RequestMethod.POST) //인터셉터용
+	public ModelAndView login(ManagerVO vo, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+	    //암호화
+		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
+	    vo.setUserpwd(encryPassword);
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		int result = dao.mangerLogin(vo);
+		if(result>=1) {
+			mav.addObject("type", "memberManage");
+			mav.setViewName("redirect:management");
+			session.setAttribute("managerStatus", "Y");
+			session.setAttribute("managerId", vo.getUserid());
+		}else {
+			mav.setViewName("redirect:management");
+		}
+		return mav;
 	}
 
 	
@@ -73,11 +96,6 @@ public class ManagmentController {
 	public String managerLogout(HttpSession session) {
 		session.setAttribute("managerStatus", "N");
 		return "management/managerLogin";
-	}
-	@RequestMapping("/managerlogin2") //임시로그인
-	public String managerlogin(HttpSession session) {
-		session.setAttribute("managerStatus", "Y");
-		return "management/management";
 	}
 	
 	@RequestMapping("/reportManage")
@@ -212,6 +230,28 @@ public class ManagmentController {
 		return "";
 	}
 	
+	@RequestMapping("/updateManager")
+	@ResponseBody
+	public ModelAndView updateManager(ManagerVO vo, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		vo = dao.choiceManager(vo.getUserid());
+		mav.addObject("vo", vo);
+		mav.setViewName("management/managerEdit");
+		return mav;
+	}
+	
+	@RequestMapping("/managerEdit")
+	@ResponseBody
+	public String managerEdit(ManagerVO vo, HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		int result = dao.updateManaer(vo);
+		return "";
+	}
+	
+	
+	
 	@RequestMapping("/inactivityReason")
 	public ModelAndView inactivityReason(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -236,35 +276,22 @@ public class ManagmentController {
 		mav.setViewName("management/leaveReason");
 		return mav;
 	}
-	/*
-	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
-	@ResponseBody
-	public ModelAndView managerRegister(ManagerVO vo, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
-		//int result = dao.insertManager(vo);
-		System.out.println("test ddddddddddddd");
-		int result = 0;
-		if(result>=1) {
-			mav.addObject("msg", "true");
-		}else {
-			mav.addObject("msg", "false");
-		}
-		//mav.setViewName("management/joinResultPage");
-		return mav;
-	}
-	*/
 	@RequestMapping(value="/managerInsert", method=RequestMethod.POST, produces="application/text; charset=UTF-8")
 	@ResponseBody
 	public String managerRegister(ManagerVO vo, HttpServletRequest req) {
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
-		System.out.println("암호확인"+vo.getUserpwd());
 		//암호화
 		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
 		vo.setUserpwd(encryPassword);
-		System.out.println("암호화 된 패스워드"+vo.getUserpwd());
-		//dao.insertManager(vo);
+		dao.insertManager(vo);
 		return "";
 	}
 	
+	@RequestMapping("/increaseSession")
+	@ResponseBody
+	public int increaseSession(HttpSession session) throws Exception{
+	    int incTime = 1800;
+	    session.setMaxInactiveInterval(incTime);
+	    return incTime;
+	}
 }

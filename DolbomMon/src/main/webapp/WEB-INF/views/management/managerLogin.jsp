@@ -6,23 +6,19 @@
 <meta charset="UTF-8">
 
 
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-</head>
-<body>
 <title>DolbomMon</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
+
+</head>
+<body>
+
 <script>
 
 	$(function(){
-		$("#test").click(function(){ /*DB작업 전 임시 로그인버튼*/
-			location.href="/dbmon/managerlogin2";
-			
-		});
 		
 		
 
@@ -141,12 +137,11 @@
 	</div>
 	<div id="rightDiv">
 	
-	<form method="post" id="managerLogin" action="">
+	<form method="post" id="managerLogin" action="/dbmon/managerLoginOk">
 	  <h2>Login</h2>
-	  <input type="text" class="user" placeholder="userid"/>
-	  <input type="password" class="pass"placeholder="password"/>
+	  <input type="text" name="userid" class="user" placeholder="userid" autocomplete="off"/>
+	  <input type="password" name="userpwd" class="pass"placeholder="password"/>
 	  <input type="submit" value="로그인"/>
-	  <input type="button" value="임시로그인" id="test"/>
 
 	</form>
 	
