@@ -1,5 +1,7 @@
 package com.dolbommon.dbmon.search;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -9,6 +11,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dolbommon.dbmon.board.FreeBoardVO;
 
 
 @Controller
@@ -34,7 +38,7 @@ public class RecruitBoardController {
 		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		//List<MemberVO> mvoList = dao.selectTMemNo();
+		
 		ModelAndView mav = new ModelAndView();
 		
 		//mav.addObject("mvoList", mvoList);

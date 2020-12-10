@@ -78,7 +78,6 @@ public class BoardController {
 		List<FreeBoardVO> list = dao.freeBoardList(vo);
 		List<NoticeBoardVO> list2 = nDao.exposeNotice();
 		
-		
 		Calendar now = Calendar.getInstance();
 		SimpleDateFormat fomat = new SimpleDateFormat("yy-MM-dd");
 		String dateStr = fomat.format(now.getTime());

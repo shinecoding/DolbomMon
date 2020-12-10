@@ -104,7 +104,7 @@
 		<tbody>
 			<c:forEach var="notice" items="${list2}">
 				<tr>
-					<td colspan="1"></td><td colspan="1"><span class="badge rounded-pill bg-warning" style="padding: 5px;">&nbsp;&nbsp;&nbsp;공지&nbsp;&nbsp;&nbsp;</span></td><td colspan="5"><a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></td>
+					<td colspan="1"></td><td align="center" colspan="1"><span class="badge rounded-pill bg-warning" style="padding: 5px;">&nbsp;&nbsp;&nbsp;공지&nbsp;&nbsp;&nbsp;</span></td><td colspan="5"><a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></td>
 				</tr>
 			</c:forEach>
 			<c:forEach var="vo" items="${list}">

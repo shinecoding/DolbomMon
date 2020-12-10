@@ -22,7 +22,7 @@
 	}
 	.all_wrapper{
 		margin-top:70px;
-		width:1000px;
+		width:1100px;
 		background-color:white;
 		margin:0 auto;
 	}
@@ -81,21 +81,30 @@
 	<!-- -->
 	#imgBox{
 		float:left;
-		padding: 5px;
+		padding: 15px;
 		height: 150px;
 		position: absolute;
-		top: 30px;
+		top: 20px;
 	}
 	#offerBox{
 		float:right;
-		width: 290px;
+		width: 310px;
+		padding: 3px;
 	}
 	#offerTitle{
 		font-size: 1.1em;
 	}
 	.card-body{
 		white-space: nowrap;
-	
+	}
+	#btnBox{
+		margin-top: 10px;
+		margin-bottom: -10px;
+		width: 100%;
+		height: 50px;
+		white-space: nowrap;
+		display: inline-block;
+		vertical-align: top;
 	}
 </style>
 <body>
@@ -126,46 +135,41 @@
   </form>
   </div>
   
-  <div style="/* overflow: scroll hidden; */ width: 100%; height: 100px; white-space: nowrap; 
-  display: inline-block; vertical-align: top;">
-  <div class="btn1" role="button">실내놀이</div>
-  <div class="btn1" role="button">등하원 돕기</div>
-  <div class="btn1" role="button">책 읽기</div>
-  <div class="btn1" role="button">야외활동</div>
-  <div class="btn1" role="button">한글놀이</div>
-  <div class="btn1" role="button">영어놀이</div>
-  <div class="btn1" role="button">학습지도</div>
-  <div class="btn1" role="button">체육놀이</div>
-  <div class="btn1" role="button">간단청소</div>
-  <div class="btn1" role="button">밥챙겨주기</div><br/>
-  <div class="btn1" role="button">간단설거지</div>
-  <div class="btn1" role="button">장기입주</div>
-  <div class="btn1" role="button">단기입주</div>
-  </div>
+	<div id="btnBox">
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책 읽기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act5">한글놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act6">영어놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act7">학습지도</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act8">체육놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act9">간단 청소</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act10">밥 챙겨주기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단 설거지</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
+	</div>
  
-   <div class="wrapper1" style="display:inline">
-	<div class="total" style="float:left"><br/>총 ${totalRecords}건의 일자리 찾기가 있습니다</div>
+	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b>${totalRecords}건</b>의 일자리 찾기가 있습니다</div>
 	<!-- <div class="float-right" style="float:right">후기순 -->
-	<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:20%; float: right;">
+	<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:20%; float: right; margin: 0px;">
 	    <option selected>최신순</option>
 	    <option value="1">후기순</option>
 	    <option value="2">높은 시급순</option>
 	    <option value="3">낮은 시급순</option>
 	</select>
+	
+	</div>
 	<br/>
-
-	</div>
-	<br/><br/><br/>
-	
-	</div>
-	
+	<br/>
 	<div class="row">
 		<c:forEach var="vo" items="${list2}">
 			<div class="col-sm-6" style="padding: 20px;">
 				<div class="card">
 					<div class="card-body">
 						<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 45px;"><span>0</span>명 지원</div>
+						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
 						<div id="offerBox" >
 							<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
