@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	
+	
 	$(function(){
 		
 		var anotherUser;
@@ -19,11 +20,12 @@
 		var roomNo;
 		var scrollStop = 1;
 		var startChatRoom = 0;
+		var roomseq;
 		//채팅입력
 		$("#send2").click(function(){
 			insertChat();
 		});
-		
+		makeRoom();
 		//채팅방 클릭시
 		$(document).on("click",".roomBox>div",function(e){
 			roomNo = $(this).attr('id');
@@ -34,14 +36,16 @@
 		    $("#insertId").html(anotherId+"님과 채팅중입니다."); 
 		    //$(this).children('div.imgChange').html('<img src="icon/message/chaticon2.png" class="imgResize"/>');
 		});
-		
+		/*
 		$("#room2").click(function(){
 			newRoom();
 			$(".container").css("display","block");
 			 
 		});
+		*/
 		$("#hiddenChat").click(function(){
 			$(".container").css("display","none");
+			window.close();
 		});
 		
 		
@@ -90,12 +94,12 @@
 				insertChat();
 			}
 		});
-		
+		/*
 		//채팅방 접속, 생성
 		$("#room2").click(function(){
 			makeRoom();
 		})
-		
+		*/
 
 		
 		
@@ -172,7 +176,7 @@
 			
 		}
 		//방만들기 버튼 클릭시
-		var roomseq;
+
 		function makeRoom(){
 			$.ajax({
 				url : "makeRoom", 
@@ -248,6 +252,7 @@
 	  -webkit-font-smoothing: antialiased;
 	  -moz-osx-font-smoothing: grayscale;
 	  text-rendering: optimizeLegibility;
+	  overflow-x:hidden;
 	}
 	
 	.container {
@@ -447,12 +452,15 @@
 	    overflow:hidden;
 	    text-overflow:ellipsis;
 	}
+	.chatPage{
+		margin:0 auto;
+	}
 </style>
 </head>
 <body>
 
-<input type="button" value="방만들기" class="btn btn-info" id="room2" style="margin-bottom:15px;">
-<div class="container" style="display:none">
+<!-- <input type="button" value="방만들기" class="btn btn-info" id="room2" style="margin-bottom:15px;"> -->
+<div class="chatPage" style="display:block">
 	
 	<div class="row no-gutters chatform">
 	  <div class="col-md-4 border-right userBox">
