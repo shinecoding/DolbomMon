@@ -95,6 +95,11 @@
 			}
 		});
 		
+		$("#domain").change(function(){
+			var domain = $(this).val();
+			$("#email2").val(domain);
+		});
+		
 		$("#userid").keyup(function(){
 			var userid = $(this).val();
 			var useridReg = /^[A-Za-z]{1}\w{7,11}$/;
@@ -141,10 +146,11 @@
 		});
 		
 		$("#email1").keyup(function(){
+			
 			var email1 = $(this).val();
 			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
 			if(!email1Reg.test(email1)){
-				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ").css("color", "#ff0000");
+				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ").css("color", "red");
 			}else{
 				$("#emailChk").html("").css("color", "green");
 			}
@@ -153,10 +159,12 @@
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
 				$("#email2").val("");
+				$("#emailChk").css("color","red");
 			}
 		})
 		
 		$("#email2").keyup(function(){
+			$("#domain option:eq(0)").attr("selected", "selected");
 			var email2 = $(this).val();
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
@@ -168,7 +176,25 @@
 			var email1 = $("#email1").val();
 			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
 			if(!email1Reg.test(email1)){
-				$("#emailChk").val("").css("color", "green");
+				$("#emailChk").val("").css("color", "red");
+			}
+		});
+		
+		$("#domain").change(function(){
+			console.log("셀렉트박스 값 변경");
+			var email2 = $(this).val();
+			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			if(!email2Reg.test(email2)) {
+				$("#emailChk").html("올바른 이메일 도메인 형식이 아닙니다.").css("color", "red");
+			}else{
+				$("#emailChk").html("").css("color", "green");
+			}
+			
+			var email1 = $("#email1").val();
+			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
+			if(!email1Reg.test(email1)){
+				$("#emailChk").css("color", "red");
+				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ");
 			}
 		});
 		
@@ -405,7 +431,7 @@
 			<img src="<%=request.getContextPath()%>/img/mylogo.png" />
 			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
 		</div>
-		<div id="useridDiv">
+		<div id="useridDiv" class="form-group has-warning has-feedback">
 			<label for="userid">아이디</label><span id="useridRegChk"></span><br/>
 			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" id="idChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
 			<input type="hidden" id="idStatus" value="N"/>
@@ -433,7 +459,7 @@
 		<div id="emailDiv">
 			<label for="email1">이메일</label><span id="emailChk"></span><br/>
 			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:24%;" /><span style="wdith:2%; height:50px; line-height:50px; text-aling:center; margin:0 1%;">@</span><input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
-			<select style="width:24%; margin-left:3%; height:50px;" >
+			<select id="domain" style="width:24%; margin-left:3%; height:50px;" >
 				<option selected="selected" >직접입력</option>
 				<option>gmail.com</option>
 				<option>naver.com</option>

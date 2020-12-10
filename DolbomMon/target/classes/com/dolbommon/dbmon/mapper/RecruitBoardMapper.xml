@@ -86,7 +86,7 @@
 			where  job_board_no = #{param1}
 	</update>
 	<update id="updateDsSpecificDate">
-		update jb_specific_day select_date=#{sdVO.select_date}, start_time=#{sdVO.start_time}, end_time=#{sdVO.end_time} 
+		update jb_specific_day set select_date=#{sdVO.select_date}, start_time=#{sdVO.start_time}, end_time=#{sdVO.end_time} 
 			where job_board_no = #{param1}
 			
 	</update>
