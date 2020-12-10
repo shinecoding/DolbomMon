@@ -26,6 +26,124 @@
 			
 			startTime();
 			
+			////////////////// 글에있던 원하는 활동 데이터 //////////////////////
+			var getpwa = "${vo.pw_activity}";
+			var getPw_activity = getpwa.split(",");
+			$("input[name=pw_activity]").each(function(){
+				for(var i=0; i<getPw_activity.length;i++){
+					if($(this).val()==getPw_activity[i]){
+						$(this).prop("checked",true);
+					}
+				}
+			});
+			
+			////////////////////// 원하는 성별  /////////////////////// 
+			var getWish_gender = "${vo.wish_gender}";
+			$("input[name=wish_gender]").each(function(){
+				for(var i=0;i<3;i++){
+					if($(this).val()==getWish_gender){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			/////////////////////원하는 돌봄몬 나이 ////////////////////////
+			var getWA = "${vo.wish_age}";
+			var getWish_age = getWA.split(",");
+			$("input[name=wish_age]").each(function(){
+				for(var i=0;i<5;i++){
+					if($(this).val()==getWish_age[i]){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			var getChildCnt = ${cVO.child_cnt};
+			var getCB = "${cVO.child_birth}";
+			console.log("getCB => " + getCB);
+			var getChild_birth = getCB.split(",");
+			
+			$("input[name=childrenCnt]").each(function(){
+					var ccnt = $(this).attr("id");
+					console.log("ccnt => " + ccnt);
+					if(ccnt == "childrenCnt"+getChildCnt){
+						$(this).prop("checked", true);
+						console.log("배열의 길이 => " + getChild_birth.length);
+						for(var j=0;j<getChild_birth.length;j++){
+							var test = $("."+ccnt).attr("id");
+							console.log("test => " +test);
+							console.log("getChild_birth[j] => " + getChild_birth[j]);
+							cnt = 1+j;
+							var test2 = $("."+ccnt).children("li:nth-of-type("+cnt+")").children("input[name=child_birth]").val(getChild_birth[j]);
+						}
+					}
+			});
+			
+			var getTime_type = "${vo.time_type}";
+			$("input[name=time_type]").each(function(){
+				for(var i=0;i<2;i++){
+					if($(this).val()==getTime_type){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			var getStart_date = "${rdVO.start_date}";
+			$("#start_date").val(getStart_date);
+			
+			var getStart_time = "${rdVO.start_time}";
+			$("#start_time").val(getStart_time);
+			
+		
+			
+			var getDay = "${rdVO.yoil}";
+			var getYoil = getDay.split(",");
+			$("input[name=yoil]").each(function(){
+				for(var i=0;i<7;i++){
+					if($(this).val()==getYoil[i]){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			$(document).ready(function(){
+				var test = $("#start_time").val();
+				var i=1;
+				for(i;i<=48;i++){
+					if($("#start_time option[id=rt"+i+"]").val()==test){
+						endTime(i); 	
+						var getEnd_time = "${rdVO.end_time}";
+						$("#end_time").val(getEnd_time);
+					}
+				}
+			});
+			
+			var getWeek = ${rdVO.week};
+			$("input[name=week]").each(function(){
+				for(var i=0;i<3;i++){
+					if($(this).val()==getWeek){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			var getTimeCon = "${vo.time_consultation}";
+			if(getTimeCon=="Y"){
+				$("#time_consultation").prop("checked", true);
+			}else{
+				$("#time_consultation").prop("checked", false);
+			}
+			
+			var getTimeCon = "${vo.consultation}";
+			if(getTimeCon=="Y"){
+				$("#consultation").prop("checked", true);
+			}else{
+				$("#consultation").prop("checked", false);
+			}
+		
+			
+			
+			
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
 				$("label[for=timeType1]").css("background-color", "#ffc207");
@@ -82,6 +200,13 @@
 						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
 					}
 				}
+			}
+			
+			for(var i=2;i<5;i++){
+				if($("#week"+i).is(":checked")){
+					$("label[for=week"+i+"]").css("background", "#ffc207");
+				}
+					$("label[for=week"+i+"]").css("background", "#EFEFEF");
 			}
 			
 			/////////////// 성별 설정 /////////////////
@@ -212,6 +337,7 @@
 				}
 			}
 		});
+		
 		var todayday = new Date();
 		$(".childBtn").datepicker({
 			showAnim : "show",
@@ -687,9 +813,9 @@
 					<label for="g3">무관</label>
 				</div>
 				<div id="ageDiv">
-					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
-					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
-					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
+					<input type="checkbox" id="20" name="wish_age" value="20" />
+					<input type="checkbox" id="30" name="wish_age" value="30" />
+					<input type="checkbox" id="40" name="wish_age" value="40" />
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
 					<ul>
@@ -719,19 +845,19 @@
 						<div><label for="childrenCnt4">4명</label></div>
 					</div>
 					<div id="childrenDetailDiv">
-						<ul id="childcnt1">
+						<ul id="childcnt1" class="childrenCnt1">
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt2">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						<ul id="childcnt2" class="childrenCnt2">
+							<li id="1"><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li id="2"><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt3">
+						<ul id="childcnt3" class="childrenCnt3">
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt4">
+						<ul id="childcnt4" class="childrenCnt4">
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
@@ -746,7 +872,7 @@
 			</div>
 			<div id="addrDiv" class="mainDiv">
 				<div id="mapImgDiv" style="margin:30px 0;">
-					<div>아직 장소를 입력하지 않았습니다.</div>
+					<div style="color:orange;">입력한 돌봄 장소 - ${vo.care_addr }</div>
 					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
 				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">

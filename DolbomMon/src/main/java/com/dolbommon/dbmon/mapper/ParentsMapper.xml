@@ -16,8 +16,8 @@
 			values(member_sq.currval, #{sdVO.select_date}, #{sdVO.start_time}, #{sdVO.end_time})
 	</insert>
 	<insert id="insertDsRegularDate">
-		insert into jb_regular_date(job_board_no, yoil, start_time, end_time, start_date, end_date)
-			values(member_sq.currval, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date})
+		insert into jb_regular_date(job_board_no, yoil, start_time, end_time, start_date, end_date, week)
+			values(member_sq.currval, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date}, #{rdVO.week})
 	</insert>
 	
 	<select id="selectMyRdBoard" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">

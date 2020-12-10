@@ -18,6 +18,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.container{width:800px;}
 	i{color:gray;}
@@ -253,7 +254,28 @@
 
 		$("#deleteBtn").click(function(){
 			var deleteConfirm = confirm("삭제하시겠습니까?");
-			location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
+			var applyCnt = ${rbVO.tcnt};
+			if(applyCnt == 0){
+				location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
+			}else {
+				swal({
+					title : "이미 지원한 선생님이 있습니다.",
+					icon : "info"
+				});
+			}
+		});
+		
+		$("#editBtn").click(function(){
+			var applyCnt = ${rbVO.tcnt};
+			console.log("지원자 수 => " + applyCnt);
+			if(applyCnt == 0){
+				location.href="<%=request.getContextPath()%>/editBoard?no=${rbVO.job_board_no}";
+			}else{
+				swal({
+					title : "이미 지원한 선생님이 있습니다.",
+					icon : "info"
+				});
+			}
 		});
 		
 		
@@ -496,7 +518,7 @@
 		
 		var timebar = "";
 		
-		for(var j=0;j<edll+1;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
+		for(var j=0;j<edll;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
 			for(var i=0;i<getYoil.length;i++){
 				var height = (endDivLoc - startDivLoc)*10;
 				var top = startDivLoc*10+50+1;
@@ -639,6 +661,7 @@
       	<h5>희망 시급</h5>
       	<li class="list-group-item">
       		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><b style="font-size:25px;line-height:86px;margin-left:5px;">${rbVO.wish_wage } 원</b>
+      		<span><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
    		
    		</li>
    <h5>선호하는 돌봄유형</h5>
@@ -745,7 +768,7 @@
 	<br/>
    	<c:if test="${userid == rbVO.userid}">
    		<div style="margin:50px 0; text-align:right;">
-			<input type="button" class="btn btn-warning ed" value="수정하기" style="margin-right:10px;"/><input type="button" id="deleteBtn" class="btn btn-warning ed" value="삭제하기"/>
+			<input type="button" class="btn btn-warning ed" id="editBtn" value="수정하기" style="margin-right:10px;"/><input type="button" id="deleteBtn" class="btn btn-warning ed" value="삭제하기"/>
 		</div>
  	</c:if>
 </div>
