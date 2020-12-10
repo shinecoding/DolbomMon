@@ -74,6 +74,7 @@ public class TeacherController {
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
+		
 		dao.hitCount(vo);
 		int timeInt = 0;
 		String timeStr = "";
@@ -98,16 +99,21 @@ public class TeacherController {
 		String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
 		mvo.setUsername(hideName);
 		
-		
+		//후기, 경험, 인증
+		List<ReviewVO> review = dao.selectReview(userid);
 		List<ExperienceVO> list = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
 		CertificationVO cvo = cdao.selectCert(userid);
+		
+		
 		ModelAndView mav = new ModelAndView();
+		
 		
 		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
 		mav.addObject("mvo", mvo);
+		mav.addObject("review", review);
 		mav.addObject("cvo", cvo);
 		mav.addObject("list", list);
 		mav.setViewName("teacher/teacherView");

@@ -20,7 +20,20 @@
 			location.href="/dbmon/report?userid=${vo.userid}";
 		})
 		
-	});
+		
+		$(document).on("click", "#shinchung", function(){
+			
+			
+			
+			
+			
+			
+		})
+		
+		
+		
+		
+	});//제이쿼리
 </script>
 <style>
 .container{width:800px;}
@@ -299,7 +312,54 @@ border-radius:10px;
    		</c:forEach>	
    		</li>
    		</ul>
+   		
+   		<h5>후기</h5>
+   		<ul class="list-group">
+   		<li class="list-group-item">
+   		<c:forEach var="rvo" items="${review}">
+   			<ul class="list-group list-group-horizontal" style="margin:0; padding:0;">
+	   			<li class="list-group-item" style="border:none; margin-top:5px;padding-left:0;">
+	   				<img src="upload/${rvo.pic}" style="width:60px; height:60px; border-radius:10px;margin-left:10px;"/>
+	   			</li>
+	   			<li class="list-group-item" style="border:none; padding-left:0;">
+		   			${rvo.username.substring(0,1)}O${rvo.username.substring(2) }
+		   			<br/>
+		   			<c:forEach var="s" begin="1" end="${rvo.review_star}">
+		   				<i class="fas fa-star" style="color:orange"></i>
+		   			</c:forEach>
+		   			<c:forEach var="s" begin="1" end="${5-rvo.review_star}">
+		   				<i class="fas fa-star" style="color:gray"></i>
+		   			</c:forEach>
+		   			
+		   			<span class="ml-2" style="font-size:0.7em">
+						<fmt:parseNumber integerOnly="true" var="edit_year" value="${rvo.review_date/525600}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_month" value="${rvo.review_date/43200}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_day" value="${rvo.review_date/1440}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${rvo.review_date/60}"/>					
+					<c:choose>
+						<c:when test="${rvo.review_date>525600}">${rvo.review_date/525600}년</c:when>
+						<c:when test="${rvo.review_date>43200}">${rvo.review_date}달</c:when>
+						<c:when test="${rvo.review_date>1440}">${rvo.review_date}일</c:when>
+						<c:when test="${rvo.review_date>60}">${rvo.review_date}시간</c:when>
+						<c:otherwise>${rvo.review_date}분</c:otherwise>
+					</c:choose>
+					 전
+				</span>
+		   			<br/>
+		   			
+		   			
+		   			
+		   			<b>${rvo.review_content}</b><br/>
+	   			</li>
+   			</ul>
+   		</c:forEach>	
+   		</li>
+   		</ul>
+   		
+   		
    <br/>
+   
+   	
    
    
    <!-- ================================지도======================================== -->

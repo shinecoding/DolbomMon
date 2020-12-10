@@ -185,7 +185,6 @@ input:checked + .slider:before {
 <hr/><br/>
 </div>
 <div class="container" >
-	<a href="/dbmon/teacherPicture2" >프로필 사진 업로드</a>
    <div id="title">
    		<div id="titlefont">마이페이지</div>
    		<div class="rightlog">   

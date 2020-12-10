@@ -7,6 +7,8 @@ public interface TeacherDaoImp {
 	
 	public TeacherVO selectTeacher(String userid);
 	public MemberVO selectTMember(String userid);
+	public List<ReviewVO> selectReview(String userid);
+	
 	public int updateIntro(TeacherVO vo);
 	public int updateType(TeacherVO vo);
 	public int updateWage(TeacherVO vo);
@@ -25,8 +27,11 @@ public interface TeacherDaoImp {
 	public MemberVO selectTMap(String userid);
 	public int updateTMap(MemberVO mvo);
 	public int updateArea(TeacherVO vo);
-	
+	//활성화 비활성화 버튼
 	public int updateActive(TeacherVO vo);
+	//후기 적기/수정
+	public int insertReview(ReviewVO vo);
+	public int updateReview(ReviewVO vo);
 	
 }
 
