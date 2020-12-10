@@ -100,7 +100,7 @@
 	<div id="space"></div>
 	<div class="list-group">
 		<a href="identityEdit" class="list-group-item list-group-item-action"><b>회원정보 수정</b></a>
-		<a href="withdraw" class="list-group-item list-group-item-action"><b>회원 탈퇴 신청</b></a>
+		<a href="withdrawForm" class="list-group-item list-group-item-action"><b>회원 탈퇴 신청</b></a>
 		<a href="#" class="list-group-item list-group-item-action"><b>돌봄몬 서비스 이용동의</b></a>
 	</div>
 </div>

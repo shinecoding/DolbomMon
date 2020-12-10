@@ -25,6 +25,9 @@ public interface ManageDaoImp {
 	//마이페이지 분류
 	public int countTeacher(String userid);
 	
+	//매니저 수정 선택
+	public ManagerVO choiceManager(String userid);
+	
 	//메모창 오픈
 	public String selectMemo(String no);
 	
@@ -49,4 +52,15 @@ public interface ManageDaoImp {
 	//매니저 등록
 	public int insertManager(ManagerVO vo);
 	
+	//매니저 아이디 중복확인
+	public int selectManagerId(String userid);
+	
+	//매니저 수정하기
+	public int updateManaer(ManagerVO vo);
+	
+	//매니저 로그인
+	public int mangerLogin(ManagerVO vo);
+	
+	//부서구하기
+	public ManagerVO getDepartment(String userid);
 }

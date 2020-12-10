@@ -8,16 +8,16 @@
 			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0)
 	</insert>
 	<insert id="insertDsChildInfo">
-		insert into add_child(job_board_no, child_birth, userid) 
-			values(member_sq.currval, #{cVO.child_birth}, #{rbVO.userid})
+		insert into add_child(job_board_no, child_birth, userid, child_cnt) 
+			values(member_sq.currval, #{cVO.child_birth}, #{rbVO.userid}, #{cVO.child_cnt})
 	</insert>
 	<insert id="insertDsSpecificDate">
 		insert into jb_specific_day(job_board_no, select_date, start_time, end_time)
 			values(member_sq.currval, #{sdVO.select_date}, #{sdVO.start_time}, #{sdVO.end_time})
 	</insert>
 	<insert id="insertDsRegularDate">
-		insert into jb_regular_date(job_board_no, yoil, start_time, end_time, start_date, end_date)
-			values(member_sq.currval, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date})
+		insert into jb_regular_date(job_board_no, yoil, start_time, end_time, start_date, end_date, week)
+			values(member_sq.currval, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date}, #{rdVO.week})
 	</insert>
 	
 	<select id="selectMyRdBoard" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">

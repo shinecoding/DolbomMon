@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select job_board_no, userid, care_addr, wish_age, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
+		select job_board_no, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
 			from parent_list order by job_board_no desc
 	</select>
 	
@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="recruitRegularDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.RegularDateVO">
-		select job_board_no, yoil, start_date, end_date, start_time, end_time
+		select job_board_no, yoil, to_char(start_date, 'YYYY-MM-DD') start_date, to_char(end_date, 'YYYY-MM-DD') end_date, start_time, end_time, week
 			from jb_regular_date where job_board_no=#{param1}
 	</select>
 	
@@ -71,6 +71,31 @@
 	<update id="hitCount" parameterType="int">
 		update parent_list set hit=hit+1 where job_board_no=#{param1}
 	</update>
+	
+	<update id="updateDbmSearch">
+		update parent_list set care_addr=#{rbVO.care_addr}, dong_addr=#{rbVO.dong_addr}, time_type=#{rbVO.time_type}, pw_activity=#{rbVO.pw_activity}, wish_wage=#{rbVO.wish_wage}, consultation=#{rbVO.consultation}, time_consultation=#{rbVO.time_consultation}
+			, wish_age=#{rbVO.wish_age}, wish_gender=#{rbVO.wish_gender}, content=#{rbVO.content}, lat=#{rbVO.lat}, lng =#{rbVO.lng}
+			where job_board_no = #{param1}
+	</update>
+	<update id="updateDsChildInfo">
+		update add_child set(child_birth, child_cnt) = 
+			(#{cVO.child_birth}, #{cVO.child_cnt})
+			 where job_board_no = #{param1}
+	
+	</update>
+	<update id="updateDsRegularDate">
+		update jb_regular_date(yoil, start_time, end_time, start_date, end_date, week) =
+			(#{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date}, #{rdVO.week})
+			where  job_board_no = #{param1}
+	</update>
+	<update id="updateDsSpecificDate">
+		update jb_specific_date(select_date, start_time, end_time) = 
+			(#{sdVO.select_date}, #{sdVO.start_time}, #{sdVO.end_time})
+			where job_board_no = #{param1}
+			
+	</update>
+	
+	
 	
 	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 

@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.ManageDaoImp;
 import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.Teacher.TeacherVO;
 
@@ -142,7 +143,10 @@ public class MemberController {
 		public int useridChk(@RequestParam("userid") String userid) {
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberUseridChk(userid);
+			ManageDaoImp dao2 = sqlSession.getMapper(ManageDaoImp.class);
+			int result2 = dao.memberUseridChk(userid);
+			int result3 = dao2.selectManagerId(userid);
+			int result = result2 + result3;
 			return result;
 		}
 		
@@ -262,9 +266,9 @@ public class MemberController {
 		
 		// 돌볼 수 있는 아이의 연령대와 가능한 활동  >>
 		@RequestMapping(value = "/dbm/activityAndAge", method = RequestMethod.POST)
-		public String dbmActivityAndAge(@RequestParam("care_type") String care_type, HttpSession ses) {
+		public String dbmActivityAndAge(@RequestParam("teacher_type") String teacher_type, HttpSession ses) {
 			
-			ses.setAttribute("care_type", care_type);
+			ses.setAttribute("teacher_type", teacher_type);
 			
 			return "register/dbm/activityAndAge";
 		}

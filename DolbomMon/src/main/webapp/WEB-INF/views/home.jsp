@@ -1,24 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dolbommon</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
-<link href="<%=request.getContextPath() %>css/style.css" rel="stylesheet">
-<link href="<%=request.getContextPath() %>css/demo.css" rel="stylesheet">
+<!-- 	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet">
+		<link href="<%=request.getContextPath() %>/css/demo.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <script>
-
+/*
 function getCookie(name) {
 
     var cookies = document.cookie.split(";");
@@ -60,11 +61,53 @@ document.write('<meta name="viewport" content="width=1024, user-scalable=yes, in
 document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">')
 
 }
+*/
+	$(function() {
+	  AOS.init({
+	    duration: 1200
+	  });
+	  onElementHeightChange(document.body, function(){
+	    AOS.refresh();
+	  });
+	});
 
+
+	function onElementHeightChange(elm, callback) {
+	    var lastHeight = elm.clientHeight
+	    var newHeight;
+	    
+	    (function run() {
+	        newHeight = elm.clientHeight;      
+	        if (lastHeight !== newHeight) callback();
+	        lastHeight = newHeight;
+
+	        if (elm.onElementHeightChangeTimer) {
+	          clearTimeout(elm.onElementHeightChangeTimer); 
+	        }
+
+	        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+	    })();
+	  }
+	
+	
+	
+	
+	
+	$(window).scroll(function() {  
+        var position = $(window).scrollTop(); 
+		if (position >= 700){
+			$(".redution").delay(500).fadeOut(1000);
+		}
+	});        
+	
 </script>
 
 <style type="text/css">
-
+@media (max-width:700px){
+	#listitem{
+		display:none;
+	}
+}
 *{
 	margin: 0px;
 	padding: 0px;
@@ -77,7 +120,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
       cursor:pointer;
       font-family:"Noto Sans KR,sans-serif!important;";
       text-decoration:none;
-      font-weight:bold;
+     
       text-align: center; 
       margin:0; padding:0;
       }
@@ -120,7 +163,16 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 	}
 	#homeWrap_ALL{width:100%;}
 	.lead{font-size:17px; font-family: 'Noto Sans KR', sans-serif; font-weight:bold; color:#6c757d;}
-
+   .jb-text { 
+		position: absolute; 
+		top: 50%; width: 100%; 
+   	}
+   .jb-text p { 
+		margin-top: -24px; 
+		text-align: center; 
+		font-size: 48px; color: #ffffff; 
+   }
+   
 </style>
 
 <body>
@@ -130,8 +182,17 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 <div id="top" style="height:150px;">
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
-
-
+ <div class="redution">
+<video class="redution" src='img/video.mp4' width='100%' muted="muted" autoplay loop>
+</video>
+	<div class="jb-text">
+		<p>사업소개</p>
+		<h5 style="color:white;">Services</h5>
+		<br/><br/><br/><br/>
+		<h2 style="color:white">놀이부터 배움까지 선생님 매칭 웹</h2>
+		<h2 style="font-weight:bold; color:white;">아이돌봄 웹 서비스</h2>
+	</div>
+ </div>
 <!-- -------------------bx슬라이더------------- -->
 <div id="slider" >
 <%@ include file="/WEB-INF/views/bxslider.jsp" %>
@@ -140,7 +201,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
  <!--================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
-  <div id="list" class="block" style="width: 100%; margin:0 auto;">
+  <div id="list" class="block" style="width: 100%; margin:0 auto;" data-aos="fade-down">
   <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; max-width:1000px; margin:0 auto;">
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
      <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
@@ -151,16 +212,20 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
   </ul>
   <br/><br/><hr class="featurette-divider">
   
-<div id="teacher_chart" data-aos="flip-left">
+<div id="teacher_chart" data-aos="fade-up">
 <%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 
 </div>
 
-<div id="advertise" >
+<div id="advertise" data-aos="fade-up">
 <%@ include file="/WEB-INF/views/advertiseDolbom.jsp" %>
 </div>
     <hr class="featurette-divider">
+<div id="QnAView">
+<%@ include file="/WEB-INF/views/QandAview.jsp" %>
+</div>   
+    
 <div id="mainContents4" >
-    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="fade-up">
       <div class="col-md-7"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive;">DOLBOMMON GUIDE</span><br/><br/>Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
@@ -173,17 +238,18 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
       </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider"><br/><br/>
 
-    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7 order-md-2"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
-      </span></h2>
+      </span></h2><br/>
          <p class="lead"> 
             부모님과 아이가 누구인지, 어떤 도움을 받고 싶은지, <br/>언제 활동하기 원하는지를 신청서에<br/> 상세하게 알려주세요. <br/>
-            신청서 작성이 완료되면 <br/>시터님을 직접 찾을 수 있습니다.<br/>
-         Tip.자기소개를 상세할수록, 내 후기가 많을수록, <br/>돌봄 기간이 짧을수록 시터님을 더 빨리 찾을 수 있습니다!
+         <span style="color:#ff7942;"><br/>
+         Tip.자기소개가 상세할수록, 내 후기가 많을수록, <br/>돌봄 기간이 짧을수록 시터님을 더 빨리 찾을 수 있습니다!
+		</span>    
          </p>
      
       </div>
@@ -194,15 +260,15 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider">
 
-    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7">
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><br/>Step 03.<br/><br/>
-        <span class="text-muted">Have an interview</span></h2>
+        <span class="text-muted">Have an interview</span></h2><br/><br/>
         <p class="lead">
-      먼저, 내가 직접 지역, 요일, 시간 등 다양하게 검색해서  <br/>마음에 쏙 드는 시터님을 찾아보세요.<br/>
-      연락해보고 싶은 시터님이 있다면, <br/>인터뷰를 신청해보세요.<br/>
-      내가 신청한 시터님이 3시간 안에 <br/>수락 또는 조율 응답을 하는 경우, 시터님의 연락처가 부모님에게 공개됩니다. <br/>
-      (마이페이지 > 구직현황에서 확인할 수 있습니다.)<br/>
+      먼저, 내가 직접 지역, 요일, 시간 등 다양하게 검색해서  <br/>
+      연락해보고 싶은 시터님이 있다면, 
+      <br/>인터뷰를 신청해보세요.<br/>
+      (마이페이지 > 구직현황에서 확인할 수 있습니다.)<br/><br/>
       <span style="color:#ff7942">Tip. 완료된 인증 수, 채용횟수, 후기 수가 많을수록 <br/>성실한 시터님일 확률이 높습니다.</span>
         </p>
       </div>

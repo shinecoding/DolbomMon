@@ -21,6 +21,7 @@ public class RecruitBoardVO {
 		private String lng;
 		private int hit; //조회수
 		private int tcnt;
+		private int week;
 		
 		public int getJob_board_no() {
 			return job_board_no;
@@ -130,6 +131,14 @@ public class RecruitBoardVO {
 		public void setTcnt(int tcnt) {
 			this.tcnt = tcnt;
 		}
+		public int getWeek() {
+			return week;
+		}
+		public void setWeek(int week) {
+			this.week = week;
+		}
+		
+		
 	}
 
 

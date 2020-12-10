@@ -20,6 +20,8 @@ public interface FreeBoardDaoImp {
 	public int freeBoardInsert(FreeBoardVO vo);
 	//자유게시판 글 삭제
 	public int freeBoardDel(int no, String userid);
+	//파일명 얻어오기
+	public FreeBoardVO getFileName(int no);
 	//자유게시판 글 수정
 	public int freeBoardEditOk(FreeBoardVO vo);
 	//답글 쓰기 옵션 선택

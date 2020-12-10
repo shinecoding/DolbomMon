@@ -71,12 +71,6 @@ $(function(){
 		font-size: 30px;
 		position: relative;
 	}
-	#logoLink{
-		padding: 30px;
-		width: 50%;
-		display: block;
-		margin: 0 auto;
-	}
 	#tel1{
 		position: relative;
 	}
@@ -96,10 +90,9 @@ $(function(){
 </style>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
-	<div>
-		<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logoLink" align="middle"/></a>	
-	</div>
+	<hr/>
 	<div id="top">
 		<b>회원정보 수정</b>
 	</div>

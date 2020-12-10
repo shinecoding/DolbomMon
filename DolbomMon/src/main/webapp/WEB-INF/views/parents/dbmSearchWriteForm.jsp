@@ -217,7 +217,7 @@
 			showAnim : "show",
 			changeMonth : true,
 			changeYear : true,
-			minDate : new Date(todayday.getFullYear()-15, todayday.getMonth(), todayday.getDate()),
+			minDate : new Date(todayday.getFullYear()-10, todayday.getMonth(), todayday.getDate()),
 			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()-1, todayday.getDate()),
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
@@ -276,6 +276,10 @@
 				$("#regularDateDiv #endDateBtn").datepicker("option", "maxDate", maxDate);
 				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
 				$("#regularDateDiv #end_date").val("");
+				$("input[name=week]").each(function(){
+					$(this).prop("checked", false);
+					$(this).parent("label").css("background-color", "#EFEFEF");
+				});
 			},
 			altFormat:"yyyy-mm-dd"
 		});
@@ -325,17 +329,26 @@
 			altFormat:"yyyy-mm-dd"
 		});
 		
-		$("input[name=period_week]").change(function(){
-			var selectedData = $(this).attr("id");
-			console.log("selectedData => " + selectedData);
-			for(var i=2;i<5;i++){
-				if(selectedData==("week"+i)){
-					setEndDate(i);
-					$(this).parent("label").css("background-color", "#FFC207");
-				}else{
-					$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
+		///////////// 종료일 설정 ////////////
+		$("input[name=week]").change(function(){
+			var start_dateVal = $("input[id=start_date]").val();
+			console.log("start_dateVal => " +start_dateVal);
+			if(start_dateVal!=""){
+				var selectedData = $(this).attr("id");
+				console.log("selectedData => " + selectedData);
+				for(var i=2;i<5;i++){
+					if(selectedData==("week"+i)){
+						setEndDate(i);
+						$(this).parent("label").css("background-color", "#FFC207");
+					}else{
+						$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
+					}
 				}
-				
+			}else{
+				swal({
+					title : "시작날짜를 먼저 입력해주세요",
+					icon : "info"
+				});
 			}
 		});
 		
@@ -543,12 +556,6 @@
 									
 				</script>
 <script>
-	$.divOnOff = function(a){
-		$(".mainDiv").fadeOut();
-		var divLocation = $(a).parents(".mainDiv").offset();
-		console.log("요소의 위치 => " + divLocation);
-		$(a).parents(".mainDiv").fadeIn();
-	}
 	
 	function startTime(){ // 시작 시간
 		var time = new Date(2020, 0, 1);
@@ -705,10 +712,10 @@
 					<div>
 						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
 					</div>
-					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt3" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt4" name="childrenCnt"/>
+					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
+					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
+					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
+					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
 					<div id=childrenCnt>
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
@@ -778,8 +785,7 @@
 						<input type="hidden" id="end_date" name="end_date" readonly="readonly" />
 					<div id="startDateDiv">
 						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
-						<input class="btn btn-warning" type="button" id="endDateBtn" value="돌봄 종료일" />
-						<input type="text" id="start_date" name="start_date" readonly="readonly" />
+						<input class="btn" type="text" id="start_date" name="start_date" readonly="readonly" />
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -802,9 +808,9 @@
 					<hr/>
 					<div id="periodDiv">
 						<div>기간을 선택해주세요.</div>
-						<label for="week2"><input type="radio" id="week2" name="period_week" value="2"/>2주</label>
-						<label for="week3"><input type="radio" id="week3" name="period_week" value="3"/>3주</label>
-						<label for="week4"><input type="radio" id="week4" name="period_week" value="4"/>4주</label>
+						<label for="week2"><input type="radio" id="week2" name="week" value="2"/>2주</label>
+						<label for="week3"><input type="radio" id="week3" name="week" value="3"/>3주</label>
+						<label for="week4"><input type="radio" id="week4" name="week" value="4"/>4주</label>
 					</div>
 				</div>
 				<div id="timeDiv">

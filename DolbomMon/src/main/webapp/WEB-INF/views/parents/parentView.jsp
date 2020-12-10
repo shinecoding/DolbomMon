@@ -18,6 +18,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.container{width:800px;}
 	i{color:gray;}
@@ -253,7 +254,28 @@
 
 		$("#deleteBtn").click(function(){
 			var deleteConfirm = confirm("삭제하시겠습니까?");
-			location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
+			var applyCnt = ${rbVO.tcnt};
+			if(applyCnt == 0){
+				location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
+			}else {
+				swal({
+					title : "이미 지원한 선생님이 있습니다.",
+					icon : "info"
+				});
+			}
+		});
+		
+		$("#editBtn").click(function(){
+			var applyCnt = ${rbVO.tcnt};
+			console.log("지원자 수 => " + applyCnt);
+			if(applyCnt == 0){
+				location.href="<%=request.getContextPath()%>/editBoard?no=${rbVO.job_board_no}";
+			}else{
+				swal({
+					title : "이미 지원한 선생님이 있습니다.",
+					icon : "info"
+				});
+			}
 		});
 		
 		
@@ -291,13 +313,54 @@
 				getYoil[i] = 6;
 			}
 		}
-		
 		var first = 0;
+		var cnt = 0;
+		var ttest = 0;
+		var gylength = getYoil.length;
+		console.log("입력받은 요일 수 => " + gylength);
+		for(var i=0; i<getYoil.length;i++){
+			if(startday.getDay()>getYoil[i]){
+				
+			}else {
+				ttest = ttest+1;
+			}
+		}
+		if(ttest == 0){
+			cnt = 1;
+			loop :
+			for(var i=0;i<7;i++){
+				
+				var data = getYoil[0]-i;
+				if(data == 0){
+					data = 7;
+				}else if(data == -1){
+					data = 6;
+				}else if(data == -2){
+					data = 5;
+				}else if(data == -3){
+					data = 4;
+				}else if(data == -4){
+					data = 3;
+				}else if(data == -5){
+					data = 2;
+				}else if(data == -6){
+					data = 1;
+				}
+				if(data == startday.getDay()){
+					first = first + i;
+					console.log("fiiiiiiirst => " + first);
+					break loop;
+				}
+			}
+			startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+first);
+		}
+		
+		
 		
 		console.log("입력받은 요일 => " + selectedYoil);
 		console.log("시작일의 요일 => " + startday.getDay());
 		console.log("정렬 전 => " + getYoil);
-		var cnt = 0; // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
+		 // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
 		for(var i=0;i<getYoil.length;i++){
 			if(getYoil[i]==(startday.getDay())){
 				cnt = 1;
@@ -330,6 +393,12 @@
 						pdata = 3;
 					}else if(pdata == 10){
 						pdata = 4;
+					}else if(pdata == 11){
+						pdata = 5;
+					}else if(pdata == 12){
+						pdata = 6;
+					}else if(pdata == 13){
+						pdata = 1;
 					}
 					
 					if(mdata == 0){
@@ -340,6 +409,12 @@
 						mdata = 5;
 					}else if(mdata == -3){
 						mdata = 4;
+					}else if(mdata == -4){
+						mdata = 3;
+					}else if(mdata == -5){
+						mdata = 2;
+					}else if(mdata == -6){
+						mdata = 1;
 					}
 					
 					console.log("시작일 확인 =>" + startday.getDay());
@@ -492,11 +567,11 @@
 		console.log("두 날짜 사이의 일 수 => " + edl);
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
-		
-		
+		var weeek = ${rdVO.week};
+		console.log("weeekekekekek -> " + weeek);
 		var timebar = "";
 		
-		for(var j=0;j<edll+1;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
+		for(var j=0;j<weeek;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
 			for(var i=0;i<getYoil.length;i++){
 				var height = (endDivLoc - startDivLoc)*10;
 				var top = startDivLoc*10+50+1;
@@ -639,6 +714,7 @@
       	<h5>희망 시급</h5>
       	<li class="list-group-item">
       		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><b style="font-size:25px;line-height:86px;margin-left:5px;">${rbVO.wish_wage } 원</b>
+      		<span><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
    		
    		</li>
    <h5>선호하는 돌봄유형</h5>
@@ -745,7 +821,7 @@
 	<br/>
    	<c:if test="${userid == rbVO.userid}">
    		<div style="margin:50px 0; text-align:right;">
-			<input type="button" class="btn btn-warning ed" value="수정하기" style="margin-right:10px;"/><input type="button" id="deleteBtn" class="btn btn-warning ed" value="삭제하기"/>
+			<input type="button" class="btn btn-warning ed" id="editBtn" value="수정하기" style="margin-right:10px;"/><input type="button" id="deleteBtn" class="btn btn-warning ed" value="삭제하기"/>
 		</div>
  	</c:if>
 </div>

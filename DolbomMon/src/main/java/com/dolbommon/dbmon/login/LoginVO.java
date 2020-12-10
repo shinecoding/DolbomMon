@@ -8,6 +8,7 @@ public class LoginVO {
 	private String birth;
 	private String tel1;
 	private String email;
+	private String activity;
 	private String sessionKey;
 	private String sessionLimit;
 	
@@ -46,6 +47,12 @@ public class LoginVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getActivity() {
+		return activity;
+	}
+	public void setActivity(String activity) {
+		this.activity = activity;
 	}
 	public String getSessionKey() {
 		return sessionKey;
