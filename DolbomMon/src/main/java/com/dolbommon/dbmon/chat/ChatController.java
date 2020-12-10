@@ -80,7 +80,6 @@ public class ChatController {
 			}
 			room.setUserid_t((String) session.getAttribute("userid")); // 접속한 사람
 			//룸 중복확인후 생성
-			System.out.println((String) session.getAttribute("userid"));
 			//서버실행시 쿼리문 반복수행되는 에러때문에 밑에서 다시한번 방갯수구함
 			int result2 = chatdao.roomCheck(userid, room.getUserid());
 			if(result2==0) {
