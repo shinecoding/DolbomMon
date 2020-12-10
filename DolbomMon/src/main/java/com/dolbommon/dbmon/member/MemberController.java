@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.ManageDaoImp;
 import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.Teacher.TeacherVO;
 
@@ -142,7 +143,10 @@ public class MemberController {
 		public int useridChk(@RequestParam("userid") String userid) {
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberUseridChk(userid);
+			ManageDaoImp dao2 = sqlSession.getMapper(ManageDaoImp.class);
+			int result2 = dao.memberUseridChk(userid);
+			int result3 = dao2.selectManagerId(userid);
+			int result = result2 + result3;
 			return result;
 		}
 		
@@ -325,8 +329,8 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="/dbm/profileImageOk", method = RequestMethod.POST)
-		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses,
-				@RequestParam("userid") String uesrid) {
+		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses
+				) {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			
 			String path = ses.getServletContext().getRealPath("/upload");
@@ -374,9 +378,9 @@ public class MemberController {
 				if(who.equals("T")) {
 					ses.setAttribute("pic", fileNames[i]);
 				}else {
-					System.out.println(uesrid);
+					String userid = (String)ses.getAttribute("userid");
 					System.out.println("파일명 => " + fileNames[i]);
-					imgresult = dao.parentImageUpload(fileNames[i], uesrid);
+					imgresult = dao.parentImageUpload(fileNames[i], userid);
 				}
 			}
 			ModelAndView mav = new ModelAndView();

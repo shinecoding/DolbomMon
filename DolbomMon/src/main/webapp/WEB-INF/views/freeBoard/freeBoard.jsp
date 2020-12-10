@@ -69,9 +69,11 @@
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
-
-
-<hr/><br/>
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
+	    	<a href="#"></a></div>
+	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
+<hr/>
 
 
 <div class="container">
@@ -103,10 +105,12 @@
 		</thead>
 		<tbody>
 			<c:forEach var="notice" items="${list2}">
+
 				<tr>
 					<td colspan="1"></td><td align="center" colspan="1"><span class="badge rounded-pill bg-warning" style="padding: 5px;">&nbsp;&nbsp;&nbsp;공지&nbsp;&nbsp;&nbsp;</span></td><td colspan="5"><a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></td>
 				</tr>
 			</c:forEach>
+
 			<c:forEach var="vo" items="${list}">
 				<tr>
 					<c:if test="${vo.step<=0}">

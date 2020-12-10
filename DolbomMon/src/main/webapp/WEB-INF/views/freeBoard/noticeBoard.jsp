@@ -71,15 +71,15 @@
 <%@include file="/WEB-INF/views/top.jsp"%>
 
 
-<hr/><br/>
 
-
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
+	    	<a href="#"></a></div>
+	    	<img src="img/141.png" style="width:100%; height:400px; "/>
+<hr/>
 <div class="container">
 
-<div id="top_noticeboard">
 
-<b>공지사항</b>
-</div>
 <div style="float: right;">
 	<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
 </div>
