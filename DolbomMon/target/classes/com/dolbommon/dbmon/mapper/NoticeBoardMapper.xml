@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.board.NoticeBoardDaoImp">
 	<select id="noticeBoardList" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
-		select no, subject, userid, hit, writedate, filename1, filename2 from noticeBoard 
+		select * from (select * from (select no, subject, userid, hit, writedate, filename1, filename2 
+		from noticeBoard 
 		<choose>
 			<when test="searchKey!=null and searchWord!=null">
 				<if test='searchKey.equals("subject")'>
@@ -18,6 +19,10 @@
 				</if>	
 			</when>
 		</choose>
+		order by no desc) where 
+		<![CDATA[rownum<=${currentPageRecord}]]>
+		order by no) where 
+		<![CDATA[rownum<=${lastPageRecordCount}]]>
 		order by no desc
 	</select>
 	
@@ -135,12 +140,12 @@
 				</when>
 			</choose>	
 			<choose>
-				<when test='expose!=null and expose.equals("Y")'>
+				<when test='expose.equals("Y")'>
 					, expose='Y'
 				</when>
 			</choose>
 			<choose>
-				<when test='expose==null and !expose.equals("Y")'>
+				<when test='expose.equals("N")'>
 					, expose=null
 				</when>
 			</choose>

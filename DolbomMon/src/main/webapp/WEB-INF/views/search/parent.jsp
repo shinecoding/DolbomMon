@@ -78,8 +78,25 @@
 	    text-align: left;
 	    color: white;
 }
+	<!-- -->
+	#imgBox{
+		float:left;
+		padding: 5px;
+		height: 150px;
+		position: absolute;
+		top: 30px;
+	}
+	#offerBox{
+		float:right;
+		width: 290px;
+	}
+	#offerTitle{
+		font-size: 1.1em;
+	}
+	.card-body{
+		white-space: nowrap;
 	
- 
+	}
 </style>
 <body>
 <!-- -------------------상단메뉴------------- -->
@@ -127,7 +144,7 @@
   </div>
  
    <div class="wrapper1" style="display:inline">
-	<div class="total" style="float:left"> 총 ${totalRecords}건의 일자리 찾기가 있습니다</div>
+	<div class="total" style="float:left"><br/>총 ${totalRecords}건의 일자리 찾기가 있습니다</div>
 	<!-- <div class="float-right" style="float:right">후기순 -->
 	<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:20%; float: right;">
 	    <option selected>최신순</option>
@@ -141,77 +158,35 @@
 	<br/><br/><br/>
 	
 	</div>
-	<c:forEach var="vo" items="${list2}">
-
-	<div class="wrapper2" onclick="location.href='parentView?no=${vo.job_board_no}'">
-
-	<ul class="list-group">
-	<li class="list-group-item"><i class="fas fa-star"></i>
-	<ul class="list-group list-group-horizontal">
-	
-		<li class="list-group-item border-0 col-2">
-			
-			<img src="img/tea1.PNG" class="rounded-circle"/><br/><br/>
-		<div class="badge badge-warning badge-pill ml-1" ><span>0</span>명 지원</div>
-		</li>
-		<li class="list-group-item border-0 col-10">
-			<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
-			<h6 style="color:orange;"> no. ${vo.job_board_no}</h6>
-			<h6><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</h6>
-			<h6><b>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</b></h6>
-			<h7>${vo.care_addr } | ${vo.userid } | 11/18 시작</h7><br/><br/>
-			<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 10,000원 | <b>협의가능</b></h6>
-		</li>
-		</ul>
-		</li>
-			
-	</ul>
-	</div>
-	<hr/>
-	<br/>
-	</c:forEach> 
 	
 	<div class="row">
-  <div class="col-sm-6" style="padding: 10px;">
-    <div class="card">
-      <div class="card-body">
-      <div style="float:left;"><img src="img/tea1.PNG" class="rounded"/></div>
-      <div style="float:right; padding: 5px;">
-        <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
-        <p class="card-text">신생아 1명, 유아 1명</p>
-        <p class="card-text">충북 청주시 청원구</p>
-        <p class="card-text">희망시급 10,000원 | 협의가능 | 12월 12일 시작</p>
-        </div>
-        <a href="#" class="btn btn-warning">신청하기</a>
-      </div>
-    </div>
-   </div>
-   <div class="col-sm-6" style="padding: 10px;">
-    <div class="card">
-      <div class="card-body">
-      <div style="float:left; padding: 5px;"><img src="img/tea1.PNG" class="rounded-circle"/></div>
-      <div style="float:right; padding: 5px;">
-        <h6 class="card-title"><b>돌봄몬을 찾습니다</b></h6>
-        <p class="card-text">no. 123
-        <br/>신생아 1명, 유아 1명
-        <br/>충북 청주시 청원구
-        <br/>희망시급 10,000원 | 협의가능 | 12월 12일 시작
-        </p>
-        
-        </div>
-        <a href="#" class="btn btn-warning" style="border: 1px solid red;">신청하기</a>
-      </div>
-    </div>
-  </div>
-
-	
-
+		<c:forEach var="vo" items="${list2}">
+			<div class="col-sm-6" style="padding: 20px;">
+				<div class="card">
+					<div class="card-body">
+						<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
+						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 45px;"><span>0</span>명 지원</div>
+						<div id="offerBox" >
+							<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
+							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
+							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
+							<br/><span>${vo.care_addr } </span>
+							<br/><span>12/12 시작</span>
+							<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
+							
+							
+							<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+							
+							</p>
+						</div>
+					</div>
+				<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	</div>
 <hr/>
-<br/>
-
-
-
- </div>
 <jsp:include page="../footer.jsp"/>
 </body>
 </html>

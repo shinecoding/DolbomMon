@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select job_board_no, userid, care_addr, wish_age, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
+		select job_board_no, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
 			from parent_list order by job_board_no desc
 	</select>
 	
