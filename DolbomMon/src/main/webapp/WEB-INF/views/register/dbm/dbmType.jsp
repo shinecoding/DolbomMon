@@ -59,13 +59,13 @@
 			imgChange();
 		});
 		
-		$("input[name=dbm_type]").change(function(){
+		$("input[name=teacher_type]").change(function(){
 			
 			imgChange();
 		});
 		
 		$("#dbmTypeFrm").submit(function(){
-			var data = $("input[name=care_type]").val();
+			var data = $("input[name=teacher_type]").val();
 			if(data == null || data == ""){
 				alert("유형을 선택해주세요");				
 				return false;

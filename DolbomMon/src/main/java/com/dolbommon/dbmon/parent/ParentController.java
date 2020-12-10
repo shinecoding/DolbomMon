@@ -204,6 +204,7 @@ public class ParentController {
 		System.out.println("자녀 생년월일 => " + child_birth);
 		cVO.setChild_birth(child_birth);
 		
+		
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
