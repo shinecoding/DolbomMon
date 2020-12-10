@@ -10,14 +10,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	var anotherUser;
+	
 	$(function(){
+		
+		var anotherUser;
 		var timerID;
 		var newTimerID; 
 		var roomNo;
 		var scrollStop = 1;
 		var startChatRoom = 0;
-		
 		//채팅입력
 		$("#send2").click(function(){
 			insertChat();
@@ -95,6 +96,10 @@
 			makeRoom();
 		})
 		
+
+		
+		
+		
 		//해당 게시글 대상 아이디로 방목록 최상단 갱신
 		function newRoom(){
 			$.ajax({
@@ -106,70 +111,7 @@
 		}
 		
 		
-		//방만들기 버튼 클릭시
-		var roomseq;
-		function makeRoom(){
-			$.ajax({
-				url : "makeRoom", 
-				data : {
-					roomname:$("#roomname").val(),
-				},
-				type : "post",
-				success : function(result){
-				///////////
-						var $data = $(result);
-						tag="";
-						$data.each(function(idx, rVo){
-							if(rVo.userid!=rVo.userid_t){
-								if(startChatRoom==0){
-									selectRoom(rVo.roomseq);
-									roomNo=rVo.roomseq;
-								}
-								tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
-								tag+='<img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">';
-								tag+='<div class="text">';
-								tag+='<h6>'+rVo.roomseq+' : ';
-								if(rVo.userid=="${myId}"){
-									if(startChatRoom==0){
-										$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
-										startChatRoom++;
-									}
-									tag+="<span class='anotherUser'>"+rVo.userid_t;
-								}else{
-									if(startChatRoom==0){
-										$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
-										startChatRoom++;
-									}
-									tag+="<span class='anotherUser'>"+rVo.userid
-								}
-								tag+='</span></h6>';
-								tag+='<p class="time text-muted small wordCut" style="width:150px; height:19px;">'+rVo.lastChat+'</p>';
-								tag+='<p class="time text-muted small">'+rVo.indate+'</p></div>';
-								tag+='<div style="line-height:50px; height:50px;" class="imgChange">';
-								if(roomNo!=rVo.roomseq){
-									if(rVo.userid=="${myId}"){
-										if(rVo.newchat=="Y"){
-											tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
-										}							
-									}else if(rVo.userid_t=="${myId}"){
-										if(rVo.newchat_t=="Y"){
-											tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
-										}					
-									}
-								}else{
-									tag+='<img src="icon/message/chaticon2.png" class="imgResize"/>';
-								}
-								tag+="</div></div><hr>";
-							}
-						});					
-					$(".roomBox").html(tag);
-					$("#roomname").val("");
-					$("#message").focus();
-				}
-			});
-			
-			newTimerID = setTimeout(makeRoom, 1999);
-		}
+		
 		
 		//채팅입력시
 		function insertChat(){
@@ -229,7 +171,74 @@
 			timerID = setTimeout(selectRoom, 1000, roomNo);
 			
 		}
+		//방만들기 버튼 클릭시
+		var roomseq;
+		function makeRoom(){
+			$.ajax({
+				url : "makeRoom", 
+				data : {
+					roomname:$("#roomname").val(),
+					userid:"${anotherId}",
+				},
+				type : "post",
+				success : function(result){
+				///////////
+						var $data = $(result);
+						tag="";
+						$data.each(function(idx, rVo){
+							if(rVo.userid!=rVo.userid_t){
+								if(startChatRoom==0){
+									selectRoom(rVo.roomseq);
+									roomNo=rVo.roomseq;
+								}
+								tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
+								tag+='<img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">';
+								tag+='<div class="text">';
+								tag+='<h6>'+rVo.roomseq+' : ';
+								if(rVo.userid=="${myId}"){
+									if(startChatRoom==0){
+										$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
+										startChatRoom++;
+									}
+									tag+="<span class='anotherUser'>"+rVo.userid_t;
+								}else{
+									if(startChatRoom==0){
+										$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
+										startChatRoom++;
+									}
+									tag+="<span class='anotherUser'>"+rVo.userid
+								}
+								tag+='</span></h6>';
+								tag+='<p class="time text-muted small wordCut" style="width:150px; height:19px;">'+rVo.lastChat+'</p>';
+								tag+='<p class="time text-muted small">'+rVo.indate+'</p></div>';
+								tag+='<div style="line-height:50px; height:50px;" class="imgChange">';
+								if(roomNo!=rVo.roomseq){
+									if(rVo.userid=="${myId}"){
+										if(rVo.newchat=="Y"){
+											tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
+										}							
+									}else if(rVo.userid_t=="${myId}"){
+										if(rVo.newchat_t=="Y"){
+											tag+='<img src="icon/message/chaticon1.png" class="imgResize"/>';
+										}					
+									}
+								}else{
+									tag+='<img src="icon/message/chaticon2.png" class="imgResize"/>';
+								}
+								tag+="</div></div><hr>";
+							}
+						});					
+					$(".roomBox").html(tag);
+					$("#roomname").val("");
+					$("#message").focus();
+				}
+			});
+			
+			newTimerID = setTimeout(makeRoom, 1999);
+		}
 		
+		
+	
 	});
 
 </script>

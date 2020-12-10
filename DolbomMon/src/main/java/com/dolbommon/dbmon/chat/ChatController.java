@@ -23,14 +23,18 @@ public class ChatController {
 	ChatDAO chatdao;
 
 	@RequestMapping("/chat")
-	public ModelAndView chatMain(HttpSession session) {
+	public ModelAndView chatMain(HttpSession session, HttpServletRequest req) {
 
 		ModelAndView mav = new ModelAndView();
 
 		String userid = (String) session.getAttribute("userid");
-
+		String anotherId = (String)req.getParameter("userid");
+		if(anotherId==null || anotherId.equals("")) {
+			anotherId="test001";
+		}
 		mav.addObject("roomList", chatdao.selectAllRoom(userid)); // 방정보..
 		mav.addObject("myId", userid);
+		mav.addObject("anotherId", anotherId);
 		mav.setViewName("chat/chatMain");
 		return mav;
 	}
@@ -52,12 +56,18 @@ public class ChatController {
 	// 방만들기 and 채팅방열기
 	@RequestMapping(value = "/makeRoom", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ChatRoomDTO> makeakeRoom(ChatRoomDTO room, HttpSession session) {
-
-		String userid = (String) session.getAttribute("userid");
-
-		room.setUserid("test3"); // 글, 프로필 대상
+	public List<ChatRoomDTO> makeakeRoom(ChatRoomDTO room, HttpSession session, HttpServletRequest req) {
 		
+		String userid = (String) session.getAttribute("userid");
+		
+		
+		String userid2 = (String)req.getParameter("userid");
+		
+		if(userid2==null || userid2.equals("")) {
+			userid2="test001";
+		}
+
+		room.setUserid(userid2); // 글, 프로필 대상
 		
 		//방갯수확인
 		int result = chatdao.roomCheck(userid, room.getUserid());
@@ -70,7 +80,7 @@ public class ChatController {
 			}
 			room.setUserid_t((String) session.getAttribute("userid")); // 접속한 사람
 			//룸 중복확인후 생성
-	
+			System.out.println((String) session.getAttribute("userid"));
 			//서버실행시 쿼리문 반복수행되는 에러때문에 밑에서 다시한번 방갯수구함
 			int result2 = chatdao.roomCheck(userid, room.getUserid());
 			if(result2==0) {

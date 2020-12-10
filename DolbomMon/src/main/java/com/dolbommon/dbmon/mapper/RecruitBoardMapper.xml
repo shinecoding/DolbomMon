@@ -5,7 +5,7 @@
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select job_board_no, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
-			from parent_list order by job_board_no desc
+			from parent_list where status='R' or status='P' order by job_board_no desc
 	</select>
 	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">

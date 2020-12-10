@@ -23,7 +23,9 @@
 	.container{width:800px;}
 	i{color:gray;}
 	#profimg{
-	   width:50%;
+	   	width:400px;
+		height:400px;
+		text-align:center;
 	}
 	h5{
 	   padding: 20px 0px 0px 0px;
@@ -55,7 +57,7 @@
  	#regularDate .dateCls{text-align:center;}
  	#timebarDiv {position:relative;width:0px;height:0px;}
  	.timebar{position:absolute;top:50px; background-color:orange;opacity:0.7; width:50px;}
- 	
+ 	.clearfix:after { clear:both; }
 </style>
 
 <script>
@@ -180,6 +182,16 @@
 		
 	});
 	$(function(){
+		var popupWidth = 1000;
+		var popupHeight = 650;
+		var popupX = (window.screen.width / 2) - (popupWidth / 2);
+		var popupY= (window.screen.height / 2) - (popupHeight / 2);
+		$(document).on("click",".cBtn",function(){
+			console.log("test");
+			var userid = $(this).attr('id');
+			window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		});
+		
 		
 		$("#testBtn").click(function(){
 			
@@ -554,20 +566,32 @@
 		//////////////////////////////////////////////////////////////////////////
 		
 	});
-	
+
+
 	
 	
 </script>
 </head>
 <body>
 
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/>
+
 <div class="container">
-   <div class="badge badge-warning badge-pill float-right mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
-   <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
+	<div>
+  	 <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
+   </div>
+   <div class="clearfix" style="width:100%">
+	   <div style="position:relative; float:right; height:1px; top:-420px;">
+			<div class="badge badge-warning badge-pill mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
+	   </div>
+   </div>
+   <div>
    <ul class="list-group">
          <li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${rbVO.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">학부모</span><br/>
          <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span id="jobNo" class="ml-2">${rbVO.job_board_no }</span></li>
    </ul>
+   </div>
    <br/>
    <ul class="list-group list-group-horizontal-sm">
          <li class="list-group-item col-6" style="text-align:center"><i class="fas fa-search mr-2"></i>지원자 수<br/><div>${rbVO.tcnt }</div></li>
@@ -719,7 +743,7 @@
 									<h6><b>지원시간</b> | ${tlist.apply_date }</h6>
 									<h7>CCTV 촬영가능여부 - ${tlist.cctv } | ? | ? </h7><br/><br/>
 									<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
-									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn" style="float:right;" /><input type="button" class="btn btn-warning" id="d" value="협의하기" style="float:right;"/><input class="btn btn-warning" type="button" value="채팅하기" style="float:right;" />
+									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn" style="float:right;" /><input type="button" class="btn btn-warning cBtn" id="${tlist.userid }" value="협의하기" style="float:right; margin:0 5px;"/>
 								</li>
 							</ul>
 						</li>
