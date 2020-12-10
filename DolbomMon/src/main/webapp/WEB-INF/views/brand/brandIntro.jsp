@@ -44,7 +44,7 @@
 <div id="upper">
 
    
-   <video class="redution" src='img/video.mp4' width='100%' autoplay loop>
+   <video class="redution" src='img/video.mp4' width='100%' autoplay muted loop>
 </video>
  <div class="jb-text">
         <p>사업소개</p>
@@ -59,8 +59,8 @@
 	엄마들을 위해 <br/>놀이 돌봄 서비스 
 	'돌봄몬'을 시작했습니다.<br/> </h4>
    <br/><br/><br/><br/><br/>
-   <img src="img/pic2.png" data-aos="flip-left"/>
-   <img src="img/intro1.png" data-aos="flip-left" style="margin-top: 4rem;max-width: 786px;padding: 0 15px; margin: 50 auto;"/>
+   <img src="img/pic2.png" data-aos="fade-up"/>
+   <img src="img/intro1.png" data-aos="fade-up" style="margin-top: 4rem;max-width: 786px;padding: 0 15px; margin: 50 auto;"/>
 </div>
 <script>
     AOS.init({

@@ -225,7 +225,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 </div>   
     
 <div id="mainContents4" >
-    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="fade-up">
       <div class="col-md-7"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive;">DOLBOMMON GUIDE</span><br/><br/>Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
@@ -240,7 +240,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider"><br/><br/>
 
-    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-right">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7 order-md-2"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
@@ -260,7 +260,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider">
 
-    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7">
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><br/>Step 03.<br/><br/>
         <span class="text-muted">Have an interview</span></h2><br/><br/>

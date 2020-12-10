@@ -181,27 +181,13 @@ var test='<%=(String)session.getAttribute("userid")%>';
 		$('tr').css("background-color","#fff");
 		$(this).closest('tr').css("background-color","antiquewhite");
 	});
-	/*
+	
 	$(document).on("click",".eBtn",function(){
 		if(confirm("해당 관리자의 정보를 수정하겠습니까?")){
-		var userid = $(this).closest('tr').find('td:eq(1)').text();
-		var type= $(this).attr('id');
-		reason(no);
-		$.ajax({
-				url:"updateActivity",
-				async : false,
-				type:"POST",
-				data : {
-					no:no,
-					certi:"N",
-					type:type,
-				},success : function(){
-					location.href="/dbmon/management?type=memberManage?no="+no;
-				}
-			})
+			var userid = $(this).closest('tr').find('td:eq(1)').text();
+			window.open('/dbmon/updateManager?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		}
 	});
-	*/
 </script>
 </head>
 <body>

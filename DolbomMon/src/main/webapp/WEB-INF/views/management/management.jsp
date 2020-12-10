@@ -30,15 +30,6 @@
 <script src="<%=request.getContextPath() %>/css/vfs_fonts.js" type="text/javascript" ></script>
 
 <script>
-	
-
-/* 	$(document).ready(function(){
-
-	    $("#mainPage").load("/dbmon/");
-
-	}); */
-
-	
  
     function memberPage(url){
         var ajaxOption = {
@@ -58,26 +49,75 @@
     function logOut(){
 		location.href="/dbmon/managerLogout";
     } 
-    /*
-	function openNewWindow() { 
-		window.open("/dbmon/messagetest","message","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=482, height=600"); 
-	}
-*/
 	
+    
+    
+    //Timer 설정 시작
+    var tid;
+    var cnt = parseInt(1800);//초기값(초단위)
+    
+    function counter_init() { //메인화면 세션 카운트 실행
+     tid = setInterval("counter_run()", 1000);
+    }
+    
+    function counter_run() { //메인화면 세션 카운트
+     document.all.counter.innerText = time_format(cnt);
+     cnt--;
+     if(cnt < 0) {
+      clearInterval(tid);
+     }
+    }
+    
+      
+    function counter_reset() { 
+      $.ajax({
+    	  	url:"increaseSession",
+    	  	success:function(){
+    	        clearInterval(tid);
+    	        cnt = parseInt(1800);//초기값(초단위)
+    	        counter_init();
+    	  	}
+      			
+      })
+     
+    }
+    
+    function time_format(s) {
+     //var nHour=0;
+     var nMin=0;
+     var nSec=0;
+     if(s>0) {
+      nMin = parseInt(s/60);
+      nSec = s%60;
+
+      if(nMin>60) {
+       //nHour = parseInt(nMin/60);
+       nMin = nMin%60;
+      }
+     }
+     if(nSec<10) nSec = "0"+nSec;
+     if(nMin<10) nMin = "0"+nMin;
+
+     return /*""+nHour+":"+*/nMin+":"+nSec;
+    }
 </script>
 <style>
+
 	body, div{
 		margin:0;
 		padding:0;
 	}
 	#topBar{
 		display:flex;
-		background-color:#24292E;
-		font-size:2em;
+		font-size:15px;
 		line-height:2em;
-		text-align:center;
 		padding:16px;
 		height:70px;
+		background-color: #222;
+	    border-color: #080808;
+	    border: 1px solid transparent;
+	    color:rosybrown;
+	    font-family: 'Noto Sans KR', sans-serif;
 	}
 	#mainPage{
 		position:absolute;
@@ -218,12 +258,12 @@
 		overflow: scroll;
 		overflow-x:hidden;
 	}
-
+	.clearfix:after { clear:both; }
 	
 </style>
 
 </head>
-<body<c:if test="${type!=null}"> onload="memberPage('/dbmon/${type}');"</c:if>>
+<body onload="counter_init(); <c:if test='${type!=null}'>memberPage('/dbmon/${type}');</c:if>">
 
 
 <div class="area"></div><nav class="main-menu">
@@ -331,8 +371,11 @@
 
 
 <!-- ============================= -->
-<!-- <div id="topBar" id="topBar"><a href="javascript:openNewWindow()"><button class="btn btn-primary">쪽지</button></a></div> --> <!-- 돌봄몬 사이트 네비게이션 위치 --> 
-<div id="topBar" id="topBar"></div><!-- 돌봄몬 사이트 네비게이션 위치 -->
+<div id="topBar" id="topBar" class="clearfix">
+	<div style="width:100%; text-align:right;">
+		<span style="margin-right:20px; line-height:36.2px;"><b>${vo.department}</b> ${vo.username}님 &nbsp&nbsp&nbsp <span id="counter">30:00</span></span><button class="btn btn-outline-info" style="padding:3px; margin-bottom:3px;" onclick="counter_reset()">세션연장</button>
+	</div>
+</div><!-- 돌봄몬 사이트 네비게이션 위치 -->
 <div id="mainPage"></div>
 </body>
 </html>
