@@ -5,6 +5,7 @@ public class ChildrenVO {
 	private String userid;
 	private String child_birth;
 	private String child_gender;
+	private int child_cnt;
 	
 	public int getJob_board_no() {
 		return job_board_no;
@@ -30,5 +31,12 @@ public class ChildrenVO {
 	public void setChild_gender(String child_gender) {
 		this.child_gender = child_gender;
 	}
+	public int getChild_cnt() {
+		return child_cnt;
+	}
+	public void setChild_cnt(int child_cnt) {
+		this.child_cnt = child_cnt;
+	}
+	
 	
 }
