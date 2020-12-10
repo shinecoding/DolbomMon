@@ -26,7 +26,7 @@
 	#selectDayDiv li>label{
 		display:block; 
 		width:100%; height:100%; 
-		border:1px solid gray; border-radius:50%; 
+		border-radius:50%; 
 		background-color:#EFEFEF; 
 		margin:0;
 	}
@@ -57,11 +57,14 @@
 	#periodDiv h6{color:gray; margin-top:20px;}
 	label{display:inline-block; width:100%; height:100%; margin:0;}
 	#periodDiv ul{width:100%; overflow:hidden; height:auto; margin:0;}
-	#periodList li{width:25%; text-align:center; float:left; border:1px solid #EFEFEF; }
+	#periodList li{width:33%; text-align:center; float:left; border:1px solid #EFEFEF; }
 	/* input[type=radio]{display:none;} */
 	
-	input[type=submit]{width:100%; height:40px; margin-top:30px; background-color:#ff5400; color:white; border:1px solid #EFEFEF;}
-	
+	input[type=submit]{width:100%; height:40px; margin-top:30px; background-color:orange; color:white; border:1px solid #EFEFEF;}
+	label{-webkit-transition:background-color 1s;
+		transition:background-color 1s;}
+	li{-webkit-transition:background-color 1s;
+		transition:background-color 1s;}
 </style>
 <script>
 
@@ -69,7 +72,7 @@
 		$(document).ready(function(){
 			for(var i=1;i<8;i++){
 				if($("input[id="+i+"]").is(":checked")){
-					$("label[for="+i+"]").css("background-color", "#ff5400").css("color", "white");
+					$("label[for="+i+"]").css("background-color", "orange").css("color", "white");
 				}else{
 					$("label[for="+i+"]").css("background-color", "#EFEFEF");
 				}
@@ -77,7 +80,7 @@
 			
 			for(var i=1;i<5;i++){
 				if($("input[id=p"+i+"]").is(":checked")){
-					$("label[for=p"+i+"]").css("background-color", "#ff5400").css("color", "white");
+					$("label[for=p"+i+"]").css("background-color", "orange").css("color", "white");
 				}else{
 					$("label[for=p"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
 				}
@@ -87,9 +90,8 @@
 		
 		$("#startDateBtn").datepicker({
 			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			yearRange : 'c-100:c',
+			minDate : '0',
+			maxDate : '1m',
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#start_date").val(dateText);
@@ -103,7 +105,7 @@
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
-				$("label[for="+selectedData+"]").css("background-color", "#ff5400").css("color", "white");//노랑
+				$("label[for="+selectedData+"]").css("background-color", "orange").css("color", "white");//노랑
 			}else{
 				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF").css("color", "black");//회색
 			}
@@ -120,7 +122,7 @@
 			}else{
 				for(var i=1;i<5;i++){
 					if($("input[id=p"+i+"]").is(":checked")){
-						$("label[for=p"+i+"]").css("background-color", "#ff5400").css("color", "white");
+						$("label[for=p"+i+"]").css("background-color", "orange").css("color", "white");
 						setEndDate(i);
 					}else{
 						$("label[for=p"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
@@ -227,7 +229,7 @@
 		<form method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 		<div id="headerDiv"><h2>원하는 시간 직접 입력하기</h2></div>
 		<div id="startDateDiv">
-			<input type="button" id="startDateBtn" value="활동 시작일 선택" />
+			<input class="btn" style="background-color:orange;color:white;"type="button" id="startDateBtn" value="활동 시작일 선택" />
 			<input type="text" id="start_date" name="start_date" readonly="readonly" />
 		</div>
 		<div id="selectDayDiv">
@@ -269,9 +271,8 @@
 				<li><label for="p1"><input type="radio" id="p1" name="asdf" />1주일 이상</label></li>
 				<li><label for="p2"><input type="radio" id="p2" name="asdf" />1개월 이상</label></li>
 				<li><label for="p3"><input type="radio" id="p3" name="asdf" />3개월 이상</label></li>
-				<li><label for="p4"><input type="radio" id="p4" name="asdf" />6개월 이상</label></li>
 			</ul>
-			<input type="submit" value="다음" />
+			<input class="btn" type="submit" value="다음" />
 		</div>
 		</form>
 	</div>

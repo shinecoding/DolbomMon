@@ -24,7 +24,10 @@
 	.dt{width:100%; font-size:14px; color:gray;}
 	
 	#dbmTypeDiv input[type=submit]{width:100%; height:40px; margin-top:20px;}
-	
+	label{-webkit-transition:background-color 1s;
+		transition:background-color 1s;}
+	li{-webkit-transition:background-color 1s;
+		transition:background-color 1s;}
 	
 	/* ==================== 라디오 버튼 ====================== */
 </style>
@@ -104,7 +107,7 @@
 				<div class="d1"><label for="dt2"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div></div>
 				<div class="d1"><label for="dt3"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div></div>
 				<div class="d1"><label for="dt4"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">일반</p><p class="dt">위 3가지 경우에 속하지 않지만 돌봄몬으로 활동하고 싶은 경우</p></div></div>
-				<input type="submit" value="다음" />
+				<input type="submit" class="btn" style="background-color:orange;margin-bottom:100px;" value="다음" />
 			</form>
 		</div>
 	</div>
