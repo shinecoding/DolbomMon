@@ -74,6 +74,11 @@ $(function(){
 		
 	});//trash삭제
 	
+	//프로필 들어가기
+    $(document).on("click", ".list-group-horizontal", function(){
+    	location.href="teacherView?userid="+$(this).parent().parent().attr('id');
+    });
+	
 	$(document).on("change", "#likeDropdown", function(){
 		var order = $(this).val();
 		console.log("정렬="+order);
@@ -95,7 +100,7 @@ $(function(){
 					if(vo.active=="Y"){
 						tag += '<ul class="list-group" id="'+vo.userid+'">';
 						tag += '<li class="list-group-item">';
-						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<ul class="list-group list-group-horizontal" style="cursor:pointer">';
 						tag += '<li class="list-group-item border-0 col-2">';
 						tag += '<img src=';
 						if(vo.pic==null){
@@ -216,7 +221,7 @@ $(function(){
 					if(vo.active=="Y"){	
 						tag += '<ul class="list-group" id="'+vo.userid+'">';
 						tag += '<li class="list-group-item">';
-						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<ul class="list-group list-group-horizontal" style="cursor:pointer"> ';
 						tag += '<li class="list-group-item border-0 col-2">';
 						tag += '<img src=';
 						if(vo.pic==null){
@@ -274,7 +279,7 @@ $(function(){
 						
 						tag += '<ul class="list-group" id="'+vo.userid+'">';
 						tag += '<li class="list-group-item">';
-						tag += '<ul class="list-group list-group-horizontal">';
+						tag += '<ul class="list-group list-group-horizontal" style="cursor:pointer" onclick="location.href="teacherView?userid=${vo.userid}"" >';
 						tag += '<li class="list-group-item border-0 col-2">';
 						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';
 						tag += '<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>';
@@ -330,7 +335,8 @@ $(function(){
 		<c:if test="${vo.active == 'Y'}">
 		<ul class="list-group" id="${vo.userid}">
 			<li class="list-group-item">
-				<ul class="list-group list-group-horizontal">
+			<a href="<%=request.getContextPath()%>/teacherView?userid=${vo.userid}&nowPage=${hvo.nowPage}">
+				<ul class="list-group list-group-horizontal" style="cursor:pointer">
 					<li class="list-group-item border-0 col-2">
 						<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}" class="rounded-circle"/><br/>
 						<div class="badge badge-warning badge-pill ml-3" >신청하기</div>
@@ -356,7 +362,7 @@ $(function(){
 						<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 					</li>
 				</ul>
-		
+		</a>
 			
 	<!--스케쥴api가 완성되고 요일 데이터를 집어넣을 경우! 아니면 그냥 인증정보 표시
 		<div class="float-left">
@@ -383,7 +389,7 @@ $(function(){
 	<c:if test="${vo.active == 'N'}">
 		<ul class="list-group" id="${vo.userid}">
 			<li class="list-group-item">
-				<ul class="list-group list-group-horizontal">
+				<ul class="list-group list-group-horizontal" >
 					<li class="list-group-item border-0 col-2">
 						<img src="img/profilepic.png" alt="${vo.userid}" class="rounded-circle"/><br/>
 						<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>
