@@ -72,6 +72,22 @@
 		update parent_list set hit=hit+1 where job_board_no=#{param1}
 	</update>
 	
+	<update id="updateDbmSearch">
+		<!-- update parent_list set(care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation, wish_age, wish_gender, content, lat, lng, writedate) =
+			(#{care_addr}, #{dong_addr}, #{time_type}, #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate)
+			where job_board_no = #{param1} -->
+	</update>
+	<update id="updateDsChildInfo">
+	</update>
+	<update id="updateDsRegularDate">
+	
+	</update>
+	<update id="updateDsSpecificDate">
+	
+	</update>
+	
+	
+	
 	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 
 		values(board_sq.nextval,#{content}, #{userid}, 0, sysdate)

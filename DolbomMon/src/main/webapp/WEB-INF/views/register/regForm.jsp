@@ -383,7 +383,7 @@
 	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
 	<c:if test="${who=='T' }" >
-		<input type="hidden" name="care_type" value="${care_type }" />
+		<input type="hidden" name="teacher_type" value="${teacher_type }" />
 		<input type="hidden" name="child_age" value="${child_age }" />
 		<input type="hidden" name="activity_type" value="${activity_type }" />
 		<input type="hidden" name="yoil" value="${yoil }" />
