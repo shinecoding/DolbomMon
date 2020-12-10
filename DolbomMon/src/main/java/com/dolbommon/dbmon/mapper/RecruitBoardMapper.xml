@@ -78,19 +78,15 @@
 			where job_board_no = #{param1}
 	</update>
 	<update id="updateDsChildInfo">
-		update add_child set(child_birth, child_cnt) = 
-			(#{cVO.child_birth}, #{cVO.child_cnt})
+		update add_child set child_birth=#{cVO.child_birth}, child_cnt=#{cVO.child_cnt} 
 			 where job_board_no = #{param1}
-	
 	</update>
 	<update id="updateDsRegularDate">
-		update jb_regular_date(yoil, start_time, end_time, start_date, end_date, week) =
-			(#{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date}, #{rdVO.week})
+		update jb_regular_date set yoil=#{rdVO.yoil}, start_time=#{rdVO.start_time}, end_time=#{rdVO.end_time}, start_date=#{rdVO.start_date}, end_date=#{rdVO.end_date}, week=#{rdVO.week}
 			where  job_board_no = #{param1}
 	</update>
 	<update id="updateDsSpecificDate">
-		update jb_specific_date(select_date, start_time, end_time) = 
-			(#{sdVO.select_date}, #{sdVO.start_time}, #{sdVO.end_time})
+		update jb_specific_day select_date=#{sdVO.select_date}, start_time=#{sdVO.start_time}, end_time=#{sdVO.end_time} 
 			where job_board_no = #{param1}
 			
 	</update>

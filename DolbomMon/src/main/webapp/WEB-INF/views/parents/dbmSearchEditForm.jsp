@@ -534,33 +534,6 @@
 				return false;
 			}
 			
-			var childCnt = $("input[name=childrenCnt]:checked").length;
-			if(childCnt < 1) {
-				swal({
-					title : "자녀 정보 입력",
-					text : "자녀의 정보를 입력해주세요",
-					icon : "info"
-				});
-				return false;
-			}
-			
-			var cnttt = 0;
-			$(".child_birth").each(function(){
-				var cb = $(this).val();
-				if(cb==null || cb==""){
-					cnttt = cnttt+1;
-					console.log("cnttt => " + cnttt);
-				}
-			});
-			if(cnttt == 0){
-				swal({
-					title : "자녀 정보 입력",
-					text : "자녀의 생년월일을 입력해주세요",
-					icon : "info"
-				});
-				cnttt = 0;
-				return false;
-			}
 			
 			if($("input[name=time_type]:checked").length<1){
 				swal({
@@ -855,10 +828,10 @@
 					<div>
 						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
 					</div>
-					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt3" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt4" name="childrenCnt"/>
+					<input type="radio" id="childrenCnt1" name="child_cnt" value="1"/>
+					<input type="radio" id="childrenCnt2" name="child_cnt" value="2"/>
+					<input type="radio" id="childrenCnt3" name="child_cnt" value="3"/>
+					<input type="radio" id="childrenCnt4" name="child_cnt" value="4"/>
 					<div id=childrenCnt>
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>

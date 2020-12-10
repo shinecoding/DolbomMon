@@ -152,7 +152,7 @@
 			var email2 = $("#email2").val();
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
-				$("#email2").val("").css("color", "green");
+				$("#email2").val("");
 			}
 		})
 		
@@ -179,7 +179,7 @@
 			var tel1 = $(this).val();
 			var tel1Reg = /^01(?:0)\d{8}$/;
 			if(!tel1Reg.test(tel1)){
-				$("#tel1Chk").html("휴대폰 번호를 입력해주세요.").css("color", "red");
+				$("#tel1Chk").html("-를 제외한 휴대폰 번호를 입력해주세요.ex)010...").css("color", "red");
 				$("#smsIdentity").attr("disabled", true);
 			}else{
 				$("#tel1Chk").html("").css("color", "green");
