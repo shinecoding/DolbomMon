@@ -45,10 +45,10 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 	
 	
 	// 구인글 수정
-	public int updateDbmSearch(RecruitBoardVO rbVO);// 선생님 구하기 - 글 등록
-	public int updateDsChildInfo(@Param("rbVO")RecruitBoardVO rbVO, @Param("cVO")ChildrenVO cVO); // 선생님 구하기 - 자녀 정보
-	public int updateDsRegularDate(@Param("rbVO")RecruitBoardVO rbVO, @Param("rdVO")RegularDateVO rdVO); // 선생님 구하기 - 정기적으로
-	public int updateDsSpecificDate(@Param("rbVO")RecruitBoardVO rbVO, @Param("sdVO")SpecificDateVO sdVO); // 선생님 구하기 - 선택한 날짜
+	public int updateDbmSearch(int no, @Param("rbVO")RecruitBoardVO rbVO);// 선생님 구하기 - 글 등록
+	public int updateDsChildInfo(int no, @Param("rbVO")RecruitBoardVO rbVO, @Param("cVO")ChildrenVO cVO); // 선생님 구하기 - 자녀 정보
+	public int updateDsRegularDate(int no, @Param("rbVO")RecruitBoardVO rbVO, @Param("rdVO")RegularDateVO rdVO); // 선생님 구하기 - 정기적으로
+	public int updateDsSpecificDate(int no, @Param("rbVO")RecruitBoardVO rbVO, @Param("sdVO")SpecificDateVO sdVO); // 선생님 구하기 - 선택한 날짜
 	
 	
 	//이미 신청한 선생님인지 확인하기

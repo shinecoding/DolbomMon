@@ -778,6 +778,7 @@
 	</div>
 	<div class="container">
 		<form id="writeFrm" method="post" action="dbmSearchWriteEditOk">
+			<input type="hidden" name="no" value="${no }" />
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
@@ -896,14 +897,14 @@
 					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
 				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">
-					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" style="display:inline-block;border:none;"/></div>
+					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" value="${vo.dong_addr }" style="display:inline-block;border:none;"/></div>
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
 					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소" />
-					<input type="hidden" id="care_addr" name="care_addr"/>
-					<input type="hidden" id="lat" name="lat"/>
-					<input type="hidden" id="lng" name="lng"/>
+					<input type="hidden" id="care_addr" name="care_addr" value="${vo.care_addr }"/>
+					<input type="hidden" id="lat" name="lat" value="${vo.lat }"/>
+					<input type="hidden" id="lng" name="lng" value="${vo.lng }"/>
 				</div>
 			</div>
 			
@@ -924,10 +925,10 @@
 				
 				<div id="regularDateDiv">
 					<div id="title">정기적으로</div>
-						<input type="hidden" id="end_date" name="end_date" readonly="readonly" />
+						<input type="hidden" id="end_date" name="end_date" readonly="readonly" value="${rdVO.end_date }" />
 					<div id="startDateDiv">
 						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
-						<input class="btn" type="text" id="start_date" name="start_date" readonly="readonly" />
+						<input class="btn" type="text" id="start_date" name="start_date" value="${rdVO.start_date }" readonly="readonly" />
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />

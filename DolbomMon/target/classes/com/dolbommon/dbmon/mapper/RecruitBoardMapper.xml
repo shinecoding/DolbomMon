@@ -73,17 +73,26 @@
 	</update>
 	
 	<update id="updateDbmSearch">
-		<!-- update parent_list set(care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation, wish_age, wish_gender, content, lat, lng, writedate) =
-			(#{care_addr}, #{dong_addr}, #{time_type}, #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate)
-			where job_board_no = #{param1} -->
+		update parent_list set care_addr=#{rbVO.care_addr}, dong_addr=#{rbVO.dong_addr}, time_type=#{rbVO.time_type}, pw_activity=#{rbVO.pw_activity}, wish_wage=#{rbVO.wish_wage}, consultation=#{rbVO.consultation}, time_consultation=#{rbVO.time_consultation}
+			, wish_age=#{rbVO.wish_age}, wish_gender=#{rbVO.wish_gender}, content=#{rbVO.content}, lat=#{rbVO.lat}, lng =#{rbVO.lng}
+			where job_board_no = #{param1}
 	</update>
 	<update id="updateDsChildInfo">
+		update add_child set(child_birth, child_cnt) = 
+			(#{cVO.child_birth}, #{cVO.child_cnt})
+			 where job_board_no = #{param1}
+	
 	</update>
 	<update id="updateDsRegularDate">
-	
+		update jb_regular_date(yoil, start_time, end_time, start_date, end_date, week) =
+			(#{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date}, #{rdVO.week})
+			where  job_board_no = #{param1}
 	</update>
 	<update id="updateDsSpecificDate">
-	
+		update jb_specific_date(select_date, start_time, end_time) = 
+			(#{sdVO.select_date}, #{sdVO.start_time}, #{sdVO.end_time})
+			where job_board_no = #{param1}
+			
 	</update>
 	
 	
