@@ -90,13 +90,7 @@
 <br/>
 	<table class="table" style="margin: 0px;">
   	<tbody>
-  		<c:forEach var="notice" items="${list2}">
-	  		<tr>
-	  			<th><span class="badge rounded-pill bg-warning ">공지</span>&nbsp;&nbsp;<a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></th>
-	  			
-	  			
-	  		</tr>
-  		</c:forEach>
+
   	</tbody>
 	</table>
 
@@ -114,7 +108,11 @@
 			</tr>
 		</thead>
 		<tbody>
-		
+			<c:forEach var="notice" items="${list2}">
+	  			<tr>
+	  			<td colspan="1"></td><td colspan="1" ><span class="badge rounded-pill bg-warning ">공지</span></td><td colspan="5"><a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></td>
+	  			</tr>
+			</c:forEach>
 	
 			<c:forEach var="vo" items="${list}">
 				<tr>

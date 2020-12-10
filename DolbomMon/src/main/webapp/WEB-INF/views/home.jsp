@@ -11,15 +11,15 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
-<link href="<%=request.getContextPath() %>css/style.css" rel="stylesheet">
-<link href="<%=request.getContextPath() %>css/demo.css" rel="stylesheet">
+<!-- 	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet">
+		<link href="<%=request.getContextPath() %>/css/demo.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <script>
-
+/*
 function getCookie(name) {
 
     var cookies = document.cookie.split(";");
@@ -61,7 +61,45 @@ document.write('<meta name="viewport" content="width=1024, user-scalable=yes, in
 document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">')
 
 }
+*/
+	$(function() {
+	  AOS.init({
+	    duration: 1200
+	  });
+	  onElementHeightChange(document.body, function(){
+	    AOS.refresh();
+	  });
+	});
 
+
+	function onElementHeightChange(elm, callback) {
+	    var lastHeight = elm.clientHeight
+	    var newHeight;
+	    
+	    (function run() {
+	        newHeight = elm.clientHeight;      
+	        if (lastHeight !== newHeight) callback();
+	        lastHeight = newHeight;
+
+	        if (elm.onElementHeightChangeTimer) {
+	          clearTimeout(elm.onElementHeightChangeTimer); 
+	        }
+
+	        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+	    })();
+	  }
+	
+	
+	
+	
+	
+	$(window).scroll(function() {  
+        var position = $(window).scrollTop(); 
+		if (position >= 700){
+			$(".redution").delay(500).fadeOut(1000);
+		}
+	});        
+	
 </script>
 
 <style type="text/css">
@@ -125,7 +163,16 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 	}
 	#homeWrap_ALL{width:100%;}
 	.lead{font-size:17px; font-family: 'Noto Sans KR', sans-serif; font-weight:bold; color:#6c757d;}
-
+   .jb-text { 
+		position: absolute; 
+		top: 50%; width: 100%; 
+   	}
+   .jb-text p { 
+		margin-top: -24px; 
+		text-align: center; 
+		font-size: 48px; color: #ffffff; 
+   }
+   
 </style>
 
 <body>
@@ -135,8 +182,17 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 <div id="top" style="height:150px;">
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
-
-
+ <div class="redution">
+<video class="redution" src='img/video.mp4' width='100%' muted="muted" autoplay loop>
+</video>
+	<div class="jb-text">
+		<p>사업소개</p>
+		<h5 style="color:white;">Services</h5>
+		<br/><br/><br/><br/>
+		<h2 style="color:white">놀이부터 배움까지 선생님 매칭 웹</h2>
+		<h2 style="font-weight:bold; color:white;">아이돌봄 웹 서비스</h2>
+	</div>
+ </div>
 <!-- -------------------bx슬라이더------------- -->
 <div id="slider" >
 <%@ include file="/WEB-INF/views/bxslider.jsp" %>
@@ -169,7 +225,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 </div>   
     
 <div id="mainContents4" >
-    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="fade-up">
       <div class="col-md-7"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive;">DOLBOMMON GUIDE</span><br/><br/>Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
@@ -184,7 +240,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider"><br/><br/>
 
-    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-right">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7 order-md-2"><br/><br/>
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
@@ -204,7 +260,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
     <hr class="featurette-divider">
 
-    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="flip-left">
+    <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7">
         <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><br/>Step 03.<br/><br/>
         <span class="text-muted">Have an interview</span></h2><br/><br/>
