@@ -568,7 +568,7 @@
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
 		var weeek = ${rdVO.week};
-		
+		console.log("weeekekekekek -> " + weeek);
 		var timebar = "";
 		
 		for(var j=0;j<weeek;j++){ // j 값에 몇 주치 데이터를 넣을지 정함
