@@ -63,6 +63,7 @@ public class TeacherController {
 	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
 		
 		String userid = (String) ses.getAttribute("userid");
+		String paramid = req.getParameter("userid");
 		if(req.getParameter("userid")!=null) {
 			userid = req.getParameter("userid");
 		};
@@ -101,6 +102,7 @@ public class TeacherController {
 		CertificationVO cvo = cdao.selectCert(userid);
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
 		mav.addObject("mvo", mvo);

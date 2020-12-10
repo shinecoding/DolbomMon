@@ -69,9 +69,11 @@
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
-
-
-<hr/><br/>
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
+	    	<a href="#"></a></div>
+	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
+<hr/>
 
 
 <div class="container">
@@ -80,14 +82,27 @@
 
 <b>자유게시판</b>
 </div>
-<div>
-	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기</a>
+<div style="float: right;">
+	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>
 </div>
 <div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board" style="font-size: 0.9em;">
 <br/>
+	<table class="table" style="margin: 0px;">
+  	<tbody>
+  		<c:forEach var="notice" items="${list2}">
+	  		<tr>
+	  			<th><span class="badge rounded-pill bg-warning ">공지</span>&nbsp;&nbsp;<a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></th>
+	  			
+	  			
+	  		</tr>
+  		</c:forEach>
+  	</tbody>
+	</table>
+
 	<table class="table table-hover">
 		<thead>
+		
 			<tr id="head">
 				<th width="80">글번호</th>
 				<th width="150">말머리</th>
@@ -99,6 +114,8 @@
 			</tr>
 		</thead>
 		<tbody>
+		
+	
 			<c:forEach var="vo" items="${list}">
 				<tr>
 					<c:if test="${vo.step<=0}">
@@ -115,7 +132,7 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</c:forEach>
 						<c:if test="${vo.step>0}">
-							☞
+							➥
 						</c:if>
 						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
 					<td scope="row" align="center">${vo.userid}</td>
@@ -166,7 +183,7 @@
 			</ul>
 		</nav>
 	<br/>
-	<form method="get" action="/dbmon/freeBoard" id="searchFrm">
+	<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
 		<div class="input-group mb-3">
 			<div id="searchDiv">
 				<select class="custom-select" name="searchKey" id="searchKey">

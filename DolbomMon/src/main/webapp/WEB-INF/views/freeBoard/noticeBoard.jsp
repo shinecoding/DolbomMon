@@ -13,128 +13,160 @@
 	.container{
 		width: 900px;	
 	}
-	#top{
+
+	#top_noticeboard{
+
 		margin: 15px;
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
+		position: relative;
+	}
+	#head{
+		text-align: center;
+	}
+	.subject{
+		width: 400px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		
 	}
 	a:link, a:visited, a:hover{
 	 	color: black;
-	}
-	body{
-	 	font-size: 0.9em;
 	 }
-	
-	
+	/* body{
+	 	font-size: 0.9em;
+
+	 }	 */
+	 
+	 }
+	 ul, li{
+		margin: 0px;
+		padding: 0px;
+		list-style-type: none;
+	}
+	#searchDiv{
+		width: 180px;
+	}
+	<!--
+	#paging ul{
+		width: 100%;
+		height: 40px;
+		overflow: auto;
+	}
+	#paging li{
+		float: left;
+		width: 60px;
+		height: 40px;
+		text-align: center;
+		font-size: 1.3em;
+	}	-->
+
 </style>
 </head>
+
 <body>
-<div id="topMain">
+
 <%@include file="/WEB-INF/views/top.jsp"%>
+
+
+
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
+	    	<a href="#"></a></div>
+	    	<img src="img/141.png" style="width:100%; height:400px; "/>
 <hr/>
-</div>
 <div class="container">
-<div id="top">
-<b>공지사항</b>
+
+
+<div style="float: right;">
+	<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
 </div>
-<div>
-	<!-- 관리자만 볼 수 있게 숨기기 -->
-	<a class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
-</div>
-<div id="notice">
+<div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
+<div id="board" style="font-size: 0.9em;">
 <br/>
 	<table class="table table-hover">
-		
-		<colgroup>
-			<col style="width: 10%;">
-			<col>
-			<col style="width: 12%;">
-			<col style="width: 15%;">
-			<col style="width: 10%;">
-			<col style="width: 10%;">
-		</colgroup>
 		<thead>
-			<tr>
-				<th scope="col">글번호</th>
-				<th scope="col">글제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">등록일</th>
-				<th scope="col">조회수</th>
-				<th scope="col">첨부파일</th>
+			<tr id="head">
+				<th width="90">글번호</th>
+				<th width="300">글제목</th>
+				<th width="90">작성자</th>
+				<th width="100">등록일</th>
+				<th width="80">조회수</th>
+				<th width="100">첨부파일</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td class="subject"><a href="noticeBoardView">공지사항11111111111111</a></td>
-				<td>관리자</td>
-				<td>13:11</td>
-				<td>1</td>
-				<td><a href="#" download><img src="<%=request.getContextPath()%>/img/disk.png"/></a></td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>공지사항2222222</td>
-				<td>관리자</td>
-				<td>11-11 15:11</td>
-				<td>2</td>
-				<td></td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>글제목입니다3333333</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				<td><a href="#" download><img src="<%=request.getContextPath()%>/img/disk.png"/></a></td>
-			</tr>
-			<tr>
-				<th scope="row">4</th>
-				<td>공지사항4444444</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				<td><a href="#" download><img src="<%=request.getContextPath()%>/img/disk.png"/></a></td>
-			</tr>
-			<tr>
-				<th scope="row">5</th>
-				<td>공지사항5555555</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				<td></td>
-			</tr>
+			<c:forEach var="vo" items="${list}">
+				<tr>
+					<td scope="row" align="center">${vo.no}</td>		
+					<td scope="row" class="subject">
+						<a href="/dbmon/noticeBoardView?no=${vo.no}">${vo.subject}</a></td>
+					<td scope="row" align="center">${vo.userid}</td>
+					<td scope="row" align="center">${vo.writedate}</td>
+					<td scope="row" align="center">${vo.hit}</td>
+					<td scope="row" align="center">
+						<c:if test="${vo.filename1!=null}">
+							<c:forEach var="f1" items="${vo.filename1}">
+								<a href="<%=request.getContextPath()%>/upload/${f1}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f1}" alt="${vo.no}"/></a>		
+							</c:forEach>				
+						</c:if>
+						<c:if test="${vo.filename2!=null}">
+							<c:forEach var="f2" items="${vo.filename2}">						
+								<a href="<%=request.getContextPath()%>/upload/${f2}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f2}" alt="${vo.no}"/></a>							
+							</c:forEach>
+						</c:if>	
+					</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<br/>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Next</a>
-			</li>
-		</ul>
-	</nav>
+	
+	<!-- paging -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				
+				<!-- 이전 페이지 -->
+				<li class="page-item">
+					<c:if test="${pVo.nowPage>1}">
+						<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/noticeBoard?nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord}</c:if>">Previous</a>
+					</c:if>	
+				</li>
+				
+				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onePageNumCount-1}">
+					<c:if test="${p<=pVo.totalPage}">
+						<li class="page-item">
+						<a class="page-link" href="/dbmon/noticeBoard?nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord}</c:if>"><span <c:if test="${p==pVo.nowPage}">style="color:red"</c:if>>${p}</span></a>
+					</c:if>
+				</c:forEach>
+				
+				<!-- 다음페이지 -->
+				<li class="page-item">
+					<c:if test="${pVo.nowPage<pVo.totalPage}">
+						<a class="page-link" href="/dbmon/noticeBoard?nowPage=${pVo.nowPage+1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord}</c:if>">Next</a>
+					</c:if>
+				</li>
+			</ul>
+		</nav>
 	<br/>
-	<div class="input-group mb-3">
-		<input type="text" class="form-control" placeholder="검색어를 입력하세요"/>
-		<div class="input-group-append">
-			<button class="btn btn-warning" type="button" id="button-addon2">검색</button>
+	<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
+		<div class="input-group mb-3">
+			<div id="searchDiv">
+				<select class="custom-select" name="searchKey" id="searchKey">
+					<option value="subject">제목</option>
+					<option value="content">글내용</option>
+					<option value="userid">작성자</option>
+				</select>
+				</div>
+				<input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"/>
+				<div class="input-group-append">
+					<input type="submit" class="btn btn-warning" value="검색"/>
+			</div>
 		</div>
-	</div>
+	</form>
 </div>
-
-
-
-
 </div>
 </body>
 </html>
