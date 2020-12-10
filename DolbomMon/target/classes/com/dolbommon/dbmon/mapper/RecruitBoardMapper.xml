@@ -16,6 +16,9 @@
 		select count(job_board_no) from parent_list
 	</select>
 	
+	<select id="requestRecords" resultType="int">
+		select count(job_board_no) from parent_list where job_board_no=#{param1}
+	</select>
 	<select id="recruitBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
 			(select count(t_userid) from t_p_table where job_board_no = #{param1}) tcnt
@@ -96,6 +99,14 @@
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 
 		values(board_sq.nextval, #{content}, #{userid}, 0, sysdate)
 	</insert>
+	
+	
+	<!-- 필터 -->
+	
+	<select id="recruitActType" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		 select job_board_no, userid, care_addr, time_type, pw_activity, wish_wage, consultation, wish_age, wish_gender, content, to_char(writedate, 'MM-DD HH:MI') writedate, hit, lat, lng, time_consultation, dong_addr, status from parent_list where pw_activity like '%'||#{activity_type}||'%'
+	</select>
+	
 	
 	
 </mapper>

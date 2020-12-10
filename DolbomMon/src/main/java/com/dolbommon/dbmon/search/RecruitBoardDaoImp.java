@@ -16,7 +16,10 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 	
 	//총 게시물 수 구하기 
 	public int getTotalRecords(); 
-	
+	//필터
+	public List<RecruitBoardVO> recruitActType(String activity_type);
+	//지원자 수 구하기
+	public int requestRecords(int job_board_no);
 	//레코드 한 개 선택 
 	public RecruitBoardVO recruitBoardSelect(int no);
 	//레코드 한 개 선택 - 자녀

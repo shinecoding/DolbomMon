@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -39,13 +41,13 @@ public class RecruitBoardController {
 	public ModelAndView parent() {
 		
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
-		
+		RecruitBoardVO rVo = new RecruitBoardVO();
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		
+		//int requestRecords = dao.requestRecords(rVo.getJob_board_no());	//지원자 수 구하기
+		//System.out.println("111"+requestRecords);
 		ModelAndView mav = new ModelAndView();
 		
-		//mav.addObject("mvoList", mvoList);
 		mav.addObject("list2", list2);
 		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");
@@ -85,10 +87,15 @@ public class RecruitBoardController {
 		return mav;
 	}
 	
-	
-	
-	
-	
+	@RequestMapping(value="/careAct", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public List<RecruitBoardVO> careAct(String activity_type) {
+		System.out.println("액티비티 타입"+activity_type);
+		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
+		List<RecruitBoardVO> list3 = dao.recruitActType(activity_type);
+		
+		return list3;
+	}
 	
 }
 

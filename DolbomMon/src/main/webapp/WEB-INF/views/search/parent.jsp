@@ -14,11 +14,9 @@
 	* {
 		padding:0; list-style-type:none; box-sizing:border-box; 
 		font-family: Noto Sans KR,sans-serif!important;
-	}
-	
+	}	
 	#all{
-		margin:0 auto; background-color:white;
-		
+		margin:0 auto; background-color:white;	
 	}
 	.all_wrapper{
 		margin-top:70px;
@@ -27,9 +25,9 @@
 		margin:0 auto;
 	}
 	img{ height:110px; width:110px;}
+	
 	.list
 	
-
     div{
         margin:0 auto;
         width:600px;
@@ -42,8 +40,7 @@
 	    color: white;
 	    font-weight: 100;
 	    font-size: 1em;
-	    line-height: 1.375;
-	    
+	    line-height: 1.375;   
 	}
 	.btn1{
 	    color: #434343;
@@ -79,23 +76,25 @@
 	    color: white;
 }
 	<!-- -->
-	#imgBox{
+	.imgBox{
 		float:left;
 		padding: 15px;
 		height: 150px;
 		position: absolute;
 		top: 20px;
 	}
-	#offerBox{
+	.offerBox{
 		float:right;
 		width: 310px;
 		padding: 3px;
 	}
-	#offerTitle{
+	.offerTitle{
 		font-size: 1.1em;
 	}
 	.card-body{
 		white-space: nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
 	}
 	#btnBox{
 		margin-top: 10px;
@@ -107,6 +106,89 @@
 		vertical-align: top;
 	}
 </style>
+<script>
+	$(function(){
+		$(document).on("click", "#btnBox>button", function(){
+	    	var activity_type = $(this).text();
+	    	console.log(activity_type);
+	    	var url = "/dbmon/careAct";
+			var params = "activity_type="+activity_type;
+			console.log("파람="+params);
+			$.ajax({
+				url:url,
+				data:params,
+				type:'GET',
+				success:function(result){
+					console.log("갯수="+result.length);
+					$("#Tcnt").text(result.length);
+					var $result = $(result);
+					var tag = "";
+					
+					$result.each(function(idx, vo){
+						tag += '<div class="col-sm-6" style="padding: 20px;">';
+						tag += '<div class="card">';
+						tag += '<div class="card-body">';
+						tag += '<div class="imgBox"><img src=';
+						
+						tag +='"img/ch1.PNG" class="rounded-circle"></div>';
+					
+						tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>';
+						
+						tag += ' 명 지원</div>';
+						tag += '<div class="offerBox" style="width: 310px";>';
+						tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
+						tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
+						tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+						tag += '<br/><span>'+vo.care_addr+'</span>';
+						tag += '<br/><span>12/12 시작</span>';
+						tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
+						if(vo.consultation=="Y"){
+							tag += ' | <b>협의가능</b></span></p>';
+						}else{
+							tag += '</span></p>';
+						}
+							tag += '</div></div>';
+							tag += '<div class="card-footer btn" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';	
+							tag += '</div>';
+							tag += '</div>';
+							tag += '</div>';
+					});
+					tag += "";
+					
+					$("#cardBox").html(tag);
+					
+				}, error: function(){
+					console.log("리스트 받기 에러");
+					}
+
+				});
+				
+	    });//ajax
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	});
+
+
+
+
+
+</script>
+
+
+
+
+
+
 <body>
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
@@ -116,25 +198,22 @@
 <!-- ------------------------------------------ -->
 <div class="all_wrapper" >
 <div>
-<button type="button" class="btn btn-warning btn-lg btn-block">어떤 일자리를 찾으세요?</button>
-<button type="button" class="btn btn-light btn-lg" style="width:100%">가까운 일자리 찾기</button><br/><br/>
+<button type="button" class="btn btn-warning btn-lg btn-block" style="width: 100%; margin-bottom: -20px;">가까운 일자리 찾기</button><br/>
 </div>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:white; "> 
 <div id="filterbox" >
-<input class="form-control" style="width:100%; type="text" placeholder="돌봄 지역을 선택해주세요" readonly>
-
-<form class="form-inline">
-  <label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
-  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
-    <option selected>돌봄 유형을 선택하시면, 맞춤 일자리를 보여드려요</option>
-    <option value="1">2~10세 정기 돌봄</option>
-    <option value="2">신생아/영아 정기 돌봄</option>
-    <option value="3">긴급 돌봄</option>
-    <option value="4">모든 돌봄 유형 보기</option>
-  </select>
-  </form>
-  </div>
-  
+	<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
+	<form class="form-inline">
+	<label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label>
+	<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:100%;">
+	<option selected>돌봄 유형을 선택하시면, 맞춤 일자리를 보여드려요</option>
+	<option value="1">2~10세 정기 돌봄</option>
+	<option value="2">신생아/영아 정기 돌봄</option>
+	<option value="3">긴급 돌봄</option>
+	<option value="4">모든 돌봄 유형 보기</option>
+	</select>
+	</form>
+</div>
 	<div id="btnBox">
 		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
 		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
@@ -151,8 +230,7 @@
 		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
 	</div>
  
-	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b>${totalRecords}건</b>의 일자리 찾기가 있습니다</div>
-	<!-- <div class="float-right" style="float:right">후기순 -->
+	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리 찾기가 있습니다</div>
 	<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" style="width:20%; float: right; margin: 0px;">
 	    <option selected>최신순</option>
 	    <option value="1">후기순</option>
@@ -163,15 +241,15 @@
 	</div>
 	<br/>
 	<br/>
-	<div class="row">
+	<div class="row" id="cardBox">
 		<c:forEach var="vo" items="${list2}">
 			<div class="col-sm-6" style="padding: 20px;">
 				<div class="card">
 					<div class="card-body">
-						<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
+						<div class="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
 						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
-						<div id="offerBox" >
-							<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
+						<div class="offerBox" >
+							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
 							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
 							<br/><span>${vo.care_addr } </span>

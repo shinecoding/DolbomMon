@@ -181,7 +181,7 @@ EDIT ON
 	    
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
 
-	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username }님 <input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         
