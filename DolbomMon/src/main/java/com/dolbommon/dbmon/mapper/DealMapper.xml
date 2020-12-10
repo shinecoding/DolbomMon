@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="selectOrigin" resultType="int">
-		select job_board_no from parent_list where origin_no=#{origin_no}
+		select job_board_no from parent_list where origin_no=#{origin_no} and agree is null
 	</select>
 	
 	<update id="setAgree" parameterType="map">
