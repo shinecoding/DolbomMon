@@ -266,9 +266,9 @@ public class MemberController {
 		
 		// 돌볼 수 있는 아이의 연령대와 가능한 활동  >>
 		@RequestMapping(value = "/dbm/activityAndAge", method = RequestMethod.POST)
-		public String dbmActivityAndAge(@RequestParam("care_type") String care_type, HttpSession ses) {
+		public String dbmActivityAndAge(@RequestParam("teacher_type") String teacher_type, HttpSession ses) {
 			
-			ses.setAttribute("care_type", care_type);
+			ses.setAttribute("teacher_type", teacher_type);
 			
 			return "register/dbm/activityAndAge";
 		}

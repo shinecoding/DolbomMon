@@ -217,7 +217,7 @@
 			showAnim : "show",
 			changeMonth : true,
 			changeYear : true,
-			minDate : new Date(todayday.getFullYear()-15, todayday.getMonth(), todayday.getDate()),
+			minDate : new Date(todayday.getFullYear()-10, todayday.getMonth(), todayday.getDate()),
 			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()-1, todayday.getDate()),
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
@@ -276,6 +276,10 @@
 				$("#regularDateDiv #endDateBtn").datepicker("option", "maxDate", maxDate);
 				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
 				$("#regularDateDiv #end_date").val("");
+				$("input[name=week]").each(function(){
+					$(this).prop("checked", false);
+					$(this).parent("label").css("background-color", "#EFEFEF");
+				});
 			},
 			altFormat:"yyyy-mm-dd"
 		});
@@ -708,10 +712,10 @@
 					<div>
 						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
 					</div>
-					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt3" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt4" name="childrenCnt"/>
+					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
+					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
+					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
+					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
 					<div id=childrenCnt>
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
