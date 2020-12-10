@@ -119,6 +119,7 @@
 			});
 			
 			var getWeek = ${rdVO.week};
+			console.log("getWeek => " + getWeek);
 			$("input[name=week]").each(function(){
 				for(var i=0;i<3;i++){
 					if($(this).val()==getWeek){
@@ -126,6 +127,14 @@
 					}
 				}
 			});
+			
+			var getWish_wage = ${vo.wish_wage};
+			console.log("wish_wage => " + getWish_wage);
+			$("#wish_wage").val(getWish_wage);
+			
+			var getContent = "${vo.content}";
+			console.log("getContent => " + getContent);
+			$("#content").val(getContent);
 			
 			var getTimeCon = "${vo.time_consultation}";
 			if(getTimeCon=="Y"){
@@ -202,11 +211,18 @@
 				}
 			}
 			
+			
 			for(var i=2;i<5;i++){
+				
 				if($("#week"+i).is(":checked")){
-					$("label[for=week"+i+"]").css("background", "#ffc207");
+					var test = $("#week"+i).attr("id");
+					console.log("id => " + test)
+					console.log("i => " + i);
+					$("label[for=week"+i+"]").css("background-color", "#ffc207");
+				}else{
+					console.log("i x=> " + i );
+					$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
 				}
-					$("label[for=week"+i+"]").css("background", "#EFEFEF");
 			}
 			
 			/////////////// 성별 설정 /////////////////
@@ -343,7 +359,7 @@
 			showAnim : "show",
 			changeMonth : true,
 			changeYear : true,
-			minDate : new Date(todayday.getFullYear()-15, todayday.getMonth(), todayday.getDate()),
+			minDate : new Date(todayday.getFullYear()-10, todayday.getMonth(), todayday.getDate()),
 			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()-1, todayday.getDate()),
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
@@ -402,6 +418,10 @@
 				$("#regularDateDiv #endDateBtn").datepicker("option", "maxDate", maxDate);
 				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
 				$("#regularDateDiv #end_date").val("");
+				$("input[name=week]").each(function(){
+					$(this).prop("checked", false);
+					$(this).parent("label").css("background-color", "#EFEFEF");
+				});
 			},
 			altFormat:"yyyy-mm-dd"
 		});
@@ -757,7 +777,7 @@
 		<%@include file="/WEB-INF/views/top.jsp"%>
 	</div>
 	<div class="container">
-		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
+		<form id="writeFrm" method="post" action="dbmSearchWriteEditOk">
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
@@ -984,12 +1004,12 @@
 			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
 			<div id="descriptionDiv" class="mainDiv">
 				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
-				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
+				<textarea name="content" id="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
 			
 			<div id="submitDiv" >
-				<input class="btn btn-warning" type="submit" value="등록하기" />
+				<input class="btn btn-warning" type="submit" value="수정하기" />
 			</div>
 			
 			<div id="footer"></div>
