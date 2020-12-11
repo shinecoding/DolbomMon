@@ -76,7 +76,9 @@ public class MemberController {
 				
 		@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
 		public ModelAndView regOk(
-			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
+			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo
+			, @RequestParam("pic") String pic
+				) {
 			
 			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
@@ -104,14 +106,22 @@ public class MemberController {
 			
 			
 			String who = (String)ses.getAttribute("who");
+			if(who.equals("T")) {
+				
+			}
+			
 			System.out.println("who=>"+ who);
 			int result = 0;
 			
 			try {
 				if(who.equals("T")) {
+					System.out.println("선생님 회원가입 시작 =>");
 					dao.memberReg(mVo);
+					System.out.println("member테이블 insert");
 					dao.memberRegTeacher(mVo, tVo);
+					System.out.println("teacher테이블 insert");
 					result = dao.memberRegRegular(mVo, rdVo);
+					System.out.println("시간테이블 insert");
 				}else {
 					result = dao.memberReg(mVo);
 				}

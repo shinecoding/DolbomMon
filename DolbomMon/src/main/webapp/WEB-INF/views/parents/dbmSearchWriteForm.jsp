@@ -859,7 +859,7 @@
 				</p>
 			</div>
 			
-			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
+			<div class="title"><label class="divOnOff" for="descriptionDiv">선생님이 알아야 할 내용과 신청내용을 적어주세요</label></div>
 			<div id="descriptionDiv" class="mainDiv">
 				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
 				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
