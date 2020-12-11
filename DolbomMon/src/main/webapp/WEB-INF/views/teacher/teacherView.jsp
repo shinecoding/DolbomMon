@@ -54,23 +54,31 @@ width:100%;
 height:200px;
 border-radius:10px;
 }
+
+.clearfix:after { clear:both; }
 </style>
 </head>
 <body>
-<div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
-</div>
+<hr/>
 <div class="container">
-	<c:if test="${mvo.userid!=paramid}"><div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div></c:if>
-   <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
+	
+	
+	<div>
+		<img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
+	</div>
+   <div class="clearfix" style="width:100%">
+	   <div style="position:relative; float:right; height:1px; top:-420px;">
+			<c:if test="${mvo.userid!=paramid}"><div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div></c:if>
+	   </div>
+   </div>
    <ul class="list-group">
    		
    		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    		
    </ul>
-   
+
    <br/>
    <ul class="list-group list-group-horizontal-sm">
    		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>${vo.hit}</div></li>
