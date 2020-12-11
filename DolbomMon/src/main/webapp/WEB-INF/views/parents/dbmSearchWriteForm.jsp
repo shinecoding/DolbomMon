@@ -826,7 +826,7 @@
 						</select>
 					</div>
 					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation" value="Y">
     					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>

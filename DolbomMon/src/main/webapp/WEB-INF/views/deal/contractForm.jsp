@@ -68,7 +68,7 @@
 					console.log("ccnt => " + ccnt);
 					if(ccnt == "childrenCnt"+getChildCnt){
 						$(this).prop("checked", true);
-						console.log("배열의 길이 => " + getChild_birth.length;
+						console.log("배열의 길이 => " + getChild_birth.length);
 						for(var j=0;j<getChild_birth.length;j++){
 							var test = $("."+ccnt).attr("id");
 							console.log("test => " +test);
