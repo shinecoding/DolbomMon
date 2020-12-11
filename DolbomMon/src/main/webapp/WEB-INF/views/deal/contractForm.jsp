@@ -63,7 +63,7 @@
 			console.log("getCB => " + getCB);
 			var getChild_birth = getCB.split(",");
 			
-			$("input[name=childrenCnt]").each(function(){
+			$("input[name=child_cnt]").each(function(){
 					var ccnt = $(this).attr("id");
 					console.log("ccnt => " + ccnt);
 					if(ccnt == "childrenCnt"+getChildCnt){
