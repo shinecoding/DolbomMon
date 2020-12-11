@@ -15,7 +15,7 @@
 
 		 //채팅창 오픈
 			var popupWidth = 1060;
-			var popupHeight = 596;
+			var popupHeight = 656;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
 			var popupY= (window.screen.height / 2) - (popupHeight / 2);
 			$(document).on("click",".ccBtn",function(){
@@ -216,7 +216,7 @@ EDIT ON
 	    
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
 
-	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username }님 <input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         

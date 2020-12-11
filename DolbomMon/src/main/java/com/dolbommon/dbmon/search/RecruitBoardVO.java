@@ -23,6 +23,7 @@ public class RecruitBoardVO {
 		private int tcnt;
 		private int week;
 		private int origin_no; //원글번호
+		private String teacherid;
 		
 		public int getJob_board_no() {
 			return job_board_no;
@@ -143,6 +144,12 @@ public class RecruitBoardVO {
 		}
 		public void setOrigin_no(int origin_no) {
 			this.origin_no = origin_no;
+		}
+		public String getTeacherid() {
+			return teacherid;
+		}
+		public void setTeacherid(String teacherid) {
+			this.teacherid = teacherid;
 		}
 		
 		
