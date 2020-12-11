@@ -11,57 +11,57 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
+
 <!-- 	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet">
 		<link href="<%=request.getContextPath() %>/css/demo.css" rel="stylesheet"> -->
+
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <script>
-/*
-function getCookie(name) {
 
-    var cookies = document.cookie.split(";");
+   $(function() {
+     AOS.init({
+       duration: 1200
+     });
+     onElementHeightChange(document.body, function(){
+       AOS.refresh();
+     });
+   });
 
-    for(var i=0; i<cookies.length; i++) {
 
-        if(cookies[i].indexOf("=") == -1) {
+   function onElementHeightChange(elm, callback) {
+       var lastHeight = elm.clientHeight
+       var newHeight;
+       
+       (function run() {
+           newHeight = elm.clientHeight;      
+           if (lastHeight !== newHeight) callback();
+           lastHeight = newHeight;
 
-            if(name == cookies[i])
+           if (elm.onElementHeightChangeTimer) {
+             clearTimeout(elm.onElementHeightChangeTimer); 
+           }
 
-                return "";
+           elm.onElementHeightChangeTimer = setTimeout(run, 200);
+       })();
+     }
+   
+   
+   
+   
+   
+   $(window).scroll(function() {  
+        var position = $(window).scrollTop(); 
+      if (position >= 700){
+         $(".redution").delay(500).fadeOut(1000);
+      }
+   });        
+   
 
-        }
-
-        else {
-
-            var crumb = cookies[i].split("=");
-
-            if(name == crumb[0].trim())
-
-                return unescape(crumb[1].trim());
-
-        }
-
-    }
-
-};
-
-var desktopModeTF = getCookie("DesktopMode")
-
-var Scale = getCookie("DesktopModeScale")
-
-if (desktopModeTF == "true") {
-
-document.write('<meta name="viewport" content="width=1024, user-scalable=yes, initial-scale='+Scale+'">');
-
-} else {
-
-document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">')
-
-}
-*/
 	$(function() {
 	  AOS.init({
 	    duration: 1200
@@ -90,9 +90,6 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 	  }
 	
 	
-	
-	
-	
 	$(window).scroll(function() {  
         var position = $(window).scrollTop(); 
 		if (position >= 700){
@@ -104,15 +101,15 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 
 <style type="text/css">
 @media (max-width:700px){
-	#listitem{
-		display:none;
-	}
+   #listitem{
+      display:none;
+   }
 }
 *{
-	margin: 0px;
-	padding: 0px;
-	list-style-type: none;
-	cursor:pointer;
+   margin: 0px;
+   padding: 0px;
+   list-style-type: none;
+   cursor:pointer;
 
        }
    body{
@@ -157,20 +154,22 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
           color:white;
     }
 
-	h3{
-		margin-top:30px;margin-bottom:30px;
-	
-	}
-	#homeWrap_ALL{width:100%;}
-	.lead{font-size:17px; font-family: 'Noto Sans KR', sans-serif; font-weight:bold; color:#6c757d;}
+
+   h3{
+      margin-top:30px;margin-bottom:30px;
+   
+   }
+   #homeWrap_ALL{width:100%;}
+   .lead{font-size:17px; font-family: 'Noto Sans KR', sans-serif; font-weight:bold; color:#6c757d;}
    .jb-text { 
-		position: absolute; 
-		top: 50%; width: 100%; 
-   	}
+      position: absolute; 
+      top: 50%; width: 100%; 
+      }
    .jb-text p { 
-		margin-top: -24px; 
-		text-align: center; 
-		font-size: 48px; color: #ffffff; 
+      margin-top: -24px; 
+      text-align: center; 
+      font-size: 48px; color: #ffffff; 
+
    }
    
 </style>
@@ -179,19 +178,21 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
 <div id="homeWrap_ALL" >
 
 <!-- -------------------상단메뉴------------- -->
-<div id="top" style="height:150px;">
+<div id="top" style="height:150px; margin-bottom:0px;">
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
  <div class="redution">
 <video class="redution" src='img/video.mp4' width='100%' muted="muted" autoplay loop>
 </video>
-	<div class="jb-text">
-		<p>사업소개</p>
-		<h5 style="color:white;">Services</h5>
-		<br/><br/><br/><br/>
-		<h2 style="color:white">놀이부터 배움까지 선생님 매칭 웹</h2>
-		<h2 style="font-weight:bold; color:white;">아이돌봄 웹 서비스</h2>
-	</div>
+
+   <div class="jb-text">
+      <p style="font-family: 'JetBrains Mono', monospace;">DOLBOMMON</p>
+      <h5 style="color:white;">Services</h5>
+      <br/><br/><br/><br/>
+      <h2 style="color:white">육아에 도움이 필요할 땐 언제 어디서나</h2>
+      <h2 style="font-weight:bold; color:gold;">돌봄몬이 해결하겠습니다.</h2>
+   </div>
+
  </div>
 <!-- -------------------bx슬라이더------------- -->
 <div id="slider" >
@@ -249,7 +250,7 @@ document.write('<meta name="viewport" content="width=device-width, user-scalable
             부모님과 아이가 누구인지, 어떤 도움을 받고 싶은지, <br/>언제 활동하기 원하는지를 신청서에<br/> 상세하게 알려주세요. <br/>
          <span style="color:#ff7942;"><br/>
          Tip.자기소개가 상세할수록, 내 후기가 많을수록, <br/>돌봄 기간이 짧을수록 시터님을 더 빨리 찾을 수 있습니다!
-		</span>    
+      </span>    
          </p>
      
       </div>
