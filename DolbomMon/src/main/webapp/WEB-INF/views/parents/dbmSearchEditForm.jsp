@@ -63,7 +63,7 @@
 			console.log("getCB => " + getCB);
 			var getChild_birth = getCB.split(",");
 			
-			$("input[name=childrenCnt]").each(function(){
+			$("input[name=child_cnt]").each(function(){
 					var ccnt = $(this).attr("id");
 					console.log("ccnt => " + ccnt);
 					if(ccnt == "childrenCnt"+getChildCnt){
@@ -534,6 +534,34 @@
 				return false;
 			}
 			
+			var child_cnt = $("input[name=childrenCnt]:checked").length;
+			if(childCnt < 1) {
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 정보를 입력해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var cnttt = 0;
+			$(".child_birth").each(function(){
+				var cb = $(this).val();
+				if(cb==null || cb==""){
+					cnttt = cnttt+1;
+					console.log("cnttt => " + cnttt);
+				}
+			});
+			if(cnttt == 0){
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 생년월일을 입력해주세요",
+					icon : "info"
+				});
+				cnttt = 0;
+				return false;
+			}
+			
 			
 			if($("input[name=time_type]:checked").length<1){
 				swal({
@@ -942,7 +970,7 @@
 						</select>
 					</div>
 					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation" value="Y">
     					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
@@ -966,7 +994,7 @@
     					<label class="custom-control-label" for="avgWage">평균시급 적용</label>
 					</div>
 					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation">
+    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation" value="Y">
     					<label class="custom-control-label" for="consultation">시급 협의가능</label>
 					</div>
 				<p>

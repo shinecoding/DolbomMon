@@ -63,7 +63,7 @@
 			console.log("getCB => " + getCB);
 			var getChild_birth = getCB.split(",");
 			
-			$("input[name=childrenCnt]").each(function(){
+			$("input[name=child_cnt]").each(function(){
 					var ccnt = $(this).attr("id");
 					console.log("ccnt => " + ccnt);
 					if(ccnt == "childrenCnt"+getChildCnt){
@@ -541,6 +541,33 @@
 					text : "선생님을 만나고 싶은 날을 선택해주세요",
 					icon : "info"
 				});
+				return false;
+			}
+			var child_cnt = $("input[name=childrenCnt]:checked").length;
+			if(childCnt < 1) {
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 정보를 입력해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var cnttt = 0;
+			$(".child_birth").each(function(){
+				var cb = $(this).val();
+				if(cb==null || cb==""){
+					cnttt = cnttt+1;
+					console.log("cnttt => " + cnttt);
+				}
+			});
+			if(cnttt == 0){
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 생년월일을 입력해주세요",
+					icon : "info"
+				});
+				cnttt = 0;
 				return false;
 			}
 			
