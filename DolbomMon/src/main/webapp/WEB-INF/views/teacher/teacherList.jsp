@@ -228,7 +228,8 @@ input:checked + .slider:before {
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
-<jsp:include page="../footer.jsp"/>
+
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
 
