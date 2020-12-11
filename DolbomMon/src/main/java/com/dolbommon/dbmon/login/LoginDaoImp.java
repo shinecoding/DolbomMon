@@ -1,7 +1,5 @@
 package com.dolbommon.dbmon.login;
 
-import javax.xml.crypto.Data;
-
 import com.dolbommon.dbmon.member.MemberVO;
 
 public interface LoginDaoImp {

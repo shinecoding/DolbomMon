@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>인증글 보기</title>
+<title>Q&A 게시글 보기</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,63 +18,64 @@
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
-	}	
+	}
+	
+	#reply{
+		position: relative;
+		width: 900px;
+	}
+	#replyBtn{
+		float: rigth;
+		position: absolute;
+		left: 760px;
+		top: 10px;
+	}
+	#replyListDiv{
+		width: 850px;
+	}
 </style>
+
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 	<div class="container">
 		<div id="top">
-			<b>인증 게시글 보기</b>
+			<b>Q&A 게시글 보기</b>
 		</div>
 		<table class="table" style="table-layout: fixed">
 			<tbody>
 				<tr>
 					<th scope="col" width="130px">글제목</th>
-					<td>인증글제목</td>
+					<td>${qna_list.subject}</td>
 				</tr>
 				<tr>
 					<th scope="col">작성자</th>
-					<td>홍길동</td>
+					<td>${qna_list.userid}</td>
 				</tr>
 				<tr>
 					<th scope="col">등록일</th>
-					<td>11-16 15:35</td>
+					<td>${qna_list.writedate}</td>
 				</tr>
 				<tr>
-					<th scope="col">조회수</th>
-					<td>20</td>
-				</tr>
-				<tr>
-					<th scope="col">글내용</th>
+					<th scope="col">자주 묻는 질문 게시글 내용</th>
 					<td>
-					<br/>
-					인증글내용인증글내용인증글내용인증글내용인증글내용인증글내용<br/>
-					인증글내용인증글내용인증글내용<br/>
-					인증글내용인증글내용인증글내용<br/>
-					<br/>
+					<br/>${qna_list.content}<br/>
 					</td>
 				</tr>
-				<tr>
-					<th scope="col">첨부파일</th>
-					<td>
-					<a href="#" download><img src="<%=request.getContextPath()%>/img/disk.png"/></a>
-					</td>
-				</tr>
+				
 			</tbody>
-			<tfoot>
-				<tr>
-					<th scope="col">이전글</th>
-					<td><a href="#">이전글 이전글 이전글</a></td>	
-				</tr>
-				<tr>
-					<th scope="col">다음글</th>
-					<td><a href="#">다음글 다음글 다음글</a></td>	
-				</tr>
-			</tfoot>
+			
 		</table>
+		<hr/>
+		<br/>
 		<div>
-			<a class="btn btn-warning" href="#" role="button">삭제</a>
-			<a class="btn btn-warning" href="#" role="button">목록</a>
+		<br/>
+			<%-- <c:if test="${userid==qna_vo.userid}">
+				<a class="btn btn-warning" href="/dbmon/noticeBoardDel?no=${qna_list.seq}" role="button" id="delBtn">삭제</a>
+				<a class="btn btn-warning" href="/dbmon/noticeBoardEdit?no=${qna_list.seq}" role="button">수정</a>
+			</c:if>
+			<a class="btn btn-warning" href="/dbmon/noticeBoard" role="button">목록</a> --%>
 		</div>
 	</div>
 </body>

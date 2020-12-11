@@ -182,11 +182,15 @@ input:checked + .slider:before {
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
 </div>
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">마이페이지</h1>
+	    	<a href="#"></a></div>
+	    	<img src="img/pop3.png" style="width:100%; height:400px; "/>
+
 <div class="container" >
    <div id="title">
-   		<div id="titlefont">마이페이지</div>
+   		<div id="titlefont"></div>
    		<div class="rightlog">   
 			   <a id="lgt" href="/dbmon/logout">로그아웃</a>
 			   <div id="dividebar">|</div>

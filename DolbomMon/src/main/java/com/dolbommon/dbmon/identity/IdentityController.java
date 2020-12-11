@@ -74,24 +74,26 @@ public class IdentityController {
 		}
 		return mav;
 	}
-	
+	//회원탈퇴 폼으로 이동
+	@RequestMapping("/withdrawForm")
+	public String withdrawform() {
+
+		return "identity/withdraw";	
+	}
+
 	//회원탈퇴 신청
 	@RequestMapping("/withdraw")
-	public ModelAndView withdraw(LoginVO vo, HttpSession ses) {
+	public ModelAndView withdraw(IdentityVO vo, HttpSession ses) {
 		
-		ses.getAttribute("userid");
-		System.out.println(ses.getAttribute("userid"));
+		vo.setUserid((String)ses.getAttribute("userid"));
 		
+		IdentityDaoImp dao = sqlSession.getMapper(IdentityDaoImp.class);
+		dao.withdraw(vo);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("identity/withdraw");
+		mav.setViewName("identity/withdrawResult");
 		
 		return mav;
-		
-		
 	}
-	
-	
-	
-	
+
 }

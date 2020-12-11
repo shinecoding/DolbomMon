@@ -28,20 +28,20 @@
 			
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#ffc207");
 				$("#specificDateDiv").css("display", "inline-block");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "inline-block");
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#ffc207");
 				$("#regularDateDiv").css("display", "inline-block");
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "inline-block");
 			}else{
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "none");
@@ -50,7 +50,7 @@
 			
 			for(var i=1;i<8;i++){
 				if($("input[id=rd"+i+"]").is(":checked")){
-					$("label[for=rd"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=rd"+i+"]").css("background-color", "#ffc207");
 				}else{
 					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
 				}
@@ -87,32 +87,27 @@
 			/////////////// 성별 설정 /////////////////
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
-					$("label[for=g"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=g"+i+"]").css("background-color", "#ffc207");
 				}else{
-					$("label[for=g"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for=g"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 			/////////////// 나이대 설정 ////////////
 			for(var i=2;i<7;i++){
 				if($("input[id="+i+"0]").is(":checked")){
-					$("label[for="+i+"0]").parent().css("background-color", "#ffc207").css("color", "white");
+					$("label[for="+i+"0]").parent().css("background-color", "#ffc207");
 				}else{
-					$("label[for="+i+"0]").parent().css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for="+i+"0]").parent().css("background-color", "#EFEFEF");
 				}
 			}
 			
 			for(var i=1;i<5;i++){
 				if($("#childrenInfo>input[id=childrenCnt"+i+"]").is(":checked")){
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ffc207");
-					$("#childrenDetail").html("");
-					var tag = ""
-					tag += "<li><span class='cn'>자녀 이름</span><input class='cntext' type='text' name='child_name' /><br/>";
-					tag += "<span class='cb'>자녀 생년월일</span><input class='cbtext' type='date' name='child_birth' /></li>";
-					for(var j=0;j<i;j++){
-						$("#childrenDetail").append(tag);
-					}
+					$("#childcnt"+i).fadeIn(700);
 				}else{
 					$("label[for="+i+"]").css("background-color", "#EFEFEF");
+					$("#childcnt"+i).css("display", "none");
 				}
 			}
 			/////////////////// 페이지 로딩 시 //////////////////////end
@@ -121,21 +116,21 @@
 		////////////////////// 정기적으로, 특정날에만 선택//////////////////////////////
 		$("#timeTypeDiv >input[type=radio]").change(function(){
 			if($("#timeType1").is(":checked")){
-				$("label[for=timeType1]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType1]").css("background-color", "#ffc207");
 				$("#specificDateDiv").fadeIn();
 				$("#timeDiv").fadeIn();
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#regularDateDiv").css("display", "none");
 				
 			}else if($("#timeType2").is(":checked")){
-				$("label[for=timeType2]").css("background-color", "#ffc207").css("color", "white");
+				$("label[for=timeType2]").css("background-color", "#ffc207");
 				$("#regularDateDiv").fadeIn();
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#timeDiv").fadeIn();
 			}else{
-				$("label[for=timeType1]").css("background-color", "#EFEFEF").css("color", "black");
-				$("label[for=timeType2]").css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for=timeType1]").css("background-color", "#EFEFEF");
+				$("label[for=timeType2]").css("background-color", "#EFEFEF");
 				$("#specificDateDiv").css("display", "none");
 				$("#regularDateDiv").css("display", "none");
 				$("#timeDiv").css("display", "none");
@@ -181,9 +176,9 @@
 		$("input[name=wish_gender]").change(function(){
 			for(var i=1;i<=3;i++){
 				if($("input[id=g"+i+"]").is(":checked")){
-					$("label[for=g"+i+"]").css("background-color", "#ffc207").css("color", "white");
+					$("label[for=g"+i+"]").css("background-color", "#ffc207");
 				}else{
-					$("label[for=g"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for=g"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 		});
@@ -191,39 +186,49 @@
 		//////////// 나이 변경 ///////////////
 		$("input[name=wish_age]").change(function(){
 			for(var i=0;i<20;i++){
-				$("#dadadada").fadeIn(30);
-				$("#dadadada").fadeOut(30);
 			}
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
 				
-				$("label[for="+selectedData+"]").parent().css("background-color", "#ffc207").css("color", "white");
+				$("label[for="+selectedData+"]").parent().css("background-color", "#ffc207");
 			}else{
 				
-				$("label[for="+selectedData+"]").parent().css("background-color", "#EFEFEF").css("color", "black");
+				$("label[for="+selectedData+"]").parent().css("background-color", "#EFEFEF");
 			}
 			
 		});
 		
 		//////////// 자녀 정보 //////////////
 		$("#childrenInfo>input[type=radio]").change(function(){
+			$(".child_birth").val("");
 			for(var i=1;i<5;i++){
 				if($("input[id=childrenCnt"+i+"]").is(":checked")){
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#ffc207");
-					$("#childrenDetail").html("");
-					var tag = ""
-					tag += "<li>";
-					tag += "<input type='button' class='cb' value='자녀생년월일'><input type='date' id='child_birth' name='child_birth' /></li>";
-					for(var j=0;j<i;j++){
-						$("#childrenDetail").append(tag);
-					}
+					$("#childcnt"+i).fadeIn(700);
 				}else{
 					$("label[for=childrenCnt"+i+"]").css("background-color", "#EFEFEF");
+					$("#childcnt"+i).css("display", "none");
 				}
 			}
 		});
-		
+		var todayday = new Date();
+		$(".childBtn").datepicker({
+			showAnim : "show",
+			changeMonth : true,
+			changeYear : true,
+			minDate : new Date(todayday.getFullYear()-10, todayday.getMonth(), todayday.getDate()),
+			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()-1, todayday.getDate()),
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				var tname = $(this).val();
+				console.log("fd => " + tname);
+				$(this).val("자녀 생년월일");
+				$(this).next().val(tname);
+			},
+			altFormat:"yyyy-mm-dd"
+		});
+		////////////자녀 정보 //////////////
 		///////////////////////////// 지도 생성 ////////////////////////////////
 		
 		///////////////////////////// 지도 생성 ////////////////////////////////
@@ -231,85 +236,66 @@
 		$(document).on('keyup','input[inputmode=numeric]',function(event){
 			this.value = this.value.replace(/[^0-9]/g,'');  
 			this.value = this.value.replace(/,/g,'');  
+			$("input[id=avgWage]").prop("checked", false);
 			if(this.value<8590){
 				$(this).css("color", "gray");
 				$("#minWage").html("최저시급(8590원)이상의 시급을 입력해주세요");
 			}else {
-				$(this).css("color", "white");
-				$("#minWage").html("")
+				$("#minWage").html("");
+				$(this).css("color", "black");
 			}
 		});
 		
 		$("input[id=avgWage]").change(function(){
 			var wage = $("#wish_wage").val;
-			
 			if(wage<8590){
 				$("#wish_wage").css("color", "gray");
 				$("#minWage").html("최저시급(8590원)이상의 시급을 입력해주세요");
 			}else {
-				$("#wish_wage").css("color", "white");
+				$("#wish_wage").css("color", "black");
 				$("#minWage").html("")
 			}
 			
 			if(this.checked){
-				$("#wish_wage").val("8600").attr("readonly", "readonly");
-			}else{
-				$("#wish_wage").prop("readonly", false);
+				$("#wish_wage").val("8600");
 			}
 		});
 		////////////////////////// 정기적으로 ////////////////////////// 
 		$("#regularDateDiv #startDateBtn").datepicker({ // 시작일 데이트피커
 			showAnim : "show",
 			minDate : "0",
-			maxDate : "30d",
+			maxDate : "15d",
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#regularDateDiv #start_date").val(dateText);
-				console.log(dateText);
 				$("#regularDateDiv #startDateBtn").val("돌봄 시작일");
-				setEndDate(3);
+				var startDate = new Date(dateText);
+				var minDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()+14);
+				var maxDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()+16);
+				$("#regularDateDiv #endDateBtn").datepicker("option", "minDate", minDate);
+				$("#regularDateDiv #endDateBtn").datepicker("option", "maxDate", maxDate);
+				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+				$("#regularDateDiv #end_date").val("");
+				$("input[name=week]").each(function(){
+					$(this).prop("checked", false);
+					$(this).parent("label").css("background-color", "#EFEFEF");
+				});
 			},
 			altFormat:"yyyy-mm-dd"
 		});
-		function setEndDate(i){
-			var date = new Date();
-			var startDate = document.getElementById("start_date").value;
-			var data = startDate.split("-");
-			var endDate;
-			var setEndDate;
-			var month = Number(data[1]);
-			if(i==1){
-				endDate = new Date(data[0], data[1], Number(data[2])+7);
-				setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-			}else if(i==2){
-				if(month+1==12){
-					endDate = new Date(data[0], month+1, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+1, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}else if(i==3){
-				if(month+3==12){
-					endDate = new Date(data[0], month+3, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+3, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}else if(i==4){
-				if(month+6==12){
-					endDate = new Date(data[0], month+6, data[2]);
-					setEndDate = endDate.getFullYear()+"-12-"+endDate.getDate();
-				}else{
-					endDate = new Date(data[0], month+6, data[2]);
-					setEndDate = endDate.getFullYear()+"-"+endDate.getMonth()+"-"+endDate.getDate();
-				}
-			}
-			document.getElementById("end_date").value = setEndDate;
-		}
 		
-		
+		//////////////////////////정기적으로 ////////////////////////// 
+		$("#regularDateDiv #endDateBtn").datepicker({ // 종료일 데이트피커
+			showAnim : "show",
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$("#regularDateDiv #end_date").val(dateText);
+				
+				$("#regularDateDiv #endDateBtn").val("돌봄 종료일");
+				
+			},
+			altFormat:"yyyy-mm-dd"
+		});
 		
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
@@ -317,9 +303,9 @@
 			var selectedData = $(this).attr("id");
 			
 			if($("input[id="+selectedData+"]").is(":checked")){
-				$("label[for="+selectedData+"]").css("background-color", "#ffc207").css("color", "white");//노랑
+				$("label[for="+selectedData+"]").css("background-color", "#ffc207");//노랑
 			}else{
-				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF").css("color", "black");//회색
+				$("label[for="+selectedData+"]").css("background-color", "#EFEFEF");//회색
 			}
 			
 		});
@@ -343,16 +329,37 @@
 			altFormat:"yyyy-mm-dd"
 		});
 		
+		///////////// 종료일 설정 ////////////
+		$("input[name=week]").change(function(){
+			var start_dateVal = $("input[id=start_date]").val();
+			console.log("start_dateVal => " +start_dateVal);
+			if(start_dateVal!=""){
+				var selectedData = $(this).attr("id");
+				console.log("selectedData => " + selectedData);
+				for(var i=2;i<5;i++){
+					if(selectedData==("week"+i)){
+						setEndDate(i);
+						$(this).parent("label").css("background-color", "#FFC207");
+					}else{
+						$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
+					}
+				}
+			}else{
+				swal({
+					title : "시작날짜를 먼저 입력해주세요",
+					icon : "info"
+				});
+			}
+		});
+		
 		/////////////////////////// 등록하기 버튼 누를 시 ////////////////////////
 		$("#writeFrm").submit(function(){
 			var wage = $("#wish_wage").val();
 			if(wage==null || wage==""){
 				alert("희망시급을 입력해주세요");
-				$.divOnOff(this);
 				return false;
 			}else if(wage<8590){
 				alert("희망시급은 최소 8590원 이상이어야합니다.");
-				$.divOnOff(this);
 				return false;
 			}
 			var pw_activityCnt = $("input[name=pw_activity]:checked").length;
@@ -362,7 +369,6 @@
 					text : "원하는 돌봄유형을 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=pw_activity]");
 				return false;
 			}
 			
@@ -373,7 +379,6 @@
 					text : "원하는 선생님 성별을 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=wish_gender]");
 				return false;
 			}
 			
@@ -384,7 +389,6 @@
 					text : "원하는 선생님 나이대를 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=wish_age]");
 				return false;
 			}
 			
@@ -395,23 +399,26 @@
 					text : "자녀의 정보를 입력해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=childrenCnt]");
 				return false;
 			}
 			
-			$("input[name=child_birth]").each(function(){
-				var cbtext = $(this).val();
-				if(cbtext == null || cbtext == ""){
-					console.log("cb =>" + cbtext);
-					swal({
-						title : "자녀 정보 입력",
-						text : "자녀의 생년월일을 입력해주세요",
-						icon : "info"
-					});
-					$.divOnOff("input[name=child_birth]");
-					return false;
+			var cnttt = 0;
+			$(".child_birth").each(function(){
+				var cb = $(this).val();
+				if(cb==null || cb==""){
+					cnttt = cnttt+1;
+					console.log("cnttt => " + cnttt);
 				}
 			});
+			if(cnttt == 0){
+				swal({
+					title : "자녀 정보 입력",
+					text : "자녀의 생년월일을 입력해주세요",
+					icon : "info"
+				});
+				cnttt = 0;
+				return false;
+			}
 			
 			if($("input[name=time_type]:checked").length<1){
 				swal({
@@ -419,7 +426,6 @@
 					text : "선생님을 만나고 싶은 날을 선택해주세요",
 					icon : "info"
 				});
-				$.divOnOff("input[name=time_type]");
 				return false;
 			}
 			
@@ -432,7 +438,6 @@
 						title : "돌봄 날짜를 선택 해주세요",
 						icon : "info"
 					});
-					$.divOnOff("input[name=time_type]");
 					return false;
 				}
 			} else if(time_type=="R"){ // 정기적으로 
@@ -445,7 +450,6 @@
 						text : "돌봄 시작날짜를 선택해주세요",
 						icon : "info"
 					});
-					$.divOnOff("#start_date");
 					return false;
 				}else if(end_date==null || end_date==""){
 					swal({
@@ -453,7 +457,6 @@
 						text : "돌봄 종료날짜를 선택해주세요",
 						icon : "info"
 					});
-					$.divOnOff("#end_date");
 					return false;
 				}
 				
@@ -464,7 +467,6 @@
 						text : "선생님을 만나고 싶은 요일을 선택해주세요",
 						icon : "info"
 					});
-					$.divOnOff("input[name=yoil]");
 					return false;
 				}
 			}
@@ -480,7 +482,6 @@
 					text : "돌봄 종료시간을 선택해주세요",
 					icon : "info"
 				});
-				$.divOnOff("#end_time");
 				return false;
 			}
 			
@@ -497,7 +498,7 @@
 					$(function(){
 						var lng;
 						var lat;
-						$("#zipcodeBtn").click(function(){
+						$(".zipcodeBtn").click(function(){
 							console.log("클릭");
 							new daum.Postcode({
 						        oncomplete: function(data) {
@@ -546,8 +547,8 @@
 						            });
 						           	window.close();
 						        },theme:{
-						        	searchBgColor: "#ff5400", //검색창 배경색
-						            queryTextColor: "#FFFFFF" //검색창 글자색
+						        	searchBgColor: "#ffc207", //검색창 배경색
+						            queryTextColor: "#black" //검색창 글자색
 						        }
 						    }).open();
 						});
@@ -555,12 +556,6 @@
 									
 				</script>
 <script>
-	$.divOnOff = function(a){
-		$(".mainDiv").fadeOut();
-		var divLocation = $(a).parents(".mainDiv").offset();
-		console.log("요소의 위치 => " + divLocation);
-		$(a).parents(".mainDiv").fadeIn();
-	}
 	
 	function startTime(){ // 시작 시간
 		var time = new Date(2020, 0, 1);
@@ -586,7 +581,7 @@
 			var i=1;
 			for(i;i<=48;i++){
 				if($("#start_time option[id=rt"+i+"]").val()==test){
-					endTime(i);
+					endTime(i); 	
 				}
 			}
 		});
@@ -611,6 +606,21 @@
 			time.setMinutes(time.getMinutes()+30);
 		}
 		document.getElementById("end_time").innerHTML = tag;
+	}
+	
+	function setEndDate(i){
+		var date = new Date();
+		var startDate = document.getElementById("start_date").value;
+		console.log("startDate => " + startDate);
+		var data = new Date(startDate);
+		var endDate;
+		var setEndDate;
+		var month = Number(data[1]);
+		console.log(i);
+		endDate = new Date(data.getFullYear(), data.getMonth(), data.getDate()+(7*i));
+		console.log("end_date => " + endDate);
+		setEndDate = endDate.getFullYear()+"-"+(endDate.getMonth()+1)+"-"+endDate.getDate();
+		document.getElementById("end_date").value = setEndDate;
 	}
 </script>
 <style>
@@ -676,10 +686,7 @@
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
 					<input type="radio" id="g3" name="wish_gender" value="A"/>
-					<div>
-						
-					</div>
-					<label for="g1">여자</label>
+					<label class="label" for="g1">여자</label>
 					<label for="g2">남자</label>
 					<label for="g3">무관</label>
 				</div>
@@ -705,10 +712,10 @@
 					<div>
 						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
 					</div>
-					<input type="radio" id="childrenCnt1" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt2" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt3" name="childrenCnt"/>
-					<input type="radio" id="childrenCnt4" name="childrenCnt"/>
+					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
+					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
+					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
+					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
 					<div id=childrenCnt>
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
@@ -716,7 +723,24 @@
 						<div><label for="childrenCnt4">4명</label></div>
 					</div>
 					<div id="childrenDetailDiv">
-						<ul id="childrenDetail"></ul>
+						<ul id="childcnt1">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt2">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt3">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt4">
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="자녀4 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -727,15 +751,15 @@
 			<div id="addrDiv" class="mainDiv">
 				<div id="mapImgDiv" style="margin:30px 0;">
 					<div>아직 장소를 입력하지 않았습니다.</div>
-					<img src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
+					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
-				<div id="mapDiv" style="margin:30px 0; display:none;">
+				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">
+					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" style="display:inline-block;border:none;"/></div>
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
-					<input type="button" id="zipcodeBtn" value="돌봄 장소" />
+					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소" />
 					<input type="hidden" id="care_addr" name="care_addr"/>
-					<input type="hidden" id="dong_addr" name="dong_addr"/>
 					<input type="hidden" id="lat" name="lat"/>
 					<input type="hidden" id="lng" name="lng"/>
 				</div>
@@ -758,11 +782,10 @@
 				
 				<div id="regularDateDiv">
 					<div id="title">정기적으로</div>
+						<input type="hidden" id="end_date" name="end_date" readonly="readonly" />
 					<div id="startDateDiv">
-						<input type="button" id="startDateBtn" value="돌봄 시작일 선택" />
-						<input type="text" id="start_date" name="start_date" readonly="readonly" />
-						<input type="hidden" id="end_date" name="end_date"  />
-						
+						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
+						<input class="btn" type="text" id="start_date" name="start_date" readonly="readonly" />
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -782,6 +805,13 @@
 							<li><label for="rd7">일</label></li>
 						</ul>
 					</div>
+					<hr/>
+					<div id="periodDiv">
+						<div>기간을 선택해주세요.</div>
+						<label for="week2"><input type="radio" id="week2" name="week" value="2"/>2주</label>
+						<label for="week3"><input type="radio" id="week3" name="week" value="3"/>3주</label>
+						<label for="week4"><input type="radio" id="week4" name="week" value="4"/>4주</label>
+					</div>
 				</div>
 				<div id="timeDiv">
 					<div id="startDiv">
@@ -794,6 +824,10 @@
 						<select id="end_time" name="end_time">
 							<option>종료시간</option>
 						</select>
+					</div>
+					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
+    					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
 			</div>
@@ -809,10 +843,16 @@
 					<span id="minWage" style="color:red"></span>
 				</div>
 				<div id="wageDiv">
-					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
+					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590"/><span>원/1시간</span>
 				</div>
-				<label for="avgWage" style="width:100%;"><input type="checkbox" id="avgWage" style="width:5%;"/><span style="width:90%;">평균시급 적용</span></label>
-				<label for="conYN" style="width:100%;"><input type="checkbox" id="consultation" style="width:5%;" name="consultation" value="Y"/><span style="width:90%;">협의 가능</span></label>
+					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
+    					<input type="checkbox" class="custom-control-input" id="avgWage">
+    					<label class="custom-control-label" for="avgWage">평균시급 적용</label>
+					</div>
+					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
+    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation">
+    					<label class="custom-control-label" for="consultation">시급 협의가능</label>
+					</div>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
@@ -827,7 +867,7 @@
 			</div>
 			
 			<div id="submitDiv" >
-				<input type="submit" value="등록하기" />
+				<input class="btn btn-warning" type="submit" value="등록하기" />
 			</div>
 			
 			<div id="footer"></div>

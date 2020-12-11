@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.deal.DealDaoImp">
+	<insert id="insertContract" >
+		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit, status, origin_no, agree, teacherid) 
+			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0, 'C', #{origin_no}, 'T', #{teacherid})
+	</insert>
+	
+	<select id="selectTeacherHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
+		select p.job_board_no, t_userid, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, p.status, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
+		from parent_list p join t_p_table t on p.job_board_no=t.job_board_no where (p.status='R' or p.status='P') and t_userid=#{userid} order by p.job_board_no desc
+	</select>
+	
+	<select id="searchContract" resultType="int" parameterType="int">
+		select count(userid) from parent_list where origin_no=#{no} and agree='T' 
+	</select>
+	
+	<select id="applyDbmSelect2" parameterType="int" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO">
+		select member.username, member.userid, member.tel1, trunc(months_between(trunc(sysdate), birth)/12) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, to_char(t_p_table.apply_date, 'YYYY-MM-DD HH:MI') apply_date
+			from member, t_p_table, teacher 
+	    	where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and t_p_table.job_board_no = #{param1}
+	</select>
+	
+	<select id="recruitBoardSelect2" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
+			(select count(t_userid) from t_p_table where job_board_no = #{param1}) tcnt
+			from parent_list p, member m 
+			where p.job_board_no=#{param1} and p.userid = m.userid
+	</select>
+	
+	<select id="recruitChildSelect2" parameterType="int" resultType="com.dolbommon.dbmon.parent.ChildrenVO">
+		select job_board_no, child_birth
+			from add_child where job_board_no=#{param1}
+	</select>
+	
+	<select id="recruitSpecificDateSelect2" parameterType="int" resultType="com.dolbommon.dbmon.member.SpecificDateVO">
+		select job_board_no, select_date, start_time, end_time
+			from jb_specific_day where job_board_no=#{param1}
+	</select>
+	
+	<select id="recruitRegularDateSelect2" parameterType="int" resultType="com.dolbommon.dbmon.member.RegularDateVO">
+		select job_board_no, yoil, to_char(start_date, 'YYYY-MM-DD') start_date, to_char(end_date, 'YYYY-MM-DD') end_date, start_time, end_time, week
+			from jb_regular_date where job_board_no=#{param1}
+	</select>
+	
+	<select id="selectOrigin" resultType="int">
+		select job_board_no from parent_list where origin_no=#{origin_no} and agree='T' or agree='Y'
+	</select>
+	
+	<update id="setAgree" parameterType="map">
+		update parent_list set agree=#{agree} where job_board_no=#{no}
+	</update>
+	
+	<select id="ContractStatus" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and (agree='Y' or agree='T') and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	<select id="ContractStatus2" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and agree='N' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+</mapper>

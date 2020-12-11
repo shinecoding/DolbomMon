@@ -18,4 +18,5 @@
 	<delete id="replyDelete">
 		delete from replyBoard where re_no=${param1}
 	</delete>
+
 </mapper>
