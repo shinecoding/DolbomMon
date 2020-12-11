@@ -190,7 +190,7 @@ input:checked + .slider:before {
 
 <div class="container" >
    <div id="title">
-   		<div id="titlefont">마이페이지</div>
+   		<div id="titlefont"></div>
    		<div class="rightlog">   
 			   <a id="lgt" href="/dbmon/logout">로그아웃</a>
 			   <div id="dividebar">|</div>
