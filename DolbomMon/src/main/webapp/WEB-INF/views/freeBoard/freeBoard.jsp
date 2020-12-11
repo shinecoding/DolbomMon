@@ -88,17 +88,7 @@
 <div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board" style="font-size: 0.9em;">
 <br/>
-	<table class="table" style="margin: 0px;">
-  	<tbody>
-  		<c:forEach var="notice" items="${list2}">
-	  		<tr>
-	  			<th><span class="badge rounded-pill bg-warning ">공지</span>&nbsp;&nbsp;<a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></th>
-	  			
-	  			
-	  		</tr>
-  		</c:forEach>
-  	</tbody>
-	</table>
+
 
 	<table class="table table-hover">
 		<thead>
@@ -114,8 +104,13 @@
 			</tr>
 		</thead>
 		<tbody>
-		
-	
+			<c:forEach var="notice" items="${list2}">
+
+				<tr>
+					<td colspan="1"></td><td align="center" colspan="1"><span class="badge rounded-pill bg-warning" style="padding: 5px;">&nbsp;&nbsp;&nbsp;공지&nbsp;&nbsp;&nbsp;</span></td><td colspan="5"><a href="/dbmon/noticeBoardView?no=${notice.no}">${notice.subject}</a></td>
+				</tr>
+			</c:forEach>
+
 			<c:forEach var="vo" items="${list}">
 				<tr>
 					<c:if test="${vo.step<=0}">

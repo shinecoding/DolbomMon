@@ -26,8 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.deal.DealDaoImp;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
+import com.dolbommon.dbmon.search.RecruitBoardDaoImp;
+import com.dolbommon.dbmon.search.RecruitBoardVO;
 
 
 @Controller
@@ -118,10 +121,24 @@ public class TeacherController {
 		return "/teacher/teacherHeart";
 	}
 
+	///내가 신청한 글 임시작성
 	@RequestMapping("/teacherApplyHistory")
-	public String teacherApplyHistory() {
-		return "/teacher/teacherApplyHistory";
+	public ModelAndView teacherApplyHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
+			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
+			//List<MemberVO> mvoList = dao.selectTMemNo();
+			ModelAndView mav = new ModelAndView();
+			
+			//mav.addObject("mvoList", mvoList);
+			mav.addObject("list2", list2);
+			//mav.addObject("totalRecords", totalRecords);
+			mav.setViewName("/teacher/teacherApplyHistory");
+
+			return mav;
 	}
+		
 
 	@RequestMapping("/teacherEdit")
 	public ModelAndView teacherEdit(HttpSession ses) {

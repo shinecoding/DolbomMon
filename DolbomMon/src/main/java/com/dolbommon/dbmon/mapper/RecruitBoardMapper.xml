@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select job_board_no, userid, care_addr, wish_age, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
-			from parent_list order by job_board_no desc
+		select job_board_no, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
+			from parent_list where status='R' or status='P' order by job_board_no desc
 	</select>
 	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
@@ -16,24 +16,24 @@
 		select count(job_board_no) from parent_list
 	</select>
 	
-	<select id="jobSearchBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.userid, m.username, p.care_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate,
-			(select count(t_userid) from t_p_table where  p.job_board_no = #{param1}) tcnt
+	<select id="recruitBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
+			(select count(t_userid) from t_p_table where job_board_no = #{param1}) tcnt
 			from parent_list p, member m 
 			where p.job_board_no=#{param1} and p.userid = m.userid
 	</select>
 	
-	<select id="jobSearchChildSelect" parameterType="int" resultType="com.dolbommon.dbmon.parent.ChildrenVO">
+	<select id="recruitChildSelect" parameterType="int" resultType="com.dolbommon.dbmon.parent.ChildrenVO">
 		select job_board_no, child_birth
 			from add_child where job_board_no=#{param1}
 	</select>
 	
-	<select id="jobSearchRegularDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.RegularDateVO">
-		select job_board_no, yoil, start_date, end_date, start_time, end_time
+	<select id="recruitRegularDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.RegularDateVO">
+		select job_board_no, yoil, to_char(start_date, 'YYYY-MM-DD') start_date, to_char(end_date, 'YYYY-MM-DD') end_date, start_time, end_time, week
 			from jb_regular_date where job_board_no=#{param1}
 	</select>
 	
-	<select id="jobSearchSpecificDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.SpecificDateVO">
+	<select id="recruitSpecificDateSelect" parameterType="int" resultType="com.dolbommon.dbmon.member.SpecificDateVO">
 		select job_board_no, select_date, start_time, end_time
 			from jb_specific_day where job_board_no=#{param1}
 	</select>
@@ -49,17 +49,17 @@
 	</insert>
 	
 	<select id="applyDbmSelect" parameterType="int" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO">
-		select member.username, member.userid, member.tel1, nvl(trunc(months_between(sysdate, to_date(substr(to_char(member.birth, 'YYYY'), 1, 4), 'YYYY'))/12),0) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, to_char(t_p_table.apply_date, 'YYYY-MM-DD HH:MI') apply_date
+		select member.username, member.userid, member.tel1, trunc(months_between(trunc(sysdate), birth)/12) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, to_char(t_p_table.apply_date, 'YYYY-MM-DD HH:MI') apply_date
 			from member, t_p_table, teacher 
 	    	where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and t_p_table.job_board_no = #{param1}
 	</select>
 	
-	<delete id="applyCancel" parameterType="String">
-		delete from t_p_table where t_userid = #{param1}
+	<delete id="applyCancel" >
+		delete from t_p_table where t_userid = #{param1} and job_board_no = #{param2}
 	</delete>
 	
-	<delete id="refusalDbm" parameterType="String">
-		delete from t_p_table where t_userid = #{param1}
+	<delete id="refusalDbm" >
+		delete from t_p_table where t_userid = #{param1} and job_board_no = #{param2}
 	</delete>
 	
 	<select id="applyChk" resultType="int">
@@ -71,6 +71,27 @@
 	<update id="hitCount" parameterType="int">
 		update parent_list set hit=hit+1 where job_board_no=#{param1}
 	</update>
+	
+	<update id="updateDbmSearch">
+		update parent_list set care_addr=#{rbVO.care_addr}, dong_addr=#{rbVO.dong_addr}, time_type=#{rbVO.time_type}, pw_activity=#{rbVO.pw_activity}, wish_wage=#{rbVO.wish_wage}, consultation=#{rbVO.consultation}, time_consultation=#{rbVO.time_consultation}
+			, wish_age=#{rbVO.wish_age}, wish_gender=#{rbVO.wish_gender}, content=#{rbVO.content}, lat=#{rbVO.lat}, lng =#{rbVO.lng}
+			where job_board_no = #{param1}
+	</update>
+	<update id="updateDsChildInfo">
+		update add_child set child_birth=#{cVO.child_birth}, child_cnt=#{cVO.child_cnt} 
+			 where job_board_no = #{param1}
+	</update>
+	<update id="updateDsRegularDate">
+		update jb_regular_date set yoil=#{rdVO.yoil}, start_time=#{rdVO.start_time}, end_time=#{rdVO.end_time}, start_date=#{rdVO.start_date}, end_date=#{rdVO.end_date}, week=#{rdVO.week}
+			where  job_board_no = #{param1}
+	</update>
+	<update id="updateDsSpecificDate">
+		update jb_specific_day select_date=#{sdVO.select_date}, start_time=#{sdVO.start_time}, end_time=#{sdVO.end_time} 
+			where job_board_no = #{param1}
+			
+	</update>
+	
+	
 	
 	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 

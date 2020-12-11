@@ -26,6 +26,133 @@
 			
 			startTime();
 			
+			////////////////// 글에있던 원하는 활동 데이터 //////////////////////
+			var getpwa = "${vo.pw_activity}";
+			var getPw_activity = getpwa.split(",");
+			$("input[name=pw_activity]").each(function(){
+				for(var i=0; i<getPw_activity.length;i++){
+					if($(this).val()==getPw_activity[i]){
+						$(this).prop("checked",true);
+					}
+				}
+			});
+			
+			////////////////////// 원하는 성별  /////////////////////// 
+			var getWish_gender = "${vo.wish_gender}";
+			$("input[name=wish_gender]").each(function(){
+				for(var i=0;i<3;i++){
+					if($(this).val()==getWish_gender){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			/////////////////////원하는 돌봄몬 나이 ////////////////////////
+			var getWA = "${vo.wish_age}";
+			var getWish_age = getWA.split(",");
+			$("input[name=wish_age]").each(function(){
+				for(var i=0;i<5;i++){
+					if($(this).val()==getWish_age[i]){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			var getChildCnt = ${cVO.child_cnt};
+			var getCB = "${cVO.child_birth}";
+			console.log("getCB => " + getCB);
+			var getChild_birth = getCB.split(",");
+			
+			$("input[name=childrenCnt]").each(function(){
+					var ccnt = $(this).attr("id");
+					console.log("ccnt => " + ccnt);
+					if(ccnt == "childrenCnt"+getChildCnt){
+						$(this).prop("checked", true);
+						console.log("배열의 길이 => " + getChild_birth.length);
+						for(var j=0;j<getChild_birth.length;j++){
+							var test = $("."+ccnt).attr("id");
+							console.log("test => " +test);
+							console.log("getChild_birth[j] => " + getChild_birth[j]);
+							cnt = 1+j;
+							var test2 = $("."+ccnt).children("li:nth-of-type("+cnt+")").children("input[name=child_birth]").val(getChild_birth[j]);
+						}
+					}
+			});
+			
+			var getTime_type = "${vo.time_type}";
+			$("input[name=time_type]").each(function(){
+				for(var i=0;i<2;i++){
+					if($(this).val()==getTime_type){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			var getStart_date = "${rdVO.start_date}";
+			$("#start_date").val(getStart_date);
+			
+			var getStart_time = "${rdVO.start_time}";
+			$("#start_time").val(getStart_time);
+			
+		
+			
+			var getDay = "${rdVO.yoil}";
+			var getYoil = getDay.split(",");
+			$("input[name=yoil]").each(function(){
+				for(var i=0;i<7;i++){
+					if($(this).val()==getYoil[i]){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			$(document).ready(function(){
+				var test = $("#start_time").val();
+				var i=1;
+				for(i;i<=48;i++){
+					if($("#start_time option[id=rt"+i+"]").val()==test){
+						endTime(i); 	
+						var getEnd_time = "${rdVO.end_time}";
+						$("#end_time").val(getEnd_time);
+					}
+				}
+			});
+			
+			var getWeek = ${rdVO.week};
+			console.log("getWeek => " + getWeek);
+			$("input[name=week]").each(function(){
+				for(var i=0;i<3;i++){
+					if($(this).val()==getWeek){
+						$(this).prop("checked", true);
+					}
+				}
+			});
+			
+			var getWish_wage = ${vo.wish_wage};
+			console.log("wish_wage => " + getWish_wage);
+			$("#wish_wage").val(getWish_wage);
+			
+			var getContent = "${vo.content}";
+			console.log("getContent => " + getContent);
+			$("#content").val(getContent);
+			
+			var getTimeCon = "${vo.time_consultation}";
+			if(getTimeCon=="Y"){
+				$("#time_consultation").prop("checked", true);
+			}else{
+				$("#time_consultation").prop("checked", false);
+			}
+			
+			var getTimeCon = "${vo.consultation}";
+			if(getTimeCon=="Y"){
+				$("#consultation").prop("checked", true);
+			}else{
+				$("#consultation").prop("checked", false);
+			}
+		
+			
+			
+			
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
 				$("label[for=timeType1]").css("background-color", "#ffc207");
@@ -81,6 +208,20 @@
 						var changeImg = nowImg.replace("-s.", "-n."); 
 						$("label[for=pa"+i+"]").children("img").attr("src", changeImg);
 					}
+				}
+			}
+			
+			
+			for(var i=2;i<5;i++){
+				
+				if($("#week"+i).is(":checked")){
+					var test = $("#week"+i).attr("id");
+					console.log("id => " + test)
+					console.log("i => " + i);
+					$("label[for=week"+i+"]").css("background-color", "#ffc207");
+				}else{
+					console.log("i x=> " + i );
+					$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 			
@@ -212,6 +353,7 @@
 				}
 			}
 		});
+		
 		var todayday = new Date();
 		$(".childBtn").datepicker({
 			showAnim : "show",
@@ -392,33 +534,6 @@
 				return false;
 			}
 			
-			var childCnt = $("input[name=childrenCnt]:checked").length;
-			if(childCnt < 1) {
-				swal({
-					title : "자녀 정보 입력",
-					text : "자녀의 정보를 입력해주세요",
-					icon : "info"
-				});
-				return false;
-			}
-			
-			var cnttt = 0;
-			$(".child_birth").each(function(){
-				var cb = $(this).val();
-				if(cb==null || cb==""){
-					cnttt = cnttt+1;
-					console.log("cnttt => " + cnttt);
-				}
-			});
-			if(cnttt == 0){
-				swal({
-					title : "자녀 정보 입력",
-					text : "자녀의 생년월일을 입력해주세요",
-					icon : "info"
-				});
-				cnttt = 0;
-				return false;
-			}
 			
 			if($("input[name=time_type]:checked").length<1){
 				swal({
@@ -545,7 +660,6 @@
 											map.setCenter(coords);
 						                } 
 						            });
-						           	window.close();
 						        },theme:{
 						        	searchBgColor: "#ffc207", //검색창 배경색
 						            queryTextColor: "#black" //검색창 글자색
@@ -622,6 +736,16 @@
 		setEndDate = endDate.getFullYear()+"-"+(endDate.getMonth()+1)+"-"+endDate.getDate();
 		document.getElementById("end_date").value = setEndDate;
 	}
+	/*
+	$("#writeFrm").submit(function(){
+		var gsWin = window.open("about:blank", "winName");
+	    var frm = document.form;
+	    frm.action = http://www.abc.com/requestPage.asp;
+	    frm.target="winName";
+	    frm.submit();
+	})
+	  */  
+	
 </script>
 <style>
  	.ui-datepicker:nth-of-type(1){width:100%;}
@@ -631,13 +755,11 @@
  	.divOn{display:inline-block;}
 </style>
 <body>
-	<div id="top">
-		<%@include file="/WEB-INF/views/top.jsp"%>
-	</div>
 	<div class="container">
-		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
+		<form id="writeFrm" method="post" action="contractWrite">
+			<input type="hidden" name="origin_no" value="${no }" />
 			<div id="header">
-				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
+				<a href="#"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
 			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
 			<div>
@@ -691,9 +813,9 @@
 					<label for="g3">무관</label>
 				</div>
 				<div id="ageDiv">
-					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
-					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
-					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
+					<input type="checkbox" id="20" name="wish_age" value="20" />
+					<input type="checkbox" id="30" name="wish_age" value="30" />
+					<input type="checkbox" id="40" name="wish_age" value="40" />
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
 					<ul>
@@ -712,10 +834,10 @@
 					<div>
 						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
 					</div>
-					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
-					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
-					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
-					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
+					<input type="radio" id="childrenCnt1" name="child_cnt" value="1"/>
+					<input type="radio" id="childrenCnt2" name="child_cnt" value="2"/>
+					<input type="radio" id="childrenCnt3" name="child_cnt" value="3"/>
+					<input type="radio" id="childrenCnt4" name="child_cnt" value="4"/>
 					<div id=childrenCnt>
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
@@ -723,19 +845,19 @@
 						<div><label for="childrenCnt4">4명</label></div>
 					</div>
 					<div id="childrenDetailDiv">
-						<ul id="childcnt1">
+						<ul id="childcnt1" class="childrenCnt1">
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt2">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						<ul id="childcnt2" class="childrenCnt2">
+							<li id="1"><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li id="2"><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt3">
+						<ul id="childcnt3" class="childrenCnt3">
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt4">
+						<ul id="childcnt4" class="childrenCnt4">
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
@@ -750,18 +872,18 @@
 			</div>
 			<div id="addrDiv" class="mainDiv">
 				<div id="mapImgDiv" style="margin:30px 0;">
-					<div>아직 장소를 입력하지 않았습니다.</div>
+					<div style="color:orange;">입력한 돌봄 장소 - ${vo.care_addr }</div>
 					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
 				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">
-					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" style="display:inline-block;border:none;"/></div>
+					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" value="${vo.dong_addr }" style="display:inline-block;border:none;"/></div>
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
 					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소" />
-					<input type="hidden" id="care_addr" name="care_addr"/>
-					<input type="hidden" id="lat" name="lat"/>
-					<input type="hidden" id="lng" name="lng"/>
+					<input type="hidden" id="care_addr" name="care_addr" value="${vo.care_addr }"/>
+					<input type="hidden" id="lat" name="lat" value="${vo.lat }"/>
+					<input type="hidden" id="lng" name="lng" value="${vo.lng }"/>
 				</div>
 			</div>
 			
@@ -782,10 +904,10 @@
 				
 				<div id="regularDateDiv">
 					<div id="title">정기적으로</div>
-						<input type="hidden" id="end_date" name="end_date" readonly="readonly" />
+						<input type="hidden" id="end_date" name="end_date" readonly="readonly" value="${rdVO.end_date }" />
 					<div id="startDateDiv">
 						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
-						<input class="btn" type="text" id="start_date" name="start_date" readonly="readonly" />
+						<input class="btn" type="text" id="start_date" name="start_date" value="${rdVO.start_date }" readonly="readonly" />
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -862,12 +984,14 @@
 			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
 			<div id="descriptionDiv" class="mainDiv">
 				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
-				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
+				<textarea name="content" id="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
 			
+			<input type="hidden" name="teacherId" value="${teacherId}"/>
+			
 			<div id="submitDiv" >
-				<input class="btn btn-warning" type="submit" value="등록하기" />
+				<input class="btn btn-warning" type="submit" value="계약서 보내기" />
 			</div>
 			
 			<div id="footer"></div>

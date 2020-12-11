@@ -11,8 +11,10 @@
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <script src="css/jquery.bxslider.js"></script>
 <link rel="stylesheet" href="css/jquery.bxslider.css" type="text/css"/>
-<!--    <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet">
-      <link href="<%=request.getContextPath() %>/css/demo.css" rel="stylesheet"> -->
+
+<!-- 	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet">
+		<link href="<%=request.getContextPath() %>/css/demo.css" rel="stylesheet"> -->
+
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -59,6 +61,42 @@
       }
    });        
    
+
+	$(function() {
+	  AOS.init({
+	    duration: 1200
+	  });
+	  onElementHeightChange(document.body, function(){
+	    AOS.refresh();
+	  });
+	});
+
+
+	function onElementHeightChange(elm, callback) {
+	    var lastHeight = elm.clientHeight
+	    var newHeight;
+	    
+	    (function run() {
+	        newHeight = elm.clientHeight;      
+	        if (lastHeight !== newHeight) callback();
+	        lastHeight = newHeight;
+
+	        if (elm.onElementHeightChangeTimer) {
+	          clearTimeout(elm.onElementHeightChangeTimer); 
+	        }
+
+	        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+	    })();
+	  }
+	
+	
+	$(window).scroll(function() {  
+        var position = $(window).scrollTop(); 
+		if (position >= 700){
+			$(".redution").delay(500).fadeOut(1000);
+		}
+	});        
+	
 </script>
 
 <style type="text/css">
@@ -116,6 +154,7 @@
           color:white;
     }
 
+
    h3{
       margin-top:30px;margin-bottom:30px;
    
@@ -130,6 +169,7 @@
       margin-top: -24px; 
       text-align: center; 
       font-size: 48px; color: #ffffff; 
+
    }
    
 </style>
@@ -144,6 +184,7 @@
  <div class="redution">
 <video class="redution" src='img/video.mp4' width='100%' muted="muted" autoplay loop>
 </video>
+
    <div class="jb-text">
       <p style="font-family: 'JetBrains Mono', monospace;">DOLBOMMON</p>
       <h5 style="color:white;">Services</h5>
@@ -151,6 +192,7 @@
       <h2 style="color:white">육아에 도움이 필요할 땐 언제 어디서나</h2>
       <h2 style="font-weight:bold; color:gold;">돌봄몬이 해결하겠습니다.</h2>
    </div>
+
  </div>
 <!-- -------------------bx슬라이더------------- -->
 <div id="slider" >

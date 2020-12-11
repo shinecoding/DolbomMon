@@ -94,12 +94,13 @@
 					<li class="list-group-item">
 						<div class="row">
 							<div class="col-1">
-									<img src="img/profilepic.png" class="rounded-circle"/>
+									<img <c:if test="${list.pic==null || list.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${list.pic!=null || list.pic != '' }" >src="upload/${list.pic}"</c:if>class="rounded-circle"/>
 								</div>	
 							<div class="col-6" onclick="location.href='parentView?no=${list.job_board_no}'" style="cursor:pointer;">
 									<b>글 번호 ${list.job_board_no }</b><i class="fas fa-search ml-1"></i><br/>
 									희망시급: ${list.wish_wage }원<br/>
 									신청시간: ${list.writedate }<br/>
+									돌봄장소: ${list.care_addr }<br/>
 									자녀정보
 									<div id="${list.job_board_no }" ></div>
 									<script>

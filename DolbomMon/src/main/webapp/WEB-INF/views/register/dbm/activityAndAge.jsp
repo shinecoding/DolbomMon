@@ -41,7 +41,12 @@
 			
 			for(var i=1;i<14;i++){
 				var selectedData = $("input[id="+i+"]").attr("id");
-				
+				$("label[for="+selectedData+"]").children("img").fadeOut(200);
+				$("label[for="+selectedData+"]").children("img").fadeIn(200);
+				$("label[for="+selectedData+"]").children("img").fadeOut(100);
+				$("label[for="+selectedData+"]").children("img").fadeIn(100);
+				$("label[for="+selectedData+"]").children("img").fadeOut(50);
+				$("label[for="+selectedData+"]").children("img").fadeIn(50);
 				if($("input[id="+selectedData+"]").is(":checked")){
 					var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
 					if(selectedData=="2"){
@@ -71,7 +76,12 @@
 			
 			for(var i=1;i<5;i++){
 				var selectedData = $("input[id=age"+i+"]").attr("id");
-				
+				$("label[for="+selectedData+"]").children("img").fadeOut(200);
+				$("label[for="+selectedData+"]").children("img").fadeIn(200);
+				$("label[for="+selectedData+"]").children("img").fadeOut(100);
+				$("label[for="+selectedData+"]").children("img").fadeIn(100);
+				$("label[for="+selectedData+"]").children("img").fadeOut(50);
+				$("label[for="+selectedData+"]").children("img").fadeIn(50);
 				if($("input[id="+selectedData+"]").is(":checked")){
 					var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
 					var changeImg = nowImg.replace("-n.","-s.");
@@ -87,7 +97,12 @@
 		// 돌봄몬 - 돌볼 수 있는 아이의 연령대
 		$("input[name=child_age]").change(function(){
 			var selectedData = $(this).attr("id");
-			
+			$("label[for="+selectedData+"]").children("img").fadeOut(200);
+			$("label[for="+selectedData+"]").children("img").fadeIn(200);
+			$("label[for="+selectedData+"]").children("img").fadeOut(100);
+			$("label[for="+selectedData+"]").children("img").fadeIn(100);
+			$("label[for="+selectedData+"]").children("img").fadeOut(50);
+			$("label[for="+selectedData+"]").children("img").fadeIn(50);
 			if($("input[id="+selectedData+"]").is(":checked")){
 				var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
 				var changeImg = nowImg.replace("-n.","-s.");
@@ -102,7 +117,12 @@
 		// 돌봄몬 - 가능한 활동
 		$("input[name=activity_type]").change(function(){
 			var selectedData = $(this).attr("id");
-			
+			$("label[for="+selectedData+"]").children("img").fadeOut(200);
+			$("label[for="+selectedData+"]").children("img").fadeIn(200);
+			$("label[for="+selectedData+"]").children("img").fadeOut(100);
+			$("label[for="+selectedData+"]").children("img").fadeIn(100);
+			$("label[for="+selectedData+"]").children("img").fadeOut(50);
+			$("label[for="+selectedData+"]").children("img").fadeIn(50);
 			if($("input[id="+selectedData+"]").is(":checked")){
 				var nowImg = $("label[for="+selectedData+"]").children("img").attr("src");
 				if(selectedData=="2"){
@@ -129,6 +149,10 @@
 				}
 			}
 		});
+		
+		
+		
+		
 		
 		$("#aaaFrm").submit(function(){
 			var childAgeData;
@@ -202,7 +226,7 @@
 				<div><label for="12"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-n.svg"/><br/><span>장기입주</span></label></div>
 				<div><label for="13"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/><span>단기입주</span></label></div>
 			</div>
-			<input type="submit" value="다음" />
+			<input type="submit" class="btn" style="background-color:orange;margin-bottom:100px;color:white;" value="다음" />
 		</form>
 	</div>
 </body>

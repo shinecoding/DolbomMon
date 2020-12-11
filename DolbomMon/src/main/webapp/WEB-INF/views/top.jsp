@@ -13,6 +13,17 @@
 			   $("ul",this).slideUp("fast");
 			});
 
+		 //채팅창 오픈
+			var popupWidth = 1060;
+			var popupHeight = 596;
+			var popupX = (window.screen.width / 2) - (popupWidth / 2);
+			var popupY= (window.screen.height / 2) - (popupHeight / 2);
+			$(document).on("click",".ccBtn",function(){
+				console.log("test");
+				var userid = $(this).attr('id');
+				window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			});
+		 
       });	
    </script>
 
@@ -183,8 +194,7 @@ EDIT ON
 	
 	
 	           <span style="float:right">
-	           <a href="javascript:void(window.open('/dbmon/chat','message','width=1200,height=1000,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	           <button class="btn btn-primary ppp">채팅</button></a>
+	           <button class="btn btn-primary ppp ccBtn">채팅</button></a>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	           <button class="btn btn-primary ppp">쪽지</button></a>
 	           <a href="/dbmon/temporaryLogin">
