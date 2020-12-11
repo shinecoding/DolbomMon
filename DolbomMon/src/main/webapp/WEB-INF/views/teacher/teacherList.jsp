@@ -190,7 +190,7 @@ input:checked + .slider:before {
 
 <div class="container" >
    <div id="title">
-   		<div id="titlefont">마이페이지</div>
+   		<div id="titlefont"></div>
    		<div class="rightlog">   
 			   <a id="lgt" href="/dbmon/logout">로그아웃</a>
 			   <div id="dividebar">|</div>
@@ -228,7 +228,8 @@ input:checked + .slider:before {
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
-<jsp:include page="../footer.jsp"/>
+
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
 

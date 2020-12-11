@@ -59,13 +59,13 @@
 			imgChange();
 		});
 		
-		$("input[name=dbm_type]").change(function(){
+		$("input[name=teacher_type]").change(function(){
 			
 			imgChange();
 		});
 		
 		$("#dbmTypeFrm").submit(function(){
-			var data = $("input[name=care_type]").val();
+			var data = $("input[name=teacher_type]").val();
 			if(data == null || data == ""){
 				alert("유형을 선택해주세요");				
 				return false;
@@ -99,10 +99,10 @@
 		</div>
 		<div id="dbmTypeDiv">
 			<form id="dbmTypeFrm" method="post" action="<%=request.getContextPath()%>/dbm/activityAndAge">
-				<input type="radio" name="care_type" id="dt1" value="선생님" />
-				<input type="radio" name="care_type" id="dt2" value="대학생" />
-				<input type="radio" name="care_type" id="dt3" value="엄마" />
-				<input type="radio" name="care_type" id="dt4" value="일반" checked="checked" />
+				<input type="radio" name="teacher_type" id="dt1" value="선생님" />
+				<input type="radio" name="teacher_type" id="dt2" value="대학생" />
+				<input type="radio" name="teacher_type" id="dt3" value="엄마" />
+				<input type="radio" name="teacher_type" id="dt4" value="일반" checked="checked" />
  				<div class="d1"><label for="dt1"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">선생님</p><p class="dt">보육교사, 유치원정교사, 특수학교(유치원/초등)정교사, 초등학교정교사 자격증을 보유하고 있는 경우</p></div></div>
 				<div class="d1"><label for="dt2"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">대학생</p><p class="dt">현재 대학교에서 재학 및 휴학 중인 경우</p></div></div>
 				<div class="d1"><label for="dt3"><img src="<%=request.getContextPath()%>/icon/chkboxN.cr7.png" style="width:148px; height:148px;"/></label><div class="d2"><p class="dbmType">엄마</p><p class="dt">본인의 아이를 키우며 육아 경험이 있는 경우</p></div></div>

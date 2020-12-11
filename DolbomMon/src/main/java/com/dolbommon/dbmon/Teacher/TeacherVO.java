@@ -24,10 +24,16 @@ public class TeacherVO {
 	private int headcount;
 	private String discussion;
 	private String active;
-	
+	private String teacher_type;
 	
 
 	
+	public String getTeacher_type() {
+		return teacher_type;
+	}
+	public void setTeacher_type(String teacher_type) {
+		this.teacher_type = teacher_type;
+	}
 	public String getActive() {
 		return active;
 	}

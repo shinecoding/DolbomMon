@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.deal.DealDaoImp;
 import com.dolbommon.dbmon.member.MemberDaoImp;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
@@ -68,6 +69,9 @@ public class ParentController {
 		RecruitBoardVO rbVO = dao.recruitBoardSelect(no);
 		ChildrenVO cVO = dao.recruitChildSelect(no);
 		
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		String contractId = dao2.ContractStatus(no);
+		String contractId2 = dao2.ContractStatus2(no);
 		
 		
 		String who = (String)ses.getAttribute("who");
@@ -88,11 +92,13 @@ public class ParentController {
 			RegularDateVO rdVO = dao.recruitRegularDateSelect(no);
 			mav.addObject("rdVO", rdVO);
 		}
-		
+		System.out.println(contractId);
 		mav.addObject("apChk", apChk);
 		mav.addObject("tlist", tlist);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
+		mav.addObject("contractId", contractId);
+		mav.addObject("contractId2", contractId2);
 		mav.setViewName("/parents/parentView");
 		
 		return mav;
@@ -204,6 +210,7 @@ public class ParentController {
 		System.out.println("자녀 생년월일 => " + child_birth);
 		cVO.setChild_birth(child_birth);
 		
+		
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		
@@ -234,6 +241,10 @@ public class ParentController {
 		return mav;
 	
 	}
+	
+	
+	
+	
 	
 	
 }

@@ -135,18 +135,36 @@
 				    		
 	    	});
 	    });
+		//스크롤
+		$(window).scroll(function(){
+			
+			var scrolltop = $(document).scrollTop();//스크롤 위치
+				console.log(scrolltop);
+			var height = $(document).height(); //문서길이
+				console.log(height);
+			var height_win = $(window).height(); //보여지는 창의 길이
+				console.log(height_win);
+			
+			if(Math.round($(window).scrollTop()) == $(document).height() - $(window).height()){
+				for(i=0; i<15; i++){
+					$("#cardBox").append();
+				}
+			}
+			
+		});
 	    
 		//========================ajax=========for selectbox=================
 		
+			
 			$(document).on("change", "#dropdownCT", function(){
 				var care_type = $(this).val();
 				console.log("케어타입="+care_type);
-				var url2 = "/dbmon/searchCare";
-				var params2 = "care_type="+care_type;
+				var url = "/dbmon/searchCare";
+				var params = "care_type="+care_type;
 				console.log("파라미터="+params2);
 				$.ajax({
-					url:url2,
-					data:params2,
+					url:url,
+					data:params,
 					type:'GET',
 					success:function(result){
 						
@@ -663,7 +681,7 @@
 						<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
 						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
 					<c:choose>
-						<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
+						<c:when test="${vo.last_edit>525600}">${edit_year}년</c:when>
 						<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
 						<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
 						<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>

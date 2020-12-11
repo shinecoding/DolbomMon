@@ -7,6 +7,7 @@
 		select p.job_board_no, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
 		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, (select count(tp.t_userid)
 		from t_p_table tp where tp.job_board_no = p.job_board_no) tcnt from parent_list p order by job_board_no desc
+
 	</select>
 	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
@@ -72,6 +73,27 @@
 	<update id="hitCount" parameterType="int">
 		update parent_list set hit=hit+1 where job_board_no=#{param1}
 	</update>
+	
+	<update id="updateDbmSearch">
+		update parent_list set care_addr=#{rbVO.care_addr}, dong_addr=#{rbVO.dong_addr}, time_type=#{rbVO.time_type}, pw_activity=#{rbVO.pw_activity}, wish_wage=#{rbVO.wish_wage}, consultation=#{rbVO.consultation}, time_consultation=#{rbVO.time_consultation}
+			, wish_age=#{rbVO.wish_age}, wish_gender=#{rbVO.wish_gender}, content=#{rbVO.content}, lat=#{rbVO.lat}, lng =#{rbVO.lng}
+			where job_board_no = #{param1}
+	</update>
+	<update id="updateDsChildInfo">
+		update add_child set child_birth=#{cVO.child_birth}, child_cnt=#{cVO.child_cnt} 
+			 where job_board_no = #{param1}
+	</update>
+	<update id="updateDsRegularDate">
+		update jb_regular_date set yoil=#{rdVO.yoil}, start_time=#{rdVO.start_time}, end_time=#{rdVO.end_time}, start_date=#{rdVO.start_date}, end_date=#{rdVO.end_date}, week=#{rdVO.week}
+			where  job_board_no = #{param1}
+	</update>
+	<update id="updateDsSpecificDate">
+		update jb_specific_day select_date=#{sdVO.select_date}, start_time=#{sdVO.start_time}, end_time=#{sdVO.end_time} 
+			where job_board_no = #{param1}
+			
+	</update>
+	
+	
 	
 	<insert id="recruitBoardInsert" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 
