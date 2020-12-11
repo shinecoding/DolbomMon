@@ -79,6 +79,7 @@ $(function(){
     	location.href="teacherView?userid="+$(this).parent().parent().attr('id')+"nowPage="+$(this).attr('id');
     });
 	
+	//필터
 	$(document).on("change", "#likeDropdown", function(){
 		var order = $(this).val();
 		console.log("정렬="+order);
@@ -321,7 +322,7 @@ $(function(){
 	<div id="activeBox" class="mb-3"><span id="allActive"><i class="fas fa-circle" ></i>전체</span> <span id="onlyActive"><i class="fas fa-circle" style="color:gray;"></i>구인중 일자리만</span>
 		<div id="likeFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
 		<select id="likeDropdown">
-			<option value="like_order">업데이트 순</option>
+			<option value="last_edit">업데이트 순</option>
 			<option value="certi_cnt">인증 수 순</option>
 			<option value="wage_low">시급 낮은 순</option>
 			<option value="wage_high">시급 높은 순</option>
@@ -417,22 +418,22 @@ $(function(){
 		<ul class="pagination justify-content-center">
 			<li class="page-item">
 				<!-- 이전페이지 -->
-				<c:if test="${hvo.nowPage>1}">
-				<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/parentHeart?nowPage=${hvo.nowPage-1}" style="color:gray" aria-label="Previous">
+				<c:if test="${vo.nowPage>1}">
+				<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/parentHeart?nowPage=${vo.nowPage-1}" style="color:gray" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span></a>
 				</c:if>
 			</li>
-			<c:forEach var="p" begin="${hvo.startPageNum}" end="${hvo.startPageNum+ hvo.onePageNumCount -1}">
-				<c:if test="${p<=hvo.totalPage}">
+			<c:forEach var="p" begin="${vo.startPageNum}" end="${vo.startPageNum+ vo.onePageNumCount -1}">
+				<c:if test="${p<=vo.totalPage}">
 				<li	class="page-item">
-					<a class="page-link" href="/dbmon/parentHeart?nowPage=${p}" style="color:gray"><span <c:if test="${p == hvo.nowPage}" >style="color:orange;"</c:if> >${p}</span></a>
+					<a class="page-link" href="/dbmon/parentHeart?nowPage=${p}" style="color:gray"><span <c:if test="${p == vo.nowPage}" >style="color:orange;"</c:if> >${p}</span></a>
 				</li>
 				</c:if>
 			</c:forEach>			
 			<li class="page-item">
 				<!-- 다음페이지 -->
-				<c:if test="${hvo.nowPage < hvo.totalPage}">
-				<a class="page-link" href="/dbmon/parentHeart?nowPage=${hvo.nowPage+1}" style="color:gray"><span aria-hidden="true">&raquo;</span></a>
+				<c:if test="${vo.nowPage < vo.totalPage}">
+				<a class="page-link" href="/dbmon/parentHeart?nowPage=${vo.nowPage+1}" style="color:gray"><span aria-hidden="true">&raquo;</span></a>
 				</c:if>
 			</li>
 		</ul>

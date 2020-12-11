@@ -21,21 +21,23 @@ public interface JobSearchDaoImp {
 	
 	//총 게시물 수 구하기
 	public int getTotalRecord();
+	public int getHeartRecord(String userid);
 	//레코드 한개 선택
 	public TeacherVO jobSearchBoardSelect(int no);
 	//찜기능
-	public List<TeacherVO> selectHeart(String userid);
+	public List<TeacherVO> selectHeart(TeacherVO vo);
 	public int insertHeart(LiketVO vo);
 	public int deleteHeart(LiketVO vo);
 	
 	//찜게시판 기능
-	public List<TeacherVO> selectHeartActive(String userid);
+	public List<TeacherVO> selectHeartActive(TeacherVO vo);
 	
 	//찜게시판 정렬
-	public List<TeacherVO> likeOrder(String userid);
-	public List<TeacherVO> likeCertiCnt(String userid);
-	public List<TeacherVO> likeWageLow(String userid);
-	public List<TeacherVO> likeWageHigh(String userid);
+	public List<TeacherVO> likeOrder(TeacherVO vo);
+	public List<TeacherVO> likeCertiCnt(TeacherVO vo);
+	public List<TeacherVO> likeWageLow(TeacherVO vo);
+	public List<TeacherVO> likeWageHigh(TeacherVO vo);
+	
 	
 	//글번호 구하기
 	public List<TeacherVO> selectTMem(); 
