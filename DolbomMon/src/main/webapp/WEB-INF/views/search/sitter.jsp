@@ -667,13 +667,6 @@
 	</div>
 	</div>
 
-
-
-
-
-
-
-
 <!-- ----------------------------카드 디자인------------------------------ -->
 	<div id="cardBox"  class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">

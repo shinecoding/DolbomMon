@@ -13,15 +13,6 @@
 	.container{
 		width: 900px;	
 	}
-
-	#top_noticeboard{
-
-		margin: 15px;
-		padding: 15px;
-		text-align: center;
-		font-size: 30px;
-		position: relative;
-	}
 	#head{
 		text-align: center;
 	}
@@ -35,12 +26,6 @@
 	a:link, a:visited, a:hover{
 	 	color: black;
 	 }
-	/* body{
-	 	font-size: 0.9em;
-
-	 }	 */
-	 
-	 }
 	 ul, li{
 		margin: 0px;
 		padding: 0px;
@@ -49,19 +34,6 @@
 	#searchDiv{
 		width: 180px;
 	}
-	<!--
-	#paging ul{
-		width: 100%;
-		height: 40px;
-		overflow: auto;
-	}
-	#paging li{
-		float: left;
-		width: 60px;
-		height: 40px;
-		text-align: center;
-		font-size: 1.3em;
-	}	-->
 
 </style>
 </head>
@@ -69,21 +41,17 @@
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
-
-
-
 <div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
 	    	<a href="#"></a></div>
 	    	<img src="img/141.png" style="width:100%; height:400px; "/>
-<hr/>
 <div class="container">
 
-
-<div style="float: right;">
+<div style="float: right; margin: 15px;
+		padding: 15px;">
 	<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
 </div>
-<div style="font-size: 0.9em;"><br/>총 게시물 수 : ${totalRecord}</div>
+<div style="font-size: 0.9em;"><br/><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board" style="font-size: 0.9em;">
 <br/>
 	<table class="table table-hover">
@@ -123,25 +91,21 @@
 		</tbody>
 	</table>
 	<br/>
-	
 	<!-- paging -->
 		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				
+			<ul class="pagination justify-content-center">			
 				<!-- 이전 페이지 -->
 				<li class="page-item">
 					<c:if test="${pVo.nowPage>1}">
 						<a class="page-link" tabindex="-1" aria-disabled="true" href="/dbmon/noticeBoard?nowPage=${pVo.nowPage-1}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord}</c:if>">Previous</a>
 					</c:if>	
-				</li>
-				
+				</li>		
 				<c:forEach var="p" begin="${pVo.startPageNum}" end="${pVo.startPageNum+pVo.onePageNumCount-1}">
 					<c:if test="${p<=pVo.totalPage}">
 						<li class="page-item">
 						<a class="page-link" href="/dbmon/noticeBoard?nowPage=${p}<c:if test="${pVo.searchWord!=null}">&searchKey=${pVo.searchKey}&searchWord=${pVo.searchWord}</c:if>"><span <c:if test="${p==pVo.nowPage}">style="color:red"</c:if>>${p}</span></a>
 					</c:if>
 				</c:forEach>
-				
 				<!-- 다음페이지 -->
 				<li class="page-item">
 					<c:if test="${pVo.nowPage<pVo.totalPage}">
@@ -159,9 +123,9 @@
 					<option value="content">글내용</option>
 					<option value="userid">작성자</option>
 				</select>
-				</div>
+			</div>
 				<input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"/>
-				<div class="input-group-append">
+			<div class="input-group-append">
 					<input type="submit" class="btn btn-warning" value="검색"/>
 			</div>
 		</div>
