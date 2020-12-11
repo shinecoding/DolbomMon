@@ -22,6 +22,7 @@ public class RecruitBoardVO {
 		private int hit; //조회수
 		private int tcnt;
 		private int week;
+		private int origin_no; //원글번호
 		
 		public int getJob_board_no() {
 			return job_board_no;
@@ -136,6 +137,12 @@ public class RecruitBoardVO {
 		}
 		public void setWeek(int week) {
 			this.week = week;
+		}
+		public int getOrigin_no() {
+			return origin_no;
+		}
+		public void setOrigin_no(int origin_no) {
+			this.origin_no = origin_no;
 		}
 		
 		
