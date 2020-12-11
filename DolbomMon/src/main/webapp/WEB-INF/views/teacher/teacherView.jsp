@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +80,10 @@ border-radius:10px;
    <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
    <ul class="list-group">
    		
-   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
+   		<li class="list-group-item align-middle">
+   		<span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span>
+   		<span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.teacher_type=='선생님'}">선생님 돌봄몬</c:if><c:if test="${vo.teacher_type=='대학생'}">대학생 돌봄몬</c:if><c:if test="${vo.teacher_type=='엄마'}">엄마 돌봄몬</c:if><c:if test="${vo.teacher_type=='일반'}">일반 돌봄몬</c:if></span>
+   		<c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    		
    </ul>
@@ -337,10 +341,10 @@ border-radius:10px;
 						<fmt:parseNumber integerOnly="true" var="edit_day" value="${rvo.review_date/1440}"/>
 						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${rvo.review_date/60}"/>					
 					<c:choose>
-						<c:when test="${rvo.review_date>525600}">${rvo.review_date/525600}년</c:when>
-						<c:when test="${rvo.review_date>43200}">${rvo.review_date}달</c:when>
-						<c:when test="${rvo.review_date>1440}">${rvo.review_date}일</c:when>
-						<c:when test="${rvo.review_date>60}">${rvo.review_date}시간</c:when>
+						<c:when test="${rvo.review_date>525600}">${edit_year}년</c:when>
+						<c:when test="${rvo.review_date>43200}">${edit_month}달</c:when>
+						<c:when test="${rvo.review_date>1440}">${edit_day}일</c:when>
+						<c:when test="${rvo.review_date>60}">${edit_hour}시간</c:when>
 						<c:otherwise>${rvo.review_date}분</c:otherwise>
 					</c:choose>
 					 전

@@ -670,7 +670,7 @@
 						<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.last_edit/1440}"/>
 						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.last_edit/60}"/>					
 					<c:choose>
-						<c:when test="${vo.last_edit>525600}">${vo.last_edit/525600}년</c:when>
+						<c:when test="${vo.last_edit>525600}">${edit_year}년</c:when>
 						<c:when test="${vo.last_edit>43200}">${edit_month}달</c:when>
 						<c:when test="${vo.last_edit>1440}">${edit_day}일</c:when>
 						<c:when test="${vo.last_edit>60}">${edit_hour}시간</c:when>

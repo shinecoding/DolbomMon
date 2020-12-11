@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.Teacher.TeacherDaoImp">
 	<select id="selectTeacher" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.TeacherVO">
-		select userid, intro, care_type, child_age, activity_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit, area1, area2, area3, active from teacher where userid=#{userid}
+		select userid, intro, care_type, child_age, activity_type, teacher_type, desired_wage, pic, cctv, hit, round((sysdate - last_edit) *1440) as last_edit, area1, area2, area3, active from teacher where userid=#{userid}
 	</select>
 	<select id="selectTMember" parameterType="String" resultType="com.dolbommon.dbmon.Teacher.MemberVO">
 		select username, email, tel1, addr, zipcode, gender, birth, no, lat, lng from member where userid = #{userid}
 	</select>
 	<select id="selectReview" resultType="com.dolbommon.dbmon.Teacher.ReviewVO">
-		select distinct r.userid, m.username, m.pic, ac.child_cnt, r.reviewid, r.review_content, r.review_star, r.review_star, round((sysdate - r.review_date)*1440) as review_date from review r join member m on r.reviewid = m.userid join add_child ac on m.userid = ac.userid where r.userid = #{param1}
+		select distinct r.userid, m.username, m.pic, r.reviewid, r.review_content, r.review_star, r.review_star, round((sysdate - r.review_date)*1440) as review_date from review r join member m on r.reviewid = m.userid where r.userid = #{param1}
 	</select>
 	<insert id="insertReview">
 	</insert>
