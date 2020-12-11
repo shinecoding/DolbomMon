@@ -95,10 +95,6 @@
 			}
 		});
 		
-		$("#domain").change(function(){
-			var domain = $(this).val();
-			$("#email2").val(domain);
-		});
 		
 		$("#userid").keyup(function(){
 			var userid = $(this).val();
@@ -164,7 +160,9 @@
 		})
 		
 		$("#email2").keyup(function(){
-			$("#domain option:eq(0)").attr("selected", "selected");
+			var domain = document.getElementById("domain");
+			domain.selectedIndex = 0;
+			var selectText = domain.options[domain.selectedIndex].text;
 			var email2 = $(this).val();
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
@@ -181,8 +179,12 @@
 		});
 		
 		$("#domain").change(function(){
-			console.log("셀렉트박스 값 변경");
-			var email2 = $(this).val();
+			var domain = $(this).val();
+			if(domain == '직접입력'){
+				$("#email2").val("");				
+			}else {
+				$("#email2").val(domain);
+			}
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
 				$("#emailChk").html("올바른 이메일 도메인 형식이 아닙니다.").css("color", "red");
@@ -425,7 +427,6 @@
 		<input type="hidden" name="who" value="${who }" />
 		<input type="hidden" id="lat" name="lat" />
 		<input type="hidden" id="lng" name="lng" />
-		<input type="hidden" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
 		
 		<div id="headerDiv">
 			<img src="<%=request.getContextPath()%>/img/mylogo.png" />

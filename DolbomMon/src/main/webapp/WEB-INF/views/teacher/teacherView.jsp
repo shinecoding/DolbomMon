@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,20 @@
 			location.href="/dbmon/report?userid=${vo.userid}";
 		})
 		
-	});
+		
+		$(document).on("click", "#shinchung", function(){
+			
+			
+			
+			
+			
+			
+		})
+		
+		
+		
+		
+	});//제이쿼리
 </script>
 <style>
 .container{width:800px;}
@@ -54,23 +68,34 @@ width:100%;
 height:200px;
 border-radius:10px;
 }
+
+.clearfix:after { clear:both; }
 </style>
 </head>
 <body>
-<div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
-</div>
+<hr/>
 <div class="container">
-	<c:if test="${mvo.userid!=paramid}"><div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div></c:if>
-   <img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
+	
+	
+	<div>
+		<img class="rounded mx-auto d-block" id="profimg" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if> />
+	</div>
+   <div class="clearfix" style="width:100%">
+	   <div style="position:relative; float:right; height:1px; top:-420px;">
+			<c:if test="${mvo.userid!=paramid}"><div class="badge badge-warning badge-pill float-right mt-3 p-2" id="report"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div></c:if>
+	   </div>
+   </div>
    <ul class="list-group">
    		
-   		<li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">일반 돌봄몬</span><c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
+   		<li class="list-group-item align-middle">
+   		<span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span>
+   		<span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.teacher_type=='선생님'}">선생님 돌봄몬</c:if><c:if test="${vo.teacher_type=='대학생'}">대학생 돌봄몬</c:if><c:if test="${vo.teacher_type=='엄마'}">엄마 돌봄몬</c:if><c:if test="${vo.teacher_type=='일반'}">일반 돌봄몬</c:if></span>
+   		<c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    		
    </ul>
-   
+
    <br/>
    <ul class="list-group list-group-horizontal-sm">
    		<li class="list-group-item col-4" style="text-align:center"><i class="fas fa-search mr-2"></i>조회수<br/><div>${vo.hit}</div></li>
@@ -299,7 +324,54 @@ border-radius:10px;
    		</c:forEach>	
    		</li>
    		</ul>
+   		
+   		<h5>후기</h5>
+   		<ul class="list-group">
+   		<li class="list-group-item">
+   		<c:forEach var="rvo" items="${review}">
+   			<ul class="list-group list-group-horizontal" style="margin:0; padding:0;">
+	   			<li class="list-group-item" style="border:none; margin-top:5px;padding-left:0;">
+	   				<img src="upload/${rvo.pic}" style="width:60px; height:60px; border-radius:10px;margin-left:10px;"/>
+	   			</li>
+	   			<li class="list-group-item" style="border:none; padding-left:0;">
+		   			${rvo.username.substring(0,1)}O${rvo.username.substring(2) }
+		   			<br/>
+		   			<c:forEach var="s" begin="1" end="${rvo.review_star}">
+		   				<i class="fas fa-star" style="color:orange"></i>
+		   			</c:forEach>
+		   			<c:forEach var="s" begin="1" end="${5-rvo.review_star}">
+		   				<i class="fas fa-star" style="color:gray"></i>
+		   			</c:forEach>
+		   			
+		   			<span class="ml-2" style="font-size:0.7em">
+						<fmt:parseNumber integerOnly="true" var="edit_year" value="${rvo.review_date/525600}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_month" value="${rvo.review_date/43200}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_day" value="${rvo.review_date/1440}"/>
+						<fmt:parseNumber integerOnly="true" var="edit_hour" value="${rvo.review_date/60}"/>					
+					<c:choose>
+						<c:when test="${rvo.review_date>525600}">${edit_year}년</c:when>
+						<c:when test="${rvo.review_date>43200}">${edit_month}달</c:when>
+						<c:when test="${rvo.review_date>1440}">${edit_day}일</c:when>
+						<c:when test="${rvo.review_date>60}">${edit_hour}시간</c:when>
+						<c:otherwise>${rvo.review_date}분</c:otherwise>
+					</c:choose>
+					 전
+				</span>
+		   			<br/>
+		   			
+		   			
+		   			
+		   			<b>${rvo.review_content}</b><br/>
+	   			</li>
+   			</ul>
+   		</c:forEach>	
+   		</li>
+   		</ul>
+   		
+   		
    <br/>
+   
+   	
    
    
    <!-- ================================지도======================================== -->

@@ -51,7 +51,7 @@ $(function(){
 	            });
 	           	window.close();
 	        },theme:{
-	        	searchBgColor: "#ff5400", //검색창 배경색
+	        	searchBgColor: "#ffc207", //검색창 배경색
 	            queryTextColor: "#FFFFFF" //검색창 글자색
 	        }
 	    }).open();
