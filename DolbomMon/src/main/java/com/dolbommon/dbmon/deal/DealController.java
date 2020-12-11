@@ -76,6 +76,7 @@ public class DealController {
 	@RequestMapping(value="/contractWrite", method = RequestMethod.POST)
 	public ModelAndView dbmSearchWriteFormOk(HttpServletRequest req, HttpSession ses, RecruitBoardVO rbVO, ChildrenVO cVO, SpecificDateVO sdVO, RegularDateVO rdVO) {
 		String teacherId = (String)req.getParameter("teacherId");
+		rbVO.setTeacherid(teacherId);
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
 		
@@ -128,6 +129,7 @@ public class DealController {
 			}
 			transactionManager.commit(status);
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			transactionManager.rollback(status);
 		}
 		
@@ -182,5 +184,6 @@ public class DealController {
 		
 		return mav; 
 	}
+	
 	
 }

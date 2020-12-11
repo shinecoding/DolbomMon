@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.deal.DealDaoImp">
 	<insert id="insertContract" >
-		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit, status, origin_no) 
-			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0, 'C', #{origin_no})
+		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit, status, origin_no, agree, teacherid) 
+			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0, 'C', #{origin_no}, 'T', #{teacherid})
 	</insert>
 	
 	<select id="selectTeacherHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="searchContract" resultType="int" parameterType="int">
-		select count(userid) from parent_list where origin_no=#{no} and agree is null 
+		select count(userid) from parent_list where origin_no=#{no} and agree='T' 
 	</select>
 	
 	<select id="applyDbmSelect2" parameterType="int" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO">
@@ -46,10 +46,17 @@
 	</select>
 	
 	<select id="selectOrigin" resultType="int">
-		select job_board_no from parent_list where origin_no=#{origin_no} and agree is null
+		select job_board_no from parent_list where origin_no=#{origin_no} and agree='T' or agree='Y'
 	</select>
 	
 	<update id="setAgree" parameterType="map">
 		update parent_list set agree=#{agree} where job_board_no=#{no}
 	</update>
+	
+	<select id="ContractStatus" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and (agree='Y' or agree='T') and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	<select id="ContractStatus2" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and agree='N' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
 </mapper>
