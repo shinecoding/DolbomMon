@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class TeacherVO {
 	private String userid;
 	private String pic;
+	private String teacher_type;
 	private String care_type;
 	private String[] type_list;
 	private String child_age;
@@ -312,6 +313,12 @@ public class TeacherVO {
 	}
 	public void setCrime_status(String crime_status) {
 		this.crime_status = crime_status;
+	}
+	public String getTeacher_type() {
+		return teacher_type;
+	}
+	public void setTeacher_type(String teacher_type) {
+		this.teacher_type = teacher_type;
 	}
 	
 	

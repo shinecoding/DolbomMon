@@ -277,7 +277,7 @@ public class MemberController {
 		// 돌볼 수 있는 아이의 연령대와 가능한 활동  >>
 		@RequestMapping(value = "/dbm/activityAndAge", method = RequestMethod.POST)
 		public String dbmActivityAndAge(@RequestParam("teacher_type") String teacher_type, HttpSession ses) {
-			
+			System.out.println(teacher_type);
 			ses.setAttribute("teacher_type", teacher_type);
 			
 			return "register/dbm/activityAndAge";
@@ -433,8 +433,13 @@ public class MemberController {
 			
 			return "register/dbm/introduce";
 		}
-
-}
+		
+		@RequestMapping("/dbm/introduce/np")
+		public String dbmIntroduceNonePic() {
+			
+			return "register/dbm/introduce";
+		}
+	}
 
 
 
