@@ -40,7 +40,9 @@
 	font-weight:normal;
 	color:gray;
 }
-
+.half-highlight {
+  background: linear-gradient(180deg,rgba(255,255,255,0) 50%, #FFD0AE 50%);
+}
 </style>
 
 
@@ -48,9 +50,9 @@
 <div class="container">
 
 <div class="gridStyleAllWrapper" style="margin-top:0px; height:600px;">
-<h3 class="_3Om6n" style="margin-top:70px;"><img class="_3v9X3" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/index/icon-onair.svg" alt="실시간 맘시터 후기">
+<h3 style="margin-top:70px;"><img class="_3v9X3" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/index/icon-onair.svg" alt="실시간 맘시터 후기">
 <div style="margin:10px;">  </div>
-<strong>실시간</strong>&nbsp;돌봄몬 후기</h3>
+<strong class="half-highlight">실시간</strong>&nbsp;돌봄몬 후기</h3>
 <br/><br/>
 
 

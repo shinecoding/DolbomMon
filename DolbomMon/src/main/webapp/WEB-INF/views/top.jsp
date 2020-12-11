@@ -56,14 +56,15 @@ EDIT ON
 	 	position: fixed;
 	  	top: 0px;
 	  	left: 0px;
-	 	z-index:2;
+	 	z-index:10000;
 	 	background-color:white;
       }
-	  ul.mainTopmenu{height: 48px;}
+	  ul.mainTopmenu{height: 50px;
+	  }
       ul.mainTopmenu li{ 
 	     float: left;
 		 width: 263px;
-		 height: 48px;
+		 height: 50px;
 		 text-align:center;
 		 background-color: white;
 		 position: relative;
@@ -76,7 +77,7 @@ EDIT ON
 	     display: block;
 		 width: 100%;
 		 height: 100%;
-		 line-height: 48px;
+		 line-height: 50px;
 		 font-weight:bold;
 		 font-size:18px;
 		 overflow:hidden;
@@ -91,7 +92,7 @@ EDIT ON
 	  ul.mainTopmenu li {
 		width: calc(80%/6);
 		height:50px;
-		
+		line-height:50px;
 		
 		}
 	  ul.mainTopmenu ul.subMain li {
@@ -104,7 +105,7 @@ EDIT ON
       ul.mainTopmenu li a:hover{
       	 color:orange;
 	     opacity:50;
-	     background:rgb(244,244,244);
+	     background:white;
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
@@ -112,7 +113,7 @@ EDIT ON
       ul.mainTopmenu{
 	     zoom: 1;
 	     margin-bottom:0;
-	     height:60px;
+	     
 		 }
       ul.mainTopmenu:after{
 	     height: 0;
@@ -141,9 +142,33 @@ EDIT ON
 	   #fixtopLogo:after { clear:both;} 
 	   .mainTopmenu>li *{
 	   -webkit-padding-start:0px;
-	   width:100%;
+	    width:100%;
 	   
 	   }
+	   .spread-underline {
+		  color: #333;
+		  text-decoration: none;
+		  display: inline-block;
+		  padding: 2px 0;
+		  position: relative;
+		}
+		.spread-underline:after {    
+		  background: none repeat scroll 0 0 transparent;
+		  bottom: 0;
+		  content: "";
+		  display: block;
+		  height: 2px;
+		  left: 50%;
+		  position: absolute;
+		  background: #ffb000;
+		  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+		  width: 0;
+		}
+		.spread-underline:hover:after { 
+		  width: 100%; 
+		  height:3px;
+		  left: 0; 
+		}
 	   
    </style>
 </head>
@@ -194,31 +219,31 @@ EDIT ON
 	
 	   <ul class="mainTopmenu" id="topmenu-button">
 	       
-	       <li><a href="#">고객센터</a>
+	       <li class="spread-underline"><a href="#">고객센터</a>
 	
-	        <ul class="subMain">
-	          <li><a href="/dbmon/brandIntro">회사소개</a></li>
-	         <li><a href="#">신고하기</a></li>         
-	       </ul>
+		        <ul class="subMain">
+		          <li class="spread-underline"><a href="/dbmon/brandIntro">회사소개</a></li>
+		         <li><a href="#" class="spread-underline">신고하기</a></li>         
+		       </ul>
 	       </li>
-	       <li><a href="/dbmon/noticeBoard">공지사항</a>
+	       <li  class="spread-underline"><a href="/dbmon/noticeBoard">공지사항</a>
 	       <ul class="subMain">    
 	       
 	      </ul>
 	      </li>
-	      <li><a href="/dbmon/freeBoard">자유게시판</a>
+	      <li><a href="/dbmon/freeBoard" class="spread-underline">자유게시판</a>
 	
 	
 	      </li>
-	      <li><a href="/dbmon/parent_list">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
+	      <li><a href="/dbmon/parent_list" class="spread-underline">일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
 	      </li>
-	      <li><a href="/dbmon/sitter_list">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+	      <li><a href="/dbmon/sitter_list" class="spread-underline">돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
 	       
 	      </li>
-	      <li><a href="#">My Menu</a>
+	      <li><a href="#" class="spread-underline">My Menu</a>
 	       <ul class="subMain">
-	         <li><a href="teacherList">선생님페이지</a></li>
-	         <li><a href="mypage">부모님페이지</a></li>
+	         <li><a href="teacherList" class="spread-underline">선생님페이지</a></li>
+	         <li><a href="mypage" class="spread-underline">부모님페이지</a></li>
 	      </ul>
 	 </ul>
 
