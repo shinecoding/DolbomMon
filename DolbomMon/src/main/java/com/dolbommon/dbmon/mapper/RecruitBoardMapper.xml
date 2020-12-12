@@ -101,8 +101,6 @@
 		values(board_sq.nextval,#{content}, #{userid}, 0, sysdate)
 	</insert>
 	
-	
-	
 	<delete id="recruitBoardDel">
 		delete from parent_list where job_board_no=#{param1} and userid=#{param2}
 	</delete>
@@ -110,7 +108,7 @@
 	<update id="recruitBoardEditOk" parameterType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		update parent_list set content=#{content}, where job_board_no=#{job_board_no} and userid=#{userid}
 	</update>
-<!-- 	
+	<!-- 	
 	<select id="optionSelect" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select job_board_no, ref, step, lvl from parent_list where job_board_no=#{param1}
 	</select> -->
@@ -120,7 +118,6 @@
 		insert into parent_list(job_board_no, content, userid, hit, writedate) 
 		values(board_sq.nextval, #{content}, #{userid}, 0, sysdate)
 	</insert>
-	
 	
 	<!-- 필터 -->
 	<select id="recruitActType" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">

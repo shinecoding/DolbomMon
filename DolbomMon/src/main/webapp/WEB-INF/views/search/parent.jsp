@@ -114,6 +114,16 @@ $(function(){
     $(document).on("click", "#mapBtn", function(){
 			$("#map").toggle();
 	});
+	
+  	//검색창	
+    $(document).on("keyup", "#locFilter", function(){
+    	var value = $(this).val().toLowerCase();
+    	$(".loc").filter(function(){
+    		$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    	});
+    });
+	
+	
 	//필터
 	$(document).on("click", "#btnBox>button", function(){
 	    var activity_type = $(this).text();
@@ -343,10 +353,10 @@ $(function(){
 			<div class="col-sm-6" style="padding: 20px;">
 				<div class="card">
 					<div class="card-body">
-						<div class="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
+						<div class="imgBox"><img src="img/hoochoo.jpg" class="rounded-circle"></div>
 						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>${vo.tcnt}</span>명 지원</div>
 						<div class="offerBox" >
-							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
+							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>후추후추후추</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
 							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate}</span>
 							<br/><span>${vo.care_addr} </span>
