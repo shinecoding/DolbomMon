@@ -148,7 +148,6 @@ public class BoardController {
     public void imageUpload(HttpServletRequest request,
             HttpServletResponse response, MultipartHttpServletRequest multiFile
             , @RequestParam MultipartFile upload) throws Exception{
-      
 		// 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
         
@@ -187,9 +186,9 @@ public class BoardController {
             printWriter = response.getWriter();
             String fileUrl = "/dbmon/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName;  // 작성화면
             
-        // 업로드시 메시지 출력
-          printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-          printWriter.flush();
+            // 업로드시 메시지 출력
+            printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+            printWriter.flush();
             
         }catch(IOException e){
             e.printStackTrace();
@@ -336,7 +335,6 @@ public class BoardController {
 	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		FreeBoardVO vo = new FreeBoardVO();
-		
 		
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
@@ -884,12 +882,5 @@ public class BoardController {
 			mav.setViewName("freeboard/result");
 		}
 		return mav;
-	}
-		
-		
-		
-		
-		
-		
-	
+	}	
 }
