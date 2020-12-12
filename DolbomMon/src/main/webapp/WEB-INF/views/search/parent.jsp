@@ -25,11 +25,7 @@
 		margin:0 auto;
 	}
 	img{ height:110px; width:110px;}
-	
-	.list div{
-        margin: 0 auto;
-        width: 600px;
-    }
+
     .form-control{
     	margin:0 auto;
     	background-color:white;
@@ -154,7 +150,7 @@ $(function(){
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
 					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
 					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span>12/12 시작</span>';
+					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 					if(vo.consultation=="Y"){
 						tag += ' | <b>협의가능</b></span></p>';
@@ -205,7 +201,7 @@ $(function(){
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
 					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
 					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span>12/12 시작</span>';
+					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 					if(vo.consultation=="Y"){
 						tag += ' | <b>협의가능</b></span></p>';
@@ -259,7 +255,7 @@ $(function(){
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
 					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
 					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span>12/12 시작</span>';
+					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 					if(vo.consultation=="Y"){
 						tag += ' | <b>협의가능</b></span></p>';
@@ -360,7 +356,7 @@ $(function(){
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
 							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate}</span>
 							<br/><span>${vo.care_addr} </span>
-							<br/><span>12/12 시작</span>
+							<br/><span><b>${vo.start_date}</b> 시작</span>
 							<br/><span style="color: orange;">희망시급 ${vo.wish_wage}원
 							
 							

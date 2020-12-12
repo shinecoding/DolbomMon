@@ -19,6 +19,7 @@ public class RecruitBoardVO {
 		private String writedate; //글 등록일
 		private String lat;
 		private String lng;
+		private String start_date;
 		private int hit; //조회수
 		private int tcnt;
 		private int week;
@@ -123,6 +124,12 @@ public class RecruitBoardVO {
 		}
 		public void setLng(String lng) {
 			this.lng = lng;
+		}
+		public String getStart_date() {
+			return start_date;
+		}
+		public void setStart_date(String start_date) {
+			this.start_date = start_date;
 		}
 		public void setHit(int hit) {
 			this.hit = hit;
