@@ -38,7 +38,7 @@ public class JobSearchController {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
+		List<TeacherVO> list = dao.jobSearchBoardList(10); //선생님 리스트
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
 		TeacherVO mvo = null;
 		if(req.getParameter("userid")==null) {
@@ -66,7 +66,7 @@ public class JobSearchController {
 	@RequestMapping("/teacher_chart") 
 	public ModelAndView teacher_chart() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList(10);
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		//List<MemberVO> mvoList = dao.selectTMem();
 		ModelAndView mav = new ModelAndView();
@@ -112,7 +112,7 @@ public class JobSearchController {
 
 	@RequestMapping(value="/filterOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> filterOrder(String order){
+	public List<TeacherVO> filterOrder(String order, int count){
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		
@@ -131,7 +131,7 @@ public class JobSearchController {
 		} else if(order.equals("M")) {
 			list = dao.filterGender("M");
 		} else if(order.equals("all")) {
-			list = dao.jobSearchBoardList();
+			list = dao.jobSearchBoardList(count);
 		}
 		
 		return list;

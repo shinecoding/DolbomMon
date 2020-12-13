@@ -111,9 +111,18 @@
 </style>
 
 <script>
+var count = 5;
+var gender;
+
+
 	$(function(){
 		
 
+	    //countTest
+	    $(document).on("click", "#countTest", function(){
+	    	count= count+2;
+	    	testAjax(gender)
+	    });
 	    //프로필 들어가기
 	    $(document).on("click", ".card>.profilepic", function(){
 	    	location.href="teacherView?userid="+$(this).parent().attr('id');
@@ -428,10 +437,18 @@
    	 	});//ajax 
 
 	    $(document).on("click", "#genderBox>button", function(){
-	    	var gender = $(this).val();
+	    	gender = $(this).val();
+	    	testAjax(gender)
+	    });//ajax
+		
+	    //추가버튼 테스트
+    	function testAjax(gender){
 	    	console.log(gender);
 	    	var url = "/dbmon/filterOrder";
-			var params = "order="+gender;
+			var params = {
+					order:gender,
+					count:count, 
+			}
 			console.log("파람="+params);
 			$.ajax({
 				url:url,
@@ -510,9 +527,7 @@
 					}
 
 				});
-				
-	    });//ajax
-		
+    	}
 	    
 	});//제이쿼리
 	</script>
@@ -668,6 +683,7 @@
 	</div>
 
 <!-- ----------------------------카드 디자인------------------------------ -->
+<button id="countTest">숫자 테스트</button>
 	<div id="cardBox"  class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
 		<div class="card"  id="${vo.userid}"  data-aos="fade-up" >		
