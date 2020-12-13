@@ -204,26 +204,14 @@
 
   <div id="list" class="block" style="width: 100%; margin:0 auto;" data-aos="fade-down">
   <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; max-width:1000px; margin:0 auto;">
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=등하원 돕기"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원 돕기</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=실내놀이"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=야외활동"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=학습지도"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=영어놀이"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=가사돌봄"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
   <br/><br/><hr class="featurette-divider">
-  </div>
-  
- <!--  <script>
-  $(function(){
-  $(document).on("click", "#listitem>li", function(){
-  	var activity_type = $(this).text();
-  	console.log(activity_type);
-  	
-  	location.href="/dbmon/searchFrontAct"+activity_type;
-			}
-  </script>
-  --> 
   
 <div id="teacher_chart" data-aos="fade-up">
 <%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 

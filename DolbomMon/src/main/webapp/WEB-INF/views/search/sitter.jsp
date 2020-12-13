@@ -135,126 +135,24 @@
 				    		
 	    	});
 	    });
-		//스크롤================================================
-		<!--$(window).scroll(function(){
+		//스크롤
+		$(window).scroll(function(){
 			
-			var scrolltop = $(window).scrollTop();//스크롤 위치
-			//	console.log(scrolltop);
+			var scrolltop = $(document).scrollTop();//스크롤 위치
+				console.log(scrolltop);
 			var height = $(document).height(); //문서길이
-			//	console.log(height);
+				console.log(height);
 			var height_win = $(window).height(); //보여지는 창의 길이
-			//	console.log(height_win);
-				
+				console.log(height_win);
 			
 			if(Math.round($(window).scrollTop()) == $(document).height() - $(window).height()){
-			
-					scrollList();
-					
-					
-						
-					
-				
+				for(i=0; i<15; i++){
+					$("#cardBox").append();
+				}
 			}
 			
 		});
 	    
-		function scrollList(){
-			
-			var url = "/dbmon/selectAllSitter";
-			
-			$.ajax({
-				url:url,
-				type:'GET',
-				success:function(result){
-					
-					$("#Tcnt").text(result.length);
-
-						var $result = $(result);
-					var tag = "";
-					
-					
-					$result.each(function(idx, vo){
-					console.log("idx="+idx);
-					var cnt = 1;
-					
-					
-						tag += '<div class="card"   data-aos="fade-up" >';
-						tag += '<img class="profilepic" src=';
-						if(vo.pic==null){
-							tag +='"img/profilepic.png"';
-						} else {
-							tag +='"upload/' +vo.pic+ '"';
-						}
-						tag += '/><br/>';
-						tag += '<div class="card-body">';
-							tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
-							
-							tag += '<span class="ml-2" style="font-size:0.7em">';
-							if(vo.last_edit>525600){
-								tag += Math.round(vo.last_edit/525600)+'년';
-							} else if(vo.last_edit>43200){
-								tag += Math.round(vo.last_edit/43200) +'달';
-							} else if(vo.last_edit>1440){
-								tag += Math.round(vo.last_edit/1440) +'일';
-							} else if(vo.last_edit>60){
-								tag += Math.round(vo.last_edit/60) +'시간';
-							} else {
-								tag += Math.round(vo.last_edit) +'분';
-							}
-							tag += '</span>';
-							tag += '<span class="emptyHeart">';
-							tag += '<input type="hidden" value="'+ vo.userid +'" />';
-							tag += '<i class="fab fa-gratipay" style=';
-							if(vo.userid!=vo.cardid){
-								tag += '"color:gray"';
-							} else if(vo.userid == vo.cardid){
-								tag += '"color:orange"';
-							}
-							tag += '></i>';
-							tag += '</span>';
-							tag += '</h5>';
-										
-							tag += '<span class="iconColor">';
-							tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
-							tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
-							tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
-							tag += '</span>';
-							
-							if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
-								tag += '<hr/>';
-							}
-							if(vo.identi_status == "Y"){
-								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-							} else if(vo.license_status == "Y"){
-								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-							} else if(vo.school_status == "Y"){
-								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-							} else if(vo.crime_status == "Y"){
-								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
-							}
-							
-							tag += '</div>';
-							tag += '</div>';	
-							
-							for(idx=5*cnt-5; idx<(5*cnt); idx++){
-								$("#cardBox").html(tag);  
-							}
-							cnt++;
-					});
-					
-					
-					
-					
-				},
-				
-				error:function(error){
-					console.log("리스트 받기 에러"+ error.responseText);
-				}
-		});
-			
-		};
-		-->
-		
 		//========================ajax=========for selectbox=================
 		
 			
@@ -277,7 +175,7 @@
 						
 						$result.each(function(idx, vo){
 						
-							tag += '<div class="card"   data-aos="fade-up" >';
+							tag += '<div class="card" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -366,7 +264,7 @@
 					
 					$result.each(function(idx, vo){
 						
-						tag += '<div class="card"  data-aos="fade-up"  >';
+						tag += '<div class="card" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -459,7 +357,7 @@
 												
 						$result.each(function(idx, vo){
 						
-							tag += '<div class="card"   data-aos="fade-up" >';
+							tag += '<div class="card" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -547,7 +445,7 @@
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card"   data-aos="fade-up" >';
+						tag += '<div class="card">';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -770,9 +668,7 @@
 	</div>
 
 <!-- ----------------------------카드 디자인------------------------------ -->
-	
 	<div id="cardBox"  class="d-inline-block" style="width:100%; min-height:700px;">
-	
 	<c:forEach var="vo" items="${list}">
 		<div class="card"  id="${vo.userid}"  data-aos="fade-up" >		
 			<img class="profilepic" src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}"/><br/>
