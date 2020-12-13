@@ -38,7 +38,17 @@ public class JobSearchController {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
+		int totalRecord = dao.getTotalRecord();	//총 게시물 수
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		String activity_type = req.getParameter("activity_type");
+		System.out.println("000000"+activity_type);
+		if(req.getParameter("activity_type")==null) {
+			list = dao.jobSearchBoardList(); //선생님 리스트
+		}else {
+			list = dao.jobSearchActType(activity_type);
+		}
+		
+		
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
 		TeacherVO mvo = null;
 		if(req.getParameter("userid")==null) {
@@ -47,8 +57,6 @@ public class JobSearchController {
 		} else {
 		mvo = dao.selectTTMap(userid); //내 위치
 		}
-		int totalRecord = dao.getTotalRecord();	//총 게시물 수
-		
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -62,6 +70,20 @@ public class JobSearchController {
 		return mav;
 	
 	}
+	/*
+	@RequestMapping("/selectAllSitter")
+	@ResponseBody
+	public List<TeacherVO> selectAllSitter(HttpSession ses, HttpServletRequest req) {
+		
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		
+		
+		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
+		return list;
+	}
+	*/
+	
+	
 	//메인화면에 띄워줄 리스트
 	@RequestMapping("/teacher_chart") 
 	public ModelAndView teacher_chart() {
@@ -91,6 +113,38 @@ public class JobSearchController {
 		
 		return list;
 	}
+	/*
+	@RequestMapping(value="/searchFrontAct")
+	public ModelAndView searchFrontAct(HttpSession ses, HttpServletRequest req){
+		String userid = (String)ses.getAttribute("userid");
+		
+		String activity_type = req.getParameter("activity_type");
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.jobSearchActType(activity_type);
+		
+		
+		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
+		TeacherVO mvo = null;
+		if(req.getParameter("userid")==null) {
+			//로그인 안 했을 때 지도 위치 지정 >test1계정의 위치 띄워줌
+			mvo = dao.selectTTMap("test1");
+		} else {
+			mvo = dao.selectTTMap(userid); //내 위치
+		}
+		int totalRecord = dao.getTotalRecord();	//총 게시물 수
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("hash", hash);
+		mav.addObject("mvo", mvo);
+		mav.addObject("totalRecord", totalRecord);//총 게시물 수
+		mav.setViewName("search/sitter");
+		
+		return mav;
+	}*/
 	
 	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
