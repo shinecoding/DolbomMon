@@ -46,23 +46,24 @@ public class RecruitBoardController {
 	@RequestMapping("/parent_list") 
 	public ModelAndView parent(HttpSession ses, HttpServletRequest req) {
 		String userid = (String)ses.getAttribute("userid");
-		
+		String testId = "test1";
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
-		RecruitBoardVO rVo = new RecruitBoardVO();
+		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-
-		RecruitBoardVO mvo = null;
-//		if(req.getParameter("userid")==null) {
-//			//로그인 안 했을 때 지도 위치 지정 >test1계정의 위치 띄워줌
-//			mvo = dao.selectTTMap("test1");
-//		} else {
-//		mvo = dao.selectTTMap(userid); //내 위치
-//		}
 		
-
+		/*
+		RecruitBoardVO mvo = null;
+		if(req.getParameter("userid")==null) {
+			//로그인 안 했을 때 지도 위치 지정>test1계정의 위치 띄워줌
+			mvo = dao.selectMyMap(testId);
+		} else {
+			mvo = dao.selectMyMap(userid); //내 위치
+		}
+		*/
 		ModelAndView mav = new ModelAndView();
 		
+		//mav.addObject("mvo", mvo);
 		mav.addObject("list2", list2);
 		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");
@@ -106,9 +107,13 @@ public class RecruitBoardController {
 	public List<RecruitBoardVO> careAct(String activity_type) {
 		System.out.println("액티비티 타입 "+activity_type);
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
-		List<RecruitBoardVO> list = dao.recruitActType(activity_type);
-		
-		return list;
+		if(activity_type.equals("전체")) {
+			List<RecruitBoardVO> list = dao.recruitBoardList();
+			return list;
+		}else {
+			List<RecruitBoardVO> list = dao.recruitActType(activity_type);
+			return list;
+		}		
 	}
 	//select 필터
 	@RequestMapping(value="/careSelect", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
