@@ -683,7 +683,7 @@ var gender;
 	</div>
 
 <!-- ----------------------------카드 디자인------------------------------ -->
-<button id="countTest">숫자 테스트</button>
+
 	<div id="cardBox"  class="d-inline-block" style="width:100%; min-height:700px;">
 	<c:forEach var="vo" items="${list}">
 		<div class="card"  id="${vo.userid}"  data-aos="fade-up" >		
@@ -730,6 +730,7 @@ var gender;
 	
 
 	</div>
+	<div><button style="position:relative; left:45%;" class="btn btn-info" id="countTest">숫자 테스트</button></div>
 
 
 
