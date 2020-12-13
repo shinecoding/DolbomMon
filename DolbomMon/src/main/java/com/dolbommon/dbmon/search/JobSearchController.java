@@ -38,7 +38,15 @@ public class JobSearchController {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		String activity_type = req.getParameter("activity_type");
+		System.out.println("000000"+activity_type);
+		if(req.getParameter("activity_type")==null) {
+			list = dao.jobSearchBoardList(); //선생님 리스트
+		}else {
+			list = dao.jobSearchActType(activity_type);
+		}
+		
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
 		TeacherVO mvo = null;
 		if(req.getParameter("userid")==null) {
