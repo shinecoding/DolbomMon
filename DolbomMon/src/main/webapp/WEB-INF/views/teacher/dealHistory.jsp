@@ -102,7 +102,7 @@
 </div>
 <div class="container">
 	<div id="title">
-   		<div id="titlefont">내 구직현황</div>
+   		<div id="titlefont">내 활동내역</div>
    		<nav>
 		<ul class="nav nav-tabs justify-content-center">
 			<li class="nav-item">
@@ -140,14 +140,16 @@
 											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</p>
 										</div>
+										<!-- 
 										<div style="height:1px;">
 											<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${vo.job_board_no}" style="margin:0 5px;" />
 										</div>
 										<div style="height:1px;">
 											<input class="btn btn-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
 										</div>
+										 -->
 									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
+								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">계약서 자세히 보기</div>
 								</div>
 							</div>
 						</c:forEach>
@@ -158,35 +160,36 @@
 		<div class="tab-pane fade" id="nav-inbox" role="tabpanel">
 		<ul class="list-group list-group-flush">
 				<li class="list-group-item">
-				<div class="all_wrapper" >
 					<div class="row">
-						<c:forEach var="vo" items="${list3}">
-							<div class="col-sm-12" style="padding: 20px;">
-								<div class="card">
-									<div class="card-body">
-										<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
-										<div id="offerBox" >
-											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
-											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-											<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
-											<br/><span>${vo.care_addr } </span>
-											<br/><span>12/12 시작</span>
-											<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
-											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
-											</p>
-										</div>
-										<div style="height:1px;">
-											<input class="btn btn-warning cancel" type="button" value="거절" id="cancel" style="margin:0 5px;" />
-										</div>
-									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
+						<div class="col-1">
+								<img src="img/profilepic.png" class="rounded-circle"/>
+							</div>	
+						<div class="col-11">
+								<b>김O욱 부모</b><i class="fas fa-search ml-1"></i><br/>
+								희망시급: 10,000원<br/>
+								신청시간: 2018.09.26 16:59<br/>
+								<i class="far fa-check-circle"></i>
+								<i class="far fa-times-circle"></i><br/>
+								부모님에게 응답하지 않았습니다.<br/>
+						</div>	
 					</div>
 				</li>
+				
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-1">
+								<img src="img/profilepic.png" class="rounded-circle"/>
+							</div>	
+						<div class="col-11">
+								<b>김O욱 부모</b><i class="fas fa-search ml-1"></i><br/>
+								희망시급: 10,000원<br/>
+								신청시간: 2018.09.26 16:59<br/>
+								<b>-거절완료-</b><br/>
+								부모님에게 내 거절의사를 전달하였습니다.<br/>
+						</div>	
+					</div>
+				</li>
+				
 			</ul>
 		
 		

@@ -18,7 +18,7 @@
 	#title{
 		margin:20px 5px;
 		display:block;
-	width:100%;
+		width:800px;
 	}
 	#titlefont{
 		font-size: 25px;
@@ -33,6 +33,45 @@
 		font-size: 50px;
 		margin: 10px;
 		color:orange;
+	}
+	.card-body{
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+	}
+	#imgBox{
+		float:left;
+		padding: 15px;
+		height: 150px;
+		position: absolute;
+		top: 20px;
+	}
+	#offerBox{
+	    position: relative;
+	    width: 310px;
+	    padding: 3px;
+	    left: 180px;
+	}
+	#offerTitle{
+		font-size: 1.1em;
+	}
+	.all_wrapper{
+		margin-top:70px;
+		width:770px;
+		background-color:white;
+		margin:0 auto;
+	}
+	.viewContract{
+		position: relative;
+	    margin: 0 5px;
+	    top: -40px;
+	    right: -510px;
+	}
+	.cancel{
+		position: relative;
+	    margin: 0 5px;
+	    top: -41px;
+	    right: -620px;
 	}
 </style>
 </head>
@@ -57,33 +96,33 @@
 		<div class="tab-pane fade show active" id="nav-apply" role="tabpanel">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
+					<div class="all_wrapper" >
 					<div class="row">
-						<div class="col-1">
-								<img src="img/profilepic.png" class="rounded-circle"/>
-							</div>	
-						<div class="col-11">
-								<b>최O은 선생님</b><i class="fas fa-search ml-1"></i><br/>
-								희망시급: 10,000원<br/>
-								신청시간: 2018.09.26 16:59<br/>
-								<i class="far fa-check-circle"></i>
-								<i class="fas fa-times-circle"></i><br/>
-								부모님이 내 지원을 거절하였습니다.<br/>
-						</div>	
+						<c:forEach var="vo" items="${list3}">
+							<div style="padding:0px 10px; width:765px">
+								<div class="card">
+									<div class="card-body">
+										<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle" style="height:110px; width:110px;"></div>
+										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
+										<div id="offerBox" >
+											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
+											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
+											<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
+											<br/><span>${vo.care_addr } </span>
+											<br/><span>12/12 시작</span>
+											<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
+											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+											</p>
+										</div>
+										<div style="height:1px;">
+											<input class="btn btn-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
+										</div>
+									</div>
+								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="row">
-						<div class="col-1">
-								<img src="img/profilepic.png" class="rounded-circle"/>
-							</div>	
-						<div class="col-11">
-								<b>이O준 선생님</b><i class="fas fa-search ml-1"></i><br/>
-								희망시급: 10,000원<br/>
-								신청시간: 2018.09.26 16:59<br/>
-								<i class="fas fa-check-circle"></i>
-								<i class="far fa-times-circle"></i><br/>
-								선생님이 내 지원을 수락하였습니다.<br/>
-						</div>	
 					</div>
 				</li>
 			</ul>

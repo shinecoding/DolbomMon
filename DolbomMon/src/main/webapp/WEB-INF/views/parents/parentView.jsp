@@ -35,7 +35,7 @@
 	 font-size:60px;
 	 margin: 8px;
 	}
-	#dbmDiv{height:200px;margin-top:50px;}
+	#dbmDiv{margin-top:50px;}
 	#applyDbmList h6{height:7%;}
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
@@ -801,7 +801,7 @@
 		<c:if test="${userid == rbVO.userid}">
 			<h5>나에게 신청한 돌봄몬</h5>
 			<c:forEach var="tlist" items="${tlist }">
-		        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
+		        <div class="wrapper2" style="margin:15px 0;" id="dbmDiv">
 		        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 					<ul class="list-group">
 						<li class="list-group-item"><i class="fas fa-star"></i>
@@ -842,7 +842,7 @@
 		console.log("${contractId}");
 		console.log("${contractId2}");
 		</script>
-			t
+			
       	</c:if>
       	
         <c:if test="${who=='T' }">
