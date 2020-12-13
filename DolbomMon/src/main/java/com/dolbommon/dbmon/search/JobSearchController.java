@@ -102,7 +102,8 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchCare(String care_type) {			
+	public List<TeacherVO> searchCare(String care_type) {
+		System.out.println("케어 타입"+care_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
