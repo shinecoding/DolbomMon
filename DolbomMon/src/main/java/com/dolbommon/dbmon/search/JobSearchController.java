@@ -38,7 +38,7 @@ public class JobSearchController {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList(10); //선생님 리스트
+		List<TeacherVO> list = dao.jobSearchBoardList(9999); //선생님 리스트
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
 		TeacherVO mvo = null;
 		if(req.getParameter("userid")==null) {
@@ -99,7 +99,7 @@ public class JobSearchController {
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.jobSearchBoardList();
+			list = dao.jobSearchBoardList(10);
 		}else {
 			list = dao.jobSearchCareType(care_type); 	
 		}
@@ -119,17 +119,17 @@ public class JobSearchController {
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(order.equals("last_edit")){
-			list = dao.filterLastEdit();
+			list = dao.filterLastEdit(count);
 		} else if(order.equals("certi_cnt")){
-			list = dao.filterCertiCnt();
+			list = dao.filterCertiCnt(count);
 		} else if(order.equals("wage_low")){
-			list = dao.filterWageLow();
+			list = dao.filterWageLow(count);
 		} else if(order.equals("wage_high")){
-			list = dao.filterWageHigh();
+			list = dao.filterWageHigh(count);
 		} else if(order.equals("F")) {
-			list = dao.filterGender("F");
+			list = dao.filterGender("F", count);
 		} else if(order.equals("M")) {
-			list = dao.filterGender("M");
+			list = dao.filterGender("M", count);
 		} else if(order.equals("all")) {
 			list = dao.jobSearchBoardList(count);
 		}

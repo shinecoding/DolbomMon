@@ -3,6 +3,8 @@ package com.dolbommon.dbmon.search;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface JobSearchDaoImp {
 	//구직게시판 리스트보기
 	public List<TeacherVO> jobSearchBoardList(int count);
@@ -12,12 +14,12 @@ public interface JobSearchDaoImp {
 	public List<TeacherVO> jobSearchCareType(String care_type);
 	
 	//구직게시판 정렬
-	public List<TeacherVO> filterLastEdit();
-	public List<TeacherVO> filterCertiCnt();
-	public List<TeacherVO> filterWageLow();
-	public List<TeacherVO> filterWageHigh();
+	public List<TeacherVO> filterLastEdit(int count);
+	public List<TeacherVO> filterCertiCnt(int count);
+	public List<TeacherVO> filterWageLow(int count);
+	public List<TeacherVO> filterWageHigh(int count);
 	
-	public List<TeacherVO> filterGender(String gender);
+	public List<TeacherVO> filterGender(@Param("gender")String gender, @Param("count")int count);
 	
 	//총 게시물 수 구하기
 	public int getTotalRecord();

@@ -111,9 +111,12 @@
 </style>
 
 <script>
+var tabType=1;
 var count = 5;
 var gender;
-
+var activity_type;
+var care_type;
+var order;
 
 	$(function(){
 		
@@ -121,10 +124,21 @@ var gender;
 	    //countTest
 	    $(document).on("click", "#countTest", function(){
 	    	count= count+2;
-	    	testAjax(gender)
+	    	if(tabType=1){
+	    		testAjax(gender)
+	    	}else if(tabType=2){
+	    		dropdownAjax(care_type)
+	    	}else if(tabType=3){
+	    		actBoxAjax(activity_type)
+	    	}else if(tabType=4){
+	    		orderDropdownAjax(order)
+	    	}
+	    	
+	    	
 	    });
 	    //프로필 들어가기
 	    $(document).on("click", ".card>.profilepic", function(){
+	    	//console.log($(this).parent().attr('id'));
 	    	location.href="teacherView?userid="+$(this).parent().attr('id');
 
 	    });
@@ -165,115 +179,31 @@ var gender;
 		//========================ajax=========for selectbox=================
 		
 			
-			$(document).on("change", "#dropdownCT", function(){
-				var care_type = $(this).val();
-				console.log("케어타입="+care_type);
-				var url = "/dbmon/searchCare";
-				var params = "care_type="+care_type;
-				console.log("파라미터="+params2);
-				$.ajax({
-					url:url,
-					data:params,
-					type:'GET',
-					success:function(result){
-						
-						$("#Tcnt").text(result.length);
-
- 						var $result = $(result);
-						var tag = "";
-						
-						$result.each(function(idx, vo){
-						
-							tag += '<div class="card" >';
-							tag += '<img class="profilepic" src=';
-							if(vo.pic==null){
-								tag +='"img/profilepic.png"';
-							} else {
-								tag +='"upload/' +vo.pic+ '"';
-							}
-							tag += '/><br/>';
-							tag += '<div class="card-body">';
-								tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
-								
-								tag += '<span class="ml-2" style="font-size:0.7em">';
-								if(vo.last_edit>525600){
-									tag += Math.round(vo.last_edit/525600)+'년';
-								} else if(vo.last_edit>43200){
-									tag += Math.round(vo.last_edit/43200) +'달';
-								} else if(vo.last_edit>1440){
-									tag += Math.round(vo.last_edit/1440) +'일';
-								} else if(vo.last_edit>60){
-									tag += Math.round(vo.last_edit/60) +'시간';
-								} else {
-									tag += Math.round(vo.last_edit) +'분';
-								}
-								tag += '</span>';
-								tag += '<span class="emptyHeart">';
-								tag += '<input type="hidden" value="'+ vo.userid +'" />';
-								tag += '<i class="fab fa-gratipay" style=';
-								if(vo.userid!=vo.cardid){
-									tag += '"color:gray"';
-								} else if(vo.userid == vo.cardid){
-									tag += '"color:orange"';
-								}
-								tag += '></i>';
-								tag += '</span>';
-								tag += '</h5>';
-											
-								tag += '<span class="iconColor">';
-								tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
-								tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
-								tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
-								tag += '</span>';
-								
-								if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
-									tag += '<hr/>';
-								}
-								if(vo.identi_status == "Y"){
-									tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-								} else if(vo.license_status == "Y"){
-									tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-								} else if(vo.school_status == "Y"){
-									tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-								} else if(vo.crime_status == "Y"){
-									tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
-								}
-								
-								tag += '</div>';
-								tag += '</div>';							
-						});
-						tag += "";
-						
-						$("#cardBox").html(tag);  
-					},
-					error:function(error){
-						console.log("리스트 받기 에러-->"+ error.responseText);
-					}
-			});
-			
+		$(document).on("change", "#dropdownCT", function(){
+			count=5;
+			tabType=2;
+			care_type = $(this).val();
+			dropdownAjax(care_type)
    	 	});//ajax
-		
-		
-		//========================ajax=========for buttons=================
-	    $(document).on("click", "#actBox>button", function(){
-	    	var activity_type = $(this).text();
-	    	console.log(activity_type);
-	    	var url = "/dbmon/searchAct";
-			var params = "activity_type="+activity_type;
-			console.log("파람="+params);
+		function dropdownAjax(care_type){
+			console.log("케어타입="+care_type);
+			var url = "/dbmon/searchCare";
+			var params = "care_type="+care_type;
+			console.log("파라미터="+params2);
 			$.ajax({
 				url:url,
 				data:params,
 				type:'GET',
 				success:function(result){
-					console.log("갯수="+result.length);
+					
 					$("#Tcnt").text(result.length);
-					var $result = $(result);
+
+						var $result = $(result);
 					var tag = "";
 					
 					$result.each(function(idx, vo){
-						
-						tag += '<div class="card" >';
+					
+						tag += '<div class="card" id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -333,40 +263,40 @@ var gender;
 					});
 					tag += "";
 					
-					$("#cardBox").html(tag);
-					
-				}, error: function(){
-					console.log("리스트 받기 에러");
-					}
-
-				});
-				
-	    });//ajax
-			
-	    
-	    
-	//====================최신순 필터=========================
+					$("#cardBox").html(tag);  
+				},
+				error:function(error){
+					console.log("리스트 받기 에러-->"+ error.responseText);
+				}
+		});
 		
-		$(document).on("change", "#orderDropdown", function(){
-				var order = $(this).val();
-				console.log("정렬="+order);
-					
-				var url = "/dbmon/filterOrder";
-				var params = "order="+order;
-				
-				console.log("파라미터="+params);
+   	 	}
+		
+		//========================ajax=========for buttons=================
+	    $(document).on("click", "#actBox>button", function(){
+	    	count=5;
+	    	tabType=3;
+	    	activity_type = $(this).text();
+	    	actBoxAjax(activity_type)
+	    });//ajax
+			function actBoxAjax(activity_type){
+				console.log(activity_type);
+		    	var url = "/dbmon/searchAct";
+				var params = "activity_type="+activity_type;
+				console.log("파람="+params);
 				$.ajax({
 					url:url,
 					data:params,
 					type:'GET',
 					success:function(result){
-						
- 						var $result = $(result);
+						console.log("갯수="+result.length);
+						$("#Tcnt").text(result.length);
+						var $result = $(result);
 						var tag = "";
-												
-						$result.each(function(idx, vo){
 						
-							tag += '<div class="card" >';
+						$result.each(function(idx, vo){
+							
+							tag += '<div class="card" id="'+vo.userid+'" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -428,15 +358,112 @@ var gender;
 						
 						$("#cardBox").html(tag);
 						
-					},
-					error:function(error){
-						console.log("리스트 받기 에러-->"+ error.responseText);
-					}
-			});
-			
+					}, error: function(){
+						console.log("리스트 받기 에러");
+						}
+
+					});
+	    }
+	    
+	    
+	//====================최신순 필터=========================
+		
+		$(document).on("change", "#orderDropdown", function(){
+				count=5;
+				tabType=4;
+				order = $(this).val();
+				orderDropdownAjax(order)
    	 	});//ajax 
+   	 	function orderDropdownAjax(order){
+   	 	console.log("정렬="+order);
+		
+		var url = "/dbmon/filterOrder";
+		var params = "order="+order;
+		
+		console.log("파라미터="+params);
+		$.ajax({
+			url:url,
+			data:params,
+			type:'GET',
+			success:function(result){
+				
+					var $result = $(result);
+				var tag = "";
+										
+				$result.each(function(idx, vo){
+				
+					tag += '<div class="card" id="'+vo.userid+'" >';
+					tag += '<img class="profilepic" src=';
+					if(vo.pic==null){
+						tag +='"img/profilepic.png"';
+					} else {
+						tag +='"upload/' +vo.pic+ '"';
+					}
+					tag += '/><br/>';
+					tag += '<div class="card-body">';
+						tag += '<h5 class="card-title"><b>' + vo.username.substring(0,1)+'O'+vo.username.substring(2)+'</b>';
+						
+						tag += '<span class="ml-2" style="font-size:0.7em">';
+						if(vo.last_edit>525600){
+							tag += Math.round(vo.last_edit/525600)+'년';
+						} else if(vo.last_edit>43200){
+							tag += Math.round(vo.last_edit/43200) +'달';
+						} else if(vo.last_edit>1440){
+							tag += Math.round(vo.last_edit/1440) +'일';
+						} else if(vo.last_edit>60){
+							tag += Math.round(vo.last_edit/60) +'시간';
+						} else {
+							tag += Math.round(vo.last_edit) +'분';
+						}
+						tag += '</span>';
+						tag += '<span class="emptyHeart">';
+						tag += '<input type="hidden" value="'+ vo.userid +'" />';
+						tag += '<i class="fab fa-gratipay" style=';
+						if(vo.userid!=vo.cardid){
+							tag += '"color:gray"';
+						} else if(vo.userid == vo.cardid){
+							tag += '"color:orange"';
+						}
+						tag += '></i>';
+						tag += '</span>';
+						tag += '</h5>';
+									
+						tag += '<span class="iconColor">';
+						tag += '<h6 class="loc"><i class="fas fa-map-marker-alt"></i>'+ vo.area1 +'</h6>';
+						tag += '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+ vo.desired_wage +'원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion +'</h6>';
+						tag += '<h6><i class="fas fa-child"></i>'+ vo.birth +'세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+ vo.headcount +'명</h6>';
+						tag += '</span>';
+						
+						if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
+							tag += '<hr/>';
+						}
+						if(vo.identi_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
+						} else if(vo.license_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
+						} else if(vo.school_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
+						} else if(vo.crime_status == "Y"){
+							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
+						}
+						
+						tag += '</div>';
+						tag += '</div>';							
+				});
+				tag += "";
+				
+				$("#cardBox").html(tag);
+				
+			},
+			error:function(error){
+				console.log("리스트 받기 에러-->"+ error.responseText);
+			}
+	});
+   	 	}
 
 	    $(document).on("click", "#genderBox>button", function(){
+	    	count=5;
+	    	tabType=1;
 	    	gender = $(this).val();
 	    	testAjax(gender)
 	    });//ajax
@@ -462,7 +489,7 @@ var gender;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card">';
+						tag += '<div class="card"  id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
