@@ -146,7 +146,7 @@ $(function(){
     $(document).on("keyup", "#locFilter", function(){
     	var value = $(this).val().toLowerCase();
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    		$(this).parent().parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
     	});
     });
 	
@@ -375,7 +375,9 @@ $(function(){
 });
 
 
-
+	$(document).ready(function(){
+		$("#topmenu-button").children("li:nth-of-type(4)").children("a").css("color", "orange");
+	});
 
 
 </script>

@@ -5,6 +5,7 @@
 	*{margin:0; padding:0; list-style:none; text-decoration:none; font-family: 'Poor Story', cursive;
 		font-weight:bold;
 	}
+	li{list-style:none;}
 	label.divOnOff{font-weight:bold; color:black; font-size:30px;}
 	.container{width:600px; margin-top:50px; }
 	input[type=checkbox]{display:none;}
@@ -14,10 +15,11 @@
 	/* ============= 초기화 ==============  */
 	
 	/* ============= 헤더 =============== */
-	
-	.title{display:inline-block; width:70%; height:50px; line-height:50px; margin:30px 0;}
-	
-	.title>label{width:100%; height:100%; cursor:pointer; }
+	#header{ padding:10px;}
+	#header img{width:350px; margin:0 auto;}
+	#header>div{text-align:center; font-size:2em; }
+	.title{display:inline-block; width:70%; height:50px; line-height:50px; border-top:3px solid #EFEFEF; border-bottom:3px solid #EFEFEF; margin:30px 0;}
+	.title>label{width:100%; height:100%; cursor:pointer;}
 	#ageAndGenderDiv{display:none;}
 	#ageDiv ul{ }
 	
@@ -45,26 +47,27 @@
 	/* ====================== 자녀 수 ========================= */
 	#childrenInfo{display:inline-block; width:70%; overflow:hidden; height:auto; font-weight:bold;}
 	#childrenCnt label{
-		width:19%; 
-		height:70px; 
-		line-height:70px; 
+		width:15%; 
+		height:50px; 
+		line-height:50px; 
 		text-align:center; 
 		background-color:#EFEFEF;
-		border-radius:30px;
-		margin:3%; 
+		border-radius:10px;
+		margin:5%; 
 		float:left; 
 		font-weight:1000;
 		color:gray;
+		list-style:none;
 	}
-	
 	/* ===================== 자녀 세부정보 ==================== */
 	#childrenInfoDiv{display:inline-block; width:70%; text-align:center;}
 	#childrenDetailDiv{width:100%; overflow:hidden; height:auto;}
 	#childrenDetail{width:100%; overflow:hidden; height:auto;}
 	#childrenDetailDiv ul{display:none;}
-	#childrenDetailDiv li{width:100%; height:30px; margin:10px 0; }
-	#childrenDetailDiv .childBtn{height:100%; margin-bottom:4px; line-height:18px;}
-	#childrenDetailDiv .child_birth{height:100%; text-align:center;}
+	#childrenDetailDiv li{width:100%; height:30px;padding:0 5%; margin:10px 0; }
+	#childrenDetailDiv .childBtn{width:45%;height:100%; margin-bottom:4px; line-height:18px;}
+	#childrenDetailDiv span{width:3%;background-color:white;}
+	#childrenDetailDiv .child_birth{width:45%;height:100%; text-align:center;}
 	/* ===================== 자녀 세부정보 ==================== */
 	
 	#zidcodeBtnDiv{text-align:center;}
@@ -104,10 +107,10 @@
 	#regularDateDiv #endDateBtn{margin-left:13%; display:none;}
 	/* ==================== 정기적으로 - 날짜 설정 =================== */
 	#regularDateDiv {display:inline-block; width:60%; text-align:center;}
-	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:70%;}
-	#regularDateDiv #startDateDiv>input{width:38%; height:100%; text-align:center; border-radius:15px;}
-	#regularDateDiv #startDateBtn{margin-right:10%;}
-	#regularDateDiv #start_date{margin-left:10%;font-weight:bold; border:1px solid gray;}
+	#regularDateDiv #startDateDiv{display:inline-block; margin-bottom:5px; width:100%;}
+	#regularDateDiv #startDateDiv>input{width:40%; height:100%; text-align:center; border-radius:15px;}
+	#regularDateDiv #startDateBtn{margin-right:5%;}
+	#regularDateDiv #start_date{margin-left:5%;font-weight:bold; border:1px solid gray;}
 	#regularDateDiv #end_date{margin-left:13%;}
 	#fatman{display:none; position:relative; left:80%; bottom:500px;}
 	/* ===================== =====================*/
@@ -171,7 +174,12 @@
 	label{-webkit-transition:background-color 1s;
 		transition:background-color 1s;}
 	li{-webkit-transition:background-color 1s;
-		transition:background-color 1s;}
+		transition:background-color 1s;
+		list-style:none;
+		}
+	ul{
+		list-style:none;
+	}
 	#footer{margin-bottom:300px;}
 	
 	

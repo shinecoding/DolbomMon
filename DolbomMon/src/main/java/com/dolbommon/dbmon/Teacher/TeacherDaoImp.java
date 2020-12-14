@@ -3,6 +3,8 @@ package com.dolbommon.dbmon.Teacher;
 import java.util.HashSet;
 import java.util.List;
 
+import com.dolbommon.dbmon.member.RegularDateVO;
+
 public interface TeacherDaoImp {
 	
 	public TeacherVO selectTeacher(String userid);
@@ -32,6 +34,7 @@ public interface TeacherDaoImp {
 	//후기 적기/수정
 	public int insertReview(ReviewVO vo);
 	public int updateReview(ReviewVO vo);
-	
+	public int updateSchedule(String userid, RegularDateVO rdVO);
+	public RegularDateVO selectSchedule(String userid);
 }
 
