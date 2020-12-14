@@ -14,11 +14,11 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
 
-	.container{width:1100px;font-family: 'Poor Story', cursive;}
+	.container{width:1100px; font-family: 'Jua', sans-serif;}
 
 
 	img{ height:110px; width:110px;}
@@ -704,19 +704,19 @@ var value;
 
 
    <div id="actBox">
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책 읽기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act5">한글놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act6">영어놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act7">학습지도</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act8">체육놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act9">간단 청소</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act10">밥 챙겨주기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단 설거지</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act1" >실내놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원 돕기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act3">책 읽기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act9">간단 청소</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act10">밥 챙겨주기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act11">간단 설거지</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
 
   </div>
  
