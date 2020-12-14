@@ -10,6 +10,7 @@ public class ApplyToParentInfoVO {
 	private String cctv;
 	private String apply_date;
 	private String pic;
+	private String discussion; 
 	
 	public String getUsername() {
 		return username;
@@ -64,6 +65,12 @@ public class ApplyToParentInfoVO {
 	}
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+	public String getDiscussion() {
+		return discussion;
+	}
+	public void setDiscussion(String discussion) {
+		this.discussion = discussion;
 	}
 	
 	
