@@ -14,9 +14,11 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
 <style>
 
-	.container{width:1100px;}
+	.container{width:1100px;font-family: 'Poor Story', cursive;}
 
 
 	img{ height:110px; width:110px;}
@@ -228,7 +230,7 @@ var value;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card" id="'+vo.userid+'" >';
+						tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -324,7 +326,7 @@ var value;
 						
 						$result.each(function(idx, vo){
 							
-							tag += '<div class="card" id="'+vo.userid+'" >';
+							tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -422,7 +424,7 @@ var value;
 										
 				$result.each(function(idx, vo){
 				
-					tag += '<div class="card" id="'+vo.userid+'" >';
+					tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 					tag += '<img class="profilepic" src=';
 					if(vo.pic==null){
 						tag +='"img/profilepic.png"';
@@ -519,7 +521,7 @@ var value;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card"  id="'+vo.userid+'" >';
+						tag += '<div class="card" data-aos="fade-up"  id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -793,7 +795,7 @@ var value;
 
 
 	</div>
-	<div><button style="position:relative; width:250px; left:38%; font-size:2em;" class="btn btn-info" id="countTest">더보기</button></div>
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top: 50px;" class="btn btn-warning" id="countTest">더보기</button></div>
 
 
 
