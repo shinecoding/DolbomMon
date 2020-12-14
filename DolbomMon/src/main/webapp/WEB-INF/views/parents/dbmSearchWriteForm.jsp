@@ -419,7 +419,7 @@
 				return false;
 			}
 			
-			var child_cnt = $("input[name=child_cnt]:checked").length;
+			var child_cnt = $("input[name=childrenCnt]:checked").length;
 			if(child_cnt < 1) {
 				swal({
 					title : "자녀 정보 입력",

@@ -22,6 +22,9 @@
 	#startDateDiv{text-align:center; padding:10px 0; }
 	#startDateDiv>input{width:30%; height:100%; margin:0 5%;}
 	#startDateDiv>input[name=start_date]{height:38px;vertical-align:bottom;text-align:center;}
+	#endDateDiv{text-align:center; padding:10px 0; }
+	#endDateDiv>input{width:30%; height:100%; margin:0 5%;}
+	#endDateDiv>input[name=end_date]{height:38px;vertical-align:bottom;text-align:center;}
 	/* ===================== =====================*/
 	#selectDayDiv{width:100%; overflow:hidden; height:auto; border-bottom:1px solid gray; padding-bottom:20px; margin-bottom:30px;}
 	#selectDayDiv li>label{
@@ -68,38 +71,46 @@
 		transition:background-color 1s;}
 </style>
 <script>
-
+	
 	$(function(){
-		$("input[name=yoil]").each(function(){
-			if($(this).is(':checked') == true){
-				console.log('참참ㅊ마');
-			}else{
-				console.log("너거거거거거");
-			}
-		});
-		for(var i=1;i<8;i++){
-			var ft = $("input[id='"+i+"']").is(":checked");
-			console.log(ft);
-			if(ft){
-				$("label[for="+i+"]").css("background-color", "orange").css("color", "white");
-			}else{
-				var sivar = $("input[id="+i+"]").attr("id");
-				console.log("sdsds =>" + sivar);
-				$("label[for="+i+"]").css("background-color", "#EFEFEF");
-			}
-		}
 			
+		startTime();
+		
 		$("input[name=period]").each(function(){
 			$(this).prop("checked", false);
 		});
-			
 		
+		var getDay = "${rdVO.yoil}";
+		var getYoil = getDay.split(",");
+		$("input[name=yoil]").each(function(){
+			for(var i=0;i<7;i++){
+				if($(this).val()==getYoil[i]){
+					$(this).prop("checked", true);
+				}
+			}
+		});
+		
+		var getStart_time = "${rdVO.start_time}";
+		$(document).ready(function(){
+			$("#start_time").val(getStart_time);
+			var test = $("#start_time").val();
+			for(var i=1;i<=48;i++){
+				if($("#start_time option[id=rt"+i+"]").val()==test){
+					endTime(i); 	
+					var getEnd_time = "${rdVO.end_time}";
+					$("#end_time").val(getEnd_time);
+				}
+			}
+		});
+		
+		var minDate;
 		$("#startDateBtn").datepicker({
 			showAnim : "show",
 			minDate : '0',
 			maxDate : '1m',
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
+				minDate = dateText;
 				$("#start_date").val(dateText);
 				$("#startDateBtn").val("활동 시작일 선택");
 				$("input[name=period]").each(function(){
@@ -118,6 +129,22 @@
 			altFormat:"yyyy-mm-dd"
 		});
 		
+		var todayday = new Date(minDate);
+		$("#endDateBtn").datepicker({
+			showAnim : "show",
+			changeMonth : true,
+			changeYear : true,
+			minDate : new Date(todayday.getFullYear(), todayday.getMonth(), todayday.getDate()+15),
+			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()+5, todayday.getDate()),
+			dateFormat : "yy-mm-dd",
+			onSelect:function(dateText){
+				$("#end_date").val(dateText);
+				
+				$("#endDateBtn").val("돌봄 종료일 선택");
+			},
+			altFormat:"yyyy-mm-dd"
+		});
+		
 		// 요일 선택 시 색상변경
 		$("input[name=yoil]").change(function(){
 			var selectedData = $(this).attr("id");
@@ -129,45 +156,27 @@
 			}
 		});
 		
-		// 기간 선택 시 색상변경
-		$("input[type=radio]").change(function(){
-			
-			var selectedData = $(this).attr("id");
-			var startDate = $("input[id=start_date]").val();
-			console.log("startDate ==>" + startDate+"2");
-			if(startDate=="") {
-				alert("활동 시작일을 먼저 설정해주세요");
+		$("input[name=yoil]").each(function(){
+			if($(this).is(':checked') == true){
+				$(this).parent("label").css("background-color", "orange").css("color", "white");
 			}else{
-				for(var i=1;i<5;i++){
-					if($("input[id=p"+i+"]").is(":checked")){
-						$("label[for=p"+i+"]").css("background-color", "orange").css("color", "white");
-						setEndDate(i);
-					}else{
-						$("label[for=p"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
-						
-					}
-				}
+				$(this).parent("label").css("background-color", "#EFEFEF");
 			}
-		});
-		
-		$(function(){
-			$("#dateFrm").submit(function(){
-			});
 		});
 	});
 	
-	function startTime(){
+	function startTime(){ // 시작 시간
 		var time = new Date(2020, 0, 1);
 		var tag="";
 		for(var i=1;i<=48;i++){
 			if(time.getHours()<10 && time.getMinutes()==0) {
-				tag += "<option id='"+i+"'>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
+				tag += "<option id='rt"+i+"'>0"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()<10 && time.getMinutes()!=0){
-				tag += "<option id='"+i+"'>0"+time.getHours()+":"+time.getMinutes()+"</option>";
+				tag += "<option id='rt"+i+"'>0"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}else if(time.getHours()>=10 && time.getMinutes()==0){
-				tag += "<option id='"+i+"'>"+time.getHours()+":0"+time.getMinutes()+"</option>";
+				tag += "<option id='rt"+i+"'>"+time.getHours()+":0"+time.getMinutes()+"</option>";
 			}else if(time.getHours()>=10 && time.getMinutes()!=0){
-				tag += "<option id='"+i+"'>"+time.getHours()+":"+time.getMinutes()+"</option>";
+				tag += "<option id='rt"+i+"'>"+time.getHours()+":"+time.getMinutes()+"</option>";
 			}
 			time.setMinutes(time.getMinutes()+30);
 		}
@@ -244,33 +253,75 @@
 			}
 		}
 		document.getElementById("end_date").value = setEndDate;
+		
 	}
+	
+	
+	$(function(){
+		$("#dateFrm").submit(function(){
+			
+			var start_date = $("#start_date").val();
+			var end_date = $("#end_date").val();
+			if(start_date==null || start_date==""){
+				swal({
+					title : "돌봄 날짜 선택",
+					text : "돌봄 시작날짜를 선택해주세요",
+					icon : "info"
+				});
+				return false;
+			}else if(end_date==null || end_date==""){
+				swal({
+					title : "돌봄 날짜 선택",
+					text : "돌봄 종료날짜를 선택해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var yoil = $("input[name=yoil]:checked").length;
+			if(yoil < 1) {
+				swal({
+					title : "돌봄 날짜 선택",
+					text : "선생님을 만나고 싶은 요일을 선택해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+			
+			var start_time = $("#start_time").val();
+			var end_time = $("#end_time").val();
+			console.log("stime => " + start_time);
+			console.log("etime => " + end_time);
+			
+			if(end_time==null || end_time=="종료시간") {
+				swal({
+					title : "돌봄 시간 선택",
+					text : "돌봄 종료시간을 선택해주세요",
+					icon : "info"
+				});
+				return false;
+			}
+		});
+	});
 </script>
 </head>
-<body onload="startTime();">
+<body>
 	<div class="container">
 		<form id="dateFrm" method="post" action="<%=request.getContextPath()%>/teacherScheduleEdit">
-		<div id="headerDiv"><h2>원하는 시간 직접 입력하기</h2></div>
+		<div id="headerDiv"><h2>돌봄 기간 / 시간 변경</h2></div>
 		<div id="startDateDiv">
 			<input class="btn" style="background-color:orange;color:white;"type="button" id="startDateBtn" value="활동 시작일 선택" />
 			<input type="text" id="start_date" name="start_date" readonly="readonly" value="${rdVO.start_date }"/>
 		</div>
 		<div id="selectDayDiv">
-			<input type="checkbox" id="1" name="yoil" value="월" />
-			<input type="checkbox" id="2" name="yoil" value="화" />
-			<input type="checkbox" id="3" name="yoil" value="수" />
-			<input type="checkbox" id="4" name="yoil" value="목" />
-			<input type="checkbox" id="5" name="yoil" value="금" />
-			<input type="checkbox" id="6" name="yoil" value="토" />
-			<input type="checkbox" id="7" name="yoil" value="일" />
 			<ul>
-				<li><label for="1">월</label></li>
-				<li><label for="2">화</label></li>
-				<li><label for="3">수</label></li>
-				<li><label for="4">목</label></li>
-				<li><label for="5">금</label></li>
-				<li><label for="6">토</label></li>
-				<li><label for="7">일</label></li>
+				<li><label for="1"><input type="checkbox" id="1" name="yoil" value="월" />월</label></li>
+				<li><label for="2"><input type="checkbox" id="2" name="yoil" value="화" />화</label></li>
+				<li><label for="3"><input type="checkbox" id="3" name="yoil" value="수" />수</label></li>
+				<li><label for="4"><input type="checkbox" id="4" name="yoil" value="목" />목</label></li>
+				<li><label for="5"><input type="checkbox" id="5" name="yoil" value="금" />금</label></li>
+				<li><label for="6"><input type="checkbox" id="6" name="yoil" value="토" />토</label></li>
+				<li><label for="7"><input type="checkbox" id="7" name="yoil" value="일" />일</label></li>
 			</ul>
 		</div>
 		<div id="timeDiv">
@@ -287,14 +338,11 @@
 				</select>
 			</div>
 		</div>
+		<div id="endDateDiv">
+			<input class="btn" style="background-color:orange;color:white;"type="button" id="endDateBtn" value="활동 종료일 선택" />
+			<input type="text" id="end_date" name="end_date" readonly="readonly" value="${rdVO.end_date }"/>
+		</div>
 		<div id="periodDiv">
-			<input type="text" id="end_date" name="end_date" placeholder="end_date" value="${rdVO.end_date }" />
-			<h6>이 일정으로 얼마나 일할 수 있나요?</h6>
-			<ul id="periodList">
-				<li><label for="p1"><input type="radio" id="p1" name="period" />1주일 이상</label></li>
-				<li><label for="p2"><input type="radio" id="p2" name="period" />1개월 이상</label></li>
-				<li><label for="p3"><input type="radio" id="p3" name="period" />3개월 이상</label></li>
-			</ul>
 			<input class="btn" type="submit" value="저장하기" />
 		</div>
 		</form>
