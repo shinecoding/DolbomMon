@@ -20,7 +20,8 @@
 	input[type=radio], input[type=checkbox]{display:none;}
 	/* ==================== 시작 날짜 =================== */
 	#startDateDiv{text-align:center; padding:10px 0; }
-	#startDateDiv>input{width:30%; margin:0 5%;}
+	#startDateDiv>input{width:30%; height:100%; margin:0 5%;}
+	#startDateDiv>input[name=start_date]{height:38px;vertical-align:bottom;text-align:center;}
 	/* ===================== =====================*/
 	#selectDayDiv{width:100%; overflow:hidden; height:auto; border-bottom:1px solid gray; padding-bottom:20px; margin-bottom:30px;}
 	#selectDayDiv li>label{
@@ -69,24 +70,29 @@
 <script>
 
 	$(function(){
-		$(document).ready(function(){
-			for(var i=1;i<8;i++){
-				if($("input[id="+i+"]").is(":checked")){
-					$("label[for="+i+"]").css("background-color", "orange").css("color", "white");
-				}else{
-					$("label[for="+i+"]").css("background-color", "#EFEFEF");
-				}
+		$("input[name=yoil]").each(function(){
+			if($(this).is(':checked') == true){
+				console.log('참참ㅊ마');
+			}else{
+				console.log("너거거거거거");
 			}
-			
-			for(var i=1;i<5;i++){
-				if($("input[id=p"+i+"]").is(":checked")){
-					$("label[for=p"+i+"]").css("background-color", "orange").css("color", "white");
-				}else{
-					$("label[for=p"+i+"]").css("background-color", "#EFEFEF").css("color", "black");
-				}
-			}
-			
 		});
+		for(var i=1;i<8;i++){
+			var ft = $("input[id='"+i+"']").is(":checked");
+			console.log(ft);
+			if(ft){
+				$("label[for="+i+"]").css("background-color", "orange").css("color", "white");
+			}else{
+				var sivar = $("input[id="+i+"]").attr("id");
+				console.log("sdsds =>" + sivar);
+				$("label[for="+i+"]").css("background-color", "#EFEFEF");
+			}
+		}
+			
+		$("input[name=period]").each(function(){
+			$(this).prop("checked", false);
+		});
+			
 		
 		$("#startDateBtn").datepicker({
 			showAnim : "show",
@@ -96,6 +102,18 @@
 			onSelect:function(dateText){
 				$("#start_date").val(dateText);
 				$("#startDateBtn").val("활동 시작일 선택");
+				$("input[name=period]").each(function(){
+					$(this).prop("checked", false);
+					$(this).parent("label").css("background-color", "#EFEFEF").css("color", "black");
+					$(this).parent("label").fadeOut(300);
+					$(this).parent("label").fadeIn(250);
+					$(this).parent("label").fadeOut(200);
+					$(this).parent("label").fadeIn(150);
+					$(this).parent("label").fadeOut(100);
+					$(this).parent("label").fadeIn(50);
+					$(this).parent("label").fadeOut(10);
+					$(this).parent("label").fadeIn(300);
+				});
 			},
 			altFormat:"yyyy-mm-dd"
 		});
@@ -130,6 +148,11 @@
 					}
 				}
 			}
+		});
+		
+		$(function(){
+			$("#dateFrm").submit(function(){
+			});
 		});
 	});
 	
@@ -226,7 +249,7 @@
 </head>
 <body onload="startTime();">
 	<div class="container">
-		<form method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
+		<form id="dateFrm" method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 		<div id="headerDiv"><h2>원하는 시간 직접 입력하기</h2></div>
 		<div id="startDateDiv">
 			<input class="btn" style="background-color:orange;color:white;"type="button" id="startDateBtn" value="활동 시작일 선택" />
@@ -268,9 +291,9 @@
 			<input type="hidden" id="end_date" name="end_date" placeholder="end_date" />
 			<h6>이 일정으로 얼마나 일할 수 있나요?</h6>
 			<ul id="periodList">
-				<li><label for="p1"><input type="radio" id="p1" name="asdf" />1주일 이상</label></li>
-				<li><label for="p2"><input type="radio" id="p2" name="asdf" />1개월 이상</label></li>
-				<li><label for="p3"><input type="radio" id="p3" name="asdf" />3개월 이상</label></li>
+				<li><label for="p1"><input type="radio" id="p1" name="period" />1주일 이상</label></li>
+				<li><label for="p2"><input type="radio" id="p2" name="period" />1개월 이상</label></li>
+				<li><label for="p3"><input type="radio" id="p3" name="period" />3개월 이상</label></li>
 			</ul>
 			<input class="btn" type="submit" value="다음" />
 		</div>
