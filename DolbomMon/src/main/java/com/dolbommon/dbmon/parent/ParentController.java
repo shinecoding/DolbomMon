@@ -87,9 +87,11 @@ public class ParentController {
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {
 			SpecificDateVO sdVO = dao.recruitSpecificDateSelect(no);
+			System.out.println("특정날에만 ");
 			mav.addObject("sdVO", sdVO);
 		}else if(timeType.equals("R")){
 			RegularDateVO rdVO = dao.recruitRegularDateSelect(no);
+			System.out.println("정기적으로 ");
 			mav.addObject("rdVO", rdVO);
 		}
 		System.out.println(contractId);
@@ -194,9 +196,8 @@ public class ParentController {
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
 		if(time_consultation==null || time_consultation=="") {
-			rbVO.setConsultation("N");
+			rbVO.setTime_consultation("N");
 		}
-		
 		String childb = cVO.getChild_birth();
 		String childbArr[] = childb.split(",");
 		
@@ -225,9 +226,11 @@ public class ParentController {
 			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
 				System.out.println("S");
+				dao.insertNullRegularDate();
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
 				System.out.println("R");
+				dao.insertNullSpecificDate();
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);

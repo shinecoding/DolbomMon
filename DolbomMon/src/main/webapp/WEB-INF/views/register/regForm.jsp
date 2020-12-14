@@ -15,28 +15,38 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.container{width:600px;}
-	.container div{width:100%; overflow:hidden; height:auto; margin-top:15px;}
+	.container div{width:100%;overflow:hidden; height:auto; margin-top:15px;}
 	
 	#headerDiv{text-align:center; }
-	#headerDiv>img{width:60%; height:200px;} 	
+	#headerDiv>a>img{width:80%;} 	
 	#headerDiv>h4{width:70%; margin:0 auto;}
 	
-	sapn{display:inline-block; margin-left:5px; font-size:14px;}	
-	.container>div>label{display:inline-block; width:auto;float:left; margin:0;}
-	.container>div>span{width:auto;height:20px;float:left;}
-	.container>div>input{width:80%; height:50px; padding:5px 10px; float:left;}
+	.container>div>div>label{display:inline-block;width:auto;float:left; margin:0; font-size:21px;}
+	.container>div>div>span{display:inline-block; width:auto;height:20px;float:left;font-size:16px; margin-top:8px; margin-left:5px;}
+	.container>div>input{width:80%; height:40px; padding:5px 10px; float:left;}
 	
-	#genderDiv label{width:19%; height:50px; line-height:50px; text-align:center; border:1px solid gray; background-color:#EFEFEF; cursor:pointer;}
+	#genderDiv label{width:19%; height:40px; line-height:40px; text-align:center; border:none; border-radius:20px; background-color:#EFEFEF; cursor:pointer;}
 	#genderDiv input[type=radio]{display:none;}
-	input[type=submit]{width:100%; height:40px; margin:30px 0;}
+	input[type=submit]{width:100%; height:40px; margin:30px 0 100px 0;}
+	
+	label{-webkit-transition:background-color 1s; transition:background-color 1s;}
 	
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
 <script>
 	$(function(){
+		$("#genderDiv input[type=radio]").each(function(){
+			if($(this).is(":checked")){
+				$(this).css("background-color", "#ffc207"); 
+			}else{
+				$(this).parent("label").css("background-color", "#EFEFEF"); 
+			}
+		});
+		
+		
 		// 생년월일 옵션
 		$("#birthBtn").datepicker({
 			showAnim : "show",
@@ -77,8 +87,8 @@
 		            });
 		           	window.close();
 		        },theme:{
-		        	searchBgColor: "#ff5400", //검색창 배경색
-		            queryTextColor: "#FFFFFF" //검색창 글자색
+		        	searchBgColor: "#ffc207", //검색창 배경색
+		            queryTextColor: "#black" //검색창 글자색
 		        }
 		    }).open();
 		});
@@ -88,9 +98,9 @@
 			var selectedDate = $(this).attr("id");
 			for(var i=1;i<=2;i++){
 				if($("input[id="+i+"]").is(":checked")) {
-					$("label[for="+i+"]").css("background-color", "#ff5400").css("color", "white");
+					$("label[for="+i+"]").css("background-color", "#ffc207");
 				}else{
-					$("label[for="+i+"]").css("background-color", "#EFEFEF").css("color", "black");
+					$("label[for="+i+"]").css("background-color", "#EFEFEF");
 				}
 			}
 		});
@@ -185,6 +195,7 @@
 			}else {
 				$("#email2").val(domain);
 			}
+			var email2 = $("#email2").val();
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
 				$("#emailChk").html("올바른 이메일 도메인 형식이 아닙니다.").css("color", "red");
@@ -275,9 +286,12 @@
 	          	                  	text: $("#text").val()
 	          	                    },
 	          	                 	success:function(){
-	          	                   		alert("해당 휴대폰으로 인증번호를 발송했습니다");
-		          	                   	$("#userNum").css("display", "block");
-		                  				$("#userNumChk").css("display", "block");
+	          	                 		swal({
+	          	      						title : "인증번호를 발송했습니다.",
+	          	      						icon : "info"
+	          	      					});
+		          	                	$("#userNum").fadeIn(1500);
+		                  				$("#userNumChk").fadeIn(1500);
 	          	                   	}, error:function(){
 	          	                      
 	          	                   	}
@@ -404,7 +418,6 @@
 			return true;
 		});
 	});
-	
 </script>
 </head>
 <body>
@@ -429,38 +442,41 @@
 		<input type="hidden" id="lng" name="lng" />
 		
 		<div id="headerDiv">
-			<img src="<%=request.getContextPath()%>/img/mylogo.png" />
-			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
+			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png" /></a>
+			<c:if test="${who == 'P' }"><h2>회원가입</h2></c:if><c:if test="${who == 'T' }"><h5>일자리를  찾기 위한 내용 작성이 끝났습니다. <br/>이제, 사용하실 아이디와 비밀번호를 입력해주세요.</h5></c:if>
 		</div>
 		<div id="useridDiv" class="form-group has-warning has-feedback">
-			<label for="userid">아이디</label><span id="useridRegChk"></span><br/>
-			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" id="idChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
+			<div><label for="userid">아이디</label><span id="useridRegChk"></span></div>
+			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" class="btn btn-warning" id="idChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
 			<input type="hidden" id="idStatus" value="N"/>
 		</div>
 		<div id="userpwdDiv">
-			<label for="userpwd">비밀번호</label><span id="userpwdRegChk"></span><br/>
+			<div><label for="userpwd">비밀번호</label><span id="userpwdRegChk"></span></div>
 			<input type="password" id="userpwd" name="userpwd" placeholder="비밀번호 입력"/>
 		</div>
 		<div id="userpwdChkDiv">
-			<label for="userpwdChk">비밀번호 확인</label><span id=userpwdChkChk></span><br/>
+			<div><label for="userpwdChk">비밀번호 확인</label><span id=userpwdChkChk></span></div>
 			<input type="password" id="userpwdChk" />
 		</div>
 		<div id="usernameDiv">
-			<label>이름</label><span id="usernameChk"></span><br/>
+			<div><label>이름</label><span id="usernameChk"></span></div>
 			<input type="text" id="username" name="username" placeholder="이름 입력" style="width:80%;"/> 
 		</div>
 		<div id="birthDiv">
-			<input type="button" id="birthBtn" value="생년월일" style="width:20%;margin-right:5%" />
+			<input type="button" class="btn btn-warning" id="birthBtn" value="생년월일" style="width:20%;margin-right:5%" />
 			<input type="text" id="birth" name="birth" style="width:50%;" readonly="readonly" placeholder="생년월일"/>
 		</div>
 		<div id="genderDiv"> 
-			<label for="1"  ><input type="radio" name="gender" id="1" value="M" />남자</label>
+			<div><p style="font-size:20px;">성별</p></div>
+			<label for="1" ><input type="radio" name="gender" id="1" value="M" />남자</label>
 			<label for="2" style="margin-left:2%;"><input type="radio" name="gender" id="2" value="F" />여자</label>
 		</div>
 		<div id="emailDiv">
-			<label for="email1">이메일</label><span id="emailChk"></span><br/>
-			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:24%;" /><span style="wdith:2%; height:50px; line-height:50px; text-aling:center; margin:0 1%;">@</span><input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
-			<select id="domain" style="width:24%; margin-left:3%; height:50px;" >
+			<div><label for="email1">이메일</label><span id="emailChk"></span></div>
+			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:23%;" />
+			<span style="display:inline-block; float:left; width:4%; height:40px; line-height:40px; text-align:center; margin:0 1%;">@</span>
+			<input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
+			<select id="domain" style="width:23%; margin-left:3%; height:40px;" >
 				<option selected="selected" >직접입력</option>
 				<option>gmail.com</option>
 				<option>naver.com</option>
@@ -469,24 +485,24 @@
 			</select>
 		</div>
 		<div id="smsDiv">
-			<label for="tel1" style="clear:both;">연락처</label><span id="tel1Chk"></span><br/>
+			<div><label for="tel1" style="clear:both;">연락처</label><span id="tel1Chk"></span></div>
 			<input type="text" id="tel1" name="tel1" style="width:80%;" />
-			<input type="button" id="smsIdentity" value="휴대폰 본인인증하기" disabled="true" style="margin-top:10px;"/>
+			<input type="button" class="btn btn-warning" id="smsIdentity" value="휴대폰 본인인증하기" disabled="true" style="margin-top:10px;"/>
 			<input type="text" id="userNum" name="userNum" style="margin-top:10px; display:none;" placeholder="인증번호 입력"/>
-			<input type="button" id="userNumChk" style="margin-top:10px;display:none;" value="인증하기"/>
+			<input type="button" class="btn btn-warning" id="userNumChk" style="margin-top:10px;display:none;" value="인증하기"/>
 			<input type="hidden" name="text" id="text">
 			<input type="hidden" id="smsIdentityYN" value="N" /> 
 		</div>
 		<div id="zonecodeDiv">
-			<label>우편번호</label><br/>
+			<div><label>우편번호</label></div>
 			<input type="text" id="zipcode" name="zipcode" placeholder="우편번호 입력" style="width:28%;"/>
-			<input type="button" value="우편번호 선택" id="zipcodeBtn" style="width:28%; margin-left:4%;"/> 
-			<label for="tel1" style="width:80%; clear:both; margin-top:10px;">도로명 주소</label><br/>
+			<input type="button" class="btn btn-warning" value="우편번호 선택" id="zipcodeBtn" style="width:28%; margin-left:4%;"/> 
+			<div><label for="tel1" style="width:80%; clear:both; margin-top:10px;">도로명 주소</label></div>
 			<input type="text" id="addr" name="addr" placeholder="도로명 주소 입력" style="width:80%;"/>
-			<label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label><br/>
+			<div><label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label></div>
 			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
 		</div>
-		<input type="submit" value="가입하기" />
+		<input type="submit" class="btn btn-warning" value="가입하기" />
 	</div>
 	</form>
 </body>

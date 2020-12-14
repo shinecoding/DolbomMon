@@ -38,9 +38,9 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 	public RecruitBoardVO recruitBoardSelect(int no);
 	//레코드 한 개 선택 - 자녀
 	public ChildrenVO recruitChildSelect(int no);
-	//레코드 한 개 선택 - 정기적 선택(S)
+	//레코드 한 개 선택 - 정기적 선택(r)
 	public RegularDateVO recruitRegularDateSelect(int no);
-	//레코드 한 개 선택 - 특정날 선택(R)
+	//레코드 한 개 선택 - 특정날 선택(s)
 	public SpecificDateVO recruitSpecificDateSelect(int no);
 	
 	//선생님이 학부모의 글을 보고 신청했을 때

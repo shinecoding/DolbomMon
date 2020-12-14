@@ -90,7 +90,7 @@ public class DealController {
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
 		if(time_consultation==null || time_consultation=="") {
-			rbVO.setConsultation("N");
+			rbVO.setTime_consultation("N");
 		}
 		System.out.println("원글번호 확인"+rbVO.getOrigin_no());
 		String childb = cVO.getChild_birth();

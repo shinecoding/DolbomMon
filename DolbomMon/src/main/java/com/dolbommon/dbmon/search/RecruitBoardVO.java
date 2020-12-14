@@ -24,6 +24,8 @@ public class RecruitBoardVO {
 		private int week;
 		private int origin_no; //원글번호
 		private String teacherid;
+		private String title;
+		private String pic;
 		
 		public int getJob_board_no() {
 			return job_board_no;
@@ -150,6 +152,18 @@ public class RecruitBoardVO {
 		}
 		public void setTeacherid(String teacherid) {
 			this.teacherid = teacherid;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getPic() {
+			return pic;
+		}
+		public void setPic(String pic) {
+			this.pic = pic;
 		}
 		
 		

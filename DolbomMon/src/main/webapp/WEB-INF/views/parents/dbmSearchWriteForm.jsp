@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dbmSearchWriteForm.css" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.css" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -279,6 +280,14 @@
 				$("input[name=week]").each(function(){
 					$(this).prop("checked", false);
 					$(this).parent("label").css("background-color", "#EFEFEF");
+					$(this).parent("label").fadeOut(300);
+					$(this).parent("label").fadeIn(250);
+					$(this).parent("label").fadeOut(200);
+					$(this).parent("label").fadeIn(150);
+					$(this).parent("label").fadeOut(100);
+					$(this).parent("label").fadeIn(50);
+					$(this).parent("label").fadeOut(10);
+					$(this).parent("label").fadeIn(300);
 				});
 			},
 			altFormat:"yyyy-mm-dd"
@@ -351,6 +360,20 @@
 				});
 			}
 		});
+		$("#subjectSelect").change(function(){
+			var subjectSel = document.getElementById("subjectSelect");
+			
+			$("input[name=title]").val(subjectSel.value);
+						
+			if(subjectSel.selectedIndex==5){
+				$("input[name=title]").val("");
+			}
+		});
+		
+		$("input[name=title]").keyup(function(){
+			var subjectSel = document.getElementById("subjectSelect");
+			subjectSel.selectedIndex = 5;
+		});
 		
 		/////////////////////////// 등록하기 버튼 누를 시 ////////////////////////
 		$("#writeFrm").submit(function(){
@@ -392,8 +415,8 @@
 				return false;
 			}
 			
-			var child_cnt = $("input[name=childrenCnt]:checked").length;
-			if(childCnt < 1) {
+			var child_cnt = $("input[name=child_cnt]:checked").length;
+			if(child_cnt < 1) {
 				swal({
 					title : "자녀 정보 입력",
 					text : "자녀의 정보를 입력해주세요",
@@ -405,7 +428,9 @@
 			var cnttt = 0;
 			$(".child_birth").each(function(){
 				var cb = $(this).val();
-				if(cb==null || cb==""){
+				console.log("cb =>"+cb+"<= cb");
+				console.log(cb);
+				if(cb!=""){
 					cnttt = cnttt+1;
 					console.log("cnttt => " + cnttt);
 				}
@@ -416,7 +441,16 @@
 					text : "자녀의 생년월일을 입력해주세요",
 					icon : "info"
 				});
-				cnttt = 0;
+				return false;
+			}
+			
+			var addr = $("input[name=dong_addr]").val();
+			if(addr == null || addr == ""){
+				swal({
+					title : "돌봄 장소 입력",
+					text : "돌봄 장소를 입력해주세요",
+					icon : "info"
+				});
 				return false;
 			}
 			
@@ -469,6 +503,17 @@
 					});
 					return false;
 				}
+				
+				var week = $("input[name=week]:checked").length;
+				if(week < 1){
+					swal({
+						title : "돌봄 날짜 선택",
+						text : "기간을 설정해주세요",
+						icon : "info"
+					});
+					return false;
+				}
+				
 			}
 			
 			var start_time = $("#start_time").val();
@@ -484,6 +529,7 @@
 				});
 				return false;
 			}
+			
 			
 			return true;
 		});
@@ -724,22 +770,22 @@
 					</div>
 					<div id="childrenDetailDiv">
 						<ul id="childcnt1">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 						<ul id="childcnt2">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 						<ul id="childcnt3">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 						<ul id="childcnt4">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀4 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 					</div>
 				</div>
@@ -758,7 +804,7 @@
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
-					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소" />
+					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소 선택" />
 					<input type="hidden" id="care_addr" name="care_addr"/>
 					<input type="hidden" id="lat" name="lat"/>
 					<input type="hidden" id="lng" name="lng"/>
@@ -859,9 +905,21 @@
 				</p>
 			</div>
 			
-			<div class="title"><label class="divOnOff" for="descriptionDiv">선생님이 알아야 할 내용과 신청내용을 적어주세요</label></div>
+			<div class="title"><label class="divOnOff" for="descriptionDiv">제목과 신청내용을 적어주세요</label></div>
 			<div id="descriptionDiv" class="mainDiv">
 				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
+				<div style="display:inline-block;width:70%;padding-left:10px;text-align:left;">제목</div>
+				<div id="subject" style="display:inline-block;width:70%;text-align:center; margin-bottom:20px";>
+					<select id="subjectSelect" class="form-control selectpicker noborder" style="display:inline-block;">
+						<option disabled="disabled">제목을 선택해주세요.</option>
+						<option>직접 입력</option>
+						<option>간단한 학습지도 해줄 돌봄몬 찾습니다.</option>
+						<option>하원 후 저녁 시간까지 돌봐줄 돌봄몬 찾습니다.</option>
+						<option>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</option>
+						<option>야외활동 같이해줄 돌봄몬 찾습니다.</option>
+					</select>
+					<input type="text" name="title" class="form-control spread-underline" placeholder="직접 입력" style="display:inline-block;padding-left:10px;border:none;border-bottom:1px solid gray;border-radius:0;margin-top:5px;">
+				</div>
 				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>

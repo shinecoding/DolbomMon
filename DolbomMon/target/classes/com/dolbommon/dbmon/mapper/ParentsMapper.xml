@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.parent.ParentDaoImp">
 	<insert id="insertDbmSearch" >
-		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit) 
-			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0)
+		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender,title , content, lat, lng, writedate, hit) 
+			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender},#{title}, #{content}, #{lat}, #{lng}, sysdate, 0)
 	</insert>
 	<insert id="insertDsChildInfo">
 		insert into add_child(job_board_no, child_birth, userid, child_cnt) 
@@ -19,6 +19,15 @@
 		insert into jb_regular_date(job_board_no, yoil, start_time, end_time, start_date, end_date, week)
 			values(member_sq.currval, #{rdVO.yoil}, #{rdVO.start_time}, #{rdVO.end_time}, #{rdVO.start_date}, #{rdVO.end_date}, #{rdVO.week})
 	</insert>
+	<insert id="insertNullSpecificDate">
+		insert into jb_specific_day(job_board_no)
+			values(member_sq.currval)
+	</insert>
+	<insert id="insertNullRegularDate">
+		insert into jb_regular_date(job_board_no)
+			values(member_sq.currval)
+	</insert>
+	
 	
 	<select id="selectMyRdBoard" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
 		select p.job_board_no, p.userid, p.care_addr, p.time_type, p.pw_activity, p.wish_age, p.wish_wage, p.consultation, p.wish_gender, p.content, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate,

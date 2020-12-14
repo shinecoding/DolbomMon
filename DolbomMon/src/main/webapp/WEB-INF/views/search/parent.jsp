@@ -277,7 +277,9 @@ $(function(){
 });
 
 
-
+	$(document).ready(function(){
+		$("#topmenu-button").children("li:nth-of-type(4)").children("a").css("color", "orange");
+	});
 
 
 </script>
@@ -348,7 +350,7 @@ $(function(){
 						<div class="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
 						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>${vo.tcnt}</span>명 지원</div>
 						<div class="offerBox" >
-							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
+							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>${vo.title }</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
 							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
 							<br/><span>${vo.care_addr } </span>
