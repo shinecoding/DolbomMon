@@ -43,7 +43,7 @@ public class JobSearchController {
 		String activity_type = req.getParameter("activity_type");
 		System.out.println("000000"+activity_type);
 		if(req.getParameter("activity_type")==null) {
-			List<TeacherVO> list = dao.jobSearchBoardList(9999); //선생님 리스트
+			list = dao.jobSearchBoardList(9999); //선생님 리스트
 		}else {
 			list = dao.jobSearchActType(activity_type);
 		}
