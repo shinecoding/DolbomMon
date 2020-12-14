@@ -5,10 +5,11 @@
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.status, p.consultation,p.title, p.content, p.wish_gender,
-		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
+		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, round((sysdate - p.writedate) *1440) as writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
 		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
+
 		where p.status='P' or p.status='R'
 		order by job_board_no desc
 	</select>
@@ -16,7 +17,9 @@
 	<select id="selectMyMap" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select lat, lng from member where userid=#{param1}
 	</select>
-	
+	<select id="selectAllParent" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select userid, username, lat, lng, addr from member where lat is not null and lng is not null and who = 'P'
+	</select>
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
 		select no from member
 	</select>

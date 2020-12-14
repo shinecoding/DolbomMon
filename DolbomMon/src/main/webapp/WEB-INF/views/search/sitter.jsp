@@ -201,11 +201,13 @@ var value;
 		function dropdownAjax(care_type){
 			console.log("케어타입="+care_type);
 			var url = "/dbmon/searchCare";
+
 			var params =	{
 					care_type:care_type,
 					count:count, 
 			} 
 			
+
 			console.log("파라미터="+params);
 			$.ajax({
 				url:url,

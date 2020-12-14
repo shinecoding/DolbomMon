@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <style>
 	* {
 		padding:0; list-style-type:none; box-sizing:border-box; 
@@ -77,6 +79,7 @@
 	}
 	
 	<!-- -->
+	
 	.imgBox{
 		float:left;
 		padding: 15px;
@@ -95,6 +98,14 @@
 	.offerTitle{
 		font-size: 1.1em;
 	}
+	.card {
+	width:45%;
+	display:block;
+	float:left;
+	margin:20px 20px;
+	border:1px orange solid; 
+	border-radius:20px; 
+	}
 	.card-body{
 		white-space: nowrap;
 		overflow:hidden;
@@ -111,8 +122,8 @@
 		vertical-align: top;
 	}
 	.modalHidden{
-		width: 527px;
-		height: 275px;
+		width: 100%;
+		height: 100%;
 		color: black;
 		position: absolute;
 		text-align: center;
@@ -121,6 +132,8 @@
 		color: white;
 		z-index: 100;
 		background-color: rgb(100,100,100);
+		border:1px orange solid; 
+		border-radius:20px; 
 	}
 
 
@@ -137,7 +150,7 @@ $(function(){
     $(document).on("keyup", "#locFilter", function(){
     	var value = $(this).val().toLowerCase();
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
     	});
     });
 	
@@ -178,7 +191,20 @@ $(function(){
 					tag += '<div class="offerBox" style="width: 310px";>';
 					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+					tag += '<span class="ml-2" style="font-size:0.7em">';
+					if(vo.writedate>525600){
+						tag += Math.round(vo.writedate/525600)+'년';
+					} else if(vo.writedate>43200){
+						tag += Math.round(vo.writedate/43200) +'달';
+					} else if(vo.writedate>1440){
+						tag += Math.round(vo.writedate/1440) +'일';
+					} else if(vo.writedate>60){
+						tag += Math.round(vo.writedate/60) +'시간';
+					} else {
+						tag += Math.round(vo.writedate) +'분';
+					}
+					tag += '</span>';
+					
 					tag += '<br/><span>'+vo.care_addr+'</span>';
 					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
@@ -237,7 +263,20 @@ $(function(){
 					tag += '<div class="offerBox" style="width: 310px";>';
 					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+					tag += '<span class="ml-2" style="font-size:0.7em">';
+					if(vo.writedate>525600){
+						tag += Math.round(vo.writedate/525600)+'년';
+					} else if(vo.writedate>43200){
+						tag += Math.round(vo.writedate/43200) +'달';
+					} else if(vo.writedate>1440){
+						tag += Math.round(vo.writedate/1440) +'일';
+					} else if(vo.writedate>60){
+						tag += Math.round(vo.writedate/60) +'시간';
+					} else {
+						tag += Math.round(vo.writedate) +'분';
+					}
+					tag += '</span>';					
+					
 					tag += '<br/><span>'+vo.care_addr+'</span>';
 					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
@@ -299,7 +338,20 @@ $(function(){
 					tag += '<div class="offerBox" style="width: 310px";>';
 					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+					tag += '<br/><span><b>신생아 1명, 유아 1명</b></span> |';
+					tag += '<span class="ml-2" style="font-size:0.7em">';
+					if(vo.writedate>525600){
+						tag += Math.round(vo.writedate/525600)+'년';
+					} else if(vo.writedate>43200){
+						tag += Math.round(vo.writedate/43200) +'달';
+					} else if(vo.writedate>1440){
+						tag += Math.round(vo.writedate/1440) +'일';
+					} else if(vo.writedate>60){
+						tag += Math.round(vo.writedate/60) +'시간';
+					} else {
+						tag += Math.round(vo.writedate) +'분';
+					}
+					tag += '</span>';
 					tag += '<br/><span>'+vo.care_addr+'</span>';
 					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
@@ -327,9 +379,7 @@ $(function(){
 });
 
 
-	$(document).ready(function(){
-		$("#topmenu-button").children("li:nth-of-type(4)").children("a").css("color", "orange");
-	});
+
 
 
 </script>
@@ -393,30 +443,45 @@ $(function(){
 	</div>
 	<br/>
 	<br/>
-	<div class="row" id="cardBox">
+	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 		<c:forEach var="vo" items="${list2}">
-			<div class="col-sm-6" style="padding: 20px;">
-				<c:if test="${vo.status=='P'}">
-					<div class="modalHidden" data-aos="fade-up"><div class="offerConclude">구인이 종료된 공고입니다</div></div>
-				</c:if>
+			
 				<div class="card" data-aos="fade-up">
+					<c:if test="${vo.status=='P'}">
+						<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>
+					</c:if>
+					
 					<div class="card-body">
 						<div class="imgBox"><img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> class="rounded-circle"></div>
 						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>${vo.tcnt}</span>명 지원</div>
 						<div class="offerBox">
 							<span class="card-title offerTitle" style="line-height: 2em;"><b>제목 ${vo.title}</b></span>
-							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid}</span>
-							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate}</span>
-							<br/><span class="loc">${vo.care_addr}</span>
-							<br/><span><b>${vo.start_date}</b> 시작</span>
-							<br/><span style="color: orange;">희망시급 ${vo.wish_wage}원
-							<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid}</span><br/>
+								<span><b>신생아 1명, 유아 1명</b></span> | 
+								<!-- 마지막 업데이트일 -->
+								<span class="ml-2" style="font-size:0.7em">
+										<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.writedate/525600}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.writedate/43200}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.writedate/1440}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.writedate/60}"/>					
+									<c:choose>
+										<c:when test="${vo.writedate>525600}">${edit_year}년</c:when>
+										<c:when test="${vo.writedate>43200}">${edit_month}달</c:when>
+										<c:when test="${vo.writedate>1440}">${edit_day}일</c:when>
+										<c:when test="${vo.writedate>60}">${edit_hour}시간</c:when>
+										<c:otherwise>${vo.writedate}분</c:otherwise>
+									</c:choose> 전
+								</span><br/>
+								<span class="loc"><i class="fas fa-map-marker-alt"></i>${vo.care_addr}</span><br/>
+								<span><b>${vo.start_date}</b> 시작</span><br/>
+								<span style="color: orange;">희망시급 ${vo.wish_wage}원
+								<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 							</p>
 						</div>
 					</div>
 					<div class="card-footer btn" style="width: 100%;" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
 				</div>
-			</div>
+			
 		</c:forEach>
 	</div>
 	
