@@ -1,6 +1,7 @@
 	
 package com.dolbommon.dbmon.search;
 	 
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +30,8 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 	public List<RecruitBoardVO> filterLowWage();
 	//지도 위치
 	public RecruitBoardVO selectMyMap(String userid);
-	
+	//모든 학부모 지도 위치
+	public HashSet<RecruitBoardVO> selectAllParents();
 	
 	
 	//레코드 한 개 선택 

@@ -3,7 +3,7 @@ package com.dolbommon.dbmon.search;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +51,7 @@ public class RecruitBoardController {
 		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		
+		HashSet<RecruitBoardVO> hash = dao.selectAllParents();
 		
 		RecruitBoardVO mvo = null;
 		if(req.getParameter("userid")==null) {
@@ -64,6 +64,7 @@ public class RecruitBoardController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("mvo", mvo);
+		mav.addObject("hash", hash);
 		mav.addObject("list2", list2);
 		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");

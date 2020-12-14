@@ -17,6 +17,11 @@
 		select lat, lng from member where userid=#{param1}
 	</select>
 	
+	<select id="selectAllParents" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select p.job_board_no, p.care_addr, m.username, m.userid, m.lat, m.lng from member m join parent_list p on m.userid=p.userid
+		where m.lat is not null and m.lng is not null and m.who='P' and p.status='R'
+	</select>
+	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
 		select no from member
 	</select>
