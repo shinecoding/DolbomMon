@@ -316,18 +316,6 @@ public class TeacherController {
 		return pic;
 	}
 
-	@RequestMapping(value="/teacherScheduleEdit", method=RequestMethod.POST)
-	public ModelAndView teacherSchedule(HttpSession ses, RegularDateVO rdVO) {
-		
-		String userid = (String)ses.getAttribute("userid");
-		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		dao.updateSchedule(userid, rdVO);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:teacherEdit");
-		return mav;
-	}
-
 
 	@RequestMapping("/teacherExp")
 	public ModelAndView teacherExp(HttpSession ses) {
@@ -729,6 +717,18 @@ public class TeacherController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("rdVO", rdVO);
 		mav.setViewName("teacher/teacherSchedule");
+		return mav;
+	}
+	
+	@RequestMapping(value="/teacherScheduleEdit", method=RequestMethod.POST)
+	public ModelAndView teacherSchedule(HttpSession ses, RegularDateVO rdVO) {
+		
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		dao.updateSchedule(userid, rdVO);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:teacherEdit");
 		return mav;
 	}
 	
