@@ -76,6 +76,7 @@ public class TeacherController {
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
+		RegularDateVO rdVO = dao.selectSchedule(userid);
 		
 		dao.hitCount(vo);
 		int timeInt = 0;
@@ -110,7 +111,7 @@ public class TeacherController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		
+		mav.addObject("rdVO", rdVO);
 		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
@@ -169,9 +170,11 @@ public class TeacherController {
 		String userid = (String) ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
+		RegularDateVO rdVO = dao.selectSchedule(userid);
 		List<ExperienceVO> list = dao.selectExp(userid);
 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("rdVO", rdVO);
 		mav.addObject("vo", vo);
 		mav.addObject("hash", list);
 		mav.setViewName("teacher/teacherEdit");
@@ -725,7 +728,11 @@ public class TeacherController {
 		
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		dao.updateSchedule(userid, rdVO);
+		try {
+			dao.updateTeacherSchedule(userid, rdVO);
+		}catch(Exception e) {
+			System.out.println("에러 메세지 => " + e.getMessage());
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:teacherEdit");

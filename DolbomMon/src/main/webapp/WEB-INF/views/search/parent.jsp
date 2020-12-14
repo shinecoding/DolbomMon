@@ -163,6 +163,11 @@ $(function(){
     	}
     });
 	
+    $(document).on("click", ".locBtn", function(){
+    	//console.log($(this).parent().attr('id'));
+    	location.href="parentView?no="+$(this).attr('id');
+
+    });
 	
 	//지도 토글
     $(document).on("click", "#mapBtn", function(){
@@ -211,7 +216,7 @@ $(function(){
 		            var tag = "";
 		               
 		            $result.each(function(idx, vo){
-		               tag += '<div class="card" data-aos="fade-up">';
+		               tag += '<div class="card" data-aos="fade-up" >';
 		               if(vo.status=="P"){
 		                  tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
 		               }
@@ -252,7 +257,7 @@ $(function(){
 		                  tag += '</span></p>';
 		               }
 		               tag += '</div></div>';
-		               tag += '<div class="card-footer btn" style="width: 100%;" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';   
+		               tag += '<div class="card-footer btn locBtn" style="width: 100%;"  id="'+vo.job_board_no+'" >자세히 보기</div>';   
 		               tag += '</div>';
 		               tag += '</div>';
 		            });
@@ -290,7 +295,7 @@ $(function(){
 	            var tag = "";
 	               
 	            $result.each(function(idx, vo){
-	               tag += '<div class="card" data-aos="fade-up">';
+	               tag += '<div class="card" data-aos="fade-up"  id="'+vo.job_board_no+'" >';
 	               if(vo.status=="P"){
 	                  tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
 	               }
@@ -331,7 +336,7 @@ $(function(){
 	                  tag += '</span></p>';
 	               }
 	               tag += '</div></div>';
-	               tag += '<div class="card-footer btn" style="width: 100%;" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';   
+	               tag += '<div class="card-footer btn locBtn" style="width: 100%;"  id="'+vo.job_board_no+'" >자세히 보기</div>';   
 	               tag += '</div>';
 	               tag += '</div>';
 	            });
@@ -372,7 +377,7 @@ $(function(){
 		            var tag = "";
 		                                 
 		            $result.each(function(idx, vo){
-		               tag += '<div class="card" data-aos="fade-up">';
+		               tag += '<div class="card" data-aos="fade-up"  id="'+vo.job_board_no+'" >';
 		               if(vo.status=="P"){
 		                  tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
 		               }
@@ -413,7 +418,7 @@ $(function(){
 		                  tag += '</span></p>';
 		               }
 		               tag += '</div></div>';
-		               tag += '<div class="card-footer btn" style="width: 100%;" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';   
+		               tag += '<div class="card-footer btn locBtn" style="width: 100%;" id="'+vo.job_board_no+'" >자세히 보기</div>';   
 		               tag += '</div>';
 		               tag += '</div>';
 		            });
