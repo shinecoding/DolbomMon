@@ -149,7 +149,13 @@ var value;
 	   
 		//지도 토글
 	      $(document).on("click", "#mapBtn", function(){
-				$("#map").toggle();
+	    	  $("#map").toggle();
+				AOS.init({
+				    duration: 1200
+				  });
+				  onElementHeightChange(document.body, function(){
+				    AOS.refresh();
+				  });
 			});
 		//검색창	
 	    $(document).on("keyup", "#locFilter", function(){
@@ -403,7 +409,7 @@ var value;
 		
 		var url = "/dbmon/filterOrder";
 		var params = {
-				order:gender,
+				order:order,
 				count:count, 
 		}
 		console.log("파라미터="+params);
@@ -581,7 +587,28 @@ var value;
 
 				});
     	}
-    	 testAjax(gender);
+	    if(${activity_type=='등하원 돕기'}){
+	    	activity_type='등하원 돕기'
+	    	actBoxAjax(activity_type);
+	    }else if(${activity_type=='실내놀이'}){
+	    	activity_type='실내놀이'
+		    actBoxAjax(activity_type);
+	    }else if(${activity_type=='야외활동'}){
+	    	activity_type='야외활동'
+			    actBoxAjax(activity_type);
+		}else if(${activity_type=='학습지도'}){
+	    	activity_type='학습지도'
+			    actBoxAjax(activity_type);
+		}else if(${activity_type=='영어놀이'}){
+	    	activity_type='영어놀이'
+			    actBoxAjax(activity_type);
+		}else if(${activity_type=='가사돌봄'}){
+	    	activity_type='간단 청소'
+			    actBoxAjax(activity_type);
+		}else{
+	    	testAjax(gender);
+	    }
+    	// 
 	});//제이쿼리
 	</script>
  <script>	
@@ -645,9 +672,36 @@ var value;
 	   
 		
 	});//제이쿼리
+	function mapResize(){
+		$("#map").css("display","none");
+		AOS.init({
+		    duration: 1200
+		  });
+		  onElementHeightChange(document.body, function(){
+		    AOS.refresh();
+		  });
+	}
+
+
+		function onElementHeightChange(elm, callback) {
+		    var lastHeight = elm.clientHeight
+		    var newHeight;
+		    
+		    (function run() {
+		        newHeight = elm.clientHeight;      
+		        if (lastHeight !== newHeight) callback();
+		        lastHeight = newHeight;
+
+		        if (elm.onElementHeightChangeTimer) {
+		          clearTimeout(elm.onElementHeightChangeTimer); 
+		        }
+
+		        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+		    })();
+		  }
 </script>
 </head>
-<body>
+<body onload="mapResize()">
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
