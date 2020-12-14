@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,7 +143,20 @@ $(function(){
 					tag += '<div class="offerBox" style="width: 310px";>';
 					tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+					tag += '<span class="ml-2" style="font-size:0.7em">';
+					if(vo.writedate>525600){
+						tag += Math.round(vo.writedate/525600)+'년';
+					} else if(vo.writedate>43200){
+						tag += Math.round(vo.writedate/43200) +'달';
+					} else if(vo.writedate>1440){
+						tag += Math.round(vo.writedate/1440) +'일';
+					} else if(vo.writedate>60){
+						tag += Math.round(vo.writedate/60) +'시간';
+					} else {
+						tag += Math.round(vo.writedate) +'분';
+					}
+					tag += '</span>';
+					
 					tag += '<br/><span>'+vo.care_addr+'</span>';
 					tag += '<br/><span>12/12 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
@@ -193,7 +207,20 @@ $(function(){
 					tag += '<div class="offerBox" style="width: 310px";>';
 					tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+					tag += '<span class="ml-2" style="font-size:0.7em">';
+					if(vo.writedate>525600){
+						tag += Math.round(vo.writedate/525600)+'년';
+					} else if(vo.writedate>43200){
+						tag += Math.round(vo.writedate/43200) +'달';
+					} else if(vo.writedate>1440){
+						tag += Math.round(vo.writedate/1440) +'일';
+					} else if(vo.writedate>60){
+						tag += Math.round(vo.writedate/60) +'시간';
+					} else {
+						tag += Math.round(vo.writedate) +'분';
+					}
+					tag += '</span>';					
+					
 					tag += '<br/><span>'+vo.care_addr+'</span>';
 					tag += '<br/><span>12/12 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
@@ -247,7 +274,20 @@ $(function(){
 					tag += '<div class="offerBox" style="width: 310px";>';
 					tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b> | '+vo.writedate+'</span>';
+					tag += '<br/><span><b>신생아 1명, 유아 1명</b></span> |';
+					tag += '<span class="ml-2" style="font-size:0.7em">';
+					if(vo.writedate>525600){
+						tag += Math.round(vo.writedate/525600)+'년';
+					} else if(vo.writedate>43200){
+						tag += Math.round(vo.writedate/43200) +'달';
+					} else if(vo.writedate>1440){
+						tag += Math.round(vo.writedate/1440) +'일';
+					} else if(vo.writedate>60){
+						tag += Math.round(vo.writedate/60) +'시간';
+					} else {
+						tag += Math.round(vo.writedate) +'분';
+					}
+					tag += '</span>';
 					tag += '<br/><span>'+vo.care_addr+'</span>';
 					tag += '<br/><span>12/12 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
@@ -348,7 +388,21 @@ $(function(){
 						<div class="offerBox" >
 							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate}</span>
+							<br/><span><b>신생아 1명, 유아 1명</b></span> | 
+							<!-- 마지막 업데이트일 -->
+							<span class="ml-2" style="font-size:0.7em">
+									<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.writedate/525600}"/>
+									<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.writedate/43200}"/>
+									<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.writedate/1440}"/>
+									<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.writedate/60}"/>					
+								<c:choose>
+									<c:when test="${vo.writedate>525600}">${edit_year}년</c:when>
+									<c:when test="${vo.writedate>43200}">${edit_month}달</c:when>
+									<c:when test="${vo.writedate>1440}">${edit_day}일</c:when>
+									<c:when test="${vo.writedate>60}">${edit_hour}시간</c:when>
+									<c:otherwise>${vo.writedate}분</c:otherwise>
+								</c:choose> 전
+							</span>
 							<br/><span>${vo.care_addr} </span>
 							<br/><span>12/12 시작</span>
 							<br/><span style="color: orange;">희망시급 ${vo.wish_wage}원
