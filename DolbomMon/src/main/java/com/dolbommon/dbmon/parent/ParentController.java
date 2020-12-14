@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.deal.DealDaoImp;
 import com.dolbommon.dbmon.member.MemberDaoImp;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
@@ -47,14 +48,15 @@ public class ParentController {
 	@RequestMapping("/parentApplyHistory") // 내가, 내게 지원한
 	public ModelAndView parentApplyHistory(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
-		
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
-		
+		List<RecruitBoardVO> list3 = dao2.selectTeacherHistory2(userid);
 		List<ParentHistoryVO> list = dao.selectMyRdBoard(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("list", list);
+		mav.addObject("list3", list3);
 		mav.setViewName("/parents/parentApplyHistory");
 		
 		return mav;
@@ -68,6 +70,9 @@ public class ParentController {
 		RecruitBoardVO rbVO = dao.recruitBoardSelect(no);
 		ChildrenVO cVO = dao.recruitChildSelect(no);
 		
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		String contractId = dao2.ContractStatus(no);
+		String contractId2 = dao2.ContractStatus2(no);
 		
 		
 		String who = (String)ses.getAttribute("who");
@@ -88,11 +93,13 @@ public class ParentController {
 			RegularDateVO rdVO = dao.recruitRegularDateSelect(no);
 			mav.addObject("rdVO", rdVO);
 		}
-		
+		System.out.println(contractId);
 		mav.addObject("apChk", apChk);
 		mav.addObject("tlist", tlist);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
+		mav.addObject("contractId", contractId);
+		mav.addObject("contractId2", contractId2);
 		mav.setViewName("/parents/parentView");
 		
 		return mav;

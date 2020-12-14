@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -71,10 +73,10 @@ public class TeacherController {
 			userid = req.getParameter("userid");
 		};
 		
-		System.out.println("test"+userid);
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
+		
 		dao.hitCount(vo);
 		int timeInt = 0;
 		String timeStr = "";
@@ -99,18 +101,24 @@ public class TeacherController {
 		String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
 		mvo.setUsername(hideName);
 		
-		
+		//후기, 경험, 인증
+		List<ReviewVO> review = dao.selectReview(userid);
 		List<ExperienceVO> list = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
 		CertificationVO cvo = cdao.selectCert(userid);
+		
+		
 		ModelAndView mav = new ModelAndView();
+		
 		
 		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
 		mav.addObject("mvo", mvo);
+		mav.addObject("review", review);
 		mav.addObject("cvo", cvo);
 		mav.addObject("list", list);
+		mav.addObject("userid", userid);
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
@@ -121,24 +129,40 @@ public class TeacherController {
 		return "/teacher/teacherHeart";
 	}
 
-	///내가 신청한 글 임시작성
+	///내구직현황 선생님
 	@RequestMapping("/teacherApplyHistory")
 	public ModelAndView teacherApplyHistory(HttpSession ses) {
 			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 			String userid = (String)ses.getAttribute("userid");
 			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
+			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
 			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
 			//List<MemberVO> mvoList = dao.selectTMemNo();
 			ModelAndView mav = new ModelAndView();
 			
 			//mav.addObject("mvoList", mvoList);
 			mav.addObject("list2", list2);
+			mav.addObject("list3", list3);
 			//mav.addObject("totalRecords", totalRecords);
 			mav.setViewName("/teacher/teacherApplyHistory");
 
 			return mav;
 	}
-		
+	
+	///행동내역 작성
+	@RequestMapping("/dealHistory")
+	public ModelAndView dealHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.teacherDealHistory(userid);
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("list2", list2);
+			mav.setViewName("/teacher/dealHistory");
+
+			return mav;
+	}
+	
 
 	@RequestMapping("/teacherEdit")
 	public ModelAndView teacherEdit(HttpSession ses) {
@@ -230,7 +254,8 @@ public class TeacherController {
 	}
 
 	@RequestMapping(value = "/teacherPictureOk", method = RequestMethod.POST)
-	public ModelAndView teacherPictureOk(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses,
+	@ResponseBody
+	public String teacherPictureOk(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses,
 			HttpServletRequest req) {
 
 		// folder where the pic will be saved
@@ -276,7 +301,7 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		int result = dao.updatePic(vo); // query
-		ModelAndView mav = new ModelAndView();
+		
 
 		if (result <= 0) {
 			// if the picture is not completely uploaded, then erase the picture from the
@@ -285,14 +310,18 @@ public class TeacherController {
 				File ff = new File(path, pic);
 				ff.delete();
 			}
-			// fail
-			//mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
-			mav.setViewName("/teacher/teacherResult");
-		} else { // success
-			mav.setViewName("redirect:teacherEdit");
+			
 		}
-		return mav;
+		System.out.println("픽="+pic);	
+		return pic;
 	}
+
+	
+
+	
+	
+	
+
 
 	@RequestMapping("/teacherExp")
 	public ModelAndView teacherExp(HttpSession ses) {
@@ -306,6 +335,7 @@ public class TeacherController {
 		
 		return mav;
 	}
+	
 	
 	//경험추가
 	@RequestMapping("/teacherAddExp")

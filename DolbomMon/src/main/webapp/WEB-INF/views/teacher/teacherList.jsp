@@ -219,7 +219,7 @@ input:checked + .slider:before {
    		<li class="list-group-item list-group-item-action"><a href="teacherView"><i class="fas fa-user-circle mx-2"></i> 내 프로필 보기</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherEdit"><i class="fas fa-user-edit mx-2"></i> 내 프로필 수정</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="teacherProof"><i class="fas fa-check-circle mx-2"></i> 인증 관리</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
-   		<li class="list-group-item list-group-item-action"><a href="#"><i class="fas fa-chalkboard-teacher mx-2"></i> 활동내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
+   		<li class="list-group-item list-group-item-action"><a href="dealHistory"><i class="fas fa-chalkboard-teacher mx-2"></i> 활동내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/myReport"><i class="fas fa-exclamation-triangle mx-2"></i> 신고내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    </ul>
    <br/>
@@ -228,7 +228,8 @@ input:checked + .slider:before {
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
 </div>
-<jsp:include page="../footer.jsp"/>
+
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
 

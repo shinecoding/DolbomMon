@@ -38,7 +38,17 @@ public class JobSearchController {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList(); //선생님 리스트
+
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		String activity_type = req.getParameter("activity_type");
+		System.out.println("000000"+activity_type);
+		if(req.getParameter("activity_type")==null) {
+			list = dao.jobSearchBoardList(9999); //선생님 리스트
+		}else {
+			list = dao.jobSearchActType(activity_type);
+		}
+		
+
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
 		TeacherVO mvo = null;
 		if(req.getParameter("userid")==null) {
@@ -66,7 +76,7 @@ public class JobSearchController {
 	@RequestMapping("/teacher_chart") 
 	public ModelAndView teacher_chart() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList(10);
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		//List<MemberVO> mvoList = dao.selectTMem();
 		ModelAndView mav = new ModelAndView();
@@ -94,12 +104,13 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchCare(String care_type) {			
+	public List<TeacherVO> searchCare(String care_type) {
+		System.out.println("케어 타입"+care_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.jobSearchBoardList();
+			list = dao.jobSearchBoardList(10);
 		}else {
 			list = dao.jobSearchCareType(care_type); 	
 		}
@@ -112,48 +123,63 @@ public class JobSearchController {
 
 	@RequestMapping(value="/filterOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> filterOrder(String order){
+	public List<TeacherVO> filterOrder(String order, int count){
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(order.equals("last_edit")){
-			list = dao.filterLastEdit();
+			list = dao.filterLastEdit(count);
 		} else if(order.equals("certi_cnt")){
-			list = dao.filterCertiCnt();
+			list = dao.filterCertiCnt(count);
 		} else if(order.equals("wage_low")){
-			list = dao.filterWageLow();
+			list = dao.filterWageLow(count);
 		} else if(order.equals("wage_high")){
-			list = dao.filterWageHigh();
+			list = dao.filterWageHigh(count);
 		} else if(order.equals("F")) {
-			list = dao.filterGender("F");
+			list = dao.filterGender("F", count);
 		} else if(order.equals("M")) {
-			list = dao.filterGender("M");
+			list = dao.filterGender("M", count);
 		} else if(order.equals("all")) {
-			list = dao.jobSearchBoardList();
+			list = dao.jobSearchBoardList(count);
 		}
 		
 		return list;
 	}
 	
+	
+	
 	@RequestMapping(value="/likeOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> likeOrder(String order, HttpSession ses){
+	public List<TeacherVO> likeOrder(String order, HttpSession ses, HttpServletRequest req, TeacherVO vo){
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		String userid = (String)ses.getAttribute("userid");
+		vo.setUserid(userid);
+		
+		
+		//페이징
+		String nowPageTxt = req.getParameter("nowPage");
+		if(nowPageTxt!=null) { //페이지 번호를 request한 경우
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
+			}
+				
+		vo.setTotalRecord(dao.getHeartRecord(userid)); //총 레코드 수
+				
 		
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		String sql = sqlSession.getConfiguration().getMappedStatement("likeOrder").getBoundSql(vo).getSql();
+		System.out.println("sql="+sql);
 		
-		if(order.equals("like_order")){
-			list = dao.likeOrder(userid);
+		if(order.equals("last_edit")){
+			list = dao.likeOrder(vo);
 		} else if(order.equals("certi_cnt")){
-			list = dao.likeCertiCnt(userid);
+			list = dao.likeCertiCnt(vo);
 		} else if(order.equals("wage_low")){
-			list = dao.likeWageLow(userid);
+			list = dao.likeWageLow(vo);
 		} else if(order.equals("wage_high")){
-			list = dao.likeWageHigh(userid);
+			list = dao.likeWageHigh(vo);
 		}
 		
 		return list;
@@ -161,38 +187,58 @@ public class JobSearchController {
 
 
 	@RequestMapping("/parentHeart") //부모 찜리스트에 보여지는 선생님 정보
-	public ModelAndView parentHeart(HttpSession ses, HttpServletRequest req, HeartPagingVO hvo) {
+	public ModelAndView parentHeart(HttpSession ses, HttpServletRequest req, TeacherVO vo) {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		
 		//리스트보여주기
 		String userid = (String)ses.getAttribute("userid");
 		System.out.println("세션 아이디"+userid);
-		List<TeacherVO> list = dao.selectHeart(userid);
-		System.out.println("리스트"+list);
+		vo.setUserid(userid);
+		
+		//String sql = sqlSession.getConfiguration().getMappedStatement("selectHeart").getBoundSql("userid").getSql();
+		//System.out.println("sql="+sql);
+		
 		//페이징
 		String nowPageTxt = req.getParameter("nowPage");
 		if(nowPageTxt!=null) { //페이지 번호를 request한 경우
-			hvo.setNowPage(Integer.parseInt(nowPageTxt));
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
 		}
-		hvo.setTotalRecord(dao.getTotalRecord()); //총 레코드 수
+		
+		vo.setTotalRecord(dao.getHeartRecord(userid)); //총 레코드 수
+		
+		List<TeacherVO> list = dao.selectHeart(vo);
+		System.out.println("리스트"+list);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("hvo", hvo);
+		mav.addObject("nowPage", vo.getNowPage());
+		mav.addObject("vo", vo);
 		mav.addObject("list", list);
 		mav.setViewName("/parents/parentHeart");
 		return mav;
 	}
 	@RequestMapping("/selectActive") //찜리스트 전체&구인중
 	@ResponseBody
-	public List<TeacherVO> selectActive(HttpSession ses, String active) {
+	public List<TeacherVO> selectActive(HttpSession ses, String active,  HttpServletRequest req, TeacherVO vo) {
 		
 		String userid = (String)ses.getAttribute("userid");
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		vo.setUserid(userid);
+		
+		//페이징
+		String nowPageTxt = req.getParameter("nowPage");
+		if(nowPageTxt!=null) { //페이지 번호를 request한 경우
+			vo.setNowPage(Integer.parseInt(nowPageTxt));
+			}
+		vo.setTotalRecord(dao.getHeartRecord(userid)); //총 레코드 수
+						
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
+			
+		
 		
 		if(active.equals("allActive")) {
-			list = dao.selectHeart(userid);
+			list = dao.selectHeart(vo);
 		}else if(active.equals("onlyActive")) {
-			list = dao.selectHeartActive(userid);
+			list = dao.selectHeartActive(vo);
 		}
 		
 		return list;

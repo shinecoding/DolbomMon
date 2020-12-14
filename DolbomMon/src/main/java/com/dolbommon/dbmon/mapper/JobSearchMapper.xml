@@ -4,8 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.JobSearchDaoImp">
 
-	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select distinct t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y'
+	<select id="jobSearchBoardList" resultType="com.dolbommon.dbmon.search.TeacherVO" parameterType="int">
+		select * from
+		(select distinct t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y')
+		where <![CDATA[rownum<=${count}]]>
 	</select>
 	<!-- 필터 -->
 	<select id="jobSearchActType" resultType="com.dolbommon.dbmon.search.TeacherVO">
@@ -15,23 +17,47 @@
 		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.care_type = #{care_type} and t.active = 'Y'
 	</select>
 	<select id="filterLastEdit" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by t.last_edit desc
+		select * from
+		(select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by t.last_edit desc)
+		where <![CDATA[rownum<=${count}]]>
 	</select>
 	<select id="filterCertiCnt" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by c.certi_cnt desc
+		select * from
+		(select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by c.certi_cnt desc)
+		where <![CDATA[rownum<=${count}]]>
 	</select>
 	<select id="filterWageLow" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by t.desired_wage asc
+		select * from
+		(select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by t.desired_wage asc)
+		where <![CDATA[rownum<=${count}]]>
 	</select>
 	<select id="filterWageHigh" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by t.desired_wage desc
+		select * from
+		(select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' order by t.desired_wage desc)
+		where <![CDATA[rownum<=${count}]]>
 	</select>
 	<select id="filterGender" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' and m.gender = #{gender}
+		select * from
+		(select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.cardid  from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid  left join liket l on t.userid=l.cardid where m.who = 'T' and t.active = 'Y' and m.gender = #{gender})
+		where <![CDATA[rownum<=${count}]]>
 	</select>
 	<!-- 좋아요 -->
 	<select id="selectHeart" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T'
+		select * from
+		(select * from 
+		(select t.userid userid, m.username username, m.lat lat, m.lng lng, m.addr addr, 
+		m.gender gender, trunc(months_between(trunc(sysdate), birth)/12) as birth,
+		 m.no no, t.pic pic, t.care_type care_type, t.child_age child_age, 
+		 t.activity_type activity_type, t.desired_wage desired_wage, t.area1 area1,
+		  t.headcount headcount, t.discussion discussion, 
+		  t.active active, round((sysdate - t.last_edit) *1440) as last_edit, 
+		  c.identi_status identi_status, c.school_status school_status, 
+		  c.license_status license_status, c.crime_status crime_status, l.userid userid2, l.cardid cardid 
+		 from teacher t join member m on t.userid= m.userid left join certification c 
+		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
+		 l.userid=#{userid} and m.who = 'T' order by m.no desc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by no asc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by no desc
 	</select>
 	<insert id="insertHeart" parameterType="com.dolbommon.dbmon.search.LiketVO">
 		insert into liket(userid, cardid) values(#{userid}, #{cardid})
@@ -40,19 +66,92 @@
 		delete from liket where userid = #{userid} and cardid = #{cardid}
 	</delete>
 	<select id="selectHeartActive" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' and t.active = 'Y'
+		select * from
+		(select * from 
+		(select t.userid userid, m.username username, m.lat lat, m.lng lng, m.addr addr, 
+		m.gender gender, trunc(months_between(trunc(sysdate), birth)/12) as birth,
+		 m.no no, t.pic pic, t.care_type care_type, t.child_age child_age, 
+		 t.activity_type activity_type, t.desired_wage desired_wage, t.area1 area1,
+		  t.headcount headcount, t.discussion discussion, 
+		  t.active active, round((sysdate - t.last_edit) *1440) as last_edit, 
+		  c.identi_status identi_status, c.school_status school_status, 
+		  c.license_status license_status, c.crime_status crime_status, c.certi_cnt certi_cnt, l.userid userid2, l.cardid cardid 
+		 from teacher t join member m on t.userid= m.userid left join certification c 
+		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
+		 l.userid=#{userid} and m.who = 'T' and t.active = 'Y' order by m.no desc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by no asc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by no desc
 	</select>
 	<select id="likeOrder" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' order by last_edit
+		select * from
+		(select * from 
+		(select t.userid userid, m.username username, m.lat lat, m.lng lng, m.addr addr, 
+		m.gender gender, trunc(months_between(trunc(sysdate), birth)/12) as birth,
+		 m.no no, t.pic pic, t.care_type care_type, t.child_age child_age, 
+		 t.activity_type activity_type, t.desired_wage desired_wage, t.area1 area1,
+		  t.headcount headcount, t.discussion discussion, 
+		  t.active active, round((sysdate - t.last_edit) *1440) as last_edit, 
+		  c.identi_status identi_status, c.school_status school_status, 
+		  c.license_status license_status, c.crime_status crime_status, c.certi_cnt certi_cnt, l.userid userid2, l.cardid cardid 
+		 from teacher t join member m on t.userid= m.userid left join certification c 
+		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
+		 l.userid=#{userid} and m.who = 'T' order by t.last_edit desc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by last_edit asc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by last_edit desc
+		
+		
 	</select>
 	<select id="likeCertiCnt" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' order by certi_cnt
+		select * from
+		(select * from 
+		(select t.userid userid, m.username username, m.lat lat, m.lng lng, m.addr addr, 
+		m.gender gender, trunc(months_between(trunc(sysdate), birth)/12) as birth,
+		 m.no no, t.pic pic, t.care_type care_type, t.child_age child_age, 
+		 t.activity_type activity_type, t.desired_wage desired_wage, t.area1 area1,
+		  t.headcount headcount, t.discussion discussion, 
+		  t.active active, round((sysdate - t.last_edit) *1440) as last_edit, 
+		  c.identi_status identi_status, c.school_status school_status, 
+		  c.license_status license_status, c.crime_status crime_status, c.certi_cnt certi_cnt, l.userid userid2, l.cardid cardid 
+		 from teacher t join member m on t.userid= m.userid left join certification c 
+		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
+		 l.userid=#{userid} and m.who = 'T' order by c.certi_cnt desc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by certi_cnt asc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by certi_cnt desc
+		
 	</select>
 	<select id="likeWageLow" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' order by t.desired_wage asc
+		select * from
+		(select * from 
+		(select t.userid userid, m.username username, m.lat lat, m.lng lng, m.addr addr, 
+		m.gender gender, trunc(months_between(trunc(sysdate), birth)/12) as birth,
+		 m.no no, t.pic pic, t.care_type care_type, t.child_age child_age, 
+		 t.activity_type activity_type, t.desired_wage desired_wage, t.area1 area1,
+		  t.headcount headcount, t.discussion discussion, 
+		  t.active active, round((sysdate - t.last_edit) *1440) as last_edit, 
+		  c.identi_status identi_status, c.school_status school_status, 
+		  c.license_status license_status, c.crime_status crime_status, c.certi_cnt certi_cnt, l.userid userid2, l.cardid cardid 
+		 from teacher t join member m on t.userid= m.userid left join certification c 
+		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
+		 l.userid=#{userid} and m.who = 'T' order by t.desired_wage asc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by desired_wage desc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by desired_wage asc
 	</select>
 	<select id="likeWageHigh" resultType="com.dolbommon.dbmon.search.TeacherVO">
-		select t.userid, m.username, m.lat, m.lng, m.addr, m.gender, trunc(months_between(trunc(sysdate), birth)/12) as birth, m.no, t.pic, t.care_type, t.child_age, t.activity_type, t.desired_wage, t.area1, t.headcount, t.discussion, t.active, round((sysdate - t.last_edit) *1440) as last_edit, c.identi_status, c.school_status, c.license_status, c.crime_status, l.userid, l.cardid from teacher t join member m on t.userid= m.userid left join certification c on t.userid= c.userid join liket l on t.userid=l.cardid where l.userid=#{param1} and m.who = 'T' order by t.desired_wage desc
+		select * from
+		(select * from 
+		(select t.userid userid, m.username username, m.lat lat, m.lng lng, m.addr addr, 
+		m.gender gender, trunc(months_between(trunc(sysdate), birth)/12) as birth,
+		 m.no no, t.pic pic, t.care_type care_type, t.child_age child_age, 
+		 t.activity_type activity_type, t.desired_wage desired_wage, t.area1 area1,
+		  t.headcount headcount, t.discussion discussion, 
+		  t.active active, round((sysdate - t.last_edit) *1440) as last_edit, 
+		  c.identi_status identi_status, c.school_status school_status, 
+		  c.license_status license_status, c.crime_status crime_status, c.certi_cnt certi_cnt, l.userid userid2, l.cardid cardid 
+		 from teacher t join member m on t.userid= m.userid left join certification c 
+		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
+		 l.userid=#{userid} and m.who = 'T' order by t.desired_wage desc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by desired_wage asc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by desired_wage desc	
 	</select>
 	<!-- 지도 -->
 	<select id="selectAllTeacher" resultType="com.dolbommon.dbmon.search.TeacherVO">
@@ -67,7 +166,13 @@
 	</select>
 	
 	<select id="getTotalRecord" resultType="int">	
-		select count(userid) from teacher
+		select count(userid) from teacher where active = 'Y'
+	</select>
+	<select id="getHeartRecord" resultType="int">	
+		select count(userid) from liket where userid = #{userid}
+	</select>
+	<select id="heartPaging" resultType="com.dolbommon.dbmon.search.TeacherVO">
+		
 	</select>
 
 </mapper>

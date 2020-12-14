@@ -35,7 +35,7 @@
 	 font-size:60px;
 	 margin: 8px;
 	}
-	#dbmDiv{height:200px;margin-top:50px;}
+	#dbmDiv{margin-top:50px;}
 	#applyDbmList h6{height:7%;}
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
@@ -58,6 +58,13 @@
  	#timebarDiv {position:relative;width:0px;height:0px;}
  	.timebar{position:absolute;top:50px; background-color:orange;opacity:0.7; width:50px;}
  	.clearfix:after { clear:both; }
+ 	
+ 	.viewContract{
+		position: relative;
+	    margin: 0 5px;
+	    top: 0px;
+	    right: 0px;
+	}
 </style>
 
 <script>
@@ -188,7 +195,7 @@
 		var popupY= (window.screen.height / 2) - (popupHeight / 2);
 		$(document).on("click",".cBtn",function(){
 			popupWidth = 1060;
-			popupHeight = 596;
+			popupHeight = 656;
 			var userid = $(this).attr('id');
 			window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
@@ -199,6 +206,13 @@
 			var userid = $(this).attr('id');
 			window.open('/dbmon/contractOpen?userid='+userid+'&no='+${rbVO.job_board_no }, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
+		$(document).on("click",".viewContract",function(){
+			popupWidth = 1060;
+			popupHeight = 1600;
+			var origin_no = $(this).attr('id');
+			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		});
+		
 		
 		
 		$("#testBtn").click(function(){
@@ -787,7 +801,7 @@
 		<c:if test="${userid == rbVO.userid}">
 			<h5>나에게 신청한 돌봄몬</h5>
 			<c:forEach var="tlist" items="${tlist }">
-		        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
+		        <div class="wrapper2" style="margin:15px 0;" id="dbmDiv">
 		        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 					<ul class="list-group">
 						<li class="list-group-item"><i class="fas fa-star"></i>
@@ -804,16 +818,31 @@
 									<h6><b>지원시간</b> | ${tlist.apply_date }</h6>
 									<h7>CCTV 촬영가능여부 - ${tlist.cctv } | ? | ? </h7><br/><br/>
 									<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
-									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn" style="float:right; margin:0 5px;" /><input type="button" class="btn btn-warning contractOpen" id="${tlist.userid }" value="계약하기" style="float:right; margin:0 5px;"/><input type="button" class="btn btn-warning cBtn" id="${tlist.userid }" value="협의하기" style="float:right; margin:0 5px;"/>
-									
+									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn" style="float:right; margin:0 5px;" />
+									<input type="button" class="btn btn-warning contractOpen" id="${tlist.userid }" value="계약하기" style="float:right; margin:0 5px;"/>
+									<input type="button" class="btn btn-warning cBtn" id="${tlist.userid }" value="협의하기" style="float:right; margin:0 5px;"/>
+									<div style="height:1px; float:right;">
+										<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0 5px;" />
+									</div>
+									<br/>
+									<c:if test="${contractId==tlist.userid }">
+										<span style="color:orange; font-size:14px;position:relative; top:10px;"><b>계약이 진행중입니다.</b></span>
+									</c:if>
+									<c:if test="${contractId2==tlist.userid }">
+										<span style="color:red; font-size:14px; position:relative; top:10px;"><b>최근에 계약이 거절되었습니다.</b></span>
+									</c:if>
 								</li>
 							</ul>
+
 						</li>
 					</ul>
 				</div>
 			</c:forEach>
+		<script>
+		console.log("${contractId}");
+		console.log("${contractId2}");
+		</script>
 			
-					
       	</c:if>
       	
         <c:if test="${who=='T' }">

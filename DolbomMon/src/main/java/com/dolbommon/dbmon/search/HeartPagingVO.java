@@ -8,7 +8,11 @@ public class HeartPagingVO {
 	private int onePageRecord=5; //한 페이지에 표시할 레코드 수
 	private int onePageNumCount=5; //한번에 표시할 페이지 번호 숫자 
 	private int startPageNum = 1; //페이지 번호의 시작페이지
+	private int currentPageRecord=nowPage*onePageRecord;
 	private int lastPageRecordCount = 10; //마지막페이지의 선택 레코드 수
+	
+	public HeartPagingVO() {}
+	
 	
 	public int getNowPage() {
 		return nowPage;
@@ -16,6 +20,7 @@ public class HeartPagingVO {
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
 		
+		currentPageRecord = nowPage * onePageRecord;
 		//시작페이지 번호 계산
 		startPageNum = (nowPage-1)/onePageNumCount* onePageNumCount+1;
 	}
@@ -62,6 +67,16 @@ public class HeartPagingVO {
 	}
 	public void setLastPageRecordCount(int lastPageRecordCount) {
 		this.lastPageRecordCount = lastPageRecordCount;
+	}
+
+
+	public int getCurrentPageRecord() {
+		return currentPageRecord;
+	}
+
+
+	public void setCurrentPageRecord(int currentPageRecord) {
+		this.currentPageRecord = currentPageRecord;
 	}
 	
 	

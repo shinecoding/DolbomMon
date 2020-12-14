@@ -37,7 +37,7 @@ $(function(){
 });
 
 function laterUpload(){
-	$("#pic").val("");
+	location.href = "<%=request.getContextPath()%>/dbm/introduce/np";
 }
 
 </script>
@@ -54,7 +54,7 @@ function laterUpload(){
 		</div>
 		<p>내 사진을 올리면 부모회원의 선택을 <span>5배 더 많이</span> 받을 수 있습니다.</p>		
 		<input id="uploadSubmit" type="submit" value="지금 올리기"  />
-		<input id="later" type="submit" value="나중에 하기" onclick="laterUpload();"/>
+		<input id="later" type="button" value="나중에 하기" onclick="laterUpload();"/>
 	</div>
 	</form>
 </body>

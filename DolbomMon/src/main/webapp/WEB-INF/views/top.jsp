@@ -15,7 +15,7 @@
 
 		 //채팅창 오픈
 			var popupWidth = 1060;
-			var popupHeight = 596;
+			var popupHeight = 656;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
 			var popupY= (window.screen.height / 2) - (popupHeight / 2);
 			$(document).on("click",".ccBtn",function(){
@@ -192,17 +192,17 @@ EDIT ON
 	           class="logo" alt="Logo" src="home" style="margin-bottom:20px; float:left;" 
 	           Onclick="location.href='/dbmon'"/>
 	
-	
+				<c:if test="${logStatus != null || logStatus=='Y'}">
 	           <span style="float:right">
-	           <button class="btn btn-primary ppp ccBtn">채팅</button></a>
+	           <button class="btn btn-primary ppp ccBtn" style="margin-top:7px;">채팅</button>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	           <button class="btn btn-primary ppp">쪽지</button></a>
-	           <a href="/dbmon/temporaryLogin">
+	           <button class="btn btn-primary ppp" style="margin-top:7px;">쪽지</button></a>
+	          <!-- <a href="/dbmon/temporaryLogin">
 	           <button class="btn btn-info ppp">임시선생로그인</button></a>
 	           <a href="/dbmon/temporaryLoginP">
-	           <button class="btn btn-info ppp">임시부모로그인</button></a>
-	           </span>
-	           
+	           <button class="btn btn-info ppp">임시부모로그인</button></a>--> 
+	           </span> 
+	           </c:if>
 	       
 		<a class="btn" style="float:right"> 
 		 	<c:if test="${logStatus == null || logStatus=='N'}">
@@ -216,7 +216,7 @@ EDIT ON
 	    
 	         <c:if test="${logStatus != null || logStatus=='Y'}">
 
-	         ${username }님<input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username }님 <input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         
