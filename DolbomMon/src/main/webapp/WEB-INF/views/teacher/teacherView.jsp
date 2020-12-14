@@ -13,7 +13,6 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 
 <script>
 	$(function(){
@@ -488,7 +487,8 @@
 </script>
 <style>
 .container{width:800px;
-font-family: 'Poor Story', cursive;}
+}
+
 i{color:gray;}
 #profimg{
 	width:400px;
@@ -823,16 +823,24 @@ border-radius:10px;
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">
-   		<c:forEach var="evo" items="${list}">
-   			<b>${evo.exp_content}</b><br/>
-   			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
-   		</c:forEach>	
+   		<c:if test="${list==null}">
+   		작성 시 부모로부터<br/>
+		4배 더 많은 선택을 받게 됩니다!
+   		</c:if>
+   		<c:if test="${list!=null }">
+	   		<c:forEach var="evo" items="${list}">
+	   			<b>${evo.exp_content}</b><br/>
+	   			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
+	   		</c:forEach>
+   		</c:if>
    		</li>
    		</ul>
    		
+   		<c:if test="${review!=null}">
    		<h5>후기</h5>
    		<ul class="list-group">
    		<li class="list-group-item">
+   		
    		<c:forEach var="rvo" items="${review}">
    			<ul class="list-group list-group-horizontal" style="margin:0; padding:0;">
 	   			<li class="list-group-item" style="border:none; margin-top:5px;padding-left:0;">
@@ -872,7 +880,7 @@ border-radius:10px;
    		</c:forEach>	
    		</li>
    		</ul>
-   		
+   		</c:if>
    		
    <br/>
    

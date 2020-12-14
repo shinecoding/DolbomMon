@@ -19,13 +19,12 @@
 	crossorigin="anonymous" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <style>
 .container {
 	width: 800px;
 	text-align:center;
-	font-family: 'Poor Story', cursive;
+	font-family: 'Jua', sans-serif;
 }
 
 #title {
