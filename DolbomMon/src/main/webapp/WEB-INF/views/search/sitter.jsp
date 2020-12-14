@@ -178,12 +178,13 @@ var order;
 	    
 		//========================ajax=========for selectbox=================
 		
-			
+
 		$(document).on("change", "#dropdownCT", function(){
 			count=12;
 			tabType=2;
 			care_type = $(this).val();
 			dropdownAjax(care_type)
+
    	 	});//ajax
 		function dropdownAjax(care_type){
 			console.log("케어타입="+care_type);
