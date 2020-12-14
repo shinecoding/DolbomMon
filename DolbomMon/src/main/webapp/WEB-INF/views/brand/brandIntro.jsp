@@ -14,10 +14,7 @@
 <style>
 
    body,ul,li{margin:0; padding:0; text-align:center;}
-   .img1{
-      width:100%;
-      height:300px;
-   }
+
    #upper{
       text-align:center;
       color:black;
@@ -70,7 +67,7 @@
  
 </script>
 </body>
-<img src="img/intro2.PNG" class="img1"/>
+
 <!-- ------------------footer------------- -->
 <hr/>
 <jsp:include page="../footer.jsp"/>
