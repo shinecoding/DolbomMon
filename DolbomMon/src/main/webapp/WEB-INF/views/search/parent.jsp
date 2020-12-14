@@ -137,7 +137,7 @@ $(function(){
     $(document).on("keyup", "#locFilter", function(){
     	var value = $(this).val().toLowerCase();
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    		$(this).parent().parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
     	});
     });
 	
@@ -435,7 +435,7 @@ $(function(){
 	var positions = [
 		<c:forEach var="vo" items="${hash}">
 	    {
-	        content: '<div style="padding:5px;">${vo.username.substring(0,1)}O${vo.username.substring(2)}<br/><a href="teacherView?userid=${vo.userid}">프로필보기</a></div>', 
+	        content: '<div style="padding:5px;">${vo.username.substring(0,1)}O${vo.username.substring(2)}<br/><a href="parentView?=${vo.job_board_no}">프로필 보기</a></div>', 
 	        latlng: new kakao.maps.LatLng("${vo.lat}", "${vo.lng}")
 	    },
 	    </c:forEach>
@@ -444,7 +444,7 @@ $(function(){
 	// 마커 이미지의 이미지 주소입니다
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 	    
-	for (var i = 0; i < positions.length; i ++) {
+	for (var i=0; i<positions.length; i++) {
 	    
 	    // 마커 이미지의 이미지 크기 입니다
 	    var imageSize = new kakao.maps.Size(24, 35); 
