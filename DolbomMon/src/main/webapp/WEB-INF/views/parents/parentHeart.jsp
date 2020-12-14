@@ -79,6 +79,26 @@ $(function(){
     	location.href="teacherView?userid="+$(this).parent().parent().attr('id')+"nowPage="+$(this).attr('id');
     });
 	
+	//신청하기&협의하기
+    var popupWidth = 1060;
+	var popupHeight = 596;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	$(document).on("click", ".shinchung", function(){
+		console.log('test');
+		popupWidth = 1060;
+		popupHeight = 1600;
+		var userid = $(this).attr('id');
+		console.log(userid);
+		window.open('/dbmon/contractOpenT?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	})
+	$(document).on("click",".cBtn",function(){
+		popupWidth = 1060;
+		popupHeight = 656;
+		var userid = $(this).attr('id');
+		window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	});
+	
 	//필터
 	$(document).on("change", "#likeDropdown", function(){
 		var order = $(this).val();
@@ -111,10 +131,8 @@ $(function(){
 						}		
 						
 						tag+= ' class="rounded-circle"/><br/>';
-						
-						tag+= '<div class="badge badge-warning badge-pill ml-3" >신청하기</div>';
 						tag+= '</li>';
-						tag+= '<li class="list-group-item border-0 col-10">';
+						tag+= '<li class="list-group-item border-0 col-8">';
 						tag+= '<h6><b>' +vo.username.substring(0,1)+ 'O' + vo.username.substring(2)+ '</b>';
 						
 						tag+= '<span class="ml-2" style="font-size:0.7em">';
@@ -137,6 +155,10 @@ $(function(){
 						tag+= '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+vo.desired_wage + '원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion+ '</h6>';
 						tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
 						tag+= '</li>';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<button class="shinchung btn btn-warning mb-3">신청</button>';
+						tag += '<button class="cBtn btn btn-warning">협의</button>';
+						tag += '</li>';
 						tag+= '</ul>';
 							
 						if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
@@ -161,7 +183,6 @@ $(function(){
 						tag += '<ul class="list-group list-group-horizontal">';
 						tag += '<li class="list-group-item border-0 col-2">';
 						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';
-						tag += '<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>';
 						tag += '</li>';
 						tag += '<li class="list-group-item border-0 col-10" style="color:gray">';
 						tag += '<h6><b>비공개</b>';
@@ -233,9 +254,8 @@ $(function(){
 						
 						tag+= ' class="rounded-circle"/><br/>';
 						
-						tag+= '<div class="badge badge-warning badge-pill ml-3" >신청하기</div>';
 						tag+= '</li>';
-						tag+= '<li class="list-group-item border-0 col-10">';
+						tag+= '<li class="list-group-item border-0 col-8">';
 						tag+= '<h6><b>' +vo.username.substring(0,1)+ 'O' + vo.username.substring(2)+ '</b>';
 						
 						tag+= '<span class="ml-2" style="font-size:0.7em">';
@@ -258,6 +278,10 @@ $(function(){
 						tag+= '<h6><i class="fas fa-coins mr-1"></i>희망시급 : '+vo.desired_wage + '원 | <i class="fas fa-hands-helping"></i>협의유무: '+ vo.discussion+ '</h6>';
 						tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
 						tag+= '</li>';
+						tag += '<li class="list-group-item border-0 col-2">';
+						tag += '<button class="shinchung btn btn-warning mb-3">신청</button>';
+						tag += '<button class="cBtn btn btn-warning">협의</button>';
+						tag += '</li>';
 						tag+= '</ul>';
 							
 						if(vo.identi_status =="Y" || vo.license_status =="Y" || vo.school_status== "Y" || vo.crime_status=="Y"){
@@ -282,9 +306,7 @@ $(function(){
 						tag += '<li class="list-group-item">';
 						tag += '<ul class="list-group list-group-horizontal" style="cursor:pointer" onclick="location.href="teacherView?userid=${vo.userid}"" >';
 						tag += '<li class="list-group-item border-0 col-2">';
-						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';
-						tag += '<div class="badge badge-secondary badge-pill ml-3" > 비공개</div>';
-						tag += '</li>';
+						tag += '<img src="img/profilepic.png" alt="'+vo.userid+'" class="rounded-circle"/><br/>';						tag += '</li>';
 						tag += '<li class="list-group-item border-0 col-10" style="color:gray">';
 						tag += '<h6><b>비공개</b>';
 						tag += '</h6>';
@@ -339,9 +361,8 @@ $(function(){
 				<ul class="list-group list-group-horizontal" style="cursor:pointer" id="${hvo.nowPage}">
 					<li class="list-group-item border-0 col-2">
 						<img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> alt="${vo.userid}" class="rounded-circle"/><br/>
-						<div class="badge badge-warning badge-pill ml-3" >신청하기</div>
 					</li>
-					<li class="list-group-item border-0 col-10">
+					<li class="list-group-item border-0 col-8">
 						<h6><b>${vo.username.substring(0,1)}O${vo.username.substring(2)}</b>
 						<span class="ml-2" style="font-size:0.7em">
 								<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.last_edit/525600}"/>
@@ -360,6 +381,10 @@ $(function(){
 						<h6 class="loc"><i class="fas fa-map-marker-alt"></i>${vo.area1}</h6>
 						<h6><i class="fas fa-coins mr-1"></i>희망시급 : ${vo.desired_wage}원 | <i class="fas fa-hands-helping"></i>협의유무: ${vo.discussion}</h6>
 						<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
+					</li>
+					<li class="list-group-item border-0 col-2">
+						<button class="shinchung btn btn-warning mb-3">신청</button>
+						<button class="cBtn btn btn-warning">협의</button>
 					</li>
 				</ul>
 		
@@ -413,7 +438,7 @@ $(function(){
 	
 	
 	
-	
+	<!------------------------------- 페이징 ------------------------>
 	<nav id="heartPaging" aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<li class="page-item">
