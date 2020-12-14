@@ -1,70 +1,77 @@
 package com.dolbommon.dbmon;
 
-import javax.inject.Inject;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.dolbommon.dbmon.QnA.QnAService;
+import com.dolbommon.dbmon.QnA.QnAVO;
+import com.dolbommon.dbmon.QnA.QnaDaoImp;
 
 
 @Controller
 public class HomeController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	
-	  @Inject QnAService service; SqlSession sqlSession;
+	  SqlSession sqlSession;
 	 
-	 public SqlSession getSqlSession() { return sqlSession; }
+	 public SqlSession getSqlSession() {
+		 return sqlSession; 
+		 }
 	 
-	  @Autowired public void setSqlSession(SqlSession sqlSession) { this.sqlSession
-	  = sqlSession; }
+	  @Autowired 
+	  public void setSqlSession(SqlSession sqlSession) { 
+		  this.sqlSession = sqlSession; 
+		  }
+	  @Autowired 
+	  DataSourceTransactionManager transactionManager;
 	 
 	
-	  @Autowired DataSourceTransactionManager transactionManager;
-	 
-	
-	
+	//자주묻는질문 게시판 리스트
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) throws Exception{
+	public ModelAndView home(QnAVO qna_vo, HttpServletRequest req) throws Exception{
+		
+		ModelAndView mav = new ModelAndView();
+		
+		QnaDaoImp qDao = sqlSession.getMapper(QnaDaoImp.class);
 		
 		
+		List<QnAVO> qna_list = qDao.QnaList(qna_vo);
+	
+		mav.addObject("qna_list", qna_list);
+		mav.addObject("QnAVO", qna_vo);
 		
-		logger.info("home");
-		
-		model.addAttribute("qna_list",service.QnaList());
-		
-		
-		return "home";
+		mav.setViewName("/home");
+		return mav;
 	}
-	/*
-	 * //공지사항 게시글 보기
-	 * 
-	 * @RequestMapping("/qnaBoardView") public ModelAndView qnaBoardView(int seq,
-	 * HttpServletRequest req, HttpServletResponse res) throws Exception {
-	 * 
-	 * QnAVO vo = new QnAVO();
-	 * 
-	 * vo.setSeq(Integer.parseInt(req.getParameter("seq")));
-	 * 
-	 * 
-	 * QnADaoIml dao = sqlSession.getMapper(QnADaoIml.class);
-	 * 
-	 * 
-	 * QnAVO resultVo = dao.qnaBoardSelect(vo.getSeq());
-	 * 
-	 * ModelAndView mav = new ModelAndView(); mav.addObject("vo", resultVo);
-	 * 
-	 * mav.setViewName("/qnaBoardView");
-	 * 
-	 * return mav; }
-	 */
+
+	//게시글 보기
+		@RequestMapping("/qnaBoardView")
+		public ModelAndView qnaBoardView(int seq, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+			
+			QnAVO qna_vo = new QnAVO();
+			
+			qna_vo.setSeq(Integer.parseInt(req.getParameter("seq")));
+			
+			QnaDaoImp dao = sqlSession.getMapper(QnaDaoImp.class);
+
+			QnAVO resultVo = dao.qnaBoardView(qna_vo.getSeq());
+			System.out.println("111111"+resultVo.getContent());
+			System.out.println("222222"+resultVo.getSeq());
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("qna_vo", resultVo);
+			mav.setViewName("QnA/qnaBoardView");
+		
+			return mav;
+		}
 }
 

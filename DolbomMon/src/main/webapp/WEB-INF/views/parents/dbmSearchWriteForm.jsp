@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/dbmSearchWriteForm.css" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 <link href="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.css" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -18,6 +20,8 @@
 <script src="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <script>
 	$(function(){
@@ -621,14 +625,88 @@
 		console.log("end_date => " + endDate);
 		setEndDate = endDate.getFullYear()+"-"+(endDate.getMonth()+1)+"-"+endDate.getDate();
 		document.getElementById("end_date").value = setEndDate;
+
+		/* aos적용하기 */
+		   $(function() {
+			     AOS.init({
+			       duration: 1200
+			     });
+			     onElementHeightChange(document.body, function(){
+			       AOS.refresh();
+			     });
+			   });
+
+
+			   function onElementHeightChange(elm, callback) {
+			       var lastHeight = elm.clientHeight
+			       var newHeight;
+			       
+			       (function run() {
+			           newHeight = elm.clientHeight;      
+			           if (lastHeight !== newHeight) callback();
+			           lastHeight = newHeight;
+
+			           if (elm.onElementHeightChangeTimer) {
+			             clearTimeout(elm.onElementHeightChangeTimer); 
+			           }
+
+			           elm.onElementHeightChangeTimer = setTimeout(run, 200);
+			       })();
+			     }
+			   $(window).scroll(function() {  
+			        var position = $(window).scrollTop(); 
+			      if (position >= 700){
+			         $(".redution").delay(500).fadeOut(1000);
+			      }
+			   });        
+			   
+
+				$(function() {
+				  AOS.init({
+				    duration: 1200
+				  });
+				  onElementHeightChange(document.body, function(){
+				    AOS.refresh();
+				  });
+				});   
+		function onElementHeightChange(elm, callback) {
+		    var lastHeight = elm.clientHeight
+		    var newHeight;
+		    
+		    (function run() {
+		        newHeight = elm.clientHeight;      
+		        if (lastHeight !== newHeight) callback();
+		        lastHeight = newHeight;
+
+		        if (elm.onElementHeightChangeTimer) {
+		          clearTimeout(elm.onElementHeightChangeTimer); 
+		        }
+
+		        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+		    })();
+		  }
+				
 	}
 </script>
 <style>
+	*{ font-family: 'Poor Story', cursive;
+	}
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
  	.ui-state-active{background-color:#FFC207;}
  	.divOff{display:none;}
  	.divOn{display:inline-block;}
+ 	.divOnOff{font-family: 'Poor Story', cursive; 
+ 	font-weight:bold; color:black; font-size:25px; }
+ 	.orangeSpan{
+ 	font-size: 1em;
+    text-align: center;
+    color: #ff7928;
+    font-weight: 800;
+    font-family: 'Poor Story', cursive;
+    margin-top:20px;
+    margin-bottom:200px;
+ 	}
 </style>
 <body>
 	<div id="top">
@@ -636,16 +714,19 @@
 	</div>
 	<div class="container">
 		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
-			<div id="header">
-				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
-			</div>
-			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
-			<div>
-				<img src="<%=request.getContextPath()%>/img/actImg.png" style="width:170px;height:170px;" />
+			<div class="title222" style="margin-bottom:80px;">
+			<img src="<%=request.getContextPath() %>/img/iii11.svg" style="width:300px;height:200px; margin:0 auto;"/><br/><br/>
+			<span class="orangeSpan" style="font-size:25px; color:black; margin-bottom:80px;"> 
+			회원님과 꼭 맞는 돌봄몬을 찾기위해
+			몇가지 질문으로 시작하겠습니다.</span></div>
+			
+			<div class="title" style="margin-bottom:80px; margin-top:0px;"><label class="divOnOff" for="activityTypeDiv" 
+			>어떤 돌봄을 원하세요?</label><span class="orangeSpan" > 
+			원하시는 놀이 유형을 선택해주세요. </span>
+				
 			</div>
 			
-			
-			<div id="activityTypeDiv" class="mainDiv">
+			<div id="activityTypeDiv" class="mainDiv" style="color:gray; font-weight:bold; font-size:14px;" data-aos="fade-up">
 				<input type="checkbox" id="pa1" value="실내놀이" name="pw_activity"/>
 				<input type="checkbox" id="pa2" value="등하원돕기" name="pw_activity" />
 				<input type="checkbox" id="pa3" value="책읽기" name="pw_activity" />
@@ -676,12 +757,12 @@
 					<div><label for="pa13"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/><span>단기입주</span></label></div>
 				</div>
 			</div>
-			
-			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
+			<div id="dataALLwrapper" data-aos="fade-up">
+			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 성별과 나이대가 있으신가요?</label></div>
 			<div id="ageAndGenderDiv" class="mainDiv">
-				<div id="genderDiv">
+				<div id="genderDiv" style="color:gray; font-weight:bold;">
 					<div>
-						<img src="<%=request.getContextPath()%>/img/genderImg.png" style="width:200px;height:150px; margin:30px 0"/>
+						<img src="<%=request.getContextPath()%>/img/genderImg.png" style="width:80px;height:80px; margin:30px 0"/>
 					</div>
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
@@ -690,33 +771,39 @@
 					<label for="g2">남자</label>
 					<label for="g3">무관</label>
 				</div>
-				<div id="ageDiv">
+				<div id="ageDiv" style="color:gray; font-weight:bold;">
 					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
 					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
 					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
-					<ul>
-						<li><label for="20">20대</label></li>
-						<li><label for="30">30대</label></li>
-						<li><label for="40">40대</label></li>
-						<li><label for="50">50대</label></li>
-						<li><label for="60">60대</label></li>
+					<ul style="width:100%; margin-left:200px; color:gray;">
+						<li style="width:60px; color:gray;"><label for="20">20대</label></li>
+						<li style="width:60px; color:gray;"><label for="30">30대</label></li>
+						<li style="width:60px; color:gray;"><label for="40">40대</label></li>
+						<li style="width:60px; color:gray;"><label for="50">50대</label></li>
+						<li style="width:60px; color:gray;"><label for="60">60대</label></li>
 					</ul>
 				</div>
 			</div>
-			
-			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">자녀의 정보를 입력해주세요</label></div>
+			</div>
+			<div id="dataALLwrapper" data-aos="fade-up">
+			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">몇 명의 아이를 돌봐드릴까요?</label>
+			<span class="orangeSpan" > 
+			해당하는 자녀 수 버튼을 클릭하시면, 
+			생년월일 입력으로 이동합니다.
+			 </span>
+			</div>
 			<div id="childrenInfoDiv" class="mainDiv">
 				<div id="childrenInfo">
 					<div>
-						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
+						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:150px;height:150px;" />
 					</div>
 					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
 					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
 					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
 					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
-					<div id=childrenCnt>
+					<div id="childrenCnt" style="color:gray; font-weight:bold;">
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
 						<div><label for="childrenCnt3">3명</label></div>
@@ -744,31 +831,32 @@
 					</div>
 				</div>
 			</div>
-			
+			</div>
+			<div id="dataALLwrapper" data-aos="fade-up">
 			<div class="title">
 				<label class="divOnOff" for="addrDiv">돌봄 장소를 입력해주세요</label>
 			</div>
-			<div id="addrDiv" class="mainDiv">
+			<div id="addrDiv" class="mainDiv" style="color:gray; font-weight:bold;">
 				<div id="mapImgDiv" style="margin:30px 0;">
-					<div>아직 장소를 입력하지 않았습니다.</div>
-					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
+					<div style="color:#ff7942; font-weight:bold;">아직 장소를 입력하지 않았습니다. 지도를 클릭해주세요.</div><br/><br/>
+					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:150px;height:150px;"/>
 				</div>
 				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">
 					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" style="display:inline-block;border:none;"/></div>
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
-				<div id="zidcodeBtnDiv">
-					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소" />
+				<div id="zidcodeBtnDiv" >
+					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소 입력하기" style="color:gray; font-weight:bold; font-size:20px;"/>
 					<input type="hidden" id="care_addr" name="care_addr"/>
 					<input type="hidden" id="lat" name="lat"/>
 					<input type="hidden" id="lng" name="lng"/>
 				</div>
 			</div>
 			
-			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
+			<div class="title" style="margin-bottom:50px; margin-top:100px;"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
 			
-			<div id="timeTypeDiv" class="mainDiv">
-				<div><img src="<%=request.getContextPath() %>/img/calImg.png" style="width:270px;height:250px;"/></div>
+			<div id="timeTypeDiv" class="mainDiv" style="color:gray; font-weight:bold;margin-bottom:50px;"> 
+				<div><img src="<%=request.getContextPath() %>/img/calImg.png" style="width:150px;height:150px; margin-bottom:50px;"/></div>
 				<input type="radio" id="timeType1" name="time_type" value="S"/>
 				<input type="radio" id="timeType2" name="time_type" value="R"/>
 				<label for="timeType1">특정날에만</label>
@@ -831,18 +919,18 @@
 					</div>
 				</div>
 			</div>
+			</div>
 			
-			
-			
+			<div id="dataALLwrapper" data-aos="fade-up">
 			<div class="title"><label class="divOnOff" for="paymentDiv">희망시급을 입력해주세요</label></div>
 			<div id="paymentDiv" class="mainDiv">
 				<div>
-					<img src="<%=request.getContextPath() %>/img/payImg.png" style="width:170px;height:150px;margin:20px 0" />
+					<img src="<%=request.getContextPath() %>/img/payImg.png" style="width:150px;height:150px;margin:20px 0" />
 				</div>
 				<div>
 					<span id="minWage" style="color:red"></span>
 				</div>
-				<div id="wageDiv">
+				<div id="wageDiv" style="color:gray; font-weight:bold;">
 					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590"/><span>원/1시간</span>
 				</div>
 					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
@@ -858,20 +946,31 @@
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
 				</p>
 			</div>
+			</div>
 			
+			<div id="dataALLwrapper" data-aos="fade-up">
 			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
 			<div id="descriptionDiv" class="mainDiv">
-				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
-				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
+				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:150px;height:150px; margin:20px 0;"/></div>
+				<textarea name="content" style="font-weight:bold;" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
 			
-			<div id="submitDiv" >
-				<input class="btn btn-warning" type="submit" value="등록하기" />
+			<div id="submitDiv" style="font-weight:bold; font-size:20px;" >
+				<input class="btn btn-warning" type="submit" value="등록하기" style="font-weight:bold; font-size:20px;"/>
 			</div>
-			
-			<div id="footer"></div>
+			</div>
+			<div id="footer">
+			</div>
 		</form>
 	</div>
+	<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 2000
+    });
+ 
+</script>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

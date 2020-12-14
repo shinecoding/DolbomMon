@@ -80,7 +80,6 @@
 
 <div id="top_freeboard">
 
-<b>자유게시판</b>
 </div>
 <div style="float: right;">
 	<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>
