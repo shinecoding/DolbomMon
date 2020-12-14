@@ -11,6 +11,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <style>
 	* {
 		padding:0; list-style-type:none; box-sizing:border-box; 
@@ -25,12 +27,9 @@
 		background-color:white;
 		margin:0 auto;
 	}
-	img{ height:110px; width:110px;}
 	
-	.list div{
-        margin: 0 auto;
-        width: 600px;
-    }
+	img{ height:110px; width:110px;}
+
     .form-control{
     	margin:0 auto;
     	background-color:white;
@@ -90,6 +89,9 @@
 		float:right;
 		width: 310px;
 		padding: 3px;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
 	}
 	.offerTitle{
 		font-size: 1.1em;
@@ -99,6 +101,7 @@
 		overflow:hidden;
 		text-overflow:ellipsis;
 	}
+
 	#btnBox{
 		margin-top: 10px;
 		margin-bottom: -10px;
@@ -108,13 +111,38 @@
 		display: inline-block;
 		vertical-align: top;
 	}
+	.modalHidden{
+		width: 527px;
+		height: 275px;
+		color: black;
+		position: absolute;
+		text-align: center;
+		line-height: 280px;
+		font-size: 1.8em;
+		color: white;
+		z-index: 100;
+		background-color: rgb(100,100,100);
+	}
+
+
 </style>
 <script>
 $(function(){
 	//지도 토글
     $(document).on("click", "#mapBtn", function(){
 			$("#map").toggle();
+			
 	});
+	
+  	//검색창	
+    $(document).on("keyup", "#locFilter", function(){
+    	var value = $(this).val().toLowerCase();
+    	$(".loc").filter(function(){
+    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    	});
+    });
+	
+	
 	//필터
 	$(document).on("click", "#btnBox>button", function(){
 	    var activity_type = $(this).text();
@@ -134,14 +162,22 @@ $(function(){
 					
 				$result.each(function(idx, vo){
 					tag += '<div class="col-sm-6" style="padding: 20px;">';
+					if(vo.status=="P"){
+						tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
+					}
 					tag += '<div class="card">';
 					tag += '<div class="card-body">';
-					tag += '<div class="imgBox"><img src=';	
-					tag +='"img/ch1.PNG" class="rounded-circle"></div>';
-					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>';
+					tag += '<div class="imgBox"><img src=';
+					if(vo.pic==null){
+						tag +='"img/profilepic.png"';
+					} else {
+						tag +='"upload/' +vo.pic+ '"';
+					}
+					tag += 'class="rounded-circle"></div>';
+					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>';
 					tag += vo.tcnt+'명 지원</div>';
 					tag += '<div class="offerBox" style="width: 310px";>';
-					tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
+					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
 					tag += '<span class="ml-2" style="font-size:0.7em">';
 					if(vo.writedate>525600){
@@ -158,7 +194,7 @@ $(function(){
 					tag += '</span>';
 					
 					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span>12/12 시작</span>';
+					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 					if(vo.consultation=="Y"){
 						tag += ' | <b>협의가능</b></span></p>';
@@ -198,14 +234,22 @@ $(function(){
 					
 				$result.each(function(idx, vo){
 					tag += '<div class="col-sm-6" style="padding: 20px;">';
-					tag += '<div class="card">';
+					if(vo.status=="P"){
+						tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
+					}
+					tag += '<div class="card" data-aos="fade-up">';
 					tag += '<div class="card-body">';
 					tag += '<div class="imgBox"><img src=';	
-					tag +='"img/ch1.PNG" class="rounded-circle"></div>';
-					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;">';
+					if(vo.pic==null){
+						tag +='"img/profilepic.png"';
+					} else {
+						tag +='"upload/' +vo.pic+ '"';
+					}
+					tag += 'class="rounded-circle"></div>';
+					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;">';
 					tag += vo.tcnt+'명 지원</div>';
 					tag += '<div class="offerBox" style="width: 310px";>';
-					tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
+					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
 					tag += '<span class="ml-2" style="font-size:0.7em">';
 					if(vo.writedate>525600){
@@ -222,7 +266,7 @@ $(function(){
 					tag += '</span>';					
 					
 					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span>12/12 시작</span>';
+					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 					if(vo.consultation=="Y"){
 						tag += ' | <b>협의가능</b></span></p>';
@@ -265,14 +309,22 @@ $(function(){
 											
 				$result.each(function(idx, vo){
 					tag += '<div class="col-sm-6" style="padding: 20px;">';
+					if(vo.status=="P"){
+						tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
+					}
 					tag += '<div class="card">';
 					tag += '<div class="card-body">';
-					tag += '<div class="imgBox"><img src=';	
-					tag +='"img/ch1.PNG" class="rounded-circle"></div>';
-					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;">';
+					tag += '<div class="imgBox"><img src=';
+					if(vo.pic==null){
+						tag +='"img/profilepic.png"';
+					} else {
+						tag +='"upload/' +vo.pic+ '"';
+					}
+					tag += 'class="rounded-circle"></div>';
+					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;">';
 					tag += vo.tcnt+'명 지원</div>';
 					tag += '<div class="offerBox" style="width: 310px";>';
-					tag += '<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
+					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
 					tag += '<br/><span><b>신생아 1명, 유아 1명</b></span> |';
 					tag += '<span class="ml-2" style="font-size:0.7em">';
@@ -289,7 +341,7 @@ $(function(){
 					}
 					tag += '</span>';
 					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span>12/12 시작</span>';
+					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
 					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 					if(vo.consultation=="Y"){
 						tag += ' | <b>협의가능</b></span></p>';
@@ -301,17 +353,17 @@ $(function(){
 						tag += '</div>';
 						tag += '</div>';
 						tag += '</div>';
-					});
-					tag += "";
+				});
+				tag += "";
 					
-					$("#cardBox").html(tag);
+				$("#cardBox").html(tag);
 					
-				},
-				error:function(error){
-					console.log("리스트 받기 에러-->"+ error.responseText);
-				}
-			});
-	 	});//ajax 
+			},
+			error:function(error){
+				console.log("리스트 받기 에러-->"+ error.responseText);
+			}
+		});
+	 });//ajax 
 });
 
 
@@ -338,7 +390,7 @@ $(function(){
 	<div id="map">
 	</div>
 </div>
-<div class="listPanel" style="display: block; vertical-align: inherit; background-color:white; "> 
+<div class="listPanel" style="display: block; vertical-align: inherit; background-color:white;"> 
 <div id="filterbox">
 	<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 	<form class="form-inline">
@@ -353,7 +405,8 @@ $(function(){
 	</form>
 </div>
 	<div id="btnBox">
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act0">전체</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1">실내놀이</button>
 		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원돕기</button>
 		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책읽기</button>
 		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
@@ -381,39 +434,39 @@ $(function(){
 	<div class="row" id="cardBox">
 		<c:forEach var="vo" items="${list2}">
 			<div class="col-sm-6" style="padding: 20px;">
-				<div class="card">
+				<c:if test="${vo.status=='P'}">
+					<div class="modalHidden" data-aos="fade-up"><div class="offerConclude">구인이 종료된 공고입니다</div></div>
+				</c:if>
+				<div class="card" data-aos="fade-up">
 					<div class="card-body">
-						<div class="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>${vo.tcnt}</span>명 지원</div>
-						<div class="offerBox" >
-							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
-							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-							<br/><span><b>신생아 1명, 유아 1명</b></span> | 
-							<!-- 마지막 업데이트일 -->
-							<span class="ml-2" style="font-size:0.7em">
-									<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.writedate/525600}"/>
-									<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.writedate/43200}"/>
-									<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.writedate/1440}"/>
-									<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.writedate/60}"/>					
-								<c:choose>
-									<c:when test="${vo.writedate>525600}">${edit_year}년</c:when>
-									<c:when test="${vo.writedate>43200}">${edit_month}달</c:when>
-									<c:when test="${vo.writedate>1440}">${edit_day}일</c:when>
-									<c:when test="${vo.writedate>60}">${edit_hour}시간</c:when>
-									<c:otherwise>${vo.writedate}분</c:otherwise>
-								</c:choose> 전
-							</span>
-							<br/><span>${vo.care_addr} </span>
-							<br/><span>12/12 시작</span>
+						<div class="imgBox"><img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> class="rounded-circle"></div>
+						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>${vo.tcnt}</span>명 지원</div>
+						<div class="offerBox">
+							<span class="card-title offerTitle" style="line-height: 2em;"><b>제목 ${vo.title}</b></span>
+							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid}</span>
+								<br/><span><b>신생아 1명, 유아 1명</b></span> | 
+								<!-- 마지막 업데이트일 -->
+								<span class="ml-2" style="font-size:0.7em">
+										<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.writedate/525600}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_month" value="${vo.writedate/43200}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_day" value="${vo.writedate/1440}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_hour" value="${vo.writedate/60}"/>					
+									<c:choose>
+										<c:when test="${vo.writedate>525600}">${edit_year}년</c:when>
+										<c:when test="${vo.writedate>43200}">${edit_month}달</c:when>
+										<c:when test="${vo.writedate>1440}">${edit_day}일</c:when>
+										<c:when test="${vo.writedate>60}">${edit_hour}시간</c:when>
+										<c:otherwise>${vo.writedate}분</c:otherwise>
+									</c:choose> 전
+								</span>
+							<br/><span class="loc">${vo.care_addr}</span>
+							<br/><span><b>${vo.start_date}</b> 시작</span>
 							<br/><span style="color: orange;">희망시급 ${vo.wish_wage}원
-							
-							
 							<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
-							
 							</p>
 						</div>
 					</div>
-				<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
+					<div class="card-footer btn" style="width: 100%;" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
 				</div>
 			</div>
 		</c:forEach>
@@ -495,19 +548,14 @@ $(function(){
 	}
 
 </script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</div>
+</div>
 <hr/>
+<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 1000
+    });
+</script>
 <jsp:include page="../footer.jsp"/>
 </body>
 </html>

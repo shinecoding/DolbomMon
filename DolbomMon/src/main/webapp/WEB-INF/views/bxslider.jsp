@@ -127,7 +127,7 @@ $(function(){
       </li>
       <li>
       	<div style="position:absolute; margin-top:400px;margin-left:450px; color:white;">
-	       <h1>믿을 수 있는 시터를 만나요</h1>
+	       <h1>믿을 수 있는 돌봄몬을 만나요</h1>
 	       <h4 style="font-weight:bold;">신원검증, 범죄경력조회를 통과한 선생님만을 검증하여 추천합니다</h4>
 	       <a href="#"></a></div>
    		   <img src="img/242.jpg" />
@@ -136,7 +136,7 @@ $(function(){
       	<div style="position:absolute; margin-top:200px;margin-left:850px;color:white;">
 	       <h1>매주 아이가 더 기다리는 아이맞춤 선생님</h1>
 	       <h2 style="font-weight:bold;">등하원/이동, 학습, 영어, 창의미술, 놀이돌봄<br/></h2>
-			<h6>악어선생님은 아이들의 보호자이면서
+			<h6>돌봄몬은 아이들의 보호자이면서
 			동시에 놀이부터 배움까지 담당합니다.</h6>
 	       <a href="#"></a></div>
       	   <img src="img/243.png" />
