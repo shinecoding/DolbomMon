@@ -395,9 +395,13 @@
 				});
 				return false;
 			}
-			
+
 			var childCnt = $("input[name=childrenCnt]:checked").length;
 			if(childCnt < 1) {
+
+			var child_cnt = $("input[name=childrenCnt]:checked").length;
+			if(child_cnt < 1) {
+
 				swal({
 					title : "자녀 정보 입력",
 					text : "자녀의 정보를 입력해주세요",

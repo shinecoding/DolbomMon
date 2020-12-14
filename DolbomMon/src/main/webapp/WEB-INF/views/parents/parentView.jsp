@@ -646,6 +646,11 @@
 	
 	
 </script>
+
+<style>
+	#specificDate>div{width:100%;}
+	.ui-state-disabled>span{text-align:center;}
+</style>
 </head>
 <body>
 
@@ -801,7 +806,7 @@
 		<c:if test="${userid == rbVO.userid}">
 			<h5>나에게 신청한 돌봄몬</h5>
 			<c:forEach var="tlist" items="${tlist }">
-		        <div class="wrapper2" style="margin:15px 0;" id="dbmDiv">
+		        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
 		        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 					<ul class="list-group">
 						<li class="list-group-item"><i class="fas fa-star"></i>
@@ -844,7 +849,6 @@
 		console.log("${contractId}");
 		console.log("${contractId2}");
 		</script>
-			
       	</c:if>
       	
         <c:if test="${who=='T' }">
@@ -856,6 +860,7 @@
         	<c:forEach var="tlist" items="${tlist }">
         	
         		<c:if test="${userid == tlist.userid }" >
+        			<h5 style="margin-top:30px;">학부모의 연락을 기다리고 있습니다.</h5>
 			        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
 			        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 						<ul class="list-group">
@@ -888,7 +893,7 @@
 		</div>
  	</c:if>
 </div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

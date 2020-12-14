@@ -49,7 +49,7 @@ public class RecruitBoardController {
 		String testId = "test1";
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
-		List<RecruitBoardVO> list2 = dao.recruitBoardList();
+		List<RecruitBoardVO> list2 = dao.recruitBoardList(99999);
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
 		HashSet<RecruitBoardVO> hash = dao.selectAllParents();
 		
@@ -105,29 +105,29 @@ public class RecruitBoardController {
 	//필터
 	@RequestMapping(value="/careAct", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<RecruitBoardVO> careAct(String activity_type) {
+	public List<RecruitBoardVO> careAct(String activity_type, int count) {
 		System.out.println("액티비티 타입 "+activity_type);
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		if(activity_type.equals("전체")) {
-			List<RecruitBoardVO> list = dao.recruitBoardList();
+			List<RecruitBoardVO> list = dao.recruitBoardList(count);
 			return list;
 		}else {
-			List<RecruitBoardVO> list = dao.recruitActType(activity_type);
+			List<RecruitBoardVO> list = dao.recruitActType(activity_type, count);
 			return list;
 		}		
 	}
 	//select 필터
 	@RequestMapping(value="/careSelect", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<RecruitBoardVO> careSelect(String care_type) {
+	public List<RecruitBoardVO> careSelect(String care_type, int count) {
 		System.out.println("케어 타입 "+care_type);
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		List<RecruitBoardVO> list = new ArrayList<RecruitBoardVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.recruitBoardList();
+			list = dao.recruitBoardList(count);
 		}else {
-			list = dao.recruitCareSelect(care_type); 	
+			list = dao.recruitCareSelect(care_type, count); 	
 		}	
 		return list;
 	}
@@ -135,18 +135,18 @@ public class RecruitBoardController {
 	//정렬 필터
 	@RequestMapping(value="/filterArray", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<RecruitBoardVO> filterOrder(String order){
+	public List<RecruitBoardVO> filterOrder(String order, int count){
 		
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
 		List<RecruitBoardVO> list = new ArrayList<RecruitBoardVO>();
-		
+		System.out.println("order = "+order);
 		if(order.equals("new")){
-			list = dao.recruitBoardList();
+			list = dao.recruitBoardList(count);
 		} else if(order.equals("wage_high")){
-			list = dao.filterHighWage();
+			list = dao.filterHighWage(count);
 		} else if(order.equals("wage_low")){
-			list = dao.filterLowWage();
+			list = dao.filterLowWage(count);
 		}	
 		return list;
 	}
