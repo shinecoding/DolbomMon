@@ -94,11 +94,11 @@ public class DealController {
 		rbVO.setUserid((String)ses.getAttribute("userid"));
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation==null || consultation=="") {
+		if(consultation == null) {
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation==null || time_consultation=="") {
+		if(time_consultation == null) {
 			rbVO.setTime_consultation("N");
 		}
 		System.out.println("원글번호 확인"+rbVO.getOrigin_no());
@@ -131,9 +131,11 @@ public class DealController {
 			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
 				System.out.println("S");
+				dao.insertNullRegularDate();
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
 				System.out.println("R");
+				dao.insertNullSpecificDate();
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);
@@ -165,12 +167,12 @@ public class DealController {
 		rbVO.setUserid((String)ses.getAttribute("userid"));
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation==null || consultation=="") {
+		if(consultation == null) {
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation==null || time_consultation=="") {
-			rbVO.setConsultation("N");
+		if(time_consultation == null) {
+			rbVO.setTime_consultation("N");
 		}
 		
 		String childb = cVO.getChild_birth();
@@ -202,9 +204,11 @@ public class DealController {
 			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
 				System.out.println("S");
+				dao.insertNullRegularDate();
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
 				System.out.println("R");
+				dao.insertNullSpecificDate();
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);

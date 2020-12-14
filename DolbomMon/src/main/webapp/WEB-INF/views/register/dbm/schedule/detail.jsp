@@ -12,6 +12,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	*{margin:0; padding:0; list-style:none;}
 	.container{width:518px; padding:0;}
@@ -152,6 +153,52 @@
 		
 		$(function(){
 			$("#dateFrm").submit(function(){
+				
+				var startDate = $("#start_date").val();
+				if(startDate == null || startDate == ""){
+					swal({
+						title:"활동 시작일을 선택해주세요",
+						icon : "info"
+					});
+					return false;
+				}
+				
+				var yoilChk = $("input[name=yoil]:checked").length;
+				if(yoilChk<1){
+					swal({
+						title:"요일을 선택해주세요",
+						icon : "info"
+					});
+					return false;
+				}
+				
+				var startTime = $("#start_time").val();
+				if(startTime=="" || startTime == null){
+					swal({
+						title:"시작시간를 선택해주세요",
+						icon : "info"
+					});
+					return false;
+				}
+				
+				var endTime = $("#end_time").val();
+				if(endTime=="종료시간" || endTime==null){
+					swal({
+						title:"종료시간를 선택해주세요",
+						icon : "info"
+					});
+					return false;
+				}
+				
+				var periodChk = $("input[name=period]:checked").length;
+				if(periodChk<1){
+					swal({
+						title:"활동 기간을 선택해주세요",
+						icon : "info"
+					});
+				}
+				
+				return true;
 			});
 		});
 	});

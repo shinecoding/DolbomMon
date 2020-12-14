@@ -58,7 +58,7 @@
 	</select>
 	
 	<select id="selectOrigin" resultType="int">
-		select job_board_no from parent_list where origin_no=#{origin_no} and agree='T' or agree='Y'
+		select job_board_no from parent_list where origin_no=#{origin_no} and (agree='T' or agree='Y')
 	</select>
 	
 	<update id="setAgree" parameterType="map">
