@@ -166,7 +166,7 @@
 	</select>
 	
 	<select id="getTotalRecord" resultType="int">	
-		select count(userid) from teacher
+		select count(userid) from teacher where active = 'Y'
 	</select>
 	<select id="getHeartRecord" resultType="int">	
 		select count(userid) from liket where userid = #{userid}
