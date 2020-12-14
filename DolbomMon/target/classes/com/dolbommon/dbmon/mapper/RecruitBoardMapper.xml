@@ -9,6 +9,7 @@
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
 		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
+
 		where p.status='P' or p.status='R'
 		order by job_board_no desc
 	</select>
