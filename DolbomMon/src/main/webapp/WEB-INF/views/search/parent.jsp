@@ -25,7 +25,7 @@
 		width:1100px;
 		background-color:white;
 		margin:0 auto;
-			 font-family: 'Jua', sans-serif;
+		font-family: 'Jua', sans-serif;
 	}
 	
 	img{ height:110px; width:110px;}
@@ -112,8 +112,7 @@
 	}
 
 	#btnBox{
-		margin-top: 10px;
-		margin-bottom: -10px;
+		margin-top:0;
 		width: 100%;
 		height: 50px;
 		white-space: nowrap;
@@ -135,7 +134,9 @@
 		border-radius:20px; 
 	}
 
-
+	.card-footer{
+	border-bottom-radius:20px;
+	}
 </style>
 <script>
 var tabType=1;
@@ -493,20 +494,20 @@ function mapResize(){
 	</form>
 </div>
 	<div id="btnBox">
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act0">전체</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1">실내놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원돕기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책읽기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act5">한글놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act6">영어놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act7">학습지도</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act8">체육놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act9">간단청소</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act10">밥챙겨주기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단설거지</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act0">전체</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act1">실내놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원돕기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act3">책읽기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act9">간단청소</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act10">밥챙겨주기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act11">간단설거지</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
 	</div>
  
 	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리 찾기가 있습니다</div>
@@ -638,13 +639,13 @@ function mapResize(){
 
 </script>
 </div>
-<hr/>
+
 <script>
     AOS.init({
         easing: 'ease-out-back',
         duration: 1000
     });
 </script>
-<jsp:include page="../footer.jsp"/>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

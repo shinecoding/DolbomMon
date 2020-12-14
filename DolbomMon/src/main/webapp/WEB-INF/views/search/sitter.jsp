@@ -18,7 +18,9 @@
 
 <style>
 
-	.container{width:1100px; font-family: 'Jua', sans-serif;}
+	.container{width:1100px;
+	 font-family: 'Jua', sans-serif;
+	 }
 
 
 	img{ height:110px; width:110px;}
