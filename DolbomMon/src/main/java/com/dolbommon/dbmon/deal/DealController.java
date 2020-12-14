@@ -142,6 +142,11 @@ public class DealController {
 			transactionManager.rollback(status);
 		}
 		
+		//dao2.
+		///rbVO.getUserid()
+		//teacherId
+		//
+		
 		mav.addObject("result", result);
 		mav.setViewName("/deal/writeResult");
 		
@@ -227,14 +232,23 @@ public class DealController {
 	@RequestMapping("/contractView")
 	public ModelAndView parentView(int origin_no, HttpSession ses, HttpServletRequest req) {
 		//String origin_no = (String)req.getParameter("origin_no");
+		String teacherid = (String)req.getParameter("teacherid");
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
-		int no = dao.selectOrigin(origin_no);
+		ModelAndView mav = new ModelAndView();
+		int no=0;
+		try {
+		no = dao.selectOrigin(origin_no, teacherid);
+		}catch(Exception e) {
+			mav.addObject("result5", 1);
+			mav.setViewName("deal/writeResult");
+			return mav;
+		}
 		List<ApplyToParentInfoVO> tlist = dao.applyDbmSelect2(no);
 		RecruitBoardVO rbVO = dao.recruitBoardSelect2(no);
 		ChildrenVO cVO = dao.recruitChildSelect2(no);
 		
 		String userid = (String)ses.getAttribute("userid");
-		ModelAndView mav = new ModelAndView();
+		
 		
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {

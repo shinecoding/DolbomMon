@@ -25,8 +25,10 @@ public interface DealDaoImp {
 	// 계약서 찾기
 	public int searchContract(int no);
 	
+	//계약서 중복작성시 앞의 계약서 모두 거절처리
+	public int rejectContract(@Param("userid")String userid, @Param("teacherid")String teacherid);
 	//계약서의 글번호 찾기
-	public int selectOrigin(int no);
+	public Integer selectOrigin(@Param("no")int no, @Param("teacherid")String teacherid);
 	
 	//신청한 선생님의 정보를 담은 리스트 출력
 	public List<ApplyToParentInfoVO> applyDbmSelect2(int no); 
