@@ -5,6 +5,7 @@
 	*{margin:0; padding:0; list-style:none; text-decoration:none; font-family: 'Poor Story', cursive;
 		font-weight:bold;
 	}
+	li{list-style:none;}
 	label.divOnOff{font-weight:bold; color:black; font-size:30px;}
 	.container{width:600px; margin-top:50px; }
 	input[type=checkbox]{display:none;}
