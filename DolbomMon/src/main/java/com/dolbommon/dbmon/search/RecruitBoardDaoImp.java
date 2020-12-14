@@ -14,7 +14,7 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 
 	public interface RecruitBoardDaoImp { 
 	//구인게시판 리스트보기 
-	public List<RecruitBoardVO> recruitBoardList();
+	public List<RecruitBoardVO> recruitBoardList(int count);
 	//총 게시물 수 구하기 
 	public int getTotalRecords(); 
 	//필터

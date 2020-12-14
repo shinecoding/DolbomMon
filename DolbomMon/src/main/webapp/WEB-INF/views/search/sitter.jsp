@@ -409,7 +409,7 @@ var value;
 		
 		var url = "/dbmon/filterOrder";
 		var params = {
-				order:gender,
+				order:order,
 				count:count, 
 		}
 		console.log("파라미터="+params);

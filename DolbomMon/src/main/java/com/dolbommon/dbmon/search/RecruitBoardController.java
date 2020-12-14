@@ -49,7 +49,7 @@ public class RecruitBoardController {
 		String testId = "test1";
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
-		List<RecruitBoardVO> list2 = dao.recruitBoardList();
+		List<RecruitBoardVO> list2 = dao.recruitBoardList(99999);
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
 		
 		HashSet<RecruitBoardVO> hash = dao.selectAllParent();//지도의 모든 선생/부모 위치
@@ -109,7 +109,7 @@ public class RecruitBoardController {
 		System.out.println("액티비티 타입 "+activity_type);
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		if(activity_type.equals("전체")) {
-			List<RecruitBoardVO> list = dao.recruitBoardList();
+			List<RecruitBoardVO> list = dao.recruitBoardList(count);
 			return list;
 		}else {
 			List<RecruitBoardVO> list = dao.recruitActType(activity_type, count);
@@ -125,7 +125,7 @@ public class RecruitBoardController {
 		List<RecruitBoardVO> list = new ArrayList<RecruitBoardVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.recruitBoardList();
+			list = dao.recruitBoardList(count);
 		}else {
 			list = dao.recruitCareSelect(care_type, count); 	
 		}	
@@ -140,9 +140,9 @@ public class RecruitBoardController {
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
 		List<RecruitBoardVO> list = new ArrayList<RecruitBoardVO>();
-		
+		System.out.println("order = "+order);
 		if(order.equals("new")){
-			list = dao.recruitBoardList();
+			list = dao.recruitBoardList(count);
 		} else if(order.equals("wage_high")){
 			list = dao.filterHighWage(count);
 		} else if(order.equals("wage_low")){
