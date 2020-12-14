@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,6 +103,8 @@
 	display:block;
 	float:left;
 	margin:20px 20px;
+	border:1px orange solid; 
+	border-radius:20px; 
 	}
 	.card-body{
 		white-space: nowrap;
@@ -129,7 +132,8 @@
 		color: white;
 		z-index: 100;
 		background-color: rgb(100,100,100);
-		border-radius: 3px;
+		border:1px orange solid; 
+		border-radius:20px; 
 	}
 
 
@@ -146,7 +150,7 @@ $(function(){
     $(document).on("keyup", "#locFilter", function(){
     	var value = $(this).val().toLowerCase();
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
     	});
     });
 	
@@ -375,9 +379,7 @@ $(function(){
 });
 
 
-	$(document).ready(function(){
-		$("#topmenu-button").children("li:nth-of-type(4)").children("a").css("color", "orange");
-	});
+
 
 
 </script>
