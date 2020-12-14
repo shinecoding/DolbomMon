@@ -736,6 +736,7 @@
 </script>
 <style>
 	*{ font-family: 'Poor Story', cursive;
+		list-style:none;
 	}
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
@@ -823,12 +824,12 @@
 					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
-					<ul style="width:100%; margin-left:200px; color:gray;">
-						<li style="width:60px; color:gray;"><label for="20">20대</label></li>
-						<li style="width:60px; color:gray;"><label for="30">30대</label></li>
-						<li style="width:60px; color:gray;"><label for="40">40대</label></li>
-						<li style="width:60px; color:gray;"><label for="50">50대</label></li>
-						<li style="width:60px; color:gray;"><label for="60">60대</label></li>
+					<ul style="width:100%; margin-left:180px; color:gray;">
+						<li style="width:60px; color:gray; list-style:none;"><label for="20">20대</label></li>
+						<li style="width:60px; color:gray; list-style:none;"><label for="30">30대</label></li>
+						<li style="width:60px; color:gray; list-style:none;"><label for="40">40대</label></li>
+						<li style="width:60px; color:gray; list-style:none;"><label for="50">50대</label></li>
+						<li style="width:60px; color:gray; list-style:none;"><label for="60">60대</label></li>
 					</ul>
 				</div>
 			</div>
@@ -845,13 +846,11 @@
 					<div>
 						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:150px;height:150px;" />
 					</div>
-
 					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
 					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
 					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
 					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
 					<div id="childrenCnt" style="color:gray; font-weight:bold;">
-
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
 						<div><label for="childrenCnt3">3명</label></div>
@@ -962,7 +961,7 @@
 						</select>
 					</div>
 					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation" value="Y">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
     					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
@@ -994,7 +993,9 @@
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
 				</p>
 			</div>
+			</div>
 			
+			<div id="dataALLwrapper" data-aos="fade-up">
 			<div class="title"><label class="divOnOff" for="descriptionDiv">제목과 신청내용을 적어주세요</label></div>
 			<div id="descriptionDiv" class="mainDiv">
 				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>

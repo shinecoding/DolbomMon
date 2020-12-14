@@ -57,6 +57,7 @@
 		float:left; 
 		font-weight:1000;
 		color:gray;
+		list-style:none;
 	}
 	/* ===================== 자녀 세부정보 ==================== */
 	#childrenInfoDiv{display:inline-block; width:70%; text-align:center;}
@@ -173,7 +174,12 @@
 	label{-webkit-transition:background-color 1s;
 		transition:background-color 1s;}
 	li{-webkit-transition:background-color 1s;
-		transition:background-color 1s;}
+		transition:background-color 1s;
+		list-style:none;
+		}
+	ul{
+		list-style:none;
+	}
 	#footer{margin-bottom:300px;}
 	
 	
