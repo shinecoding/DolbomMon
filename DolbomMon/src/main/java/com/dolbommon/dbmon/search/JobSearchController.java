@@ -66,6 +66,7 @@ public class JobSearchController {
 		mav.addObject("list", list);
 		mav.addObject("hash", hash);
 		mav.addObject("mvo", mvo);
+		mav.addObject("activity_type", activity_type);
 		mav.addObject("totalRecord", totalRecord);//총 게시물 수
 		mav.setViewName("search/sitter");
 		
