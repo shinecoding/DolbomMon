@@ -153,7 +153,6 @@ $(function(){
     $(document).on("click", "#countTest", function(){
     	count= count+6;
     	if(tabType==1){
-    		testAjax(gender)
     	}else if(tabType==2){
     		dropdownAjax(care_type)
     	}else if(tabType==3){
