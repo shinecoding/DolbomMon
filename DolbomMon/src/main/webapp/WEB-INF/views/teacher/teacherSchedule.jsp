@@ -12,9 +12,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
 <style>
 	*{margin:0; padding:0; list-style:none;}
-	.container{width:518px; padding:0;}
+	.container{width:518px; padding:0; font-family: 'Poor Story', cursive;}
 	
 	#headerDiv{width:100%; height:auto; text-align:center; margin-top:50px; border-bottom:1px solid #EFEFEF;}
 	input[type=radio], input[type=checkbox]{display:none;}

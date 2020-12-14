@@ -46,8 +46,12 @@ public class HomeController {
 		
 		
 		List<QnAVO> qna_list = qDao.QnaList(qna_vo);
+		List<QnAVO> qna_list2 = qDao.QnaList2(qna_vo);
+		List<QnAVO> qna_list3 = qDao.QnaList3(qna_vo);
 	
 		mav.addObject("qna_list", qna_list);
+		mav.addObject("qna_list2", qna_list2);
+		mav.addObject("qna_list3", qna_list3);
 		mav.addObject("QnAVO", qna_vo);
 		
 		mav.setViewName("/home");
