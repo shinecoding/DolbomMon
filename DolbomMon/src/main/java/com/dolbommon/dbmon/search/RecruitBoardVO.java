@@ -4,6 +4,7 @@ public class RecruitBoardVO {
 		//구인게시판
 
 		private int job_board_no; //구인글 번호
+		private String title;
 		private String username;
 		private String userid; //아이디
 		private String care_addr; //돌봄장소
@@ -19,12 +20,13 @@ public class RecruitBoardVO {
 		private String writedate; //글 등록일
 		private String lat;
 		private String lng;
+		private String start_date;
 		private int hit; //조회수
 		private int tcnt;
 		private int week;
 		private int origin_no; //원글번호
 		private String teacherid;
-		private String title;
+		private String status;
 		private String pic;
 		
 		public int getJob_board_no() {
@@ -32,6 +34,12 @@ public class RecruitBoardVO {
 		}
 		public void setJob_board_no(int job_board_no) {
 			this.job_board_no = job_board_no;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
 		}
 		public String getUsername() {
 			return username;
@@ -126,6 +134,12 @@ public class RecruitBoardVO {
 		public void setLng(String lng) {
 			this.lng = lng;
 		}
+		public String getStart_date() {
+			return start_date;
+		}
+		public void setStart_date(String start_date) {
+			this.start_date = start_date;
+		}
 		public void setHit(int hit) {
 			this.hit = hit;
 		}
@@ -153,21 +167,16 @@ public class RecruitBoardVO {
 		public void setTeacherid(String teacherid) {
 			this.teacherid = teacherid;
 		}
-		public String getTitle() {
-			return title;
+		public String getStatus() {
+			return status;
 		}
-		public void setTitle(String title) {
-			this.title = title;
+		public void setStatus(String status) {
+			this.status = status;
 		}
 		public String getPic() {
 			return pic;
 		}
 		public void setPic(String pic) {
 			this.pic = pic;
-		}
-		
-		
+		}		
 	}
-
-
-

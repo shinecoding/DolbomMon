@@ -117,7 +117,8 @@
       cursor:pointer;
       font-family:"Noto Sans KR,sans-serif!important;";
       text-decoration:none;
-     
+      max-width: 100%;
+      min-width:70%;
       text-align: center; 
       margin:0; padding:0;
       }
@@ -152,11 +153,12 @@
           font-weight:bold;
           margin:10px;
           color:white;
+          max-width: 100%;
     }
 
 
    h3{
-      margin-top:30px;margin-bottom:30px;
+      margin-top:30px;margin-bottom:30px; max-width: 100%;
    
    }
    #homeWrap_ALL{width:100%;}
@@ -171,7 +173,24 @@
       font-size: 48px; color: #ffffff; 
 
    }
-   
+  
+   @media (min-width: 1000px){
+	.service-req {
+    height: 488px;
+    background: url(img/qwq11.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    }
+	.phero{
+	display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    color:#fff;
+    padding:166px 0px 0px;
+    font-weight:bold;
+	}
+}
 </style>
 
 <body>
@@ -204,15 +223,17 @@
 
   <div id="list" class="block" style="width: 100%; margin:0 auto;" data-aos="fade-down">
   <ul id ="listitem" class="list-group list-group-horizontal-sm"  style="width:100%; max-width:1000px; margin:0 auto;">
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
-     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=등하원 돕기"><img src="img/a.png"  width="56" height="56"/></a><br/>등하원 돕기</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=실내놀이"><img src="img/b.png"  width="56" height="56"/></a><br/>실내놀이</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=야외활동"><img src="img/c.png"  width="56" height="56"/></a><br/>야외활동</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=학습지도"><img src="img/d.png"  width="56" height="56"/></a><br/>학습지도</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=영어놀이"><img src="img/f.png"  width="56" height="56"/></a><br/>영어놀이</li>
+     <li class="list-group-item" style="border-radius:50%; border:none; width:15%; height:100px; margin:0 30px;"><a href="/dbmon/sitter_list?activity_type=가사돌봄"><img src="img/g.png"  width="56" height="56"/></a><br/>가사돌봄</li>
   </ul>
   <br/><br/><hr class="featurette-divider">
   
+<!-- ----------- --> 
+
 <div id="teacher_chart" data-aos="fade-up">
 <%@ include file="/WEB-INF/views/teacher_chart.jsp" %> 
 </div>
@@ -221,21 +242,27 @@
 <%@ include file="/WEB-INF/views/advertiseDolbom.jsp" %>
 </div>
     <hr class="featurette-divider">
-<div id="QnAView">
+<div id="QnAView" data-aos="fade-up">
 <%@ include file="/WEB-INF/views/QandAview.jsp" %>
-</div>   
+</div>  
     
+<div data-aos="fade-up">
+<img src="<%=request.getContextPath() %>/img/ii1212.svg" 
+	style="width:150px;height:150px;margin:20px 0; background-color:white;" />	
+</div>
+<span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive; color:gray;">DOLBOMMON GUIDE</span>
+<br/><br/><br/><br/>
 <div id="mainContents4" >
     <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="fade-up">
       <div class="col-md-7"><br/><br/>
-        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive;">DOLBOMMON GUIDE</span><br/><br/>Step 01.<br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
         <p class="lead">가장 빨리, 원하는 조건의 <br/>아이 돌보미를 구할 수 있는 <br/>
                  돌봄몬을 이용하기 위해<br/> 빠르고 간편한 회원가입을 진행해주세요.
         </p>
       </div>
       <div class="col-md-5">
-        <img src="img/guide1.PNG" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500px" height="500px"  focusable="false" role="img" /><rect width="100%" height="100%"/>
+        <img src="img/guide1.PNG" Onclick="location.href='/dbmon/join'"class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500px" height="400px"  focusable="false" role="img" /><rect width="100%" height="100%"/>
       </div>
     </div>
 
@@ -255,7 +282,7 @@
      
       </div>
       <div class="col-md-5 order-md-1">
-        <img src="img/guide2.PNG" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
+        <img src="img/guide2.PNG" Onclick="location.href='/dbmon/dbmSearchWriteForm'" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
       </div>
     </div>
 
@@ -274,7 +301,7 @@
         </p>
       </div>
       <div class="col-md-5">
-       <img src="img/guide03.png" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
+       <img src="img/guide03.png" Onclick="location.href='/dbmon/join'" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
       </div>
     </div>
 </div> <!-- Maincontents4 -->
@@ -283,8 +310,20 @@
     <!-- /END THE FEATURETTES -->
 
   </div><!-- /.container -->
-    
+   
 </div><!-- </homeWrap_ALL> -->
+ 
+ <div class="service-req" style="margin-bottom:0;">
+ <h2 class="phero">지금 바로 돌봄몬 만나기</h2> 
+ <div class="btn1234123" >
+ <a href="/dbmon/join" class="btn-act1234"
+		style="background: #ff7942; color: #fff; 
+		border-radius:33px; height: 85px;
+		text-align: center; -webkit-box-direction: normal;
+		word-break: break-all; padding: 0 55px;
+	    font-size: 25px; font-family:Noto Sans KR,sans-serif!important;
+	    line-height: 100px;">돌봄서비스 신청</a>
+ </div></div>
 <script>
     AOS.init({
         easing: 'ease-out-back',
