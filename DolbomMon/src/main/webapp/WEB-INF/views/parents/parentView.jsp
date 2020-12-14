@@ -811,6 +811,7 @@
 				
 									<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded-circle" style="width:100%;height:100%;"/><br/><br/>
 								</li>
+
 								<li class="list-group-item border-0 col-9" id="applyDbmList">
 									<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
 									<h6 style="color:orange;">이름 - ${tlist.username }</h6> 
@@ -824,6 +825,7 @@
 									<div style="height:1px; float:right;">
 										<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0 5px;" />
 									</div>
+
 									<br/>
 									<c:if test="${contractId==tlist.userid }">
 										<span style="color:orange; font-size:14px;position:relative; top:10px;"><b>계약이 진행중입니다.</b></span>
@@ -848,7 +850,7 @@
         <c:if test="${who=='T' }">
         	<c:if test="${apChk<1 }">
         		<div style="text-align:center; margin:50px 0">
-					<input id="applyBtn" type="button" value="신청하기" style="width:40%; height:50px;"/>
+					<input id="applyBtn" type="button" value="신청하기" class="btn btn-warning" style="width:40%; height:50px;"/>
 				</div>
         	</c:if>
         	<c:forEach var="tlist" items="${tlist }">
@@ -857,20 +859,19 @@
 			        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
 			        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 						<ul class="list-group">
-							<li class="list-group-item"><i class="fas fa-star"></i>
+							<li class="list-group-item">
 								<ul class="list-group list-group-horizontal">
 			
 									<li class="list-group-item border-0 col-3">
 					
-										<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded-circle" style="width:100%;height:100%;"/><br/><br/>
+										<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> style="width:100%;height:70%; border-radius:20px;"/><br/><br/>
 									</li>
 									<li class="list-group-item border-0 col-9" id="applyDbmList">
-										<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
-										<h6 style="color:orange;">이름 - ${tlist.username }</h6> 
-										<h6><b>나이 - ${tlist.birth }세</b></h6>
-										<h6><b>지원시간</b> | </h6>
+										<h4><b>${tlist.username }</b></h4> 
+										<h6>나이 - ${tlist.birth }세</h6>
+										<h6>지원시간 | </h6>
 										<h6><c:if test="${tlist.cctv == 'Y'}">CCTV가 있어도 당당히 일할 수 있습니다.</c:if><c:if test="${tlist.cctv == 'N'}">CCTV촬영을 원하지 않습니다.</c:if></h6><br/>
-										<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
+										<h6><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
 										<input class="btn btn-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />
 									</li>
 								</ul>

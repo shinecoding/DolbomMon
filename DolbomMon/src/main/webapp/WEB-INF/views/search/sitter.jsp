@@ -117,6 +117,7 @@ var gender;
 var activity_type;
 var care_type;
 var order;
+var value;
 
 	$(function(){
 		
@@ -133,8 +134,6 @@ var order;
 	    	}else if(tabType=4){
 	    		orderDropdownAjax(order)
 	    	}
-	    	
-	    	
 	    });
 	    //프로필 들어가기
 	    $(document).on("click", ".card>.profilepic", function(){
@@ -152,21 +151,30 @@ var order;
 			});
 		//검색창	
 	    $(document).on("keyup", "#locFilter", function(){
-	    	var value = $(this).val().toLowerCase();
+	    	value = $(this).val().toLowerCase();
+	    	//$(".loc").filter(function(){
+	    	//	$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
+	    			//		console.log($(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1));
+				    //		console.log($(this).text().toLowerCase().indexOf(value)>-1);
+			//	    console.log($(this));
+	    	//});
+	    	//console.log(value)
+	    	searchWord(value)
+	    });
+		
+		function searchWord(value){
 	    	$(".loc").filter(function(){
 	    		$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
-				    		
+	    		console.log(value);
 	    	});
-	    });
+		}
+		
 		//스크롤
 		$(window).scroll(function(){
 			
 			var scrolltop = $(document).scrollTop();//스크롤 위치
-				console.log(scrolltop);
 			var height = $(document).height(); //문서길이
-				console.log(height);
 			var height_win = $(window).height(); //보여지는 창의 길이
-				console.log(height_win);
 			
 			if(Math.round($(window).scrollTop()) == $(document).height() - $(window).height()){
 				for(i=0; i<15; i++){
@@ -679,7 +687,7 @@ var order;
 
 
    <div id="actBox">
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1">실내놀이</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책 읽기</button>
 	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
@@ -758,7 +766,9 @@ var order;
 	
 
 	</div>
-	<div><button style="position:relative; left:45%;" class="btn btn-info" id="countTest">숫자 테스트</button></div>
+
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em;" class="btn btn-info" id="countTest">더보기</button></div>
+
 
 
 
