@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qnaMapper">
+<mapper namespace="com.dolbommon.dbmon.QnA.QnaDaoImp">
 	<select id ="QnaList" resultType="com.dolbommon.dbmon.QnA.QnAVO">
 		select seq, subject, userid, writedate from qna
 		order by seq desc
 	</select>
-<!-- 	
-	<select id="qnaBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select no, subject, content, userid, writedate
+	
+	<select id="qnaBoardView" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
+		select seq, subject, content, userid, writedate
 		from qna where seq=#{param1}
-	</select> -->
+	</select> 
 </mapper> 

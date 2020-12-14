@@ -67,12 +67,12 @@
 				
 			</tr>
 		</thead>
-		<tbody role="form" method="post" action="/">
+		<tbody>
 		<c:forEach var="qna_vo" items="${qna_list}">
 			<tr>
 				<th scope="row"><c:out value="${qna_vo.seq}"/></th>
 				<td class="subject" style="float:left;">
-				<%-- <a href="/dbmon/qnaBoardView?no=${qna_list.no}"> --%>
+				<a href="/dbmon/qnaBoardView?seq=${qna_vo.seq}">
 				<c:out value="${qna_vo.subject}"/></a></td>
 				<td><c:out value="${qna_vo.userid}"/></td>
 				<td><fmt:formatDate value="${qna_vo.writedate}" pattern="yyyy-MM-dd"/></td>
@@ -108,7 +108,7 @@
 		<tbody>
 			<tr>
 				<th scope="row">1</th>
-				<td class="subject"><a href="noticeBoardView">공지사항11111111111111</a></td>
+				<td class="subject"><a href="qnaBoardView">공지사항11111111111111</a></td>
 				<td>관리자</td>
 				<td>13:11</td>
 				<td>1</td>
@@ -171,7 +171,7 @@
 		<tbody>
 			<tr>
 				<th scope="row">1</th>
-				<td class="subject"><a href="noticeBoardView">공지사항11111111111111</a></td>
+				<td class="subject"><a href="qnaBoardView">공지사항11111111111111</a></td>
 				<td>관리자</td>
 				<td>13:11</td>
 				<td>1</td>
@@ -215,4 +215,7 @@
         </div>
       </div>
     </div>
+    
+<img src="img/intro2.PNG" class="img1"/>
     <hr/>
+
