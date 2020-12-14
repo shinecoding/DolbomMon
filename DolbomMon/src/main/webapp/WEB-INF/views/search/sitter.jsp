@@ -741,7 +741,7 @@ var value;
 
 
 	</div>
-	<div><button style="position:relative; width:250px; left:38%; font-size:2em;" class="btn btn-info" id="countTest">더보기</button></div>
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top: 50px;" class="btn btn-warning" id="countTest">더보기</button></div>
 
 
 
