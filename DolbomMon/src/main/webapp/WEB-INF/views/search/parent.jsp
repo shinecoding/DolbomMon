@@ -13,12 +13,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
-	* {
-		padding:0; list-style-type:none; box-sizing:border-box; 
-		font-family: Noto Sans KR,sans-serif!important;
-	}	
+		
 	#all{
 		margin:0 auto; background-color:white;	
 	}
@@ -27,6 +25,7 @@
 		width:1100px;
 		background-color:white;
 		margin:0 auto;
+			 font-family: 'Jua', sans-serif;
 	}
 	
 	img{ height:110px; width:110px;}
@@ -483,8 +482,8 @@ function mapResize(){
 <div id="filterbox">
 	<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 	<form class="form-inline">
-	<label class="my-1 mr-2" for="selectType"></label>
-	<select class="custom-select my-1 mr-sm-2" id="selectType" style="width: 100%;">
+	
+	<select class="custom-select border-warning mt-2" id="selectType" style="width: 100%;">
 	<option selected>돌봄 유형을 선택하시면, 맞춤 일자리를 보여드려요</option>
 	<option value="정기 돌봄">2~10세 정기 돌봄</option>
 	<option value="신생아/영아">신생아/영아 정기 돌봄</option>
