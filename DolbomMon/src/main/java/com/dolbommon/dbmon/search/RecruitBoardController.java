@@ -51,8 +51,8 @@ public class RecruitBoardController {
 		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList(99999);
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
-		HashSet<RecruitBoardVO> hash = dao.selectAllParents();
 		
+		HashSet<RecruitBoardVO> hash = dao.selectAllParent();//지도의 모든 선생/부모 위치
 		RecruitBoardVO mvo = null;
 		if(req.getParameter("userid")==null) {
 			//로그인 안 했을 때 지도 위치 지정>test1계정의 위치 띄워줌
@@ -167,7 +167,7 @@ public class RecruitBoardController {
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
 		if(time_consultation==null || time_consultation=="") {
-			rbVO.setConsultation("N");
+			rbVO.setTime_consultation("N");
 		}
 		
 		String time_type = rbVO.getTime_type();
@@ -186,7 +186,7 @@ public class RecruitBoardController {
 		cVO.setChild_birth(child_birth);
 		/////////////////////////////////////////////////////////
 		System.out.println("글번호 => " + no);
-		int result = 0;
+		int editResult = 0;
 		try {
 			System.out.println("업데이트 시작 => ");
 			dao.updateDbmSearch(no, rbVO);
@@ -196,34 +196,27 @@ public class RecruitBoardController {
 			
 			if(time_type.equals("R")) {
 				System.out.println("Rd 업데이트");
-				result = dao.updateDsRegularDate(no, rbVO, rdVO);
+				editResult = dao.updateDsRegularDate(no, rbVO, rdVO);
 				System.out.println("Rd 업데이트 됨");
 			}else {
 				System.out.println("Sd 업데이트");
-				result = dao.updateDsSpecificDate(no, rbVO, sdVO);
+				editResult = dao.updateDsSpecificDate(no, rbVO, sdVO);
 				System.out.println("Sd 업데이트 됨");
 			}
 			transactionManager.commit(status);
 		}catch(Exception e) {
 			transactionManager.rollback(status);
+			System.out.println("에러 발생 =>"+e.getMessage());
 		}
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("result", result);
+		mav.addObject("no", no);
+		mav.addObject("editResult", editResult);
 		mav.setViewName("/parents/writeResult");
 		
 		return mav;
 	
 	}
-	
-	
-	
-	
-	
+
 }
 
-
-
-
-
-	

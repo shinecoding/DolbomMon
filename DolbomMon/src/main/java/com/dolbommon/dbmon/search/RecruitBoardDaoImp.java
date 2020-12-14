@@ -27,21 +27,20 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 	//높은 시급순
 	public List<RecruitBoardVO> filterHighWage(int count);
 	//낮은 시급순
-
 	public List<RecruitBoardVO> filterLowWage(int count);
 	//지도 내 위치
 	public RecruitBoardVO selectMyMap(String userid);
-	//모든 학부모 지도 위치
-	public HashSet<RecruitBoardVO> selectAllParents();
+	//모든 선생 위치
+	public HashSet<RecruitBoardVO> selectAllParent();
 	
 	
 	//레코드 한 개 선택 
 	public RecruitBoardVO recruitBoardSelect(int no);
 	//레코드 한 개 선택 - 자녀
 	public ChildrenVO recruitChildSelect(int no);
-	//레코드 한 개 선택 - 정기적 선택(S)
+	//레코드 한 개 선택 - 정기적 선택(r)
 	public RegularDateVO recruitRegularDateSelect(int no);
-	//레코드 한 개 선택 - 특정날 선택(R)
+	//레코드 한 개 선택 - 특정날 선택(s)
 	public SpecificDateVO recruitSpecificDateSelect(int no);
 	
 	//선생님이 학부모의 글을 보고 신청했을 때
