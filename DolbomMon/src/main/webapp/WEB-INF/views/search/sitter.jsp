@@ -147,8 +147,13 @@ var value;
 	   
 		//지도 토글
 	      $(document).on("click", "#mapBtn", function(){
-				$("#map").css("height","500px").css("width","100%");	
 	    	  $("#map").toggle();
+				AOS.init({
+				    duration: 1200
+				  });
+				  onElementHeightChange(document.body, function(){
+				    AOS.refresh();
+				  });
 			});
 		//검색창	
 	    $(document).on("keyup", "#locFilter", function(){
@@ -667,7 +672,31 @@ var value;
 	});//제이쿼리
 	function mapResize(){
 		$("#map").css("display","none");
+		AOS.init({
+		    duration: 1200
+		  });
+		  onElementHeightChange(document.body, function(){
+		    AOS.refresh();
+		  });
 	}
+
+
+		function onElementHeightChange(elm, callback) {
+		    var lastHeight = elm.clientHeight
+		    var newHeight;
+		    
+		    (function run() {
+		        newHeight = elm.clientHeight;      
+		        if (lastHeight !== newHeight) callback();
+		        lastHeight = newHeight;
+
+		        if (elm.onElementHeightChangeTimer) {
+		          clearTimeout(elm.onElementHeightChangeTimer); 
+		        }
+
+		        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+		    })();
+		  }
 </script>
 </head>
 <body onload="mapResize()">

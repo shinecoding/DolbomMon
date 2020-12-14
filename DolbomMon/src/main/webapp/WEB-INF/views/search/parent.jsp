@@ -139,11 +139,41 @@
 
 </style>
 <script>
+var tabType=1;
+var count = 12;
+var gender = 'all';
+var activity_type;
+var care_type;
+var order;
+var value;
+
+
 $(function(){
+	
+    //countTest
+    $(document).on("click", "#countTest", function(){
+    	count= count+6;
+    	if(tabType==1){
+    		testAjax(gender)
+    	}else if(tabType==2){
+    		dropdownAjax(care_type)
+    	}else if(tabType==3){
+    		actBoxAjax(activity_type)
+    	}else if(tabType==4){
+    		orderDropdownAjax(order)
+    	}
+    });
+	
+	
 	//지도 토글
     $(document).on("click", "#mapBtn", function(){
-    		$("#map").css("height","500px").css("width","100%");
 			$("#map").toggle();
+			AOS.init({
+			    duration: 1200
+			  });
+			  onElementHeightChange(document.body, function(){
+			    AOS.refresh();
+			  });
 			
 	});
 	
@@ -158,82 +188,102 @@ $(function(){
 	
 	//필터
 	$(document).on("click", "#btnBox>button", function(){
-	    var activity_type = $(this).text();
-	    console.log(activity_type);
-	    var url = "/dbmon/careAct";
-		var params = "activity_type="+activity_type;
-		console.log("파람="+params);
-		$.ajax({
-			url: url,
-			data: params,
-			type: 'GET',
-			success: function(result){
-				console.log("갯수="+result.length);
-				$("#Tcnt").text(result.length);
-				var $result = $(result);
-				var tag = "";
-					
-				$result.each(function(idx, vo){
-					tag += '<div class="col-sm-6" style="padding: 20px;">';
-					if(vo.status=="P"){
-						tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
-					}
-					tag += '<div class="card">';
-					tag += '<div class="card-body">';
-					tag += '<div class="imgBox"><img src=';
-					if(vo.pic==null){
-						tag +='"img/profilepic.png"';
-					} else {
-						tag +='"upload/' +vo.pic+ '"';
-					}
-					tag += 'class="rounded-circle"></div>';
-					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>';
-					tag += vo.tcnt+'명 지원</div>';
-					tag += '<div class="offerBox" style="width: 310px";>';
-					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
-					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<span class="ml-2" style="font-size:0.7em">';
-					if(vo.writedate>525600){
-						tag += Math.round(vo.writedate/525600)+'년';
-					} else if(vo.writedate>43200){
-						tag += Math.round(vo.writedate/43200) +'달';
-					} else if(vo.writedate>1440){
-						tag += Math.round(vo.writedate/1440) +'일';
-					} else if(vo.writedate>60){
-						tag += Math.round(vo.writedate/60) +'시간';
-					} else {
-						tag += Math.round(vo.writedate) +'분';
-					}
-					tag += '</span>';
-					
-					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
-					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
-					if(vo.consultation=="Y"){
-						tag += ' | <b>협의가능</b></span></p>';
-					}else{
-						tag += '</span></p>';
-					}
-					tag += '</div></div>';
-					tag += '<div class="card-footer btn" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';	
-					tag += '</div>';
-					tag += '</div>';
-					tag += '</div>';
-				});
-				tag += "";
-				$("#cardBox").html(tag);	
-			}, error: function(){
-				console.log("리스트 받기 에러");
-			}
-		});		
+    	count=12;
+    	tabType=3;
+    	activity_type = $(this).text();
+    	actBoxAjax(activity_type);
 	});//ajax
+	
+	function actBoxAjax(activity_type){
+		    var url = "/dbmon/careAct";
+			var params = {
+					activity_type:activity_type,
+					count:count, 
+			} 
+			console.log("파람="+params);
+			$.ajax({
+				url: url,
+				data: params,
+				type: 'GET',
+				success: function(result){
+					console.log("갯수="+result.length);
+					$("#Tcnt").text(result.length);
+					var $result = $(result);
+					var tag = "";
+						
+					$result.each(function(idx, vo){
+						tag += '<div class="col-sm-6" style="padding: 20px;">';
+						if(vo.status=="P"){
+							tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
+						}
+						tag += '<div class="card">';
+						tag += '<div class="card-body">';
+						tag += '<div class="imgBox"><img src=';
+						if(vo.pic==null){
+							tag +='"img/profilepic.png"';
+						} else {
+							tag +='"upload/' +vo.pic+ '"';
+						}
+						tag += 'class="rounded-circle"></div>';
+						tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>';
+						tag += vo.tcnt+'명 지원</div>';
+						tag += '<div class="offerBox" style="width: 310px";>';
+						tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
+						tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
+						tag += '<span class="ml-2" style="font-size:0.7em">';
+						if(vo.writedate>525600){
+							tag += Math.round(vo.writedate/525600)+'년';
+						} else if(vo.writedate>43200){
+							tag += Math.round(vo.writedate/43200) +'달';
+						} else if(vo.writedate>1440){
+							tag += Math.round(vo.writedate/1440) +'일';
+						} else if(vo.writedate>60){
+							tag += Math.round(vo.writedate/60) +'시간';
+						} else {
+							tag += Math.round(vo.writedate) +'분';
+						}
+						tag += '</span>';
+						
+						tag += '<br/><span>'+vo.care_addr+'</span>';
+						tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
+						tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
+						if(vo.consultation=="Y"){
+							tag += ' | <b>협의가능</b></span></p>';
+						}else{
+							tag += '</span></p>';
+						}
+						tag += '</div></div>';
+						tag += '<div class="card-footer btn" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';	
+						tag += '</div>';
+						tag += '</div>';
+						tag += '</div>';
+					});
+					tag += "";
+					$("#cardBox").html(tag);	
+				}, error: function(){
+					console.log("리스트 받기 에러");
+				}
+			});		
+	}
 	    
 	//select
 	$(document).on("change", "#selectType", function(){
-		var care_type = $(this).val();
+		count=12;
+		tabType=2;
+		care_type = $(this).val();
+		if(care_type=='all'){
+			gender='all';
+			tabType=1;
+		}
+		dropdownAjax(care_type)
+	});//ajax
+	function dropdownAjax(care_type){
 		console.log("케어타입="+care_type);
 		var url2 = "/dbmon/careSelect";
-		var params2 = "care_type="+care_type;
+		var params2 = {
+				care_type:care_type,
+				count:count, 
+		} 
 		console.log("파라미터="+params2);
 		$.ajax({
 			url:url2,
@@ -298,93 +348,124 @@ $(function(){
 				console.log("리스트 받기 에러");
 			}
 		});		
-	});//ajax
+	}
 	
 	
 	//====================정렬 필터=========================
 	
 	$(document).on("change", "#selectArray", function(){
-		var order = $(this).val();
-		console.log("정렬="+order);
-				
-		var url = "/dbmon/filterArray";
-		var params = "order="+order;
-			
-		console.log("파라미터="+params);
-		$.ajax({
-			url: url,
-			data: params,
-			type: 'GET',
-			success: function(result){
+		count=12;
+		tabType=4;
+		order = $(this).val();
+		orderDropdownAjax(order)
+	 });//ajax
+	 
+	 function orderDropdownAjax(order){}
 					
-				var $result = $(result);
-				var tag = "";
-											
-				$result.each(function(idx, vo){
-					tag += '<div class="col-sm-6" style="padding: 20px;">';
-					if(vo.status=="P"){
-						tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
-					}
-					tag += '<div class="card">';
-					tag += '<div class="card-body">';
-					tag += '<div class="imgBox"><img src=';
-					if(vo.pic==null){
-						tag +='"img/profilepic.png"';
-					} else {
-						tag +='"upload/' +vo.pic+ '"';
-					}
-					tag += 'class="rounded-circle"></div>';
-					tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;">';
-					tag += vo.tcnt+'명 지원</div>';
-					tag += '<div class="offerBox" style="width: 310px";>';
-					tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
-					tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
-					tag += '<br/><span><b>신생아 1명, 유아 1명</b></span> |';
-					tag += '<span class="ml-2" style="font-size:0.7em">';
-					if(vo.writedate>525600){
-						tag += Math.round(vo.writedate/525600)+'년';
-					} else if(vo.writedate>43200){
-						tag += Math.round(vo.writedate/43200) +'달';
-					} else if(vo.writedate>1440){
-						tag += Math.round(vo.writedate/1440) +'일';
-					} else if(vo.writedate>60){
-						tag += Math.round(vo.writedate/60) +'시간';
-					} else {
-						tag += Math.round(vo.writedate) +'분';
-					}
-					tag += '</span>';
-					tag += '<br/><span>'+vo.care_addr+'</span>';
-					tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
-					tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
-					if(vo.consultation=="Y"){
-						tag += ' | <b>협의가능</b></span></p>';
-					}else{
-						tag += '</span></p>';
-					}
-						tag += '</div></div>';
-						tag += '<div class="card-footer btn" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';	
-						tag += '</div>';
-						tag += '</div>';
-						tag += '</div>';
-				});
-				tag += "";
-					
-				$("#cardBox").html(tag);
-					
-			},
-			error:function(error){
-				console.log("리스트 받기 에러-->"+ error.responseText);
+			var url = "/dbmon/filterArray";
+			var params = {
+					order:gender,
+					count:count, 
 			}
-		});
-	 });//ajax 
+				
+			console.log("파라미터="+params);
+			$.ajax({
+				url: url,
+				data: params,
+				type: 'GET',
+				success: function(result){
+						
+					var $result = $(result);
+					var tag = "";
+												
+					$result.each(function(idx, vo){
+						tag += '<div class="col-sm-6" style="padding: 20px;">';
+						if(vo.status=="P"){
+							tag += '<div class="modalHidden"><div class="offerConclude">구인이 종료된 공고입니다</div></div>';
+						}
+						tag += '<div class="card">';
+						tag += '<div class="card-body">';
+						tag += '<div class="imgBox"><img src=';
+						if(vo.pic==null){
+							tag +='"img/profilepic.png"';
+						} else {
+							tag +='"upload/' +vo.pic+ '"';
+						}
+						tag += 'class="rounded-circle"></div>';
+						tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;">';
+						tag += vo.tcnt+'명 지원</div>';
+						tag += '<div class="offerBox" style="width: 310px";>';
+						tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
+						tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span>';
+						tag += '<br/><span><b>신생아 1명, 유아 1명</b></span> |';
+						tag += '<span class="ml-2" style="font-size:0.7em">';
+						if(vo.writedate>525600){
+							tag += Math.round(vo.writedate/525600)+'년';
+						} else if(vo.writedate>43200){
+							tag += Math.round(vo.writedate/43200) +'달';
+						} else if(vo.writedate>1440){
+							tag += Math.round(vo.writedate/1440) +'일';
+						} else if(vo.writedate>60){
+							tag += Math.round(vo.writedate/60) +'시간';
+						} else {
+							tag += Math.round(vo.writedate) +'분';
+						}
+						tag += '</span>';
+						tag += '<br/><span>'+vo.care_addr+'</span>';
+						tag += '<br/><span><b>'+vo.start_date+'</b> 시작</span>';
+						tag += '<br/><span style="color: orange;">희망시급 '+vo.wish_wage+'원';
+						if(vo.consultation=="Y"){
+							tag += ' | <b>협의가능</b></span></p>';
+						}else{
+							tag += '</span></p>';
+						}
+							tag += '</div></div>';
+							tag += '<div class="card-footer btn" onclick="location.href=parentView?no='+vo.job_board_no+'">자세히 보기</div>';	
+							tag += '</div>';
+							tag += '</div>';
+							tag += '</div>';
+					});
+					tag += "";
+						
+					$("#cardBox").html(tag);
+						
+				},
+				error:function(error){
+					console.log("리스트 받기 에러-->"+ error.responseText);
+				}
+			});
+	 
+	 
 });
 
 
 function mapResize(){
 	$("#map").css("display","none");
+	AOS.init({
+	    duration: 1200
+	  });
+	  onElementHeightChange(document.body, function(){
+	    AOS.refresh();
+	  });
 }
 
+	function onElementHeightChange(elm, callback) {
+	    var lastHeight = elm.clientHeight
+	    var newHeight;
+	    
+	    (function run() {
+	        newHeight = elm.clientHeight;      
+	        if (lastHeight !== newHeight) callback();
+	        lastHeight = newHeight;
 
+	        if (elm.onElementHeightChangeTimer) {
+	          clearTimeout(elm.onElementHeightChangeTimer); 
+	        }
+
+	        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+	    });
+	  }
+	
 </script>
 
 
@@ -489,7 +570,7 @@ function mapResize(){
 	</div>
 	
 	
-	
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em;" class="btn btn-info" id="countTest">더보기</button></div>
 <!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
 <script>
