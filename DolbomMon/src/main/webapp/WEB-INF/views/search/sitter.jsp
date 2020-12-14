@@ -214,7 +214,7 @@ var order;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card" id="'+vo.userid+'" >';
+						tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -310,7 +310,7 @@ var order;
 						
 						$result.each(function(idx, vo){
 							
-							tag += '<div class="card" id="'+vo.userid+'" >';
+							tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -408,7 +408,7 @@ var order;
 										
 				$result.each(function(idx, vo){
 				
-					tag += '<div class="card" id="'+vo.userid+'" >';
+					tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 					tag += '<img class="profilepic" src=';
 					if(vo.pic==null){
 						tag +='"img/profilepic.png"';
@@ -505,7 +505,7 @@ var order;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card"  id="'+vo.userid+'" >';
+						tag += '<div class="card" data-aos="fade-up"  id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
