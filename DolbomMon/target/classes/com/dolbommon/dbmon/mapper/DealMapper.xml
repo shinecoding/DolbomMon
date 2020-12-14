@@ -4,13 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.deal.DealDaoImp">
 	<insert id="insertContract" >
-		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit, status, origin_no, agree, teacherid) 
-			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0, 'C', #{origin_no}, 'T', #{teacherid})
+		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit, status, origin_no, agree, teacherid, who) 
+			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0, 'C', #{origin_no}, 'T', #{teacherid}, 'P')
+	</insert>
+	<insert id="insertContractT" >
+		insert into parent_list(job_board_no, userid, care_addr, dong_addr, time_type, pw_activity, wish_wage, consultation, time_consultation,  wish_age, wish_gender, content, lat, lng, writedate, hit, status, origin_no, agree, teacherid, who) 
+			values(member_sq.nextval, #{userid}, #{care_addr},#{dong_addr} ,#{time_type},  #{pw_activity}, #{wish_wage}, #{consultation}, #{time_consultation}, #{wish_age}, #{wish_gender}, #{content}, #{lat}, #{lng}, sysdate, 0, 'C', member_sq.currval, 'T', #{teacherid}, 'T')
 	</insert>
 	
 	<select id="selectTeacherHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
 		select p.job_board_no, t_userid, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, p.status, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
 		from parent_list p join t_p_table t on p.job_board_no=t.job_board_no where (p.status='R' or p.status='P') and t_userid=#{userid} order by p.job_board_no desc
+	</select>
+	
+	<select id="selectTeacherHistory2" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
+		select * from parent_list where status='C' and teacherid='test1212' and agree='T' and who='T' order by job_board_no desc
+	</select>
+	
+	<select id="teacherDealHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
+		select * from parent_list where status='C' and teacherid=#{userid} and agree='Y' and who='P'
 	</select>
 	
 	<select id="searchContract" resultType="int" parameterType="int">

@@ -12,10 +12,16 @@ import com.dolbommon.dbmon.search.RecruitBoardVO;
 
 public interface DealDaoImp {
 		
-	// 계약서 - 글 등록
+	// 계약서 - 선생님이 부모님에게
 	public int insertContract(RecruitBoardVO rbVO);
+	// 계약서 - 부모님이 선생님에게
+	public int insertContractT(RecruitBoardVO rbVO);
 	// 내가 신청한 글 목록 보기	
 	public List<RecruitBoardVO> selectTeacherHistory(String userid);
+	// 내게지원한 글 목록 보기	
+	public List<RecruitBoardVO> selectTeacherHistory2(String userid);
+	// 내가 활동중인 글목록(선생님)	
+	public List<RecruitBoardVO> teacherDealHistory(String userid);
 	// 계약서 찾기
 	public int searchContract(int no);
 	

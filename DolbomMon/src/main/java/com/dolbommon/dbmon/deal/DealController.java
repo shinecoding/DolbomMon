@@ -31,14 +31,13 @@ public class DealController {
 	@Autowired
 	DataSourceTransactionManager transactionManager;
 	
-	//계약서 오픈
+	//계약서 오픈 선생님이 신청한것
 	@RequestMapping("/contractOpen")
 	public ModelAndView editBoard(int no, HttpServletRequest req) {
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		String teacherId = (String)req.getParameter("userid");
 		RecruitBoardVO vo = dao.recruitBoardSelect(no);
 		ModelAndView mav = new ModelAndView();
-		
 		String time_type = vo.getTime_type();
 		
 		if(time_type.equals("R")) {
@@ -71,8 +70,18 @@ public class DealController {
 		return mav;
 	}
 	
+	//계약서 오픈 부모님이 신청한것
+	@RequestMapping("/contractOpenT")
+	public ModelAndView contractOpenT(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String teacherId = (String)req.getParameter("userid");
+		mav.addObject("teacherId", teacherId);
+		mav.setViewName("deal/contractFormT");
+		return mav;
+	}
 	
-	//계약서 등록
+	
+	//계약서 등록 선생님이 부모님에게
 	@RequestMapping(value="/contractWrite", method = RequestMethod.POST)
 	public ModelAndView dbmSearchWriteFormOk(HttpServletRequest req, HttpSession ses, RecruitBoardVO rbVO, ChildrenVO cVO, SpecificDateVO sdVO, RegularDateVO rdVO) {
 		String teacherId = (String)req.getParameter("teacherId");
@@ -139,6 +148,81 @@ public class DealController {
 		return mav;
 	
 	}
+	
+	//계약서 등록 부모님이 선생님에게
+	@RequestMapping(value="/contractWriteT", method = RequestMethod.POST)
+	public ModelAndView contractWriteT(HttpServletRequest req, HttpSession ses, RecruitBoardVO rbVO, ChildrenVO cVO, SpecificDateVO sdVO, RegularDateVO rdVO) {
+		String teacherId = (String)req.getParameter("teacherId");
+		System.out.println("아이디테스트"+teacherId);
+		rbVO.setTeacherid(teacherId);
+		
+		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
+		
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		rbVO.setUserid((String)ses.getAttribute("userid"));
+		
+		String consultation = (String)rbVO.getConsultation();
+		if(consultation==null || consultation=="") {
+			rbVO.setConsultation("N");
+		}
+		String time_consultation = (String)rbVO.getTime_consultation();
+		if(time_consultation==null || time_consultation=="") {
+			rbVO.setConsultation("N");
+		}
+		
+		String childb = cVO.getChild_birth();
+		String childbArr[] = childb.split(",");
+		
+		String child_birthStr = "";
+		for(int i=0;i<childbArr.length;i++) {
+			if(!childbArr[i].equals("")) {
+				child_birthStr += childbArr[i]+",";
+			}
+		}
+		String child_birth = child_birthStr.substring(0, child_birthStr.length()-1);
+		System.out.println("자녀 생년월일 => " + child_birth);
+		cVO.setChild_birth(child_birth);
+		
+		
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		ModelAndView mav = new ModelAndView();
+		
+		String time_type = (String)rbVO.getTime_type();
+		System.out.println("type_type => " + time_type);
+		int result = 0;
+		try {
+			System.out.println("in");
+			dao2.insertContractT(rbVO);
+			System.out.println("parent_list 데이터 등록 됨");
+			dao.insertDsChildInfo(rbVO, cVO);
+			System.out.println("자녀 정보 등록됨");
+			if(time_type.equals("S")) {
+				System.out.println("S");
+				result = dao.insertDsSpecificDate(rbVO, sdVO);
+			}else {
+				System.out.println("R");
+				result = dao.insertDsRegularDate(rbVO, rdVO);
+			}
+			transactionManager.commit(status);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			transactionManager.rollback(status);
+		}
+		
+		mav.addObject("result", result);
+		mav.setViewName("/parents/writeResult");
+		
+		return mav;
+	
+	}
+	
+	
+	
+	
 	//선생님이 계약서 보기
 	@RequestMapping("/contractView")
 	public ModelAndView parentView(int origin_no, HttpSession ses, HttpServletRequest req) {

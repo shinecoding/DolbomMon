@@ -26,11 +26,9 @@
 	}
 	img{ height:110px; width:110px;}
 	
-	.list
-	
-    div{
-        margin:0 auto;
-        width:600px;
+	.list div{
+        margin: 0 auto;
+        width: 600px;
     }
     .form-control{
     	margin:0 auto;
@@ -303,7 +301,7 @@ $(function(){
 	</div>
 </div>
 <div class="listPanel" style="display: block; vertical-align: inherit; background-color:white; "> 
-<div id="filterbox" >
+<div id="filterbox">
 	<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 	<form class="form-inline">
 	<label class="my-1 mr-2" for="selectType"></label>
@@ -352,10 +350,10 @@ $(function(){
 						<div class="offerBox" >
 							<span class="card-title" class="offerTitle" style="line-height: 2em;"><b>${vo.title }</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
-							<br/><span>${vo.care_addr } </span>
+							<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate}</span>
+							<br/><span>${vo.care_addr} </span>
 							<br/><span>12/12 시작</span>
-							<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
+							<br/><span style="color: orange;">희망시급 ${vo.wish_wage}원
 							
 							
 							<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>

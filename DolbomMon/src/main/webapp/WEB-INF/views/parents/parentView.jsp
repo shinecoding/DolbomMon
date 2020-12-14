@@ -955,7 +955,7 @@
 		<c:if test="${userid == rbVO.userid}">
 			<c:if test="${rbVO.tcnt>0 }" ><h5>나에게 신청한 돌봄몬</h5></c:if>
 			<c:forEach var="tlist" items="${tlist }">
-		        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
+		        <div class="wrapper2" style="margin:15px 0;" id="dbmDiv">
 		        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 					<ul class="list-group">
 						<li class="list-group-item" style="height:200px; margin:10px 0;">
@@ -995,6 +995,7 @@
 		console.log("${contractId}");
 		console.log("${contractId2}");
 		</script>
+			
       	</c:if>
       	
         <c:if test="${who=='T' }">
