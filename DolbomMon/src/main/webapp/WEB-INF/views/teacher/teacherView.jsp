@@ -21,16 +21,24 @@
 			location.href="/dbmon/report?userid=${vo.userid}";
 		})
 		
-		
-		$(document).on("click", "#shinchung", function(){
-			
-			
-			
-			
-			
-			
+		var popupWidth = 1060;
+		var popupHeight = 596;
+		var popupX = (window.screen.width / 2) - (popupWidth / 2);
+		var popupY= (window.screen.height / 2) - (popupHeight / 2);
+		$(document).on("click", ".shinchung", function(){
+			console.log('test');
+			popupWidth = 1060;
+			popupHeight = 1600;
+			var userid = $(this).attr('id');
+			console.log(userid);
+			window.open('/dbmon/contractOpenT?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		})
-		
+		$(document).on("click",".cBtn",function(){
+			popupWidth = 1060;
+			popupHeight = 656;
+			var userid = $(this).attr('id');
+			window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		});
 		
 		
 		
@@ -91,7 +99,9 @@ border-radius:10px;
    		<li class="list-group-item align-middle">
    		<span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span>
    		<span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.teacher_type=='선생님'}">선생님 돌봄몬</c:if><c:if test="${vo.teacher_type=='대학생'}">대학생 돌봄몬</c:if><c:if test="${vo.teacher_type=='엄마'}">엄마 돌봄몬</c:if><c:if test="${vo.teacher_type=='일반'}">일반 돌봄몬</c:if></span>
-   		<c:if test="${mvo.userid!=paramid}"><button name="shinchung" class="btn btn-warning float-right">신청</button></c:if><br/>
+   		<c:if test="${mvo.userid!=paramid}">
+   		<input type="button" class="btn btn-warning cBtn" id="${userid }" value="협의하기" style="float:right; margin:0 5px;"/>
+   		<button name="shinchung" id="${userid }" class="btn btn-warning float-right shinchung">신청</button></c:if><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    		
    </ul>
