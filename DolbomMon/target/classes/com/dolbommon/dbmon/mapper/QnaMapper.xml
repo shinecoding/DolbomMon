@@ -5,7 +5,7 @@
 <mapper namespace="qnaMapper">
 	<select id ="QnaList" resultType="com.dolbommon.dbmon.QnA.QnAVO">
 		select seq, subject, userid, writedate from qna
-		order by seq desc
+		order by seq desc where type=1
 	</select>
 <!-- 	
 	<select id="qnaBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">

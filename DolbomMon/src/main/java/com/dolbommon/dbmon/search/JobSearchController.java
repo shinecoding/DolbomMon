@@ -84,10 +84,10 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchAct", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchAct(String activity_type) {
+	public List<TeacherVO> searchAct(String activity_type, int count) {
 		System.out.println("액티비티 타입"+activity_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchActType(activity_type);
+		List<TeacherVO> list = dao.jobSearchActType(activity_type, count);
 		
 		return list;
 	}

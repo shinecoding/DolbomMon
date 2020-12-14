@@ -9,7 +9,7 @@ public interface JobSearchDaoImp {
 	//구직게시판 리스트보기
 	public List<TeacherVO> jobSearchBoardList(int count);
 	//구직게시판 activity_type필터
-	public List<TeacherVO> jobSearchActType(String activity_type);
+	public List<TeacherVO> jobSearchActType(@Param("activity_type")String activity_type, @Param("count")int count);
 	//구직게시판 care_type필터
 	public List<TeacherVO> jobSearchCareType(String care_type);
 	
