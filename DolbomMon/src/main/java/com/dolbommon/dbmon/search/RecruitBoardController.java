@@ -52,7 +52,7 @@ public class RecruitBoardController {
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
 		
-		/*
+		
 		RecruitBoardVO mvo = null;
 		if(req.getParameter("userid")==null) {
 			//로그인 안 했을 때 지도 위치 지정>test1계정의 위치 띄워줌
@@ -60,10 +60,10 @@ public class RecruitBoardController {
 		} else {
 			mvo = dao.selectMyMap(userid); //내 위치
 		}
-		*/
+		
 		ModelAndView mav = new ModelAndView();
 		
-		//mav.addObject("mvo", mvo);
+		mav.addObject("mvo", mvo);
 		mav.addObject("list2", list2);
 		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");

@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="selectMyMap" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select m.lat as lat, m.lng as lng from member m join parent_list p on m.userid=p.userid where m.userid=#{param1}
+		select lat, lng from member where userid=#{param1}
 	</select>
 	
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
