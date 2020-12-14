@@ -104,15 +104,15 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchCare(String care_type) {
+	public List<TeacherVO> searchCare(String care_type, int count) {
 		System.out.println("케어 타입"+care_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.jobSearchBoardList(10);
+			list = dao.jobSearchBoardList(12);
 		}else {
-			list = dao.jobSearchCareType(care_type); 	
+			list = dao.jobSearchCareType(care_type, count); 	
 		}
 		
 		return list;

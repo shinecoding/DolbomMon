@@ -112,7 +112,7 @@
 
 <script>
 var tabType=1;
-var count = 2;
+var count = 12;
 var gender = 'all';
 var activity_type;
 var care_type;
@@ -123,7 +123,7 @@ var order;
 
 	    //countTest
 	    $(document).on("click", "#countTest", function(){
-	    	count= count+2;
+	    	count= count+6;
 	    	if(tabType==1){
 	    		testAjax(gender)
 	    	}else if(tabType==2){
@@ -183,13 +183,21 @@ var order;
 			count=12;
 			tabType=2;
 			care_type = $(this).val();
+			if(care_type=='all'){
+				gender='all';
+				tabType=1;
+			}
 			dropdownAjax(care_type)
 
    	 	});//ajax
 		function dropdownAjax(care_type){
 			console.log("케어타입="+care_type);
 			var url = "/dbmon/searchCare";
-			var params = "care_type="+care_type;
+			var params =	{
+					care_type:care_type,
+					count:count, 
+			} 
+			
 			console.log("파라미터="+params);
 			$.ajax({
 				url:url,
@@ -275,7 +283,7 @@ var order;
 		
 		//========================ajax=========for buttons=================
 	    $(document).on("click", "#actBox>button", function(){
-	    	count=2;
+	    	count=12;
 	    	tabType=3;
 	    	activity_type = $(this).text();
 	    	actBoxAjax(activity_type);
