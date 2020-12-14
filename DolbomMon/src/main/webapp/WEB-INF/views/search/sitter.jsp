@@ -193,11 +193,13 @@ var order;
 		function dropdownAjax(care_type){
 			console.log("케어타입="+care_type);
 			var url = "/dbmon/searchCare";
+
 			var params =	{
 					care_type:care_type,
 					count:count, 
 			} 
 			
+
 			console.log("파라미터="+params);
 			$.ajax({
 				url:url,
@@ -729,7 +731,7 @@ var order;
 
 
 	</div>
-	<div><button style="position:relative; left:45%;" class="btn btn-info" id="countTest">숫자 테스트</button></div>
+	<div><button style="position:relative; left:45%;" class="btn btn-warning" id="countTest">숫자 테스트</button></div>
 
 
 
