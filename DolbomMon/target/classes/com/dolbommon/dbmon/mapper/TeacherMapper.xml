@@ -72,4 +72,11 @@
 	<update id="updateActive" parameterType="com.dolbommon.dbmon.Teacher.TeacherVO">
 		update teacher set active = #{active} where userid = #{userid}
 	</update>
+	<update id="updateSchedule">
+		update regular_date set start_date=#{start_date}, end_date=#{end_date}, yoil=#{yoil}, start_time=#{start_time}, end_time=#{end_time} 
+			where userid=#{param1}
+	</update>
+	<select id="selectSchedule" parameterType="String" resultType="com.dolbommon.dbmon.member.RegularDateVO">
+		select to_char(start_date,'YYYY-MM-DD') as start_date, to_char(end_date, 'YYYY-MM-DD') as end_date, yoil, start_time, end_time from regular_date where userid = #{param1}
+	</select>
 </mapper>

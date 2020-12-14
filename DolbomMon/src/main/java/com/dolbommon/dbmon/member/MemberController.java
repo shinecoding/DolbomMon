@@ -14,6 +14,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -331,10 +332,16 @@ public class MemberController {
 		@RequestMapping(value="/dbm/profileImage", method = RequestMethod.POST)
 		public String dbmProfileImage(HttpSession ses, 
 			      @RequestParam("desired_wage") String desired_wage,
-			      @RequestParam("cctv") String cctv
+			      @RequestParam("cctv") String cctv,
+			      @RequestParam("discussion") String discussion
 		){
+			if(discussion.equals("")||discussion.equals(null)) {
+				discussion = "N";
+			}
+			ses.setAttribute("discussion", discussion);
 			ses.setAttribute("desired_wage" ,desired_wage);
 			ses.setAttribute("cctv" ,cctv);
+			
 			return "register/dbm/profileImage";
 		}
 		

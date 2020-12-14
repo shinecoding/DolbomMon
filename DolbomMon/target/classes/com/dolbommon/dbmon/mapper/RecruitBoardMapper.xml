@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.status, p.consultation, p.content, p.wish_gender,
+		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.status, p.consultation,p.title, p.content, p.wish_gender,
 		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
@@ -26,7 +26,7 @@
 	</select>
 
 	<select id="recruitBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
+		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender,p.title , p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
 		(select count(t_userid) from t_p_table where job_board_no = #{param1}) as tcnt
 		from parent_list p, member m 
 		where p.job_board_no=#{param1} and p.userid = m.userid
@@ -58,7 +58,7 @@
 	</insert>
 	
 	<select id="applyDbmSelect" parameterType="int" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO">
-		select member.username, member.userid, member.tel1, trunc(months_between(trunc(sysdate), birth)/12) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, to_char(t_p_table.apply_date, 'YYYY-MM-DD HH:MI') apply_date
+		select member.username, member.userid, member.tel1, trunc(months_between(trunc(sysdate), birth)/12) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, teacher.discussion, to_char(t_p_table.apply_date, 'YYYY-MM-DD HH:MI') apply_date
 		from member, t_p_table, teacher 
 	    where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and t_p_table.job_board_no = #{param1}
 	</select>
@@ -83,7 +83,7 @@
 	
 	<update id="updateDbmSearch">
 		update parent_list set care_addr=#{rbVO.care_addr}, dong_addr=#{rbVO.dong_addr}, time_type=#{rbVO.time_type}, pw_activity=#{rbVO.pw_activity}, wish_wage=#{rbVO.wish_wage}, consultation=#{rbVO.consultation}, time_consultation=#{rbVO.time_consultation}
-			, wish_age=#{rbVO.wish_age}, wish_gender=#{rbVO.wish_gender}, content=#{rbVO.content}, lat=#{rbVO.lat}, lng =#{rbVO.lng}
+			, wish_age=#{rbVO.wish_age}, wish_gender=#{rbVO.wish_gender},title=#{rbVO.title}, content=#{rbVO.content}, lat=#{rbVO.lat}, lng =#{rbVO.lng}
 			where job_board_no = #{param1}
 	</update>
 	<update id="updateDsChildInfo">
@@ -126,7 +126,7 @@
 	
 	<!-- 필터 -->
 	<select id="recruitActType" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.title, p.content, p.wish_gender,
 		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
@@ -137,7 +137,7 @@
 	
 	<!-- select 필터 -->
 	<select id="recruitCareSelect" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.title, p.content, p.wish_gender,
 		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
@@ -147,7 +147,7 @@
 	
 	<!-- array 필터 높은 시급순-->
 	<select id="filterHighWage" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.title, p.content, p.wish_gender,
 		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date

@@ -4,8 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.QnA.QnaDaoImp">
 	<select id ="QnaList" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, userid, writedate from qna
-		order by seq desc
+		select seq, subject, userid, writedate from qna where type=1
+		order by seq desc 
+	</select>
+	<select id ="QnaList2" resultType="com.dolbommon.dbmon.QnA.QnAVO">
+		select seq, subject, userid, writedate from qna where type=2
+		order by seq desc 
+	</select>
+	<select id ="QnaList3" resultType="com.dolbommon.dbmon.QnA.QnAVO">
+		select seq, subject, userid, writedate from qna where type=3
+		order by seq desc 
 	</select>
 	
 	<select id="qnaBoardView" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
