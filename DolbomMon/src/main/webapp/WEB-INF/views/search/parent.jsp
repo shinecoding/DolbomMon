@@ -142,6 +142,7 @@
 $(function(){
 	//지도 토글
     $(document).on("click", "#mapBtn", function(){
+    		$("#map").css("height","500px").css("width","100%");
 			$("#map").toggle();
 			
 	});
@@ -379,7 +380,9 @@ $(function(){
 });
 
 
-
+function mapResize(){
+	$("#map").css("display","none");
+}
 
 
 </script>
@@ -389,7 +392,7 @@ $(function(){
 
 
 
-<body>
+<body onload="mapResize()">
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
