@@ -3,7 +3,7 @@ package com.dolbommon.dbmon.search;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +52,7 @@ public class RecruitBoardController {
 		List<RecruitBoardVO> list2 = dao.recruitBoardList();
 		int totalRecords = dao.getTotalRecords();	//총 게시물 수
 		
-		
+		HashSet<RecruitBoardVO> hash = dao.selectAllParent();//지도의 모든 선생/부모 위치
 		RecruitBoardVO mvo = null;
 		if(req.getParameter("userid")==null) {
 			//로그인 안 했을 때 지도 위치 지정>test1계정의 위치 띄워줌
@@ -64,6 +64,7 @@ public class RecruitBoardController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("mvo", mvo);
+		mav.addObject("hash", hash);
 		mav.addObject("list2", list2);
 		mav.addObject("totalRecords", totalRecords);
 		mav.setViewName("search/parent");

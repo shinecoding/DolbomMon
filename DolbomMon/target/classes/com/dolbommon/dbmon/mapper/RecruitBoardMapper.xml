@@ -17,7 +17,9 @@
 	<select id="selectMyMap" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select lat, lng from member where userid=#{param1}
 	</select>
-	
+	<select id="selectAllParent" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		select userid, username, lat, lng, addr from member where lat is not null and lng is not null and who = 'P'
+	</select>
 	<select id="selectTMemNo" resultType="com.dolbommon.dbmon.search.MemberVO">
 		select no from member
 	</select>
