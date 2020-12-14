@@ -38,15 +38,17 @@ public class JobSearchController {
 		String userid = (String)ses.getAttribute("userid");
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		String activity_type = req.getParameter("activity_type");
 		System.out.println("000000"+activity_type);
 		if(req.getParameter("activity_type")==null) {
-			list = dao.jobSearchBoardList(); //선생님 리스트
+			List<TeacherVO> list = dao.jobSearchBoardList(9999); //선생님 리스트
 		}else {
 			list = dao.jobSearchActType(activity_type);
 		}
 		
+
 		HashSet<TeacherVO> hash = dao.selectAllTeacher();//지도의 모든 선생/부모 위치
 		TeacherVO mvo = null;
 		if(req.getParameter("userid")==null) {
@@ -74,7 +76,7 @@ public class JobSearchController {
 	@RequestMapping("/teacher_chart") 
 	public ModelAndView teacher_chart() {
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchBoardList();
+		List<TeacherVO> list = dao.jobSearchBoardList(10);
 		int totalRecord = dao.getTotalRecord();	//총 게시물 수
 		//List<MemberVO> mvoList = dao.selectTMem();
 		ModelAndView mav = new ModelAndView();
@@ -108,7 +110,7 @@ public class JobSearchController {
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.jobSearchBoardList();
+			list = dao.jobSearchBoardList(10);
 		}else {
 			list = dao.jobSearchCareType(care_type); 	
 		}
@@ -121,26 +123,26 @@ public class JobSearchController {
 
 	@RequestMapping(value="/filterOrder", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> filterOrder(String order){
+	public List<TeacherVO> filterOrder(String order, int count){
 		
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(order.equals("last_edit")){
-			list = dao.filterLastEdit();
+			list = dao.filterLastEdit(count);
 		} else if(order.equals("certi_cnt")){
-			list = dao.filterCertiCnt();
+			list = dao.filterCertiCnt(count);
 		} else if(order.equals("wage_low")){
-			list = dao.filterWageLow();
+			list = dao.filterWageLow(count);
 		} else if(order.equals("wage_high")){
-			list = dao.filterWageHigh();
+			list = dao.filterWageHigh(count);
 		} else if(order.equals("F")) {
-			list = dao.filterGender("F");
+			list = dao.filterGender("F", count);
 		} else if(order.equals("M")) {
-			list = dao.filterGender("M");
+			list = dao.filterGender("M", count);
 		} else if(order.equals("all")) {
-			list = dao.jobSearchBoardList();
+			list = dao.jobSearchBoardList(count);
 		}
 		
 		return list;

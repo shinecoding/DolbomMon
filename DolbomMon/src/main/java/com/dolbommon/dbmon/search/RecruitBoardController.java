@@ -136,13 +136,12 @@ public class RecruitBoardController {
 		List<RecruitBoardVO> list = new ArrayList<RecruitBoardVO>();
 		
 		if(order.equals("new")){
-			list = dao.filterNewArray();
+			list = dao.recruitBoardList();
 		} else if(order.equals("wage_high")){
 			list = dao.filterHighWage();
 		} else if(order.equals("wage_low")){
 			list = dao.filterLowWage();
-		}
-		
+		}	
 		return list;
 	}
 	////돌봄몬 구하기 수정하기 
