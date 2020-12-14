@@ -14,20 +14,20 @@ import com.dolbommon.dbmon.parent.ChildrenVO;
 
 	public interface RecruitBoardDaoImp { 
 	//구인게시판 리스트보기 
-	public List<RecruitBoardVO> recruitBoardList();
+	public List<RecruitBoardVO> recruitBoardList(int count);
 	//총 게시물 수 구하기 
 	public int getTotalRecords(); 
 	//필터
-	public List<RecruitBoardVO> recruitActType(String activity_type);
+	public List<RecruitBoardVO> recruitActType(@Param("activity_type")String activity_type, @Param("count")int count);
 	//셀렉트 필터
-	public List<RecruitBoardVO> recruitCareSelect(String care_type);
+	public List<RecruitBoardVO> recruitCareSelect(@Param("care_type")String care_type, @Param("count")int count);
 	//정렬 필터
 	//최신순
 	public List<RecruitBoardVO> filterNewArray();
 	//높은 시급순
-	public List<RecruitBoardVO> filterHighWage();
+	public List<RecruitBoardVO> filterHighWage(int count);
 	//낮은 시급순
-	public List<RecruitBoardVO> filterLowWage();
+	public List<RecruitBoardVO> filterLowWage(int count);
 	//지도 내 위치
 	public RecruitBoardVO selectMyMap(String userid);
 	//모든 선생 위치
