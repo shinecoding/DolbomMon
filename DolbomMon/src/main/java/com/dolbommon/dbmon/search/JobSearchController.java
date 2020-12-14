@@ -45,7 +45,7 @@ public class JobSearchController {
 		if(req.getParameter("activity_type")==null) {
 			list = dao.jobSearchBoardList(9999); //선생님 리스트
 		}else {
-			list = dao.jobSearchActType(activity_type);
+			list = dao.jobSearchActType(activity_type, 12);
 		}
 		
 
