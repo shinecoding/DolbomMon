@@ -51,6 +51,27 @@
 	
 
 </style>
+<script>
+
+	$(function(){
+			
+		   //countTest
+		$(document).on("click",".comment",function(){
+			//var userid = $(this).attr('id');
+			var userid = "test1212";
+			var popupWidth = 800;
+			var popupHeight = 596;
+			var popupX = (window.screen.width / 2) - (popupWidth / 2);
+			var popupY= (window.screen.height / 2) - (popupHeight / 2);
+			
+			console.log(userid);
+			window.open('/dbmon/commentWrite?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			
+		});
+	});	
+		
+		
+</script>
 </head>
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
@@ -83,7 +104,8 @@
    		<li class="list-group-item list-group-item-action"><a href="parentEdit"><i class="fas fa-user-edit mx-2"></i> 내 프로필 수정</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="#"><i class="fas fa-chalkboard-teacher mx-2"></i> 활동내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="#"><i class="fas fa-exclamation-triangle mx-2"></i> 신고내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
-   </ul>
+   		
+   	   </ul>
    <br/>
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
@@ -91,6 +113,8 @@
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
    </ul>
+   <button class="comment" id="${userid}">후기 작성</button>
+   
 </div>
 
 </body>

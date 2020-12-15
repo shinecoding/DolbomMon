@@ -29,7 +29,7 @@
 		padding: 15px;
 		font-size: 30px;
 	}
-	#headerDiv>a>img{width:250px;} 	
+	#headerDiv>a>img{width:180px;} 	
 	#headerDiv>h4{width:70%; margin:0 auto;}
 	
 	.container>div>div>label{display:inline-block;width:auto;float:left; margin:0px;}

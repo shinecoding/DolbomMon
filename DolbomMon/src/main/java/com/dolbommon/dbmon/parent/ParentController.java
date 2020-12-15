@@ -263,7 +263,14 @@ public class ParentController {
 	
 	}
 	
-	
+	//후기 작성
+	@RequestMapping("/commentWrite")
+	public String commentWrite() {
+		
+		
+		
+		return "/parents/commentWrite";
+	}
 	
 	
 	
