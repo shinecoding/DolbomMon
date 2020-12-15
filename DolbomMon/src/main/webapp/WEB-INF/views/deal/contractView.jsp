@@ -94,7 +94,7 @@ var charge; //총결제금액
 			           msg += '상점 거래ID : ' + rsp.merchant_uid;
 			           msg += '결제 금액 : ' + rsp.paid_amount;
 			           msg += '카드 승인번호 : ' + rsp.apply_num;
-						alert(msg);	\
+						alert(msg);	
 						("#hiidenDiv").html(tag);
 						$('#hiddenForm').submit();
 				   	 	//location.href="http://localhost:9090/dbmon/"
@@ -880,7 +880,9 @@ var charge; //총결제금액
 </div>
 <div class="container" style="height:80px;">
 	<div style=" float:right;">
+
 		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
+
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		</c:if>

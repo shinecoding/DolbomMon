@@ -237,6 +237,9 @@ public class DealController {
 	public ModelAndView parentView(int origin_no, HttpSession ses, HttpServletRequest req) {
 		//String origin_no = (String)req.getParameter("origin_no");
 		String teacherid = (String)req.getParameter("teacherid");
+		if(teacherid==null) {
+			teacherid = (String)ses.getAttribute("userid");
+		}
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 		ModelAndView mav = new ModelAndView();
 		int no=0;
@@ -263,7 +266,10 @@ public class DealController {
 			mav.addObject("rdVO", rdVO);
 		}
 		
+		
+		
 		mav.addObject("tlist", tlist);
+		mav.addObject("userid", userid);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
 		mav.setViewName("/deal/contractView");
