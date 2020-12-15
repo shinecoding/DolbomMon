@@ -60,5 +60,6 @@ public interface DealDaoImp {
 		
 	public MemberVO selectMemberDeal(String userid);
 	public int insertPayment(PaymentVO vo);
+	public int updatePayment(String pay_no);
 }
 

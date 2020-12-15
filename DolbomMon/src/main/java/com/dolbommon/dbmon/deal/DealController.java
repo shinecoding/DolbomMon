@@ -305,6 +305,8 @@ public class DealController {
 		String pay_money = req.getParameter("pay_money");
 		String apply_num = req.getParameter("apply_num");
 		String teacherid = req.getParameter("teacherid");
+		String pay_no = req.getParameter("pay_no");
+		
 		PaymentVO pvo = new PaymentVO();
 		pvo.setParent_id(parent_id);
 		pvo.setPay_id(pay_id);
@@ -312,12 +314,17 @@ public class DealController {
 		pvo.setPay_money(pay_money);
 		pvo.setApply_num(apply_num);
 		pvo.setTeacher_id(teacherid);
+		pvo.setPay_no(pay_no);
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		
 		MemberVO mvo = dao.selectMemberDeal(parent_id);
 		pvo.setParent_name(mvo.getUsername());
 		pvo.setTel(mvo.getTel1());
 		pvo.setEmail(mvo.getEmail());
+		System.out.println("어플라이 넘="+pvo.getApply_num());
+		System.out.println("이멜="+pvo.getEmail());
 		
+		dao.updatePayment(pay_no);
 		dao.insertPayment(pvo);
 		
 		ModelAndView mav = new ModelAndView();
