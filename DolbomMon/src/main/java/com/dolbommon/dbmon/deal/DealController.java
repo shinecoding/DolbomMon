@@ -272,6 +272,7 @@ public class DealController {
 		mav.addObject("userid", userid);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
+		mav.addObject("teacherid", teacherid);
 		mav.setViewName("/deal/contractView");
 		
 		return mav;
