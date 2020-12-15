@@ -2,7 +2,7 @@ package com.dolbommon.dbmon.deal;
 
 public class PaymentVO {
 	private String pay_no;
-	private String parent_id;
+	private String parent_id;//결제자아이디
 	private String parent_name;
 	private String pay_date;
 	private String pay_money;
