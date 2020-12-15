@@ -22,7 +22,9 @@
 	</select>
 	
 	<select id="teacherDealHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
-		select * from parent_list where status='C' and teacherid=#{userid} and agree='Y' and who='P'
+		select p.job_board_no ,p.userid ,p.care_addr ,p.time_type ,p.pw_activity ,p.wish_wage ,p.consultation ,p.wish_age ,p.wish_gender ,p.content ,p.writedate ,p.status 
+		,p.agree ,p.who ,p.reject ,p.origin_no ,p.payment ,a.pay_no ,a.parent_id ,a.teacher_id , a.refund_status, a.reimburse, a.pay_date from parent_list p join payment a on p.job_board_no=a.pay_no
+		where payment='Y' and teacherid=#{userid} order by a.pay_date desc
 	</select>
 	
 	<select id="searchContract" resultType="int" parameterType="int">
