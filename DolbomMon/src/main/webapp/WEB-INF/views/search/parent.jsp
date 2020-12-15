@@ -116,6 +116,7 @@
 		white-space: nowrap;
 		display: inline-block;
 		vertical-align: top;
+		margin-left:5px;
 	}
 	.modalHidden{
 		width: 100%;
