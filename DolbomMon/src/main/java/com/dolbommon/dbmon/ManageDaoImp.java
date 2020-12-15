@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.deal.PaymentVO;
 import com.dolbommon.dbmon.member.MemberVO;
 import com.dolbommon.dbmon.report.ReportVO;
 
@@ -23,7 +24,7 @@ public interface ManageDaoImp {
 	public List<MemberVO> selectManager(ManagerVO data);
 	
 	//결제 리스트 불러오기
-	public List<MemberVO> selectPayment(ManagerVO data);
+	public List<PaymentVO> selectPayment(PaymentVO data);
 	
 	//마이페이지 분류
 	public int countTeacher(String userid);

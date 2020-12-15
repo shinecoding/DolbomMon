@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.deal.PaymentVO;
 import com.dolbommon.dbmon.member.MemberVO;
 import com.dolbommon.dbmon.report.ReportDaoImp;
 import com.dolbommon.dbmon.report.ReportVO;
@@ -149,7 +150,7 @@ public class ManagmentController {
 	
 	@RequestMapping(value = "/paymentList")
 	@ResponseBody 
-	public Map<String, Object> paymentList(ManagerVO boardVO){
+	public Map<String, Object> paymentList(PaymentVO boardVO){
 		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
 		Map<String, Object> mp = new HashMap<String, Object>();
 		mp.put("data", dao.selectPayment(boardVO));

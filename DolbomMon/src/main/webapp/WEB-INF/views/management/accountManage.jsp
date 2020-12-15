@@ -14,10 +14,7 @@
 		font-size:14px;
 	}
 	td {
-		max-width: 120px;
 		white-space: nowrap;
-		overflow:hidden;
-		text-overflow: ellipsis;
 	}
 	.clickTr:hover{
 		background-color: #efefef;
@@ -72,53 +69,100 @@ var test='<%=(String)session.getAttribute("userid")%>';
 			},
 		ajax: {
 			"type" : "POST",
-			"url" : "managerList",
+			"url" : "paymentList",
 			"dataType": "JSON"
 	         },columns: [
-				{"data" : "no"},
-				{"data" : "userid"},
-				{"data" : "manager_join_authority",
+				{"data" : "pay_no",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						console.log('data test'+data)
+						 return '';
+						}
+						return data;
+				}},
+				{"data" : "parent_id",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
 						 return '';
 						}
 						return data;
 				}},
-				{"data" : "member_inactivity_authority",
+				{"data" : "parent_name",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}
+						return data;
+				}},
+				{"data" : "pay_date",
 					"render":  function (data, type, row) {
 					if ( data == null ) {
 					 return '';
 					}
 					return data;
 				}},
-				{"data" : "page_authority",
+				{"data" : "pay_money",
 					"render":  function (data, type, row) {
-				if ( data == null ) {
-				 return '';
-				}
-				return data;
+					if ( data == null ) {
+					 return '';
+					}
+					return data;
 				}},
-				{"data" : "department",
+				{"data" : "teacher_id",
+					 "render": function(data, type, row){
+		                    if(type=='display'){
+		                        data ='<a class="selectId" href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
+		                    }
+		                    return data;	
+				
+				}},
+				{"data" : "refund_status",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
 						 return '';
 						}
 						return data;
 				}},
-				{"data" : "position",
+				{"data" : "reimburse",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
 						 return '';
 						}
 						return data;
 				}},
-				{"data" : "username"},
-				{"data" : "tel"},
-				{"data" : "regdate"},
-				{"data" : "",
+				{"data" : "pay_id",
 					"render":  function (data, type, row) {
-						data='<a class="eBtn" href="#")><img src="/dbmon/icon/editbtn.png" title="수정"></a>';
-						if(test=='dd'){data = "<button class='btn btn-info'>수정</button>";} //세션아이디가 관리자아이디면..
+						if ( data == null ) {
+						 return '';
+						}
+						return data;
+				}},
+				{"data" : "merchant_id",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}
+						return data;
+				}},
+				{"data" : "apply_num",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}
+						return data;
+				}},
+				{"data" : "tel",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}
+						return data;
+				}},
+				{"data" : "email",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '';
+						}
 						return data;
 				}},
 			],"language":{
@@ -147,20 +191,15 @@ var test='<%=(String)session.getAttribute("userid")%>';
 				{ targets: 8, width: 70 },
 				{ targets: 9, width: 70 },
 				{ targets: 10, width: 70 },
+				{ targets: 11, width: 70 },
+				{ targets: 12, width: 70 },
 			]
 	    });
+	   console.log("test");
 	   $('.dt-button').addClass('btn btn-outline-info');
 	   $('.dt-button').removeClass('dt-button');
 	});
 	//팝업창 위치
-	var popupWidth = 680;
-	var popupHeight = 1300;
-	var popupX = (window.screen.width / 2) - (popupWidth / 2);
-	var popupY= (window.screen.height / 2) - (popupHeight / 2);
-	
-	$(document).on("click","#joinBtn",function(){
-		window.open('/dbmon/managerRegister', '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
-	});
 	/* iframe으로 열기
 	function onPopupWindow(){
 		var win =  window.open(null, '_blank', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
@@ -193,25 +232,23 @@ var test='<%=(String)session.getAttribute("userid")%>';
 <body>
 <!-- table-bordered  -->
 
-<div class="container">
-<div class="clearfix" style="height:50px;">
-<button class="btn btn-outline-warning" id="joinBtn"style="float:right; margin-top:6px;" >관리자 등록</button> <!-- onclick=" onPopupWindow()" iframe으로열기 -->
-</div>
+<div class="container" style="padding-top:50px;">
 <table id="accountTable"  class="table hover">
     <thead>
         <tr>
             <th>결제 번호</th>
             <th>결제자ID</th>
             <th>이름</th>
-            <th>선생님ID</th>
-            <th>연락처</th>
-            <th>email</th>
             <th>결제일</th>
             <th>결제금액</th>
+            <th>선생님ID</th>
+            <th>환불신청여부</th>
+            <th>환불진행여부</th>
             <th>결제고유ID</th>
             <th>상점거래ID</th>
-            <th>카드승인번호</th>
-
+            <th>카드승인번호</th>                        
+            <th>연락처</th>
+            <th>email</th>
         </tr>
     </thead>
 </table>
