@@ -57,7 +57,7 @@
 			from jb_regular_date where job_board_no=#{param1}
 	</select>
 	
-	<select id="selectOrigin" resultType="int" parameterType="map">
+	<select id="selectOrigin" resultType="String" parameterType="map">
 		select job_board_no from parent_list where origin_no=#{no} and (agree='T' or agree='Y') and teacherid=#{teacherid}
 	</select>
 	
@@ -65,17 +65,8 @@
 		update parent_list set agree=#{agree} where job_board_no=#{no}
 	</update>
 	
-	<select id="ContractStatus" parameterType="int" resultType="String">
-		SELECT * FROM (select teacherid from parent_list where status='C' and (agree='Y' or agree='T') and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
-	</select>
-	<select id="ContractStatus2" parameterType="int" resultType="String">
-		SELECT * FROM (select teacherid, agree from parent_list where status='C' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
-	</select>
-	<select id="ContractStatus3" parameterType="int" resultType="String">
-		SELECT * FROM (select teacherid from parent_list where status='C' and agree='Y' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
-	</select>
-	<select id="ContractStatus4" parameterType="int" resultType="String">
-		SELECT * FROM (select teacherid from parent_list where status='C' and agree='T' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	<select id="ContractStatus" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		SELECT * FROM (select teacherid, agree, payment from parent_list where status='C' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	
 	<update id="rejectContract">
