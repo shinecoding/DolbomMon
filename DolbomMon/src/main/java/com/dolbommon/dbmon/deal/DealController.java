@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.member.MemberVO;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
 import com.dolbommon.dbmon.parent.ApplyToParentInfoVO;
@@ -255,7 +256,7 @@ public class DealController {
 		ChildrenVO cVO = dao.recruitChildSelect2(no);
 		
 		String userid = (String)ses.getAttribute("userid");
-		
+		MemberVO mvo = dao.selectMemberDeal(userid);
 		
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {
@@ -272,6 +273,7 @@ public class DealController {
 		mav.addObject("userid", userid);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
+		mav.addObject("mvo", mvo);
 		mav.setViewName("/deal/contractView");
 		
 		return mav;
@@ -291,6 +293,34 @@ public class DealController {
 		}
 		
 		return mav; 
+	}
+	
+	
+	@RequestMapping("/paymentSuccess")
+	public ModelAndView paymentSuccess(HttpSession ses, HttpServletRequest req) {
+		String parent_id = (String)ses.getAttribute("userid");
+		String pay_id = req.getParameter("pay_id");
+		String merchant_id = req.getParameter("merchant_id");
+		String pay_money = req.getParameter("pay_money");
+		String apply_num = req.getParameter("apply_num");
+		PaymentVO pvo = new PaymentVO();
+		pvo.setParent_id(parent_id);
+		pvo.setPay_id(pay_id);
+		pvo.setMerchant_id(merchant_id);
+		pvo.setPay_money(pay_money);
+		pvo.setApply_num(apply_num);
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		MemberVO mvo = dao.selectMemberDeal(parent_id);
+		pvo.setParent_name(mvo.getUsername());
+		pvo.setTel(mvo.getTel1());
+		pvo.setEmail(mvo.getEmail());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pvo", pvo);
+		mav.setViewName("managment/");
+		
+		return mav;
 	}
 	
 	

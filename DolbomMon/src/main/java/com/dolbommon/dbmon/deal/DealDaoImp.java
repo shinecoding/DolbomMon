@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.dolbommon.dbmon.member.MemberVO;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
 import com.dolbommon.dbmon.parent.ApplyToParentInfoVO;
@@ -57,6 +58,6 @@ public interface DealDaoImp {
 	//계약서 작성중인지 아닌지 확인 - 진행
 	public String ContractStatus4(int no);
 		
-	
+	public MemberVO selectMemberDeal(String userid);
 }
 

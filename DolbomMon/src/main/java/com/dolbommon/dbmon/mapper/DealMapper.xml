@@ -81,4 +81,8 @@
 	<update id="rejectContract">
 		update parent_list set agree='N' where userid=#{userid} and teacherid=#{teacherid} and agree='T'
 	</update>
+	
+	<select id="selectMemberDeal">
+		select username, email, tel1, addr, zipcode from member where userid = #{userid}
+	</select>
 </mapper>
