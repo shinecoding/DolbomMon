@@ -43,16 +43,7 @@
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
 	    	<a href="#"></a></div>
 	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
-<hr/>
 
-
-<div class="container">
-
-<div id="top_freeboard">
-
-
-</div>
-<img src="img/pop1.png" style="width:100%; height:400px; "/>
 <div class="container">
 	<div style="float: right; margin: 15px; padding: 15px;">
 		<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>

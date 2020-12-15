@@ -7,8 +7,10 @@
 @media (max-width:700px){
 	.dbmon_info_review1{
 		display:none;
-	}
-}
+		font-family:'Poor Story', cursive;
+		
+	}}
+
 
 .dbmon_info_review1{
 		margin-left:30px;
@@ -18,12 +20,13 @@
 		width:20%;
 		font-family:'Nanum Gothic', sans-serif;
 		font-size:15px;
+		font-weight:bold;
 
 	  
 	}
 
- a:link { color: black; text-decoration: none;}
- a:visited { color: black; text-decoration: none;}
+ a:link { color: black; text-decoration: none; }
+ a:visited { color: black; text-decoration: none; font-weight:bold;}
  a:hover { color: black; text-decoration: none;}
  a{color:black; font-weight: normal;}
 
@@ -33,11 +36,11 @@
 }
 .product-info__price{
 	color:#ff7942;
-	font-size:13px;
+	font-size:15px;
 }
 .product-info__name{
 	color:gray;
-	font-size:14px;
+	font-size:15px;
 }
 
 .review-comment__contents{
@@ -253,7 +256,7 @@ p{
 
 
  <c:forEach var="vo" items="${list }">
-	<div class="wrapper2" Onclick="location.href='teacherView'">
+	<div class="wrapper2" onclick="location.href='teacherView'">
 	<ul class="list-group" style="font-size:.85em; font-weight: 500;">
 	<li class="list-group-item">
 		<ul class="list-group list-group-horizontal">

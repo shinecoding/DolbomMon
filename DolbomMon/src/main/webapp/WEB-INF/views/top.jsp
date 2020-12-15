@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
    <script type="text/javascript">
    
          $(function(){
@@ -34,6 +35,7 @@ EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @media (max-width:1250px){
+	*{font-family: 'Poor Story', cursive;}
 	#fixed-menu{
 		display:none;
 	}
@@ -45,13 +47,13 @@ EDIT ON
 	}
 	.clearfix{
 		display:none;
+		
 	}
 	ul.mainTopmenu {
 		display:none;
 	}
 }
-
-
+/* ===================미디어 쿼리 end ===================*/
      #menu-button{
      	-webkit-padding-start:0px;
      	
@@ -63,25 +65,36 @@ EDIT ON
 
       #fixed-menu {
         width: 100%;
-        height:150px;
+        height:120px;
 	 	position: fixed;
 	  	top: 0px;
 	  	left: 0px;
 	 	z-index:10000;
 	 	background-color:white;
+	 	
       }
-	  ul.mainTopmenu{height: 50px;
+	  ul.mainTopmenu{
+	  	height: 50px;
+	  	background-color: #FAD961;
+	    background-image: -webkit-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
+	    background-image: -moz-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
+	    background-image: -o-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
+	    background-image: linear-gradient(270deg, #FAD961 0%, #F76B1C 100%); 
+	   
+	  
+	  
+	  
 	  }
       ul.mainTopmenu li{ 
 	     float: left;
 		 width: 263px;
 		 height: 50px;
 		 text-align:center;
-		 background-color: white;
 		 position: relative;
 		 z-index:1000;
 		 list-style-type: none;
 		 -webkit-padding-start:0px;
+		 font-family: 'Noto Sans KR', sans-serif;
 		
 		 }
       ul.mainTopmenu li a{
@@ -92,34 +105,45 @@ EDIT ON
 		 font-weight:700;
 		 font-size:18px;
 		 overflow:hidden;
-		 color:gray;
+		 color:white;
 		 text-decoration: none;
-		 font-family:"Noto Sans KR";
+		 font-family:
 		 text-align:center;
 		 list-style-type: none;
-		 
+		 font-family: font-family: 'Jua', sans-serif;
 		 margin-left:0px;
+		 
+		 
 		 }
 	  ul.mainTopmenu li {
 		width: calc(80%/6);
 		height:50px;
 		line-height:50px;
 		
+		
 		}
 	  ul.mainTopmenu ul.subMain li {
 	    width: 100%;
 	    -webkit-padding-start:0px;
 	    height:50px;
+	    
 	    }
 	  
 	  
       ul.mainTopmenu li a:hover{
-      	 color:orange;
-	     opacity:50;
-	     background:white;
+	     opacity:30;
+	     color:white;
+	     font-family: 'Jua', sans-serif; font-size:21px;
+	     font-weight:500;
+	    
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
+	     background-color: #FAD961;
+	     background-image: -webkit-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
+	     background-image: -moz-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
+	     background-image: -o-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
+	     background-image: linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);  
 		 }
       ul.mainTopmenu{
 	     zoom: 1;
@@ -132,12 +156,13 @@ EDIT ON
 		 content: ".";
 		 display: block;
 		 clear: both;
+		 
 		 }
 		
 	  .logo{
 	      width:100px;
-	      height:50px;
-	      margin-top:30px; 
+	      height:45px;
+	      margin-top:15px; 
 	   }
 	   
 	   header#topHeader{
@@ -157,7 +182,7 @@ EDIT ON
 	   
 	   }
 	   .spread-underline {
-		  color: #333;
+		  color: gray;
 		  text-decoration: none;
 		  display: inline-block;
 		  padding: 2px 0;
@@ -171,7 +196,7 @@ EDIT ON
 		  height: 2px;
 		  left: 50%;
 		  position: absolute;
-		  background: #ffb000;
+		  
 		  transition: width 0.3s ease 0s, left 0.3s ease 0s;
 		  width: 0;
 		}
@@ -179,12 +204,13 @@ EDIT ON
 		  width: 100%; 
 		  height:3px;
 		  left: 0; 
+		  
 		}
 	   
    </style>
 </head>
 <body>
-<div style="height:150px">
+<div>
  <div id="fixed-menu" >
 	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1295px;">
 	    <header id="topHeader">
@@ -232,8 +258,8 @@ EDIT ON
 	       <li class="spread-underline"><a href="#">고객센터</a>
 	
 		        <ul class="subMain">
-		          <li class="spread-underline"><a href="/dbmon/brandIntro">회사소개</a></li>
-		         <li><a href="#" class="spread-underline">신고하기</a></li>         
+		          <li class="spread-underline"><a class="introcss11" href="/dbmon/brandIntro">회사소개</a></li>
+		                 
 		       </ul>
 	       </li>
 	       <li  class="spread-underline"><a href="/dbmon/noticeBoard">공지사항</a>
@@ -252,8 +278,8 @@ EDIT ON
 	      </li>
 	      <li><a href="#" class="spread-underline">My Menu</a>
 	       <ul class="subMain">
-	         <li><a href="teacherList" class="spread-underline">선생님페이지</a></li>
-	         <li><a href="mypage" class="spread-underline">부모님페이지</a></li>
+	         <li><a href="teacherList" class="spread-underline introcss12">선생님페이지</a></li>
+	         <li><a href="mypage" class="spread-underline introcss12">부모님페이지</a></li>
 	      </ul>
 	 </ul>
 
