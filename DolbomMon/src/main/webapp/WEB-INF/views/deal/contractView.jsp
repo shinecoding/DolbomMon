@@ -738,7 +738,6 @@ var charge; //총결제금액
 </script>
 </head>
 <body>
-
 <div class="container">
    <div style="margin:100px 0 20px 0;">
   	 <img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>

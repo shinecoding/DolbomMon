@@ -6,11 +6,13 @@ public class ApplyToParentInfoVO {
 	private String tel1;
 	private String birth;
 	private String gender;
-	private int desired_wage;
+	private int desired_wage; // 돌봄몬 희망시급
 	private String cctv;
 	private String apply_date;
 	private String pic;
 	private String discussion; 
+	private String teacherid;
+	private int wish_wage; // 학부모 희망시급
 	
 	public String getUsername() {
 		return username;
@@ -71,6 +73,18 @@ public class ApplyToParentInfoVO {
 	}
 	public void setDiscussion(String discussion) {
 		this.discussion = discussion;
+	}
+	public String getTeacherid() {
+		return teacherid;
+	}
+	public void setTeacherid(String teacherid) {
+		this.teacherid = teacherid;
+	}
+	public int getWish_wage() {
+		return wish_wage;
+	}
+	public void setWish_wage(int wish_wage) {
+		this.wish_wage = wish_wage;
 	}
 	
 	
