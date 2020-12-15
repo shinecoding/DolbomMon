@@ -256,7 +256,7 @@ public class DealController {
 		ChildrenVO cVO = dao.recruitChildSelect2(no);
 		
 		String userid = (String)ses.getAttribute("userid");
-		MemberVO mvo = dao.selectMemberDeal(userid);
+		com.dolbommon.dbmon.deal.MemberVO mvo = dao.selectMemberDeal(userid);
 		
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {
@@ -317,7 +317,7 @@ public class DealController {
 		pvo.setPay_no(pay_no);
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 		
-		MemberVO mvo = dao.selectMemberDeal(parent_id);
+		com.dolbommon.dbmon.deal.MemberVO mvo = dao.selectMemberDeal(parent_id);
 		pvo.setParent_name(mvo.getUsername());
 		pvo.setTel(mvo.getTel1());
 		pvo.setEmail(mvo.getEmail());
