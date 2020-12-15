@@ -13,12 +13,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
 <style>
-	* {
-		padding:0; list-style-type:none; box-sizing:border-box; 
-		font-family: Noto Sans KR,sans-serif!important;
-	}	
+		
 	#all{
 		margin:0 auto; background-color:white;	
 	}
@@ -27,6 +25,7 @@
 		width:1100px;
 		background-color:white;
 		margin:0 auto;
+		font-family: 'Jua', sans-serif;
 	}
 	
 	img{ height:110px; width:110px;}
@@ -99,7 +98,7 @@
 		font-size: 1.1em;
 	}
 	.card {
-	width:45%;
+	width:44.9%;
 	display:block;
 	float:left;
 	margin:20px 20px;
@@ -113,8 +112,7 @@
 	}
 
 	#btnBox{
-		margin-top: 10px;
-		margin-bottom: -10px;
+		margin-top:0;
 		width: 100%;
 		height: 50px;
 		white-space: nowrap;
@@ -136,7 +134,9 @@
 		border-radius:20px; 
 	}
 
-
+	.card-footer{
+	border-bottom-radius:20px;
+	}
 </style>
 <script>
 var tabType=1;
@@ -153,7 +153,7 @@ $(function(){
     $(document).on("click", "#countTest", function(){
     	count= count+6;
     	if(tabType==1){
-    		testAjax(gender)
+    		dropdownAjax(care_type)
     	}else if(tabType==2){
     		dropdownAjax(care_type)
     	}else if(tabType==3){
@@ -185,7 +185,13 @@ $(function(){
     $(document).on("keyup", "#locFilter", function(){
     	var value = $(this).val().toLowerCase();
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	   
+    		AOS.init({
+			    duration: 1200
+			  });
+			  onElementHeightChange(document.body, function(){
+			    AOS.refresh();
+			  });
     	});
     });
 	
@@ -488,8 +494,8 @@ function mapResize(){
 <div id="filterbox">
 	<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 	<form class="form-inline">
-	<label class="my-1 mr-2" for="selectType"></label>
-	<select class="custom-select my-1 mr-sm-2" id="selectType" style="width: 100%;">
+	
+	<select class="custom-select border-warning mt-2" id="selectType" style="width: 100%;">
 	<option selected>돌봄 유형을 선택하시면, 맞춤 일자리를 보여드려요</option>
 	<option value="정기 돌봄">2~10세 정기 돌봄</option>
 	<option value="신생아/영아">신생아/영아 정기 돌봄</option>
@@ -499,20 +505,20 @@ function mapResize(){
 	</form>
 </div>
 	<div id="btnBox">
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act0">전체</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1">실내놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원돕기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책읽기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act5">한글놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act6">영어놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act7">학습지도</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act8">체육놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act9">간단청소</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act10">밥챙겨주기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단설거지</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act0">전체</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act1">실내놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원돕기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act3">책읽기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act9">간단청소</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act10">밥챙겨주기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act11">간단설거지</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
 	</div>
  
 	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리 찾기가 있습니다</div>
@@ -644,13 +650,13 @@ function mapResize(){
 
 </script>
 </div>
-<hr/>
+
 <script>
     AOS.init({
         easing: 'ease-out-back',
         duration: 1000
     });
 </script>
-<jsp:include page="../footer.jsp"/>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
