@@ -60,7 +60,8 @@
 				</tr>
 				<tr>
 					<th scope="col">등록일</th>
-					<td>${qna_vo.writedate}</td>
+					
+					<td><fmt:formatDate value="${qna_vo.writedate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<tr>
 					<th scope="col">자주 묻는 질문 게시글 내용</th>
