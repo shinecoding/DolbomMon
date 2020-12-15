@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.parent;
 
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -272,15 +273,6 @@ public class ParentController {
 	
 	}
 
-	//후기 작성
-	@RequestMapping("/commentWrite")
-	public String commentWrite() {
-		
-		
-		
-		return "/parents/commentWrite";
-	}
-
 	@RequestMapping("parentProfile")
 	public ModelAndView parentProfile(String userid) {
 		
@@ -294,6 +286,39 @@ public class ParentController {
 		return mav;
 	}
 	
+	//후기 작성
+	@RequestMapping("/commentWrite")
+	public ModelAndView commentWrite(HttpServletRequest req, String userid) {
+		userid = (String)req.getParameter("userid");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userid", userid);
+		mav.setViewName("parents/commentWrite");
+		
+		return mav;
+	}
 	
+	@RequestMapping(value="/commentWriteOk", method=RequestMethod.POST)
+	public ModelAndView commentWriteOk(CommentVO vo, HttpServletRequest req, HttpSession ses, String userid) {
+		vo.setUserid((String)req.getParameter("userid"));	//선생님 아이디
+		vo.setReviewid((String)ses.getAttribute("userid"));	//작성자(학부모) 아이디
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+	
+		String star = vo.getReview_star();
+		System.out.println(star);
+		String starArr[] = star.split(",");
+		System.out.println(starArr[starArr.length-1]);
+		vo.setReview_star(starArr[starArr.length-1]);
+		int crrrstar = Integer.parseInt(vo.getReview_star());
+		ModelAndView mav = new ModelAndView();
+		//dao.sumReviewStar(vo.getReview_star());
+		int result = dao.insertComment(vo);
+		if(result>0) {	//레코드 추가 성공
+			mav.setViewName("parents/commentResult");
+		}else {	//레코드 추가 실패
+			mav.setViewName("parents/commentFailResult");	
+		}
+		return mav;
+
+	}
 
 }

@@ -58,7 +58,7 @@
 		   //countTest
 		$(document).on("click",".comment",function(){
 			//var userid = $(this).attr('id');
-			var userid = "test1212";
+			var userid = $(this).attr('id');
 			var popupWidth = 800;
 			var popupHeight = 596;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
@@ -113,7 +113,7 @@
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
    </ul>
-   <button class="comment" id="${userid}">후기 작성</button>
+   <button class="comment" id="test1212">후기 작성</button>
    
 </div>
 
