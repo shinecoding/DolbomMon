@@ -63,7 +63,7 @@
 	</insert>
 	
 	<select id="applyDbmSelect" parameterType="int" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO">
-		select member.username, member.userid, member.tel1, trunc(months_between(trunc(sysdate), birth)/12) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, teacher.discussion, to_char(t_p_table.apply_date, 'YYYY-MM-DD HH:MI') apply_date
+		select member.username, member.userid, member.tel1, trunc(months_between(trunc(sysdate), birth)/12) birth, member.gender, teacher.desired_wage, teacher.cctv , teacher.pic, teacher.discussion, round((sysdate - apply_date) *1440) as apply_date
 		from member, t_p_table, teacher 
 	    where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and t_p_table.job_board_no = #{param1}
 	</select>

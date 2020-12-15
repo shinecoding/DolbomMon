@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.dolbommon.dbmon.deal.MemberVO;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
 import com.dolbommon.dbmon.parent.ApplyToParentInfoVO;
@@ -48,9 +49,17 @@ public interface DealDaoImp {
 	//계약서 수락/거절
 	public int setAgree(@Param("agree")String agree,@Param("no") int no);
 	
-	//계약서 작성중인지 아닌지 확인
+	//계약서 작성중인지 아닌지 확인 - 수락 & 진행
 	public String ContractStatus(int no);
-	//계약서 작성중인지 아닌지 확인
+	//계약서 작성중인지 아닌지 확인 - 거절
 	public String ContractStatus2(int no);
+	//계약서 작성중인지 아닌지 확인 - 수락
+	public String ContractStatus3(int no);
+	//계약서 작성중인지 아닌지 확인 - 진행
+	public String ContractStatus4(int no);
+		
+	public com.dolbommon.dbmon.deal.MemberVO selectMemberDeal(String parent_id);
+	public int insertPayment(PaymentVO vo);
+	public int updatePayment(String pay_no);
 }
 

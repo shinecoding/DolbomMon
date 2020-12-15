@@ -446,6 +446,7 @@
 		<input type="hidden" name="start_date" value="${start_date }" />
 		<input type="hidden" name="end_date" value="${end_date }" />
 		<input type="hidden" name="desired_wage" value="${desired_wage }" />
+		<input type="hidden" name="discussion" value="${discussion }" />
 		<input type="hidden" name="cctv" value="${cctv }" />
 		<input type="hidden" name="pic" value="${pic }" />
 		<input type="hidden" name="intro" value="${intro }" />

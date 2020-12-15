@@ -88,12 +88,25 @@ var charge; //총결제금액
 			    m_redirect_url : 'http://localhost:9090/dbmon/'
 			}, function(rsp) {
 			    if ( rsp.success ) {
+			    	
 			    	var msg = '결제가 완료되었습니다.';
 			           msg += '고유ID : ' + rsp.imp_uid;
-			           msg += 'dasdasd : ' + rsp.merchant_uid;
+			           msg += '상점 거래ID : ' + rsp.merchant_uid;
 			           msg += '결제 금액 : ' + rsp.paid_amount;
 			           msg += '카드 승인번호 : ' + rsp.apply_num;
-						alert(msg);
+						alert(msg);	
+						
+						var tag = "<form name='hiddenForm' id='hiddenForm' action='/dbmon/paymentSuccess'>";
+							tag += "<input type='hidden' name='pay_id' value='"+ rsp.imp_uid +"'>";//고유id
+							tag += "<input type='hidden' name='merchant_id' value='"+ rsp.merchant_uid +"'>";//상점거래id
+							tag += "<input type='hidden' name='pay_money' value='"+ rsp.paid_amount +"'>";//결재금액
+							tag += "<input type='hidden' name='apply_num' value='"+ rsp.apply_num +"'>";//카드승인번호
+							tag += "<input type='hidden' name='teacherid' value='${teacherid}'>";//카드승인번호
+							tag += "<input type='hidden' name='pay_no' value='${rbVO.job_board_no}' >"; 
+							tag += "</form>";
+						$("#hiddenDiv").html(tag);
+						hiddenForm.submit();
+
 				   	 	//location.href="http://localhost:9090/dbmon/"
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
@@ -725,7 +738,6 @@ var charge; //총결제금액
 </script>
 </head>
 <body>
-
 <div class="container">
    <div style="margin:100px 0 20px 0;">
   	 <img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>
@@ -877,6 +889,7 @@ var charge; //총결제금액
 </div>
 <div class="container" style="height:80px;">
 	<div style=" float:right;">
+
 		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
@@ -886,7 +899,7 @@ var charge; //총결제금액
 		</c:if>
 		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='N'}">
 			<span style="color:red">거절한 계약서입니다.</span>
-		</c:if>
+		</c:if>	
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='Y'}">
 			<a href="javascript:paymentTest()" class="btn btn-warning">결제하기</a>
 		</c:if>
@@ -895,6 +908,7 @@ var charge; //총결제금액
 		</c:if>
 	</div>
 </div>
+<div style="width:100%; height:300px;" id="hiddenDiv">
 </div>
 </body>
 </html>

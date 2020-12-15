@@ -720,22 +720,22 @@
 					</div>
 					<div id="childrenDetailDiv">
 						<ul id="childcnt1">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 						<ul id="childcnt2">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 						<ul id="childcnt3">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 						<ul id="childcnt4">
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀1 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀2 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀3 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="자녀4 생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" /> - <input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
 					</div>
 				</div>

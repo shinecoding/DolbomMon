@@ -69,10 +69,26 @@
 		SELECT * FROM (select teacherid from parent_list where status='C' and (agree='Y' or agree='T') and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	<select id="ContractStatus2" parameterType="int" resultType="String">
-		SELECT * FROM (select teacherid from parent_list where status='C' and agree='N' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+		SELECT * FROM (select teacherid, agree from parent_list where status='C' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	<select id="ContractStatus3" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and agree='Y' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	<select id="ContractStatus4" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and agree='T' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	
 	<update id="rejectContract">
 		update parent_list set agree='N' where userid=#{userid} and teacherid=#{teacherid} and agree='T'
+	</update>
+	
+	<select id="selectMemberDeal" parameterType="String" resultType="com.dolbommon.dbmon.deal.MemberVO">
+		select username, email, tel1, addr, zipcode from member where userid = #{parent_id}
+	</select>
+	<insert id="insertPayment">
+		insert into payment(pay_no, parent_id, parent_name, pay_money, teacher_id, pay_id, merchant_id, apply_num, tel, email) values(#{pay_no}, #{parent_id}, #{parent_name}, #{pay_money}, #{teacher_id}, #{pay_id}, #{merchant_id}, #{apply_num}, #{tel}, #{email})
+	</insert>
+	<update id="updatePayment">
+		update parent_list set payment = 'Y' where job_board_no = #{pay_no}
 	</update>
 </mapper>

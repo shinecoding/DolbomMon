@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.deal.MemberVO;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
 import com.dolbommon.dbmon.parent.ApplyToParentInfoVO;
@@ -255,7 +256,7 @@ public class DealController {
 		ChildrenVO cVO = dao.recruitChildSelect2(no);
 		
 		String userid = (String)ses.getAttribute("userid");
-		
+		com.dolbommon.dbmon.deal.MemberVO mvo = dao.selectMemberDeal(userid);
 		
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {
@@ -271,7 +272,9 @@ public class DealController {
 		mav.addObject("tlist", tlist);
 		mav.addObject("userid", userid);
 		mav.addObject("cVO", cVO);
+		mav.addObject("teacherid", teacherid);
 		mav.addObject("rbVO", rbVO);
+		mav.addObject("mvo", mvo);
 		mav.setViewName("/deal/contractView");
 		
 		return mav;
@@ -291,6 +294,45 @@ public class DealController {
 		}
 		
 		return mav; 
+	}
+	
+	
+	@RequestMapping("/paymentSuccess")
+	public ModelAndView paymentSuccess(HttpSession ses, HttpServletRequest req) {
+		String parent_id = (String)ses.getAttribute("userid");
+		String pay_id = req.getParameter("pay_id");
+		String merchant_id = req.getParameter("merchant_id");
+		String pay_money = req.getParameter("pay_money");
+		String apply_num = req.getParameter("apply_num");
+		String teacherid = req.getParameter("teacherid");
+		String pay_no = req.getParameter("pay_no");
+		
+		PaymentVO pvo = new PaymentVO();
+		pvo.setParent_id(parent_id);
+		pvo.setPay_id(pay_id);
+		pvo.setMerchant_id(merchant_id);
+		pvo.setPay_money(pay_money);
+		pvo.setApply_num(apply_num);
+		pvo.setTeacher_id(teacherid);
+		pvo.setPay_no(pay_no);
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		
+		com.dolbommon.dbmon.deal.MemberVO mvo = dao.selectMemberDeal(parent_id);
+		pvo.setParent_name(mvo.getUsername());
+		pvo.setTel(mvo.getTel1());
+		pvo.setEmail(mvo.getEmail());
+		System.out.println("어플라이 넘="+pvo.getApply_num());
+		System.out.println("이멜="+pvo.getEmail());
+		
+		dao.updatePayment(pay_no);
+		dao.insertPayment(pvo);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("mss", "결제 성공하였습니다.");
+		mav.setViewName("deal/contractResult");
+			
+		
+		return mav;
 	}
 	
 	
