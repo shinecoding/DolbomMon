@@ -272,4 +272,19 @@ public class JobSearchController {
 	}
 	
 	
+	@RequestMapping("/parentHistory")
+	public ModelAndView parentHistory(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.selectHistory(userid);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("/parents/parentHistory");
+		return mav; 
+	}
+	
+	
 }
