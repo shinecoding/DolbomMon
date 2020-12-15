@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -560,13 +560,17 @@
 		var edl = Math.floor(ed/1000/60/60/24)+1;
 		edll = Math.floor(edl/7);
 		var edlll = edl%7;
-		var money = "${wish_wage}"
-		console.log("지불 예상 금액 => " + (endDivLoc - startDivLoc)*money/2);
-		
+		var yoilCnt = getYoil.length;
+		console.log("요일 수 => " + yoilCnt);
+		var money = "${rbVO.wish_wage}";
+		console.log("돈 => " +money);
+		var weeek = "${rdVO.week}";
+		console.log("주 => " + weeek);
+		console.log("지불 예상 금액 => " + (endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
+		$("#charge").val((endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
 		console.log("두 날짜 사이의 일 수 => " + edl);
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
-		var weeek = "${rdVO.week}";
 		console.log("weeekekekekek -> " + weeek);
 		var timebar = "";
 		
