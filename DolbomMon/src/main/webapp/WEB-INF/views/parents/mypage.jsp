@@ -79,7 +79,7 @@
    <ul class="list-group list-group-flush">
    		<li class="list-group-item list-group-item-action"><a href="parentApplyHistory"><i class="fas fa-clipboard mx-2"></i> 내 구인현황</a><i class="fas fa-angle-right float-right mt-1 mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="parentHeart"><i class="fas fa-heart mx-2"></i> 찜한 돌봄몬</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
-   		<li class="list-group-item list-group-item-action"><a href="parentView"><i class="fas fa-user-circle mx-2"></i> 내 프로필 보기</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
+   		<li class="list-group-item list-group-item-action"><a href="parentProfile?userid=${userid }"><i class="fas fa-user-circle mx-2"></i> 내 프로필 보기</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="parentEdit"><i class="fas fa-user-edit mx-2"></i> 내 프로필 수정</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="#"><i class="fas fa-chalkboard-teacher mx-2"></i> 활동내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="#"><i class="fas fa-exclamation-triangle mx-2"></i> 신고내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>

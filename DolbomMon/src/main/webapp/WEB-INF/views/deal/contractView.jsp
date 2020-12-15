@@ -680,7 +680,6 @@
 </script>
 </head>
 <body>
-
 <div class="container">
    <div style="margin:100px 0 20px 0;">
   	 <img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>
@@ -832,7 +831,7 @@
 </div>
 <div class="container" style="height:80px;">
 	<div style=" float:right;">
-		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == currID}">
+		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		</c:if>
