@@ -90,6 +90,7 @@
 		select p.job_board_no, p.userid, p.teacherid, m.pic, c.child_birth, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage
 		    from parent_list p, member m, add_child c
 		    where p.teacherid = #{param1} and p.status = 'C' and p.userid = m.userid and c.job_board_no = p.job_board_no
+		    order by writedate desc
 	</select>
 </mapper>
 
