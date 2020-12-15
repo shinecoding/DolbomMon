@@ -136,10 +136,10 @@ public class TeacherController {
 			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 			TeacherDaoImp dao2 = sqlSession.getMapper(TeacherDaoImp.class);
 			String userid = (String)ses.getAttribute("userid");
-			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
 			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
 			
 			List<ApplyToTeacher> list = dao2.applyToParent(userid);
+			List<ApplyToTeacher> list2 = dao2.applyToMe(userid);
 			
 			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
 			//List<MemberVO> mvoList = dao.selectTMemNo();

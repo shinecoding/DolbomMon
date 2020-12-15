@@ -42,5 +42,7 @@ public interface TeacherDaoImp {
 	
 	//선생님 - 내가지원한 
 	public List<ApplyToTeacher> applyToParent(String userid);
+	//선생님 - 내게지원한 (학부모가 선생님에게 신청 - 계약서를 보냄)
+	public List<ApplyToTeacher> applyToMe(String userid);
 }
 

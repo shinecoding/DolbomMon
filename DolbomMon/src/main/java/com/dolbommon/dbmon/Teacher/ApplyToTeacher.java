@@ -1,6 +1,7 @@
 package com.dolbommon.dbmon.Teacher;
 
 public class ApplyToTeacher {
+	private int job_board_no;
 	private String username;
 	private String userid;
 	private String tel1;
@@ -16,8 +17,16 @@ public class ApplyToTeacher {
 	private String writedate;
 	private String care_addr;
 	private int wish_wage; // 학부모 희망시급
+	private int tcnt;
+	private String t_userid;
 	
 	
+	public int getJob_board_no() {
+		return job_board_no;
+	}
+	public void setJob_board_no(int job_board_no) {
+		this.job_board_no = job_board_no;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -107,6 +116,18 @@ public class ApplyToTeacher {
 	}
 	public void setWish_wage(int wish_wage) {
 		this.wish_wage = wish_wage;
+	}
+	public int getTcnt() {
+		return tcnt;
+	}
+	public void setTcnt(int tcnt) {
+		this.tcnt = tcnt;
+	}
+	public String getT_userid() {
+		return t_userid;
+	}
+	public void setT_userid(String t_userid) {
+		this.t_userid = t_userid;
 	}
 	
 	
