@@ -17,7 +17,7 @@
  	p{display:inline-block; width:40%; overflow:hidden; height:auto; font-size:15px;}
  	.container>input{width:70%; height:40px; border:1px solid #CCC; border-radius:10px;}
  	input[type=submit]:nth-of-type(1){margin:20px 0; background-color:orange; color:#EFEFEF}
- 	input[type=file]{display:block;}
+ 	input[type=file]{display:none;}
 </style>
 <script>
 	$(function(){
@@ -44,7 +44,7 @@
 
 </head>
 <body>
-	<form id="uploadFrm" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/parent/profileImageOk">
+	<form id="uploadFrm" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/dbm/profileImageOk">
 			<input id="userid" type="hidden" name="userid" value="${userid }" />
 			<input id="pic" type="file" name="pic" />
 	<div class="container">

@@ -34,7 +34,7 @@
 	label[for=N] span{}
 	/* ========================= cctv동의여부 ============================*/
 	
-	input[type=submit]{width:90%; height:50px; margin:30px 0 100px 0;}
+	input[type=submit]{width:90%; height:50px; margin-top:30px;}
 	
 </style>
 <script>
@@ -57,20 +57,6 @@
 				$("#desired_wage").val("8600");
 			}else{
 				
-			}
-		});
-		
-		if($("#disRadio").is(":checked")){
-			$("input[name=discussion]").val("Y");
-		}else {
-			$("input[name=discussion]").val("N");
-		}
-		
-		$("#disRadio").change(function(){
-			if($("#disRadio").is(":checked")){
-				$("input[name=discussion]").val("Y");
-			}else {
-				$("input[name=discussion]").val("N");
 			}
 		});
 		
@@ -107,9 +93,8 @@
 				<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
     				<div><input type="checkbox" class="custom-control-input" id="avg_wage" >
     				<label class="custom-control-label" for="avg_wage">평균시급 적용</label></div>
-    				<div><input type="checkbox" name="disRadio" class="custom-control-input" id="disRadio" >
-    				<label class="custom-control-label" for="disRadio">협의가능</label></div>
-    				<input type="text" value="N" name="discussion" id="discussion" style="display:none;"/>
+    				<div><input type="checkbox" name="discussion" class="custom-control-input" id="discussion" value="Y" >
+    				<label class="custom-control-label" for="discussion">협의가능</label></div>
 				</div>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>

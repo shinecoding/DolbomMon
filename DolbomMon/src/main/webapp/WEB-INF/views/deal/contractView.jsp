@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +23,9 @@
 	.container{width:800px;}
 	i{color:gray;}
 	#profimg{
-	   	width:100px;
-		height:100px;
+	   	width:400px;
+		height:400px;
+		text-align:center;
 	}
 	h5{
 	   padding: 20px 0px 0px 0px;
@@ -118,8 +119,44 @@
 	});
 	
 	
+	
+	var sd = "${sdVO.select_date}";
+	
+	
+	
+	$(function(){
+		
+		function available(date) {
+			var selectedDate = sd.split(",");
+			
+			var thismonth = date.getMonth()+1;
+			var thisday = date.getDate();
+			if(thismonth<10){
+				thismonth = "0"+thismonth;
+			}
+			if(thisday<10){
+				thisday = "0"+thisday;
+			}
+		    ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
+		    if ($.inArray(ymd, selectedDate) >= 0) {
+		        return [true,"",""];
+		    } else {
+		        return [false,"",""];
+		    }
+		}
+
+		$("#specificDate").datepicker({ // 고정 데이트피커
+			yearRange : 'c-100:c',
+			format : "yy-mm-dd",
+			beforeShowDay: available
+		});
+	});
+	
 	$(document).ready(function(){
 		
+		
+		///////////////////////////////////
+		var dbmid = $(this).parents("#dbmDiv").children("#dbmid").val();
 		///////////////////// 원하는 활동 ///////////////////
 		$(".pwa").each(function(){
 			var selectedData = $(this).text();
@@ -153,14 +190,107 @@
 		});
 		
 		
-		var time_type = "${rbVO.time_type}";
-		/////////////////////////////////////////////////// 
-		console.log("time type => " + time_type);
-		if(time_type=="R") {
-		///////////////////////////////////////// rd
+		$("#testBtn").click(function(){
+			
+			console.log("pwa => " + pw_activityStr);
+			
+			console.log("child_birth => " + cb);
+			
+			console.log("care_addr => " + care_addr);
+			
+		
+		});
+		
+		$("#applyBtn").click(function(){
+			var applyQna = confirm("신청하시겠습니까?");
+			if(applyQna){
+				location.href="<%=request.getContextPath()%>/applyToParent?no=${rbVO.job_board_no}";
+			}else{
+			
+			}
+		});
+		
+		$(document).on('click', '#refusalBtn', function(){
+			var dbmid = $(this).parents("#dbmDiv").children("#dbmid").val();
+			var jobNo = $("#jobNo").text();
+			$.ajax({
+	          	url:"refusalDbm",
+	          	type:"post",
+	            data:{dbmid: dbmid,
+	            	no : jobNo
+	            },
+	            success:function(result){
+	            	console.log("result => " + result);
+	               	if(result>0){
+	               		alert("거절하였습니다");
+	               		location.reload();
+	               	}else{
+	               		
+	               	}
+	            }, error:function(){
+	                    
+	            }
+	    	});
+		});
+		
+		$(document).on('click', '#cancleBtn', function(){
+			var cancleQna = confirm("정말 취소하시겠습니까?");
+			var dbmid = $(this).parents("#dbmDiv").children("#dbmid").val();
+			var jobNo = $("#jobNo").text();
+			console.log("jobNo => " + jobNo);
+			if(cancleQna){
+				$.ajax({
+		          	url:"applyCancel",
+		          	type:"post",
+		            data:{dbmid: dbmid,
+		            	no : jobNo
+		            },
+		            success:function(result){
+		            	console.log("result => " + result);
+		               	if(result>0){
+		               		alert("취소하였습니다");
+		               		location.reload();
+		               	}else{
+		               		
+		               	}
+		            }, error:function(){
+		                    
+		            }
+		    	});
+			}
+			
+		});
+
+		$("#deleteBtn").click(function(){
+			var deleteConfirm = confirm("삭제하시겠습니까?");
+			var applyCnt = ${rbVO.tcnt};
+			if(applyCnt == 0){
+				location.href="<%=request.getContextPath()%>/deleteBoard?no=${rbVO.job_board_no}";
+			}else {
+				swal({
+					title : "이미 지원한 선생님이 있습니다.",
+					icon : "info"
+				});
+			}
+		});
+		
+		$("#editBtn").click(function(){
+			var applyCnt = ${rbVO.tcnt};
+			console.log("지원자 수 => " + applyCnt);
+			if(applyCnt == 0){
+				location.href="<%=request.getContextPath()%>/editBoard?no=${rbVO.job_board_no}";
+			}else{
+				swal({
+					title : "이미 지원한 선생님이 있습니다.",
+					icon : "info"
+				});
+			}
+		});
+		
+		
+		///////////////////////////////////////////////////
 		var start_time = "${rdVO.start_time}";
 		var end_time = "${rdVO.end_time}";
-		console.log("endtime in r => " + end_time);
 		var start_date = "${rdVO.start_date}";
 		var end_date = "${rdVO.end_date}";
 		var syoil = "${rdVO.yoil}";
@@ -196,11 +326,52 @@
 		var cnt = 0;
 		var ttest = 0;
 		var gylength = getYoil.length;
-		console.log("시작날짜의 요일 => " + startday.getDay());
-		console.log("같은 요일 체크 전 =>" + getYoil);
+		console.log("입력받은 요일 수 => " + gylength);
+		for(var i=0; i<getYoil.length;i++){
+			if(startday.getDay()>getYoil[i]){
+				
+			}else {
+				ttest = ttest+1;
+			}
+		}
+		if(ttest == 0){
+			cnt = 1;
+			loop :
+			for(var i=0;i<7;i++){
+				
+				var data = getYoil[0]-i;
+				if(data == 0){
+					data = 7;
+				}else if(data == -1){
+					data = 6;
+				}else if(data == -2){
+					data = 5;
+				}else if(data == -3){
+					data = 4;
+				}else if(data == -4){
+					data = 3;
+				}else if(data == -5){
+					data = 2;
+				}else if(data == -6){
+					data = 1;
+				}
+				if(data == startday.getDay()){
+					first = first + i;
+					console.log("fiiiiiiirst => " + first);
+					break loop;
+				}
+			}
+			startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+first);
+		}
+		
+		
+		
+		console.log("입력받은 요일 => " + selectedYoil);
+		console.log("시작일의 요일 => " + startday.getDay());
+		console.log("정렬 전 => " + getYoil);
+		 // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
 		for(var i=0;i<getYoil.length;i++){
 			if(getYoil[i]==(startday.getDay())){
-				console.log("입력한 요일 중 시작날의 요일과 같은 요일이 있는 경우")
 				cnt = 1;
 				var idx = getYoil.indexOf(getYoil[i]);
 				console.log("삭제할 배열의 인덱스 =>" + idx);
@@ -209,173 +380,12 @@
 				getYoil.unshift(startday.getDay());
 			}
 		}
-		
-		console.log("정렬 후 v => " + getYoil);
-		var cnt = 0;
-		for(var i=0;i<getYoil.length;i++){
-			if(getYoil[i]<startday.getDay()){
-				cnt = cnt + 1;
-			}else {
-				cnt = 0;
-			}
-		}
-		
-		if(cnt==0){
-			console.log("선택날짜에 해당요일이 없는 경우");
-			console.log("요일 확인 => " + getYoil);
-			lbl :
-			for(var i=0;i<7;i++){
-				for(var j=0;j<7;j++){
-					mdata = getYoil[j]-i;
-					pdata = getYoil[j]+i;
-					
-					if(pdata == 8){
-						pdata = 1;
-					}else if(pdata == 9){
-						pdata = 2;
-					}else if(pdata == 10){
-						pdata = 3;
-					}else if(pdata == 11){
-						pdata = 4;
-					}else if(pdata == 12){
-						pdata = 5;
-					}else if(pdata == 13){
-						pdata = 6;
-					}
-					
-					if(mdata == 0){
-						mdata = 7;
-					}else if(mdata == -1){
-						mdata = 6;
-					}else if(mdata == -2){
-						mdata = 5;
-					}else if(mdata == -3){
-						mdata = 4;
-					}else if(mdata == -4){
-						mdata = 3;
-					}else if(mdata == -5){
-						mdata = 2;
-					}else if(mdata == -6){
-						mdata = 1;
-					}
-					
-					if(mdata==startday.getDay()){
-						console.log("mdata로 설정됨 => " + mdata);
-						var idx = getYoil.indexOf(getYoil[j]);
-						var temp = getYoil[j];
-						console.log("삭제할 배열의 인덱스 =>" + idx);
-						getYoil.splice(idx,1);
-						console.log("삭제 후 => " +  getYoil);
-						getYoil.unshift(temp);
-						console.log("다시 정렬 후 => " +  getYoil);
-						break lbl; 
-					}
-					
-					/* if(pdata==startday.getDay()){
-						console.log("pdata로 설정됨 => " + pdata);
-						var idx = getYoil.indexOf(getYoil[j]);
-						var temp = getYoil[j];
-						console.log("삭제할 배열의 인덱스 =>" + idx);
-						getYoil.splice(idx,1);
-						console.log("삭제 후 => " +  getYoil);
-						getYoil.unshift(temp);
-						console.log("다시 정렬 후 => " +  getYoil);
-						break lbl;
-					} */
-				}
-			}
-		}
-		
-		console.log("시작일 확인 =>" + startday.getDay());
-		if(cnt==0){
-			if(startday.getDay()>getYoil[0]){
-				cnt = 1;
-				loop :
-				for(var i=1;i<7;i++){
-					
-					var data = getYoil[0]+i;
-					if(data == 8){
-						data = 1;
-					}else if(data == 9){
-						data = 2;
-					}else if(data == 10){
-						data = 3;
-					}else if(data == 11){
-						data = 4;
-					}else if(data == 12){
-						data = 5;
-					}else if(data == 13){
-						data = 6;
-					}
-					if(data == startday.getDay()){
-						console.log("fiiiiiiirst ++  => " - i);
-						startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()-i);
-						break loop;
-					}
-				}
-			}else {
-				cnt = 1;
-				loop :
-				for(var i=1;i<7;i++){
-					
-					var data = getYoil[0]-i;
-					if(data == 0){
-						data = 7;
-					}else if(data == -1){
-						data = 6;
-					}else if(data == -2){
-						data = 5;
-					}else if(data == -3){
-						data = 4;
-					}else if(data == -4){
-						data = 3;
-					}else if(data == -5){
-						data = 2;
-					}else if(data == -6){
-						data = 1;
-					}
-					if(data == startday.getDay()){
-						console.log("fiiiiiiirst -- => " + i);
-						startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+i);
-						break loop;
-					}
-				}
-			}
-		}else {
-			console.log("입력한 모든 요일이 시작 요일 뒤에 있는 경우 => " + getYoil[0]);
-			for(var i=1;i<7;i++){
-				var startdaypp = startday.getDay()+i;
-				if(startdaypp==8){
-					startdaypp=1;
-				}else if(startdaypp==9){
-					startdaypp=2;
-				}else if(startdaypp==10){
-					startdaypp=3;
-				}else if(startdaypp==11){
-					startdaypp=4;
-				}else if(startdaypp==12){
-					startdaypp=5;
-				}else if(startdaypp==13){
-					startdaypp=6;
-				}else if(startdaypp==14){
-					startdaypp=7;
-				}
-				if(startdaypp == getYoil[0]){
-					console.log("선택한 요일이 시작 요일보다 전부 앞에 있는 경우 => " + i );
-					startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+i);
-				}
-			}
-		}
-		
-		console.log("입력받은 요일 => " + selectedYoil);
-		console.log("시작일의 요일 => " + startday.getDay());
-		console.log("정렬 전 => " + getYoil);
-		 // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
+		console.log("정렬 후 => " + getYoil);
 		
 		var pdata;
 		var mdata;
 		
-		if(cnt == 120){
+		if(cnt == 0){
 			console.log("선택날짜에 해당요일이 없는 경우");
 			lbl :
 			for(var i=0;i<7;i++){
@@ -431,6 +441,7 @@
 						break lbl;
 					}
 				}
+				
 			}
 			
 			startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+first);
@@ -560,17 +571,12 @@
 		var edl = Math.floor(ed/1000/60/60/24)+1;
 		edll = Math.floor(edl/7);
 		var edlll = edl%7;
-		var yoilCnt = getYoil.length;
-		console.log("요일 수 => " + yoilCnt);
-		var money = "${rbVO.wish_wage}";
-		console.log("돈 => " +money);
-		var weeek = "${rdVO.week}";
-		console.log("주 => " + weeek);
-		console.log("지불 예상 금액 => " + (endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
-		$("#charge").val((endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
+		
+		
 		console.log("두 날짜 사이의 일 수 => " + edl);
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
+		var weeek = ${rdVO.week};
 		console.log("weeekekekekek -> " + weeek);
 		var timebar = "";
 		
@@ -605,70 +611,7 @@
 		}
 		$("#timebarDiv").append(timebar);
 		
-		}else { /////////////////////////////sd
-			var start_time = "${sdVO.start_time}";
-			console.log("sd _ start_time => " + start_time);
-			var end_time = "${sdVO.end_time}";
-			console.log("ed _ end_time => " + end_time);
-			var etArr = end_time.split(":");
-			var stArr = start_time.split(":");
-			var hour = etArr[0]-stArr[0];
-			var min = etArr[1]-stArr[1];
-			if(min==-30){
-				hour = hour - 1;
-				min = 30;
-			}
-			if(min==30){
-				hour = hour + 0.5;
-			}
-			console.log("시간 => " + hour);
-			var sd = "${sdVO.select_date}";
-			var selectedDate = sd.split(", ");
-			var selectedDatelength = selectedDate.length;
-			var money = "${rbVO.wish_wage}";
-			console.log("시급 => " + money);
-			console.log("일할 날의 수 => " + selectedDatelength);
-			var charge = money * hour * selectedDatelength;
-			console.log("예상 결제 금액 => " + charge);
-			$("#charge").val(charge);
-			console.log("sdsdsd sd => " + sd);
-			
-			$(function(){
-				
-				function available(date) {
-					
-					var thismonth = date.getMonth()+1;
-					var thisday = date.getDate();
-					if(thismonth<10){
-						thismonth = "0"+thismonth;
-					}
-					if(thisday<10){
-						thisday = "0"+thisday;
-					}
-				    ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
-				    if ($.inArray(ymd, selectedDate) >= 0) {
-				        return [true,"",""];
-				    } else {
-				        return [false,"",""];
-				    }
-				    
-				}
 		
-				$("#specificDate").multiDatesPicker({ // 고정 데이트피커
-					numberOfMonths : [1, 2],
-					maxDate : "+30d",
-					minDate : "0",
-					format : "yy-mm-dd",
-					beforeShowDay: available
-				});
-				
-				$("#specificDate>div").css("width", "100%");
-				$(".ui-state-disabled>span").css("text-align", "center");
-				$("a").parent("td").addClass("ui-state-highlight ui-datepicker-current-day");
-				$("td a").addClass('ui-state-active');
-				$("a").parent("td").css("background-color", "orange");
-			});
-		}
 		
 		//////////////////////////////////////////////////////////////////////////
 		
@@ -682,9 +625,8 @@
 <body>
 
 <div class="container">
-   <div style="margin:100px 0 20px 0;">
-  	 <img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>
-  	 <div style="text-align:center;font-size:20px;">계약서</div>
+	<div>
+  	 <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
    </div>
    <div class="clearfix" style="width:100%">
 	   <div style="position:relative; float:right; height:1px; top:-420px;">
@@ -706,7 +648,7 @@
     <h5>신청 내용</h5>
     <li class="list-group-item p-5" style="text-align:center"><c:if test="${rbVO.content==null || rbVO.content=='' }" >아직 작성하지 않았습니다.</c:if><c:if test="${rbVO.content!=null || rbVO.content!='' }">${rbVO.content }</c:if></li>
     <h5>돌봄 장소</h5>
-   	<li class="list-group-item p-4"><span style="color:orange;">*${rbVO.care_addr }</span> 
+   	<li class="list-group-item p-4"><span style="color:orange;">*${rbVO.dong_addr }</span> 
       	<div id="map" style="width:100%;height:300px;"></div>
     	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87"></script>
 		<script>
@@ -733,9 +675,11 @@
 				<div id="specificDate">
 					
 				</div>
-				<div >
-					<div style="width:50%;float:left;text-align:center;font-size:25px;">돌봄시작시간 - <b>${sdVO.start_time }</b></div>
-					<div style="width:50%;float:left;text-align:center;font-size:25px;">돌봄종료시간 - <b>${sdVO.end_time }</b></div>
+				<div>
+					<input class="" type="text" value="${sdVO.start_time }" readonly="readonly"/>
+					<input class="" type="text" value="${sdVO.end_time }" readonly="readonly"/>
+					${sdVO.select_date }
+					
 				</div>
 			</c:if>
 			<c:if test="${rbVO.time_type=='R' }">
@@ -791,12 +735,7 @@
       		<span><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
    		
    		</li>
-      	<h5>총 예상 결제 금액</h5>
-      	<li class="list-group-item">
-      		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><input readonly="readonly" type="text" name="charge" id="charge" value="" style="margin-left:5px;height:40px;padding-left:10px;font-size:20px;font-weight:bold;width:100px;border:none;"/><b style="font-size:20px;">원</b>
-      		<span></span>
-   		</li>
-   <h5>돌봄유형</h5>
+   <h5>선호하는 돌봄유형</h5>
    <li class="list-group-item">
          <ul class="list-group list-group-horizontal-sm" >
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-indoorplay-n.svg" /><br/>실내놀이</li>

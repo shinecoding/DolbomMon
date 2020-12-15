@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	/* =============== 초기화 ============== */
 	*{margin:0; padding:0;}
@@ -25,16 +24,8 @@
 	label{margin:0px; width:100%; }
 	input[type=checkbox]{display:none;}
 	/* =============== 시간 선택 라디오버튼 ============== */
-	/* ================ 시간 ======================*/
-	span{margin-left:10px;color:gray;font-size:14px;}	
 	
-	/* ================ 시간 ======================*/
-	input[type=submit]{width:100%; height:50px; margin-top:30px; background-color:orange;}
-	
-	div{-webkit-transition:background-color 0.5s;
-		transition:background-color 0.5s;
-		list-style:none;
-		}
+	input[type=submit]{width:100%; height:50px; margin-top:30px;}
 </style>
 <script>
 	$(function(){
@@ -55,12 +46,6 @@
 			
 		});
 		
-		$("form>div").hover(function(){
-			$(this).css("background-color", "#EFEFEF");			
-		},function(){
-			$(this).css("background-color", "white");			
-		});
-		
 		$("#scheduleFrm").submit(function(){
 			var data;
 			$("input[name=yoil]").each(function(){
@@ -69,10 +54,7 @@
 				}
 			});
 			if(data==null||data==""){
-				swal({
-					title : "활동가능한 시간대를 선택해주세요",
-					icon : "info"
-				});
+				alert("활동가능한 시간대를 선택해주세요");
 				return false;
 			}
 			return true;
@@ -114,9 +96,9 @@
 				주말 종일<span>오전 8시 - 저녁 8시</span></label>
 			</div>
 			<div class="inputRadioDiv">
-				<label for="cr7"><input type="radio" id="cr7" name="yoil" value="1"/> 내가 원하는 시간 직접 입력하기</label>
+				<label for="cr7"><input type="radio" id="cr7" name="yoil" value="1"/>내가 원하는 시간 직접 입력하기</label>
 			</div>
-			<input type="submit" class="btn" value="다음">
+			<input type="submit" value="다음">
 		</form>
 	</div>
 </body>

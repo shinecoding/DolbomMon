@@ -10,8 +10,10 @@
 </c:if>
 <c:if test="${result<1}">
 	<script>
-		alert("글 등록 실패");
-		history.back();
+	swal({
+		title : "등록 실패",
+		icon : "info"
+	});
 	</script>
 </c:if>
 <c:if test="${editResult>0 }">

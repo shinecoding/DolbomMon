@@ -208,12 +208,11 @@ public class ParentController {
 		rbVO.setUserid((String)ses.getAttribute("userid"));
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation == null) {
-			System.out.println("협의 null =in");
+		if(consultation==null || consultation=="") {
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation == null) {
+		if(time_consultation==null || time_consultation=="") {
 			rbVO.setTime_consultation("N");
 		}
 		String childb = cVO.getChild_birth();

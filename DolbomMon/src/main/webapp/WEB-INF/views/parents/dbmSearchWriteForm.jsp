@@ -961,7 +961,7 @@
 						</select>
 					</div>
 					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation" value="Y">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
     					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
@@ -985,7 +985,7 @@
     					<label class="custom-control-label" for="avgWage">평균시급 적용</label>
 					</div>
 					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation" value="Y">
+    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation">
     					<label class="custom-control-label" for="consultation">시급 협의가능</label>
 					</div>
 				<p>
