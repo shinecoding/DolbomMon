@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 	보기</title>
+<title>게시글 보기</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -142,11 +142,12 @@
 	
 	//글내용보기 댓글 표시
 	replyListSelect();
-	
 
 </script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
 	<div class="container">
 		<div id="top">
 			<b>게시글 보기</b>
@@ -179,16 +180,37 @@
 					<br/>${vo.content}<br/>
 					</td>
 				</tr>
+				<c:if test="${vo.filename1!=null}">
+					<tr>
+						<th scope="col">첨부파일</th>
+						<td>
+							<c:if test="${vo.filename1!=null}">
+								<c:forEach var="f1" items="${vo.filename1}">
+									<a href="<%=request.getContextPath()%>/upload/${f1}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f1}" alt="${vo.no}"/></a>		
+								</c:forEach>				
+							</c:if>
+							<c:if test="${vo.filename2!=null}">
+								<c:forEach var="f2" items="${vo.filename2}">						
+									<a href="<%=request.getContextPath()%>/upload/${f2}" download><img src="<%=request.getContextPath()%>/img/disk.png" title="${f2}" alt="${vo.no}"/></a>							
+								</c:forEach>
+							</c:if>	
+						</td>
+					</tr>
+				</c:if>
 			</tbody>
 			<tfoot>
+			<c:if test="${preVo.preSubject!=null}">
 				<tr>
 					<th scope="col">이전글</th>
-					<td><a href="#">이전글 이전글 이전글</a></td>	
+					<td><a href="/dbmon/preContentView?no=${vo.no}">${preVo.preSubject}</a></td>	
 				</tr>
+			</c:if>
+			<c:if test="${nextVo.nextSubject!=null}">
 				<tr>
 					<th scope="col">다음글</th>
-					<td><a href="#">다음글 다음글 다음글</a></td>	
+					<td><a href="/dbmon/nextContentView?no=${vo.no}">${nextVo.nextSubject}</a></td>	
 				</tr>
+			</c:if>
 			</tfoot>
 		</table>
 		<hr/>

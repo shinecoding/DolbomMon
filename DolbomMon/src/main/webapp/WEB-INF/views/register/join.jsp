@@ -18,13 +18,13 @@
 	$(function(){
 		$("#parent").click(function(){
 			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/parentJoin");
-			$("#joinType").val("P")
+			$("#who").val("P");
 			$("#submit").click();
 		});	
 		
 		$("#dbm").click(function(){
 			$("#joinTypeFrm").attr("action", "<%=request.getContextPath()%>/dbmJoin");
-			$("#joinType").val("T")
+			$("#who").val("T");
 			$("#submit").click();
 		});
 	});
@@ -40,9 +40,8 @@
 			<img id="dbm" src="<%=request.getContextPath()%>/img/dbm.png"/>
 		</div>
 	</div>
-	<input id="submit" type="submit" />
-	<input type="hidden" name="intro"/>
-	<input type="hidden" id="joinType" name="joinType" value=""/>
+	<input id="submit" type="submit" style="display:none;"/>
+	<input type="hidden" id="who" name="who" value=""/>
 	</form>
 </body>
 </html>

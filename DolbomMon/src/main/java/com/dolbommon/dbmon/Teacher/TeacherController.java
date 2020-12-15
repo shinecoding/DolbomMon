@@ -1,12 +1,16 @@
 package com.dolbommon.dbmon.Teacher;
 
 import java.io.File;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,14 +18,21 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.certification.CertificationDaoImp;
 import com.dolbommon.dbmon.certification.CertificationVO;
+import com.dolbommon.dbmon.deal.DealDaoImp;
+import com.dolbommon.dbmon.member.RegularDateVO;
+import com.dolbommon.dbmon.member.SpecificDateVO;
+import com.dolbommon.dbmon.search.RecruitBoardDaoImp;
+import com.dolbommon.dbmon.search.RecruitBoardVO;
 
 
 @Controller
@@ -37,22 +48,35 @@ public class TeacherController {
 		this.sqlSession = sqlSession;
 	}
 
-	// =======================================================
-
 	@RequestMapping("/teacherList")
-	public String teacherList() {
-		return "/teacher/teacherList";
-	}
-
-
-	@RequestMapping("/teacherView")
-	public ModelAndView teacherView(HttpSession ses) {//
-
+	public ModelAndView teacherList(HttpSession ses) {
+		
 		String userid = (String) ses.getAttribute("userid");
-
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", vo);
+		mav.addObject("mvo", mvo);
+		mav.setViewName("/teacher/teacherList");
+		return mav;
+	}
+	
+	@RequestMapping("/teacherView")
+	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
+		
+		String userid = (String) ses.getAttribute("userid");
+		String paramid = req.getParameter("userid");
+		if(req.getParameter("userid")!=null) {
+			userid = req.getParameter("userid");
+		};
+		
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		TeacherVO vo = dao.selectTeacher(userid);
+		MemberVO mvo = dao.selectTMember(userid);
+		
 		dao.hitCount(vo);
 		int timeInt = 0;
 		String timeStr = "";
@@ -77,41 +101,79 @@ public class TeacherController {
 		String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
 		mvo.setUsername(hideName);
 		
-		
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
+		//후기, 경험, 인증
+		List<ReviewVO> review = dao.selectReview(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
 		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
 		CertificationVO cvo = cdao.selectCert(userid);
+		
+		
 		ModelAndView mav = new ModelAndView();
 		
+		
+		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
 		mav.addObject("mvo", mvo);
+		mav.addObject("review", review);
 		mav.addObject("cvo", cvo);
-		mav.addObject("hash", hash);
+		mav.addObject("list", list);
+		mav.addObject("userid", userid);
 		mav.setViewName("teacher/teacherView");
 		return mav;
 	}
+
 
 	@RequestMapping("/teacherHeart")
 	public String teacherHeart() {
 		return "/teacher/teacherHeart";
 	}
 
+	///내구직현황 선생님
 	@RequestMapping("/teacherApplyHistory")
-	public String teacherApplyHistory() {
-		return "/teacher/teacherApplyHistory";
+	public ModelAndView teacherApplyHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
+			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
+			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
+			//List<MemberVO> mvoList = dao.selectTMemNo();
+			ModelAndView mav = new ModelAndView();
+			
+			//mav.addObject("mvoList", mvoList);
+			mav.addObject("list2", list2);
+			mav.addObject("list3", list3);
+			//mav.addObject("totalRecords", totalRecords);
+			mav.setViewName("/teacher/teacherApplyHistory");
+
+			return mav;
 	}
+	
+	///행동내역 작성
+	@RequestMapping("/dealHistory")
+	public ModelAndView dealHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.teacherDealHistory(userid);
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("list2", list2);
+			mav.setViewName("/teacher/dealHistory");
+
+			return mav;
+	}
+	
 
 	@RequestMapping("/teacherEdit")
 	public ModelAndView teacherEdit(HttpSession ses) {
 		String userid = (String) ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		TeacherVO vo = dao.selectTeacher(userid);
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
-		mav.addObject("hash", hash);
+		mav.addObject("hash", list);
 		mav.setViewName("teacher/teacherEdit");
 		return mav;
 	}
@@ -192,7 +254,8 @@ public class TeacherController {
 	}
 
 	@RequestMapping(value = "/teacherPictureOk", method = RequestMethod.POST)
-	public ModelAndView teacherPictureOk(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses,
+	@ResponseBody
+	public String teacherPictureOk(TeacherVO vo, MultipartHttpServletRequest mtfRequest, HttpSession ses,
 			HttpServletRequest req) {
 
 		// folder where the pic will be saved
@@ -238,7 +301,7 @@ public class TeacherController {
 
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
 		int result = dao.updatePic(vo); // query
-		ModelAndView mav = new ModelAndView();
+		
 
 		if (result <= 0) {
 			// if the picture is not completely uploaded, then erase the picture from the
@@ -247,28 +310,110 @@ public class TeacherController {
 				File ff = new File(path, pic);
 				ff.delete();
 			}
-			// fail
-			//mav.addObject("msg", "자료실 글 등록 실패하였습니다.");
-			mav.setViewName("/teacher/teacherResult");
-		} else { // success
-			mav.setViewName("redirect:teacherEdit");
+			
 		}
-		return mav;
+		System.out.println("픽="+pic);	
+		return pic;
 	}
+
+	
+
+	
+	
+	
+
 
 	@RequestMapping("/teacherExp")
 	public ModelAndView teacherExp(HttpSession ses) {
 		String userid = (String)ses.getAttribute("userid");
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		HashSet<ExperienceVO> hash = dao.selectExp(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("hash", hash);
+		mav.addObject("list", list);
 		mav.setViewName("teacher/teacherExp");
 		
 		return mav;
 	}
 	
+	
+	//경험추가
+	@RequestMapping("/teacherAddExp")
+	@ResponseBody
+	public String teacherAddExp(HttpSession ses, HttpServletRequest req) {
+		String result="fail";
+		String userid = (String)ses.getAttribute("userid");
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int cnt = 0;
+		cnt = dao.insertExp(userid);
+		if(userid!=null && !userid.equals("")) {
+			if(cnt>=1) {
+				result="pass";
+			}
+		}	
+		return result;
+	}
+	
+	//경험삭제
+	@RequestMapping("/teacherDelExp")
+	@ResponseBody
+	public String teacherDelExp(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
+		String result="fail";
+		String userid = (String)ses.getAttribute("userid");
+		evo.setUserid(userid);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int cnt = 0;
+		cnt = dao.deleteExp(evo);
+		if(userid!=null && !userid.equals("")) {
+			if(cnt>=1) {
+				result="pass";
+			}
+		}	
+		return result;
+	}
+	
+	//경험저장
+	@RequestMapping(value="/teacherSaveExp", method=RequestMethod.POST, produces="application/text;charset=UTF-8")
+	@ResponseBody
+	public String teacherSaveExp(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
+		String result="fail";
+		String userid = (String)ses.getAttribute("userid");
+		evo.setUserid(userid);
+		String exp_no[] = evo.getExp_no().split(",");
+		String exp_content[] = evo.getExp_content().split(",");
+		String exp_start[] = evo.getExp_start().split(",");
+		String exp_end[] = evo.getExp_end().split(",");
+		ExperienceVO resultVO = new ExperienceVO();
+		resultVO.setUserid(userid);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		int cnt = 0;
+		try {
+			for(int i=0; i<exp_no.length; i++ ) {
+				resultVO.setExp_no(exp_no[i]);
+				resultVO.setExp_start(exp_start[i]);
+				resultVO.setExp_end(exp_end[i]);
+				resultVO.setExp_content(exp_content[i]);
+				
+				try {
+					cnt = dao.updateExp(resultVO);
+				}catch(Exception e) {
+					System.out.println("경험저장 쿼리 에러"+e.getMessage());
+				}
+				
+			}
+			if(userid!=null && !userid.equals("")) {
+				if(cnt>=1) {
+					result="pass";
+				}
+			}	
+		}catch(ArrayIndexOutOfBoundsException ai) {
+			result="경험 내용을 입력하세요.";
+		}
+
+		return result;
+	}
+	
+	/*
 	@RequestMapping(value="/teacherExpOk", method=RequestMethod.POST)
 	public ModelAndView teacherExpOk(ExperienceVO evo, HttpSession ses, HttpServletRequest req) {
 		HashSet<ExperienceVO> hash = new HashSet<ExperienceVO>();
@@ -368,6 +513,8 @@ public class TeacherController {
 		
 		return mav;
 	}
+	
+	*/
 	/*
 
 	@RequestMapping("/teacherDelExp")
@@ -481,26 +628,24 @@ public class TeacherController {
 		return mav;
 	}
 	
-	@RequestMapping("/cctvOk")
-	public ModelAndView cctvOk(TeacherVO vo, HttpSession ses, HttpServletRequest req) {
+	@RequestMapping(value="/cctvOk", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String cctvOk(TeacherVO vo, HttpSession ses, String cctv) {
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
-		vo.setCctv((String)req.getParameter("cctv"));
+		/*여기 변형*/
+		if(cctv.equals("cctvAgree")) {
+			vo.setCctv("Y");
+		} else if (cctv.equals("cctvDisagree")) {
+			vo.setCctv("N");
+		}
 		
 		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
-		int result = dao.updateCCTV(vo);
+		String result = dao.updateCCTV(vo) + "";
 		
-		ModelAndView mav = new ModelAndView();
-		
-		if(result>0) {
-			mav.addObject("vo", vo);
-			mav.setViewName("redirect:teacherEdit");
-		}else {
-			mav.setViewName("teacher/teacherResult");
-		}
-		return mav;		
+		return result;		
 	}
-
+/*
 	//학부모가 선생 찾을 때 보는 지도
 	@RequestMapping("/teacherSearchMap")
 	public ModelAndView teacherSearchMap(HttpSession ses) {
@@ -515,7 +660,7 @@ public class TeacherController {
 		mav.setViewName("/teacher/teacherSearchMap");
 		return mav;
 	}
-	
+	*/
 	//선생 개인 위치 수정용 지도
 	@RequestMapping("/teacherMap")
 	public ModelAndView teacherMap(HttpSession ses) {
@@ -566,8 +711,51 @@ public class TeacherController {
 		}
 		return mav;
 	}
-
 	
-
+	@RequestMapping(value="/teacherSchedule")
+	public String teacherSchedule(HttpSession ses, RegularDateVO rdVO, SpecificDateVO sdVO) {
+		
+		String userid = (String)ses.getAttribute("userid");
+		
+		
+		
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		
+		
+		return "teacher/teacherSchedule";
+	}
+	
+	@RequestMapping(value="/updateActive", method=RequestMethod.GET, produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String updateActive(HttpSession ses, String active) {
+		String userid = (String)ses.getAttribute("userid");
+		TeacherVO vo = new TeacherVO();
+		vo.setUserid(userid);
+		vo.setActive(active);
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		String result = dao.updateActive(vo) + "";
+		return result;
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

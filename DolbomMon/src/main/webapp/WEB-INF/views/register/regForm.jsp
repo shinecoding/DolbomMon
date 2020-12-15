@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -39,13 +38,6 @@
 <script>
 	$(function(){
 		// 생년월일 옵션
-		var option = {
-			showAnim : "show",
-			changeMonth : true,
-			changeYear : true,
-			minDate : '-100y',
-			dateFormat : "yy-mm-dd"
-		}
 		$("#birthBtn").datepicker({
 			showAnim : "show",
 			changeMonth : true,
@@ -59,22 +51,16 @@
 			altFormat:"yyyy-mm-dd"
 		});
 		
-		// 휴대폰 본인인증 
-		$("#smsIdentity").click(function(){
-			window.open("<%=request.getContextPath()%>/smsIdentity", "sms", "left=400, top=150, width=500, height=300");
-		});
-		
-		// 아이디 중복검사
-		$("#useridChkBtn").on('click', function(){
-			window.open("<%=request.getContextPath()%>/idCheckForm", "idChk", "left=400, top=150, width=500, height=300");
-		});
-		
 		// 우편번호 검색창
 		$("#zipcodeBtn").click(function(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
 		            $("#zipcode").val(data.zonecode);
 		            $("#addr").val(data.address);
+		            console.log("시, 도 =>" + data.sido);
+		            console.log("시군구 =>" + data.sigungu);
+		            console.log("법정동명(동) => " + data.bname);
+		            console.log("법정동명(읍, 면, 리) => " + data.bname1);
 		            
 		            var geocoder = new kakao.maps.services.Geocoder();
 		            
@@ -109,16 +95,17 @@
 			}
 		});
 		
+		
 		$("#userid").keyup(function(){
 			var userid = $(this).val();
 			var useridReg = /^[A-Za-z]{1}\w{7,11}$/;
 			$("#idStatus").val("N");
 			if(!useridReg.test(userid)){
 				$("#useridRegChk").html("시작문자는 영문자, 아이디는 8~14글자의 영문,숫자,_만 입력가능").css("color", "#ff0000");
-				$("#useridChkBtn").attr("disabled", true);
+				$("#idChkBtn").attr("disabled", true);
 			}else{
 				$("#useridRegChk").html("사용가능한 아이디 입니다.").css("color", "green");
-				$("#useridChkBtn").attr("disabled", false);
+				$("#idChkBtn").attr("disabled", false);
 			}
 		});
 		
@@ -155,10 +142,11 @@
 		});
 		
 		$("#email1").keyup(function(){
+			
 			var email1 = $(this).val();
 			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
 			if(!email1Reg.test(email1)){
-				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ").css("color", "#ff0000");
+				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ").css("color", "red");
 			}else{
 				$("#emailChk").html("").css("color", "green");
 			}
@@ -166,11 +154,15 @@
 			var email2 = $("#email2").val();
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
-				$("#email2").val("").css("color", "green");
+				$("#email2").val("");
+				$("#emailChk").css("color","red");
 			}
 		})
 		
 		$("#email2").keyup(function(){
+			var domain = document.getElementById("domain");
+			domain.selectedIndex = 0;
+			var selectText = domain.options[domain.selectedIndex].text;
 			var email2 = $(this).val();
 			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 			if(!email2Reg.test(email2)) {
@@ -182,9 +174,137 @@
 			var email1 = $("#email1").val();
 			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
 			if(!email1Reg.test(email1)){
-				$("#email1").val("").css("color", "green");
+				$("#emailChk").val("").css("color", "red");
 			}
 		});
+		
+		$("#domain").change(function(){
+			var domain = $(this).val();
+			if(domain == '직접입력'){
+				$("#email2").val("");				
+			}else {
+				$("#email2").val(domain);
+			}
+			var email2Reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+			if(!email2Reg.test(email2)) {
+				$("#emailChk").html("올바른 이메일 도메인 형식이 아닙니다.").css("color", "red");
+			}else{
+				$("#emailChk").html("").css("color", "green");
+			}
+			
+			var email1 = $("#email1").val();
+			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
+			if(!email1Reg.test(email1)){
+				$("#emailChk").css("color", "red");
+				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ");
+			}
+		});
+		
+		$("#tel1").keyup(function(){
+			$("#smsIdentityYN").val("N");
+			$("#userNum").css("display", "none");
+			$("#userNumChk").css("display", "none");
+			var tel1 = $(this).val();
+			var tel1Reg = /^01(?:0)\d{8}$/;
+			if(!tel1Reg.test(tel1)){
+				$("#tel1Chk").html("-를 제외한 휴대폰 번호를 입력해주세요.ex)010...").css("color", "red");
+				$("#smsIdentity").attr("disabled", true);
+			}else{
+				$("#tel1Chk").html("").css("color", "green");
+				$("#smsIdentity").attr("disabled", false);
+			}
+		});
+		
+		///////////////// 아이디 중복검사 ///////////////// 
+		$("#idChkBtn").click(function(){
+	        var userid = $("#userid").val();
+	        console.log("userid => " + userid);
+	        $.ajax({
+                url:"idCheckAjax",
+                type:"post",
+                data:{userid: $("#userid").val()
+                     },
+              success:function(result){
+            	  if(result>=1){
+            		  alert("이미 사용중인 아이디입니다.");
+            	  }else if(result==0){
+            		  if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
+            			  $("#idStatus").val("Y");
+            		  }else{
+            			  $("#idStatus").val("N");
+            		  }
+            	  }
+                }, error:function(){
+                   
+                }
+             });
+	    });
+		
+		//////////////////////// 휴대폰 본인인증 ////////////////////////
+		$("#smsIdentity").click(function(){
+			//////////////// 휴대폰 중복검사 ///////////////////
+			var tel1 = $("#tel1").val();
+	        console.log("tel1 => " + tel1);
+	        
+	        $.ajax({
+                url:"telCheckAjax",
+                type:"post",
+                data:{tel1: $("#tel1").val()
+                     },
+              	success:function(result){
+            	  	if(result>=1){
+            		  	var idpwQna = confirm("이미 사용중인 연락처입니다. \n 아이디찾기 페이지로 이동하시겠습니까?");
+            		  	if(idpwQna){
+            		  		console.log("이동");
+            		  	}
+            	  	}else if(result==0){
+          				var number = Math.floor(Math.random() * 100000) + 100000;
+          	      		if(number>100000){
+          	        		number = number - 10000;
+          	        	}
+          	      		
+          				var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");
+          				
+          	       		if(con_test == true){
+          	       			$("#text").val()
+          	       			$("#text").val(number);
+	          	          	$.ajax({
+	          	            	url:"sendSms",
+	          	            	type:"post",
+	          	                data:{tel1: $("#tel1").val(),
+	          	                  	text: $("#text").val()
+	          	                    },
+	          	                 	success:function(){
+	          	                   		alert("해당 휴대폰으로 인증번호를 발송했습니다");
+		          	                   	$("#userNum").css("display", "block");
+		                  				$("#userNumChk").css("display", "block");
+	          	                   	}, error:function(){
+	          	                      
+	          	                   	}
+	          	                });
+          	      		}else{
+          	        	  
+          	       		}
+            	  	}
+                }, error:function(){
+                   
+                }
+           	});
+		});
+		
+		$("#userNumChk").click(function(){
+			var userNum = $("#userNum").val();
+	       	var sysNum = $("#text").val();    
+	         
+	      	if(userNum.trim() == sysNum.trim()){
+	      		$("#smsIdentityYN").val("Y");
+	           	alert("인증되었습니다.");
+	        } else {
+	      		$("#smsIdentityYN").val("N");
+	        	alert("인증번호가 일치하지 않습니다.");
+	        }
+		});
+		
 		
 		/////////////////////////////////////////////////////////////////////////
 		$("#regFrm").submit(function(){
@@ -269,8 +389,19 @@
 				return false;
 			}
 			
-			alert("가입성공");
-			return false;
+			var smsIdentityYN = $("#smsIdentityYN").val();
+			if(smsIdentityYN=="N" || smsIdentityYN==null){
+				alert("휴대폰 본인인증을 해주세요");
+				return true;
+			}
+			
+			var idStatus = $("#idStatus").val();
+			if(idStatus=="N"){
+				alert("아이디 중복검사를 해주세요");
+				return false;
+			}
+			
+			return true;
 		});
 	});
 	
@@ -279,7 +410,8 @@
 <body>
 	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
-		<input type="hidden" name="care_type" value="${care_type }" />
+	<c:if test="${who=='T' }" >
+		<input type="hidden" name="teacher_type" value="${teacher_type }" />
 		<input type="hidden" name="child_age" value="${child_age }" />
 		<input type="hidden" name="activity_type" value="${activity_type }" />
 		<input type="hidden" name="yoil" value="${yoil }" />
@@ -291,18 +423,19 @@
 		<input type="hidden" name="cctv" value="${cctv }" />
 		<input type="hidden" name="pic" value="${pic }" />
 		<input type="hidden" name="intro" value="${intro }" />
+	</c:if>
+		<input type="hidden" name="who" value="${who }" />
 		<input type="hidden" id="lat" name="lat" />
 		<input type="hidden" id="lng" name="lng" />
-		<input type="hidden" id="joinType" name="joinType" value="${joinType}" placeholder="가입유형"/> 
 		
 		<div id="headerDiv">
-			<img src="<%=request.getContextPath()%>/img/DOL02.PNG" />
+			<img src="<%=request.getContextPath()%>/img/mylogo.png" />
 			<h5>돌봄몬을 찾기 위한 내용 작성이 끝났습니다. 이제, 사용하실 아이디와 비밀번호를 입력해주세요</h5>
 		</div>
-		<div id="useridDiv">
+		<div id="useridDiv" class="form-group has-warning has-feedback">
 			<label for="userid">아이디</label><span id="useridRegChk"></span><br/>
-			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" id="useridChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
-			<input type="hidden" name="idStatus" id="idStatus" value="N"/>
+			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" id="idChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
+			<input type="hidden" id="idStatus" value="N"/>
 		</div>
 		<div id="userpwdDiv">
 			<label for="userpwd">비밀번호</label><span id="userpwdRegChk"></span><br/>
@@ -327,7 +460,7 @@
 		<div id="emailDiv">
 			<label for="email1">이메일</label><span id="emailChk"></span><br/>
 			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:24%;" /><span style="wdith:2%; height:50px; line-height:50px; text-aling:center; margin:0 1%;">@</span><input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
-			<select style="width:24%; margin-left:3%; height:50px;" >
+			<select id="domain" style="width:24%; margin-left:3%; height:50px;" >
 				<option selected="selected" >직접입력</option>
 				<option>gmail.com</option>
 				<option>naver.com</option>
@@ -336,9 +469,13 @@
 			</select>
 		</div>
 		<div id="smsDiv">
-			<input type="button" id="smsIdentity" value="휴대폰 본인인증하기"/>
-			<label for="tel1" style="width:80%;clear:both; margin-top:10px;">연락처</label><br/>
-			<input type="text" id="tel1" name="tel1" value="" style="width:80%;" />
+			<label for="tel1" style="clear:both;">연락처</label><span id="tel1Chk"></span><br/>
+			<input type="text" id="tel1" name="tel1" style="width:80%;" />
+			<input type="button" id="smsIdentity" value="휴대폰 본인인증하기" disabled="true" style="margin-top:10px;"/>
+			<input type="text" id="userNum" name="userNum" style="margin-top:10px; display:none;" placeholder="인증번호 입력"/>
+			<input type="button" id="userNumChk" style="margin-top:10px;display:none;" value="인증하기"/>
+			<input type="hidden" name="text" id="text">
+			<input type="hidden" id="smsIdentityYN" value="N" /> 
 		</div>
 		<div id="zonecodeDiv">
 			<label>우편번호</label><br/>
@@ -349,7 +486,7 @@
 			<label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label><br/>
 			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
 		</div>
-		<input type="submit" value="다음" />
+		<input type="submit" value="가입하기" />
 	</div>
 	</form>
 </body>

@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.ManageDaoImp;
+import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.Teacher.TeacherVO;
 
 @Controller
@@ -47,15 +49,15 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value="parentJoin", method=RequestMethod.POST)
-		public String parentJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
+		public String parentJoin(@RequestParam("who") String who, HttpSession ses) {
 			
-			ses.setAttribute("joinType", joinType);
+			ses.setAttribute("who", who);
 			return "register/regForm";
 		}
 		
 		@RequestMapping(value="dbmJoin", method=RequestMethod.POST)
-		public String dbmJoin(@RequestParam("joinType") String joinType, HttpSession ses) {
-			ses.setAttribute("joinType", joinType);
+		public String dbmJoin(@RequestParam("who") String who, HttpSession ses) {
+			ses.setAttribute("who", who);
 			return "register/dbm/dbmType";
 		}
 		
@@ -74,7 +76,9 @@ public class MemberController {
 				
 		@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
 		public ModelAndView regOk(
-			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo) {
+			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo
+			, @RequestParam("pic") String pic
+				) {
 			
 			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
@@ -84,16 +88,40 @@ public class MemberController {
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			ModelAndView mav = new ModelAndView();
 			
-			String joinType = (String)ses.getAttribute("joinType");
+			
+		    String encryPassword = PwdSha256.encrypt(mVo.getUserpwd());
+		    mVo.setUserpwd(encryPassword);
+			
+			String yoil = (String)ses.getAttribute("yoil");
+			String sd = (String)ses.getAttribute("start_date");
+			String ed = (String)ses.getAttribute("end_date");
+			String st = (String)ses.getAttribute("start_time");
+			String et = (String)ses.getAttribute("end_time");
+			
+			rdVo.setYoil(yoil);
+			rdVo.setStart_date(sd);
+			rdVo.setEnd_date(ed);
+			rdVo.setStart_time(st);
+			rdVo.setEnd_time(et);
+			
+			
+			String who = (String)ses.getAttribute("who");
+			if(who.equals("T")) {
+				
+			}
+			
+			System.out.println("who=>"+ who);
 			int result = 0;
 			
 			try {
-				if(joinType=="T") {
+				if(who.equals("T")) {
+					System.out.println("선생님 회원가입 시작 =>");
 					dao.memberReg(mVo);
-					
+					System.out.println("member테이블 insert");
 					dao.memberRegTeacher(mVo, tVo);
-					
+					System.out.println("teacher테이블 insert");
 					result = dao.memberRegRegular(mVo, rdVo);
+					System.out.println("시간테이블 insert");
 				}else {
 					result = dao.memberReg(mVo);
 				}
@@ -102,39 +130,43 @@ public class MemberController {
 				transactionManager.rollback(status);
 			}
 			
-			mav.addObject("result", result);
-			mav.setViewName("register/regResult");
+				if(who.equals("P")) {
+					if(result==1) {
+						String userid = mVo.getUserid();
+						mav.addObject("userid", userid);
+						mav.setViewName("register/parent/profileImage");
+					}else {
+						mav.addObject("result", result);
+						mav.setViewName("register/result");
+					}
+				}else {
+					mav.addObject("result", result);
+					mav.setViewName("register/regResult");
+				}
 			
 			return mav;
 		}
 		
-		// 아이디 중복검사 창
-		@RequestMapping("/idCheckForm")
-		public String idCheckWindow() {
-			return "register/idCheck";
-		}
-		
-		@RequestMapping(value = "/idChk", method = RequestMethod.POST)
+		// 아이디 중복검사 
+		@RequestMapping(value = "/idCheckAjax", method = RequestMethod.POST)
 		@ResponseBody
-		public String useridChk(HttpServletRequest req) {
-			
-			System.out.println(req.getParameter("getUserid"));
-			
+		public int useridChk(@RequestParam("userid") String userid) {
 			
 			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			int result = dao.memberUseridChk(req.getParameter("getUserid"));
-			
-			System.out.println("result => " + result);
-			
-			req.setAttribute("result", result);
-			
-			return "idchk";
+			ManageDaoImp dao2 = sqlSession.getMapper(ManageDaoImp.class);
+			int result2 = dao.memberUseridChk(userid);
+			int result3 = dao2.selectManagerId(userid);
+			int result = result2 + result3;
+			return result;
 		}
 		
-		// SMS 인증창 
-		@RequestMapping("/smsIdentity")
-		public String smsIdentity() {
-			return "register/sendSMS";
+		// 연락처 중복검사
+		@RequestMapping(value = "/telCheckAjax", method = RequestMethod.POST)
+		@ResponseBody
+		public int usertelChk(@RequestParam("tel1") String tel1) {
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			int result = dao.memberUsertelChk(tel1);
+			return result;
 		}
 		
 		@RequestMapping(value = "/sendSms", method = RequestMethod.POST)
@@ -148,7 +180,7 @@ public class MemberController {
 		       
 		    HashMap<String, String> set = new HashMap<String, String>();
 
-		    set.put("to", (String)request.getParameter("to")); // 받는 사람
+		    set.put("to", (String)request.getParameter("tel1")); // 받는 사람
 		    set.put("from", "01096801682"); // 발신번호
 		    set.put("text", "돌봄몬 본인인증 \n 인증번호는 ["+(String)request.getParameter("text")+"]입니다"); // 문자내용
 		    set.put("type", "sms"); // 문자 타입
@@ -244,9 +276,9 @@ public class MemberController {
 		
 		// 돌볼 수 있는 아이의 연령대와 가능한 활동  >>
 		@RequestMapping(value = "/dbm/activityAndAge", method = RequestMethod.POST)
-		public String dbmActivityAndAge(@RequestParam("care_type") String care_type, HttpSession ses) {
-			
-			ses.setAttribute("care_type", care_type);
+		public String dbmActivityAndAge(@RequestParam("teacher_type") String teacher_type, HttpSession ses) {
+			System.out.println(teacher_type);
+			ses.setAttribute("teacher_type", teacher_type);
 			
 			return "register/dbm/activityAndAge";
 		}
@@ -306,13 +338,14 @@ public class MemberController {
 			return "register/dbm/profileImage";
 		}
 		
-		@RequestMapping(value="/dbm/profileImageOk")
-		public String dbmProfileImageOk(HttpServletRequest req, HttpSession ses
+		@RequestMapping(value="/dbm/profileImageOk", method = RequestMethod.POST)
+		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses
 				) {
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+			
 			String path = ses.getServletContext().getRealPath("/upload");
 			// 파일 업로드를 하기위해서 req에서 MultipartHttpServletRequest 를 생성한다.
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-			
 			// mr에서 MultipartFile객체를 얻어온다.	-> List
 			List<MultipartFile> files = mr.getFiles("pic");
 			
@@ -348,11 +381,31 @@ public class MemberController {
 					}
 				}//for 111
 			}
-			for(int i=0; i<fileNames.length; i++) {
-				ses.setAttribute("pic", fileNames[i]);
+			String who = (String)ses.getAttribute("who");
+			System.out.println("image who => " + who);
+			int imgresult = 0;
+			for(int i=0; i<fileNames.length;i++) {
+				if(who.equals("T")) {
+					ses.setAttribute("pic", fileNames[i]);
+				}else {
+					String userid = (String)ses.getAttribute("userid");
+					System.out.println("파일명 => " + fileNames[i]);
+					imgresult = dao.parentImageUpload(fileNames[i], userid);
+				}
+			}
+			ModelAndView mav = new ModelAndView();
+			if(who.equals("T")) {
+				System.out.println("들어옴  TTTTTTT" );
+				mav.setViewName("register/dbm/introduce");
+				return mav;
+			}else {
+				System.out.println("들어옴 PPPPPPP" );
+				System.out.println("결과 => " + imgresult);
+				mav.addObject("imgresult", imgresult);
+				mav.setViewName("register/regResult");
+				return mav;
 			}
 			
-			return "register/dbm/introduce";
 		}
 		
 		// 돌봄몬 - 간단 자기소개입력 폼 >>
@@ -380,8 +433,13 @@ public class MemberController {
 			
 			return "register/dbm/introduce";
 		}
-
-}
+		
+		@RequestMapping("/dbm/introduce/np")
+		public String dbmIntroduceNonePic() {
+			
+			return "register/dbm/introduce";
+		}
+	}
 
 
 

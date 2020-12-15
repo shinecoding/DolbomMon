@@ -118,13 +118,41 @@ font-weight:bold;
 			$(this).siblings().css("background-color", "white").css("font-weight", "normal");
 	
 		});
+		$(document).on("click", "#cctvLst>label", function(){
+			console.log($(this).attr("for"));
+			var cctv = $(this).attr("for");
+			var url = "/dbmon/cctvOk";
+			var params = "cctv="+cctv;
 			
+			$.ajax({
+				url:url,
+				data:params,
+				type:'GET',
+				success:function(result){
+					if(result=="1"){
+						console.log("성공");
+												
+					}else if(result="0"){
+						console.log("실패");
+					}
+				}, error:function(){
+					console.log("AJAX 받기 에러");
+				}//error
+				
+			});//ajax
+			
+			
+			
+		});//cctv클릭
 		
-	});
+	});//제이쿼리
 </script>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 <div class="container">
 	<h5>내 사진</h5>
 
@@ -168,7 +196,7 @@ font-weight:bold;
    	</li>
    	<h5>활동 가능 시간</h5>
    	<li class="list-group-item">
-	   	<i class="fas fa-pen"><a class="editBtn" href="teacherWage"></a></i>
+	   	<i class="fas fa-pen"><a class="editBtn" href="teacherSchedule"></a></i>
 	   	스케쥴차트</li>
    	<h5>돌봄 가능 연령</h5>
    	 <c:set var = "str" value = "${vo.child_age}"/>
@@ -303,14 +331,14 @@ font-weight:bold;
 		
 			<li id="cctvLst" class="list-group-item" >
 				<div id="cctvHidden">
-					<input type="submit" name="cctv" id="cctvDisagree" value="N"/>
-				    <input type="submit" name="cctv" id="cctvAgree" value="Y"/>	    
+					<input type="radio" name="cctv" id="cctvDisagree" <c:if test="${vo.cctv=='N'}"> checked</c:if> value="N"/>
+				    <input type="radio" name="cctv" id="cctvAgree" <c:if test="${vo.cctv=='Y'}"> checked</c:if> value="Y"/>	    
 			    </div>
-					 <label for="cctvDisagree" class="rounded"  <c:if test="${vo.cctv=='N'}"> style="background-color:orange" </c:if>>   
+					 <label for="cctvDisagree" class="rounded"  <c:if test="${vo.cctv=='N'}"> style="background-color:orange; font-weight:bold;" </c:if>>   
 				    CCTV촬영을<br/> 원치 않습니다.<br/>
 				    	<i id="cctvCheck1" class="fas fa-check-circle"></i>
 				    </label>
-				    <label for="cctvAgree" class="rounded" <c:if test="${vo.cctv=='Y'}"> style="background-color:orange" </c:if>>
+				    <label for="cctvAgree" class="rounded" <c:if test="${vo.cctv=='Y'}"> style="background-color:orange; font-weight:bold;" </c:if>>
 				    CCTV가 있어도<br/>당당히 일할 수 있습니다.<br/>
 				    	<i id="cctvCheck2" class="fas fa-check-circle"></i>
 					</label>
@@ -323,7 +351,7 @@ font-weight:bold;
 </div>
 
 
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

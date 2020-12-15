@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.board.NoticeBoardDaoImp">
+	<select id="noticeBoardList" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select * from (select * from (select no, subject, userid, hit, writedate, filename1, filename2 
+		from noticeBoard 
+		<choose>
+			<when test="searchKey!=null and searchWord!=null">
+				<if test='searchKey.equals("subject")'>
+					where subject like '%'||#{searchWord}||'%' 
+				</if>
+				<if test='searchKey.equals("content")'>
+					where content like'%'||#{searchWord}||'%' 
+				</if>	
+				<if test='searchKey.equals("userid")'>
+					where userid like '%'||#{searchWord}||'%' 
+				</if>	
+			</when>
+		</choose>
+		order by no desc) where 
+		<![CDATA[rownum<=${currentPageRecord}]]>
+		order by no) where 
+		<![CDATA[rownum<=${lastPageRecordCount}]]>
+		order by no desc
+	</select>
+	
+	<select id="getTotalNoticeRecord" parameterType="com.dolbommon.dbmon.board.NoticeBoardVO" resultType="int">	
+		select count(no) from noticeBoard 
+		<choose>
+			<when test="searchKey!=null and searchWord!=null">
+				<if test='searchKey.equals("subject")'>
+					where subject like '%'||#{searchWord}||'%' 
+				</if>
+				<if test='searchKey.equals("content")'>
+					where content like'%'||#{searchWord}||'%' 
+				</if>	
+				<if test='searchKey.equals("userid")'>
+					where userid like '%'||#{searchWord}||'%' 
+				</if>	
+			</when>
+		</choose>
+	</select>
+	
+	<insert id="noticeBoardInsert" parameterType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		insert into noticeBoard(no, subject, content, userid, hit, writedate, ip
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, filename1
+			</when>
+		</choose>
+		<choose>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, filename2
+			</when>
+		</choose>
+		<choose>
+			<when test='expose!=null and expose.equals("Y")'>
+			, expose
+			</when>
+		</choose>
+		) values(board_sq.nextval, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, #{filename1}
+			</when>
+		</choose>
+		<choose>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, #{filename2}
+			</when>
+		</choose>
+		<choose>
+			<when test='expose!=null and expose.equals("Y")'>
+			, #{expose}
+			</when>
+		</choose>
+		)
+	</insert>
+	
+	<select id="noticeBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select no, subject, content, userid, hit, writedate, filename1, filename2 
+		from noticeBoard where no=#{param1}
+	</select>
+	
+	<select id="preNoticeSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select * from(
+			select no, lag(no, 1) over (order by no) preNo, lag(subject, 1) over (order by no) preSubject
+        	from noticeBoard
+    		)
+    	where no=#{no}
+	
+	</select>	
+
+	<select id="nextNoticeSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select * from(
+			select no, lead(no, 1) over (order by no) nextNo, lead(subject, 1) over (order by no) nextSubject
+        	from noticeBoard
+    		)
+    	where no=#{no}
+	</select>	
+	
+	<update id="noticeHitCount" parameterType="int">
+		update noticeBoard set hit=hit+1 where no=#{param1}
+	</update>
+	
+	<delete id="noticeBoardDel">
+		delete from noticeBoard where no=#{param1} and userid=#{param2}
+	</delete>
+	
+	<select id="exposeNotice" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select * from noticeBoard where expose='Y' order by no desc
+	</select>
+	
+	<select id="getNoticeFileName" resultType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		select filename1, filename2 from noticeBoard where no=#{no}
+	</select>
+	
+	<update id="noticeBoardEditOk" parameterType="com.dolbommon.dbmon.board.NoticeBoardVO">
+		update noticeBoard set subject=#{subject}, content=#{content} 	
+			<choose>
+				<when test='filename1 neq null and !filename1.equals("")'>
+					, filename1=#{filename1}
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 neq null and !filename2.equals("")'>
+				, filename2=#{filename2}
+					</when>	
+			</choose>
+			<choose>
+				<when test='filename1 eq null or filename1.equals("")'>
+					, filename1=null
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 eq null or filename2.equals("")'>
+					, filename2=null
+				</when>
+			</choose>	
+			<choose>
+				<when test='expose.equals("Y")'>
+					, expose='Y'
+				</when>
+			</choose>
+			<choose>
+				<when test='expose.equals("N")'>
+					, expose=null
+				</when>
+			</choose>
+		where no=#{no} and userid=#{userid}
+	</update>
+	
+	
+</mapper>

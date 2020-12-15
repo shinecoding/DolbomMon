@@ -4,15 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.chat.ChatDaoImp">
 	<insert id="insertRoom" parameterType="com.dolbommon.dbmon.chat.ChatRoomDTO">
-		insert into chatroom(roomseq, userid, roomname, indate) values(chatseq.nextval,#{userid}, #{roomname} ,sysdate)
+		insert into chatroom(roomseq, userid, userid_t, indate) values(chatseq.nextval,#{userid}, #{userid_t}, sysdate)
 	</insert>
-	<select id="selectAllRoom" parameterType="com.dolbommon.dbmon.chat.ChatRoomDTO">
-		select roomseq, userid, roomname, indate from chatroom order by indate desc
+	
+	<select id="selectAllRoom" resultType="com.dolbommon.dbmon.chat.ChatRoomDTO" parameterType="String">
+		select roomseq, userid, userid_t, to_char(indate ,'MM"월"DD"일" HH24:MI:SS') indate, newchat, newchat_t, lastchat from chatroom where userid=#{userid} or userid_t=#{userid} order by indate desc
 	</select>
 	
-	<select id="selectChat" resultType="com.dolbommon.dbmon.chat.ChatDTO" parameterType="String">
-		select roomseq, chatseq, userid, message, indate from chat where roomseq=#{roomseq} 
-		order by indate desc
+	<select id="selectRoom" resultType="com.dolbommon.dbmon.chat.ChatDTO" parameterType="int">
+		select chatseq, roomseq, userid, message, to_char(indate ,'MM"월"DD"일" HH24:MI:SS') indate from chat where roomseq=#{roomNo} order by indate asc
+	</select>
+	
+	<select id="roomCheck" resultType="int" parameterType="map">
+		select count(roomseq) from chatroom where (userid=#{userid} and userid_t=#{userid_t}) or (userid=#{userid_t} and userid_t=#{userid}) 
 	</select>
 	
 	<insert id="insertChat" parameterType="com.dolbommon.dbmon.chat.ChatDTO">
@@ -20,4 +24,39 @@
 		values(#{roomseq}, chatroomseq.nextval, #{userid}, #{message}, sysdate)
 	</insert>
 	
+	<update id="updateNewChat" parameterType="map">
+		update chatroom set 
+		<if test='userCheck.equals("Y")'>
+		newchat='Y', 
+		</if>
+		<if test='userCheck.equals("N")'>
+		newchat_t='Y',
+		</if>
+		lastchat=#{lastChat}, indate=sysdate  where roomseq=#{roomseq}
+	</update>
+	
+
+	<select id="selectNewchat" resultType="com.dolbommon.dbmon.chat.ChatRoomDTO">
+		select userid, userid_t from chatroom where roomseq=#{roomseq}
+	</select>
+
+	<update id="updateChatCheck" parameterType="map">
+		update chatroom set
+		<if test='userCheck.equals("N")'>
+		newchat='N'
+		</if>
+		<if test='userCheck.equals("Y")'>
+		newchat_t='N'
+		</if>
+		where roomseq=#{roomseq}
+	</update>
+	
+	<update id="roomTimeUpdate" parameterType="map">	
+		update chatroom set indate=sysdate where (userid=#{userid} and userid_t=#{userid_t}) or (userid=#{userid_t} and userid_t=#{userid})
+	</update>
+	
+	<delete id="roomDelete" parameterType="map">
+		delete from chatroom a where rowid > (select min(rowid) from chat b
+		where (b.userid = a.userid) and (b.userid_t = a.userid_t));
+	</delete>
 </mapper>

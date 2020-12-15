@@ -78,41 +78,79 @@
 <script>
 		
 	$(function(){
-		
-		function exxxx(){
-			var txt="";
-			txt+="<li><button class='btn btn-warning' type='button'>삭제</button>";		
-			txt+="<div>경험내용</div>";
-			txt+="<input type='text' name='exp_content' class='form-control' placeholder='예)키즈카페, 교육기관, 봉사활동' />";
-			txt+="<hr/>";
-			txt+="<div>경험기간</div>";
-			txt+="<div class='expLine'>";
-			txt+="<input type='date' name='exp_start'/> -";
-			txt+="<input type='date' name='exp_end'/>";
-			txt+="</div></li>";
-			$("#result").append(txt);
-		}
+		//경험추가
 		$("#addExp").click(function(){
-			exxxx();
+			//exxxx();
+			addExp();
 		});
+		//경험추가
+		function addExp(){
+			$.ajax({
+				url : "teacherAddExp",
+				success : function(result){
+					if(result=="pass"){
+						document.location.reload(true);
+					}else{
+						alert("경험 추가에 실패하였습니다. 로그인 상태를 확인하세요.");
+					}
+				}
+			});
+		}
+		//경험삭제
+		function delExp(no){
+			if(confirm("경험을 삭제하면 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")){
+				$.ajax({
+					url : "teacherDelExp",
+					data : "exp_no="+no,
+					success : function(result){
+						if(result=="pass"){
+							document.location.reload(true);
+						}else{
+							alert("경험 삭제에 실패하였습니다. 로그인 상태를 확인하세요.");
+						}
+					}
+				});
+				
+			}			
+		}
 		
-		
-
-		$(document).on('click','button', function(){
-			$(this).parent().remove("li");
-		});
-	
-	
-		$("input[type=submit]").click(function(){
-			if( $("input[type=text]").val()=="" || $("input[name='exp_start']").val()=="" || $("input[name='exp_end']").val()==""){
-				alert("빈칸을 채워주세요");
+		$("#expForm").submit(function(){
+			var formData = $("#expForm").serialize();
+			if(confirm("경험을 저장하시겠습니까?")){
+				$.ajax({
+					url : "teacherSaveExp",
+					data : formData,
+					type : "post",
+					success : function(result){
+						console.log(result)
+						if(result=="pass"){
+							alert("수정되었습니다.")
+							window.scrollTo(0, 0);
+							document.location.reload(true);
+						}else if(result=="경험 내용을 입력하세요."){
+							alert(result+" 경험 내용이 없으면 등록하실 수 없습니다.");
+						}else{
+							alert("경험 저장에 실패하였습니다. 로그인 상태를 확인하세요.");
+						}
+					}
+				});
 			}
-			return false;
 		});
+		
+		
+		$(document).on('click','button', function(){
+			//$(this).parent().remove("li");
+			delExp($(this).attr('id'));
+		});
+	
 	});
 </script>
 </head>
 <body>
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="title">
 	   		<div id="titlefont">관련 경험 수정</div>
@@ -123,13 +161,14 @@
 		</div>
 	 	
 	 	
-		<form method="post" action="teacherExpOk">
+		<form method="post" id="expForm" onsubmit="return false;">
 			<div class="form-group">
 				<ul id="result">
-				<c:forEach var="evo" items="${hash}">
+				<c:forEach var="evo" items="${list}">
+					<input type="hidden" name="exp_no" value="${evo.exp_no }"/>
 					<li>
-						<button class="btn btn-warning" type="button">삭제</button>		
-						<div>경험내용</div>
+						<button class="btn btn-warning" type="button" id="${evo.exp_no }">삭제</button>		
+						<div>경험내용</div>							
 						<input type="text" name="exp_content" class="form-control" placeholder="예)키즈카페, 교육기관, 봉사활동" 
 						value="${evo.exp_content}"	/>
 						<hr/>
@@ -146,7 +185,8 @@
 				<input type="submit" class="btn btn-warning" value="저장" />
 			</div>
 		</form>
+		
 	</div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

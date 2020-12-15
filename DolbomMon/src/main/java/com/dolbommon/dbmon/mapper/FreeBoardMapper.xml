@@ -4,37 +4,128 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.board.FreeBoardDaoImp">
 	<select id="freeBoardList" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
-		select * from (select * from (select no, head, subject, userid, hit, to_char(writedate, 'MM-DD HH:MI') writedate, ref, step, lvl from freeBoard order by ref desc, lvl asc) where 
+		select * from (select * from (select no, head, subject, userid, hit, writedate, ref, step, lvl, filename1, filename2 
+		from freeBoard 
+		<choose>
+			<when test="searchKey!=null and searchWord!=null">
+				<if test='searchKey.equals("subject")'>
+					where subject like '%'||#{searchWord}||'%' 
+				</if>
+				<if test='searchKey.equals("content")'>
+					where content like'%'||#{searchWord}||'%' 
+				</if>	
+				<if test='searchKey.equals("userid")'>
+					where userid like '%'||#{searchWord}||'%' 
+				</if>	
+			</when>
+		</choose>
+		order by ref desc, lvl asc) where 
 		<![CDATA[rownum<=${currentPageRecord}]]>
 		order by ref asc, lvl desc) where 
 		<![CDATA[rownum<=${lastPageRecordCount}]]>
 		order by ref desc, lvl asc
 	</select>
-	
-	<select id="getTotalRecord" resultType="int">	
-		select count(no) from freeBoard
+
+	<select id="getTotalRecord" parameterType="com.dolbommon.dbmon.board.FreeBoardVO" resultType="int">	
+		select count(no) from freeBoard 
+		<choose>
+			<when test="searchKey!=null and searchWord!=null">
+				<if test='searchKey.equals("subject")'>
+					where subject like '%'||#{searchWord}||'%' 
+				</if>
+				<if test='searchKey.equals("content")'>
+					where content like'%'||#{searchWord}||'%' 
+				</if>	
+				<if test='searchKey.equals("userid")'>
+					where userid like '%'||#{searchWord}||'%' 
+				</if>	
+			</when>
+		</choose>
 	</select>
 	
 	<select id="freeBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
-		select no, head, subject, content, userid, hit, writedate
+		select no, head, subject, content, userid, hit, writedate, filename1, filename2 
 		from freeBoard where no=#{param1}
 	</select>
+	
+	<select id="preRecordSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select * from(
+			select no, lag(no, 1) over (order by no) preNo, lag(subject, 1) over (order by no) preSubject
+        	from freeBoard where step=0
+    		)
+    	where no=#{no}
+	
+	</select>	
+
+	<select id="nextRecordSelect" parameterType="int" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select * from(
+			select no, lead(no, 1) over (order by no) nextNo, lead(subject, 1) over (order by no) nextSubject
+        	from freeBoard where step=0
+    		)
+    	where no=#{no}
+	</select>	
 	
 	<update id="hitCount" parameterType="int">
 		update freeBoard set hit=hit+1 where no=#{param1}
 	</update>
 	
 	<insert id="freeBoardInsert" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref) 
-		values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, board_sq.currval)
+		insert into freeBoard(no, head, subject, content, userid, hit, writedate, ip, ref
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, filename1
+			</when>
+		</choose>
+		<choose>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, filename2
+			</when>
+		</choose>
+		) values(board_sq.nextval, #{head}, #{subject}, #{content}, #{userid}, 0, sysdate, #{ip}, board_sq.currval
+		<choose>
+			<when test='filename1!=null and !filename1.equals("")'>
+			, #{filename1}
+			</when>
+		</choose>
+		<choose>
+			<when test='filename2!=null and !filename2.equals("")'>
+			, #{filename2}
+			</when>
+		</choose>
+		)
 	</insert>
+	
+	<select id="getFileName" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
+		select filename1, filename2 from freeBoard where no=#{no}
+	</select>
 	
 	<delete id="freeBoardDel">
 		delete from freeBoard where no=#{param1} and userid=#{param2}
 	</delete>
 	
 	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		update freeBoard set subject=#{subject}, content=#{content} where no=#{no} and userid=#{userid}
+		update freeBoard set subject=#{subject}, content=#{content} 	
+			<choose>
+				<when test='filename1 neq null and !filename1.equals("")'>
+				, filename1=#{filename1}
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 neq null and !filename2.equals("")'>
+				, filename2=#{filename2}
+				</when>	
+			</choose>
+			<choose>
+				<when test='filename1 eq null or filename1.equals("")'>
+				, filename1=null
+				</when>
+			</choose>
+			<choose>
+				<when test='filename2 eq null or filename2.equals("")'>
+				, filename2=null
+				</when>	
+			</choose>
+		where no=#{no} and userid=#{userid}
 	</update>
 	
 	<select id="optionSelect" resultType="com.dolbommon.dbmon.board.FreeBoardVO">

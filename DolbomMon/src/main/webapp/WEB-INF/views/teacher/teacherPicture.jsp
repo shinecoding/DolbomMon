@@ -86,7 +86,7 @@
 	color:red;
 	font-weight:bold;
 	}
-	input[type=submit]{
+	.btn-warning{
 	position:relative;
 	display: block;
 	width: 80px;
@@ -94,27 +94,64 @@
 	margin-top:30px;
 	}
 	
-</style>	
+</style>
+<script>
+	$(function(){
+		
+		$("#profBox").change(function(){
+			
+			var url = "/dbmon/teacherPictureOk";
+			var formData = new FormData($("#picForm")[0]);
+		
+			$.ajax({
+				url:url,
+				data:formData,
+				type:'POST',
+				processData:false, //필수
+				contentType: false, //필수
+				success:function(result){
+					console.log("성공");
+					console.log("결과"+result);
+					$("#profIcon").attr("src", "upload/"+result);
+				}, error:function(error){
+					console.log("사진 ajax 실패");
+				}
+			
+			});//ajax	
+		});
+	});//제이쿼리
+</script>	
 </head>
 <body>
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="title">
 	   		<div id="titlefont">내 사진 수정</div>
 	 	</div>
-		<form name="picForm" method="post"  action="/dbmon/teacherPictureOk" enctype="multipart/form-data" >
+	 	
+		<form id="picForm" name="picForm" method="post"  action="/dbmon/teacherPictureOk" enctype="multipart/form-data" >
 			<div id="profBox">
-				<img class="rounded-circle mx-auto d-block" id="profIcon" <c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if>
-				<c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if>/>
+				<img id="profIcon" class="rounded-circle mx-auto d-block" 
+				<c:if test="${vo.pic==null}">src="img/profilepic.png"</c:if>
+				<c:if test="${vo.pic!=null}">src="upload/${vo.pic}"</c:if>
+				/>
 				<img id="profPlus" src="icon/profile-add-bt.svg"/>
 				<input type="file" id="pic" name="filename" accept="image/*,video/*">
 			</div>		
 				
+
 				<div id="picWarning">
 				“내 사진을 올리면 부모회원의 선택을<br/> <span id="teacherPicRed">5배 더 많이</span> 받을 수 있습니다.”
 				</div>
-				<input type="submit" class="btn btn-warning" value="저장" />
-			
+				<a href="/dbmon/teacherEdit" class="btn btn-warning">뒤로</a>
 		</form>
+		
+		
 	</div>
+
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

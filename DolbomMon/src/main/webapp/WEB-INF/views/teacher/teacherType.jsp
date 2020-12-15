@@ -85,7 +85,10 @@ padding:20px;
 </script>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="title">
 			<div id="titlefont">돌봄 유형선택</div>
@@ -136,6 +139,7 @@ padding:20px;
 			<input type="submit" class="btn btn-warning" value="저장" />
 			</form>
 		</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

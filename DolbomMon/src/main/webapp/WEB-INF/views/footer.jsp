@@ -4,25 +4,36 @@
 <style>
  .footer {
      width:100%;
-     height:150px;
-     bottom:0;
-     background:white;
-     text-align: center;
-     color: gray;
+     height:200px;
+     text-align:left;
      font-size:.85em;
+     margin-bottom:0px;
+     background: #555;
+
+     color: #C2C2C2;
+     padding: 18px 0;
+
 }
 
 </style>
-<footer class="footer">
-<br/>
-<hr/>
-	<div>돌봄몬</div>
-		<a>
-		@ 2020 Dolbommon 대표 : 이승현 
-		<br/> 소재지 : 서울시 마포구 백범로 비트캠프 3층 | 사업자 등록번호 : 11111222000 
-		</a>
-		<p>Copyright © 2020 Dolbommon.co.,Ltd. All rights reserved.</p>
-		<address>Contact Dolbommon for more information. 02-1234-5678 | dolbommon00@gmail.com </address>
+<footer class="footer" style="margin-top:100px;">
+<br/>	
+	<div id="footer_textarea" style="margin-left:200px;">
+	<img src="<%=request.getContextPath()%>/img/mylogogray.png" 
+	         class="logo" alt="Logo" src="home" style="float:left;" 
+	         Onclick="location.href='/dbmon'"/>
+		<a style="margin-left:100px;">돌봄몬<br/></a>
+		
+		<a style="margin-left:100px;">@ 2020 Dolbommon 대표 : 이승현 <br/></a>
+		<a style="margin-left:100px;">소재지 : 서울시 마포구 백범로 비트캠프 3층 | 사업자 등록번호 : 11111222000<br/></a>
+		<a style="margin-left:100px;">Copyright © 2020 Dolbommon.co.,Ltd. All rights reserved.<br/></a>
+		<a style="margin-left:200px;">Contact Dolbommon for more information.<br/></a>
+		<a style="margin-left:200px;">02-1234-5678 | dolbommon00@gmail.com</a>
+		
+	
+	</div>
+	
+		
 </footer>
 </body>
 </html>

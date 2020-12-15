@@ -21,7 +21,25 @@ public class TeacherVO {
 	private MultipartFile filename;
 	private int hit;
 	private String last_edit;
+	private int headcount;
+	private String discussion;
+	private String active;
+	private String teacher_type;
 	
+
+	
+	public String getTeacher_type() {
+		return teacher_type;
+	}
+	public void setTeacher_type(String teacher_type) {
+		this.teacher_type = teacher_type;
+	}
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
+	}
 	public MultipartFile getFilename() {
 		return filename;
 	}
@@ -129,6 +147,18 @@ public class TeacherVO {
 	}
 	public void setLast_edit(String last_edit) {
 		this.last_edit = last_edit;
+	}
+	public int getHeadcount() {
+		return headcount;
+	}
+	public void setHeadcount(int headcount) {
+		this.headcount = headcount;
+	}
+	public String getDiscussion() {
+		return discussion;
+	}
+	public void setDiscussion(String discussion) {
+		this.discussion = discussion;
 	}
 	
 	

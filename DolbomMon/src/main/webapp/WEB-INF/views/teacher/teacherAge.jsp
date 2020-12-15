@@ -90,7 +90,10 @@ $(function(){
 </script>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<form method="post" action="<%=request.getContextPath()%>/teacherAgeOk">
 		<div id="title">
@@ -137,7 +140,7 @@ $(function(){
 		
 		</form>
 	</div>
-		
+<jsp:include page="../footer.jsp"/>		
 </body>
 </html>
 

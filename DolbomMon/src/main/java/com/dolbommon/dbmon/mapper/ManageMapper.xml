@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dolbommon.dbmon.ManageDaoImp">
+	<select id="selectReport" resultType="com.dolbommon.dbmon.report.ReportVO">
+		select SHINGO_NO, SHINGO_REASON, SHINGO_DETAIL, USERID, SHINGO_ID, to_char(SHINGO_DATE, 'YYYY-MM-DD HH24:MI:SS') shingo_date, SHINGO_STATUS, SHINGO_RESPONSE, shingo_name from shingo	
+	</select>
+	
+	<select id="selectCerti" resultType="com.dolbommon.dbmon.certification.CertificationVO">
+		select USERID, SCHOOL, DEPARTMENT, DEGREE, STATUS, GRADE, to_char(SCHOOL_DATE, 'YYYY-MM-DD') SCHOOL_DATE, SCHOOL_PROOF, LICENSE, to_char(LICENSE_DATE, 'YYYY-MM-DD') LICENSE_DATE, LICENSE_PROOF, IDENTI, to_char(IDENTI_DATE, 'YYYY-MM-DD') IDENTI_DATE, IDENTI_ADDR, CRIME, to_char(CRIME_DATE, 'YYYY-MM-DD') CRIME_DATE, PRIVACY, to_char(PRIVACY_DATE, 'YYYY-MM-DD') PRIVACY_DATE, NO, IDENTI_STATUS, SCHOOL_STATUS, LICENSE_STATUS, CRIME_STATUS, PRIVACY_STATUS, CERTI_CNT, to_char(indate, 'YYYY-MM-DD HH24:MI:SS') indate from certification
+	</select>
+	
+	<select id="selectMember" resultType="com.dolbommon.dbmon.member.MemberVO">
+		select NO, USERID, USERNAME, GENDER, to_char(BIRTH, 'YYYY-MM-DD') BIRTH, TEL1, TEL2, EMAIL, ADDR,  ADDRDETAIL, ZIPCODE, to_char(REGDATE, 'YYYY-MM-DD') REGDATE, MEMO, activity, BANK_NAME, BANK_ACCOUNT_NO, LAT, LNG, WHO, REASONTOLEAVE, to_char(leavedate, 'YYYY-MM-DD') leavedate from member
+	</select>
+	
+	<select id="selectManager" resultType="com.dolbommon.dbmon.ManagerVO">
+		select NO, USERID, MANAGER_JOIN_AUTHORITY, MEMBER_INACTIVITY_AUTHORITY, PAGE_AUTHORITY, DEPARTMENT, POSITION, USERNAME, TEL, to_char(REGDATE, 'YYYY-MM-DD') REGDATE from manager
+	</select>
+	
+	<select id="countTeacher" resultType="int" parameterType="String">
+		select count(userid) from teacher where userid=#{userid}
+	</select>
+	
+	<select id="selectMemo" resultType="String" parameterType="String">
+		select memo from member where no=#{no}
+	</select>
+	
+	<select id="selectReason" resultType="String" parameterType="String">
+		select reason from member where no=#{no}
+	</select>
+	
+	<select id="selectleaveReason" resultType="String" parameterType="String">
+		select reasontoleave from member where no=#{no}
+	</select>
+	
+	<update id="insertMemo" parameterType="map">
+		update member set memo=#{memo} where no=#{no}
+	</update>
+	
+	<update id="reasonInsert" parameterType="map">
+		update member set reason=#{reason} where no=#{no}
+	</update>
+	
+	<update id="editCerti" parameterType="map">
+		update certification set ${type}=#{certi}
+		<if test='certi.equals("Y")'>
+			, certi_cnt=certi_cnt+1
+		</if>
+		 where no=#{no}
+	</update>
+	
+	<update id="updateActivity" parameterType="map">
+		update member set ${type}=#{certi} where no=#{no}
+	</update>
+
+	<insert id="insertManager" parameterType="com.dolbommon.dbmon.ManagerVO">
+		insert into manager(no, userid, 
+		<if test='manager_join_authority!=null'>
+			manager_join_authority, 
+		</if>
+		<if test='member_inactivity_authority!=null'>
+		member_inactivity_authority,
+		</if>
+		<if test='page_authority!=null'>
+		page_authority,  
+		</if>
+		department, position, tel, regdate, userpwd, email, username) values(manager_sq.nextval, #{userid}, 
+		<if test='manager_join_authority!=null'>
+		#{manager_join_authority}, 
+		</if>
+		<if test='member_inactivity_authority!=null'>
+		#{member_inactivity_authority}, 
+		</if>
+		<if test='page_authority!=null'>
+		#{page_authority}, 
+		</if>		
+		#{department}, #{position}, #{tel}, sysdate, #{userpwd}, #{email}, #{username})
+	</insert>
+	
+	<select id="selectManagerId" parameterType="String" resultType="int">
+		select count(userid) from manager where userid=#{userid}
+	</select>
+	
+	<select id="choiceManager" parameterType="String" resultType="com.dolbommon.dbmon.ManagerVO">
+		select userid, manager_join_authority, member_inactivity_authority, page_authority, department, position, tel, userpwd, email, username from manager where userid=#{userid}
+	</select>
+	
+	<update id="updateManaer" parameterType="com.dolbommon.dbmon.ManagerVO">
+		update manager set manager_join_authority=#{manager_join_authority}, member_inactivity_authority=#{member_inactivity_authority}, page_authority=#{page_authority}, department=#{department}, position=#{position}, 
+		tel=#{tel}, email=#{email}, username=#{username} where userid=#{userid}
+	</update>
+	
+	<select id="mangerLogin" parameterType="com.dolbommon.dbmon.ManagerVO" resultType="int">
+		select count(userid) from manager where userid=#{userid} and userpwd=#{userpwd}
+	</select>
+	
+	<select id="getDepartment" resultType="com.dolbommon.dbmon.ManagerVO" parameterType="String">
+		select department, username from manager where userid=#{userid}
+	</select>
+</mapper>

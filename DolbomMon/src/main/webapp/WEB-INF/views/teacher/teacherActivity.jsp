@@ -109,7 +109,10 @@ width:55px;
 </script>
 </head>
 <body>
-
+<div id="top">
+<%@include file="/WEB-INF/views/top.jsp"%>
+<hr/><br/>
+</div>
 	<div class="container">
 		<div id="title">
 			<div id="titlefont">원하는 활동 수정</div>
@@ -238,6 +241,7 @@ width:55px;
 			<input type="submit" class="btn btn-warning" value="저장" />
 			</form>
 		</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 
