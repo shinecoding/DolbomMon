@@ -104,6 +104,7 @@ var charge; //총결제금액
 							tag += "</form>";
 						$("#hiddenDiv").html(tag);
 						$('#hiddenForm').submit();
+
 				   	 	//location.href="http://localhost:9090/dbmon/"
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
@@ -889,7 +890,6 @@ var charge; //총결제금액
 	<div style=" float:right;">
 
 		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
-
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		</c:if>
@@ -905,7 +905,6 @@ var charge; //총결제금액
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
 			<span style="color:red">선생님이 거절한 계약서입니다.</span>
 		</c:if>
-		
 	</div>
 </div>
 <div style="width:100%; height:300px;" id="hiddenDiv">
