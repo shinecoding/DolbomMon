@@ -49,8 +49,11 @@ public interface DealDaoImp {
 	//계약서 수락/거절
 	public int setAgree(@Param("agree")String agree,@Param("no") int no);
 	
-	//계약서 작성중인지 아닌지 확인 - 수락 & 진행
+	//계약서 작성중인지 아닌지 확인 
 	public RecruitBoardVO ContractStatus(int no);
+
+	//계약서의 존재유무 확인 - 돌봄몬찾기 계약서신청
+	public RecruitBoardVO checkContract(@Param("userid")String userid, @Param("teacherid")String teacherid);
 	
 	public com.dolbommon.dbmon.deal.MemberVO selectMemberDeal(String parent_id);
 	public int insertPayment(PaymentVO vo);

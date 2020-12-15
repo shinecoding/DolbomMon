@@ -71,6 +71,10 @@
 		SELECT * FROM (select teacherid, agree, payment from parent_list where status='C' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	
+	<select id="checkContract" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		SELECT * FROM (select job_board_no , teacherid, agree, payment from parent_list where status='C' and userid=#{userid} and teacherid=#{teacherid} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	
 	<update id="rejectContract">
 		update parent_list set agree='N' where userid=#{userid} and teacherid=#{teacherid} and agree='T'
 	</update>

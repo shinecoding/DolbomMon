@@ -224,7 +224,7 @@ public class DealController {
 		}
 		
 		mav.addObject("result", result);
-		mav.setViewName("/parents/writeResult");
+		mav.setViewName("/deal/writeResult");
 		
 		return mav;
 	

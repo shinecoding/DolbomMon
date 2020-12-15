@@ -4,13 +4,13 @@
 
 <c:if test="${result>0}">
 	<script>
-		alert("글등록 성공");
+		alert("계약서를 보냈습니다.");
 		window.close();
 	</script>
 </c:if>
 <c:if test="${result<1}">
 	<script>
-		alert("글등록 실패");
+		alert("계약서 보내기 실패");
 		history.back();
 	</script>
 </c:if>
