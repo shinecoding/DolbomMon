@@ -147,6 +147,15 @@ public class ManagmentController {
 		return mp;
 	}
 	
+	@RequestMapping(value = "/paymentList")
+	@ResponseBody 
+	public Map<String, Object> paymentList(ManagerVO boardVO){
+		ManageDaoImp dao = sqlSession.getMapper(ManageDaoImp.class);
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("data", dao.selectPayment(boardVO));
+		return mp;
+	}
+	
 	@RequestMapping("/updateShingoRow")
 	@ResponseBody
 	public String updateShingoRow(HttpServletRequest req) {

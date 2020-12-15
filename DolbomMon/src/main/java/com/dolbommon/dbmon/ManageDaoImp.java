@@ -22,6 +22,9 @@ public interface ManageDaoImp {
 	//매니저 리스트 불러오기
 	public List<MemberVO> selectManager(ManagerVO data);
 	
+	//결제 리스트 불러오기
+	public List<MemberVO> selectPayment(ManagerVO data);
+	
 	//마이페이지 분류
 	public int countTeacher(String userid);
 	

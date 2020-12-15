@@ -10,7 +10,7 @@
 	*, html{
 		font-family: 'Noto Sans KR', sans-serif;
 	}
-	#managerTable{
+	#accountTable{
 		font-size:14px;
 	}
 	td {
@@ -31,7 +31,7 @@
 <script>
 var test='<%=(String)session.getAttribute("userid")%>';
 	$(document).ready(function() {
-	   managerTable = $('#managerTable').DataTable({
+	   accountTable = $('#accountTable').DataTable({
 		   "order"        : [[ 0, "desc" ]], //정렬을 indate로 바꿔야한다. 업데이트 할때마다 indate sysdate 등록하게 해야함.
 	    	"scrollX" : true,
 	    	"lengthMenu": [10, 25, 50],
@@ -136,14 +136,14 @@ var test='<%=(String)session.getAttribute("userid")%>';
 	                "previous": "이전"
 	            }
 			},columnDefs: [
-				{ targets: 0, width: 40 },
-				{ targets: 1, width: 60 },
-				{ targets: 2, width: 80 },
-				{ targets: 3, width: 100 },
-				{ targets: 4, width: 80 },
-				{ targets: 5, width: 50 },
-				{ targets: 6, width: 50 },
-				{ targets: 7, width: 50 },
+				{ targets: 0, width: 70 },
+				{ targets: 1, width: 70 },
+				{ targets: 2, width: 70 },
+				{ targets: 3, width: 70 },
+				{ targets: 4, width: 70 },
+				{ targets: 5, width: 70 },
+				{ targets: 6, width: 70 },
+				{ targets: 7, width: 70 },
 				{ targets: 8, width: 70 },
 				{ targets: 9, width: 70 },
 				{ targets: 10, width: 70 },
@@ -168,7 +168,7 @@ var test='<%=(String)session.getAttribute("userid")%>';
 	}
 	*/
 	//마우스 휠 방향전환
-	$("#managerTable").on('mousewheel',function(e){
+	$("#accountTable").on('mousewheel',function(e){
 		var wheelDelta = e.originalEvent.wheelDelta;
 		if(wheelDelta > 0){
 			$(".dataTables_scrollBody").scrollLeft(-wheelDelta + $(".dataTables_scrollBody").scrollLeft());
@@ -197,20 +197,21 @@ var test='<%=(String)session.getAttribute("userid")%>';
 <div class="clearfix" style="height:50px;">
 <button class="btn btn-outline-warning" id="joinBtn"style="float:right; margin-top:6px;" >관리자 등록</button> <!-- onclick=" onPopupWindow()" iframe으로열기 -->
 </div>
-<table id="managerTable"  class="table hover">
+<table id="accountTable"  class="table hover">
     <thead>
         <tr>
-            <th>번호</th>
-            <th>아이디</th>
-            <th>관리자<br/>등록권한</th>
-            <th>회원<br/>비활성화권한</th>
-            <th>웹페이지<br/>관리권한</th>
-            <th>부서</th>
-            <th>직책</th>
+            <th>결제 번호</th>
+            <th>결제자ID</th>
             <th>이름</th>
+            <th>선생님ID</th>
             <th>연락처</th>
-            <th>등록일</th>
-            <th>수정</th>
+            <th>email</th>
+            <th>결제일</th>
+            <th>결제금액</th>
+            <th>결제고유ID</th>
+            <th>상점거래ID</th>
+            <th>카드승인번호</th>
+
         </tr>
     </thead>
 </table>
