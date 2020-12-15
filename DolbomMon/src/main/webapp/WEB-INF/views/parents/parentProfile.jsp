@@ -94,7 +94,7 @@
    
     <ul style="padding:0px;">
     	<h5>이름</h5>
-        <li class="list-group-item p-3"><span  style="font-size:1.4em; font-weight:bold">${vo.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.who=='P' }">학부모</c:if><c:if test="${vo.who=='T' }">선생님</c:if></span><br/>
+        <li class="list-group-item p-3" style="text-align:center;"><span  style="font-size:1.4em; font-weight:bold">${vo.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.who=='P' }">학부모</c:if><c:if test="${vo.who=='T' }">선생님</c:if></span><br/>
         </li>
      	<h5>연락처</h5>
     	<li class="list-group-item p-3" style="text-align:center">${vo.tel1 }</li>
@@ -108,7 +108,6 @@
     	<li class="list-group-item p-3" style="text-align:center">${vo.regdate }</li>
     	<h5>생년월일/나이</h5>
     	<li class="list-group-item p-3" style="text-align:center">${vo.birth } / ${vo.age }세</li>
-    	
     </ul>
 </div>
 <jsp:include page="../footer.jsp"/>

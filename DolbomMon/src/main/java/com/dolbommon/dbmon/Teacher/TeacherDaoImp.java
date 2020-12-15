@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.dolbommon.dbmon.member.RegularDateVO;
+import com.dolbommon.dbmon.search.RecruitBoardVO;
 
 
 public interface TeacherDaoImp {
@@ -38,5 +39,8 @@ public interface TeacherDaoImp {
 	public int updateReview(ReviewVO vo);
 	public int updateTeacherSchedule(String userid, @Param("rdVO")RegularDateVO rdVO);
 	public RegularDateVO selectSchedule(String userid);
+	
+	//선생님 - 내가지원한 
+	public List<ApplyToTeacher> applyToParent(String userid);
 }
 

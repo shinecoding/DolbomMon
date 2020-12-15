@@ -134,14 +134,19 @@ public class TeacherController {
 	@RequestMapping("/teacherApplyHistory")
 	public ModelAndView teacherApplyHistory(HttpSession ses) {
 			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			TeacherDaoImp dao2 = sqlSession.getMapper(TeacherDaoImp.class);
 			String userid = (String)ses.getAttribute("userid");
 			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
 			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
+			
+			List<ApplyToTeacher> list = dao2.applyToParent(userid);
+			
 			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
 			//List<MemberVO> mvoList = dao.selectTMemNo();
 			ModelAndView mav = new ModelAndView();
 			
 			//mav.addObject("mvoList", mvoList);
+			mav.addObject("list", list);
 			mav.addObject("list2", list2);
 			mav.addObject("list3", list3);
 			//mav.addObject("totalRecords", totalRecords);

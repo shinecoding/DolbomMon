@@ -8,8 +8,8 @@
 				values(member_sq.nextval, #{mVo.userid}, #{mVo.userpwd}, #{mVo.username}, #{mVo.birth}, #{mVo.gender}, #{mVo.tel1}, #{mVo.email}, #{mVo.addr}, #{mVo.addrdetail}, #{mVo.zipcode}, #{mVo.lat}, #{mVo.lng}, #{mVo.who})
 	</insert>
 	<insert id="memberRegTeacher">
-		insert into teacher(userid, pic, teacher_type, child_age, activity_type, desired_wage, intro, cctv, last_edit ) 
-				values(#{mVo.userid}, #{tVo.pic}, #{tVo.teacher_type}, #{tVo.child_age}, #{tVo.activity_type}, #{tVo.desired_wage}, #{tVo.intro}, #{tVo.cctv}, sysdate)
+		insert into teacher(userid, pic, teacher_type, child_age, activity_type, desired_wage, intro, discussion, cctv, last_edit ) 
+				values(#{mVo.userid}, #{tVo.pic}, #{tVo.teacher_type}, #{tVo.child_age}, #{tVo.activity_type}, #{tVo.desired_wage}, #{tVo.intro},#{tVo.discussion}, #{tVo.cctv}, sysdate)
 	</insert>
 	<insert id="memberRegRegular">
 		insert into regular_date(userid, yoil, start_time, end_time, start_date, end_date)
