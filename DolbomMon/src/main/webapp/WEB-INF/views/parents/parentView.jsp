@@ -814,7 +814,7 @@
 <hr/>
 <div class="container">
 	<div style="margin:20px 0;">
-  	 	<img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${list.pic}"</c:if>/>
+  	 	<img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>
   	 	<div style="text-align:center;font-size:20px;">${rbVO.title }</div>
    	</div>
    	<div class="clearfix" style="width:100%">
@@ -1021,7 +1021,7 @@
 									<li class="list-group-item border-0 col-9" id="applyDbmList">
 										<h4><b>${tlist.username }</b></h4> 
 										<h6>나이 - ${tlist.birth }세</h6>
-										<h6>지원시간 | </h6>
+										<h6>지원시간 | ${tlist.apply_date}</h6>
 										<h6><c:if test="${tlist.cctv == 'Y'}">CCTV가 있어도 당당히 일할 수 있습니다.</c:if><c:if test="${tlist.cctv == 'N'}">CCTV촬영을 원하지 않습니다.</c:if></h6><br/>
 										<h6><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
 										<input class="btn btn-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />
