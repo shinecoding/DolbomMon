@@ -287,6 +287,44 @@ public class ParentController {
 		return mav;
 	}
 	
+	@RequestMapping("parentDealHistory")
+	public ModelAndView parentDealHistory(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
+		List<RecruitBoardVO> list = dao.parentDealHistory(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.setViewName("parents/parentDealHistory");
+		return mav;
+	}
 	
-
+	@RequestMapping(value="/accountUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public int accountUpdate(HttpSession ses, @RequestParam("bank_name") String bank_name
+			, @RequestParam("bank_account_no") String bank_account_no) {
+		String userid = (String)ses.getAttribute("userid");
+		
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		int result = dao.accountUpdate(userid, bank_name, bank_account_no);
+		
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
