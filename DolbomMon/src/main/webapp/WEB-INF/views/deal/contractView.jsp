@@ -16,6 +16,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -60,14 +61,50 @@
 </style>
 
 <script>
-
-
+var charge; //총결제금액
 	// 신생아 0-6개월, 영아 7-36개월, 유아 4-7세, 초딩
 	var pw_activityStr = '${rbVO.pw_activity }';
 	var care_addr = "${rbVO.care_addr}";
 	var cb = '${cVO.child_birth}';
 	var child_age1;
 	var child_age2;
+	
+	
+	function paymentTest(){
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp05848718');
+
+			IMP.request_pay({
+			    pg : 'inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '돌봄몬 결제',
+			    amount : 100, //판매 가격
+			    buyer_email : '${mvo.email}',
+			    buyer_name : '${mvo.username }',
+			    buyer_tel : '${mvo.tel1}',
+			    buyer_addr : '${mvo.addr}',
+			    buyer_postcode : '${mvo.zipcode}',
+			    m_redirect_url : 'http://localhost:9090/dbmon/'
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+			           msg += '고유ID : ' + rsp.imp_uid;
+			           msg += 'dasdasd : ' + rsp.merchant_uid;
+			           msg += '결제 금액 : ' + rsp.paid_amount;
+			           msg += '카드 승인번호 : ' + rsp.apply_num;
+						alert(msg);
+				   	 	//location.href="http://localhost:9090/dbmon/"
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			        alert(msg);
+			    }
+			    
+			});
+			
+		}
+	
 	
 	function getAge(a){
 		var today = new Date();
@@ -151,6 +188,14 @@
 			var agree = $(this).attr('id');
 			location.href="<%=request.getContextPath()%>/contractOk?no=${rbVO.job_board_no}&agree="+agree;
 		});
+/* 		$(document).on("click",".pBtn",function(){
+			var no = $(this).attr('id');
+			console.log(payment);
+			console.log(charge);
+			location.href="/dbmon/payment";
+			//?charge="+charge+"no="+no;
+			
+		}); */
 		
 		
 		var time_type = "${rbVO.time_type}";
@@ -628,7 +673,7 @@
 			var money = "${rbVO.wish_wage}";
 			console.log("시급 => " + money);
 			console.log("일할 날의 수 => " + selectedDatelength);
-			var charge = money * hour * selectedDatelength;
+			charge = money * hour * selectedDatelength;
 			console.log("예상 결제 금액 => " + charge);
 			$("#charge").val(charge);
 			console.log("sdsdsd sd => " + sd);
@@ -832,7 +877,7 @@
 </div>
 <div class="container" style="height:80px;">
 	<div style=" float:right;">
-		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == currID}">
+		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		</c:if>
@@ -843,13 +888,13 @@
 			<span style="color:red">거절한 계약서입니다.</span>
 		</c:if>
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='Y'}">
-			<span style="color:green">결제버튼</span>
+			<a href="javascript:paymentTest()" class="btn btn-warning">결제하기</a>
 		</c:if>
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
 			<span style="color:red">선생님이 거절한 계약서입니다.</span>
 		</c:if>
-		
 	</div>
+</div>
 </div>
 </body>
 </html>
