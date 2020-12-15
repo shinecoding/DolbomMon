@@ -87,46 +87,69 @@
 					}
 				}
 			});
+			if(getTime_type=="R"){
+				////////////////////////////// rdVO ////////////////////////////
+				var getStart_date = "${rdVO.start_date}";
+				$("#start_date").val(getStart_date);
+				
+				var getStart_time = "${rdVO.start_time}";
+				$("#start_time").val(getStart_time);
+				
 			
-			var getStart_date = "${rdVO.start_date}";
-			$("#start_date").val(getStart_date);
-			
-			var getStart_time = "${rdVO.start_time}";
-			$("#start_time").val(getStart_time);
-			
-		
-			
-			var getDay = "${rdVO.yoil}";
-			var getYoil = getDay.split(",");
-			$("input[name=yoil]").each(function(){
-				for(var i=0;i<7;i++){
-					if($(this).val()==getYoil[i]){
-						$(this).prop("checked", true);
+				
+				var getDay = "${rdVO.yoil}";
+				var getYoil = getDay.split(",");
+				$("input[name=yoil]").each(function(){
+					for(var i=0;i<7;i++){
+						if($(this).val()==getYoil[i]){
+							$(this).prop("checked", true);
+						}
 					}
-				}
-			});
-			
-			$(document).ready(function(){
-				var test = $("#start_time").val();
-				var i=1;
-				for(i;i<=48;i++){
-					if($("#start_time option[id=rt"+i+"]").val()==test){
-						endTime(i); 	
-						var getEnd_time = "${rdVO.end_time}";
-						$("#end_time").val(getEnd_time);
+				});
+				
+				$(document).ready(function(){
+					var test = $("#start_time").val();
+					var i=1;
+					for(i;i<=48;i++){
+						if($("#start_time option[id=rt"+i+"]").val()==test){
+							endTime(i); 	
+							var getEnd_time = "${rdVO.end_time}";
+							$("#end_time").val(getEnd_time);
+						}
 					}
-				}
-			});
-			
-			var getWeek = ${rdVO.week};
-			console.log("getWeek => " + getWeek);
-			$("input[name=week]").each(function(){
-				for(var i=0;i<3;i++){
-					if($(this).val()==getWeek){
-						$(this).prop("checked", true);
+				});
+				
+				var getWeek = "${rdVO.week}";
+				console.log("getWeek => " + getWeek);
+				$("input[name=week]").each(function(){
+					for(var i=0;i<3;i++){
+						if($(this).val()==getWeek){
+							$(this).prop("checked", true);
+						}
 					}
-				}
-			});
+				});
+				/////////////////////////// rdVO
+			}else{
+				//////////////////////////////sdVO
+//////////////////////sd //////////////////////
+				var getSelect_date = "${sdVO.select_date}";
+				
+				var getStart_time = "${sdVO.start_time}";
+				$("#start_time").val(getStart_time);
+				
+				$(document).ready(function(){
+					var test = $("#start_time").val();
+					var i=1;
+					for(i;i<=48;i++){
+						if($("#start_time option[id=rt"+i+"]").val()==test){
+							endTime(i); 	
+							var getEnd_time = "${sdVO.end_time}";
+							$("#end_time").val(getEnd_time);
+						}
+					}
+				});
+			}
+			
 			
 			var getWish_wage = ${vo.wish_wage};
 			console.log("wish_wage => " + getWish_wage);
@@ -150,8 +173,26 @@
 				$("#consultation").prop("checked", false);
 			}
 		
+			for(var i=1;i<8;i++){
+				if($("input[id=rd"+i+"]").is(":checked")){
+					$("label[for=rd"+i+"]").css("background-color", "#ffc207");
+				}else{
+					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
+				}
+			}
 			
-			
+			for(var i=2;i<5;i++){
+				
+				if($("#week"+i).is(":checked")){
+					var test = $("#week"+i).attr("id");
+					console.log("id => " + test)
+					console.log("i => " + i);
+					$("label[for=week"+i+"]").css("background-color", "#ffc207");
+				}else{
+					console.log("i x=> " + i );
+					$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
+				}
+			}
 			
 			/////////////////////// 시간 설정 //////////////////////
 			if($("#timeType1").is(":checked")){
@@ -175,13 +216,7 @@
 			}
 			///////////////////////////// 정기적으로 날짜 설정 요일 //////////////////////////////
 			
-			for(var i=1;i<8;i++){
-				if($("input[id=rd"+i+"]").is(":checked")){
-					$("label[for=rd"+i+"]").css("background-color", "#ffc207");
-				}else{
-					$("label[for=rd"+i+"]").css("background-color", "#EFEFEF");
-				}
-			}
+			
 			
 			///////////////////// 돌봄유형 //////////////////
 			for(var i=1;i<14;i++){
@@ -211,19 +246,6 @@
 				}
 			}
 			
-			
-			for(var i=2;i<5;i++){
-				
-				if($("#week"+i).is(":checked")){
-					var test = $("#week"+i).attr("id");
-					console.log("id => " + test)
-					console.log("i => " + i);
-					$("label[for=week"+i+"]").css("background-color", "#ffc207");
-				}else{
-					console.log("i x=> " + i );
-					$("label[for=week"+i+"]").css("background-color", "#EFEFEF");
-				}
-			}
 			
 			/////////////// 성별 설정 /////////////////
 			for(var i=1;i<=3;i++){
@@ -975,7 +997,7 @@
 						</select>
 					</div>
 					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation" value="Y">
     					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
@@ -999,7 +1021,7 @@
     					<label class="custom-control-label" for="avgWage">평균시급 적용</label>
 					</div>
 					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation">
+    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation" value="Y">
     					<label class="custom-control-label" for="consultation">시급 협의가능</label>
 					</div>
 				<p>
