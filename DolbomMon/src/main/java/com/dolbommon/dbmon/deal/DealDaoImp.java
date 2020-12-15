@@ -48,9 +48,15 @@ public interface DealDaoImp {
 	//계약서 수락/거절
 	public int setAgree(@Param("agree")String agree,@Param("no") int no);
 	
-	//계약서 작성중인지 아닌지 확인
+	//계약서 작성중인지 아닌지 확인 - 수락 & 진행
 	public String ContractStatus(int no);
-	//계약서 작성중인지 아닌지 확인
+	//계약서 작성중인지 아닌지 확인 - 거절
 	public String ContractStatus2(int no);
+	//계약서 작성중인지 아닌지 확인 - 수락
+	public String ContractStatus3(int no);
+	//계약서 작성중인지 아닌지 확인 - 진행
+	public String ContractStatus4(int no);
+		
+	
 }
 

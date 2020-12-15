@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -963,29 +964,59 @@
 					<ul class="list-group">
 						<li class="list-group-item" style="height:200px; margin:10px 0;">
 							<ul class="list-group list-group-horizontal" style="height:100%;">
-								<li class="list-group-item border-0 col-2" style="height:100%;">
-									<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded-circle" style="width:100%;"/><br/><br/>
-									<h6 style="color:orange; text-align:center;">${tlist.username }</h6> 
-									<h6 style="text-align:center;">${tlist.birth }세</h6>
+								<li class="list-group-item border-0 col-3" style="height:100%;">
+									<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded" style="width:100%; height:100px; margin-bottom:10px;"/><br/>
+									<h6 style="font-weight:bold; text-align:center;">${tlist.username.substring(0,1) }O${tlist.username.substring(2)}</h6> 
+									<h6 style="text-align:center;">${tlist.birth }세  <c:if test="${tlist.gender=='F'}">여자</c:if><c:if test="${tlist.gender=='M'}">남자</c:if></h6>
 								</li>
-								<li class="list-group-item border-0 col-6" id="applyDbmList" style="height:100%;">
+								<li class="list-group-item border-0 col-5" id="applyDbmList" style="height:100%;">
 									
-									<h6><b>지원시간</b> | ${tlist.apply_date }</h6>
-									<h7>CCTV 촬영가능여부 - ${tlist.cctv } | ? | ? </h7><br/><br/>
-									<h6 ><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b><c:if test="${tlist.discussion=='Y' }" >협의 가능</c:if><c:if test="${tlist.discussion=='N' }" >협의 불가능</c:if></b></h6>
-									<br/>
-									<c:if test="${contractId==tlist.userid }">
-										<span style="color:orange; font-size:14px;position:relative; top:10px;"><b>계약이 진행중입니다.</b></span>
+									<h6 class="mb-3">						
+									<span ><i class="far fa-clock" style="color:orange;"></i>
+										<fmt:parseNumber integerOnly="true" var="edit_year" value="${tlist.apply_date/525600}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_month" value="${tlist.apply_date/43200}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_day" value="${tlist.apply_date/1440}"/>
+										<fmt:parseNumber integerOnly="true" var="edit_hour" value="${tlist.apply_date/60}"/>					
+									<c:choose>
+										<c:when test="${tlist.apply_date>525600}">${edit_year}년</c:when>
+										<c:when test="${tlist.apply_date>43200}">${edit_month}달</c:when>
+										<c:when test="${tlist.apply_date>1440}">${edit_day}일</c:when>
+										<c:when test="${tlist.apply_date>60}">${edit_hour}시간</c:when>
+										<c:otherwise>${tlist.apply_date}분</c:otherwise>
+									</c:choose> 전에 지원
+									</span>
+									</h6>
+									
+									<h6 class="mb-3"><i class="fas fa-video" style="color:orange;"></i><c:if test="${tlist.cctv=='Y' }"> CCTV 촬영 <b>가능</b></c:if> <c:if test="${tlist.cctv!='Y' }"> CCTV 촬영 <b>불가능</b></c:if></h6>
+									<h6 class="mb-3"><i class="fas fa-coins mr-1" style="color:orange;"></i>희망시급 ${tlist.desired_wage }원</h6>
+									<h6 class="mb-3"><i class="fas fa-hands-helping" style="color:orange"></i><c:if test="${tlist.discussion=='Y' }" >협의 <b>가능</b></c:if><c:if test="${tlist.discussion=='N' }" >협의 <b>불가능</b></c:if></h6>
+									
+									<c:if test="${contractId4==tlist.userid }">
+										<span style="color:orange; font-size:1.2em;position:relative; top:10px;"><b>-계약이 진행중입니다-</b></span>
+									</c:if>
+									<c:if test="${contractId3==tlist.userid }">
+										<span style="color:orange; font-size:1.2em;position:relative; top:10px;"><b>-계약을 수락하였습니다-</b></span>
 									</c:if>
 									<c:if test="${contractId2==tlist.userid }">
-										<span style="color:red; font-size:14px; position:relative; top:10px;"><b>최근에 계약이 거절되었습니다.</b></span>
+										<span style="color:red; font-size:1.2em; position:relative; top:10px;"><b>-계약이 거절되었습니다-</b></span>
 									</c:if>
 								</li>
 								<li class="list-group-item border-0 col-4" style="height:100%;text-align:right;">
-									<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0;"><br/>
-									<input type="button" class="btn btn-warning contractOpen" id="${tlist.userid }" value="계약하기" /><br/>
-									<input type="button" class="btn btn-warning cBtn" id="${tlist.userid }" value="협의하기" /><br/>
-									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn"  /><br/>
+									<c:choose>
+									
+										<c:when test="${contractId==tlist.userid }">
+												<input class="btn btn-outline-warning mb-2 viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0;"><br/>
+												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
+										</c:when>
+										
+										<c:otherwise>
+											
+												<input type="button" class="btn btn-outline-warning mb-2 contractOpen" id="${tlist.userid }" value="계약하기" /><br/>
+												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
+												<input class="btn btn-outline-warning mb-2" type="button" value="거절하기" id="refusalBtn"  /><br/>
+											
+										</c:otherwise>
+									</c:choose>
 								</li>
 							</ul>
 
@@ -996,6 +1027,9 @@
 		<script>
 		console.log("${contractId}");
 		console.log("${contractId2}");
+		console.log("${contractId3}");
+		console.log("${contractId4}");
+		
 		</script>
       	</c:if>
       	

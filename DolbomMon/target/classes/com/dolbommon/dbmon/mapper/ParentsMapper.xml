@@ -37,12 +37,6 @@
     		order by tcnt desc
 	</select>
 	
-	<select id="applyDbmSelect" parameterType="String" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO" >
-		select t_p_table.job_board_no, member.username, member.tel1, member.birth, member.gender, teacher.desired_wage, teacher.cctv 
-			from member, t_p_table, teacher 
-	    	where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and parent_list.userid = #{param1}
-	</select>
-	
 	<select id="applyDbmCnt" >
 		select count(t_userid) from t_p_table where job_board_no = #{param1}
 	</select>

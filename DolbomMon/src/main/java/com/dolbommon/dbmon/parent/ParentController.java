@@ -73,7 +73,10 @@ public class ParentController {
 		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
 		String contractId = dao2.ContractStatus(no);
 		String contractId2 = dao2.ContractStatus2(no);
+		String contractId3 = dao2.ContractStatus3(no);
+		String contractId4 = dao2.ContractStatus4(no);
 		
+		//마지막 계약서 유저아이디
 		
 		String who = (String)ses.getAttribute("who");
 		String userid = (String)ses.getAttribute("userid");
@@ -102,6 +105,9 @@ public class ParentController {
 		mav.addObject("rbVO", rbVO);
 		mav.addObject("contractId", contractId);
 		mav.addObject("contractId2", contractId2);
+		mav.addObject("contractId3", contractId);
+		mav.addObject("contractId4", contractId2);
+		
 		mav.setViewName("/parents/parentView");
 		
 		return mav;

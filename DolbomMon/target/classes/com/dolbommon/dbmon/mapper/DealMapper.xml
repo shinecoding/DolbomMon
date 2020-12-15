@@ -69,7 +69,13 @@
 		SELECT * FROM (select teacherid from parent_list where status='C' and (agree='Y' or agree='T') and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	<select id="ContractStatus2" parameterType="int" resultType="String">
-		SELECT * FROM (select teacherid from parent_list where status='C' and agree='N' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+		SELECT * FROM (select teacherid, agree from parent_list where status='C' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	<select id="ContractStatus3" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and agree='Y' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	<select id="ContractStatus4" parameterType="int" resultType="String">
+		SELECT * FROM (select teacherid from parent_list where status='C' and agree='T' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	
 	<update id="rejectContract">
