@@ -538,6 +538,7 @@ border-radius:10px;
 .clearfix:after { clear:both; }
 </style>
 </head>
+
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
 <hr/>
@@ -622,7 +623,7 @@ border-radius:10px;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S' || cvo.school_status==null}">
+	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S' || cvo.crime_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.crime_status=='Y'}">

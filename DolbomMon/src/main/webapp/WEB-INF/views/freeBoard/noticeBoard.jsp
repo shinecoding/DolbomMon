@@ -41,14 +41,11 @@
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
+
 <div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
             <h1 class="tit wow fadeIn animated" style="visibility: visible; margin:0 auto; width:160px;  animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
           <a href="#"></a></div>   
 	    	<img src="img/141.png" style="width:100%; height:400px; "/>
-
-
- 	
-	    	
 	    	
 <div class="container">
 <div style="float: right; margin: 15px;

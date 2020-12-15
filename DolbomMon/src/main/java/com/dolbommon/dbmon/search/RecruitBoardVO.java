@@ -29,6 +29,15 @@ public class RecruitBoardVO {
 		private String status;
 		private String pic;
 		private String agree;
+		private String who;
+		private String tel1;
+		private String gender;
+		private String email;
+		private String addr;
+		private String addrdetail;
+		private String regdate;
+		private String birth;
+		private String age;
 		
 		public String getAgree() {
 			return agree;
@@ -185,5 +194,62 @@ public class RecruitBoardVO {
 		}
 		public void setPic(String pic) {
 			this.pic = pic;
+		}
+		public String getWho() {
+			return who;
+		}
+		public void setWho(String who) {
+			this.who = who;
+		}
+		public String getTel1() {
+			return tel1;
+		}
+		public void setTel1(String tel1) {
+			this.tel1 = tel1;
+		}
+		public String getGender() {
+			return gender;
+		}
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		public String getAddr() {
+			return addr;
+		}
+		public void setAddr(String addr) {
+			this.addr = addr;
+		}
+		public String getAddrdetail() {
+			return addrdetail;
+		}
+		public void setAddrdetail(String addrdetail) {
+			this.addrdetail = addrdetail;
+		}
+		public String getRegdate() {
+			return regdate;
+		}
+		public void setRegdate(String regdate) {
+			this.regdate = regdate;
+		}
+		public String getBirth() {
+			return birth;
+		}
+		public void setBirth(String birth) {
+			this.birth = birth;
+		}
+		public String getAge() {
+			return age;
+		}
+		public void setAge(String age) {
+			this.age = age;
 		}		
+		
+		
+		
 	}

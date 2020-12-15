@@ -77,6 +77,21 @@
 			}
 			return true;
 		});
+		
+		var today = new Date();
+		var endday = new Date(today.getFullYear(), today.getMonth()+3, today.getDate());
+		console.log(today);
+		console.log(endday);
+		var ty = today.getFullYear();
+		var tm = today.getMonth();
+		var td = today.getDate();
+		
+		var ey = endday.getFullYear();
+		var ey = endday.getMonth();
+		var ey = endday.getDate();
+		
+		$("#start_date").val(ty+"-"+tm+"-"+td);
+		$("#end_date").val(ey+"-"+em+"-"+ed);
 	});
 </script>
 </head>
@@ -87,8 +102,8 @@
 		</div>
 		<form id="scheduleFrm" method="post" action="<%=request.getContextPath()%>/dbm/wantedPaymentAndCCTV">
 		
-			<input type="hidden" name="start_date" value="2020-11-22" />
-			<input type="hidden" name="end_date" value="2021-2-22" />
+			<input type="hidden" id="start_date" name="start_date" />
+			<input type="hidden" id="end_date" name="end_date" />
 			<div class="inputRadioDiv">
 				<label for="wdAll"><input type="radio" id="wdAll" name="yoil" value="월,화,수,목,금"/>
 								   <input type="checkbox" id="wdAll" name="start_time" value="08:00"/>

@@ -3,7 +3,9 @@ package com.dolbommon.dbmon.parent;
 public class ParentHistoryVO {
 	private int job_board_no; //구인글 번호
 	private String userid; //아이디
+	private String username;
 	private String care_addr; //돌봄장소
+	private String teacherid;
 	private String time_type; //돌봄시간유형
 	private String pw_activity; //원하는 활동
 	private int wish_wage; //희망시급
@@ -30,11 +32,23 @@ public class ParentHistoryVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getCare_addr() {
 		return care_addr;
 	}
 	public void setCare_addr(String care_addr) {
 		this.care_addr = care_addr;
+	}
+	public String getTeacherid() {
+		return teacherid;
+	}
+	public void setTeacherid(String teacherid) {
+		this.teacherid = teacherid;
 	}
 	public String getTime_type() {
 		return time_type;

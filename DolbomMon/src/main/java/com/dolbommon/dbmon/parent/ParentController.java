@@ -50,11 +50,14 @@ public class ParentController {
 		String userid = (String)ses.getAttribute("userid");
 		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
 		List<RecruitBoardVO> list3 = dao2.selectTeacherHistory2(userid);
 		List<ParentHistoryVO> list = dao.selectMyRdBoard(userid);
+		List<ParentHistoryVO> list2 = dao.selelctApplyToTeacher(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("list2", list2);
 		mav.addObject("list", list);
 		mav.addObject("list3", list3);
 		mav.setViewName("/parents/parentApplyHistory");
@@ -73,7 +76,10 @@ public class ParentController {
 		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
 		String contractId = dao2.ContractStatus(no);
 		String contractId2 = dao2.ContractStatus2(no);
+		String contractId3 = dao2.ContractStatus3(no);
+		String contractId4 = dao2.ContractStatus4(no);
 		
+		//마지막 계약서 유저아이디
 		
 		String who = (String)ses.getAttribute("who");
 		String userid = (String)ses.getAttribute("userid");
@@ -102,6 +108,9 @@ public class ParentController {
 		mav.addObject("rbVO", rbVO);
 		mav.addObject("contractId", contractId);
 		mav.addObject("contractId2", contractId2);
+		mav.addObject("contractId3", contractId);
+		mav.addObject("contractId4", contractId2);
+		
 		mav.setViewName("/parents/parentView");
 		
 		return mav;
@@ -261,6 +270,19 @@ public class ParentController {
 		
 		return mav;
 	
+	}
+	
+	@RequestMapping("parentProfile")
+	public ModelAndView parentProfile(String userid) {
+		
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
+		RecruitBoardVO vo = dao.getParentProfile(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("parents/parentProfile");
+		mav.addObject("vo", vo);
+		return mav;
 	}
 	
 	

@@ -28,23 +28,29 @@
 			values(member_sq.currval)
 	</insert>
 	
-	
 	<select id="selectMyRdBoard" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
 		select p.job_board_no, p.userid, p.care_addr, p.time_type, p.pw_activity, p.wish_age, p.wish_wage, p.consultation, p.wish_gender, p.content, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate,
 		 p.lat, p.lng, c.child_birth, (select count(t_userid) from t_p_table where  job_board_no = p.job_board_no) tcnt , m.pic
 			from parent_list p, add_child c, member m
     		where c.userid = #{param1} and c.userid = p.userid and p.job_board_no = c.job_board_no and m.userid= #{param1}
-    		order by tcnt desc
+    		order by tcnt desc, writedate desc
 	</select>
 	
-	<select id="applyDbmSelect" parameterType="String" resultType="com.dolbommon.dbmon.parent.ApplyToParentInfoVO" >
-		select t_p_table.job_board_no, member.username, member.tel1, member.birth, member.gender, teacher.desired_wage, teacher.cctv 
-			from member, t_p_table, teacher 
-	    	where member.userid = t_p_table.t_userid and t_p_table.t_userid = teacher.userid and parent_list.userid = #{param1}
+	<select id="selelctApplyToTeacher" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
+		select p.job_board_no, m.username, p.teacherid, p.userid, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, c.child_birth, t.pic
+    		from parent_list p, member m, add_child c, teacher t
+    		where p.userid = #{param1} and p.job_board_no = origin_no and m.userid = p.userid and p.job_board_no = c.job_board_no and p.teacherid = t.userid
+    		order by writedate desc
 	</select>
 	
 	<select id="applyDbmCnt" >
 		select count(t_userid) from t_p_table where job_board_no = #{param1}
+	</select>
+	
+	<select id="getParentProfile" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" >
+		select username, gender, to_char(birth, 'YYYY-MM-DD') birth, tel1, email, addr, addrdetail, to_char(regdate, 'YYYY-MM-DD') regdate, pic, who, trunc(months_between(trunc(sysdate), birth)/12) age
+			from member 
+			where userid = #{param1}
 	</select>
 	
 </mapper>
