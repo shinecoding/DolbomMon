@@ -175,8 +175,8 @@
 			popupWidth = 1060;
 			popupHeight = 1600;
 			var origin_no = $(this).attr('id');
-			var teacherid = $(this).next().next().attr('id'); //아래 버튼 위치 수정하면 이것도 수정
-			window.open('/dbmon/contractView?origin_no='+origin_no+'&teacherid='+teacherid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			var teacherid = $(this).prev().attr('id'); //아래 버튼 위치 수정하면 이것도 수정
+			window.open('/dbmon/contractView?origin_no='+origin_no+'&teacherid='+teacherid+'&payment=${checkVo.payment}', '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
 		
 		
@@ -991,20 +991,30 @@
 									<h6 class="mb-3"><i class="fas fa-coins mr-1" style="color:orange;"></i>희망시급 ${tlist.desired_wage }원</h6>
 									<h6 class="mb-3"><i class="fas fa-hands-helping" style="color:orange"></i><c:if test="${tlist.discussion=='Y' }" >협의 <b>가능</b></c:if><c:if test="${tlist.discussion=='N' }" >협의 <b>불가능</b></c:if></h6>
 									
-									<c:if test="${contractId4==tlist.userid }">
+									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='T' and checkVo.payment!='Y'}">
 										<span style="color:orange; font-size:1.2em;position:relative; top:10px;"><b>-계약이 진행중입니다-</b></span>
 									</c:if>
-									<c:if test="${contractId3==tlist.userid }">
-										<span style="color:orange; font-size:1.2em;position:relative; top:10px;"><b>-계약을 수락하였습니다-</b></span>
+									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='Y' and checkVo.payment!='Y'}">
+										<span style="color:orange; font-size:1em;position:relative; top:10px;"><b>선생님이 계약을 수락하였습니다. <br/>계약서에서 결제를 진행해주세요.</b></span>
 									</c:if>
-									<c:if test="${contractId2==tlist.userid }">
+									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='N' and checkVo.payment!='Y'}">
 										<span style="color:red; font-size:1.2em; position:relative; top:10px;"><b>-계약이 거절되었습니다-</b></span>
+									</c:if>
+									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='Y' and checkVo.payment=='Y'}">
+										<span style="color:orange; font-size:1em; position:relative; top:10px;"><b>결제가 완료되었습니다.<br/>마이페이지 활동내역을 확인하세요.</b></span>
 									</c:if>
 								</li>
 								<li class="list-group-item border-0 col-4" style="height:100%;text-align:right;">
 									<c:choose>
 									
-										<c:when test="${contractId==tlist.userid }">
+										<c:when test="${checkVo.teacherid==tlist.userid and (checkVo.agree=='T' or checkVo.agree=='Y') and checkVo.payment!='Y'}">
+												<input type="hidden" name="idcheck" id="${tlist.userid}">
+												<input class="btn btn-outline-warning mb-2 viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0;"><br/>
+												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
+										</c:when>
+										
+										<c:when test="${checkVo.teacherid==tlist.userid and checkVo.agree=='Y' and checkVo.payment=='Y'}">
+												<input type="hidden" name="idcheck" id="${tlist.userid}">
 												<input class="btn btn-outline-warning mb-2 viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0;"><br/>
 												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
 										</c:when>

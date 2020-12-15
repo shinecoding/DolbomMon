@@ -16,9 +16,8 @@
 		<link href="<%=request.getContextPath() %>/css/demo.css" rel="stylesheet"> -->
 
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <script>
@@ -102,26 +101,44 @@
 			$(".redution").delay(500).fadeOut(1000);
 		}
 	});        
+
+
+	jQuery(document).ready(function($) {
+
+	$(".scroll").click(function(event){            
+
+	event.preventDefault();
+
+	$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+
+	});
+
+	});
+
 	
+
+
 </script>
 
 <style type="text/css">
-@media (max-width:700px){
-   #listitem{
-      display:none;
-   }
-}
+@media (max-width:768px){
+   #listitem{overflow:hidden;}
+   *, html, body, ul, li{overflow:hidden;}
+ }
+
 *{
    margin: 0px;
    padding: 0px;
    list-style-type: none;
    cursor:pointer;
-
-       }
+   font-family: 'Noto Sans KR', sans-serif;
+		}
+	
+   
    body{
       background-color:white; 
       cursor:pointer;
-      font-family:"Noto Sans KR,sans-serif!important;";
+      font-family: 'Poor Story', cursive;
       text-decoration:none;
       max-width: 100%;
       min-width:70%;
@@ -131,6 +148,7 @@
    html{
        margin:0; padding:0;
        width: 100%;  
+       font-family: 'Noto Sans KR', sans-serif;
    }
         
      
@@ -148,7 +166,7 @@
    
     #list img{
        background-color:rgb(255, 121, 40);
-       font-family:"Noto Sans KR,sans-serif!important;";
+       font-family: 'Noto Sans KR', sans-serif;
        
        
        
@@ -165,22 +183,25 @@
 
    h3{
       margin-top:30px;margin-bottom:30px; max-width: 100%;
-   
+      font-family: 'Noto Sans KR', sans-serif;
    }
    #homeWrap_ALL{width:100%;}
    .lead{font-size:17px; font-family: 'Noto Sans KR', sans-serif; font-weight:bold; color:#6c757d;}
    .jb-text { 
       position: absolute; 
       top: 50%; width: 100%; 
+      font-family: 'Noto Sans KR', sans-serif;
       }
    .jb-text p { 
       margin-top: -24px; 
       text-align: center; 
       font-size: 48px; color: #ffffff; 
+      font-family: 'Noto Sans KR', sans-serif;
 
    }
+
+
   
-   @media (min-width: 1000px){
 	.service-req {
     height: 488px;
     background: url(img/qwq11.jpg) no-repeat 50% 50%;
@@ -195,15 +216,17 @@
     color:#fff;
     padding:166px 0px 0px;
     font-weight:bold;
+    font-family: 'Noto Sans KR', sans-serif;
 	}
-}
+	
+
 </style>
 
 <body>
 <div id="homeWrap_ALL" >
 
 <!-- -------------------상단메뉴------------- -->
-<div id="top" style="height:150px; margin-bottom:0px;">
+<div id="toptoptop131" style="height:130px; margin-bottom:0px;">
 <%@include file="/WEB-INF/views/top.jsp"%>
 </div>
  <div class="redution">
@@ -211,8 +234,8 @@
 </video>
 
    <div class="jb-text">
-      <p style="font-family: 'JetBrains Mono', monospace;">DOLBOMMON</p>
-      <h5 style="color:white;">Services</h5>
+      <p style="font-family:'Noto Sans KR', sans-serif;">돌봄몬</p>
+      <h3 style="color:white;">Services</h3>
       <br/><br/><br/><br/>
       <h2 style="color:white">육아에 도움이 필요할 땐 언제 어디서나</h2>
       <h2 style="font-weight:bold; color:gold;">돌봄몬이 해결하겠습니다.</h2>
@@ -256,12 +279,12 @@
 <img src="<%=request.getContextPath() %>/img/ii1212.svg" 
 	style="width:150px;height:150px;margin:20px 0; background-color:white;" />	
 </div>
-<span style="font-weight:bold; font-size: 50px;font-family: 'Nerko One', cursive; color:gray;">DOLBOMMON GUIDE</span>
+<span style="font-weight:bold; font-size: 50px;font-family: 'Noto Sans KR', sans-serif; color:gray;">DOLBOMMON GUIDE</span>
 <br/><br/><br/><br/>
 <div id="mainContents4" >
     <div class="row featurette" style="width:800px; margin:0 auto;"  data-aos="fade-up">
       <div class="col-md-7"><br/><br/>
-        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 01.<br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Noto Sans KR', sans-serif;">Step 01.<br/><br/>
         <span class="text-muted">Join our membership!</span></h2><br/>
         <p class="lead">가장 빨리, 원하는 조건의 <br/>아이 돌보미를 구할 수 있는 <br/>
                  돌봄몬을 이용하기 위해<br/> 빠르고 간편한 회원가입을 진행해주세요.
@@ -276,7 +299,7 @@
 
     <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7 order-md-2"><br/><br/>
-        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;">Step 02.<br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Noto Sans KR', sans-serif;">Step 02.<br/><br/>
         <span class="text-muted">Fill out an application form.<br/><br/>
       </span></h2><br/>
          <p class="lead"> 
@@ -296,7 +319,7 @@
 
     <div class="row featurette" style="width:800px; margin:0 auto;" data-aos="fade-up">
       <div class="col-md-7">
-        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Nerko One', cursive;"><br/>Step 03.<br/><br/>
+        <h2 class="featurette-heading" style="color:#ff7928; font-family: 'Noto Sans KR', sans-serif;"><br/>Step 03.<br/><br/>
         <span class="text-muted">Have an interview</span></h2><br/><br/>
         <p class="lead">
       먼저, 내가 직접 지역, 요일, 시간 등 다양하게 검색해서  <br/>
@@ -324,7 +347,7 @@
  <div class="btn1234123" >
  <a href="/dbmon/join" class="btn-act1234"
 		style="background: #ff7942; color: #fff; 
-		border-radius:33px; height: 85px;
+		border-radius:100px; height: 110px;
 		text-align: center; -webkit-box-direction: normal;
 		word-break: break-all; padding: 0 55px;
 	    font-size: 25px; font-family:Noto Sans KR,sans-serif!important;

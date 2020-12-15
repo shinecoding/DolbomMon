@@ -24,8 +24,8 @@
 		  left: 0; 
 		}
   </style>
-<h1 style="color:#ff7928;">Q&A</h1>
-<h3 class="_3xkJ0 spread-underline">돌봄몬이 <span class="_34XF1">궁금</span>하신가요?</h3>
+<h1 style="color:#ff7928; font-weight:bold;" id="target1">Q&A</h1>
+<h3 class="_3xkJ0 spread-underline">돌봄몬이 <span class="_34XF1" style="font-weight:bold; color:#ff7942;">궁금</span> 하신가요?</h3>
 <!--   <div>
 	관리자만 볼 수 있게 숨기기
 	<a class="btn btn-warning" href="noticeBoardWrite" role="button" style="float:right; margin-bottom:30px;">공지사항 등록하기</a>
@@ -35,14 +35,14 @@
         <div class="col">
          
             <ul class="nav nav-tabs">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe">부모 회원</a>
+              <li class="nav-item" style="font-size:20px;">
+                <a class="nav-link active" data-toggle="tab" href="#qwe" style="font-size:18px; color:gray;">부모 회원</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd">돌봄몬 회원</a>
+                <a class="nav-link" data-toggle="tab" href="#asd" style="font-size:18px; color:gray;">돌봄몬 회원</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxc">돌봄활동과 활동비</a>
+                <a class="nav-link" data-toggle="tab" href="#zxc" style="font-size:18px; color:gray;">돌봄활동과 활동비</a>
               </li>
             </ul>
             <div class="tab-content" style="font-weight:normal;">
@@ -59,10 +59,10 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">글번호</th>
-				<th scope="col">글제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">등록일</th>
+				<th scope="col" style="font-weight:bold;">글번호</th>
+				<th scope="col" style="font-weight:bold;">글제목</th>
+				<th scope="col" style="font-weight:bold;">작성자</th>
+				<th scope="col" style="font-weight:bold;">등록일</th>
 				
 				
 			</tr>
@@ -92,16 +92,16 @@
 			<col>
 			<col style="width: 12%;">
 			<col style="width: 15%;">
-			<col style="width: 10%;">
+			
 			
 		</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">글번호</th>
-				<th scope="col">글제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">등록일</th>
-				<th scope="col">조회수</th>
+				<th scope="col" style="font-weight:bold;">글번호</th>
+				<th scope="col" style="font-weight:bold;">글제목</th>
+				<th scope="col" style="font-weight:bold;">작성자</th>
+				<th scope="col" style="font-weight:bold;">등록일</th>
+				
 				
 			</tr>
 		</thead>
@@ -127,16 +127,16 @@
 			<col>
 			<col style="width: 12%;">
 			<col style="width: 15%;">
-			<col style="width: 10%;">
+		
 			
 		</colgroup>
 		<thead>
 			<tr>
-				<th scope="col">글번호</th>
-				<th scope="col">글제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">등록일</th>
-				<th scope="col">조회수</th>
+				<th scope="col" style="font-weight:bold;">글번호</th>
+				<th scope="col" style="font-weight:bold;">글제목</th>
+				<th scope="col" style="font-weight:bold;">작성자</th>
+				<th scope="col" style="font-weight:bold;">등록일</th>
+				
 				
 			</tr>
 		</thead>

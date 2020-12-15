@@ -17,23 +17,36 @@
 <script src="<%=request.getContextPath()%>/css/datepicker-ko.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
-	.container{width:600px;}
+	.container{width:600px;
+		margin: 0 auto;
+	}
 	.container div{width:100%;overflow:hidden; height:auto; margin-top:15px;}
 	
-	#headerDiv{text-align:center; }
-	#headerDiv>a>img{width:80%;} 	
+	#headerDiv{
+		text-align: center;
+		font-size: 30px;
+		margin: 15px;
+		padding: 15px;
+		font-size: 30px;
+	}
+	#headerDiv>a>img{width:180px;} 	
 	#headerDiv>h4{width:70%; margin:0 auto;}
 	
-	.container>div>div>label{display:inline-block;width:auto;float:left; margin:0; font-size:21px;}
-	.container>div>div>span{display:inline-block; width:auto;height:20px;float:left;font-size:16px; margin-top:8px; margin-left:5px;}
-	.container>div>input{width:80%; height:40px; padding:5px 10px; float:left;}
+	.container>div>div>label{display:inline-block;width:auto;float:left; margin:0px;}
+	.container>div>div>span{display:inline-block; width:auto;height:20px;float:left;font-size:16px; margin-top:5px; margin-left:5px;}
+	.container>div>input{height:40px; padding:5px 10px; float:left;}
 	
-	#genderDiv label{width:19%; height:40px; line-height:40px; text-align:center; border:none; border-radius:20px; background-color:#EFEFEF; cursor:pointer;}
+	#genderDiv label{width:19%; height:40px; line-height:40px; text-align:center; border:none; border-radius:20px; background-color:#EFEFEF; cursor:pointer; margin: 3px;}
 	#genderDiv input[type=radio]{display:none;}
 	input[type=submit]{width:100%; height:40px; margin:30px 0 100px 0;}
 	
 	label{-webkit-transition:background-color 1s; transition:background-color 1s;}
-	
+	#zonecodeDiv span{
+		display:inline-block; width:auto;height:20px;float:left;font-size:16px; margin-top: 15px; margin-bottom:5px;
+	}
+	#zonecodeDiv input{
+		height:40px; padding:5px 10px; float:left;
+	}
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
 <script>
@@ -421,7 +434,7 @@
 </script>
 </head>
 <body>
-	<form id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
+	<form class="input-group mb-3" id="regFrm" method="post" action="<%=request.getContextPath()%>/regFormOk" >
 	<div class="container">
 	<c:if test="${who=='T' }" >
 		<input type="hidden" name="teacher_type" value="${teacher_type }" />
@@ -443,42 +456,43 @@
 		<input type="hidden" id="lng" name="lng" />
 		
 		<div id="headerDiv">
-			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png" /></a>
-			<c:if test="${who == 'P' }"><h2>회원가입</h2></c:if><c:if test="${who == 'T' }"><h5>일자리를  찾기 위한 내용 작성이 끝났습니다. <br/>이제, 사용하실 아이디와 비밀번호를 입력해주세요.</h5></c:if>
+			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png" /></a><br/><br/>
+			<c:if test="${who == 'P' }"><b>회원가입</b></c:if><c:if test="${who == 'T' }"><h5>일자리를  찾기 위한 내용 작성이 끝났습니다. <br/>이제, 사용하실 아이디와 비밀번호를 입력해주세요.</h5></c:if>
 		</div>
 		<div id="useridDiv" class="form-group has-warning has-feedback">
-			<div><label for="userid">아이디</label><span id="useridRegChk"></span></div>
-			<input type="text" id="userid" name="userid" placeholder="아이디 입력" style="width:50%;"/><input type="button" class="btn btn-warning" id="idChkBtn" value="아이디 중복검사" disabled="true" style="width:27%; margin-left:3%;"/> 
+			<div><label class="form-label" for="userid">아이디</label><span id="useridRegChk"></span></div>
+			<input type="text" class="form-control" id="userid" name="userid" placeholder="사용하실 아이디를 입력하세요" style="width:72%;"/><input type="button" class="btn btn-warning" id="idChkBtn" value="아이디 중복검사" disabled="true" style="width:25%; margin-left:3%;"/> 
 			<input type="hidden" id="idStatus" value="N"/>
 		</div>
 		<div id="userpwdDiv">
-			<div><label for="userpwd">비밀번호</label><span id="userpwdRegChk"></span></div>
-			<input type="password" id="userpwd" name="userpwd" placeholder="비밀번호 입력"/>
+			<div><label class="form-label" for="userpwd">비밀번호</label><span id="userpwdRegChk"></span></div>
+			<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="비밀번호를 입력하세요"/>
 		</div>
 		<div id="userpwdChkDiv">
-			<div><label for="userpwdChk">비밀번호 확인</label><span id=userpwdChkChk></span></div>
-			<input type="password" id="userpwdChk" />
+			<div><label class="form-label" for="userpwdChk">비밀번호 확인</label><span id=userpwdChkChk></span></div>
+			<input type="password" class="form-control" id="userpwdChk" placeholder="비밀번호를 한번 더 입력하세요"/>
 		</div>
 		<div id="usernameDiv">
-			<div><label>이름</label><span id="usernameChk"></span></div>
-			<input type="text" id="username" name="username" placeholder="이름 입력" style="width:80%;"/> 
+			<div><label class="form-label">이름</label><span id="usernameChk"></span></div>
+			<input type="text" class="form-control" id="username" name="username" placeholder="이름을 입력하세요"/> 
 		</div>
 		<div id="birthDiv">
-			<input type="button" class="btn btn-warning" id="birthBtn" value="생년월일" style="width:20%;margin-right:5%" />
-			<input type="text" id="birth" name="birth" style="width:50%;" readonly="readonly" placeholder="생년월일"/>
+			<div><label class="form-label">생년월일</label></div>
+			<input type="text" class="form-control" id="birth" name="birth" style="width:72%;" readonly="readonly" placeholder="생년월일"/>
+			<input type="button" class="btn btn-warning" id="birthBtn" value="선택" style="width:25%; margin-left:3%;" />
 		</div>
 		<div id="genderDiv"> 
-			<div><p style="font-size:20px;">성별</p></div>
-			<label for="1" ><input type="radio" name="gender" id="1" value="M" />남자</label>
-			<label for="2" style="margin-left:2%;"><input type="radio" name="gender" id="2" value="F" />여자</label>
+			<div><p>성별</p></div>
+			<label for="1" class="form-label"><input type="radio" class="form-control" name="gender" id="1" value="M" />남자</label>
+			<label for="2" class="form-label" style="margin-left:2%;"><input type="radio" class="form-control" name="gender" id="2" value="F" />여자</label>
 		</div>
 		<div id="emailDiv">
-			<div><label for="email1">이메일</label><span id="emailChk"></span></div>
-			<input type="text" id="email1" name="email1" placeholder="이메일 입력" style="width:23%;" />
-			<span style="display:inline-block; float:left; width:4%; height:40px; line-height:40px; text-align:center; margin:0 1%;">@</span>
-			<input type="text" id="email2" name="email2" placeholder="직접 입력" style="width:24%;"/>
-			<select id="domain" style="width:23%; margin-left:3%; height:40px;" >
-				<option selected="selected" >직접입력</option>
+			<div><label class="form-label" for="email1">이메일</label><span id="emailChk"></span></div>
+			<input type="text" class="form-control" id="email1" name="email1" placeholder="이메일 입력" style="width:30%;" />
+			<span style="display:inline-block; float:left; width:3%; height:40px; line-height:40px; text-align:center; margin:0 1%;">@</span>
+			<input type="text" class="form-control" id="email2" name="email2" placeholder="직접 입력" style="width:31%;"/>
+			<select id="domain" style="width:30%; margin-left:3%; height:40px;" >
+				<option class="form-control" selected="selected" >직접입력</option>
 				<option>gmail.com</option>
 				<option>naver.com</option>
 				<option>nate.com</option>
@@ -486,24 +500,24 @@
 			</select>
 		</div>
 		<div id="smsDiv">
-			<div><label for="tel1" style="clear:both;">연락처</label><span id="tel1Chk"></span></div>
-			<input type="text" id="tel1" name="tel1" style="width:80%;" />
-			<input type="button" class="btn btn-warning" id="smsIdentity" value="휴대폰 본인인증하기" disabled="true" style="margin-top:10px;"/>
-			<input type="text" id="userNum" name="userNum" style="margin-top:10px; display:none;" placeholder="인증번호 입력"/>
+			<div><label for="tel1" class="form-label" style="clear:both;">연락처</label><span id="tel1Chk"></span></div>
+			<input type="text" id="tel1" class="form-control" name="tel1" style="width:72%;" placeholder="전화번호를 입력하세요" />
+			<input type="button" class="btn btn-warning" id="smsIdentity" value="본인인증하기" disabled="true" style="width:25%; margin-left:3%;"/>
+			<input type="text" class="form-control" id="userNum" name="userNum" style="margin-top:10px; display:none;" placeholder="인증번호 입력"/>
 			<input type="button" class="btn btn-warning" id="userNumChk" style="margin-top:10px;display:none;" value="인증하기"/>
 			<input type="hidden" name="text" id="text">
 			<input type="hidden" id="smsIdentityYN" value="N" /> 
 		</div>
 		<div id="zonecodeDiv">
-			<div><label>우편번호</label></div>
-			<input type="text" id="zipcode" name="zipcode" placeholder="우편번호 입력" style="width:28%;"/>
-			<input type="button" class="btn btn-warning" value="우편번호 선택" id="zipcodeBtn" style="width:28%; margin-left:4%;"/> 
-			<div><label for="tel1" style="width:80%; clear:both; margin-top:10px;">도로명 주소</label></div>
-			<input type="text" id="addr" name="addr" placeholder="도로명 주소 입력" style="width:80%;"/>
-			<div><label for="tel1" style="width:80%; clear:both; margin-top:10px;">상세 주소</label></div>
-			<input type="text" id="addrdetail" name="addrdetail" placeholder="상세주소 입력" style="width:80%;"/>
+			<div><label for="zipcode" class="form-label"><span>우편번호</span></label></div>
+			<input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="우편번호 입력" style="width:72%;"/>
+			<input type="button" class="btn btn-warning" value="우편번호 선택" id="zipcodeBtn" style="width:25%; margin-left:3%;"/> 
+			<div><label for="addr"style="width:80%; clear:both; margin-top:10px;"><span>도로명 주소</span></label></div>
+			<input type="text" class="form-control" id="addr" name="addr" placeholder="도로명 주소 입력"/>
+			<div><label for="addrdetail" style="width:80%; clear:both; margin-top:10px;"><span>상세 주소</span></label></div>
+			<input type="text" class="form-control" id="addrdetail" name="addrdetail" placeholder="상세주소 입력"/>
 		</div>
-		<input type="submit" class="btn btn-warning" value="가입하기" />
+		<input type="submit" class="btn btn-warning btn-lg" value="가입하기" />
 	</div>
 	</form>
 </body>

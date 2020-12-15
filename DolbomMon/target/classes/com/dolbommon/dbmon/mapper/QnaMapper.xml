@@ -20,4 +20,13 @@
 		select seq, subject, content, userid, writedate
 		from qna where seq=#{param1}
 	</select> 
+	
+	<select id="qnaBoardView2" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
+		select seq, subject, content, userid, writedate
+		from qna where seq=#{param1}
+	</select> 
+	<select id="qnaBoardView3" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
+		select seq, subject, content, userid, writedate
+		from qna where seq=#{param1}
+	</select> 
 </mapper> 

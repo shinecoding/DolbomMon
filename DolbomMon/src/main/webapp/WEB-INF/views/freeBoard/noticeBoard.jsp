@@ -41,12 +41,13 @@
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
-	    	<img src="img/141.png" style="width:100%; height:400px; "/>
-	    	<div class="in_box" style="width:100% height:1px">
-            <h1 class="tit wow fadeIn animated" style="visibility: visible; margin:0 auto; width:160px; position:relative; top:-230px; animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
-	    	<a href="#"></a></div>
-<div class="container">
 
+<div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
+            <h1 class="tit wow fadeIn animated" style="visibility: visible; margin:0 auto; width:160px;  animation-name: fadeIn; font-weight:bold; color:white;">공지사항</h1>
+          <a href="#"></a></div>   
+	    	<img src="img/141.png" style="width:100%; height:400px; "/>
+	    	
+<div class="container">
 <div style="float: right; margin: 15px;
 		padding: 15px;">
 	<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>

@@ -74,10 +74,7 @@ public class ParentController {
 		ChildrenVO cVO = dao.recruitChildSelect(no);
 		
 		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
-		String contractId = dao2.ContractStatus(no);
-		String contractId2 = dao2.ContractStatus2(no);
-		String contractId3 = dao2.ContractStatus3(no);
-		String contractId4 = dao2.ContractStatus4(no);
+		RecruitBoardVO checkVo = dao2.ContractStatus(no);
 		
 		//마지막 계약서 유저아이디
 		
@@ -87,8 +84,8 @@ public class ParentController {
 		if(who.equals("T")) {
 			apChk = dao.applyChk(no, userid);
 		}
-		
-		
+
+
 		ModelAndView mav = new ModelAndView();
 		
 		String timeType = rbVO.getTime_type();
@@ -101,15 +98,11 @@ public class ParentController {
 			System.out.println("정기적으로 ");
 			mav.addObject("rdVO", rdVO);
 		}
-		System.out.println(contractId);
 		mav.addObject("apChk", apChk);
 		mav.addObject("tlist", tlist);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
-		mav.addObject("contractId", contractId);
-		mav.addObject("contractId2", contractId2);
-		mav.addObject("contractId3", contractId);
-		mav.addObject("contractId4", contractId2);
+		mav.addObject("checkVo", checkVo);
 		
 		mav.setViewName("/parents/parentView");
 		
@@ -271,7 +264,16 @@ public class ParentController {
 		return mav;
 	
 	}
-	
+
+	//후기 작성
+	@RequestMapping("/commentWrite")
+	public String commentWrite() {
+		
+		
+		
+		return "/parents/commentWrite";
+	}
+
 	@RequestMapping("parentProfile")
 	public ModelAndView parentProfile(String userid) {
 		
@@ -286,8 +288,5 @@ public class ParentController {
 	}
 	
 	
-	
-	
-	
-	
+
 }

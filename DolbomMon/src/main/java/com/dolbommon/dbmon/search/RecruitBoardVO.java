@@ -38,7 +38,14 @@ public class RecruitBoardVO {
 		private String regdate;
 		private String birth;
 		private String age;
+		private String payment;
 		
+		public String getPayment() {
+			return payment;
+		}
+		public void setPayment(String payment) {
+			this.payment = payment;
+		}
 		public String getAgree() {
 			return agree;
 		}

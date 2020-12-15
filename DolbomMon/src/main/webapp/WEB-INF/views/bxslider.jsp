@@ -3,13 +3,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 
 <style>
    *{
-   		font-family: 'Nanum Myeongjo', serif;
-		font-family: 'Noto Sans KR', sans-serif;
-   		font-weight: bold;
+   		font-family: 'Noto Sans KR', sans-serif;
         margin:0;
         padding:0;
        }
@@ -104,7 +102,7 @@ $(function(){
       <li>
       	<div class="in_box" style="position:absolute; margin-left:200px; margin-top:200px; ">
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">“몇 시간 아이를 맘 편히 <br>맡길 수 있으면 얼마나 좋을까?”</h1>
-            <span class="sub_tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-size:20px;">당신과 같은 마음으로 돌봄몬이 시작됐습니다.</span>
+            <span class="sub_tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-size:30px;">당신과 같은 마음으로 돌봄몬이 시작됐습니다.</span>
 	     <a href="#"></a></div>
 	     <img src="img/bx1.png" />
       
@@ -113,8 +111,8 @@ $(function(){
    		<div style="position:absolute; margin-left:200px; margin-top:200px; color:white;">
 	       <h1 style="font-weight:bold;">우리의 사명감<br/>
 				</h1>
-	       <h5>“돌봄몬이 있다는 게 육아하는데 얼마나 든든한지 모른다” <br/>
-	       	언제, 어디서나 누군가의 필요가 된다는 것! 돌봄몬의 존재 이유입니다.</h5>
+	       <h3>“돌봄몬이 있다는 게 육아하는데 얼마나 든든한지 모른다” <br/>
+	       	언제, 어디서나 누군가의 필요가 된다는 것! 돌봄몬의 존재 이유입니다.</h3>
 	       <a href="#"></a></div>
   		   <img src="img/141.png" />
       </li>
@@ -128,7 +126,7 @@ $(function(){
       <li>
       	<div style="position:absolute; margin-top:400px;margin-left:450px; color:white;">
 	       <h1>믿을 수 있는 돌봄몬을 만나요</h1>
-	       <h4 style="font-weight:bold;">신원검증, 범죄경력조회를 통과한 선생님만을 검증하여 추천합니다</h4>
+	       <h3 style="font-weight:bold;">신원검증, 범죄경력조회를 통과한 선생님만을 검증하여 추천합니다</h3>
 	       <a href="#"></a></div>
    		   <img src="img/242.jpg" />
       </li>
@@ -136,8 +134,8 @@ $(function(){
       	<div style="position:absolute; margin-top:200px;margin-left:850px;color:white;">
 	       <h1>매주 아이가 더 기다리는 아이맞춤 선생님</h1>
 	       <h2 style="font-weight:bold;">등하원/이동, 학습, 영어, 창의미술, 놀이돌봄<br/></h2>
-			<h6>돌봄몬은 아이들의 보호자이면서
-			동시에 놀이부터 배움까지 담당합니다.</h6>
+			<h4>돌봄몬은 아이들의 보호자이면서
+			동시에 놀이부터 배움까지 담당합니다.</h4>
 	       <a href="#"></a></div>
       	   <img src="img/243.png" />
       </li>

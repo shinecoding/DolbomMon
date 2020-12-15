@@ -15,18 +15,22 @@
 	}	
 	#top{
 		margin: 15px;
+		margin-top: 40px;
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
 	}
 	#inputBox{
 		margin-top: 30px;
+		margin-bottom: 10px;
+		height: 190px;
 		padding: 20px;
 		border: 1px solid lightgray;
 	}
-	#username, #birth, #Tel1{
+	#username, #birth, #tel1{
 		width: 600px;
 	}
+
 </style>
 <script>
 $(function(){
@@ -57,6 +61,7 @@ $(function(){
 </head>
 <body>
 <div class="container">
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div id="top">
 <b>계정찾기</b>
 </div>
@@ -67,20 +72,20 @@ $(function(){
 	<form method="post" action="idInfo" id="searchFrm">
 		<div id="inputBox">
 			<div class="form-group row">
-				<label for="lblName" class="col-sm-2 col-form-label">이름</label>
-				<div class="col-sm-10">
+				<label for="username" id="nameLbl" class="col-sm-2 col-form-label"> &nbsp;이름</label>
+				<div class="col-sm-8">
 					<input type="text" class="form-control" id="username" name="username" placeholder="이름을 입력하세요">		
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="lblBirth" class="col-sm-2 col-form-label">생년월일</label>
-				<div class="col-sm-10">
+				<label for="birth" id="birthLbl" class="col-sm-2 col-form-label"> &nbsp;생년월일</label>
+				<div class="col-sm-8">
 					<input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일 8자리(YYYYMMDD)를 입력해주세요">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="lblTel" class="col-sm-2 col-form-label">휴대폰 번호</label>
-				<div class="col-sm-10">
+				<label for="tel1" id="telLbl" class="col-sm-2 col-form-label"> &nbsp;휴대폰 번호</label>
+				<div class="col-sm-8">
 					<input type="text" class="form-control" id="tel1" name="tel1" placeholder="휴대폰 번호를 '-'없이 입력해주세요">
 				</div>
 			</div>
@@ -89,4 +94,5 @@ $(function(){
 	</form>
 </div>
 </body>
+<jsp:include page="../footer.jsp"/>
 </html>
