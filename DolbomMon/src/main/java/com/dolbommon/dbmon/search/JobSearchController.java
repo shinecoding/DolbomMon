@@ -45,7 +45,7 @@ public class JobSearchController {
 		if(req.getParameter("activity_type")==null) {
 			list = dao.jobSearchBoardList(9999); //선생님 리스트
 		}else {
-			list = dao.jobSearchActType(activity_type);
+			list = dao.jobSearchActType(activity_type, 12);
 		}
 		
 
@@ -95,25 +95,25 @@ public class JobSearchController {
 	
 	@RequestMapping(value="/searchAct", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchAct(String activity_type) {
+	public List<TeacherVO> searchAct(String activity_type, int count) {
 		System.out.println("액티비티 타입"+activity_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
-		List<TeacherVO> list = dao.jobSearchActType(activity_type);
+		List<TeacherVO> list = dao.jobSearchActType(activity_type, count);
 		
 		return list;
 	}
 	
 	@RequestMapping(value="/searchCare", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public List<TeacherVO> searchCare(String care_type) {
+	public List<TeacherVO> searchCare(String care_type, int count) {
 		System.out.println("케어 타입"+care_type);
 		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
 		List<TeacherVO> list = new ArrayList<TeacherVO>();
 		
 		if(care_type.equals("all")) {
-			list = dao.jobSearchBoardList(10);
+			list = dao.jobSearchBoardList(12);
 		}else {
-			list = dao.jobSearchCareType(care_type); 	
+			list = dao.jobSearchCareType(care_type, count); 	
 		}
 		
 		return list;

@@ -217,6 +217,15 @@ public class RecruitBoardController {
 		return mav;
 	
 	}
-
+	
+	
+	
+	
+	
 }
 
+
+
+
+
+	

@@ -36,9 +36,7 @@ public interface TeacherDaoImp {
 	//후기 적기/수정
 	public int insertReview(ReviewVO vo);
 	public int updateReview(ReviewVO vo);
-
 	public int updateTeacherSchedule(String userid, @Param("rdVO")RegularDateVO rdVO);
 	public RegularDateVO selectSchedule(String userid);
-
 }
 

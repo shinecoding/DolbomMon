@@ -106,45 +106,17 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="qna_vo" items="${qna_list2}">
 			<tr>
-				<th scope="row">1</th>
-				<td class="subject"><a href="qnaBoardView">공지사항11111111111111</a></td>
-				<td>관리자</td>
-				<td>13:11</td>
-				<td>1</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>공지사항2222222</td>
-				<td>관리자</td>
-				<td>11-11 15:11</td>
-				<td>2</td>
+				<th scope="row"><c:out value="${qna_vo.seq}"/></th>
+				<td class="subject" style="float:left;">
+				<a href="/dbmon/qnaBoardView?seq=${qna_vo.seq}">
+				<c:out value="${qna_vo.subject}"/></a></td>
+				<td><c:out value="${qna_vo.userid}"/></td>
+				<td><fmt:formatDate value="${qna_vo.writedate}" pattern="yyyy-MM-dd"/></td>
 				
 			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>글제목입니다3333333</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				
-			</tr>
-			<tr>
-				<th scope="row">4</th>
-				<td>공지사항4444444</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				
-			</tr>
-			<tr>
-				<th scope="row">5</th>
-				<td>공지사항5555555</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				
-			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
               </div>
@@ -169,45 +141,17 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="qna_vo" items="${qna_list3}">
 			<tr>
-				<th scope="row">1</th>
-				<td class="subject"><a href="qnaBoardView">공지사항11111111111111</a></td>
-				<td>관리자</td>
-				<td>13:11</td>
-				<td>1</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>공지사항2222222</td>
-				<td>관리자</td>
-				<td>11-11 15:11</td>
-				<td>2</td>
+				<th scope="row"><c:out value="${qna_vo.seq}"/></th>
+				<td class="subject" style="float:left;">
+				<a href="/dbmon/qnaBoardView?seq=${qna_vo.seq}">
+				<c:out value="${qna_vo.subject}"/></a></td>
+				<td><c:out value="${qna_vo.userid}"/></td>
+				<td><fmt:formatDate value="${qna_vo.writedate}" pattern="yyyy-MM-dd"/></td>
 				
 			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>글제목입니다3333333</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				
-			</tr>
-			<tr>
-				<th scope="row">4</th>
-				<td>공지사항4444444</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				
-			</tr>
-			<tr>
-				<th scope="row">5</th>
-				<td>공지사항5555555</td>
-				<td>관리자</td>
-				<td>11-10 13:51</td>
-				<td>7</td>
-				
-			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
               </div>
