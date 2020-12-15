@@ -14,9 +14,13 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <style>
 
+
 	.container{width:1100px;font-family: 'Jua', sans-serif;}
+
 
 
 	img{ height:110px; width:110px;}
@@ -82,7 +86,7 @@
 	border-top-right-radius:20px;
 	cursor:pointer;
 	}
-	.card-title>b{
+	.card{
 	cursor:pointer;
 	}
 	
@@ -120,6 +124,7 @@ var gender = 'all';
 var activity_type;
 var care_type;
 var order;
+var value;
 
 	$(function(){
 		
@@ -136,40 +141,54 @@ var order;
 	    	}else if(tabType==4){
 	    		orderDropdownAjax(order)
 	    	}
-	    	
-	    	
 	    });
 	    //프로필 들어가기
-	    $(document).on("click", ".card>.profilepic", function(){
+	    $(document).on("click", ".card", function(){
 	    	//console.log($(this).parent().attr('id'));
-	    	location.href="teacherView?userid="+$(this).parent().attr('id');
+	    	location.href="teacherView?userid="+$(this).attr('id');
 
 	    });
+	    /*
 		$(document).on("click", ".card-title>b", function(){
 			location.href="teacherView?userid="+$(this).parent().parent().parent('div').attr('id');
 		})
-	   
+	   */
 		//지도 토글
 	      $(document).on("click", "#mapBtn", function(){
-				$("#map").toggle();
+	    	  $("#map").toggle();
+				AOS.init({
+				    duration: 1200
+				  });
+				  onElementHeightChange(document.body, function(){
+				    AOS.refresh();
+				  });
 			});
 		//검색창	
 	    $(document).on("keyup", "#locFilter", function(){
-	    	var value = $(this).val().toLowerCase();
+	    	value = $(this).val().toLowerCase();
+	    	//$(".loc").filter(function(){
+	    	//	$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
+	    			//		console.log($(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1));
+				    //		console.log($(this).text().toLowerCase().indexOf(value)>-1);
+			//	    console.log($(this));
+	    	//});
+	    	//console.log(value)
+	    	searchWord(value)
+	    });
+		
+		function searchWord(value){
 	    	$(".loc").filter(function(){
 	    		$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);
-				    		
+	    		console.log(value);
 	    	});
-	    });
+		}
+		
 		//스크롤
 		$(window).scroll(function(){
 			
 			var scrolltop = $(document).scrollTop();//스크롤 위치
-				console.log(scrolltop);
 			var height = $(document).height(); //문서길이
-				console.log(height);
 			var height_win = $(window).height(); //보여지는 창의 길이
-				console.log(height_win);
 			
 			if(Math.round($(window).scrollTop()) == $(document).height() - $(window).height()){
 				for(i=0; i<15; i++){
@@ -196,11 +215,13 @@ var order;
 		function dropdownAjax(care_type){
 			console.log("케어타입="+care_type);
 			var url = "/dbmon/searchCare";
+
 			var params =	{
 					care_type:care_type,
 					count:count, 
 			} 
 			
+
 			console.log("파라미터="+params);
 			$.ajax({
 				url:url,
@@ -215,7 +236,7 @@ var order;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card" id="'+vo.userid+'" >';
+						tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -311,7 +332,7 @@ var order;
 						
 						$result.each(function(idx, vo){
 							
-							tag += '<div class="card" id="'+vo.userid+'" >';
+							tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 							tag += '<img class="profilepic" src=';
 							if(vo.pic==null){
 								tag +='"img/profilepic.png"';
@@ -394,7 +415,7 @@ var order;
 		
 		var url = "/dbmon/filterOrder";
 		var params = {
-				order:gender,
+				order:order,
 				count:count, 
 		}
 		console.log("파라미터="+params);
@@ -409,7 +430,7 @@ var order;
 										
 				$result.each(function(idx, vo){
 				
-					tag += '<div class="card" id="'+vo.userid+'" >';
+					tag += '<div class="card" data-aos="fade-up" id="'+vo.userid+'" >';
 					tag += '<img class="profilepic" src=';
 					if(vo.pic==null){
 						tag +='"img/profilepic.png"';
@@ -506,7 +527,7 @@ var order;
 					
 					$result.each(function(idx, vo){
 					
-						tag += '<div class="card"  id="'+vo.userid+'" >';
+						tag += '<div class="card" data-aos="fade-up"  id="'+vo.userid+'" >';
 						tag += '<img class="profilepic" src=';
 						if(vo.pic==null){
 							tag +='"img/profilepic.png"';
@@ -572,7 +593,28 @@ var order;
 
 				});
     	}
-    	 testAjax(gender);
+	    if(${activity_type=='등하원 돕기'}){
+	    	activity_type='등하원 돕기'
+	    	actBoxAjax(activity_type);
+	    }else if(${activity_type=='실내놀이'}){
+	    	activity_type='실내놀이'
+		    actBoxAjax(activity_type);
+	    }else if(${activity_type=='야외활동'}){
+	    	activity_type='야외활동'
+			    actBoxAjax(activity_type);
+		}else if(${activity_type=='학습지도'}){
+	    	activity_type='학습지도'
+			    actBoxAjax(activity_type);
+		}else if(${activity_type=='영어놀이'}){
+	    	activity_type='영어놀이'
+			    actBoxAjax(activity_type);
+		}else if(${activity_type=='가사돌봄'}){
+	    	activity_type='간단 청소'
+			    actBoxAjax(activity_type);
+		}else{
+	    	testAjax(gender);
+	    }
+    	// 
 	});//제이쿼리
 	</script>
  <script>	
@@ -581,8 +623,8 @@ var order;
     $(function(){	    
 	    //좋아요 찜기능
 	  
-	    $(document).on("click", ".emptyHeart", function(){
-	    	
+	    $(document).on("click", ".emptyHeart", function(event){
+	    	event.stopPropagation();
 	    	var cardid = $(this).children("input").val();
 	    	console.log($(this).children("i").css("color"));
 	    	if($(this).children("i").css("color")=="rgb(128, 128, 128)"){
@@ -636,9 +678,36 @@ var order;
 	   
 		
 	});//제이쿼리
+	function mapResize(){
+		$("#map").css("display","none");
+		AOS.init({
+		    duration: 1200
+		  });
+		  onElementHeightChange(document.body, function(){
+		    AOS.refresh();
+		  });
+	}
+
+
+		function onElementHeightChange(elm, callback) {
+		    var lastHeight = elm.clientHeight
+		    var newHeight;
+		    
+		    (function run() {
+		        newHeight = elm.clientHeight;      
+		        if (lastHeight !== newHeight) callback();
+		        lastHeight = newHeight;
+
+		        if (elm.onElementHeightChangeTimer) {
+		          clearTimeout(elm.onElementHeightChangeTimer); 
+		        }
+
+		        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+		    })();
+		  }
 </script>
 </head>
-<body>
+<body onload="mapResize()">
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
@@ -662,7 +731,7 @@ var order;
 <form class="form-inline">
   
   <select id="dropdownCT" class="custom-select border-warning mt-2 mb-2" style="width:100%;">
-    <option selected>돌봄 유형을 선택하시면, 맞춤시터를 보여드려요</option>
+    <option selected>돌봄 유형을 선택하시면, 맞춤 돌봄몬을 보여드려요</option>
     
     <optgroup label="2~10세 정기 돌봄"></optgroup>
     <option value="등하원">주 5일 등하원</option>
@@ -695,26 +764,26 @@ var order;
 
 
    <div id="actBox">
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act1" >실내놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act2">등하원 돕기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act3">책 읽기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act4">야외활동</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act5">한글놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act6">영어놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act7">학습지도</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act8">체육놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act9">간단 청소</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act10">밥 챙겨주기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act11">간단 설거지</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act12">장기입주</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pt-1 pb-1 px-2" id="act13">단기입주</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act1" >실내놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원 돕기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act3">책 읽기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act9">간단 청소</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act10">밥 챙겨주기</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act11">간단 설거지</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
+	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
 
   </div>
  
 <!-- -------------------------순서 정렬--------------------- -->
 
    <div class="d-inline-block m-2" style="width:100%;">
-	<div class="float-left" > 총 돌봄몬 수 : <span id="Tcnt">${totalRecord}</span></div>
+	<div class="float-left" > 총 <span id="Tcnt">${totalRecord}</span>명의 돌봄몬</div>
 	
 	<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
 		<select id="orderDropdown">
@@ -732,7 +801,7 @@ var order;
 
 
 	</div>
-	<div><button style="position:relative; left:45%;" class="btn btn-info" id="countTest">숫자 테스트</button></div>
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top: 50px;" class="btn btn-warning" id="countTest">더보기</button></div>
 
 
 

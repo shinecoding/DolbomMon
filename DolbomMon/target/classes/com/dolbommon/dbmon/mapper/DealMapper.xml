@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="recruitBoardSelect2" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
+		select p.teacherid ,p.agree ,p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
 			(select count(t_userid) from t_p_table where job_board_no = #{param1}) tcnt
 			from parent_list p, member m 
 			where p.job_board_no=#{param1} and p.userid = m.userid
@@ -57,8 +57,8 @@
 			from jb_regular_date where job_board_no=#{param1}
 	</select>
 	
-	<select id="selectOrigin" resultType="int">
-		select job_board_no from parent_list where origin_no=#{origin_no} and agree='T' or agree='Y'
+	<select id="selectOrigin" resultType="int" parameterType="map">
+		select job_board_no from parent_list where origin_no=#{no} and (agree='T' or agree='Y') and teacherid=#{teacherid}
 	</select>
 	
 	<update id="setAgree" parameterType="map">
@@ -71,4 +71,8 @@
 	<select id="ContractStatus2" parameterType="int" resultType="String">
 		SELECT * FROM (select teacherid from parent_list where status='C' and agree='N' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
+	
+	<update id="rejectContract">
+		update parent_list set agree='N' where userid=#{userid} and teacherid=#{teacherid} and agree='T'
+	</update>
 </mapper>

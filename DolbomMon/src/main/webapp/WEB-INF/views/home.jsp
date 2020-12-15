@@ -57,6 +57,12 @@
         var position = $(window).scrollTop(); 
       if (position >= 700){
          $(".redution").delay(500).fadeOut(1000);
+     	AOS.init({
+		    duration: 1200
+		  });
+		  onElementHeightChange(document.body, function(){
+		    AOS.refresh();
+		  });
       }
    });        
    

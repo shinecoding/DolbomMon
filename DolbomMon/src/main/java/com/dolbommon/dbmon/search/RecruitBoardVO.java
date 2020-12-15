@@ -28,7 +28,14 @@ public class RecruitBoardVO {
 		private String teacherid;
 		private String status;
 		private String pic;
+		private String agree;
 		
+		public String getAgree() {
+			return agree;
+		}
+		public void setAgree(String agree) {
+			this.agree = agree;
+		}
 		public int getJob_board_no() {
 			return job_board_no;
 		}

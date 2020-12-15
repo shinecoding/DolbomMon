@@ -44,6 +44,7 @@
 	    	<a href="#"></a></div>
 	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
 
+
 <div class="container">
 	<div style="float: right; margin: 15px; padding: 15px;">
 		<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>

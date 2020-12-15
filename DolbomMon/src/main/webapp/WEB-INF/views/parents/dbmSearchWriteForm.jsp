@@ -419,7 +419,7 @@
 				return false;
 			}
 			
-			var child_cnt = $("input[name=child_cnt]:checked").length;
+			var child_cnt = $("input[name=childrenCnt]:checked").length;
 			if(child_cnt < 1) {
 				swal({
 					title : "자녀 정보 입력",
@@ -961,7 +961,7 @@
 						</select>
 					</div>
 					<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation">
+    					<input type="checkbox" class="custom-control-input" id="time_consultation" name="time_consultation" value="Y">
     					<label class="custom-control-label" for="time_consultation">시간 협의가능</label>
 					</div>
 				</div>
@@ -985,7 +985,7 @@
     					<label class="custom-control-label" for="avgWage">평균시급 적용</label>
 					</div>
 					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation">
+    					<input type="checkbox" class="custom-control-input" id="consultation" name="consultation" value="Y">
     					<label class="custom-control-label" for="consultation">시급 협의가능</label>
 					</div>
 				<p>

@@ -174,7 +174,8 @@
 			popupWidth = 1060;
 			popupHeight = 1600;
 			var origin_no = $(this).attr('id');
-			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			var teacherid = $(this).next().next().attr('id'); //아래 버튼 위치 수정하면 이것도 수정
+			window.open('/dbmon/contractView?origin_no='+origin_no+'&teacherid='+teacherid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
 		
 		
@@ -803,6 +804,8 @@
 	
 </script>
 <style>
+	#specificDate>div{width:100%;}
+	.ui-state-disabled>span{text-align:center;}
 </style>
 </head>
 <body>
@@ -811,7 +814,7 @@
 <hr/>
 <div class="container">
 	<div style="margin:20px 0;">
-  	 	<img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${list.pic}"</c:if>/>
+  	 	<img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>
   	 	<div style="text-align:center;font-size:20px;">${rbVO.title }</div>
    	</div>
    	<div class="clearfix" style="width:100%">
@@ -955,7 +958,7 @@
 		<c:if test="${userid == rbVO.userid}">
 			<c:if test="${rbVO.tcnt>0 }" ><h5>나에게 신청한 돌봄몬</h5></c:if>
 			<c:forEach var="tlist" items="${tlist }">
-		        <div class="wrapper2" style="margin:15px 0;" id="dbmDiv">
+		        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
 		        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 					<ul class="list-group">
 						<li class="list-group-item" style="height:200px; margin:10px 0;">
@@ -966,11 +969,10 @@
 									<h6 style="text-align:center;">${tlist.birth }세</h6>
 								</li>
 								<li class="list-group-item border-0 col-6" id="applyDbmList" style="height:100%;">
-									<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
 									
 									<h6><b>지원시간</b> | ${tlist.apply_date }</h6>
 									<h7>CCTV 촬영가능여부 - ${tlist.cctv } | ? | ? </h7><br/><br/>
-									<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 ${tlist.desired_wage } | <b><c:if test="${tlist.discussion=='Y' }" >협의 가능</c:if><c:if test="${tlist.discussion=='N' }" >협의 불가능</c:if></b></h6>
+									<h6 ><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b><c:if test="${tlist.discussion=='Y' }" >협의 가능</c:if><c:if test="${tlist.discussion=='N' }" >협의 불가능</c:if></b></h6>
 									<br/>
 									<c:if test="${contractId==tlist.userid }">
 										<span style="color:orange; font-size:14px;position:relative; top:10px;"><b>계약이 진행중입니다.</b></span>
@@ -995,34 +997,33 @@
 		console.log("${contractId}");
 		console.log("${contractId2}");
 		</script>
-			
       	</c:if>
       	
         <c:if test="${who=='T' }">
         	<c:if test="${apChk<1 }">
         		<div style="text-align:center; margin:50px 0">
-					<input id="applyBtn" type="button" value="신청하기" style="width:40%; height:50px;"/>
+					<input id="applyBtn" type="button" value="신청하기" class="btn btn-warning" style="width:40%; height:50px;"/>
 				</div>
         	</c:if>
         	<c:forEach var="tlist" items="${tlist }">
         		<c:if test="${userid == tlist.userid }" >
+        			<h5 style="margin-top:30px;">학부모의 연락을 기다리고 있습니다.</h5>
 			        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
 			        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 						<ul class="list-group">
-							<li class="list-group-item"><i class="fas fa-star"></i>
+							<li class="list-group-item">
 								<ul class="list-group list-group-horizontal">
 			
 									<li class="list-group-item border-0 col-3">
 					
-										<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded-circle" style="width:100%;height:100%;"/><br/><br/>
+										<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> style="width:100%;height:70%; border-radius:20px;"/><br/><br/>
 									</li>
 									<li class="list-group-item border-0 col-9" id="applyDbmList">
-										<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
-										<h6 style="color:orange;">이름 - ${tlist.username }</h6> 
-										<h6><b>나이 - ${tlist.birth }세</b></h6>
-										<h6><b>지원시간</b> | </h6>
+										<h4><b>${tlist.username }</b></h4> 
+										<h6>나이 - ${tlist.birth }세</h6>
+										<h6>지원시간 | ${tlist.apply_date}</h6>
 										<h6><c:if test="${tlist.cctv == 'Y'}">CCTV가 있어도 당당히 일할 수 있습니다.</c:if><c:if test="${tlist.cctv == 'N'}">CCTV촬영을 원하지 않습니다.</c:if></h6><br/>
-										<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
+										<h6><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
 										<input class="btn btn-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />
 									</li>
 								</ul>
@@ -1039,7 +1040,7 @@
 		</div>
  	</c:if>
 </div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
-<jsp:include page="../footer.jsp"/>
+

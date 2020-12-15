@@ -154,6 +154,22 @@ public class ParentController {
 		return mav;
 	}
 	
+	
+	///학부모행동내역 작성
+	@RequestMapping("/dealHistoryP")
+	public ModelAndView dealHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.teacherDealHistory(userid);
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("list2", list2);
+			mav.setViewName("/teacher/dealHistory");
+
+			return mav;
+	}
+	
+	
 	@RequestMapping(value = "/refusalDbm", method = RequestMethod.POST)
 	@ResponseBody
 	public int refusalDbm(@RequestParam("dbmid") String dbmid, @RequestParam("no") int no) {
@@ -192,11 +208,12 @@ public class ParentController {
 		rbVO.setUserid((String)ses.getAttribute("userid"));
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation==null || consultation=="") {
+		if(consultation == null) {
+			System.out.println("협의 null =in");
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation==null || time_consultation=="") {
+		if(time_consultation == null) {
 			rbVO.setTime_consultation("N");
 		}
 		String childb = cVO.getChild_birth();

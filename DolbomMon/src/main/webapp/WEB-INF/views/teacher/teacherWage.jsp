@@ -13,7 +13,8 @@
 
 
 <style>
-	.container{width:800px;}
+	.container{width:800px;
+}
 	
 	#title{
 		margin:20px 5px;
@@ -32,7 +33,7 @@
 	margin-top:30px;
 	
 	}
-	.fa-coins{
+	#coinIcon{
 	font-size: 50px;
 	color:orange;
 	display: flex;
