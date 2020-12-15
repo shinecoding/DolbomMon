@@ -17,6 +17,8 @@ public interface DealDaoImp {
 	public int insertContract(RecruitBoardVO rbVO);
 	// 계약서 - 부모님이 선생님에게
 	public int insertContractT(RecruitBoardVO rbVO);
+	// 계약서 취소
+	public int cancelContract(int no);
 	// 내가 신청한 글 목록 보기	
 	public List<RecruitBoardVO> selectTeacherHistory(String userid);
 	// 내게지원한 글 목록 보기	

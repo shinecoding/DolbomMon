@@ -340,6 +340,14 @@ public class DealController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/contractCancel")
+	public ModelAndView contractCancel(int no) {
+		ModelAndView mav = new ModelAndView();
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		dao.cancelContract(no);
+		mav.addObject("result6", 6);
+		mav.setViewName("deal/writeResult");
+		return mav;
+	}
 	
 }

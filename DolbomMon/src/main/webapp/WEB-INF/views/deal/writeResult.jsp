@@ -50,3 +50,9 @@
 		window.close();
 	</script>
 </c:if>
+<c:if test="${result6==1}">
+	<script>
+		alert("계약서를 삭제하였습니다.");
+		window.close();
+	</script>
+</c:if>

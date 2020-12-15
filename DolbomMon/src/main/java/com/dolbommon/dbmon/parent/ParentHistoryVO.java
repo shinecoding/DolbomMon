@@ -19,7 +19,14 @@ public class ParentHistoryVO {
 	private String child_birth;
 	private int tcnt;
 	private String pic;
+	private String agree;
 	
+	public String getAgree() {
+		return agree;
+	}
+	public void setAgree(String agree) {
+		this.agree = agree;
+	}
 	public int getJob_board_no() {
 		return job_board_no;
 	}
