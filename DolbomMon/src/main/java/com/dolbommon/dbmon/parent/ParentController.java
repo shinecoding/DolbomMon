@@ -271,7 +271,16 @@ public class ParentController {
 		return mav;
 	
 	}
-	
+
+	//후기 작성
+	@RequestMapping("/commentWrite")
+	public String commentWrite() {
+		
+		
+		
+		return "/parents/commentWrite";
+	}
+
 	@RequestMapping("parentProfile")
 	public ModelAndView parentProfile(String userid) {
 		
@@ -286,8 +295,5 @@ public class ParentController {
 	}
 	
 	
-	
-	
-	
-	
+
 }

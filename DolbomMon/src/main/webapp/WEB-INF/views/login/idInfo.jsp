@@ -15,6 +15,7 @@
 	}	
 	#top{
 		margin: 15px;
+		margin-top: 40px;
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
@@ -24,6 +25,7 @@
 </head>
 <body>
 <div class="container">
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div id="top">
 <b>계정 정보</b>
 </div>
@@ -44,4 +46,5 @@
 	</form>
 </div>
 </body>
+<jsp:include page="../footer.jsp"/>
 </html>
