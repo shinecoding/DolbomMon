@@ -832,8 +832,23 @@
 </div>
 <div class="container" style="height:80px;">
 	<div style=" float:right;">
+		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == currID}">
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
+		</c:if>
+		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='Y'}">
+			<span style="color:green">수락한 계약서입니다.</span>
+		</c:if>
+		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='N'}">
+			<span style="color:red">거절한 계약서입니다.</span>
+		</c:if>
+		<c:if test="${rbVO.userid == userid and rbVO.agree=='Y'}">
+			<span style="color:green">결제버튼</span>
+		</c:if>
+		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
+			<span style="color:red">선생님이 거절한 계약서입니다.</span>
+		</c:if>
+		
 	</div>
 </div>
 </body>
