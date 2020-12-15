@@ -111,7 +111,7 @@ var test='<%=(String)session.getAttribute("userid")%>';
 				{"data" : "teacher_id",
 					 "render": function(data, type, row){
 		                    if(type=='display'){
-		                        data ='<a class="selectId" href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
+		                        data ='<a class="selectId" href="/dbmon/parentProfile?userid='+ data + '" target="_blank">' + data + '</a>';
 		                    }
 		                    return data;	
 				
