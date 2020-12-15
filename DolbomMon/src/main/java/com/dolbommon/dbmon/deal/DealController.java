@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dolbommon.dbmon.member.MemberVO;
+import com.dolbommon.dbmon.deal.MemberVO;
 import com.dolbommon.dbmon.member.RegularDateVO;
 import com.dolbommon.dbmon.member.SpecificDateVO;
 import com.dolbommon.dbmon.parent.ApplyToParentInfoVO;

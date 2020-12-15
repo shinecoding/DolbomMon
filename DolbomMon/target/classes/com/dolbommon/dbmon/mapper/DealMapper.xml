@@ -82,8 +82,8 @@
 		update parent_list set agree='N' where userid=#{userid} and teacherid=#{teacherid} and agree='T'
 	</update>
 	
-	<select id="selectMemberDeal" parameterType="String" resultType="com.dolbommon.dbmon.member.MemberVO">
-		select username, email, tel1, addr, zipcode from member where userid = #{userid}
+	<select id="selectMemberDeal" parameterType="String" resultType="com.dolbommon.dbmon.deal.MemberVO">
+		select username, email, tel1, addr, zipcode from member where userid = #{parent_id}
 	</select>
 	<insert id="insertPayment">
 		insert into payment(pay_no, parent_id, parent_name, pay_money, teacher_id, pay_id, merchant_id, apply_num, tel, email) values(#{pay_no}, #{parent_id}, #{parent_name}, #{pay_money}, #{teacher_id}, #{pay_id}, #{merchant_id}, #{apply_num}, #{tel}, #{email})
