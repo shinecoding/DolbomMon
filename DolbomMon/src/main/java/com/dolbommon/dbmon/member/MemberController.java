@@ -78,7 +78,6 @@ public class MemberController {
 		@RequestMapping(value="/regFormOk", method=RequestMethod.POST)
 		public ModelAndView regOk(
 			HttpServletRequest req,HttpSession ses, MemberVO mVo, TeacherVO tVo, RegularDateVO rdVo
-			, @RequestParam("pic") String pic
 				) {
 			
 			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -335,9 +334,6 @@ public class MemberController {
 			      @RequestParam("cctv") String cctv,
 			      @RequestParam("discussion") String discussion
 		){
-			if(discussion.equals("")||discussion.equals(null)) {
-				discussion = "N";
-			}
 			ses.setAttribute("discussion", discussion);
 			ses.setAttribute("desired_wage" ,desired_wage);
 			ses.setAttribute("cctv" ,cctv);
@@ -345,83 +341,14 @@ public class MemberController {
 			return "register/dbm/profileImage";
 		}
 		
-		@RequestMapping(value="/dbm/profileImageOk", method = RequestMethod.POST)
-		public ModelAndView dbmProfileImageOk(HttpServletRequest req, HttpSession ses
-				) {
-			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
-			
-			String path = ses.getServletContext().getRealPath("/upload");
-			// 파일 업로드를 하기위해서 req에서 MultipartHttpServletRequest 를 생성한다.
-			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
-			// mr에서 MultipartFile객체를 얻어온다.	-> List
-			List<MultipartFile> files = mr.getFiles("pic");
-			
-			//파일명을 저장할 변수
-			String fileNames[] = new String[files.size()]; 
-			int idx = 0;
-			
-			if(files!=null) { //첨부파일이 있을 때
-				for(int i=0;i<files.size();i++) { //for 111
-					MultipartFile mf = files.get(i);
-					System.out.println("files.get==>" + files.get(i));
-					String fName = mf.getOriginalFilename();// 폼의 파일명 얻어오기
-					if(fName!=null && !fName.equals("")) {
-						String oriFileName = fName.substring(0, fName.lastIndexOf("."));// 원파일의 앞부분
-						String oriExt = fName.substring(fName.lastIndexOf(".")+1);//확장자
-						// 이름을 바꿔야 한다.
-						File f = new File(path, fName); // 
-						if(f.exists()) { // 원래 파일객체가 서버에 있으면 실행
-							for(int renameNum=1;;renameNum++) { //1,2,3,4,5,6...
-								// 변경된 파일명
-								String renameFile = oriFileName+renameNum+"."+oriExt;
-								f = new File(path, renameFile);
-								if(!f.exists()) { // 파일이 있으면 true 없으면 false
-									fName = renameFile; 
-									break;
-								}
-							}
-						}
-						try {
-							mf.transferTo(f);
-						}catch(Exception e) {}
-						fileNames[idx++] = fName;
-					}
-				}//for 111
-			}
-			String who = (String)ses.getAttribute("who");
-			System.out.println("image who => " + who);
-			int imgresult = 0;
-			for(int i=0; i<fileNames.length;i++) {
-				if(who.equals("T")) {
-					ses.setAttribute("pic", fileNames[i]);
-				}else {
-					String userid = (String)ses.getAttribute("userid");
-					System.out.println("파일명 => " + fileNames[i]);
-					imgresult = dao.parentImageUpload(fileNames[i], userid);
-				}
-			}
-			ModelAndView mav = new ModelAndView();
-			if(who.equals("T")) {
-				System.out.println("들어옴  TTTTTTT" );
-				mav.setViewName("register/dbm/introduce");
-				return mav;
-			}else {
-				System.out.println("들어옴 PPPPPPP" );
-				System.out.println("결과 => " + imgresult);
-				mav.addObject("imgresult", imgresult);
-				mav.setViewName("register/regResult");
-				return mav;
-			}
-			
-		}
-		
 		// 돌봄몬 - 간단 자기소개입력 폼 >>
-		@RequestMapping(value="/dbm/introduce", method = RequestMethod.POST)
-		public String dbmIntroduce(
+		@RequestMapping(value="/dbm/profileImageOk", method = RequestMethod.POST)
+		public ModelAndView dbmIntroduce(
 			      @RequestParam("pic") MultipartFile pic,
+			      HttpSession ses,
 			      HttpServletRequest req
 				) {
-			HttpSession ses = req.getSession();
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			
 			String path = ses.getServletContext().getRealPath("/upload");
 			System.out.println("path = " + path);
@@ -436,14 +363,54 @@ public class MemberController {
 			}catch(IOException ie) {
 				ie.printStackTrace();
 			}
-			ses.setAttribute("pic", oriFileName1);
 			
-			return "register/dbm/introduce";
+			ModelAndView mav = new ModelAndView();
+			
+			System.out.println("들어옴  TTTTTTT" );
+			ses.setAttribute("pic", oriFileName1);
+			mav.setViewName("register/dbm/introduce");
+			return mav;
 		}
 		
-		@RequestMapping("/dbm/introduce/np")
-		public String dbmIntroduceNonePic() {
+		@RequestMapping(value="/parent/profileImageOk", method = RequestMethod.POST)
+		public ModelAndView parentImgUpload(
+			      @RequestParam("pic") MultipartFile pic,
+			      @RequestParam("userid") String userid,
+			      HttpSession ses,
+			      HttpServletRequest req
+				) {
+			MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
 			
+			String path = ses.getServletContext().getRealPath("/upload");
+			System.out.println("path = " + path);
+			String fileParamName1 = pic.getName();//폼의 파일첨부 객체 변수
+			String oriFileName1 = pic.getOriginalFilename();// 원래 파일명
+			System.out.println("getName() == > " + fileParamName1 + ", " + "getOriginaleFilename() == >"+oriFileName1);
+			
+			try {
+				if(oriFileName1!=null) {
+					pic.transferTo(new File(path, oriFileName1));//실제 파일업로드 발생 
+				}
+			}catch(IOException ie) {
+				ie.printStackTrace();
+			}
+			String who = (String)ses.getAttribute("who");
+			
+			ModelAndView mav = new ModelAndView();
+			
+			System.out.println("들어옴 PPPPPPP" );
+			int imgresult = dao.parentImageUpload(oriFileName1, userid);
+			mav.addObject("imgresult", imgresult);
+			mav.setViewName("register/regResult");
+			
+			return mav;
+		}
+		
+		
+		@RequestMapping("/dbm/introduce/np")
+		public String dbmIntroduceNonePic(HttpSession ses) {
+			String pic = "";
+			ses.setAttribute("pic", pic);
 			return "register/dbm/introduce";
 		}
 	}
