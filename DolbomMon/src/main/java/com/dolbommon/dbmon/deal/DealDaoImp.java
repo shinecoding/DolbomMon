@@ -59,5 +59,6 @@ public interface DealDaoImp {
 	public String ContractStatus4(int no);
 		
 	public MemberVO selectMemberDeal(String userid);
+	public int insertPayment(PaymentVO vo);
 }
 

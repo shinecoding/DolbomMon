@@ -272,6 +272,7 @@ public class DealController {
 		mav.addObject("tlist", tlist);
 		mav.addObject("userid", userid);
 		mav.addObject("cVO", cVO);
+		mav.addObject("teacherid", teacherid);
 		mav.addObject("rbVO", rbVO);
 		mav.addObject("mvo", mvo);
 		mav.setViewName("/deal/contractView");
@@ -303,22 +304,26 @@ public class DealController {
 		String merchant_id = req.getParameter("merchant_id");
 		String pay_money = req.getParameter("pay_money");
 		String apply_num = req.getParameter("apply_num");
+		String teacherid = req.getParameter("teacherid");
 		PaymentVO pvo = new PaymentVO();
 		pvo.setParent_id(parent_id);
 		pvo.setPay_id(pay_id);
 		pvo.setMerchant_id(merchant_id);
 		pvo.setPay_money(pay_money);
 		pvo.setApply_num(apply_num);
+		pvo.setTeacher_id(teacherid);
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 		MemberVO mvo = dao.selectMemberDeal(parent_id);
 		pvo.setParent_name(mvo.getUsername());
 		pvo.setTel(mvo.getTel1());
 		pvo.setEmail(mvo.getEmail());
 		
+		dao.insertPayment(pvo);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("pvo", pvo);
-		mav.setViewName("managment/");
+		mav.addObject("mss", "결제 성공하였습니다.");
+		mav.setViewName("deal/contractResult");
+			
 		
 		return mav;
 	}

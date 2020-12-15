@@ -101,6 +101,7 @@ var charge; //총결제금액
 							tag += "<intput type='hidden' name="merchant_id" value='"+ rsp.merchant_uid +"'>";//상점거래id
 							tag += "<intput type='hidden' name="pay_money" value='"+ rsp.paid_amount +"'>";//결재금액
 							tag += "<intput type='hidden' name="apply_num" value='"+ rsp.apply_num +"'>";//카드승인번호
+							tag += "<intput type='hidden' name="teacherid" value='"+ ${teacherid} +"'>";//카드승인번호
 							tag += "</form>";
 						$("#hiddenDiv").html(tag);
 						$('#hiddenForm').submit();
