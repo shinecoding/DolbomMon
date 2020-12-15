@@ -17,7 +17,7 @@
  	p{display:inline-block; width:40%; overflow:hidden; height:auto; font-size:15px;}
  	.container>input{width:70%; height:40px; border:1px solid #CCC; border-radius:10px;}
  	input[type=submit]:nth-of-type(1){margin:20px 0; background-color:orange; color:#EFEFEF}
- 	input[type=file]{display:block;}
+ 	input[type=file]{display:none;}
 </style>
 <script>
 	$(function(){
@@ -54,8 +54,8 @@
 			<img id="plusBtn" style="cursor:pointer;" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/profile/profile-add-bt.svg" />
 		</div>
 		<p>회원가입 완료하였습니다. 프로필 사진을 등록해주세요</p>		
-		<input id="uploadSubmit" type="submit" value="지금 올리기" />
-		<input id="later" type="button" value="나중에 하기" onclick="laterUpload();"/>
+		<input id="uploadSubmit" class="btn" type="submit" value="지금 올리기" />
+		<input id="later" type="button" class="btn" value="나중에 하기" onclick="laterUpload();"/>
 	</div>
 	</form>
 </body>

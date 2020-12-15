@@ -132,7 +132,6 @@
 			}else{
 				//////////////////////////////sdVO
 //////////////////////sd //////////////////////
-				var getSelect_date = "${sdVO.select_date}";
 				
 				var getStart_time = "${sdVO.start_time}";
 				$("#start_time").val(getStart_time);
@@ -594,9 +593,11 @@
 			}
 			
 			var time_type = $("input[name=time_type]:checked").val();
+			console.log("time_type => " + time_type);
 			if(time_type=="S"){ // 특정날에만
 				console.log("특정날에만");
 				var select_date = $("#select_date").val();
+				return false;
 				if(select_date==null || select_date==""){
 					swal({
 						title : "돌봄 날짜를 선택 해주세요",
@@ -649,11 +650,8 @@
 				return false;
 			}
 			
-			return true;
 		});
 		
-		// 포커스 없애기
-		$(":focus").blur();
 	});
 
 </script>

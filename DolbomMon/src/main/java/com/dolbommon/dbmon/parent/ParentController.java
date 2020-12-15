@@ -50,11 +50,14 @@ public class ParentController {
 		String userid = (String)ses.getAttribute("userid");
 		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
 		List<RecruitBoardVO> list3 = dao2.selectTeacherHistory2(userid);
 		List<ParentHistoryVO> list = dao.selectMyRdBoard(userid);
+		List<ParentHistoryVO> list2 = dao.selelctApplyToTeacher(userid);
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("list2", list2);
 		mav.addObject("list", list);
 		mav.addObject("list3", list3);
 		mav.setViewName("/parents/parentApplyHistory");
@@ -269,10 +272,29 @@ public class ParentController {
 		return mav;
 	
 	}
+
+	//후기 작성
+	@RequestMapping("/commentWrite")
+	public String commentWrite() {
+		
+		
+		
+		return "/parents/commentWrite";
+	}
+
+	@RequestMapping("parentProfile")
+	public ModelAndView parentProfile(String userid) {
+		
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
+		RecruitBoardVO vo = dao.getParentProfile(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("parents/parentProfile");
+		mav.addObject("vo", vo);
+		return mav;
+	}
 	
 	
-	
-	
-	
-	
+
 }

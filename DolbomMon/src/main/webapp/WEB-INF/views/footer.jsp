@@ -9,14 +9,13 @@
      font-size:.85em;
      margin-bottom:0px;
      background: #555;
-
      color: #C2C2C2;
      padding: 18px 0;
 
 }
 
 </style>
-<footer class="footer" style="margin-top:100px;">
+<footer class="footer" style="margin-top:0px;">
 <br/>	
 	<div id="footer_textarea" style="margin-left:200px;">
 	<img src="<%=request.getContextPath()%>/img/mylogogray.png" 

@@ -334,9 +334,12 @@ public class MemberController {
 			      @RequestParam("cctv") String cctv,
 			      @RequestParam("discussion") String discussion
 		){
+			System.out.println(("협의 가능여부 => "  + discussion));
+			
 			ses.setAttribute("discussion", discussion);
 			ses.setAttribute("desired_wage" ,desired_wage);
 			ses.setAttribute("cctv" ,cctv);
+			
 			
 			return "register/dbm/profileImage";
 		}
