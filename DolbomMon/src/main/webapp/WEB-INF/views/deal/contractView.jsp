@@ -900,7 +900,7 @@ var charge; //총결제금액
 		</c:if>
 		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='N'}">
 			<span style="color:red">거절한 계약서입니다.</span>
-		</c:if>
+		</c:if>	
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='Y'}">
 			<a href="javascript:paymentTest()" class="btn btn-warning">결제하기</a>
 		</c:if>
