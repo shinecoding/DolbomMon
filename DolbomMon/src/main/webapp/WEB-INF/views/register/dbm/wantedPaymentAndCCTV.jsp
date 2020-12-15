@@ -14,7 +14,7 @@
 	/* ========================= 희망시급 ============================*/
 	#paymentDiv{display:inline-block; width:90%; overflow:hidden; height:auto; text-align:center; margin-top:50px;}
 	#paymentDiv img{width:30%; height:104px; margin:15px 0;}
-	#paymentDiv div:nth-of-type(1){width:100%; overflow:hidden; height:auto; text-align:center; background-color:orange; border-radius:10px;}
+	#paymentDiv #wageDiv{width:100%; overflow:hidden; height:auto; text-align:center; background-color:orange; border-radius:10px;}
 	#paymentDiv input[type=number]{width:20%; font-size:20px; text-align:right; padding:5px 10px; margin:1% 0; background-color:orange; border-radius:10px;border:none;}
 	#paymentDiv span{margin-left:1%; font-size:14px;}
 	#paymentDiv label{margin:2% 0;}
@@ -34,7 +34,7 @@
 	label[for=N] span{}
 	/* ========================= cctv동의여부 ============================*/
 	
-	input[type=submit]{width:90%; height:50px; margin-top:30px;}
+	input[type=submit]{width:90%; height:50px; margin:30px 0 100px 0;}
 	
 </style>
 <script>
@@ -57,6 +57,20 @@
 				$("#desired_wage").val("8600");
 			}else{
 				
+			}
+		});
+		
+		if($("#disRadio").is(":checked")){
+			$("input[name=discussion]").val("Y");
+		}else {
+			$("input[name=discussion]").val("N");
+		}
+		
+		$("#disRadio").change(function(){
+			if($("#disRadio").is(":checked")){
+				$("input[name=discussion]").val("Y");
+			}else {
+				$("input[name=discussion]").val("N");
 			}
 		});
 		
@@ -84,15 +98,18 @@
 			<div id="paymentDiv">
 				<h4>희망시급을 입력해주세요</h4>
 				<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-07-mainimage.svg" />
-				<div>
+				<div id="wageDiv">
 					<input type="number" inputmode="numeric" id="desired_wage" name="desired_wage" maxlength="6" value="8590" style="color:white;"/><span>원/1시간</span>
 				</div>
 				<span id="minWage" style="color:orange">
 					
 				</span>
 				<div class="custom-control custom-switch" style="margin:15px 0; text-align:center;">
-    					<input type="checkbox" class="custom-control-input" id="avg_wage" >
-    					<label class="custom-control-label" for="avg_wage">평균시급 적용</label>
+    				<div><input type="checkbox" class="custom-control-input" id="avg_wage" >
+    				<label class="custom-control-label" for="avg_wage">평균시급 적용</label></div>
+    				<div><input type="checkbox" name="disRadio" class="custom-control-input" id="disRadio" >
+    				<label class="custom-control-label" for="disRadio">협의가능</label></div>
+    				<input type="text" value="N" name="discussion" id="discussion" style="display:none;"/>
 				</div>
 				<p>
 					아이 1명을 돌보는 경우 - 최저시급 8590원 이상 필수<br/>

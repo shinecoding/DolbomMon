@@ -76,7 +76,8 @@ $(function(){
 	
 	//프로필 들어가기
     $(document).on("click", ".list-group-horizontal", function(){
-    	location.href="teacherView?userid="+$(this).parent().parent().attr('id')+"nowPage="+$(this).attr('id');
+    	location.href="teacherView?userid="+$(this).parent().parent().attr('id');
+    			//+"nowPage="+$(this).attr('id');
     });
 	
 	//신청하기&협의하기
@@ -84,7 +85,8 @@ $(function(){
 	var popupHeight = 596;
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
 	var popupY= (window.screen.height / 2) - (popupHeight / 2);
-	$(document).on("click", ".shinchung", function(){
+	$(document).on("click", ".shinchung", function(event){
+		 event.stopPropagation();
 		console.log('test');
 		popupWidth = 1060;
 		popupHeight = 1600;
@@ -92,7 +94,8 @@ $(function(){
 		console.log(userid);
 		window.open('/dbmon/contractOpenT?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 	})
-	$(document).on("click",".cBtn",function(){
+	$(document).on("click",".cBtn",function(event){
+		event.stopPropagation();
 		popupWidth = 1060;
 		popupHeight = 656;
 		var userid = $(this).attr('id');
@@ -156,8 +159,8 @@ $(function(){
 						tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
 						tag+= '</li>';
 						tag += '<li class="list-group-item border-0 col-2">';
-						tag += '<button class="shinchung btn btn-warning mb-3">신청</button>';
-						tag += '<button class="cBtn btn btn-warning">협의</button>';
+						tag += '<button class="shinchung btn btn-warning mb-3"  id="'+vo.userid+'">신청</button>';
+						tag += '<button class="cBtn btn btn-warning"  id="'+vo.userid+'">협의</button>';
 						tag += '</li>';
 						tag+= '</ul>';
 							
@@ -279,8 +282,8 @@ $(function(){
 						tag+= '<h6><i class="fas fa-child"></i>' +vo.birth+ '세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : '+vo.headcount+'명</h6>';
 						tag+= '</li>';
 						tag += '<li class="list-group-item border-0 col-2">';
-						tag += '<button class="shinchung btn btn-warning mb-3">신청</button>';
-						tag += '<button class="cBtn btn btn-warning">협의</button>';
+						tag += '<button class="shinchung btn btn-warning mb-3"  id="'+vo.userid+'">신청</button>';
+						tag += '<button class="cBtn btn btn-warning" id="'+vo.userid+'">협의</button>';
 						tag += '</li>';
 						tag+= '</ul>';
 							
@@ -383,8 +386,8 @@ $(function(){
 						<h6><i class="fas fa-child"></i>${vo.birth}세 | <i class="fas fa-baby-carriage"></i>돌봄가능아이 : ${vo.headcount}명</h6>
 					</li>
 					<li class="list-group-item border-0 col-2">
-						<button class="shinchung btn btn-warning mb-3">신청</button>
-						<button class="cBtn btn btn-warning">협의</button>
+						<button class="shinchung btn btn-warning mb-3" id=${vo.userid}>신청</button>
+						<button class="cBtn btn btn-warning" id="'+vo.userid+'">협의</button>
 					</li>
 				</ul>
 		

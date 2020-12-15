@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/multidatepicker.css" type="text/css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link href="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
@@ -23,9 +23,8 @@
 	.container{width:800px;}
 	i{color:gray;}
 	#profimg{
-	   	width:400px;
-		height:400px;
-		text-align:center;
+	   	width:100px;
+		height:100px;
 	}
 	h5{
 	   padding: 20px 0px 0px 0px;
@@ -35,7 +34,6 @@
 	 font-size:60px;
 	 margin: 8px;
 	}
-	#dbmDiv{margin-top:50px;}
 	#applyDbmList h6{height:7%;}
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
@@ -125,40 +123,6 @@
 		}
 	});
 	
-	
-	
-	var sd = "${sdVO.select_date}";
-	
-	
-	
-	$(function(){
-		
-		function available(date) {
-			var selectedDate = sd.split(",");
-			
-			var thismonth = date.getMonth()+1;
-			var thisday = date.getDate();
-			if(thismonth<10){
-				thismonth = "0"+thismonth;
-			}
-			if(thisday<10){
-				thisday = "0"+thisday;
-			}
-		    ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
-		    if ($.inArray(ymd, selectedDate) >= 0) {
-		        return [true,"",""];
-		    } else {
-		        return [false,"",""];
-		    }
-		}
-
-		$("#specificDate").datepicker({ // 고정 데이트피커
-			yearRange : 'c-100:c',
-			format : "yy-mm-dd",
-			beforeShowDay: available
-		});
-	});
-	
 	$(document).ready(function(){
 		
 		
@@ -210,7 +174,8 @@
 			popupWidth = 1060;
 			popupHeight = 1600;
 			var origin_no = $(this).attr('id');
-			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			var teacherid = $(this).next().next().attr('id'); //아래 버튼 위치 수정하면 이것도 수정
+			window.open('/dbmon/contractView?origin_no='+origin_no+'&teacherid='+teacherid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
 		
 		
@@ -312,10 +277,14 @@
 			}
 		});
 		
-		
-		///////////////////////////////////////////////////
+		var time_type = "${rbVO.time_type}";
+		/////////////////////////////////////////////////// 
+		console.log("time type => " + time_type);
+		if(time_type=="R") {
+		///////////////////////////////////////// rd
 		var start_time = "${rdVO.start_time}";
 		var end_time = "${rdVO.end_time}";
+		console.log("endtime in r => " + end_time);
 		var start_date = "${rdVO.start_date}";
 		var end_date = "${rdVO.end_date}";
 		var syoil = "${rdVO.yoil}";
@@ -351,52 +320,11 @@
 		var cnt = 0;
 		var ttest = 0;
 		var gylength = getYoil.length;
-		console.log("입력받은 요일 수 => " + gylength);
-		for(var i=0; i<getYoil.length;i++){
-			if(startday.getDay()>getYoil[i]){
-				
-			}else {
-				ttest = ttest+1;
-			}
-		}
-		if(ttest == 0){
-			cnt = 1;
-			loop :
-			for(var i=0;i<7;i++){
-				
-				var data = getYoil[0]-i;
-				if(data == 0){
-					data = 7;
-				}else if(data == -1){
-					data = 6;
-				}else if(data == -2){
-					data = 5;
-				}else if(data == -3){
-					data = 4;
-				}else if(data == -4){
-					data = 3;
-				}else if(data == -5){
-					data = 2;
-				}else if(data == -6){
-					data = 1;
-				}
-				if(data == startday.getDay()){
-					first = first + i;
-					console.log("fiiiiiiirst => " + first);
-					break loop;
-				}
-			}
-			startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+first);
-		}
-		
-		
-		
-		console.log("입력받은 요일 => " + selectedYoil);
-		console.log("시작일의 요일 => " + startday.getDay());
-		console.log("정렬 전 => " + getYoil);
-		 // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
+		console.log("시작날짜의 요일 => " + startday.getDay());
+		console.log("같은 요일 체크 전 =>" + getYoil);
 		for(var i=0;i<getYoil.length;i++){
 			if(getYoil[i]==(startday.getDay())){
+				console.log("입력한 요일 중 시작날의 요일과 같은 요일이 있는 경우")
 				cnt = 1;
 				var idx = getYoil.indexOf(getYoil[i]);
 				console.log("삭제할 배열의 인덱스 =>" + idx);
@@ -405,12 +333,174 @@
 				getYoil.unshift(startday.getDay());
 			}
 		}
-		console.log("정렬 후 => " + getYoil);
+		
+		console.log("정렬 후 v => " + getYoil);
+		var cnt = 0;
+		for(var i=0;i<getYoil.length;i++){
+			if(getYoil[i]<startday.getDay()){
+				cnt = cnt + 1;
+			}else {
+				cnt = 0;
+			}
+		}
+		
+		if(cnt==0){
+			console.log("선택날짜에 해당요일이 없는 경우");
+			console.log("요일 확인 => " + getYoil);
+			lbl :
+			for(var i=0;i<7;i++){
+				for(var j=0;j<7;j++){
+					mdata = getYoil[j]-i;
+					pdata = getYoil[j]+i;
+					
+					if(pdata == 8){
+						pdata = 1;
+					}else if(pdata == 9){
+						pdata = 2;
+					}else if(pdata == 10){
+						pdata = 3;
+					}else if(pdata == 11){
+						pdata = 4;
+					}else if(pdata == 12){
+						pdata = 5;
+					}else if(pdata == 13){
+						pdata = 6;
+					}
+					
+					if(mdata == 0){
+						mdata = 7;
+					}else if(mdata == -1){
+						mdata = 6;
+					}else if(mdata == -2){
+						mdata = 5;
+					}else if(mdata == -3){
+						mdata = 4;
+					}else if(mdata == -4){
+						mdata = 3;
+					}else if(mdata == -5){
+						mdata = 2;
+					}else if(mdata == -6){
+						mdata = 1;
+					}
+					
+					if(mdata==startday.getDay()){
+						console.log("mdata로 설정됨 => " + mdata);
+						var idx = getYoil.indexOf(getYoil[j]);
+						var temp = getYoil[j];
+						console.log("삭제할 배열의 인덱스 =>" + idx);
+						getYoil.splice(idx,1);
+						console.log("삭제 후 => " +  getYoil);
+						getYoil.unshift(temp);
+						console.log("다시 정렬 후 => " +  getYoil);
+						break lbl; 
+					}
+					
+					/* if(pdata==startday.getDay()){
+						console.log("pdata로 설정됨 => " + pdata);
+						var idx = getYoil.indexOf(getYoil[j]);
+						var temp = getYoil[j];
+						console.log("삭제할 배열의 인덱스 =>" + idx);
+						getYoil.splice(idx,1);
+						console.log("삭제 후 => " +  getYoil);
+						getYoil.unshift(temp);
+						console.log("다시 정렬 후 => " +  getYoil);
+						break lbl;
+					} */
+				}
+			}
+		}
+		
+		console.log("시작일 확인 =>" + startday.getDay());
+		if(cnt==0){
+			if(startday.getDay()>getYoil[0]){
+				cnt = 1;
+				loop :
+				for(var i=1;i<7;i++){
+					
+					var data = getYoil[0]+i;
+					if(data == 8){
+						data = 1;
+					}else if(data == 9){
+						data = 2;
+					}else if(data == 10){
+						data = 3;
+					}else if(data == 11){
+						data = 4;
+					}else if(data == 12){
+						data = 5;
+					}else if(data == 13){
+						data = 6;
+					}
+					if(data == startday.getDay()){
+						console.log("fiiiiiiirst ++  => " - i);
+						startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()-i);
+						break loop;
+					}
+				}
+			}else {
+				cnt = 1;
+				loop :
+				for(var i=1;i<7;i++){
+					
+					var data = getYoil[0]-i;
+					if(data == 0){
+						data = 7;
+					}else if(data == -1){
+						data = 6;
+					}else if(data == -2){
+						data = 5;
+					}else if(data == -3){
+						data = 4;
+					}else if(data == -4){
+						data = 3;
+					}else if(data == -5){
+						data = 2;
+					}else if(data == -6){
+						data = 1;
+					}
+					if(data == startday.getDay()){
+						console.log("fiiiiiiirst -- => " + i);
+						startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+i);
+						break loop;
+					}
+				}
+			}
+		}else {
+			console.log("입력한 모든 요일이 시작 요일 뒤에 있는 경우 => " + getYoil[0]);
+			for(var i=1;i<7;i++){
+				var startdaypp = startday.getDay()+i;
+				if(startdaypp==8){
+					startdaypp=1;
+				}else if(startdaypp==9){
+					startdaypp=2;
+				}else if(startdaypp==10){
+					startdaypp=3;
+				}else if(startdaypp==11){
+					startdaypp=4;
+				}else if(startdaypp==12){
+					startdaypp=5;
+				}else if(startdaypp==13){
+					startdaypp=6;
+				}else if(startdaypp==14){
+					startdaypp=7;
+				}
+				if(startdaypp == getYoil[0]){
+					console.log("선택한 요일이 시작 요일보다 전부 앞에 있는 경우 => " + i );
+					startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+i);
+				}
+			}
+		}
+		
+		console.log("입력받은 요일 => " + selectedYoil);
+		console.log("시작일의 요일 => " + startday.getDay());
+		console.log("정렬 전 => " + getYoil);
+		 // 시작일의 요일과 입력받은 요일들 중 같은 값이 있는지 확인
+		
 		
 		var pdata;
 		var mdata;
 		
-		if(cnt == 0){
+		if(cnt == 120){
 			console.log("선택날짜에 해당요일이 없는 경우");
 			lbl :
 			for(var i=0;i<7;i++){
@@ -466,7 +556,6 @@
 						break lbl;
 					}
 				}
-				
 			}
 			
 			startday = new Date(startday.getFullYear(), startday.getMonth(), startday.getDate()+first);
@@ -601,7 +690,7 @@
 		console.log("두 날짜 사이의 일 수 => " + edl);
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
-		var weeek = ${rdVO.week};
+		var weeek = "${rdVO.week}";
 		console.log("weeekekekekek -> " + weeek);
 		var timebar = "";
 		
@@ -636,17 +725,84 @@
 		}
 		$("#timebarDiv").append(timebar);
 		
+		}else { /////////////////////////////sd
+			var start_time = "${sdVO.start_time}";
+			console.log("sd _ start_time => " + start_time);
+			var end_time = "${sdVO.end_time}";
+			console.log("ed _ end_time => " + end_time);
+			
+			
+			var sd = "${sdVO.select_date}";
+			console.log("sdsdsd sd => " + sd);
+			var selectedDate = sd.split(", ");
+			
+			$(function(){
+				
+				function available(date) {
+					
+					var thismonth = date.getMonth()+1;
+					var thisday = date.getDate();
+					if(thismonth<10){
+						thismonth = "0"+thismonth;
+					}
+					if(thisday<10){
+						thisday = "0"+thisday;
+					}
+				    ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
+				    if ($.inArray(ymd, selectedDate) >= 0) {
+				        return [true,"",""];
+				    } else {
+				        return [false,"",""];
+				    }
+				    
+				}
 		
-		
+				$("#specificDate").multiDatesPicker({ // 고정 데이트피커
+					numberOfMonths : [1, 2],
+					maxDate : "+30d",
+					minDate : "0",
+					format : "yy-mm-dd",
+					beforeShowDay: available
+				});
+				
+				$("#specificDate>div").css("width", "100%");
+				$(".ui-state-disabled>span").css("text-align", "center");
+				$("a").parent("td").addClass("ui-state-highlight ui-datepicker-current-day");
+				$("td a").addClass('ui-state-active');
+				$("a").parent("td").css("background-color", "orange");
+			});
+		}
 		//////////////////////////////////////////////////////////////////////////
-		
+		function timeForToday(value) {
+	        var today = new Date();
+	        var timeValue = new Date(value);
+
+	        var betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+	        if (betweenTime < 1) return '방금전';
+	        if (betweenTime < 60) {
+	            return betweenTime+"분전";
+	        }
+
+	        var betweenTimeHour = Math.floor(betweenTime / 60);
+	        if (betweenTimeHour < 24) {
+	            return betweenTimeHour+"시간전";
+	        }
+
+	        var betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+	        if (betweenTimeDay < 365) {
+	            return betweenTimeDay+"일전";
+	        }
+	        return Math.floor(betweenTimeDay / 365)+"년전";
+	 	}
+		var getWritedate = "${rbVO.writedate}";
+		console.log("writedate => " + getWritedate);
+		var writedatee = timeForToday(getWritedate);
+		console.log(writedatee);
+		$("#writedate").text(writedatee);
 	});
-
-
 	
 	
 </script>
-
 <style>
 	#specificDate>div{width:100%;}
 	.ui-state-disabled>span{text-align:center;}
@@ -656,27 +812,27 @@
 
 <%@include file="/WEB-INF/views/top.jsp"%>
 <hr/>
-
 <div class="container">
-	<div>
-  	 <img class="rounded mx-auto d-block" id="profimg" src="img/profilepic.png"/>
-   </div>
-   <div class="clearfix" style="width:100%">
+	<div style="margin:20px 0;">
+  	 	<img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>
+  	 	<div style="text-align:center;font-size:20px;">${rbVO.title }</div>
+   	</div>
+   	<div class="clearfix" style="width:100%">
 	   <div style="position:relative; float:right; height:1px; top:-420px;">
-			<div class="badge badge-warning badge-pill mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/>신고</div>
+			<div class="badge badge-warning badge-pill mt-3 p-2"><img src="icon/icon-alarm.png" style="width:1em; height:1em"/></div>
 	   </div>
-   </div>
-   <div>
-   <ul class="list-group">
+   	</div>
+   	<div>
+   	<ul class="list-group">
          <li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${rbVO.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">학부모</span><br/>
          <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span id="jobNo" class="ml-2">${rbVO.job_board_no }</span></li>
-   </ul>
-   </div>
-   <br/>
-   <ul class="list-group list-group-horizontal-sm">
-         <li class="list-group-item col-6" style="text-align:center"><i class="fas fa-search mr-2"></i>지원자 수<br/><div>${rbVO.tcnt }</div></li>
-         <li class="list-group-item col-6" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/>3일 전</li>
-   </ul>
+   	</ul>
+   	</div>
+   	<br/>
+   	<ul class="list-group list-group-horizontal-sm">
+         <li class="list-group-item col-6" style="text-align:center"><i class="fas fa-search mr-2"></i>지원자 수<br/><div style="color:orange;">현재 ${rbVO.tcnt }명</div></li>
+         <li class="list-group-item col-6" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/><div id="writedate" style="color:orange;"></div></li>
+   	</ul>
       
     <h5>신청 내용</h5>
     <li class="list-group-item p-5" style="text-align:center"><c:if test="${rbVO.content==null || rbVO.content=='' }" >아직 작성하지 않았습니다.</c:if><c:if test="${rbVO.content!=null || rbVO.content!='' }">${rbVO.content }</c:if></li>
@@ -708,11 +864,9 @@
 				<div id="specificDate">
 					
 				</div>
-				<div>
-					<input class="" type="text" value="${sdVO.start_time }" readonly="readonly"/>
-					<input class="" type="text" value="${sdVO.end_time }" readonly="readonly"/>
-					${sdVO.select_date }
-					
+				<div >
+					<div style="width:50%;float:left;text-align:center;font-size:25px;">돌봄시작시간 : <b>${sdVO.start_time }</b></div>
+					<div style="width:50%;float:left;text-align:center;font-size:25px;">돌봄종료시간 : <b>${sdVO.end_time }</b></div>
 				</div>
 			</c:if>
 			<c:if test="${rbVO.time_type=='R' }">
@@ -766,71 +920,59 @@
       	<li class="list-group-item">
       		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><b style="font-size:25px;line-height:86px;margin-left:5px;">${rbVO.wish_wage } 원</b>
       		<span><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
-   		
    		</li>
    <h5>선호하는 돌봄유형</h5>
    <li class="list-group-item">
-         <ul class="list-group list-group-horizontal-sm" >
+        <ul class="list-group list-group-horizontal-sm" >
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-indoorplay-n.svg" /><br/>실내놀이</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-walk-n@2x.png" style="width:56px; height:56px;" /><br/>등하원돕기</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-read-n.svg" /><br/>책읽기</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-outdooractivities-n.svg"/><br/>야외활동</li>
-         </ul>
-         <ul class="list-group list-group-horizontal-sm" >
+        </ul>
+        <ul class="list-group list-group-horizontal-sm" >
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/p-membership-2-koreanicon-n-2.svg"/><br/>한글놀이</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-english-n.svg"/><br/>영어놀이</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-specially-n.svg"/><br/>학습지도</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-pe-n.svg"/><br/>체육놀이</li>
-         </ul>
-         <ul class="list-group list-group-horizontal-sm" >
+        </ul>
+        <ul class="list-group list-group-horizontal-sm" >
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-n.svg"/><br/>간단청소</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-n.svg"/><br/>밥챙겨주기</li>
             <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-n.svg"/><br/>간단설거지</li>
          
-         </ul>
-         <ul class="list-group list-group-horizontal-sm" >
-            <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-n.svg"/><br/>장기입주</li>
-            <li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/>단기입주</li>
+        </ul>
+        <ul class="list-group list-group-horizontal-sm" >
+        	<li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-longterm-n.svg"/><br/>장기입주</li>
+           	<li class="list-group-item col-3 pwa" style="text-align:center; border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/>단기입주</li>
 
-         </ul>
-      </li> 
+        </ul>
+      	</li> 
       
       
         <h5>그 외에 요청사항</h5>
         <li class="list-group-item p-4">
         	<b>희망 돌봄몬 성별 : <c:if test="${rbVO.wish_gender=='F'}">여자</c:if><c:if test="${rbVO.wish_gender=='M'}">남자</c:if><c:if test="${rbVO.wish_gender=='A'}">무관</c:if></b><br/>
-            
         </li>
         </ul>
         
 		<c:if test="${userid == rbVO.userid}">
-			<h5>나에게 신청한 돌봄몬</h5>
+			<c:if test="${rbVO.tcnt>0 }" ><h5>나에게 신청한 돌봄몬</h5></c:if>
 			<c:forEach var="tlist" items="${tlist }">
 		        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
 		        	<input type="hidden" id="dbmid" value="${tlist.userid }" />
 					<ul class="list-group">
-						<li class="list-group-item"><i class="fas fa-star"></i>
-							<ul class="list-group list-group-horizontal">
-		
-								<li class="list-group-item border-0 col-3">
-				
-									<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded-circle" style="width:100%;height:100%;"/><br/><br/>
+						<li class="list-group-item" style="height:200px; margin:10px 0;">
+							<ul class="list-group list-group-horizontal" style="height:100%;">
+								<li class="list-group-item border-0 col-2" style="height:100%;">
+									<img <c:if test="${tlist.pic==null}">src="img/profilepic.png"</c:if><c:if test="${tlist.pic!=null}">src="upload/${tlist.pic}"</c:if> class="rounded-circle" style="width:100%;"/><br/><br/>
+									<h6 style="color:orange; text-align:center;">${tlist.username }</h6> 
+									<h6 style="text-align:center;">${tlist.birth }세</h6>
 								</li>
-
-								<li class="list-group-item border-0 col-9" id="applyDbmList">
-									<img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/favorites/s-list-like-off.png" alt="favorites" style="color:orange; height:30px; width:30px; float:right;">
-									<h6 style="color:orange;">이름 - ${tlist.username }</h6> 
-									<h6><b>나이 - ${tlist.birth }세</b></h6>
+								<li class="list-group-item border-0 col-6" id="applyDbmList" style="height:100%;">
+									
 									<h6><b>지원시간</b> | ${tlist.apply_date }</h6>
 									<h7>CCTV 촬영가능여부 - ${tlist.cctv } | ? | ? </h7><br/><br/>
-									<h6 style="color:orange;"><i class="fas fa-coins mr-1"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
-									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn" style="float:right; margin:0 5px;" />
-									<input type="button" class="btn btn-warning contractOpen" id="${tlist.userid }" value="계약하기" style="float:right; margin:0 5px;"/>
-									<input type="button" class="btn btn-warning cBtn" id="${tlist.userid }" value="협의하기" style="float:right; margin:0 5px;"/>
-									<div style="height:1px; float:right;">
-										<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0 5px;" />
-									</div>
-
+									<h6 ><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b><c:if test="${tlist.discussion=='Y' }" >협의 가능</c:if><c:if test="${tlist.discussion=='N' }" >협의 불가능</c:if></b></h6>
 									<br/>
 									<c:if test="${contractId==tlist.userid }">
 										<span style="color:orange; font-size:14px;position:relative; top:10px;"><b>계약이 진행중입니다.</b></span>
@@ -838,6 +980,12 @@
 									<c:if test="${contractId2==tlist.userid }">
 										<span style="color:red; font-size:14px; position:relative; top:10px;"><b>최근에 계약이 거절되었습니다.</b></span>
 									</c:if>
+								</li>
+								<li class="list-group-item border-0 col-4" style="height:100%;text-align:right;">
+									<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0;"><br/>
+									<input type="button" class="btn btn-warning contractOpen" id="${tlist.userid }" value="계약하기" /><br/>
+									<input type="button" class="btn btn-warning cBtn" id="${tlist.userid }" value="협의하기" /><br/>
+									<input class="btn btn-warning" type="button" value="거절하기" id="refusalBtn"  /><br/>
 								</li>
 							</ul>
 
@@ -858,7 +1006,6 @@
 				</div>
         	</c:if>
         	<c:forEach var="tlist" items="${tlist }">
-        	
         		<c:if test="${userid == tlist.userid }" >
         			<h5 style="margin-top:30px;">학부모의 연락을 기다리고 있습니다.</h5>
 			        <div class="wrapper2" style="margin:5px 0;" id="dbmDiv">
@@ -874,7 +1021,7 @@
 									<li class="list-group-item border-0 col-9" id="applyDbmList">
 										<h4><b>${tlist.username }</b></h4> 
 										<h6>나이 - ${tlist.birth }세</h6>
-										<h6>지원시간 | </h6>
+										<h6>지원시간 | ${tlist.apply_date}</h6>
 										<h6><c:if test="${tlist.cctv == 'Y'}">CCTV가 있어도 당당히 일할 수 있습니다.</c:if><c:if test="${tlist.cctv == 'N'}">CCTV촬영을 원하지 않습니다.</c:if></h6><br/>
 										<h6><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
 										<input class="btn btn-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />

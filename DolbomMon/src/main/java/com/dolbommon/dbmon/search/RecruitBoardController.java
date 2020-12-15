@@ -162,11 +162,11 @@ public class RecruitBoardController {
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation==null || consultation=="") {
+		if(consultation == null) {
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation==null || time_consultation=="") {
+		if(time_consultation == null) {
 			rbVO.setTime_consultation("N");
 		}
 		

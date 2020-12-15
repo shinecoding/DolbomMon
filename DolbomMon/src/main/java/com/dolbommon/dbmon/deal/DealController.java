@@ -94,12 +94,12 @@ public class DealController {
 		rbVO.setUserid((String)ses.getAttribute("userid"));
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation==null || consultation=="") {
+		if(consultation == null) {
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation==null || time_consultation=="") {
-			rbVO.setConsultation("N");
+		if(time_consultation == null) {
+			rbVO.setTime_consultation("N");
 		}
 		System.out.println("원글번호 확인"+rbVO.getOrigin_no());
 		String childb = cVO.getChild_birth();
@@ -131,9 +131,11 @@ public class DealController {
 			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
 				System.out.println("S");
+				dao.insertNullRegularDate();
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
 				System.out.println("R");
+				dao.insertNullSpecificDate();
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);
@@ -141,6 +143,11 @@ public class DealController {
 			System.out.println(e.getMessage());
 			transactionManager.rollback(status);
 		}
+		
+		//dao2.
+		///rbVO.getUserid()
+		//teacherId
+		//
 		
 		mav.addObject("result", result);
 		mav.setViewName("/deal/writeResult");
@@ -165,12 +172,12 @@ public class DealController {
 		rbVO.setUserid((String)ses.getAttribute("userid"));
 		
 		String consultation = (String)rbVO.getConsultation();
-		if(consultation==null || consultation=="") {
+		if(consultation == null) {
 			rbVO.setConsultation("N");
 		}
 		String time_consultation = (String)rbVO.getTime_consultation();
-		if(time_consultation==null || time_consultation=="") {
-			rbVO.setConsultation("N");
+		if(time_consultation == null) {
+			rbVO.setTime_consultation("N");
 		}
 		
 		String childb = cVO.getChild_birth();
@@ -202,9 +209,11 @@ public class DealController {
 			System.out.println("자녀 정보 등록됨");
 			if(time_type.equals("S")) {
 				System.out.println("S");
+				dao.insertNullRegularDate();
 				result = dao.insertDsSpecificDate(rbVO, sdVO);
 			}else {
 				System.out.println("R");
+				dao.insertNullSpecificDate();
 				result = dao.insertDsRegularDate(rbVO, rdVO);
 			}
 			transactionManager.commit(status);
@@ -227,14 +236,23 @@ public class DealController {
 	@RequestMapping("/contractView")
 	public ModelAndView parentView(int origin_no, HttpSession ses, HttpServletRequest req) {
 		//String origin_no = (String)req.getParameter("origin_no");
+		String teacherid = (String)req.getParameter("teacherid");
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
-		int no = dao.selectOrigin(origin_no);
+		ModelAndView mav = new ModelAndView();
+		int no=0;
+		try {
+		no = dao.selectOrigin(origin_no, teacherid);
+		}catch(Exception e) {
+			mav.addObject("result5", 1);
+			mav.setViewName("deal/writeResult");
+			return mav;
+		}
 		List<ApplyToParentInfoVO> tlist = dao.applyDbmSelect2(no);
 		RecruitBoardVO rbVO = dao.recruitBoardSelect2(no);
 		ChildrenVO cVO = dao.recruitChildSelect2(no);
 		
 		String userid = (String)ses.getAttribute("userid");
-		ModelAndView mav = new ModelAndView();
+		
 		
 		String timeType = rbVO.getTime_type();
 		if(timeType.equals("S")) {

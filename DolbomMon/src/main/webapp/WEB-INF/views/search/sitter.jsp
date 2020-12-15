@@ -84,7 +84,7 @@
 	border-top-right-radius:20px;
 	cursor:pointer;
 	}
-	.card-title>b{
+	.card{
 	cursor:pointer;
 	}
 	
@@ -140,15 +140,16 @@ var value;
 	    	}
 	    });
 	    //프로필 들어가기
-	    $(document).on("click", ".card>.profilepic", function(){
+	    $(document).on("click", ".card", function(){
 	    	//console.log($(this).parent().attr('id'));
-	    	location.href="teacherView?userid="+$(this).parent().attr('id');
+	    	location.href="teacherView?userid="+$(this).attr('id');
 
 	    });
+	    /*
 		$(document).on("click", ".card-title>b", function(){
 			location.href="teacherView?userid="+$(this).parent().parent().parent('div').attr('id');
 		})
-	   
+	   */
 		//지도 토글
 	      $(document).on("click", "#mapBtn", function(){
 	    	  $("#map").toggle();
@@ -608,8 +609,8 @@ var value;
     $(function(){	    
 	    //좋아요 찜기능
 	  
-	    $(document).on("click", ".emptyHeart", function(){
-	    	
+	    $(document).on("click", ".emptyHeart", function(event){
+	    	event.stopPropagation();
 	    	var cardid = $(this).children("input").val();
 	    	console.log($(this).children("i").css("color"));
 	    	if($(this).children("i").css("color")=="rgb(128, 128, 128)"){
@@ -716,7 +717,7 @@ var value;
 <form class="form-inline">
   
   <select id="dropdownCT" class="custom-select border-warning mt-2 mb-2" style="width:100%;">
-    <option selected>돌봄 유형을 선택하시면, 맞춤시터를 보여드려요</option>
+    <option selected>돌봄 유형을 선택하시면, 맞춤 돌봄몬을 보여드려요</option>
     
     <optgroup label="2~10세 정기 돌봄"></optgroup>
     <option value="등하원">주 5일 등하원</option>
@@ -770,7 +771,7 @@ var value;
 <!-- -------------------------순서 정렬--------------------- -->
 
    <div class="d-inline-block m-2" style="width:100%;">
-	<div class="float-left" > 총 돌봄몬 수 : <span id="Tcnt">${totalRecord}</span></div>
+	<div class="float-left" > 총 <span id="Tcnt">${totalRecord}</span>명의 돌봄몬</div>
 	
 	<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden;">
 		<select id="orderDropdown">
