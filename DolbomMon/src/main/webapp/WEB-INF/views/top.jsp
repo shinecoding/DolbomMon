@@ -34,23 +34,31 @@ HTML CSSResult
 EDIT ON
 /* 폰트적용 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-@media (max-width:1250px){
-	*{font-family: 'Poor Story', cursive;}
+@media screen and(min-width:768px){
+	*, html, body, a{overflow:hidden;}
 	#fixed-menu{
-		display:none;
+		overflow:hidden;
 	}
+	#topHeader{overflow:hidden;}
 	#menu-button{
-		display:none;
+		overflow:hidden;
 	}
 	#topmenu-button{
-		display:none;
+		overflow:hidden;
 	}
 	.clearfix{
-		display:none;
+		overflow:hidden;
 		
 	}
 	ul.mainTopmenu {
-		display:none;
+		overflow:hidden;
+	}
+	.subMain{
+		overflow:hidden;
+	}
+	
+	ul.mainTopmenu li a{
+		overflow:hidden;
 	}
 }
 /* ===================미디어 쿼리 end ===================*/
@@ -95,11 +103,12 @@ EDIT ON
 		 list-style-type: none;
 		 -webkit-padding-start:0px;
 		 font-family: 'Noto Sans KR', sans-serif;
-		
+		 
 		 }
       ul.mainTopmenu li a{
 	     display: block;
 		 width: 100%;
+		
 		 height: 100%;
 		 line-height: 50px;
 		 font-weight:700;
@@ -107,11 +116,12 @@ EDIT ON
 		 overflow:hidden;
 		 color:white;
 		 text-decoration: none;
-		 font-family:
+
 		 text-align:center;
 		 list-style-type: none;
 		 font-family: font-family: 'Jua', sans-serif;
 		 margin-left:0px;
+		 
 		 
 		 
 		 }
@@ -131,19 +141,16 @@ EDIT ON
 	  
 	  
       ul.mainTopmenu li a:hover{
-	     opacity:30;
+	     opacity:50;
 	     color:white;
+	    
 	     font-family: 'Jua', sans-serif; font-size:21px;
 	     font-weight:500;
 	    
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
-	     background-color: #FAD961;
-	     background-image: -webkit-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
-	     background-image: -moz-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
-	     background-image: -o-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
-	     background-image: linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);  
+	     
 		 }
       ul.mainTopmenu{
 	     zoom: 1;
@@ -182,7 +189,6 @@ EDIT ON
 	   
 	   }
 	   .spread-underline {
-		  color: gray;
 		  text-decoration: none;
 		  display: inline-block;
 		  padding: 2px 0;
@@ -210,7 +216,7 @@ EDIT ON
    </style>
 </head>
 <body>
-<div>
+<div style="height:130px;">
  <div id="fixed-menu" >
 	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1295px;">
 	    <header id="topHeader">
@@ -220,9 +226,9 @@ EDIT ON
 	
 				<c:if test="${logStatus != null || logStatus=='Y'}">
 	           <span style="float:right">
-	           <button class="btn btn-primary ppp ccBtn" style="margin-top:7px;">채팅</button>
+	           <img class="btn ppp ccBtn" src="icon/chat6.png" style="height:55px; width:65px;margin-rignt:0px;"></img>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	           <button class="btn btn-primary ppp" style="margin-top:7px;">쪽지</button></a>
+	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-rignt:0px;"></img></a>
 	          <!-- <a href="/dbmon/temporaryLogin">
 	           <button class="btn btn-info ppp">임시선생로그인</button></a>
 	           <a href="/dbmon/temporaryLoginP">
@@ -233,16 +239,16 @@ EDIT ON
 		<a class="btn" style="float:right"> 
 		 	<c:if test="${logStatus == null || logStatus=='N'}">
 			  
-	        <input type="button" value="가입하기" class="btn btn-outline-warning ppp" style="color:#ff7928;" Onclick="location.href='/dbmon/join'"/>
+	         <input type="button" value="가입하기" class="btn btn-outline-#ff7942 ppp22" style="background-color:#ff7928; color:white; border-radius: 18px;" Onclick="location.href='/dbmon/join'"/>
 	        </c:if>
 	         <c:if test="${logStatus == null || logStatus=='N'}">
-	          <input type="button" value="로그인" class="btn btn-outline-warning ppp" style="color:#ff7928;" Onclick="location.href='/dbmon/login'"/> 
+	          <input type="button" value="로그인" class="btn btn-outline-warning ppp22" style="color:#ff7928;  border-radius: 18px;" Onclick="location.href='/dbmon/login'"/> 
 	          </c:if>
 	    
 	    
-	         <c:if test="${logStatus != null || logStatus=='Y'}">
+	         <c:if test="${logStatus != null || logStatus=='Y'}" ><span class="btn btn-outline-warning LogId" style="color:#ff7942; border-radius: 18px;">
 
-	         ${username }님 <input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username } 님 </span><input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942; border-radius: 18px; margin-left:5px;" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         
@@ -253,13 +259,14 @@ EDIT ON
 	
 	</div> 
 	
-	   <ul class="mainTopmenu" id="topmenu-button">
+	   <ul class="mainTopmenu" id="topmenu-button" style="min-width:1200px;">
 	       
 	       <li class="spread-underline"><a href="#">고객센터</a>
 	
-		        <ul class="subMain">
+		        <ul class="subMain" style="background-color:rgb(247,122,37);">
 		          <li class="spread-underline"><a class="introcss11" href="/dbmon/brandIntro">회사소개</a></li>
-		                 
+		          <li class="spread-underline"><a href="#target2" class="scroll">실시간 후기</a></li>  
+		          <li class="spread-underline"><a href="#target1" class="scroll">자주 묻는 질문</a></li>     
 		       </ul>
 	       </li>
 	       <li  class="spread-underline"><a href="/dbmon/noticeBoard">공지사항</a>
@@ -277,7 +284,7 @@ EDIT ON
 	       
 	      </li>
 	      <li><a href="#" class="spread-underline">My Menu</a>
-	       <ul class="subMain">
+	       <ul class="subMain" style="background-color:rgb(249,189,79);">
 	         <li><a href="teacherList" class="spread-underline introcss12">선생님페이지</a></li>
 	         <li><a href="mypage" class="spread-underline introcss12">부모님페이지</a></li>
 	      </ul>

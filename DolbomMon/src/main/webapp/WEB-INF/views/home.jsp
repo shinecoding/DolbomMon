@@ -101,15 +101,30 @@
 			$(".redution").delay(500).fadeOut(1000);
 		}
 	});        
+
+
+	jQuery(document).ready(function($) {
+
+	$(".scroll").click(function(event){            
+
+	event.preventDefault();
+
+	$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+
+	});
+
+	});
+
 	
+
+
 </script>
 
 <style type="text/css">
-@media (min-width:1000px){
-   #listitem{
-      display:none;
-      font-family: 'Noto Sans KR', sans-serif;
-   }
+@media (max-width:768px){
+   #listitem{overflow:hidden;}
+   *, html, body, ul, li{overflow:hidden;}
+ }
 
 *{
    margin: 0px;
@@ -118,7 +133,8 @@
    cursor:pointer;
    font-family: 'Noto Sans KR', sans-serif;
 		}
-       }
+	
+   
    body{
       background-color:white; 
       cursor:pointer;
@@ -183,8 +199,9 @@
       font-family: 'Noto Sans KR', sans-serif;
 
    }
+
+
   
-   @media (min-width: 1000px){
 	.service-req {
     height: 488px;
     background: url(img/qwq11.jpg) no-repeat 50% 50%;
@@ -201,7 +218,8 @@
     font-weight:bold;
     font-family: 'Noto Sans KR', sans-serif;
 	}
-}
+	
+
 </style>
 
 <body>

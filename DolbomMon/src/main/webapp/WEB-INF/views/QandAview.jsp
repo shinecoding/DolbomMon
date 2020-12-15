@@ -24,7 +24,7 @@
 		  left: 0; 
 		}
   </style>
-<h1 style="color:#ff7928; font-weight:bold;">Q&A</h1>
+<h1 style="color:#ff7928; font-weight:bold;" id="target1">Q&A</h1>
 <h3 class="_3xkJ0 spread-underline">돌봄몬이 <span class="_34XF1" style="font-weight:bold; color:#ff7942;">궁금</span> 하신가요?</h3>
 <!--   <div>
 	관리자만 볼 수 있게 숨기기
