@@ -19,6 +19,10 @@
 		select NO, USERID, MANAGER_JOIN_AUTHORITY, MEMBER_INACTIVITY_AUTHORITY, PAGE_AUTHORITY, DEPARTMENT, POSITION, USERNAME, TEL, to_char(REGDATE, 'YYYY-MM-DD') REGDATE from manager
 	</select>
 	
+	<select id="selectPayment" resultType="com.dolbommon.dbmon.deal.PaymentVO">
+		select pay_no, parent_id, parent_name, to_char(pay_date, 'YYYY-MM-DD HH24:MI') pay_date, pay_money, teacher_id, refund_status, reimburse, pay_id, merchant_id, apply_num, tel, email from payment
+	</select>
+	
 	<select id="countTeacher" resultType="int" parameterType="String">
 		select count(userid) from teacher where userid=#{userid}
 	</select>
