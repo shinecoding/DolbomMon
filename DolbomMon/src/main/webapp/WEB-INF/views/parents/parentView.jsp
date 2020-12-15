@@ -174,7 +174,8 @@
 			popupWidth = 1060;
 			popupHeight = 1600;
 			var origin_no = $(this).attr('id');
-			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			var teacherid = $(this).next().next().attr('id'); //아래 버튼 위치 수정하면 이것도 수정
+			window.open('/dbmon/contractView?origin_no='+origin_no+'&teacherid='+teacherid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
 		
 		

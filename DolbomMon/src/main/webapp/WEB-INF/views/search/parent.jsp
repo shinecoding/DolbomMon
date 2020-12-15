@@ -98,7 +98,7 @@
 		font-size: 1.1em;
 	}
 	.card {
-	width:45%;
+	width:44.9%;
 	display:block;
 	float:left;
 	margin:20px 20px;
@@ -153,7 +153,7 @@ $(function(){
     $(document).on("click", "#countTest", function(){
     	count= count+6;
     	if(tabType==1){
-    		testAjax(gender)
+    		dropdownAjax(care_type)
     	}else if(tabType==2){
     		dropdownAjax(care_type)
     	}else if(tabType==3){
@@ -185,7 +185,13 @@ $(function(){
     $(document).on("keyup", "#locFilter", function(){
     	var value = $(this).val().toLowerCase();
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	    		
+    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	   
+    		AOS.init({
+			    duration: 1200
+			  });
+			  onElementHeightChange(document.body, function(){
+			    AOS.refresh();
+			  });
     	});
     });
 	

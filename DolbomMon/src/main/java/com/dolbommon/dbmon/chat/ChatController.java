@@ -44,7 +44,7 @@ public class ChatController {
 	@ResponseBody
 	public String newRoom(ChatRoomDTO room, HttpSession session) {
 		String userid = (String) session.getAttribute("userid");
-		room.setUserid("test3"); // 글, 프로필 대상
+		room.setUserid(userid); // 글, 프로필 대상
 		chatdao.roomTimeUpdate(userid, room.getUserid());
 		
 		return "ok";
@@ -66,7 +66,6 @@ public class ChatController {
 		if(userid2==null || userid2.equals("")) {
 			userid2="test001";
 		}
-
 		room.setUserid(userid2); // 글, 프로필 대상
 		
 		//방갯수확인
@@ -74,7 +73,9 @@ public class ChatController {
 		List<ChatRoomDTO> resultRoomDTO = null;
 		if(userid!=null && !userid.equals("")) {
 			if (result >= 1) {
-
+				chatdao.roomTimeUpdate(userid, room.getUserid());
+				System.out.println("내아이디"+userid);
+				System.out.println("선생아이디"+room.getUserid());
 				resultRoomDTO = chatdao.selectAllRoom(userid);
 				return resultRoomDTO;
 			}
@@ -87,6 +88,7 @@ public class ChatController {
 			}
 			
 		}
+
 		//중복방 삭제
 		chatdao.roomDelete(userid, room.getUserid());
 		resultRoomDTO = chatdao.selectAllRoom(userid);

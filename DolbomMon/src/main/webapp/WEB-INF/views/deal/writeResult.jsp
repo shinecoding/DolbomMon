@@ -44,3 +44,9 @@
 		window.close();
 	</script>
 </c:if>
+<c:if test="${result5>=1}">
+	<script>
+		alert("계약서가 없습니다.");
+		window.close();
+	</script>
+</c:if>
