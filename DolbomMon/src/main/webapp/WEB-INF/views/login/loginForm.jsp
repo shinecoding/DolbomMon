@@ -10,9 +10,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
+
 	.container{
-		width: 800px;
+		width: 700px;
 	}
+	#top{
+		margin: 15px;
+		margin-top: 40px;
+		padding: 15px;
+		text-align: center;
+		font-size: 30px;
+	}
+	#loginInfo{
+		color: gray;
+		font-size: 0.9em;
+		margin: 0 auto;
+		margin-bottom: 10px;
+		text-align: center;
+		
+	}
+	
 	#loginCookie{
 		margin-left: 0px;
 	}
@@ -22,12 +39,7 @@
 	a:link, a:visited, a:hover, a:active {
 		color: gray;
 	}
-	#logo{
-		padding: 30px;
-		width: 50%;
-		display: block;
-		margin: 0px auto;
-	}
+
 </style>
 <script>
 $(function(){
@@ -51,10 +63,12 @@ $(function(){
 </script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
-	<div>
-	<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logo" align="middle"/></a>
+	<div id="top">
+	<b>로그인</b>
 	</div>
+	<div id="loginInfo">로그인을 하시면 더욱 편리하게 돌봄몬 서비스를 이용하실 수 있습니다.</div>
 	<form method="post" action="loginOk" id="loginFrm">
 		<div class="form-group">
 			<label for="userid">아이디</label>
@@ -78,4 +92,5 @@ $(function(){
 	</form>
 </div>
 </body>
+<jsp:include page="../footer.jsp"/>
 </html>
