@@ -817,9 +817,7 @@ border-radius:10px;
 		<div id="map"></div>
 		<div style="font:0.8em gray; text-align:center; width:100%;" >※돌봄몬의 개인정보보호를 위해 대략적인 위치만 표시됩니다.</div>
 		</c:if>
-		
-		
-		
+				
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">

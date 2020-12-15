@@ -17,10 +17,8 @@
 
 <style>
 		
-	#all{
-		margin:0 auto; background-color:white;	
-	}
-	.all_wrapper{
+
+	.container{
 		margin-top:70px;
 		width:1100px;
 		background-color:white;
@@ -118,6 +116,7 @@
 		white-space: nowrap;
 		display: inline-block;
 		vertical-align: top;
+		margin-left:5px;
 	}
 	.modalHidden{
 		width: 100%;
@@ -484,7 +483,7 @@ function mapResize(){
 <hr/><br/>
 </div>
 <!-- ------------------------------------------ -->
-<div class="all_wrapper" >
+<div class="container" >
 <div>
 	<button type="button" id="mapBtn" class="btn btn-warning btn-lg btn-block" style="width: 100%; margin-bottom: -20px;">가까운 일자리 찾기</button><br/>
 	<div id="map">
@@ -505,23 +504,23 @@ function mapResize(){
 	</form>
 </div>
 	<div id="btnBox">
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act0">전체</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act1">실내놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원돕기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act3">책읽기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act9">간단청소</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act10">밥챙겨주기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act11">간단설거지</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act0">전체</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act1">실내놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act2">등하원돕기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act3">책읽기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act4">야외활동</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act5">한글놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act6">영어놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act7">학습지도</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act8">체육놀이</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act9">간단청소</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act10">밥챙겨주기</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act11">간단설거지</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act12">장기입주</button>
+		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act13">단기입주</button>
 	</div>
  
-	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리 찾기가 있습니다</div>
+	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리</div>
 	<select class="custom-select my-1 mr-sm-2" id="selectArray" style="width:20%; float: right; margin: 0px;">
 	    <option selected value="new">최신순</option>
 	    <option value="wage_high">높은 시급순</option>
@@ -575,6 +574,7 @@ function mapResize(){
 	
 	
 	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top:50px;" class="btn btn-warning" id="countTest">더보기</button></div>
+</div>
 <!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
 <script>
@@ -649,7 +649,7 @@ function mapResize(){
 	}
 
 </script>
-</div>
+
 
 <script>
     AOS.init({
