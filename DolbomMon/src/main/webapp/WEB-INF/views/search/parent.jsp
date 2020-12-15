@@ -17,7 +17,6 @@
 
 <style>
 		
-
 	.container{
 		margin-top:70px;
 		width:1100px;
@@ -79,10 +78,10 @@
 	
 	.imgBox{
 		float:left;
-		padding: 15px;
+		padding: 5px;
 		height: 150px;
 		position: absolute;
-		top: 20px;
+		top: 30px;
 	}
 	.offerBox{
 		float:right;
@@ -233,7 +232,7 @@ $(function(){
 		                  tag +='"upload/' +vo.pic+ '"';
 		               }
 		               tag += 'class="rounded-circle"></div>';
-		               tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>';
+		               tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 48px;"><span>';
 		               tag += vo.tcnt+'명 지원</div>';
 		               tag += '<div class="offerBox">';
 		               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
@@ -312,7 +311,7 @@ $(function(){
 	                  tag +='"upload/' +vo.pic+ '"';
 	               }
 	               tag += 'class="rounded-circle"></div>';
-	               tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>';
+	               tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 48px;"><span>';
 	               tag += vo.tcnt+'명 지원</div>';
 	               tag += '<div class="offerBox">';
 	               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
@@ -394,7 +393,7 @@ $(function(){
 		                  tag +='"upload/' +vo.pic+ '"';
 		               }
 		               tag += 'class="rounded-circle"></div>';
-		               tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>';
+		               tag += '<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 48px;"><span>';
 		               tag += vo.tcnt+'명 지원</div>';
 		               tag += '<div class="offerBox">';
 		               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
@@ -540,7 +539,7 @@ function mapResize(){
 					
 					<div class="card-body">
 						<div class="imgBox"><img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> class="rounded-circle"></div>
-						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 55px;"><span>${vo.tcnt}</span>명 지원</div>
+						<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 48px;"><span>${vo.tcnt}</span>명 지원</div>
 						<div class="offerBox">
 							<span class="card-title offerTitle" style="line-height: 2em;"><b>제목 ${vo.title}</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid}</span><br/>

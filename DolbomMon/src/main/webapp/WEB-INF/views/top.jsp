@@ -284,9 +284,15 @@ EDIT ON
 	       
 	      </li>
 	      <li><a href="#" class="spread-underline">My Menu</a>
+
+	 
+
 	       <ul class="subMain" style="background-color:rgb(249,189,79);">
-	         <li><a href="teacherList" class="spread-underline introcss12">선생님페이지</a></li>
-	         <li><a href="mypage" class="spread-underline introcss12">부모님페이지</a></li>
+			<c:if test="${who =='T'}">
+			<li><a href="teacherList" class="spread-underline">마이페이지</a></li></c:if>
+			<c:if test="${who =='P'}">
+	        <li><a href="mypage" class="spread-underline">마이페이지</a></li></c:if>
+
 	      </ul>
 	 </ul>
 

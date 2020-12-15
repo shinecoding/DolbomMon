@@ -58,7 +58,7 @@ public interface DealDaoImp {
 	//계약서 작성중인지 아닌지 확인 - 진행
 	public String ContractStatus4(int no);
 		
-	public MemberVO selectMemberDeal(String parent_id);
+	public com.dolbommon.dbmon.deal.MemberVO selectMemberDeal(String parent_id);
 	public int insertPayment(PaymentVO vo);
 	public int updatePayment(String pay_no);
 }
