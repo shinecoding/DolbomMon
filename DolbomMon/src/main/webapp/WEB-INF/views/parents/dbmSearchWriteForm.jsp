@@ -595,7 +595,6 @@
 											map.setCenter(coords);
 						                } 
 						            });
-						           	window.close();
 						        },theme:{
 						        	searchBgColor: "#ffc207", //검색창 배경색
 						            queryTextColor: "#black" //검색창 글자색
