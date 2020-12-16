@@ -83,11 +83,10 @@ EDIT ON
       }
 	  ul.mainTopmenu{
 	  	height: 50px;
-	  	background-color: #FAD961;
-	    background-image: -webkit-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
-	    background-image: -moz-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
-	    background-image: -o-linear-gradient(270deg, #FAD961 0%, #F76B1C 100%);
-	    background-image: linear-gradient(270deg, #FAD961 0%, #F76B1C 100%); 
+	  	background-color: white;
+	  	
+	  
+	  
 	  
 	  }
       ul.mainTopmenu li{ 
@@ -110,7 +109,7 @@ EDIT ON
 		 font-weight:500;
 		 font-size:16px;
 		 overflow:hidden;
-		 color:white;
+		 color:gray;
 		 text-decoration: none;
 		 text-align:center;
 		 list-style-type: none;
@@ -131,14 +130,13 @@ EDIT ON
 	    width: 100%;
 	    -webkit-padding-start:0px;
 	    height:50px;
-	    background-color:#fd7e14;
 	    
 	    }
 	  
 	  
       ul.mainTopmenu li a:hover{
 	     opacity:50;
-	     color: white;
+	     color: gray;
 	     font-family: 'Jua', sans-serif; font-size:21px;
 	     font-weight:500;
 	    
@@ -242,7 +240,7 @@ EDIT ON
 	           </span> 
 	           </c:if>
 	       
-		<a class="btn" style="float:right; margin-top:25px;"> 
+		<a class="btn" style="float:right; margin-top:30px;"> 
 		 	<c:if test="${logStatus == null || logStatus=='N'}">
 			  
 	         <input type="button" value="가입하기" class="btn btn-outline-#ff7942 ppp22" style="background-color:#ff7928; color:white; border-radius: 18px;" Onclick="location.href='/dbmon/join'"/>
@@ -252,9 +250,9 @@ EDIT ON
 	          </c:if>
 	    
 	    
-	         <c:if test="${logStatus != null || logStatus=='Y'}" ><span class="btn btn-outline-warning LogId" border-radius: 18px;">
+	         <c:if test="${logStatus != null || logStatus=='Y'}" ><span class="btn btn-outline-warning LogId" style="color:#ff7942; border-radius: 18px;">
 
-	         ${username } 님 </span><input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:floralwhite; border-radius: 18px; margin-left:5px;" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username } 님 </span><input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942; border-radius: 18px; margin-left:5px;" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         
@@ -284,9 +282,9 @@ EDIT ON
 	
 	
 	      </li>
-	      <li><a href="/dbmon/parent_list" class="spread-underline" style="font-weight:bold; color:floralwhite;">#일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
+	      <li><a href="/dbmon/parent_list" class="spread-underline" style="font-weight:bold; color:#ff7942;">#일자리찾기</a> <!-- 돌봄몬이 학부모구하는것 -->
 	      </li>
-	      <li><a href="/dbmon/sitter_list" class="spread-underline" style="font-weight:bold; color:floralwhite;">#돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
+	      <li><a href="/dbmon/sitter_list" class="spread-underline" style="font-weight:bold; color:#ff7942;">#돌봄몬찾기</a> <!-- 학부모가 돌봄몬구하는것 --> 
 	       
 	      </li>
 	      <li><a href="#" class="spread-underline">My Menu</a>
