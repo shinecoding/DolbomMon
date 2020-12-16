@@ -174,7 +174,7 @@ p{
 			<img src="img/star.jpg" style="width:30px;"></c:if> 
 			<span class="badge bg-danger" style="position: absolute; top: 33px; right: 10px; color: white;">New</span> 
 		</div>
-		<div class="card-text" style="color: black; float:left; width: 300px; position: absolute; top: 95px; left: 30px;">
+		<div class="card-text" style="color: black; float:left; width: 305px; position: absolute; top: 95px; left: 30px;">
 		${cList.review_content}
 		</div>
 		</div>
