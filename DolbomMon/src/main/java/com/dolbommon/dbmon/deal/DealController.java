@@ -332,7 +332,8 @@ public class DealController {
 		
 		dao.updatePayment(pay_no);
 		dao.insertPayment(pvo);
-		
+		//String origin_no = dao.selectOrigin_no(pay_no);
+		//dao.updatePayment(origin_no);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mss", "결제 성공하였습니다.");
 		mav.setViewName("deal/contractResult");
