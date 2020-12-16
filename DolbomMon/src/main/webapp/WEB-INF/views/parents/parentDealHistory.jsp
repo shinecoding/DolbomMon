@@ -104,9 +104,6 @@
 					<div class="row">
 						
 						<c:forEach var="vo" items="${list}">
-							<c:when test="${empty list}">
-								<div>ㅇㄴㄹ니</div>
-							</c:when>
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
