@@ -63,7 +63,7 @@
 
 	$(function(){
 			
-		   //countTest
+		//countTest
 		$(document).on("click",".comment",function(){
 			//var userid = $(this).attr('id');
 			var userid = $(this).attr('id');
