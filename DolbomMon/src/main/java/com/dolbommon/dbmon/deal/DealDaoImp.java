@@ -17,6 +17,8 @@ public interface DealDaoImp {
 	public int insertContract(RecruitBoardVO rbVO);
 	// 계약서 - 부모님이 선생님에게
 	public int insertContractT(RecruitBoardVO rbVO);
+	// 계약서 취소
+	public int cancelContract(int no);
 	// 내가 신청한 글 목록 보기	
 	public List<RecruitBoardVO> selectTeacherHistory(String userid);
 	// 내게지원한 글 목록 보기	
@@ -29,7 +31,7 @@ public interface DealDaoImp {
 	//계약서 중복작성시 앞의 계약서 모두 거절처리
 	public int rejectContract(@Param("userid")String userid, @Param("teacherid")String teacherid);
 	//계약서의 글번호 찾기
-	public Integer selectOrigin(@Param("no")int no, @Param("teacherid")String teacherid);
+	public String selectOrigin(@Param("no")int no, @Param("teacherid")String teacherid);
 	
 	//신청한 선생님의 정보를 담은 리스트 출력
 	public List<ApplyToParentInfoVO> applyDbmSelect2(int no); 
@@ -49,15 +51,12 @@ public interface DealDaoImp {
 	//계약서 수락/거절
 	public int setAgree(@Param("agree")String agree,@Param("no") int no);
 	
-	//계약서 작성중인지 아닌지 확인 - 수락 & 진행
-	public String ContractStatus(int no);
-	//계약서 작성중인지 아닌지 확인 - 거절
-	public String ContractStatus2(int no);
-	//계약서 작성중인지 아닌지 확인 - 수락
-	public String ContractStatus3(int no);
-	//계약서 작성중인지 아닌지 확인 - 진행
-	public String ContractStatus4(int no);
-		
+	//계약서 작성중인지 아닌지 확인 
+	public RecruitBoardVO ContractStatus(int no);
+
+	//계약서의 존재유무 확인 - 돌봄몬찾기 계약서신청
+	public RecruitBoardVO checkContract(@Param("userid")String userid, @Param("teacherid")String teacherid);
+	
 	public com.dolbommon.dbmon.deal.MemberVO selectMemberDeal(String parent_id);
 	public int insertPayment(PaymentVO vo);
 	public int updatePayment(String pay_no);

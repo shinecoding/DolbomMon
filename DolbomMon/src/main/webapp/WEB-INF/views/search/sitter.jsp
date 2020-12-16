@@ -186,6 +186,7 @@ var value;
 		//스크롤
 		$(window).scroll(function(){
 			
+			
 			var scrolltop = $(document).scrollTop();//스크롤 위치
 			var height = $(document).height(); //문서길이
 			var height_win = $(window).height(); //보여지는 창의 길이

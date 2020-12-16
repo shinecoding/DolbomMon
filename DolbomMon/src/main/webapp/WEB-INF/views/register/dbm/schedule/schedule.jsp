@@ -83,12 +83,12 @@
 		console.log(today);
 		console.log(endday);
 		var ty = today.getFullYear();
-		var tm = today.getMonth();
+		var tm = today.getMonth()+1;
 		var td = today.getDate();
 		
 		var ey = endday.getFullYear();
-		var ey = endday.getMonth();
-		var ey = endday.getDate();
+		var em = endday.getMonth()+1;
+		var ed = endday.getDate();
 		
 		$("#start_date").val(ty+"-"+tm+"-"+td);
 		$("#end_date").val(ey+"-"+em+"-"+ed);

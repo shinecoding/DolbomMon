@@ -201,6 +201,13 @@ var charge; //총결제금액
 			var agree = $(this).attr('id');
 			location.href="<%=request.getContextPath()%>/contractOk?no=${rbVO.job_board_no}&agree="+agree;
 		});
+		
+		$(document).on("click",".cancelBtn",function(){
+			if(confirm("제안을 취소하시겠습니까?")){
+				location.href="<%=request.getContextPath()%>/contractCancel?no=${rbVO.job_board_no}";
+			}
+		});
+		
 /* 		$(document).on("click",".pBtn",function(){
 			var no = $(this).attr('id');
 			console.log(payment);
@@ -888,23 +895,31 @@ var charge; //총결제금액
         </li>
 </div>
 <div class="container" style="height:80px;">
-	<div style=" float:right;">
+	<div style=" float:right; height:43px; line-height:43px;">
 
 		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		</c:if>
 		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='Y'}">
-			<span style="color:green">수락한 계약서입니다.</span>
+			<span class="conFont" style="color:green">수락한 계약서입니다.</span>
 		</c:if>
 		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='N'}">
-			<span style="color:red">거절한 계약서입니다.</span>
+			<span class="conFont" style="color:red">거절한 계약서입니다.</span>
 		</c:if>	
-		<c:if test="${rbVO.userid == userid and rbVO.agree=='Y'}">
+		<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment!='Y'}">
 			<a href="javascript:paymentTest()" class="btn btn-warning">결제하기</a>
 		</c:if>
+		<c:if test="${rbVO.userid == userid and rbVO.agree=='T'}">
+			<span class="conFont" style="color:green">선생님의 수락을 기다리고 있습니다.</span>
+			<input class="btn btn-warning cancelBtn" type="button" value="계약서 취소" id="" style="margin-left:10px;" />
+			
+		</c:if>
+			<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment=='Y'}">
+			<span class="conFont" style="color:red">결제가 완료되었습니다.</span>
+		</c:if>
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
-			<span style="color:red">선생님이 거절한 계약서입니다.</span>
+			<span class="conFont" style="color:red">선생님이 거절한 계약서입니다.</span>
 		</c:if>
 	</div>
 </div>

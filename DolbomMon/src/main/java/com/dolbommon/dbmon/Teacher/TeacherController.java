@@ -68,7 +68,10 @@ public class TeacherController {
 	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
 		
 		String userid = (String) ses.getAttribute("userid");
+		
 		String paramid = req.getParameter("userid");
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		RecruitBoardVO checkVo = dao2.checkContract(userid, paramid);	
 		if(req.getParameter("userid")!=null) {
 			userid = req.getParameter("userid");
 		};
@@ -77,6 +80,9 @@ public class TeacherController {
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
 		RegularDateVO rdVO = dao.selectSchedule(userid);
+		
+	
+		
 		
 		dao.hitCount(vo);
 		int timeInt = 0;
@@ -112,6 +118,7 @@ public class TeacherController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("rdVO", rdVO);
+		mav.addObject("checkVo", checkVo);
 		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
@@ -134,14 +141,19 @@ public class TeacherController {
 	@RequestMapping("/teacherApplyHistory")
 	public ModelAndView teacherApplyHistory(HttpSession ses) {
 			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			TeacherDaoImp dao2 = sqlSession.getMapper(TeacherDaoImp.class);
 			String userid = (String)ses.getAttribute("userid");
-			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
 			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
+			
+			List<ApplyToTeacher> list = dao2.applyToParent(userid);
+			List<ApplyToTeacher> list2 = dao2.applyToMe(userid);
+			
 			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
 			//List<MemberVO> mvoList = dao.selectTMemNo();
 			ModelAndView mav = new ModelAndView();
 			
 			//mav.addObject("mvoList", mvoList);
+			mav.addObject("list", list);
 			mav.addObject("list2", list2);
 			mav.addObject("list3", list3);
 			//mav.addObject("totalRecords", totalRecords);

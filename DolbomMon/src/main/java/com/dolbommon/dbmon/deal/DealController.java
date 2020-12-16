@@ -224,7 +224,7 @@ public class DealController {
 		}
 		
 		mav.addObject("result", result);
-		mav.setViewName("/parents/writeResult");
+		mav.setViewName("/deal/writeResult");
 		
 		return mav;
 	
@@ -238,19 +238,24 @@ public class DealController {
 	public ModelAndView parentView(int origin_no, HttpSession ses, HttpServletRequest req) {
 		//String origin_no = (String)req.getParameter("origin_no");
 		String teacherid = (String)req.getParameter("teacherid");
+		String payment = (String)req.getParameter("payment");
 		if(teacherid==null) {
 			teacherid = (String)ses.getAttribute("userid");
 		}
 		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 		ModelAndView mav = new ModelAndView();
-		int no=0;
+		String check="";
 		try {
-		no = dao.selectOrigin(origin_no, teacherid);
+		check = dao.selectOrigin(origin_no, teacherid);
 		}catch(Exception e) {
+			System.out.println("에러메시지"+e.getMessage());
+		}
+		if(check==null || check.equals("")) {
 			mav.addObject("result5", 1);
 			mav.setViewName("deal/writeResult");
 			return mav;
 		}
+		int no = Integer.parseInt(check);
 		List<ApplyToParentInfoVO> tlist = dao.applyDbmSelect2(no);
 		RecruitBoardVO rbVO = dao.recruitBoardSelect2(no);
 		ChildrenVO cVO = dao.recruitChildSelect2(no);
@@ -270,6 +275,7 @@ public class DealController {
 		
 		
 		mav.addObject("tlist", tlist);
+		mav.addObject("payment", payment);
 		mav.addObject("userid", userid);
 		mav.addObject("cVO", cVO);
 		mav.addObject("teacherid", teacherid);
@@ -334,6 +340,14 @@ public class DealController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/contractCancel")
+	public ModelAndView contractCancel(int no) {
+		ModelAndView mav = new ModelAndView();
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		dao.cancelContract(no);
+		mav.addObject("result6", 6);
+		mav.setViewName("deal/writeResult");
+		return mav;
+	}
 	
 }
