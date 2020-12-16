@@ -125,6 +125,7 @@ public class ParentController {
 
 	}
 	
+	
 	/////////////// 학부모에게 지원하기
 	@RequestMapping("/applyToParent")
 	public ModelAndView applyToParent(HttpSession ses, RecruitBoardVO rbVO, int no) {

@@ -82,12 +82,19 @@
 	<select id="selectMemberDeal" parameterType="String" resultType="com.dolbommon.dbmon.deal.MemberVO">
 		select username, email, tel1, addr, zipcode from member where userid = #{parent_id}
 	</select>
+	<select id="selectOrigin_no" parameterType="String" resultType="String">
+		select * from(select job_board_no from parent_list where agree='Y' and origin_no=#{pay_no}) where rownum=1
+	</select>
 	<insert id="insertPayment">
 		insert into payment(pay_no, parent_id, parent_name, pay_money, teacher_id, pay_id, merchant_id, apply_num, tel, email) values(#{pay_no}, #{parent_id}, #{parent_name}, #{pay_money}, #{teacher_id}, #{pay_id}, #{merchant_id}, #{apply_num}, #{tel}, #{email})
 	</insert>
 	<update id="updatePayment">
 		update parent_list set payment = 'Y' where job_board_no = #{pay_no}
 	</update>
+	<update id="updateStatusP">
+		update parent_list set status = 'P' where origin_no = #{origin_no}
+	</update>
+	
 	<update id="cancelContract">
 		update parent_list set status='X', origin_no='', teacherid='', agree='', payment=''  where job_board_no=#{no}
 	</update>

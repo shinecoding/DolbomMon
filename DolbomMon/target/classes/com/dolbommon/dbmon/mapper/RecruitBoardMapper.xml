@@ -5,13 +5,13 @@
 <mapper namespace="com.dolbommon.dbmon.search.RecruitBoardDaoImp">
 	<select id="recruitBoardList" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select * from
-		(select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.status, p.consultation,p.wish_gender,
+		(select c.child_birth, p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.status, p.consultation,p.wish_gender,
 		p.content, p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, round((sysdate - p.writedate) *1440) as writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
-		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
+		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p, add_child c
 
-		where p.status='P' or p.status='R'
+		where (p.status='P' or p.status='R') and p.job_board_no = c.job_board_no
 		order by job_board_no desc) 
 		where <![CDATA[rownum<=${count}]]>
 	</select>
@@ -31,7 +31,7 @@
 	</select>
 
 	<select id="recruitBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender,p.title , p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
+		select p.status, p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender,p.title , p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
 		(select count(t_userid) from t_p_table where job_board_no = #{param1}) as tcnt
 		from parent_list p, member m 
 		where p.job_board_no=#{param1} and p.userid = m.userid
@@ -132,12 +132,12 @@
 	<!-- 필터 -->
 	<select id="recruitActType" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select * from
-		(select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		(select c.child_birth, p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
 		 p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
-		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
-		where p.status='P' or p.status='R' and p.pw_activity like '%'||#{activity_type}||'%'
+		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p, add_child c
+		where (p.status='P' or p.status='R') and p.job_board_no=c.job_board_no and p.pw_activity like '%'||#{activity_type}||'%'
 		order by job_board_no desc) 
 		where <![CDATA[rownum<=${count}]]>
 	</select>
@@ -145,36 +145,36 @@
 	<!-- select 필터 -->
 	<select id="recruitCareSelect" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select * from
-		(select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		(select c.child_birth, p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
 		p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
-		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
-		where p.status='P' or p.status='R' and p.pw_activity like '%'||#{care_type}||'%' order by job_board_no desc)
+		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p, add_child c
+		where (p.status='P' or p.status='R') and p.job_board_no=c.job_board_no and p.pw_activity like '%'||#{care_type}||'%' order by job_board_no desc)
 		where <![CDATA[rownum<=${count}]]>
 	</select>
 	
 	<!-- array 필터 높은 시급순-->
 	<select id="filterHighWage" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select * from
-		(select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		(select c.child_birth, p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
 		p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
-		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
-		where p.status='P' or p.status='R' order by wish_wage desc)
+		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p, add_child c
+		where (p.status='P' or p.status='R') and p.job_board_no=c.job_board_no order by wish_wage desc)
 		where <![CDATA[rownum<=${count}]]>
 	</select>
 	
 	<!-- array 필터 낮은 시급순-->
 	<select id="filterLowWage" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select * from
-		(select p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
+		(select c.child_birth, p.job_board_no, p.title, p.userid, p.care_addr, p.wish_age, p.wish_wage, p.time_type, p.consultation, p.content, p.wish_gender,
 		p.hit, p.pw_activity, p.lat, p.lng, p.time_consultation, p.dong_addr, p.status, to_char(p.writedate, 'MM-DD HH:MI') writedate, 
 		(select count(tp.t_userid) from t_p_table tp where tp.job_board_no = p.job_board_no) as tcnt, (select m.pic from member m where m.userid = p.userid) as pic, 
 		(select to_char(rd.start_date, 'MM-DD') start_date
-		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p
-		where p.status='P' or p.status='R' order by wish_wage asc)
+		from jb_regular_date rd where rd.job_board_no = p.job_board_no) as start_date from parent_list p, add_child c
+		where (p.status='P' or p.status='R') and p.job_board_no=c.job_board_no order by wish_wage asc)
 		where <![CDATA[rownum<=${count}]]>
 	</select>
 </mapper>
