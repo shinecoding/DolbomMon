@@ -23,6 +23,7 @@ public interface ParentDaoImp {
 	// 내가(학부모) 신청한 - 내가 선생님한테 보낸 계약서 정보
 	public List<ParentHistoryVO> selelctApplyToTeacher(String userid);
 	
+	public List<RecruitBoardVO> parentDealHistory(String userid);
 	
 	public List<ApplyToParentInfoVO> applyDbmSelect(String userid);
 	
