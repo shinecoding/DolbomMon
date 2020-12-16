@@ -60,5 +60,7 @@ public interface DealDaoImp {
 	public com.dolbommon.dbmon.deal.MemberVO selectMemberDeal(String parent_id);
 	public int insertPayment(PaymentVO vo);
 	public int updatePayment(String pay_no);
+	public int updateStatusP(String origin_no);
+	
 }
 

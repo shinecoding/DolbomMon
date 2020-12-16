@@ -57,8 +57,26 @@ public class TeacherVO {
 	private int startPageNum = 1; //페이지 번호의 시작페이지
 	private int currentPageRecord=nowPage*onePageRecord;
 	private int lastPageRecordCount = 10; //마지막페이지의 선택 레코드 수
-	
+	//========
+	private int pay_money;
+	private String pay_date;
+	private int job_board_no;
+	private String status;
+	private String agree;
+	private String payment;
 
+	public int getPay_money() {
+		return pay_money;
+	}
+	public void setPay_money(int pay_money) {
+		this.pay_money = pay_money;
+	}
+	public String getPay_date() {
+		return pay_date;
+	}
+	public void setPay_date(String pay_date) {
+		this.pay_date = pay_date;
+	}
 	public int getNowPage() {
 		return nowPage;
 	}
