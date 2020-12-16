@@ -97,7 +97,9 @@ $(function(){
 <hr/><br/>
 </div>
 <div class="container" style="min-height:500px;">
-			<div style="text-align:center;"><h2>나의 활동 내역</h2></div>
+			<div id="title">
+   				<div id="titlefont">나의 활동 내역</div>
+ 			</div>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
 				<div class="all_wrapper" >
