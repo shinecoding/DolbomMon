@@ -823,7 +823,7 @@
 					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
-					<ul style="width:100%; margin-left:180px; color:gray;">
+					<ul style="color:gray;">
 						<li style="width:60px; color:gray; list-style:none;"><label for="20">20대</label></li>
 						<li style="width:60px; color:gray; list-style:none;"><label for="30">30대</label></li>
 						<li style="width:60px; color:gray; list-style:none;"><label for="40">40대</label></li>

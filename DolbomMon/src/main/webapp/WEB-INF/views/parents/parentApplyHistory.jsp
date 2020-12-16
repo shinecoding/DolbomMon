@@ -219,8 +219,11 @@
 								<c:if test="${list2.agree!='Y' }">	
 									<div class="card-footer btn" onclick="contractOpen('${list2.job_board_no}', '${list2.teacherid }')">제안서 보기</div>
 								</c:if>
-								<c:if test="${list2.agree=='Y' }">	
+								<c:if test="${list2.agree=='Y' and list2.payment!='Y' }">	
 									<div class="card-footer btn" style="background-color:orange; color:white;" onclick="contractOpen('${list2.job_board_no}', '${list2.teacherid }')">결제하기</div>
+								</c:if>
+								<c:if test="${list2.payment=='Y' }">	
+									<div class="card-footer btn" style="background-color:green; color:white;">결제가 완료되었습니다.</div>
 								</c:if>
 								</div>
 							</div>

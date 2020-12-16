@@ -65,7 +65,7 @@
 		position: relative;
 	    margin: 0 5px;
 	    top: -40px;
-	    right: -510px;
+	    right: -620px;
 	}
 	.cancel{
 		position: relative;
@@ -76,18 +76,26 @@
 </style>
 <script>
 	$(function(){
-		var popupWidth = 1060;
-		var popupHeight = 596;
-		var popupX = (window.screen.width / 2) - (popupWidth / 2);
-		var popupY= (window.screen.height / 2) - (popupHeight / 2);
 		$(document).on("click",".viewContract",function(){
-			popupWidth = 1060;
-			popupHeight = 1600;
-			var origin_no = $(this).attr('id');
-			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			var userid = $(this).attr('id');
+			var popupWidth = 800;
+			var popupHeight = 796;
+			var popupX = (window.screen.width / 2) - (popupWidth / 2);
+			var popupY= (window.screen.height / 2) - (popupHeight / 2);
+			console.log(userid);
+			window.open('/dbmon/commentWrite?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
-		
 	})
+	
+	var popupWidth = 1060;
+	var popupHeight = 596;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	function contractOpen(no, id, payment){
+		popupWidth = 1060;
+		popupHeight = 1600;
+		window.open('/dbmon/contractView?origin_no='+no+'&teacherid='+id+'&payment='+payment, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	}
 </script>
 
 </head>
@@ -104,9 +112,6 @@
 					<div class="row">
 						
 						<c:forEach var="vo" items="${list}">
-							<c:when test="${empty list}">
-								<div>ㅇㄴㄹ니</div>
-							</c:when>
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
@@ -122,16 +127,18 @@
 											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</p>
 										</div>
-										<!-- 
+										
 										<div style="height:1px;">
-											<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${vo.job_board_no}" style="margin:0 5px;" />
+											<input class="btn btn-warning viewContract" type="button" value="후기 작성" id="${vo.teacherid}" style="margin:0 5px;" />
 										</div>
+										<!-- 
 										<div style="height:1px;">
 											<input class="btn btn-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
 										</div>
 										 -->
 									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">계약서 자세히 보기</div>
+								<div class="card-footer btn" onclick="contractOpen('${vo.origin_no}', '${vo.teacherid }', '${vo.payment }')">계약서 자세히 보기</div>
+
 								</div>
 							</div>
 						</c:forEach>
