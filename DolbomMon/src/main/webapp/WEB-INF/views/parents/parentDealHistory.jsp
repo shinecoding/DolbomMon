@@ -96,7 +96,7 @@
 <%@include file="/WEB-INF/views/top.jsp"%>
 <hr/><br/>
 </div>
-<div class="container">
+<div class="container" style="min-height:500px;">
 			<div style="text-align:center;"><h2>나의 활동 내역</h2></div>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
