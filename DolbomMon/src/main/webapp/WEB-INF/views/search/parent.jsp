@@ -237,8 +237,20 @@ $(function(){
 		               tag += '<div class="offerBox">';
 		               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 		               tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span><br/>';
-		               tag += '<span><b>신생아 1명, 유아 1명</b></span> | ';
-		               
+		               var cb = vo.child_birth;
+						
+						////////////////////자녀 정보 /////////////////////
+						var cbArr = cb.split(",");
+						for(var i=0; i<cbArr.length;i++){
+							console.log("cbArr => " + cbArr[i]);
+							var childYMD = cbArr[i].split("-");
+							var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+							console.log("child_birth => " + child_birth);
+							var childInfo = getAge(child_birth);
+							
+							tag += '<div style="float:left; margin-right:5px;"><span style="color:orange;">'+childInfo+'</span></div>';
+						}
+		               tag += ' | ';
 		               tag += '<span class="ml-2" style="font-size:0.7em">';
 		               if(vo.writedate>525600){
 		                  tag += Math.round(vo.writedate/525600)+'년';
@@ -316,8 +328,32 @@ $(function(){
 	               tag += '<div class="offerBox">';
 	               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 	               tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span><br/>';
-	               tag += '<span><b>신생아 1명, 유아 1명</b></span> | ';
-	               
+	               var cb = vo.child_birth;
+					
+					////////////////////자녀 정보 /////////////////////
+					var cbArr = cb.split(",");
+					for(var i=0; i<cbArr.length;i++){
+						console.log("cbArr => " + cbArr[i]);
+						var childYMD = cbArr[i].split("-");
+						var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+						console.log("child_birth => " + child_birth);
+						var childInfo = getAge(child_birth);
+						
+						tag += '<div style="float:left; margin-right:5px;"><b style="color:orange;">'+childInfo+'</b></div>';
+					}
+	               tag += ' | ';
+	               tag += '<span class="ml-2" style="font-size:0.7em">';
+	               if(vo.writedate>525600){
+	                  tag += Math.round(vo.writedate/525600)+'년 전';
+	               } else if(vo.writedate>43200){
+	                  tag += Math.round(vo.writedate/43200) +'달 전';
+	               } else if(vo.writedate>1440){
+	                  tag += Math.round(vo.writedate/1440) +'일 전';
+	               } else if(vo.writedate>60){
+	                  tag += Math.round(vo.writedate/60) +'시간 전';
+	               } else {
+	                  tag += Math.round(vo.writedate) +'분 전';
+	               }
 	               tag += '<span class="ml-2" style="font-size:0.7em">';
 	               if(vo.writedate>525600){
 	                  tag += Math.round(vo.writedate/525600)+'년';
@@ -398,8 +434,20 @@ $(function(){
 		               tag += '<div class="offerBox">';
 		               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 		               tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span><br/>';
-		               tag += '<span><b>신생아 1명, 유아 1명</b></span> | ';
-		               
+		                var cb = vo.child_birth;
+						
+						////////////////////자녀 정보 /////////////////////
+						var cbArr = cb.split(",");
+						for(var i=0; i<cbArr.length;i++){
+							console.log("cbArr => " + cbArr[i]);
+							var childYMD = cbArr[i].split("-");
+							var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+							console.log("child_birth => " + child_birth);
+							var childInfo = getAge(child_birth);
+							
+							tag += '<div style="float:left; margin-right:5px;"><b style="color:orange;">'+childInfo+'</b></div>';
+						}
+		               tag += ' | ';
 		               tag += '<span class="ml-2" style="font-size:0.7em">';
 		               if(vo.writedate>525600){
 		                  tag += Math.round(vo.writedate/525600)+'년 전';
@@ -438,6 +486,37 @@ $(function(){
 	 dropdownAjax(care_type);
 });
 
+
+function getAge(a){
+	var today = new Date();
+	var birthDay = new Date(a);
+	var child_age1;
+	var child_age2;
+	var time = Math.floor((today - birthDay) / 86400000);
+	var year = Math.floor(time/365)+1;
+	var month = Math.ceil(time/30);
+	if(month >= 96 && year < 14){
+		console.log("초딩"+year+"세");
+		child_age2 = "초등학생";
+		child_age1 = year+"세";
+		return child_age2 + child_age1;
+	}else if(month<96 && month>=37){
+		console.log("유아"+year+"세");
+		child_age2 = "유아";
+		child_age1 = year+"세";
+		return child_age2 + child_age1;
+	}else if(month<=36 && month>=7){
+		console.log("영아"+month+"개월");
+		child_age2 = "영아";
+		child_age1 = month + "개월";
+		return child_age2 + child_age1;
+	}else{
+		console.log("신생아"+month+"개월");
+		child_age2 = "신생아";
+		child_age1 = month + "개월";
+		return child_age2 + child_age1;
+	}
+}
 
 function mapResize(){
 	$("#map").css("display","none");
