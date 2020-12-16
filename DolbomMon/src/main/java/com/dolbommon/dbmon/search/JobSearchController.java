@@ -206,7 +206,7 @@ public class JobSearchController {
 		
 		vo.setTotalRecord(dao.getHeartRecord(userid)); //총 레코드 수
 		
-		List<TeacherVO> list = dao.selectHeart(vo);
+		List<TeacherVO> list = dao.likeOrder(vo);
 		System.out.println("리스트"+list);
 		
 		ModelAndView mav = new ModelAndView();

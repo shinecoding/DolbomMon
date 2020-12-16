@@ -99,9 +99,9 @@
 		  c.license_status license_status, c.crime_status crime_status, c.certi_cnt certi_cnt, l.userid userid2, l.cardid cardid 
 		 from teacher t join member m on t.userid= m.userid left join certification c 
 		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
-		 l.userid=#{userid} and m.who = 'T' order by t.last_edit desc)
-		 where <![CDATA[rownum <=${currentPageRecord}]]> order by last_edit asc)
-		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by last_edit desc
+		 l.userid=#{userid} and m.who = 'T' order by t.last_edit asc)
+		 where <![CDATA[rownum <=${currentPageRecord}]]> order by last_edit desc)
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by last_edit asc
 		
 		
 	</select>
