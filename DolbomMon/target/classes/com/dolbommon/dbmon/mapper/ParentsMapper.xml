@@ -29,15 +29,15 @@
 	</insert>
 	
 	<select id="selectMyRdBoard" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
-		select p.job_board_no,p.title, p.userid, p.care_addr, p.time_type, p.pw_activity, p.wish_age, p.wish_wage, p.consultation, p.wish_gender, p.content, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate,
+		select p.job_board_no, p.origin_no, p.teacherid, p.agree, p.userid, p.care_addr, p.time_type, p.pw_activity, p.wish_age, p.wish_wage, p.consultation, p.wish_gender, p.content, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate,
 		 p.lat, p.lng, c.child_birth, (select count(t_userid) from t_p_table where  job_board_no = p.job_board_no) tcnt , m.pic
 			from parent_list p, add_child c, member m
-    		where c.userid = #{param1} and c.userid = p.userid and p.job_board_no = c.job_board_no and m.userid= #{param1} and p.status != 'C'
-    		order by tcnt desc, writedate desc
+    		where c.userid = #{param1} and c.userid = p.userid and p.job_board_no = c.job_board_no and m.userid= #{param1} and( p.status='R' or p.status='P')
+    		order by job_board_no desc
 	</select>
 	
 	<select id="selelctApplyToTeacher" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
-		select p.job_board_no, m.username, p.teacherid, p.userid, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, c.child_birth, t.pic
+		select p.job_board_no, p.agree, m.username, p.teacherid, p.userid, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, c.child_birth, t.pic
     		from parent_list p, member m, add_child c, teacher t
     		where p.userid = #{param1} and p.job_board_no = origin_no and m.userid = p.userid and p.job_board_no = c.job_board_no and p.teacherid = t.userid and p.status = 'C'
     		order by writedate desc
@@ -56,6 +56,7 @@
 	<insert id="insertComment" parameterType="com.dolbommon.dbmon.parent.CommentVO">
 		insert into review(userid, reviewid, review_content, review_star) values(#{userid}, #{reviewid},#{review_content},#{review_star})
 	</insert>
+
 	<select id="parentDealHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select p.job_board_no ,p.userid ,p.care_addr ,p.time_type ,p.pw_activity ,p.wish_wage ,p.consultation ,p.wish_age ,p.wish_gender ,p.content ,p.writedate ,p.status 
 			,p.agree ,p.who ,p.reject ,p.origin_no ,p.payment ,a.pay_no ,a.parent_id ,a.teacher_id , a.refund_status, a.reimburse, a.pay_date 

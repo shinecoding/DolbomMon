@@ -68,7 +68,10 @@ public class TeacherController {
 	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
 		
 		String userid = (String) ses.getAttribute("userid");
+		
 		String paramid = req.getParameter("userid");
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		RecruitBoardVO checkVo = dao2.checkContract(userid, paramid);	
 		if(req.getParameter("userid")!=null) {
 			userid = req.getParameter("userid");
 		};
@@ -77,6 +80,9 @@ public class TeacherController {
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
 		RegularDateVO rdVO = dao.selectSchedule(userid);
+		
+	
+		
 		
 		dao.hitCount(vo);
 		int timeInt = 0;
@@ -112,6 +118,7 @@ public class TeacherController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("rdVO", rdVO);
+		mav.addObject("checkVo", checkVo);
 		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
