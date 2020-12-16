@@ -115,7 +115,6 @@ public class JobSearchController {
 		}else {
 			list = dao.jobSearchCareType(care_type, count); 	
 		}
-		
 		return list;
 		
 		
