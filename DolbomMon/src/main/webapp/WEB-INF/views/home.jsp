@@ -109,7 +109,7 @@
 
 	event.preventDefault();
 
-	$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+	$('html,body').animate({scrollTop:$(this.hash).offset().top-280}, 500);
 
 	});
 
@@ -227,7 +227,7 @@
 
 <!-- -------------------상단메뉴------------- -->
 <div id="toptoptop131" style="height:130px; margin-bottom:0px;">
-<%@include file="/WEB-INF/views/top.jsp"%>
+<%@include file="/WEB-INF/views/top2.jsp"%>
 </div>
  <div class="redution">
 <video class="redution" src='img/video.mp4' width='100%' muted="muted" autoplay loop>
