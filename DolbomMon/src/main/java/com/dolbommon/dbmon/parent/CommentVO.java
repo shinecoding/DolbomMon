@@ -6,7 +6,9 @@ public class CommentVO {
 	private String reviewid;
 	private String review_content;
 	private String review_star;
-	private int sum_star;
+	private String review_date;
+	private String pic;
+	private String addr;
 	
 	public String getUserid() {
 		return userid;
@@ -25,18 +27,29 @@ public class CommentVO {
 	}
 	public void setReview_content(String review_content) {
 		this.review_content = review_content;
-	}
-	
+	}	
 	public String getReview_star() {
 		return review_star;
 	}
 	public void setReview_star(String review_star) {
 		this.review_star = review_star;
 	}
-	public int getSum_star() {
-		return sum_star;
+	public String getReview_date() {
+		return review_date;
 	}
-	public void setSum_star(int sum_star) {
-		this.sum_star = sum_star;
+	public void setReview_date(String review_date) {
+		this.review_date = review_date;
+	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 }

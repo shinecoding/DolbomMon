@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.QnA.QnAVO;
 import com.dolbommon.dbmon.QnA.QnaDaoImp;
+import com.dolbommon.dbmon.parent.CommentVO;
+import com.dolbommon.dbmon.parent.ParentDaoImp;
 
 
 @Controller
@@ -43,21 +45,23 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		
 		QnaDaoImp qDao = sqlSession.getMapper(QnaDaoImp.class);
-		
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
 		
 		List<QnAVO> qna_list = qDao.QnaList(qna_vo);
 		List<QnAVO> qna_list2 = qDao.QnaList2(qna_vo);
 		List<QnAVO> qna_list3 = qDao.QnaList3(qna_vo);
-	
+		List<CommentVO> cList = dao.CommentBoard();
+		
 		mav.addObject("qna_list", qna_list);
 		mav.addObject("qna_list2", qna_list2);
 		mav.addObject("qna_list3", qna_list3);
 		mav.addObject("QnAVO", qna_vo);
+		mav.addObject("cList", cList);
 		
 		mav.setViewName("/home");
 		return mav;
 	}
-
+	
 	//게시글 보기
 		@RequestMapping("/qnaBoardView")
 		public ModelAndView qnaBoardView(int seq, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
