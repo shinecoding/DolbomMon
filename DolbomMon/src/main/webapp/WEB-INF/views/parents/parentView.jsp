@@ -829,11 +829,12 @@
    	</ul>
    	</div>
    	<br/>
+   	<c:if test="${rbVO.status!='C'}">
    	<ul class="list-group list-group-horizontal-sm">
          <li class="list-group-item col-6" style="text-align:center"><i class="fas fa-search mr-2"></i>지원자 수<br/><div style="color:orange;">현재 ${rbVO.tcnt }명</div></li>
          <li class="list-group-item col-6" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/><div id="writedate" style="color:orange;"></div></li>
    	</ul>
-      
+    </c:if>  
     <h5>신청 내용</h5>
     <li class="list-group-item p-5" style="text-align:center"><c:if test="${rbVO.content==null || rbVO.content=='' }" >아직 작성하지 않았습니다.</c:if><c:if test="${rbVO.content!=null || rbVO.content!='' }">${rbVO.content }</c:if></li>
     <h5>돌봄 장소</h5>
@@ -916,10 +917,17 @@
 	         	
 	      	</ul>
       	</li>
-      	<h5>희망 시급</h5>
+      	<c:if test="${rbVO.status!='C'}">
+      		<h5>희망 시급</h5>
+      	</c:if>
+      	<c:if test="${rbVO.status=='C'}">
+      	<h5>제안 시급</h5>
+      	</c:if>
       	<li class="list-group-item">
       		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><b style="font-size:25px;line-height:86px;margin-left:5px;">${rbVO.wish_wage } 원</b>
+      		<c:if test="${rbVO.status!='C'}">
       		<span style="color:orange;"><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
+      		</c:if>
    		</li>
    <h5>선호하는 돌봄유형</h5>
    <li class="list-group-item">
@@ -1047,9 +1055,11 @@
       	
         <c:if test="${who=='T' }">
         	<c:if test="${apChk<1 }">
+        		<c:if test="${rbVO.status!='C'}">
         		<div style="text-align:center; margin:50px 0">
 					<input id="applyBtn" type="button" value="신청하기" class="btn btn-warning" style="width:40%; height:50px;"/>
 				</div>
+				</c:if>
         	</c:if>
         	<c:forEach var="tlist" items="${tlist }">
         		<c:if test="${userid == tlist.userid }" >
