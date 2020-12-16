@@ -226,8 +226,9 @@ public class MemberController {
 		
 		// 학부모 - 스케줄 선택
 		@RequestMapping(value="/parent/schedule", method=RequestMethod.POST)
-		public String parentSchedule(HttpSession ses, @RequestParam("area1") String area1) {
-			ses.setAttribute("area1", area1);
+		public String parentSchedule(HttpSession ses, @RequestParam("area1") String area1
+					, @RequestParam("lat") String lat, @RequestParam("lng") String lng
+				) {
 			
 			return "register/parent/schedule/schedule";
 		}
@@ -301,9 +302,16 @@ public class MemberController {
 		
 		// 돌봄몬 - 원하는 시간 입력 >>
 		@RequestMapping(value="/dbm/schedule", method = RequestMethod.POST)
-		public String dbmSchedule(
+		public String dbmSchedule(HttpSession ses, @RequestParam("area1") String area1
+				, @RequestParam("lat") String lat, @RequestParam("lng") String lng
 							      ) {
-			// 지역(시,군,구,동) 값 넘겨줘야 함 (미구현)
+			System.out.println("lng => " + lng);
+			System.out.println("lat => " + lat);
+			System.out.println("area1 => " + area1);
+			ses.setAttribute("area1", area1);
+			ses.setAttribute("lat",  lat);
+			ses.setAttribute("lng", lng);
+			
 			return "register/dbm/schedule/schedule";
 		}
 		

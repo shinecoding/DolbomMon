@@ -90,13 +90,17 @@
 		            geocoder.addressSearch(data.address, function(result, status) {
 
 		                // 정상적으로 검색이 완료됐으면 
-		                 if (status === kakao.maps.services.Status.OK) {
-							
+		                var who = "${who}";
+		                console.log("가입유형 =>" + who);
+			            if (status === kakao.maps.services.Status.OK) {
+								
 							console.log("경도=> " + result[0].x);
 							console.log("위도=> " + result[0].y);
-		                	$("#lng").val(result[0].x);
-		                	$("#lat").val(result[0].y);
-		                } 
+							if(who=='P'){
+				                $("#lng").val(result[0].x);
+				                $("#lat").val(result[0].y);
+							}
+			            } 
 		            });
 		           	window.close();
 		        },theme:{
@@ -450,12 +454,15 @@
 		<input type="hidden" name="cctv" value="${cctv }" />
 		<input type="hidden" name="pic" value="${pic }" />
 		<input type="hidden" name="intro" value="${intro }" />
-		<input type="hidden" name="intro" value="${area1 }" />
+		<input type="hidden" name="area1" value="${area1 }" />
+		<input type="hidden" id="lng" name="lng" value="${lng }" />
+		<input type="hidden" id="lat" name="lat" value="${lat }"/>
 	</c:if>
 		<input type="hidden" name="who" value="${who }" />
-		<input type="hidden" id="lat" name="lat" />
+	<c:if test="${who=='P' }">
 		<input type="hidden" id="lng" name="lng" />
-		
+		<input type="hidden" id="lat" name="lat" />
+	</c:if>
 		<div id="headerDiv">
 			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png" /></a><br/><br/>
 			<c:if test="${who == 'P' }"><b>회원가입</b></c:if><c:if test="${who == 'T' }"><h5>일자리를  찾기 위한 내용 작성이 끝났습니다. <br/>이제, 사용하실 아이디와 비밀번호를 입력해주세요.</h5></c:if>
