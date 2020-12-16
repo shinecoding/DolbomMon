@@ -75,10 +75,7 @@ public class ParentController {
 		ChildrenVO cVO = dao.recruitChildSelect(no);
 		
 		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
-		String contractId = dao2.ContractStatus(no);
-		String contractId2 = dao2.ContractStatus2(no);
-		String contractId3 = dao2.ContractStatus3(no);
-		String contractId4 = dao2.ContractStatus4(no);
+		RecruitBoardVO checkVo = dao2.ContractStatus(no);
 		
 		//마지막 계약서 유저아이디
 		
@@ -88,8 +85,8 @@ public class ParentController {
 		if(who.equals("T")) {
 			apChk = dao.applyChk(no, userid);
 		}
-		
-		
+
+
 		ModelAndView mav = new ModelAndView();
 		
 		String timeType = rbVO.getTime_type();
@@ -102,15 +99,11 @@ public class ParentController {
 			System.out.println("정기적으로 ");
 			mav.addObject("rdVO", rdVO);
 		}
-		System.out.println(contractId);
 		mav.addObject("apChk", apChk);
 		mav.addObject("tlist", tlist);
 		mav.addObject("cVO", cVO);
 		mav.addObject("rbVO", rbVO);
-		mav.addObject("contractId", contractId);
-		mav.addObject("contractId2", contractId2);
-		mav.addObject("contractId3", contractId);
-		mav.addObject("contractId4", contractId2);
+		mav.addObject("checkVo", checkVo);
 		
 		mav.setViewName("/parents/parentView");
 		
@@ -321,4 +314,44 @@ public class ParentController {
 
 	}
 
+	@RequestMapping("parentDealHistory")
+	public ModelAndView parentDealHistory(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
+		
+		List<RecruitBoardVO> list = dao.parentDealHistory(userid);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.setViewName("parents/parentDealHistory");
+		return mav;
+	}
+	
+	@RequestMapping(value="/accountUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public int accountUpdate(HttpSession ses, @RequestParam("bank_name") String bank_name
+			, @RequestParam("bank_account_no") String bank_account_no) {
+		String userid = (String)ses.getAttribute("userid");
+		
+		MemberDaoImp dao = sqlSession.getMapper(MemberDaoImp.class);
+		int result = dao.accountUpdate(userid, bank_name, bank_account_no);
+		
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -450,6 +450,7 @@
 		<input type="hidden" name="cctv" value="${cctv }" />
 		<input type="hidden" name="pic" value="${pic }" />
 		<input type="hidden" name="intro" value="${intro }" />
+		<input type="hidden" name="intro" value="${area1 }" />
 	</c:if>
 		<input type="hidden" name="who" value="${who }" />
 		<input type="hidden" id="lat" name="lat" />

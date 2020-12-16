@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath() %>/css/bootstrap.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -18,9 +18,9 @@
 
 <style>
 
-	.container{width:1100px;
-	 font-family: 'Jua', sans-serif;
-	 }
+
+	.container{width:1100px;font-family: 'Jua', sans-serif;}
+
 
 
 	img{ height:110px; width:110px;}
@@ -43,6 +43,7 @@
 	    width:90px;
 	    background-color:white;
 	    border-color:orange;
+	    font-family: 'Jua', sans-serif;
 	}
 	
 	#actBox{
@@ -51,6 +52,7 @@
   	display: inline-block; 
   	vertical-align: top;
   	text-align:center;
+  	font-family: 'Jua', sans-serif;
   	}
   	
 
@@ -96,6 +98,7 @@
 	border-radius:20px; 
 	float:left; 
 	display:block;
+	font-family: 'Jua', sans-serif;
 	}
 	.iconColor i{
 	color:orange;
@@ -708,7 +711,7 @@ var value;
 <!-- -------------------상단메뉴------------- -->
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
 </div>
 <div class="container">
 

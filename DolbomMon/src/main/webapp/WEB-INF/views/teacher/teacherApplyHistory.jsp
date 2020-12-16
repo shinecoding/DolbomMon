@@ -122,30 +122,81 @@
 				<li class="list-group-item">
 				<div class="all_wrapper" >
 					<div class="row">
-						<c:forEach var="vo" items="${list2}">
+						<c:forEach var="list" items="${list}" >
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
-										<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
+										<div id="imgBox"><img <c:if test="${list.pic==null || list.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${list.pic!=null || list.pic != '' }" >src="upload/${list.pic}"</c:if>class="rounded-circle" style="height:110px; width:110px;"/></div>
+										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>${list.tcnt }</span>명 지원</div>
 										<div id="offerBox" >
 											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
-											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-											<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
-											<br/><span>${vo.care_addr } </span>
-											<br/><span>12/12 시작</span>
-											<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
-											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${list.job_board_no} | ${list.userid }</span>
+											<br/><span style="float:left;">자녀 정보 : </span><span id="${list.job_board_no }" ></span> 
+												<script>
+													$(function(){
+														var cb = '${list.child_birth}';
+														var child_age1;
+														var child_age2;
+														
+														function getAge(a){
+															var today = new Date();
+															var birthDay = new Date(a);
+															
+															var time = Math.floor((today - birthDay) / 86400000);
+															var year = Math.floor(time/365)+1;
+															var month = Math.ceil(time/30);
+															if(month >= 96 && year < 14){
+																console.log("초딩"+year+"세");
+																child_age2 = "초등학생";
+																child_age1 = year+"세";
+															}else if(month<96 && month>=37){
+																console.log("유아"+year+"세");
+																child_age2 = "유아";
+																child_age1 = year+"세";
+															}else if(month<=36 && month>=7){
+																console.log("영아"+month+"개월");
+																child_age2 = "영아";
+																child_age1 = month + "개월";
+															}else{
+																console.log("신생아"+month+"개월");
+																child_age2 = "신생아";
+																child_age1 = month + "개월";
+															}
+														}
+														////////////////////자녀 정보 /////////////////////
+														var cbArr = cb.split(",");
+														for(var i=0; i<cbArr.length;i++){
+															console.log("cbArr => " + cbArr[i]);
+															var childYMD = cbArr[i].split("-");
+															var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+															console.log("child_birth => " + child_birth);
+															getAge(child_birth);
+															
+															if(child_age2 == "초등학생"){
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}else if(child_age2 == "유아"){
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}else if(child_age2 == "영아"){
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}else if(child_age2 == "신생아"){
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}
+														}
+													});
+												</script>
+											<br/><span>${list.writedate }</span>
+											<br/><span>${list.care_addr } </span>
+											<br/><span style="color: orange;">희망시급 ${list.wish_wage }원</span>
 											</p>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${vo.job_board_no}" style="margin:0 5px;" />
+											<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${list.job_board_no}" style="margin:0 5px;" />
 										</div>
 										<div style="height:1px;">
 											<input class="btn btn-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
 										</div>
 									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
+								<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>
 								</div>
 							</div>
 						</c:forEach>
@@ -158,27 +209,75 @@
 				<li class="list-group-item">
 				<div class="all_wrapper" >
 					<div class="row">
-						<c:forEach var="vo" items="${list3}">
+						<c:forEach var="list2" items="${list2}">
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
-										<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
+										<div id="imgBox"><img <c:if test="${list2.pic==null || list2.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${list2.pic!=null || list2.pic != '' }" >src="upload/${list2.pic}"</c:if>class="rounded-circle" style="height:110px; width:110px;"/></div>
 										<div id="offerBox" >
-											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
-											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-											<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
-											<br/><span>${vo.care_addr } </span>
-											<br/><span>12/12 시작</span>
-											<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
-											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
-											</p>
+											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${list2.job_board_no} | ${list2.userid }</span>
+											<br/><span style="float:left;">자녀 정보 : </span><span id="${list2.job_board_no }" ></span> 
+												<script>
+													$(function(){
+														var cb = '${list2.child_birth}';
+														var child_age1;
+														var child_age2;
+														
+														function getAge(a){
+															var today = new Date();
+															var birthDay = new Date(a);
+															
+															var time = Math.floor((today - birthDay) / 86400000);
+															var year = Math.floor(time/365)+1;
+															var month = Math.ceil(time/30);
+															if(month >= 96 && year < 14){
+																console.log("초딩"+year+"세");
+																child_age2 = "초등학생";
+																child_age1 = year+"세";
+															}else if(month<96 && month>=37){
+																console.log("유아"+year+"세");
+																child_age2 = "유아";
+																child_age1 = year+"세";
+															}else if(month<=36 && month>=7){
+																console.log("영아"+month+"개월");
+																child_age2 = "영아";
+																child_age1 = month + "개월";
+															}else{
+																console.log("신생아"+month+"개월");
+																child_age2 = "신생아";
+																child_age1 = month + "개월";
+															}
+														}
+														////////////////////자녀 정보 /////////////////////
+														var cbArr = cb.split(",");
+														for(var i=0; i<cbArr.length;i++){
+															console.log("cbArr => " + cbArr[i]);
+															var childYMD = cbArr[i].split("-");
+															var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+															console.log("child_birth => " + child_birth);
+															getAge(child_birth);
+															
+															if(child_age2 == "초등학생"){
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}else if(child_age2 == "유아"){
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}else if(child_age2 == "영아"){
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}else if(child_age2 == "신생아"){
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+															}
+														}
+													});
+												</script>
+											<br/><span>${list2.care_addr } </span>
+											<br/><span>${list2.writedate }</span>
+											<br/><span style="color: orange;">희망시급 ${list2.wish_wage }원</span>
 										</div>
 										<div style="height:1px;">
 											<input class="btn btn-warning cancel" type="button" value="거절" id="cancel" style="margin:0 5px;" />
 										</div>
 									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">자세히 보기</div>
+								<div class="card-footer btn" onclick="location.href='contractView?origin_no=${list2.job_board_no}'">자세히 보기</div>
 								</div>
 							</div>
 						</c:forEach>
