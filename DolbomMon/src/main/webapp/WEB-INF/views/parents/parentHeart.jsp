@@ -140,15 +140,15 @@ $(function(){
 						
 						tag+= '<span class="ml-2" style="font-size:0.7em">';
 								if(vo.last_edit>525600){
-									tag+= Math.round(vo.last_edit/525600) +'년';
+									tag+= Math.floor(vo.last_edit/525600) +'년';
 								} else if(vo.last_edit>43200){
-									tag+= Math.round(vo.last_edit/43200) +'달';
+									tag+= Math.floor(vo.last_edit/43200) +'달';
 								} else if(vo.last_edit>1440){
-									tag+= Math.round(vo.last_edit/1440) +'일';
+									tag+= Math.floor(vo.last_edit/1440) +'일';
 								} else if(vo.last_edit>60){
-									tag+= Math.round(vo.last_edit/60) +'시간';
+									tag+= Math.floor(vo.last_edit/60) +'시간';
 								} else {
-									tag+= Math.round(vo.last_edit) +'분';
+									tag+= Math.floor(vo.last_edit) +'분';
 								}
 								
 						tag+= '</span></h6>';
@@ -263,15 +263,15 @@ $(function(){
 						
 						tag+= '<span class="ml-2" style="font-size:0.7em">';
 								if(vo.last_edit>525600){
-									tag+= Math.round(vo.last_edit/525600) +'년';
+									tag+= Math.floor(vo.last_edit/525600) +'년';
 								} else if(vo.last_edit>43200){
-									tag+= Math.round(vo.last_edit/43200) +'달';
+									tag+= Math.floor(vo.last_edit/43200) +'달';
 								} else if(vo.last_edit>1440){
-									tag+= Math.round(vo.last_edit/1440) +'일';
+									tag+= Math.floor(vo.last_edit/1440) +'일';
 								} else if(vo.last_edit>60){
-									tag+= Math.round(vo.last_edit/60) +'시간';
+									tag+= Math.floor(vo.last_edit/60) +'시간';
 								} else {
-									tag+= Math.round(vo.last_edit) +'분';
+									tag+= Math.floor(vo.last_edit) +'분';
 								}
 								
 						tag+= '</span></h6>';

@@ -263,7 +263,7 @@ var value;
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
-							tag += '</span>';
+							tag += ' 전</span>';
 							tag += '<span class="emptyHeart">';
 							tag += '<input type="hidden" value="'+ vo.userid +'" />';
 							tag += '<i class="fab fa-gratipay" style=';
@@ -310,10 +310,10 @@ var value;
    	 	}
 		
 		//========================ajax=========for buttons=================
-	    $(document).on("click", "#actBox input", function(){
+	    $(document).on("click", "#actBox label", function(){
 	    	count=12;
 	    	tabType=3;
-	    	activity_type = $(this).text();
+	    	activity_type = $(this).text().trim();
 	    	
 	    	actBoxAjax(activity_type);
 	    });//ajax
@@ -360,7 +360,7 @@ var value;
 								} else {
 									tag += Math.round(vo.last_edit) +'분';
 								}
-								tag += '</span>';
+								tag += ' 전</span>';
 								tag += '<span class="emptyHeart">';
 								tag += '<input type="hidden" value="'+ vo.userid +'" />';
 								tag += '<i class="fab fa-gratipay" style=';
@@ -458,7 +458,7 @@ var value;
 						} else {
 							tag += Math.round(vo.last_edit) +'분';
 						}
-						tag += '</span>';
+						tag += ' 전</span>';
 						tag += '<span class="emptyHeart">';
 						tag += '<input type="hidden" value="'+ vo.userid +'" />';
 						tag += '<i class="fab fa-gratipay" style=';
@@ -555,7 +555,7 @@ var value;
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
-							tag += '</span>';
+							tag += ' 전</span>';
 							tag += '<span class="emptyHeart">';
 							tag += '<input type="hidden" value="'+ vo.userid +'" />';
 							tag += '<i class="fab fa-gratipay" style=';
