@@ -140,7 +140,7 @@ p{
 
 <div class="gridStyleAllWrapper" style="margin-top:0px; height:600px;">
 <h3 style="margin-top:70px;"><img class="_3v9X3" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/index/icon-onair.svg" alt="실시간 돌봄몬 후기"  style="background-color:white;">
-<strong class="half-highlight">실시간</strong>&nbsp;돌봄몬 후기</h3>
+<br/><br/><strong class="half-highlight">실시간</strong>&nbsp;돌봄몬 후기</h3>
 <br/>
 
 
