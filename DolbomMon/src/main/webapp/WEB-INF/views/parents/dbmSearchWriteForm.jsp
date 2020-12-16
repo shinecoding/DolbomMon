@@ -150,8 +150,6 @@
 			$("label[for="+selectedData+"]").children("img").fadeIn(200);
 			$("label[for="+selectedData+"]").children("img").fadeOut(100);
 			$("label[for="+selectedData+"]").children("img").fadeIn(100);
-			$("label[for="+selectedData+"]").children("img").fadeOut(50);
-			$("label[for="+selectedData+"]").children("img").fadeIn(50);
 			if($(this).is(":checked")){
 				if(selectedData=="pa2"){
 					var changeImg = nowImg.replace("-n@", "-s@"); 
