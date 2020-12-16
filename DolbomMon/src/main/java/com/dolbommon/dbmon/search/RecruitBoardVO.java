@@ -39,7 +39,15 @@ public class RecruitBoardVO {
 		private String birth;
 		private String age;
 		private String payment;
+		private String child_birth;
 		
+		
+		public String getChild_birth() {
+			return child_birth;
+		}
+		public void setChild_birth(String child_birth) {
+			this.child_birth = child_birth;
+		}
 		public String getPayment() {
 			return payment;
 		}
