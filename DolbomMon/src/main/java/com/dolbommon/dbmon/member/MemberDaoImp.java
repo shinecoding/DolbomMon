@@ -22,4 +22,7 @@ public interface MemberDaoImp {
 	
 	//학부모 이미지 업로드
 	public int parentImageUpload(String pic, String userid);
+	
+	//계좌 업데이트(등록)
+	public int accountUpdate(String userid, String bank_name, String bank_account_no);
 }

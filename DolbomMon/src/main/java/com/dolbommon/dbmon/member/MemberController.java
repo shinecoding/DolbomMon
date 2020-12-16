@@ -225,8 +225,10 @@ public class MemberController {
 		}
 		
 		// 학부모 - 스케줄 선택
-		@RequestMapping("/parent/schedule")
-		public String parentSchedule() {
+		@RequestMapping(value="/parent/schedule", method=RequestMethod.POST)
+		public String parentSchedule(HttpSession ses, @RequestParam("area1") String area1) {
+			ses.setAttribute("area1", area1);
+			
 			return "register/parent/schedule/schedule";
 		}
 		

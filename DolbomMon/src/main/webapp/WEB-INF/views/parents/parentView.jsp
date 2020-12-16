@@ -68,7 +68,6 @@
 
 <script>
 
-
 	// 신생아 0-6개월, 영아 7-36개월, 유아 4-7세, 초딩
 	var pw_activityStr = '${rbVO.pw_activity }';
 	var care_addr = "${rbVO.care_addr}";
@@ -920,7 +919,7 @@
       	<h5>희망 시급</h5>
       	<li class="list-group-item">
       		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><b style="font-size:25px;line-height:86px;margin-left:5px;">${rbVO.wish_wage } 원</b>
-      		<span><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
+      		<span style="color:orange;"><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
    		</li>
    <h5>선호하는 돌봄유형</h5>
    <li class="list-group-item">
@@ -1020,11 +1019,14 @@
 										</c:when>
 										
 										<c:otherwise>
-											
+											<c:if test="${checkVo.payment!='Y'}">
 												<input type="button" class="btn btn-outline-warning mb-2 contractOpen" id="${tlist.userid }" value="계약하기" /><br/>
 												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
 												<input class="btn btn-outline-warning mb-2" type="button" value="거절하기" id="refusalBtn"  /><br/>
-											
+											</c:if>
+											<c:if test="${checkVo.payment=='Y'}">
+												<input class="btn btn-outline-danger mb-2" type="button" value="계약이 완료된 페이지 입니다." id=""  /><br/>
+											</c:if>
 										</c:otherwise>
 									</c:choose>
 								</li>

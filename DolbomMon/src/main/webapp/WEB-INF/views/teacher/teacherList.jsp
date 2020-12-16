@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	.container{width:800px;
@@ -134,6 +136,12 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+#ex7{
+		width:400px;
+		height:230px;
+		text-align:center;
+	}
 </style>
 
 
@@ -177,6 +185,34 @@ input:checked + .slider:before {
 			})
 		
 		});
+		
+		
+		$('a[href="#ex7"]').click(function(event) {
+		      event.preventDefault();
+		 
+		      $(this).modal({
+		        fadeIn : 250
+		      });
+		    });   
+				
+		$("#regBtn").click(function(){
+			params = $("#accountFrm").serialize();
+			$.ajax({
+				url : "accountUpdate",
+				type : 'post',
+				data : params,
+				success:function(result){
+					if(result > 0){
+						alert("계좌등록 완료");
+						$.modal.close();
+					}else {
+						alert("다시 확인해주세요");
+					}
+				}, error:function(e){
+					console.log(e);
+				}
+			});
+		});
 	});//제이쿼리
 </script>
 
@@ -184,6 +220,25 @@ input:checked + .slider:before {
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
+</div>
+<div id="ex7" class="modal">
+	<form id="accountFrm" >
+	<span style="color:orange;font-size:21px;">은행선택</span>
+	<div><select name="bank_name" class="form-control selectpicker noborder" style="display:inline-block; width:50%; text-align:center;">
+		<option disabled="disabled">은행을 선택해주세요</option>
+		<option>직접 입력</option>
+		<option>기업은행</option>
+		<option>국민은행</option>
+		<option>우리은행</option>
+		<option>농협</option>
+		<option>제일은행</option>
+		<option>신한은행</option>
+	</select></div>
+  	<span style="color:orange;font-size:21px;bottom:0;">계좌번호 입력</span>
+  	<div style="margin:0 0 10px 0;"><input type="text" name="bank_account_no" style="width:80%;height:40px;"/></div>
+  	<input type="button" class="btn" style="background-color:gray;" value="닫기" />
+  	<input type="button" class="btn btn-warning" value="계좌 등록하기" id="regBtn"/>
+  	</form>
 </div>
 <div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">마이페이지</h1>
@@ -225,6 +280,7 @@ input:checked + .slider:before {
    </ul>
    <br/>
    <ul id="tBottomList" class="list-group">
+   		<li class="list-group-item list-group-item-action"><a href="#ex7" rel="modal:open">결제/환불 계좌등록</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
