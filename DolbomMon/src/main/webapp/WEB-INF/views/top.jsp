@@ -298,7 +298,7 @@ EDIT ON
 			<li><a href="teacherList" class="spread-underline">마이페이지</a></li></c:if>
 			<c:if test="${who =='P'}">
 	        <li><a href="mypage" class="spread-underline">마이페이지</a></li></c:if>
-
+			<li><a href="dbmSearchWriteForm">선생님구하기</a></li>
 	      </ul>
 	 </ul>
 
