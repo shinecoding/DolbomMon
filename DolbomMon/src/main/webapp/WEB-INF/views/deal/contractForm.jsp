@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
@@ -18,8 +18,6 @@
 <script src="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8cff2cbe78d63774a9a2e7f0c1abec87&libraries=services"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <script>
 	$(function(){
@@ -802,35 +800,21 @@
  	.ui-state-active{background-color:#FFC207;}
  	.divOff{display:none;}
  	.divOn{display:inline-block;}
- 	.divOnOff{font-family: 'Poor Story', cursive; 
- 	font-weight:bold; color:black; font-size:25px; }
- 	.orangeSpan{
- 	font-size: 1em;
-    text-align: center;
-    color: #ff7928;
-    font-weight: 800;
-    font-family: 'Poor Story', cursive;
-    margin-top:20px;
-    margin-bottom:40px;
- 	}
 </style>
 <body>
 	<div class="container">
-		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
-			<div class="title222" style="margin-bottom:80px;">
-			<img src="<%=request.getContextPath() %>/img/iii11.svg" style="width:300px;height:200px; margin:0 auto;"/><br/><br/>
-			<span class="orangeSpan" style="font-size:25px; color:black; margin-bottom:20px;"> 
-			회원님과 꼭 맞는 돌봄몬을 찾기위해
-			몇가지 질문으로 시작하겠습니다.</span></div>
-			
-			<div class="title" style="margin-bottom:80px; margin-top:0px;"><label class="divOnOff" for="activityTypeDiv" 
-			>어떤 돌봄을 원하세요?</label><span class="orangeSpan" > 
-			원하시는 놀이 유형을 선택해주세요. </span>
-				
+		<form id="writeFrm" method="post" action="contractWrite">
+			<input type="hidden" name="origin_no" value="${no }" />
+			<div id="header">
+				<a href="#"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
+			</div>
+			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
+			<div>
+				<img src="<%=request.getContextPath()%>/img/actImg.png" style="width:170px;height:170px;" />
 			</div>
 			
 			
-					<div id="activityTypeDiv" class="mainDiv" style="color:gray; font-weight:bold; font-size:14px;" data-aos="fade-up">
+			<div id="activityTypeDiv" class="mainDiv">
 				<input type="checkbox" id="pa1" value="실내놀이" name="pw_activity"/>
 				<input type="checkbox" id="pa2" value="등하원돕기" name="pw_activity" />
 				<input type="checkbox" id="pa3" value="책읽기" name="pw_activity" />
@@ -862,12 +846,11 @@
 				</div>
 			</div>
 			
-			<div id="dataALLwrapper" data-aos="fade-up">
-			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 성별과 나이대가 있으신가요?</label></div>
+			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
 			<div id="ageAndGenderDiv" class="mainDiv">
-				<div id="genderDiv" style="color:gray; font-weight:bold;">
+				<div id="genderDiv">
 					<div>
-						<img src="<%=request.getContextPath()%>/img/genderImg.png" style="width:80px;height:80px; margin:30px 0"/>
+						<img src="<%=request.getContextPath()%>/img/genderImg.png" style="width:200px;height:150px; margin:30px 0"/>
 					</div>
 					<input type="radio" id="g1" name="wish_gender" value="F" />
 					<input type="radio" id="g2" name="wish_gender" value="M"/>
@@ -876,59 +859,52 @@
 					<label for="g2">남자</label>
 					<label for="g3">무관</label>
 				</div>
-				<div id="ageDiv" style="color:gray; font-weight:bold;">
-					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
-					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
-					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
+				<div id="ageDiv">
+					<input type="checkbox" id="20" name="wish_age" value="20" />
+					<input type="checkbox" id="30" name="wish_age" value="30" />
+					<input type="checkbox" id="40" name="wish_age" value="40" />
 					<input type="checkbox" id="50" name="wish_age" value="50" />
 					<input type="checkbox" id="60" name="wish_age" value="60" />
-					<ul style="width:100%; margin-left:15%; color:gray;">
-						<li style="width:60px; color:gray; list-style:none;"><label for="20">20대</label></li>
-						<li style="width:60px; color:gray; list-style:none;"><label for="30">30대</label></li>
-						<li style="width:60px; color:gray; list-style:none;"><label for="40">40대</label></li>
-						<li style="width:60px; color:gray; list-style:none;"><label for="50">50대</label></li>
-						<li style="width:60px; color:gray; list-style:none;"><label for="60">60대</label></li>
+					<ul>
+						<li><label for="20">20대</label></li>
+						<li><label for="30">30대</label></li>
+						<li><label for="40">40대</label></li>
+						<li><label for="50">50대</label></li>
+						<li><label for="60">60대</label></li>
 					</ul>
 				</div>
 			</div>
-			</div>
 			
-		<div id="dataALLwrapper" data-aos="fade-up">
-			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">몇 명의 아이를 돌봐드릴까요?</label>
-			<span class="orangeSpan" > 
-			해당하는 자녀 수 버튼을 클릭하시면, 
-			생년월일 입력으로 이동합니다.
-			 </span>
-			</div>
+			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">자녀의 정보를 입력해주세요</label></div>
 			<div id="childrenInfoDiv" class="mainDiv">
 				<div id="childrenInfo">
 					<div>
-						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:150px;height:150px;" />
+						<img src="<%=request.getContextPath() %>/img/childrenImg.png" style="width:250px;height:250px;" />
 					</div>
-					<input type="radio" id="childrenCnt1" name="childrenCnt" value="1"/>
-					<input type="radio" id="childrenCnt2" name="childrenCnt" value="2"/>
-					<input type="radio" id="childrenCnt3" name="childrenCnt" value="3"/>
-					<input type="radio" id="childrenCnt4" name="childrenCnt" value="4"/>
-					<div id="childrenCnt" style="color:gray; font-weight:bold;">
+					<input type="radio" id="childrenCnt1" name="child_cnt" value="1"/>
+					<input type="radio" id="childrenCnt2" name="child_cnt" value="2"/>
+					<input type="radio" id="childrenCnt3" name="child_cnt" value="3"/>
+					<input type="radio" id="childrenCnt4" name="child_cnt" value="4"/>
+					<div id=childrenCnt>
 						<div><label for="childrenCnt1">1명</label></div>
 						<div><label for="childrenCnt2">2명</label></div>
 						<div><label for="childrenCnt3">3명</label></div>
 						<div><label for="childrenCnt4">4명</label></div>
 					</div>
 					<div id="childrenDetailDiv">
-						<ul id="childcnt1">
+						<ul id="childcnt1" class="childrenCnt1">
 							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt2">
-							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
-						</ul>
-						<ul id="childcnt3">
-							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						<ul id="childcnt2" class="childrenCnt2">
 							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 						</ul>
-						<ul id="childcnt4">
+						<ul id="childcnt3" class="childrenCnt3">
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
+						</ul>
+						<ul id="childcnt4" class="childrenCnt4">
 							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
 							<li><input type="button" class="btn btn-warning childBtn" value="생년월일 입력" />-<input type="text" id="child_birth" class="child_birth" name="child_birth" readonly="readonly"/></li>
@@ -937,34 +913,31 @@
 					</div>
 				</div>
 			</div>
-			</div>
 			
-					<div id="dataALLwrapper" data-aos="fade-up">
 			<div class="title">
 				<label class="divOnOff" for="addrDiv">돌봄 장소를 입력해주세요</label>
 			</div>
-			<div id="addrDiv" class="mainDiv" style="color:gray; font-weight:bold;">
+			<div id="addrDiv" class="mainDiv">
 				<div id="mapImgDiv" style="margin:30px 0;">
-					<div style="color:#ff7942; font-weight:bold;">아직 장소를 입력하지 않았습니다. 지도를 클릭해주세요.</div><br/><br/>
-					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:150px;height:150px;"/>
+					<div style="color:orange;">입력한 돌봄 장소 - ${vo.care_addr }</div>
+					<img class="zipcodeBtn" src="<%=request.getContextPath() %>/img/mapImg.png" style="width:300px;height:300px;"/>
 				</div>
 				<div id="mapDiv" style="margin:30px 0; display:none; text-align:center;">
-					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" style="display:inline-block;border:none;"/></div>
+					<div><input type="text" id="dong_addr" name="dong_addr" readonly="readonly" value="${vo.dong_addr }" style="display:inline-block;border:none;"/></div>
 					<div id="map" style="width:300px;height:300px; display:inline-block; " ></div>
 				</div>
 				<div id="zidcodeBtnDiv">
 					<input class="btn btn-warning zipcodeBtn" type="button" id="zipcodeBtn" value="돌봄 장소 선택" />
-					<input type="hidden" id="care_addr" name="care_addr"/>
-					<input type="hidden" id="lat" name="lat"/>
-					<input type="hidden" id="lng" name="lng"/>
+					<input type="hidden" id="care_addr" name="care_addr" value="${vo.care_addr }"/>
+					<input type="hidden" id="lat" name="lat" value="${vo.lat }"/>
+					<input type="hidden" id="lng" name="lng" value="${vo.lng }"/>
 				</div>
 			</div>
 			
-				
-			<div class="title" style="margin-bottom:50px; margin-top:100px;"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
+			<div class="title"><label class="divOnOff" for="timeTypeDiv">언제 돌봐드릴까요?</label></div>
 			
-			<div id="timeTypeDiv" class="mainDiv" style="color:gray; font-weight:bold;margin-bottom:50px;"> 
-				<div><img src="<%=request.getContextPath() %>/img/calImg.png" style="width:150px;height:150px; margin-bottom:50px;"/></div>
+			<div id="timeTypeDiv" class="mainDiv">
+				<div><img src="<%=request.getContextPath() %>/img/calImg.png" style="width:270px;height:250px;"/></div>
 				<input type="radio" id="timeType1" name="time_type" value="S"/>
 				<input type="radio" id="timeType2" name="time_type" value="R"/>
 				<label for="timeType1">특정날에만</label>
@@ -978,10 +951,10 @@
 				
 				<div id="regularDateDiv">
 					<div id="title">정기적으로</div>
-						<input type="hidden" id="end_date" name="end_date" readonly="readonly" />
+						<input type="hidden" id="end_date" name="end_date" readonly="readonly" value="${rdVO.end_date }" />
 					<div id="startDateDiv">
 						<input class="btn btn-warning" type="button" id="startDateBtn" value="돌봄 시작일" />
-						<input class="btn" type="text" id="start_date" name="start_date" readonly="readonly" />
+						<input class="btn" type="text" id="start_date" name="start_date" value="${rdVO.start_date }" readonly="readonly" />
 					</div>
 					<div id="selectDayDiv">
 						<input type="checkbox" id="rd1" name="yoil" value="월" />
@@ -1027,18 +1000,18 @@
 					</div>
 				</div>
 			</div>
-			</div>
 			
-			<div id="dataALLwrapper" data-aos="fade-up">
+			
+			
 			<div class="title"><label class="divOnOff" for="paymentDiv">희망시급을 입력해주세요</label></div>
 			<div id="paymentDiv" class="mainDiv">
 				<div>
-					<img src="<%=request.getContextPath() %>/img/payImg.png" style="width:150px;height:150px;margin:20px 0" />
+					<img src="<%=request.getContextPath() %>/img/payImg.png" style="width:170px;height:150px;margin:20px 0" />
 				</div>
 				<div>
 					<span id="minWage" style="color:red"></span>
 				</div>
-				<div id="wageDiv" style="color:gray; font-weight:bold;">
+				<div id="wageDiv">
 					<input type="number" inputmode="numeric" id="wish_wage" name="wish_wage" maxlength="6" value="8590"/><span>원/1시간</span>
 				</div>
 					<div class="custom-control custom-switch" style="margin:7px 0; text-align:center;">
@@ -1054,43 +1027,22 @@
 					아이 2명을 돌보는 경우 - 희망시급의 1.5배 수준으로 합의
 				</p>
 			</div>
-			</div>
 			
-			<div id="dataALLwrapper" data-aos="fade-up">
-			<div class="title"><label class="divOnOff" for="descriptionDiv">제목과 신청내용을 적어주세요</label></div>
+			<div class="title"><label class="divOnOff" for="descriptionDiv">돌봄몬이 알아야 할 내용이 있나요?</label></div>
 			<div id="descriptionDiv" class="mainDiv">
 				<div><img src="<%=request.getContextPath()%>/img/contentImg.png" style="width:170px;height:150px; margin:20px 0;"/></div>
-				<div style="display:inline-block;width:70%;padding-left:10px;text-align:left;">제목</div>
-				<div id="subject" style="display:inline-block;width:70%;text-align:center; margin-bottom:20px;">
-					<select id="subjectSelect" class="form-control selectpicker noborder" style="display:inline-block;">
-						<option disabled="disabled">제목을 선택해주세요.</option>
-						<option>직접 입력</option>
-						<option>간단한 학습지도 해줄 돌봄몬 찾습니다.</option>
-						<option>하원 후 저녁 시간까지 돌봐줄 돌봄몬 찾습니다.</option>
-						<option>아이가 좋아하는 놀이를 같이해줄 돌봄몬 찾습니다.</option>
-						<option>야외활동 같이해줄 돌봄몬 찾습니다.</option>
-					</select>
-					<input type="text" name="title" class="form-control spread-underline" placeholder="직접 입력" style="display:inline-block;padding-left:10px;border:none;border-bottom:1px solid gray;border-radius:0;margin-top:5px;">
-				</div>
-				<textarea name="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
+				<textarea name="content" id="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
+			
 			<input type="hidden" name="teacherId" value="${teacherId}"/>
 			
 			<div id="submitDiv" >
 				<input class="btn btn-warning" type="submit" value="계약서 보내기" />
 			</div>
-			</div>
-			<div id="footer"></div>
 			
+			<div id="footer"></div>
 		</form>
 	</div>
-<script>
-    AOS.init({
-        easing: 'ease-out-back',
-        duration: 2000
-    });
- 
-</script>
 </body>
 </html>
