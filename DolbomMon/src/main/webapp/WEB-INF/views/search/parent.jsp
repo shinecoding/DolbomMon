@@ -195,7 +195,7 @@ $(function(){
 	
 	
 	//필터
-	$(document).on("click", "#btnBox>button", function(){
+	$(document).on("click", "#btnBox input", function(){
     	count=12;
     	tabType=3;
     	activity_type = $(this).text();
@@ -502,33 +502,62 @@ function mapResize(){
 	</select>
 	</form>
 </div>
-	<div id="btnBox">
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act0">전체</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act1">실내놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act2">등하원돕기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act3">책읽기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act4">야외활동</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act5">한글놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act6">영어놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act7">학습지도</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act8">체육놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act9">간단청소</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act10">밥챙겨주기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act11">간단설거지</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act12">장기입주</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px; color: black;" id="act13">단기입주</button>
-	</div>
- 
-	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리</div>
-	<select class="custom-select my-1 mr-sm-2" id="selectArray" style="width:20%; float: right; margin: 0px;">
-	    <option selected value="new">최신순</option>
-	    <option value="wage_high">높은 시급순</option>
-	    <option value="wage_low">낮은 시급순</option>
-	</select>
+	<div id="btnBox" class="btn-group btn-group-toggle" data-toggle="buttons">
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>등하원 돕기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>책 읽기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>야외활동
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>한글놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>영어놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>학습지도
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>체육놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 청소
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>밥 챙겨주기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 설거지
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>장기입주
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>단기입주
+	  </label>
 	
+  </div>
+ <!-- ------------------------------------ -->
+	<div class="d-inline-block m-2" style="width:100%;">
+		<div class="float-left" > 총 <span id="Tcnt">${totalRecords}</span>건의 일자리</div>
+		
+		<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden; border:none;">
+			<select id="selectArray" >
+			    <option selected value="new">최신순</option>
+			    <option value="wage_high">높은 시급순</option>
+			    <option value="wage_low">낮은 시급순</option>
+			</select>
+		</div>
 	</div>
-	<br/>
-	<br/>
+	
+<!-- ------------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 		<c:forEach var="vo" items="${list2}">
 			
