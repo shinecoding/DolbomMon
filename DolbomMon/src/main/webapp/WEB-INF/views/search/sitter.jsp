@@ -53,7 +53,9 @@
   	vertical-align: top;
   	text-align:center;
   	font-family: 'Jua', sans-serif;
+  	
   	}
+  	
   	
 
 	 .list-group-item {
@@ -214,6 +216,7 @@ var value;
 
    	 	});//ajax
 		function dropdownAjax(care_type){
+   	 		
 			console.log("케어타입="+care_type);
 			var url = "/dbmon/searchCare";
 
@@ -230,7 +233,7 @@ var value;
 				type:'GET',
 				success:function(result){
 					
-					$("#Tcnt").text(result.length);
+				//	$("#Tcnt").text(result.length);
 
 						var $result = $(result);
 					var tag = "";
@@ -307,10 +310,11 @@ var value;
    	 	}
 		
 		//========================ajax=========for buttons=================
-	    $(document).on("click", "#actBox>button", function(){
+	    $(document).on("click", "#actBox input", function(){
 	    	count=12;
 	    	tabType=3;
 	    	activity_type = $(this).text();
+	    	
 	    	actBoxAjax(activity_type);
 	    });//ajax
 			function actBoxAjax(activity_type){
@@ -327,7 +331,7 @@ var value;
 					type:'GET',
 					success:function(result){
 						console.log("갯수="+result.length);
-						$("#Tcnt").text(result.length);
+						//$("#Tcnt").text(result.length);
 						var $result = $(result);
 						var tag = "";
 						
@@ -521,7 +525,7 @@ var value;
 				data:params,
 				type:'GET',
 				success:function(result){
-					$("#Tcnt").text(result.length);
+					//$("#Tcnt").text(result.length);
 
 					var $result = $(result);
 					var tag = "";
@@ -764,21 +768,47 @@ var value;
   
 
 
-   <div id="actBox">
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act1" >실내놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원 돕기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act3">책 읽기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act9">간단 청소</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act10">밥 챙겨주기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act11">간단 설거지</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
-
+   <div id="actBox" class="btn-group btn-group-toggle" data-toggle="buttons">
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>등하원 돕기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>책 읽기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>야외활동
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>한글놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>영어놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>학습지도
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>체육놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 청소
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>밥 챙겨주기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 설거지
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>장기입주
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>단기입주
+	  </label>
+	
   </div>
  
 <!-- -------------------------순서 정렬--------------------- -->

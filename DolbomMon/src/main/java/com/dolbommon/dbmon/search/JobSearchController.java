@@ -115,7 +115,6 @@ public class JobSearchController {
 		}else {
 			list = dao.jobSearchCareType(care_type, count); 	
 		}
-		
 		return list;
 		
 		
@@ -207,7 +206,7 @@ public class JobSearchController {
 		
 		vo.setTotalRecord(dao.getHeartRecord(userid)); //총 레코드 수
 		
-		List<TeacherVO> list = dao.selectHeart(vo);
+		List<TeacherVO> list = dao.likeOrder(vo);
 		System.out.println("리스트"+list);
 		
 		ModelAndView mav = new ModelAndView();
@@ -269,6 +268,21 @@ public class JobSearchController {
 		String result = dao.deleteHeart(vo) +"";
 		
 		return result;
+	}
+	
+	
+	@RequestMapping("/parentHistory")
+	public ModelAndView parentHistory(HttpSession ses) {
+		String userid = (String)ses.getAttribute("userid");
+		
+		JobSearchDaoImp dao = sqlSession.getMapper(JobSearchDaoImp.class);
+		List<TeacherVO> list = dao.selectHistory(userid);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("/parents/parentHistory");
+		return mav; 
 	}
 	
 	
