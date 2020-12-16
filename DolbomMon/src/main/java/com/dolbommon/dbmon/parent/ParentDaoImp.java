@@ -34,4 +34,6 @@ public interface ParentDaoImp {
 	public int applyDbmCnt(int no);
 	//후기 쓰기
 	public int insertComment(CommentVO vo);
+	//홈페이지 후기
+	public List<CommentVO> CommentBoard();
 }
