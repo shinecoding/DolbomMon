@@ -341,7 +341,6 @@ $(function(){
 						tag += '<div style="float:left; margin-right:5px;"><b style="color:orange;">'+childInfo+'</b></div>';
 					}
 	               tag += ' | ';
-	               tag += '<span class="ml-2" style="font-size:0.7em">';
 	               if(vo.writedate>525600){
 	                  tag += Math.round(vo.writedate/525600)+'년 전';
 	               } else if(vo.writedate>43200){
@@ -651,7 +650,7 @@ function mapResize(){
 						<div class="offerBox">
 							<span class="card-title offerTitle" style="line-height: 2em;"><b>제목 ${vo.title}</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid}</span><br/>
-								<span><b>신생아 1명, 유아 1명</b></span> | 
+								<span><b>신생아 1명,2 유아 1명</b></span> | 
 								<!-- 마지막 업데이트일 -->
 								<span class="ml-2" style="font-size:0.7em">
 										<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.writedate/525600}"/>
