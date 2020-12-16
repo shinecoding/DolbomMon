@@ -138,7 +138,7 @@ p{
 
 <div class="container" data-aos="fade-up" id="target2" style="margin: 0 auto;">
 
-<div class="gridStyleAllWrapper" style="margin-top:0px; height:600px;">
+<div class="gridStyleAllWrapper" style="margin-top:0px; height:700px;">
 <h3 style="margin-top:70px;"><img class="_3v9X3" src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/index/icon-onair.svg" alt="실시간 돌봄몬 후기"  style="background-color:white;">
 <br/><br/><strong class="half-highlight">실시간</strong>&nbsp;돌봄몬 후기</h3>
 <br/>
@@ -187,49 +187,6 @@ p{
 </div>
 <br/>
 <br/>
-
-
-
-
-
-
-
-
-
-
-
- <c:forEach var="vo" items="${list }">
-	<div class="wrapper2" onclick="location.href='teacherView'">
-	<ul class="list-group" style="font-size:.85em; font-weight: 500;">
-	<li class="list-group-item">
-		<ul class="list-group list-group-horizontal">
-			<li class="list-group-item border-0 col-2">
-				<img src="img/profilepic.png" class="rounded-circle"/><br/>
-				<div class="badge badge-warning badge-pill ml-3" ><span>0</span>명 지원</div>
-			</li>
-			<li class="list-group-item border-0 col-10">
-				
-				<h6><b>${vo.username }<b/></h6></a><a style="color:orange;">
-				<b>돌봄가능아이 수 : ${vo.headcount}</b> | 3분전 ${vo.situation } |  ${vo.no }</a> <br/><br/>
-				<a style="color: #3b3b3b; font-size: 1em; font-weight: 500;"><b>${vo.content}</a></b><br/>
-				<a>${vo.age}세  | 희망시급 : ${vo.wage } | 협의유무: ${vo.discussion }</a><br/>
-				
-				<div class="review_rate" style="line-height: 1.375;">등록일 : ${vo.t_date} | 후기수 : 100개</div>
-			</li>
-		</ul>
-	</li>
-	</ul>
-
-</div>
-
-</c:forEach> 
-
-
-
-
-
-
-
 
 
 

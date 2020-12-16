@@ -13,7 +13,9 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <style>
-	.container{width:800px;}
+	.container{width:800px;
+	margin-bottom: 50px;
+	}
 	
 	#title{
 		margin:20px 5px;
@@ -162,9 +164,8 @@
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#ex7" rel="modal:open">결제/환불 계좌등록</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글 등록폼</a></li>
    </ul>
    
 </div>
