@@ -52,7 +52,7 @@
 	<%@include file="/WEB-INF/views/top.jsp"%>
 	<form id="joinTypeFrm" method="post" action="">
 	<div class="container" >
-		<div id="parent" style="cursor:pointer; margin-top:220px; text-align:center;border-radius:20px;">
+		<div id="parent" style="cursor:pointer; margin-top:100px; text-align:center;border-radius:20px;">
 			<div style="display:inline-block;width:70%;">
 				<img src="<%=request.getContextPath() %>/img/momJoinImg.png" style="width:150px;" />
 

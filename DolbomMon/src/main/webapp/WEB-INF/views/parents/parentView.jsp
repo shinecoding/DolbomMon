@@ -919,7 +919,7 @@
       	<h5>희망 시급</h5>
       	<li class="list-group-item">
       		<img src="<%=request.getContextPath()%>/img/moneyImg.png" style="width:60px; height:60px; line-height:80px;" /><b style="font-size:25px;line-height:86px;margin-left:5px;">${rbVO.wish_wage } 원</b>
-      		<span><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
+      		<span style="color:orange;"><c:if test="${rbVO.consultation=='Y' }">*협의 가능</c:if><c:if test="${rbVO.consultation=='N' }"></c:if></span>
    		</li>
    <h5>선호하는 돌봄유형</h5>
    <li class="list-group-item">
