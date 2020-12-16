@@ -104,9 +104,6 @@
 					<div class="row">
 						
 						<c:forEach var="vo" items="${list}">
-							<c:when test="${empty list}">
-								<div>ㅇㄴㄹ니</div>
-							</c:when>
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
@@ -131,7 +128,7 @@
 										</div>
 										 -->
 									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">계약서 자세히 보기</div>
+								<div class="card-footer btn" onclick="location.href='contractView?origin_no=${vo.job_board_no}'">계약서 자세히 보기</div>
 								</div>
 							</div>
 						</c:forEach>
