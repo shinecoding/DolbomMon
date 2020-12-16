@@ -19,8 +19,14 @@ public class ApplyToTeacher {
 	private int wish_wage; // 학부모 희망시급
 	private int tcnt;
 	private String t_userid;
+	private String agree;
 	
-	
+	public String getAgree() {
+		return agree;
+	}
+	public void setAgree(String agree) {
+		this.agree = agree;
+	}
 	public int getJob_board_no() {
 		return job_board_no;
 	}

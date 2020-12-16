@@ -73,7 +73,6 @@
 			return false;
 		}
 		return false;
-		
 	});
 	
 </script>
@@ -90,11 +89,11 @@
 			<span class="badge badge-warning mr-1"></span>활동가능지역<br/>
 		</div>
 		<div class="areaBox1">
-			<input type="text" class="form-control align-middle" id="area1" name="area1" value="" placeholder="주소">
+			<input type="text" class="form-control align-middle" id="area1" name="area1"  placeholder="주소">
 			<input type="button" class="btn btn-warning align-middle" onclick="sample5_execDaumPostcode()" value="주소 검색" ><br>
 			
-			<input type="hidden" id="lat" name="lat" value="" />
-			<input type="hidden" id="lng" name="lng" value="" />
+			<input type="hidden" id="lat" name="lat"  />
+			<input type="hidden" id="lng" name="lng"  />
 			<div id="map" style="border-radius:50px;"></div>
 		</div>
 	</div>

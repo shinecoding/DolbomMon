@@ -25,6 +25,7 @@
 	}
 	
 	.container{width:800px;
+	margin-bottom:50px;
 }
 
 	h4{text-align:center; line-height:40px;}

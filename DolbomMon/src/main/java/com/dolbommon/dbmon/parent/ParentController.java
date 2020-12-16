@@ -125,6 +125,7 @@ public class ParentController {
 
 	}
 	
+	
 	/////////////// 학부모에게 지원하기
 	@RequestMapping("/applyToParent")
 	public ModelAndView applyToParent(HttpSession ses, RecruitBoardVO rbVO, int no) {
@@ -301,7 +302,6 @@ public class ParentController {
 		String starArr[] = star.split(",");
 		System.out.println(starArr[starArr.length-1]);
 		vo.setReview_star(starArr[starArr.length-1]);
-		int calstar = Integer.parseInt(vo.getReview_star());
 		ModelAndView mav = new ModelAndView();
 		
 		int result = dao.insertComment(vo);
