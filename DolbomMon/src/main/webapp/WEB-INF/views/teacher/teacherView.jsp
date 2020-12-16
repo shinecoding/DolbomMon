@@ -851,7 +851,7 @@ border-radius:10px;
    		<h5>후기</h5>
    		<ul class="list-group">
    		<li class="list-group-item">
-   		
+   		<div style="overflow:scroll; overflow-x:hidden; width:100%; max-height:400px;"> 
    		<c:forEach var="rvo" items="${review}">
    			<ul class="list-group list-group-horizontal" style="margin:0; padding:0;">
 	   			<li class="list-group-item" style="border:none; margin-top:5px;padding-left:0;">
@@ -888,13 +888,14 @@ border-radius:10px;
 		   			<b>${rvo.review_content}</b><br/>
 	   			</li>
    			</ul>
-   		</c:forEach>	
+   		</c:forEach>
+   		</div>	
    		</li>
    		</ul>
    		</c:if>
    		
    <br/>
-   
+   <br/>
    	
    
    
