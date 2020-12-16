@@ -140,7 +140,8 @@ public class TeacherController {
 		return "/teacher/teacherHeart";
 	}
 
-	///내구직현황 선생님
+	
+	///내구직현황 선생님 <용준버전>
 	@RequestMapping("/teacherApplyHistory")
 	public ModelAndView teacherApplyHistory(HttpSession ses) {
 			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
@@ -164,7 +165,27 @@ public class TeacherController {
 
 			return mav;
 	}
-	
+	/*
+	///내구직현황 선생님 승현버전
+	@RequestMapping("/teacherApplyHistory")
+	public ModelAndView teacherApplyHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
+			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
+			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
+			//List<MemberVO> mvoList = dao.selectTMemNo();
+			ModelAndView mav = new ModelAndView();
+			
+			//mav.addObject("mvoList", mvoList);
+			mav.addObject("list2", list2);
+			mav.addObject("list3", list3);
+			//mav.addObject("totalRecords", totalRecords);
+			mav.setViewName("/teacher/teacherApplyHistory");
+
+			return mav;
+	}
+	*/
 	///행동내역 작성
 	@RequestMapping("/dealHistory")
 	public ModelAndView dealHistory(HttpSession ses) {
