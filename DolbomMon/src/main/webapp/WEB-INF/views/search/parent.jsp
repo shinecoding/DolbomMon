@@ -195,18 +195,17 @@ $(function(){
 	
 	
 	//필터
-	$(document).on("click", "#btnBox input", function(){
-    	count=12;
-    	tabType=3;
+	$(document).on("click", "#btnBox label", function(){
     	activity_type = $(this).text();
-    	actBoxAjax(activity_type);
+    	console.log("돌봄유형 =>" + activity_type.trim()+"dsf");
+    	actBoxAjax(activity_type.trim());
 	});//ajax
 	
 	function actBoxAjax(activity_type){
 		    var url = "/dbmon/careAct";
 			var params = {
 					activity_type:activity_type,
-					count:count, 
+					count:count 
 			} 
 			console.log("파람="+params);
 			$.ajax({
@@ -297,7 +296,7 @@ $(function(){
 		var url2 = "/dbmon/careSelect";
 		var params2 = {
 				care_type:care_type,
-				count:count, 
+				count:count 
 		} 
 		console.log("파라미터="+params2);
 		$.ajax({
@@ -403,7 +402,7 @@ $(function(){
 			var url = "/dbmon/filterArray";
 			var params = {
 					order:order,
-					count:count, 
+					count:count 
 			}
 				
 			console.log("파라미터="+params);
@@ -582,6 +581,7 @@ function mapResize(){
 	</form>
 </div>
 	<div id="btnBox" class="btn-group btn-group-toggle" data-toggle="buttons">
+	  
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
 	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
 	  </label>
