@@ -37,7 +37,7 @@
 	</select>
 	
 	<select id="selelctApplyToTeacher" resultType="com.dolbommon.dbmon.parent.ParentHistoryVO">
-		select p.job_board_no, p.agree, m.username, p.teacherid, p.userid, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, c.child_birth, t.pic
+		select p.payment, p.job_board_no, p.agree, m.username, p.teacherid, p.userid, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, c.child_birth, t.pic
     		from parent_list p, member m, add_child c, teacher t
     		where p.userid = #{param1} and p.job_board_no = origin_no and m.userid = p.userid and p.job_board_no = c.job_board_no and p.teacherid = t.userid and p.status = 'C'
     		order by writedate desc
@@ -58,7 +58,7 @@
 	</insert>
 
 	<select id="parentDealHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.job_board_no ,p.teacherid, p.userid ,p.care_addr ,p.time_type ,p.pw_activity ,p.wish_wage ,p.consultation ,p.wish_age ,p.wish_gender ,p.content ,p.writedate ,p.status 
+		select p.payment, p.teacherid, p.job_board_no ,p.userid ,p.care_addr ,p.time_type ,p.pw_activity ,p.wish_wage ,p.consultation ,p.wish_age ,p.wish_gender ,p.content ,p.writedate ,p.status 
 			,p.agree ,p.who ,p.reject ,p.origin_no ,p.payment ,a.pay_no ,a.parent_id ,a.teacher_id , a.refund_status, a.reimburse, a.pay_date 
 	        from parent_list p join payment a on p.job_board_no=a.pay_no
 			where payment='Y' and p.userid=#{param1} and agree = 'Y'  and status = 'C' order by a.pay_date desc

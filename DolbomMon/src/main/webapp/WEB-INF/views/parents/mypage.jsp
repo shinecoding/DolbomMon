@@ -166,7 +166,6 @@
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
    </ul>
-   <button class="comment" id="test1212">후기 작성</button>
    
 </div>
 

@@ -27,13 +27,34 @@
 </style>
 <script>
 var test='<%=(String)session.getAttribute("userid")%>';
+$('#dataList').DataTable().ajax.reload(null, false);
+	
+
 	$(document).ready(function() {
-	   accountTable = $('#accountTable').DataTable({
+
+		$.fn.dataTable.ext.search.push(
+		        function(settings, data, dataIndex){
+		            var min = Date.parse($('#fromDate').val());
+		            var max = Date.parse($('#toDate').val());
+		            console.log("민="+min)
+		            console.log("맥스="+max)
+		            var targetDate = Date.parse(data[3]);
+					console.log("타겟="+targetDate)
+		            if( (isNaN(min) && isNaN(max) ) || 
+		                (isNaN(min) && targetDate <= max )|| 
+		                ( min <= targetDate && isNaN(max) ) ||
+		                ( targetDate >= min && targetDate <= max) ){ 
+		                    return true;
+		            }
+		            return false;
+		        }
+		)
+		
+	  var table = $('#accountTable').DataTable({
 		   "order"        : [[ 0, "desc" ]], //정렬을 indate로 바꿔야한다. 업데이트 할때마다 indate sysdate 등록하게 해야함.
 	    	"scrollX" : true,
 	    	"lengthMenu": [10, 25, 50],
 		    "autoWidth" : "false",
-		    "bStateSave" : "true", //쿠키저장
 		    dom: 'Bfrtip',
 			buttons: [
 				/*'copy', 'csv', 'excel', 'pdf'*/
@@ -70,7 +91,8 @@ var test='<%=(String)session.getAttribute("userid")%>';
 		ajax: {
 			"type" : "POST",
 			"url" : "paymentList",
-			"dataType": "JSON"
+			"dataType": "JSON",
+			orderMulti: true
 	         },columns: [
 				{"data" : "pay_no",
 					"render":  function (data, type, row) {
@@ -179,7 +201,16 @@ var test='<%=(String)session.getAttribute("userid")%>';
 	                "next": "다음",
 	                "previous": "이전"
 	            }
-			},columnDefs: [
+			},
+			  "footerCallback":function(){
+		            var api = this.api(), data;
+		            var result = 0;
+		            api.column(4, {search:'applied'}).data().each(function(data,index){
+		                result += parseFloat(data);
+		            });
+		            $(api.column(4).footer()).html(result.toLocaleString()+'원');
+		        },
+			columnDefs: [
 				{ targets: 0, width: 70 },
 				{ targets: 1, width: 70 },
 				{ targets: 2, width: 70 },
@@ -198,14 +229,27 @@ var test='<%=(String)session.getAttribute("userid")%>';
 	   console.log("test");
 	   $('.dt-button').addClass('btn btn-outline-info');
 	   $('.dt-button').removeClass('dt-button');
+	   $('.dataTables_info').css("padding","0px");
+
+	   $('#accountTable_filter').prepend('<select style="width:115px;" id="select"></select>');
+	    $('#accountTable > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+	        $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
+	    });
+	   
+	    $('.dataTables_filter input').unbind().bind('keyup', function () {
+	        var colIndex = document.querySelector('#select').selectedIndex;
+	        table.column(colIndex).search(this.value).draw();
+	    });
+		   
+		   $('#accountTable_filter').prepend('<input type="text" class="form-control" style="width:120px;" id="toDate" placeholder="YYYY-MM-DD"> ');
+		   $('#accountTable_filter').prepend('<input type="text" class="form-control" style="width:120px;" id="fromDate" placeholder="YYYY-MM-DD"> ~');
+		   $('#toDate, #fromDate').unbind().bind('keyup',function(){
+		        table.draw();
+		    })
+		    
+
 	});
-	//팝업창 위치
-	/* iframe으로 열기
-	function onPopupWindow(){
-		var win =  window.open(null, '_blank', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
-		win.document.write('<iframe width="100%", height="100%" src="/dbmon/managerRegister" frameborder="0" allowfullscreen></iframe>')
-	}
-	*/
+	
 	//마우스 휠 방향전환
 	$("#accountTable").on('mousewheel',function(e){
 		var wheelDelta = e.originalEvent.wheelDelta;
@@ -221,12 +265,6 @@ var test='<%=(String)session.getAttribute("userid")%>';
 		$(this).closest('tr').css("background-color","antiquewhite");
 	});
 	
-	$(document).on("click",".eBtn",function(){
-		if(confirm("해당 관리자의 정보를 수정하겠습니까?")){
-			var userid = $(this).closest('tr').find('td:eq(1)').text();
-			window.open('/dbmon/updateManager?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
-		}
-	});
 </script>
 </head>
 <body>
@@ -251,6 +289,12 @@ var test='<%=(String)session.getAttribute("userid")%>';
             <th>email</th>
         </tr>
     </thead>
+    <tfoot style="height:1px;">
+		<tr style="height:1px;">
+			<th class="wid1" colspan="4" style="padding:0px; width:1px; text-align:right;white-space:nowrap;">총액 : </th>
+			<th class="wid1" colspan="9" style="padding:0px 10px; width:1px; text-align:left;white-space:nowrap;"></th>
+		</tr>
+	</tfoot>
 </table>
 
 </div>

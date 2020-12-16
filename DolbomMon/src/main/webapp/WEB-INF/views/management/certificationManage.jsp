@@ -35,6 +35,7 @@ var certiTable;
 	    	"scrollX" : true,
 	    	"lengthMenu": [10, 25, 50],
 		    "autoWidth" : "false",
+		    orderMulti: true,
 		    "bStateSave" : "true", //쿠키저장
 		    dom: 'Bfrtip',
 			buttons: [

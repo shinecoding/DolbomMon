@@ -277,6 +277,7 @@
                     </a>
                   
                 </li>
+                <!-- 
                 <li class="has-subnav">
                     <a href="#">
                         <i class="fa fa-laptop fa-2x"></i>
@@ -286,6 +287,7 @@
                     </a>
                     
                 </li>
+                -->
                 <li class="has-subnav">
                     <a href="/dbmon/management?type=memberManage">
                        <i class="fa fa-list fa-2x"></i>

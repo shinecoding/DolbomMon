@@ -333,6 +333,8 @@ public class DealController {
 		
 		dao.updatePayment(pay_no);
 		dao.insertPayment(pvo);
+		//String origin_no = dao.selectOrigin_no(pay_no);
+		//dao.updatePayment(origin_no);
 		dao.updateStatusP(origin_no);
 		
 		ModelAndView mav = new ModelAndView();

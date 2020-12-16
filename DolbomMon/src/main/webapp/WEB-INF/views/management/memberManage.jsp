@@ -36,6 +36,7 @@ var memberTable;
 	    	"lengthMenu": [10, 25, 50],
 		    "autoWidth" : "false",
 		    "bStateSave" : "true", //쿠키저장
+		    orderMulti: true,
 		    dom: 'Bfrtip',
 			buttons: [
 				/*'copy', 'csv', 'excel', 'pdf'*/
