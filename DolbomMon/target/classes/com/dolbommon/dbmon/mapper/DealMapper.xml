@@ -88,6 +88,10 @@
 	<update id="updatePayment">
 		update parent_list set payment = 'Y' where job_board_no = #{pay_no}
 	</update>
+	<update id="updateStatusP">
+		update parent_list set status = 'P' where origin_no = #{origin_no}
+	</update>
+	
 	<update id="cancelContract">
 		update parent_list set status='X', origin_no='', teacherid='', agree='', payment=''  where job_board_no=#{no}
 	</update>
