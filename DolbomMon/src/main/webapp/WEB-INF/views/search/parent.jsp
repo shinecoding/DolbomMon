@@ -111,10 +111,10 @@
 	#btnBox{
 		margin-top:0;
 		width: 100%;
-		height: 50px;
 		white-space: nowrap;
 		display: inline-block;
 		vertical-align: top;
+		text-align:center;
 		margin-left:5px;
 	}
 	.modalHidden{
