@@ -77,7 +77,7 @@ var certiTable;
 	        	{"data" : "userid",
 					 "render": function(data, type, row){
 		                    if(type=='display'){
-		                        data ='<a class="selectId" href="/dbmon/teacherView?userid='+ data + '" target="_blank">' + data + '</a>';
+		                        data ='<a class="selectId" href="/dbmon/parentProfile?userid='+ data + '" target="_blank">' + data + '</a>';
 		                    }
 		                    return data;	
 				
