@@ -21,7 +21,6 @@
 	.title{display:inline-block; width:70%; height:50px; line-height:50px; border-top:3px solid #EFEFEF; border-bottom:3px solid #EFEFEF; margin:30px 0;}
 	.title>label{width:100%; height:100%; cursor:pointer;}
 	#ageAndGenderDiv{display:none;}
-	#ageDiv ul{ }
 	
 	/* ============= 돌봄 유형 목록 ============== */
 	#activityTypeDiv{display:inline-block; width:60%; margin-top:100px;}
@@ -40,9 +39,9 @@
 	#genderDiv input{display:none;}
 	#genderDiv label{display:inline-block; width:50px; height:50px; line-height:50px; margin:0 5px; border-radius:50%; background-color:#EFEFEF;}
 	#ageDiv{width:100%; text-align:center; overflow:hidden; height:auto; margin:50px 0; }
-	#ageDiv ul{overflow:hidden; width:65%; margin:0 auto;}
+	#ageDiv ul{display:table;width:350px;padding:0;margin:0 auto;}
 	#ageDiv li{width:18%; height:50px; line-height:50px; float:left; margin:10px 1%; border:none; border-radius:50%; background-color:#EFEFEF; color:black; font-weight:bold; }
-	#ageDiv label{width:100%; height:100%; text-align:center; }
+	#ageDiv label{display:inline-block;width:100%; height:100%; text-align:center; }
 	/* ============= 원하는 선생님 나이 선택 ================ */
 	/* ====================== 자녀 수 ========================= */
 	#childrenInfo{display:inline-block; width:70%; overflow:hidden; height:auto; font-weight:bold;}
@@ -115,6 +114,7 @@
 	#fatman{display:none; position:relative; left:80%; bottom:500px;}
 	/* ===================== =====================*/
 	#regularDateDiv #selectDayDiv{width:100%; overflow:hidden; height:auto; }
+	#regularDateDiv ul{display:table;margin:0 auto;width:100%;padding:0;}
 	#regularDateDiv #selectDayDiv li>label{
 		display:block; 
 		width:100%; height:100%; 

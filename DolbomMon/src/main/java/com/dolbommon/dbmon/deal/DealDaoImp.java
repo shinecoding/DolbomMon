@@ -61,5 +61,7 @@ public interface DealDaoImp {
 	public int insertPayment(PaymentVO vo);
 	public int updatePayment(String pay_no);
 	public String selectOrigin_no(String pay_no);
+	public int updateStatusP(String origin_no);
+	
 }
 

@@ -64,6 +64,9 @@ public class TeacherController {
 		return mav;
 	}
 	
+	
+	
+	
 	@RequestMapping("/teacherView")
 	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
 		

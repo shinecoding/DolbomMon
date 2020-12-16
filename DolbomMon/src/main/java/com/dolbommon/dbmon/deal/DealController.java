@@ -312,6 +312,7 @@ public class DealController {
 		String apply_num = req.getParameter("apply_num");
 		String teacherid = req.getParameter("teacherid");
 		String pay_no = req.getParameter("pay_no");
+		String origin_no = req.getParameter("origin_no");
 		
 		PaymentVO pvo = new PaymentVO();
 		pvo.setParent_id(parent_id);
@@ -334,6 +335,8 @@ public class DealController {
 		dao.insertPayment(pvo);
 		//String origin_no = dao.selectOrigin_no(pay_no);
 		//dao.updatePayment(origin_no);
+		dao.updateStatusP(origin_no);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mss", "결제 성공하였습니다.");
 		mav.setViewName("deal/contractResult");

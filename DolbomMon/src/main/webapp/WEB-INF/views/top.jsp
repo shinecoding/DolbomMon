@@ -212,7 +212,12 @@ EDIT ON
 		  left: 0; 
 		  
 		}
-	   
+		.ml-1, .mx-1 {
+  		  margin-left: 100px;
+		}
+		 #groupchat1{
+		
+		}
    </style>
 </head>
 <body>
@@ -226,9 +231,15 @@ EDIT ON
 	
 				<c:if test="${logStatus != null || logStatus=='Y'}">
 	           <span style="float:right">
-	           <img class="btn ppp ccBtn" src="icon/chat6.png" style="height:55px; width:65px;margin-rignt:0px;"></img>
+	           <span id="groupchat1">
+	           <img class="btn ppp ccBtn" src="icon/chat6.png" style="height:55px; width:65px;margin-rignt:0px;">
+	           <div class="badge badge-warning badge-pill ml-1" style="margin-top:55px; margin-right:0px;">채팅하기</div></img>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
-	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-rignt:0px;"></img></a>
+	           </span>
+	           <span id="groupchat2">
+	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-rignt:0px; "></img>
+	           <div class="badge badge-warning badge-pill ml-1" style="margin-top:55px; margin-left:0px;">쪽지</div></a>
+	           </span>
 	          <!-- <a href="/dbmon/temporaryLogin">
 	           <button class="btn btn-info ppp">임시선생로그인</button></a>
 	           <a href="/dbmon/temporaryLoginP">

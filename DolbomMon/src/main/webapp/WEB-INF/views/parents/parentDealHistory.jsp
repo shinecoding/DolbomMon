@@ -138,6 +138,7 @@
 										 -->
 									</div>
 								<div class="card-footer btn" onclick="contractOpen('${vo.origin_no}', '${vo.teacherid }', '${vo.payment }')">계약서 자세히 보기</div>
+
 								</div>
 							</div>
 						</c:forEach>
