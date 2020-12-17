@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/dolbommon/dbmon/board/BoardController.java=UTF-8
+encoding//src/main/java/com/dolbommon/dbmon/login/LoginController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/management/memberManage.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/parents/parentCalendar.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/parents/scheduleEdit.jsp=UTF-8
