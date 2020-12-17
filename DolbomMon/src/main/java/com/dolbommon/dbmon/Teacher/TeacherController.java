@@ -64,11 +64,17 @@ public class TeacherController {
 		return mav;
 	}
 	
+	
+	
+	
 	@RequestMapping("/teacherView")
 	public ModelAndView teacherView(HttpSession ses, HttpServletRequest req) {
 		
 		String userid = (String) ses.getAttribute("userid");
+		
 		String paramid = req.getParameter("userid");
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		RecruitBoardVO checkVo = dao2.checkContract(userid, paramid);	
 		if(req.getParameter("userid")!=null) {
 			userid = req.getParameter("userid");
 		};
@@ -77,6 +83,9 @@ public class TeacherController {
 		TeacherVO vo = dao.selectTeacher(userid);
 		MemberVO mvo = dao.selectTMember(userid);
 		RegularDateVO rdVO = dao.selectSchedule(userid);
+		
+	
+		
 		
 		dao.hitCount(vo);
 		int timeInt = 0;
@@ -112,6 +121,72 @@ public class TeacherController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("rdVO", rdVO);
+		mav.addObject("checkVo", checkVo);
+		mav.addObject("paramid", paramid);
+		mav.addObject("timeStr", timeStr);		
+		mav.addObject("vo", vo);
+		mav.addObject("mvo", mvo);
+		mav.addObject("review", review);
+		mav.addObject("cvo", cvo);
+		mav.addObject("list", list);
+		mav.addObject("userid", userid);
+		mav.setViewName("teacher/teacherView");
+		return mav;
+	}
+	
+	@RequestMapping("/teacherViewT") 
+	public ModelAndView teacherViewT(HttpSession ses, HttpServletRequest req) {
+		
+		String userid = (String) ses.getAttribute("userid");
+		
+		String paramid = req.getParameter("userid");
+		DealDaoImp dao2 = sqlSession.getMapper(DealDaoImp.class);
+		if(req.getParameter("userid")!=null) {
+			userid = req.getParameter("userid");
+		};
+		
+		TeacherDaoImp dao = sqlSession.getMapper(TeacherDaoImp.class);
+		TeacherVO vo = dao.selectTeacher(userid);
+		MemberVO mvo = dao.selectTMember(userid);
+		RegularDateVO rdVO = dao.selectSchedule(userid);
+		
+		
+		
+		
+		dao.hitCount(vo);
+		int timeInt = 0;
+		String timeStr = "";
+		if(Integer.parseInt(vo.getLast_edit())>525600) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/525600;
+			timeStr = timeInt + "년 전";
+		} else if(Integer.parseInt(vo.getLast_edit())>43200) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/43200;
+			timeStr = timeInt + "달 전";
+		} else if(Integer.parseInt(vo.getLast_edit())>1440) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/1440;
+			timeStr = timeInt + "일 전";
+		} else if(Integer.parseInt(vo.getLast_edit())>60) {
+			timeInt = Integer.parseInt(vo.getLast_edit())/60;
+			timeStr = timeInt + "시간 전";
+		} else {
+			timeInt = Integer.parseInt(vo.getLast_edit());
+			timeStr = timeInt + "분 전";
+		}
+		
+		
+		String hideName = mvo.getUsername().substring(0,1) + "O" + mvo.getUsername().substring(2);
+		mvo.setUsername(hideName);
+		
+		//후기, 경험, 인증
+		List<ReviewVO> review = dao.selectReview(userid);
+		List<ExperienceVO> list = dao.selectExp(userid);
+		CertificationDaoImp cdao = sqlSession.getMapper(CertificationDaoImp.class);
+		CertificationVO cvo = cdao.selectCert(userid);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("rdVO", rdVO);
 		mav.addObject("paramid", paramid);
 		mav.addObject("timeStr", timeStr);		
 		mav.addObject("vo", vo);
@@ -130,7 +205,8 @@ public class TeacherController {
 		return "/teacher/teacherHeart";
 	}
 
-	///내구직현황 선생님
+	
+	///내구직현황 선생님 <용준버전>
 	@RequestMapping("/teacherApplyHistory")
 	public ModelAndView teacherApplyHistory(HttpSession ses) {
 			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
@@ -154,7 +230,27 @@ public class TeacherController {
 
 			return mav;
 	}
-	
+	/*
+	///내구직현황 선생님 승현버전
+	@RequestMapping("/teacherApplyHistory")
+	public ModelAndView teacherApplyHistory(HttpSession ses) {
+			DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+			String userid = (String)ses.getAttribute("userid");
+			List<RecruitBoardVO> list2 = dao.selectTeacherHistory(userid);
+			List<RecruitBoardVO> list3 = dao.selectTeacherHistory2(userid);
+			//int totalRecords = dao.getTotalRecords();	//총 게시물 수
+			//List<MemberVO> mvoList = dao.selectTMemNo();
+			ModelAndView mav = new ModelAndView();
+			
+			//mav.addObject("mvoList", mvoList);
+			mav.addObject("list2", list2);
+			mav.addObject("list3", list3);
+			//mav.addObject("totalRecords", totalRecords);
+			mav.setViewName("/teacher/teacherApplyHistory");
+
+			return mav;
+	}
+	*/
 	///행동내역 작성
 	@RequestMapping("/dealHistory")
 	public ModelAndView dealHistory(HttpSession ses) {

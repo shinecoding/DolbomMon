@@ -111,10 +111,10 @@
 	#btnBox{
 		margin-top:0;
 		width: 100%;
-		height: 50px;
 		white-space: nowrap;
 		display: inline-block;
 		vertical-align: top;
+		text-align:center;
 		margin-left:5px;
 	}
 	.modalHidden{
@@ -195,18 +195,17 @@ $(function(){
 	
 	
 	//필터
-	$(document).on("click", "#btnBox>button", function(){
-    	count=12;
-    	tabType=3;
+	$(document).on("click", "#btnBox label", function(){
     	activity_type = $(this).text();
-    	actBoxAjax(activity_type);
+    	console.log("돌봄유형 =>" + activity_type.trim()+"dsf");
+    	actBoxAjax(activity_type.trim());
 	});//ajax
 	
 	function actBoxAjax(activity_type){
 		    var url = "/dbmon/careAct";
 			var params = {
 					activity_type:activity_type,
-					count:count, 
+					count:count 
 			} 
 			console.log("파람="+params);
 			$.ajax({
@@ -215,7 +214,7 @@ $(function(){
 				type: 'GET',
 				success: function(result){
 		            console.log("갯수="+result.length);
-		            $("#Tcnt").text(result.length);
+		        //    $("#Tcnt").text(result.length);
 		            var $result = $(result);
 		            var tag = "";
 		               
@@ -237,8 +236,20 @@ $(function(){
 		               tag += '<div class="offerBox">';
 		               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 		               tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span><br/>';
-		               tag += '<span><b>신생아 1명, 유아 1명</b></span> | ';
-		               
+		               var cb = vo.child_birth;
+						
+						////////////////////자녀 정보 /////////////////////
+						var cbArr = cb.split(",");
+						for(var i=0; i<cbArr.length;i++){
+							console.log("cbArr => " + cbArr[i]);
+							var childYMD = cbArr[i].split("-");
+							var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+							console.log("child_birth => " + child_birth);
+							var childInfo = getAge(child_birth);
+							
+							tag += '<div style="float:left; margin-right:5px;"><span style="color:orange;">'+childInfo+'</span></div>';
+						}
+		               tag += ' | ';
 		               tag += '<span class="ml-2" style="font-size:0.7em">';
 		               if(vo.writedate>525600){
 		                  tag += Math.round(vo.writedate/525600)+'년';
@@ -285,7 +296,7 @@ $(function(){
 		var url2 = "/dbmon/careSelect";
 		var params2 = {
 				care_type:care_type,
-				count:count, 
+				count:count 
 		} 
 		console.log("파라미터="+params2);
 		$.ajax({
@@ -293,7 +304,7 @@ $(function(){
 			data:params2,
 			type:'GET',
 			success:function(result){
-	            $("#Tcnt").text(result.length);
+	        //    $("#Tcnt").text(result.length);
 
 	             var $result = $(result);
 	            var tag = "";
@@ -316,8 +327,31 @@ $(function(){
 	               tag += '<div class="offerBox">';
 	               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 	               tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span><br/>';
-	               tag += '<span><b>신생아 1명, 유아 1명</b></span> | ';
-	               
+	               var cb = vo.child_birth;
+					
+					////////////////////자녀 정보 /////////////////////
+					var cbArr = cb.split(",");
+					for(var i=0; i<cbArr.length;i++){
+						console.log("cbArr => " + cbArr[i]);
+						var childYMD = cbArr[i].split("-");
+						var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+						console.log("child_birth => " + child_birth);
+						var childInfo = getAge(child_birth);
+						
+						tag += '<div style="float:left; margin-right:5px;"><b style="color:orange;">'+childInfo+'</b></div>';
+					}
+	               tag += ' | ';
+	               if(vo.writedate>525600){
+	                  tag += Math.round(vo.writedate/525600)+'년 전';
+	               } else if(vo.writedate>43200){
+	                  tag += Math.round(vo.writedate/43200) +'달 전';
+	               } else if(vo.writedate>1440){
+	                  tag += Math.round(vo.writedate/1440) +'일 전';
+	               } else if(vo.writedate>60){
+	                  tag += Math.round(vo.writedate/60) +'시간 전';
+	               } else {
+	                  tag += Math.round(vo.writedate) +'분 전';
+	               }
 	               tag += '<span class="ml-2" style="font-size:0.7em">';
 	               if(vo.writedate>525600){
 	                  tag += Math.round(vo.writedate/525600)+'년';
@@ -367,7 +401,7 @@ $(function(){
 			var url = "/dbmon/filterArray";
 			var params = {
 					order:order,
-					count:count, 
+					count:count 
 			}
 				
 			console.log("파라미터="+params);
@@ -398,8 +432,20 @@ $(function(){
 		               tag += '<div class="offerBox">';
 		               tag += '<span class="card-title offerTitle" style="line-height: 2em;"><b>'+vo.title+'</b></span>';
 		               tag += '<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. '+vo.job_board_no +' | '+ vo.userid+'</span><br/>';
-		               tag += '<span><b>신생아 1명, 유아 1명</b></span> | ';
-		               
+		                var cb = vo.child_birth;
+						
+						////////////////////자녀 정보 /////////////////////
+						var cbArr = cb.split(",");
+						for(var i=0; i<cbArr.length;i++){
+							console.log("cbArr => " + cbArr[i]);
+							var childYMD = cbArr[i].split("-");
+							var child_birth = childYMD[0] + "," + childYMD[1] + "," +childYMD[2];
+							console.log("child_birth => " + child_birth);
+							var childInfo = getAge(child_birth);
+							
+							tag += '<div style="float:left; margin-right:5px;"><b style="color:orange;">'+childInfo+'</b></div>';
+						}
+		               tag += ' | ';
 		               tag += '<span class="ml-2" style="font-size:0.7em">';
 		               if(vo.writedate>525600){
 		                  tag += Math.round(vo.writedate/525600)+'년 전';
@@ -438,6 +484,37 @@ $(function(){
 	 dropdownAjax(care_type);
 });
 
+
+function getAge(a){
+	var today = new Date();
+	var birthDay = new Date(a);
+	var child_age1;
+	var child_age2;
+	var time = Math.floor((today - birthDay) / 86400000);
+	var year = Math.floor(time/365)+1;
+	var month = Math.ceil(time/30);
+	if(month >= 96 && year < 14){
+		console.log("초딩"+year+"세");
+		child_age2 = "초등학생";
+		child_age1 = year+"세";
+		return child_age2 + child_age1;
+	}else if(month<96 && month>=37){
+		console.log("유아"+year+"세");
+		child_age2 = "유아";
+		child_age1 = year+"세";
+		return child_age2 + child_age1;
+	}else if(month<=36 && month>=7){
+		console.log("영아"+month+"개월");
+		child_age2 = "영아";
+		child_age1 = month + "개월";
+		return child_age2 + child_age1;
+	}else{
+		console.log("신생아"+month+"개월");
+		child_age2 = "신생아";
+		child_age1 = month + "개월";
+		return child_age2 + child_age1;
+	}
+}
 
 function mapResize(){
 	$("#map").css("display","none");
@@ -502,33 +579,63 @@ function mapResize(){
 	</select>
 	</form>
 </div>
-	<div id="btnBox">
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act0">전체</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act1">실내놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act2">등하원돕기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act3">책읽기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act4">야외활동</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act5">한글놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act6">영어놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act7">학습지도</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act8">체육놀이</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act9">간단청소</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act10">밥챙겨주기</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act11">간단설거지</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act12">장기입주</button>
-		<button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:12px; padding-top:7px;" id="act13">단기입주</button>
-	</div>
- 
-	<div class="total" style="float: left; margin: 0px; margin-top: -5px; margin-left: 5px;"><br/>총 <b><span id="Tcnt">${totalRecords}</span></b>건의 일자리</div>
-	<select class="custom-select my-1 mr-sm-2" id="selectArray" style="width:20%; float: right; margin: 0px;">
-	    <option selected value="new">최신순</option>
-	    <option value="wage_high">높은 시급순</option>
-	    <option value="wage_low">낮은 시급순</option>
-	</select>
+	<div id="btnBox" class="btn-group btn-group-toggle" data-toggle="buttons">
+	  
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>등하원 돕기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>책 읽기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>야외활동
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>한글놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>영어놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>학습지도
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>체육놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 청소
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>밥 챙겨주기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 설거지
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>장기입주
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>단기입주
+	  </label>
 	
+  </div>
+ <!-- ------------------------------------ -->
+	<div class="d-inline-block m-2" style="width:100%;">
+		<div class="float-left" > 총 <span id="Tcnt">${totalRecords}</span>건의 일자리</div>
+		
+		<div id="orderFilter" class="float-right" style="cursor:pointer; height:20px; overflow:hidden; border:none;">
+			<select id="selectArray" >
+			    <option selected value="new">최신순</option>
+			    <option value="wage_high">높은 시급순</option>
+			    <option value="wage_low">낮은 시급순</option>
+			</select>
+		</div>
 	</div>
-	<br/>
-	<br/>
+	
+<!-- ------------------------------------ -->
 	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
 		<c:forEach var="vo" items="${list2}">
 			
@@ -543,7 +650,7 @@ function mapResize(){
 						<div class="offerBox">
 							<span class="card-title offerTitle" style="line-height: 2em;"><b>제목 ${vo.title}</b></span>
 							<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid}</span><br/>
-								<span><b>신생아 1명, 유아 1명</b></span> | 
+								<span><b>신생아 1명,2 유아 1명</b></span> | 
 								<!-- 마지막 업데이트일 -->
 								<span class="ml-2" style="font-size:0.7em">
 										<fmt:parseNumber integerOnly="true" var="edit_year" value="${vo.writedate/525600}"/>
@@ -572,7 +679,7 @@ function mapResize(){
 	</div>
 	
 	
-	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top:50px;" class="btn btn-warning" id="countTest">더보기</button></div>
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top:50px; margin-bottom:50px;" class="btn btn-warning" id="countTest">더보기</button></div>
 </div>
 <!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>

@@ -13,12 +13,12 @@
 	</insert>
 	
 	<select id="selectTeacherHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
-		select p.job_board_no, t_userid, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, p.status, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
+		select p.job_board_no, t_userid, p.teacherid, userid, care_addr, wish_age, wish_wage, time_type, consultation, content, wish_gender, p.status, content, hit, to_char(writedate, 'MM-DD HH:MI') writedate 
 		from parent_list p join t_p_table t on p.job_board_no=t.job_board_no where (p.status='R' or p.status='P') and t_userid=#{userid} order by p.job_board_no desc
 	</select>
 	
 	<select id="selectTeacherHistory2" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
-		select * from parent_list where status='C' and teacherid='test1212' and agree='T' and who='T' order by job_board_no desc
+		select * from parent_list where status='C' and teacherid=#{userid} and (agree='T' or agree='Y') and who='T' order by job_board_no desc
 	</select>
 	
 	<select id="teacherDealHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO" parameterType="String">
@@ -71,6 +71,10 @@
 		SELECT * FROM (select teacherid, agree, payment from parent_list where status='C' and origin_no=#{no} order by job_board_no desc) WHERE ROWNUM = 1
 	</select>
 	
+	<select id="checkContract" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
+		SELECT * FROM (select job_board_no , teacherid, agree, payment from parent_list where status='C' and userid=#{userid} and teacherid=#{teacherid} order by job_board_no desc) WHERE ROWNUM = 1
+	</select>
+	
 	<update id="rejectContract">
 		update parent_list set agree='N' where userid=#{userid} and teacherid=#{teacherid} and agree='T'
 	</update>
@@ -78,10 +82,20 @@
 	<select id="selectMemberDeal" parameterType="String" resultType="com.dolbommon.dbmon.deal.MemberVO">
 		select username, email, tel1, addr, zipcode from member where userid = #{parent_id}
 	</select>
+	<select id="selectOrigin_no" parameterType="String" resultType="String">
+		select * from(select job_board_no from parent_list where agree='Y' and origin_no=#{pay_no}) where rownum=1
+	</select>
 	<insert id="insertPayment">
 		insert into payment(pay_no, parent_id, parent_name, pay_money, teacher_id, pay_id, merchant_id, apply_num, tel, email) values(#{pay_no}, #{parent_id}, #{parent_name}, #{pay_money}, #{teacher_id}, #{pay_id}, #{merchant_id}, #{apply_num}, #{tel}, #{email})
 	</insert>
 	<update id="updatePayment">
 		update parent_list set payment = 'Y' where job_board_no = #{pay_no}
+	</update>
+	<update id="updateStatusP">
+		update parent_list set status = 'P' where origin_no = #{origin_no}
+	</update>
+	
+	<update id="cancelContract">
+		update parent_list set status='X', origin_no='', teacherid='', agree='', payment=''  where job_board_no=#{no}
 	</update>
 </mapper>

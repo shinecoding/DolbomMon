@@ -32,4 +32,8 @@ public interface ParentDaoImp {
 	
 	// 구인글에 신청한 선생님 수
 	public int applyDbmCnt(int no);
+	//후기 쓰기
+	public int insertComment(CommentVO vo);
+	//홈페이지 후기
+	public List<CommentVO> CommentBoard();
 }

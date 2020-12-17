@@ -233,6 +233,7 @@
 </style>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div class="CHMRN">
 	<div class="topDiv">
 		<div style="margin-top:8px; margin-right:8px; margin-left:-16px;">

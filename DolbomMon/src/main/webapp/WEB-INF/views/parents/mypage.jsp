@@ -13,7 +13,9 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <style>
-	.container{width:800px;}
+	.container{width:800px;
+	margin-bottom: 50px;
+	}
 	
 	#title{
 		margin:20px 5px;
@@ -61,10 +63,10 @@
 
 	$(function(){
 			
-		   //countTest
+		//countTest
 		$(document).on("click",".comment",function(){
 			//var userid = $(this).attr('id');
-			var userid = "test1212";
+			var userid = $(this).attr('id');
 			var popupWidth = 800;
 			var popupHeight = 596;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
@@ -153,19 +155,18 @@
    		<li class="list-group-item list-group-item-action"><a href="parentHeart"><i class="fas fa-heart mx-2"></i> 찜한 돌봄몬</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="parentProfile?userid=${userid }"><i class="fas fa-user-circle mx-2"></i> 내 프로필 보기</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		<li class="list-group-item list-group-item-action"><a href="parentEdit"><i class="fas fa-user-edit mx-2"></i> 내 프로필 수정</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
-   		<li class="list-group-item list-group-item-action"><a href="parentDealHistory"><i class="fas fa-chalkboard-teacher mx-2"></i> 활동내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
-   		<li class="list-group-item list-group-item-action"><a href="#"><i class="fas fa-exclamation-triangle mx-2"></i> 신고내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
+   		<li class="list-group-item list-group-item-action"><a href="parentDealHistory"><i class="fas fa-chalkboard-teacher mx-2"></i> 활동내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i>
+   		</li>
+   		<li class="list-group-item list-group-item-action"><a href="myReport"><i class="fas fa-exclamation-triangle mx-2"></i> 신고내역</a><i class="fas fa-angle-right float-right mt-1  mx-2"></i></li>
    		
    	   </ul>
    <br/>
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#ex7" rel="modal:open">결제/환불 계좌등록</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">공지사항</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기 글등록폼</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기</a></li>
    </ul>
-   <button class="comment" id="${userid}">후기 작성</button>
    
 </div>
 

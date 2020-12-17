@@ -75,19 +75,19 @@
 	}
 </style>
 <script>
-	$(function(){
-		var popupWidth = 1060;
-		var popupHeight = 596;
-		var popupX = (window.screen.width / 2) - (popupWidth / 2);
-		var popupY= (window.screen.height / 2) - (popupHeight / 2);
-		$(document).on("click",".viewContract",function(){
-			popupWidth = 1060;
-			popupHeight = 1600;
-			var origin_no = $(this).attr('id');
-			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
-		});
-		
-	})
+$(function(){
+	var popupWidth = 1060;
+	var popupHeight = 596;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	$(document).on("click",".viewContract",function(){
+		popupWidth = 1060;
+		popupHeight = 1600;
+		var origin_no = $(this).attr('id');
+		window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	});
+	
+})
 </script>
 
 </head>
@@ -96,26 +96,10 @@
 <%@include file="/WEB-INF/views/top.jsp"%>
 <hr/><br/>
 </div>
-<div class="container">
-	<div id="title">
-   		<div id="titlefont">내 활동내역</div>
-   		<nav>
-		<ul class="nav nav-tabs justify-content-center">
-			<li class="nav-item">
-				<a class="nav-link active px-5" id="nav-apply-tab" href="#nav-apply" data-toggle="tab" role="tab">
-			내가 지원한</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link px-5" id="nav-inbox-tab" href="#nav-inbox" data-toggle="tab" role="tab">
-				내게 신청한</a>
-			</li>
-		</ul>
-	</nav>	
-   		
-	</div>
-
-	<div class="tab-content" id="nav-tabContent">
-		<div class="tab-pane fade show active" id="nav-apply" role="tabpanel">
+<div class="container" style="min-height:500px;">
+			<div id="title">
+   				<div id="titlefont">나의 활동 내역</div>
+ 			</div>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
 				<div class="all_wrapper" >
@@ -149,49 +133,10 @@
 								</div>
 							</div>
 						</c:forEach>
+						
 					</div>
-					</div>
+				</div>
 			</ul>
-		</div>
-		<div class="tab-pane fade" id="nav-inbox" role="tabpanel">
-		<ul class="list-group list-group-flush">
-				<li class="list-group-item">
-					<div class="row">
-						<div class="col-1">
-								<img src="img/profilepic.png" class="rounded-circle"/>
-							</div>	
-						<div class="col-11">
-								<b>김O욱 부모</b><i class="fas fa-search ml-1"></i><br/>
-								희망시급: 10,000원<br/>
-								신청시간: 2018.09.26 16:59<br/>
-								<i class="far fa-check-circle"></i>
-								<i class="far fa-times-circle"></i><br/>
-								부모님에게 응답하지 않았습니다.<br/>
-						</div>	
-					</div>
-				</li>
-				
-				<li class="list-group-item">
-					<div class="row">
-						<div class="col-1">
-								<img src="img/profilepic.png" class="rounded-circle"/>
-							</div>	
-						<div class="col-11">
-								<b>김O욱 부모</b><i class="fas fa-search ml-1"></i><br/>
-								희망시급: 10,000원<br/>
-								신청시간: 2018.09.26 16:59<br/>
-								<b>-거절완료-</b><br/>
-								부모님에게 내 거절의사를 전달하였습니다.<br/>
-						</div>	
-					</div>
-				</li>
-				
-			</ul>
-		
-		
-		
-		</div>
-	</div>
 </div>
 <jsp:include page="../footer.jsp"/>
 </body>

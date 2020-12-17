@@ -75,6 +75,13 @@
 	    top: -41px;
 	    right: -630px;
 	}
+	
+	.msg{
+		position: relative;
+	    margin: 0 5px;
+	    top: -28px;
+	    right: -546px;
+	}
 </style>
 <script>
 	$(function(){
@@ -88,8 +95,17 @@
 			var origin_no = $(this).attr('id');
 			window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
-		
 	})
+			
+		var popupWidth = 1060;
+		var popupHeight = 596;
+		var popupX = (window.screen.width / 2) - (popupWidth / 2);
+		var popupY= (window.screen.height / 2) - (popupHeight / 2);
+		function contractOpen(no, id){
+			popupWidth = 1060;
+			popupHeight = 1600;
+			window.open('/dbmon/contractView?origin_no='+no+'&teacherid='+id, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		}
 </script>
 
 </head>
@@ -274,10 +290,16 @@
 											<br/><span style="color: orange;">희망시급 ${list2.wish_wage }원</span>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-warning cancel" type="button" value="거절" id="cancel" style="margin:0 5px;" />
+											<c:if test="${list2.agree=='T'}">
+												<span style="color:orange" class="msg" id="msg">제안 수락 대기중입니다.</span>
+											</c:if>
+											<c:if test="${list2.agree=='Y' }">
+												<span style="color:orange" class="msg" id="msg">제안을 수락하였습니다.</span>
+											</c:if>
+											<!-- <input class="btn btn-warning cancel" type="button" value="거절" id="cancel" style="margin:0 5px;" /> -->
 										</div>
 									</div>
-								<div class="card-footer btn" onclick="location.href='contractView?origin_no=${list2.job_board_no}'">자세히 보기</div>
+								<div class="card-footer btn" onclick="contractOpen('${list2.job_board_no}', '${list2.teacherid }')">제안서 보기</div>
 								</div>
 							</div>
 						</c:forEach>

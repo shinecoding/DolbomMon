@@ -224,7 +224,7 @@ public class DealController {
 		}
 		
 		mav.addObject("result", result);
-		mav.setViewName("/parents/writeResult");
+		mav.setViewName("/deal/writeResult");
 		
 		return mav;
 	
@@ -312,6 +312,7 @@ public class DealController {
 		String apply_num = req.getParameter("apply_num");
 		String teacherid = req.getParameter("teacherid");
 		String pay_no = req.getParameter("pay_no");
+		String origin_no = req.getParameter("origin_no");
 		
 		PaymentVO pvo = new PaymentVO();
 		pvo.setParent_id(parent_id);
@@ -332,6 +333,9 @@ public class DealController {
 		
 		dao.updatePayment(pay_no);
 		dao.insertPayment(pvo);
+		//String origin_no = dao.selectOrigin_no(pay_no);
+		//dao.updatePayment(origin_no);
+		dao.updateStatusP(origin_no);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mss", "결제 성공하였습니다.");
@@ -340,6 +344,14 @@ public class DealController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/contractCancel")
+	public ModelAndView contractCancel(int no) {
+		ModelAndView mav = new ModelAndView();
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		dao.cancelContract(no);
+		mav.addObject("result6", 6);
+		mav.setViewName("deal/writeResult");
+		return mav;
+	}
 	
 }

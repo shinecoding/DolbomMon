@@ -56,7 +56,7 @@
 	}	
 	#review_content{
 		width: 550px;
-		height: 250px;
+		height: 270px;
 		margin: 0 auto;
 	}
 	#reviewDiv{
@@ -90,6 +90,8 @@
 	        }
 	    })
 	});	
+	
+	
 </script>
 </head>
 <body>
@@ -97,9 +99,9 @@
 <b>후기 작성하기</b>
 </div>
 <div id="commentInfo">
-이용하신 돌봄 선생님은 어떠셨나요?<br/>많은 이용자를 위해 후기를 남겨주세요
+이용하신 돌봄 선생님은 어떠셨나요?<br/>더 나은 서비스를 위해 후기를 남겨주세요
 </div><br/><br/>
-<form method="post">
+<form method="post" action="commentWriteOk">
 <div class="review_rating">
 	<div class="warning_msg">별점을 선택해 주세요.</div><br/>
 	<div class="rating">
@@ -118,11 +120,11 @@
 </div>
 <br/>
 <div class="form-floating" id="reviewDiv">
-  <textarea class="form-control" placeholder="돌봄선생님에 대한 후기를 남겨주세요" id="review_content" name="review_content"></textarea>
+  <textarea class="form-control" placeholder="돌봄 선생님에 대한 후기를 남겨주세요" id="review_content" name="review_content"></textarea>
 </div><br/>
-	<input type="hidden" name="reviewid" value="${userid}" />
+	<input type="hidden" name="userid" value="${userid}"/>
 <div>
-<input type="submit" class="btn btn-warning" value="작성하기"/>
+<input type="submit" class="btn btn-warning" id="commentConfirm" value="작성하기"/>
 </div>
 </form>
 </body>

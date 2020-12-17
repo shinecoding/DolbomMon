@@ -74,6 +74,12 @@
 	    top: -41px;
 	    right: -620px;
 	}
+	.msg{
+		position: relative;
+	    margin: 0 5px;
+	    top: -68px;
+	    right: -536px;
+	}
 	.wordCut{
 		white-space:nowrap;
 		overflow:hidden;
@@ -87,6 +93,19 @@
 	}, function(){
 		$(this).css("background-color", "white");		
 	});
+	
+	
+	
+	var popupWidth = 1060;
+	var popupHeight = 596;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	function contractOpen(no, id){
+		popupWidth = 1060;
+		popupHeight = 1600;
+		window.open('/dbmon/contractView?origin_no='+no+'&teacherid='+id, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	}
+	
 </script>
 </head>
 <body>
@@ -185,8 +204,27 @@
 										<div style="height:1px;">
 											<input class="btn btn-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 										</div>
+										<div style="height:1px;">
+											<c:if test="${list2.agree=='T'}">
+												<span style="color:orange" class="msg" id="msg">제안 수락 대기중입니다.</span>
+											</c:if>
+											<c:if test="${list2.agree=='Y' }">
+												<span style="color:orange; right:-470px;" class="msg" id="msg">선생님이 제안을 수락하였습니다.</span>
+											</c:if>
+											<c:if test="${list2.agree=='N' }">
+												<span style="color:red; right:-470px;" class="msg" id="msg">선생님이 제안을 거절하였습니다.</span>
+											</c:if>
+										</div>
 									</div>
-								<div class="card-footer btn" onclick="location.href='contractView?origin_no=${list2.job_board_no}&teacherid=${list2.teacherid }'">자세히 보기</div>
+								<c:if test="${list2.agree!='Y' }">	
+									<div class="card-footer btn" onclick="contractOpen('${list2.job_board_no}', '${list2.teacherid }')">제안서 보기</div>
+								</c:if>
+								<c:if test="${list2.agree=='Y' and list2.payment!='Y' }">	
+									<div class="card-footer btn" style="background-color:orange; color:white;" onclick="contractOpen('${list2.job_board_no}', '${list2.teacherid }')">결제하기</div>
+								</c:if>
+								<c:if test="${list2.payment=='Y' }">	
+									<div class="card-footer btn" style="background-color:green; color:white;">결제가 완료되었습니다.</div>
+								</c:if>
 								</div>
 							</div>
 						</c:forEach>
@@ -270,9 +308,30 @@
 											<div style="height:1px;">
 												<input class="btn btn-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 											</div>
+											<div style="height:1px;">
+											<c:if test="${list.tcnt!='0'}">
+												<c:if test="${list.agree=='T'}"><!-- 이 agree가 계약서의  agree가 아닌듯? -->
+													<span style="color:orange" class="msg" id="msg">제안 수락 대기중입니다.</span>
+												</c:if>
+											</c:if>
+											<c:if test="${list.tcnt=='0'}">
+												<span style="color:orange; right:-470px;" class="msg" id="msg">지원자를 기다리는 중입니다.</span>
+											</c:if>
+											<c:if test="${list.tcnt!='0'}">
+												<c:if test="${list.agree=='Y' }">
+													<span style="color:orange; right:-470px;" class="msg" id="msg">선생님이 제안을 수락하였습니다.</span>
+												</c:if>
+											</c:if>
+											<c:if test="${list.tcnt!='0'}">
+												<c:if test="${list.agree=='N' }">
+													<span style="color:red; right:-470px;" class="msg" id="msg">선생님이 제안을 거절하였습니다.</span>
+												</c:if>
+											</c:if>
+										</div>
 										</div>
 									<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>
 									</div>
+									
 								</div>
 						</div>
 						</div>

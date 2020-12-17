@@ -53,7 +53,9 @@
   	vertical-align: top;
   	text-align:center;
   	font-family: 'Jua', sans-serif;
+  	
   	}
+  	
   	
 
 	 .list-group-item {
@@ -186,6 +188,7 @@ var value;
 		//스크롤
 		$(window).scroll(function(){
 			
+			
 			var scrolltop = $(document).scrollTop();//스크롤 위치
 			var height = $(document).height(); //문서길이
 			var height_win = $(window).height(); //보여지는 창의 길이
@@ -213,6 +216,7 @@ var value;
 
    	 	});//ajax
 		function dropdownAjax(care_type){
+   	 		
 			console.log("케어타입="+care_type);
 			var url = "/dbmon/searchCare";
 
@@ -229,7 +233,7 @@ var value;
 				type:'GET',
 				success:function(result){
 					
-					$("#Tcnt").text(result.length);
+				//	$("#Tcnt").text(result.length);
 
 						var $result = $(result);
 					var tag = "";
@@ -259,7 +263,7 @@ var value;
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
-							tag += '</span>';
+							tag += ' 전</span>';
 							tag += '<span class="emptyHeart">';
 							tag += '<input type="hidden" value="'+ vo.userid +'" />';
 							tag += '<i class="fab fa-gratipay" style=';
@@ -306,10 +310,11 @@ var value;
    	 	}
 		
 		//========================ajax=========for buttons=================
-	    $(document).on("click", "#actBox>button", function(){
+	    $(document).on("click", "#actBox label", function(){
 	    	count=12;
 	    	tabType=3;
-	    	activity_type = $(this).text();
+	    	activity_type = $(this).text().trim();
+	    	
 	    	actBoxAjax(activity_type);
 	    });//ajax
 			function actBoxAjax(activity_type){
@@ -326,7 +331,7 @@ var value;
 					type:'GET',
 					success:function(result){
 						console.log("갯수="+result.length);
-						$("#Tcnt").text(result.length);
+						//$("#Tcnt").text(result.length);
 						var $result = $(result);
 						var tag = "";
 						
@@ -355,7 +360,7 @@ var value;
 								} else {
 									tag += Math.round(vo.last_edit) +'분';
 								}
-								tag += '</span>';
+								tag += ' 전</span>';
 								tag += '<span class="emptyHeart">';
 								tag += '<input type="hidden" value="'+ vo.userid +'" />';
 								tag += '<i class="fab fa-gratipay" style=';
@@ -453,7 +458,7 @@ var value;
 						} else {
 							tag += Math.round(vo.last_edit) +'분';
 						}
-						tag += '</span>';
+						tag += ' 전</span>';
 						tag += '<span class="emptyHeart">';
 						tag += '<input type="hidden" value="'+ vo.userid +'" />';
 						tag += '<i class="fab fa-gratipay" style=';
@@ -520,7 +525,7 @@ var value;
 				data:params,
 				type:'GET',
 				success:function(result){
-					$("#Tcnt").text(result.length);
+					//$("#Tcnt").text(result.length);
 
 					var $result = $(result);
 					var tag = "";
@@ -550,7 +555,7 @@ var value;
 							} else {
 								tag += Math.round(vo.last_edit) +'분';
 							}
-							tag += '</span>';
+							tag += ' 전</span>';
 							tag += '<span class="emptyHeart">';
 							tag += '<input type="hidden" value="'+ vo.userid +'" />';
 							tag += '<i class="fab fa-gratipay" style=';
@@ -763,21 +768,47 @@ var value;
   
 
 
-   <div id="actBox">
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act1" >실내놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act2">등하원 돕기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act3">책 읽기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act4">야외활동</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act5">한글놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act6">영어놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act7">학습지도</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act8">체육놀이</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act9">간단 청소</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act10">밥 챙겨주기</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act11">간단 설거지</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act12">장기입주</button>
-	  <button class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px;" id="act13">단기입주</button>
-
+   <div id="actBox" class="btn-group btn-group-toggle" data-toggle="buttons">
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>등하원 돕기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>책 읽기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>야외활동
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>한글놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>영어놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>학습지도
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>체육놀이
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 청소
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>밥 챙겨주기
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>간단 설거지
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>장기입주
+	  </label>
+	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2"/>단기입주
+	  </label>
+	
   </div>
  
 <!-- -------------------------순서 정렬--------------------- -->
@@ -801,7 +832,7 @@ var value;
 
 
 	</div>
-	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top: 50px;" class="btn btn-warning" id="countTest">더보기</button></div>
+	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top: 50px; margin-bottom: 50px;" class="btn btn-warning" id="countTest">더보기</button></div>
 
 
 
