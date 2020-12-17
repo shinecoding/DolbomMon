@@ -66,7 +66,7 @@ $(function(){
 <%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
 	<div id="top">
-	<b>로그인</b>
+		<b>로그인</b>
 	</div>
 	<div id="loginInfo">로그인을 하시면 더욱 편리하게 돌봄몬 서비스를 이용하실 수 있습니다.</div>
 	<form method="post" action="loginOk" id="loginFrm">

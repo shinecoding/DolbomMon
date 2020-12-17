@@ -16,15 +16,18 @@
 	}
 	#top{
 		margin: 15px;
+		margin-top: 40px;
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
-		position: relative;
 	}
 	#userBox{
 		margin: 0 auto;
+		margin-top: 30px;
+		margin-bottom: 50px;
 		width: 800px;
 		float: left;
+		
 	}
 	#typeBox{
 		float: left;
@@ -54,11 +57,11 @@
 		height: 15px;
 		background-color: lightgray;
 		position: absolute;
-		top: 480px;
+		top: 440px;
 	}
 	.list-group{
-		position: absolute;
-		top: 494px;
+		margin-top: 30px;
+		margin-bottom: 140px;
 		width: 800px;
 	}
 	#logoLink{
@@ -71,10 +74,8 @@
 </style>
 </head>
 <body>
+<%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
-	<div>
-		<a href="/dbmon"><img src="<%=request.getContextPath()%>/img/newLogo.png" id="logoLink" align="middle"/></a>	
-	</div>
 	<div id="top">
 		<b>계정관리</b>
 	</div>
@@ -105,4 +106,5 @@
 	</div>
 </div>
 </body>
+<jsp:include page="../footer.jsp"/>
 </html>

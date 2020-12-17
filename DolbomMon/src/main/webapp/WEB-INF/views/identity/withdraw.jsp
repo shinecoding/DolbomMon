@@ -27,11 +27,11 @@
 		margin: 0 auto;	
 	}
 	#top{
-		margin: 0px;
-		padding: 30px;
+		margin: 15px;
+		margin-top: 40px;
+		padding: 15px;
 		text-align: center;
 		font-size: 30px;
-		position: relative;
 	}
 	#infoBox{
 		padding: 15px;
@@ -70,7 +70,6 @@
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
-	<hr/>
 	<div id="top">
 		<h5><b>회원탈퇴 전 꼭 확인해주세요!</b></h5>
 		<h6 style="color: gray";><br/><b>아래의 사유로 탈퇴를 원하시는 경우<br/>‘문의하기’버튼을 통해 먼저 연락주시기 바랍니다.</b></h6>
@@ -119,4 +118,5 @@
 	</form>
 </div>
 </body>
+<jsp:include page="../footer.jsp"/>
 </html>
