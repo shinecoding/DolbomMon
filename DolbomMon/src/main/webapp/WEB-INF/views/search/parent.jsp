@@ -18,7 +18,6 @@
 <style>
 		
 	.container{
-		margin-top:70px;
 		width:1100px;
 		font-family: 'Jua', sans-serif;
 	}
