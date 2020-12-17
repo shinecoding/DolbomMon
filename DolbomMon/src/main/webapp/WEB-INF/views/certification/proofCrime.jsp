@@ -13,7 +13,6 @@
 
 <style>
 	.container{width:800px;
-	margin-bottom:50px;
 	}
 	
 	#title{

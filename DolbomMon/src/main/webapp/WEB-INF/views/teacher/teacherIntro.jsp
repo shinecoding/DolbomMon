@@ -45,7 +45,7 @@
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<br/>
+<hr/><br/>
 </div>
 	<div class="container">
 		<div id="title">
@@ -60,7 +60,6 @@
 			</div>
 		</form>
 	</div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
-<jsp:include page="../footer.jsp"/>
