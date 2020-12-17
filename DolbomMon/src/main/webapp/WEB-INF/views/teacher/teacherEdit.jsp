@@ -613,7 +613,7 @@ font-weight:bold;
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
 </div>
 <div class="container">
 	<h5>내 사진</h5>
