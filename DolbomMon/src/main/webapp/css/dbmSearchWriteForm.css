@@ -170,7 +170,8 @@
 	#editChild li{display:block;}	
 	/* ===================== edit =======================*/
 	
-	
+	img{-webkit-transition:background-color 1s;
+		transition:background-color 1s;}
 	label{-webkit-transition:background-color 1s;
 		transition:background-color 1s;}
 	li{-webkit-transition:background-color 1s;

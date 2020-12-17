@@ -299,6 +299,7 @@ EDIT ON
 			<c:if test="${who =='P'}">
 	        <li><a href="mypage" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li></c:if>
 
+
 	      </ul>
 	 </ul>
 
