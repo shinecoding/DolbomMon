@@ -181,9 +181,11 @@ $(function(){
 	
   	//검색창	
     $(document).on("keyup", "#locFilter", function(){
+    	
     	var value = $(this).val().toLowerCase();
+    	console.log(value)
     	$(".loc").filter(function(){
-    		$(this).parent().parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	   
+    		$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value)>-1);	   
     		AOS.init({
 			    duration: 1200
 			  });
