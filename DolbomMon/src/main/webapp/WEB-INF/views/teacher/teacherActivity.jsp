@@ -113,7 +113,7 @@ width:55px;
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<br/>
+<hr/><br/>
 </div>
 	<div class="container">
 		<div id="title">
@@ -243,7 +243,7 @@ width:55px;
 			<input type="submit" class="btn btn-warning" value="저장" />
 			</form>
 		</div>
-
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
-<jsp:include page="../footer.jsp"/>
+
