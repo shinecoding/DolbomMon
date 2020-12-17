@@ -25,6 +25,7 @@
 	}
 	
 	.container{width:800px;
+	margin-top:50px;
 	margin-bottom:50px;
 }
 
@@ -44,7 +45,6 @@
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
 </div>
 <div class="container">
 	<div id="title">
@@ -200,7 +200,7 @@
 				<div class="col-7">
 				
 					<div class="row">
-						<h7><b>성범죄 경력 조회 인증</b></h7>
+						<h7><b>성범죄 경력 조회 안심 인증</b></h7>
 					</div>
 					<div class="row">
 						성범죄 경력 기록 
@@ -266,6 +266,7 @@
 		</li>
 	</ul>
 	</div>
-<jsp:include page="../footer.jsp"/>
+
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

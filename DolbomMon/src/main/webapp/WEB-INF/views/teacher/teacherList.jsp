@@ -221,6 +221,7 @@ input:checked + .slider:before {
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
+<br/>
 </div>
 <div id="ex7" class="modal">
 	<form id="accountFrm" >

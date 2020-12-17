@@ -45,7 +45,7 @@
 <body>
 <div id="top">
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
 </div>
 	<div class="container">
 		<div id="title">
