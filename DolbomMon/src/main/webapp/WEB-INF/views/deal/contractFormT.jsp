@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://cdn.rawgit.com/dubrox/Multiple-Dates-Picker-for-jQuery-UI/master/jquery-ui.multidatespicker.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
@@ -630,15 +631,23 @@
  	.divOn{display:inline-block;}
 </style>
 <body>
-	<div class="container">
+	<div class="container" style="font-family: 'Poor Story', cursive !important;">
 		<form id="writeFrm" method="post" action="contractWriteT">
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
-			<div class="title"><label class="divOnOff" for="activityTypeDiv">어떤 돌봄을 원하세요?</label></div>
-			<div>
-				<img src="<%=request.getContextPath()%>/img/actImg.png" style="width:170px;height:170px;" />
+		<div class="title222" style="margin-bottom:80px;">
+			<img src="<%=request.getContextPath() %>/img/iii11.svg" style="width:300px;height:200px; margin:0 auto;"/><br/><br/>
+			<span class="orangeSpan" style="font-size:25px; color:black; margin-bottom:80px;"> 
+			회원님과 꼭 맞는 돌봄몬을 찾기위해
+			몇가지 질문으로 시작하겠습니다.</span></div>
+			
+			<div class="title" style="margin-bottom:80px; margin-top:0px;"><label class="divOnOff" for="activityTypeDiv" 
+			>어떤 돌봄을 원하세요?</label><span class="orangeSpan" > 
+			원하시는 놀이 유형을 선택해주세요. </span>
+				
 			</div>
+			
 			
 			
 			<div id="activityTypeDiv" class="mainDiv">

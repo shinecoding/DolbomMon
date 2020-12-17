@@ -14,9 +14,10 @@
 		width: 800px;
 	}	
 	#top{
-		margin: 15px;
-		margin-top: 40px;
-		padding: 15px;
+
+		margin: 20px;
+		padding: 20px;
+
 		text-align: center;
 		font-size: 30px;
 	}
@@ -90,7 +91,7 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		<br/><input type="submit" class="btn btn-warning btn-lg btn-block" value="계정 찾기"/>
+	<br/><input type="submit" class="btn btn-warning btn-lg btn-block" value="계정 찾기"/>
 	</form>
 </div>
 </body>
