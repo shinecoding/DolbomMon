@@ -20,46 +20,18 @@
 	.container{
 		margin-top:70px;
 		width:1100px;
-		background-color:white;
-		margin:0 auto;
 		font-family: 'Jua', sans-serif;
 	}
 	
 	img{ height:110px; width:110px;}
 
     .form-control{
-    	margin:0 auto;
     	background-color:white;
     }
-    html {
-	    color: white;
-	    font-weight: 100;
-	    font-size: 1em;
-	    line-height: 1.375;   
-	}
-	.btn1{
-	    color: #434343;
-	    padding: 10px 14px;
-	    border-radius: 16px;
-	    border: 1px solid gold;
-	    margin: 5px 6px 10px 0;
-	    display: inline-block;
-	    cursor: pointer;
-	    font-size: 13px;
-	    font-weight: 400;
-	    line-height: 12px;
-	    text-align: center;
-	    width:90px;
-	}
+  
 	 .list-group-item {
 	 	width:1000px;
 	 }
-	.listPanel{
-		color: #222;
-	    font-weight: 100;
-	    font-size: 1em;
-	    line-height: 1.375;
-	}
 	.review_rate {
 	    display: flex;
 	    font-size: 12px;
@@ -95,7 +67,7 @@
 		font-size: 1.1em;
 	}
 	.card {
-	width:44.9%;
+	width:44.5%;
 	display:block;
 	float:left;
 	margin:20px 20px;
@@ -565,7 +537,6 @@ function mapResize(){
 	<div id="map">
 	</div>
 </div>
-<div class="listPanel" style="display: block; vertical-align: inherit; background-color:white;"> 
 <div id="filterbox">
 	<input type="text" class="form-control border-warning mt-2" id="locFilter" placeholder="#돌봄 지역을 입력해주세요">
 	<form class="form-inline">
