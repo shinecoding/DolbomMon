@@ -150,8 +150,6 @@
 			$("label[for="+selectedData+"]").children("img").fadeIn(200);
 			$("label[for="+selectedData+"]").children("img").fadeOut(100);
 			$("label[for="+selectedData+"]").children("img").fadeIn(100);
-			$("label[for="+selectedData+"]").children("img").fadeOut(50);
-			$("label[for="+selectedData+"]").children("img").fadeIn(50);
 			if($(this).is(":checked")){
 				if(selectedData=="pa2"){
 					var changeImg = nowImg.replace("-n@", "-s@"); 
@@ -734,15 +732,13 @@
 	}
 </script>
 <style>
-	*{ font-family: 'Poor Story', cursive;
-		list-style:none;
-	}
+	
  	.ui-datepicker:nth-of-type(1){width:100%;}
  	.ui-datepicker td>a{text-align:center;}
  	.ui-state-active{background-color:#FFC207;}
  	.divOff{display:none;}
  	.divOn{display:inline-block;}
- 	.divOnOff{font-family: 'Poor Story', cursive; 
+ 	.divOnOff{font-family: 'Poor Story', cursive !important; 
  	font-weight:bold; color:black; font-size:25px; }
  	.orangeSpan{
  	font-size: 1em;
@@ -758,7 +754,7 @@
 	<div id="top">
 		<%@include file="/WEB-INF/views/top.jsp"%>
 	</div>
-	<div class="container">
+	<div class="container" style="font-family: 'Poor Story', cursive !important;">
 		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
 			<div class="title222" style="margin-bottom:80px;">
 			<img src="<%=request.getContextPath() %>/img/iii11.svg" style="width:300px;height:200px; margin:0 auto;"/><br/><br/>
