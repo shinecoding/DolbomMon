@@ -3,10 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
-  <script type="text/javascript">
+   <script type="text/javascript">
    
          $(function(){
 	     $("ul.subMain").hide();
@@ -87,7 +84,10 @@ EDIT ON
 	  ul.mainTopmenu{
 	  	height: 50px;
 	  	background-color: white;
-
+	  	
+	  
+	  
+	  
 	  }
       ul.mainTopmenu li{ 
 	     float: left;
@@ -98,7 +98,7 @@ EDIT ON
 		 z-index:1000;
 		 list-style-type: none;
 		 -webkit-padding-start:0px;
-		 font-family: 'Noto Sans KR', sans-serif!important;
+		 font-family: 'Noto Sans KR', sans-serif;
 		 
 		 }
       ul.mainTopmenu li a{
@@ -228,7 +228,7 @@ EDIT ON
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	           </span>
 	           <span style="float:right" class="row">
-	           <span id="groupchat2" class="col" style="width:90px;height:80px; margin-left:10px;">
+	           <span id="groupchat2" class="col" style="width:90px;height:80px; margin-left:5px;">
 	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-left:0px; "></img>
 	           <div class="badge badge-warning badge-pill ml-1">쪽지</div></a>
 	           </span>
@@ -240,7 +240,7 @@ EDIT ON
 	           </span> 
 	           </c:if>
 	       
-		<a class="btn" style="float:right; margin-top:10px;"> 
+		<a class="btn" style="float:right; margin-top:30px;"> 
 		 	<c:if test="${logStatus == null || logStatus=='N'}">
 			  
 	         <input type="button" value="가입하기" class="btn btn-outline-#ff7942 ppp22" style="background-color:#ff7928; color:white; border-radius: 18px;" Onclick="location.href='/dbmon/join'"/>
