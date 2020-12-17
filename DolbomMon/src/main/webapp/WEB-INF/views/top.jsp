@@ -33,7 +33,7 @@
 HTML CSSResult
 EDIT ON
 /* 폰트적용 */
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 @media screen and(min-width:768px){
 	*, html, body, a{overflow:hidden;}
 	#fixed-menu{
@@ -99,7 +99,7 @@ EDIT ON
 		 z-index:1000;
 		 list-style-type: none;
 		 -webkit-padding-start:0px;
-		 font-family: 'Noto Sans KR', sans-serif;
+		 font-family: 'Noto Sans KR', sans-serif!important;
 		 
 		 }
       ul.mainTopmenu li a{
@@ -114,7 +114,7 @@ EDIT ON
 		 text-decoration: none;
 		 text-align:center;
 		 list-style-type: none;
-		 font-family: font-family: 'Jua', sans-serif;
+		 font-family: font-family: 'Jua', sans-serif !important;
 		 margin-left:0px;
 		 
 		 
@@ -183,7 +183,7 @@ EDIT ON
 	    width:100%;
 	   
 	   }
-	   .spread-underline {
+	     .spread-underline {
 		  text-decoration: none;
 		  display: inline-block;
 		  padding: 2px 0;
@@ -210,7 +210,7 @@ EDIT ON
 		.ml-1, .mx-1 {
   		  margin-left: 100px;
 		}
-		.subMain{background-color:white;}
+
    </style>
 </head>
 <body>
@@ -230,9 +230,9 @@ EDIT ON
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	           </span>
 	           <span style="float:right" class="row">
-	           <span id="groupchat2" class="col" style="width:90px;height:80px; margin-left:5px;">
+	           <span id="groupchat2" class="col" style="width:90px;height:80px; margin-left:15px;">
 	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-left:0px; "></img>
-	           <div class="badge badge-warning badge-pill ml-1">쪽지</div></a>
+	           <div class="badge badge-warning badge-pill ml-1" >쪽지</div></a>
 	           </span>
 	           </span>
 	          <!-- <a href="/dbmon/temporaryLogin">
@@ -242,7 +242,7 @@ EDIT ON
 	           </span> 
 	           </c:if>
 	       
-		<a class="btn" style="float:right; margin-top:25px;"> 
+		<a class="btn" style="float:right; margin-top:15px;"> 
 		 	<c:if test="${logStatus == null || logStatus=='N'}">
 			  
 	         <input type="button" value="가입하기" class="btn btn-outline-#ff7942 ppp22" style="background-color:#ff7928; color:white; border-radius: 18px;" Onclick="location.href='/dbmon/join'"/>
@@ -252,9 +252,9 @@ EDIT ON
 	          </c:if>
 	    
 	    
-	         <c:if test="${logStatus != null || logStatus=='Y'}" ><span class="btn btn-outline-warning LogId" border-radius: 18px;">
+	         <c:if test="${logStatus != null || logStatus=='Y'}" ><span class="btn btn-outline-warning LogId" style="color:#ff7942; border-radius: 18px;">
 
-	         ${username } 님 </span><input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:floralwhite; border-radius: 18px; margin-left:5px;" Onclick="location.href='/dbmon/logout'"/>           
+	         ${username } 님 </span><input type="button" value="로그아웃" class="btn btn-outline-warning ppp" style="color:ff7942; border-radius: 18px; margin-left:5px;" Onclick="location.href='/dbmon/logout'"/>           
 
 	         </c:if>
 	         
@@ -293,12 +293,13 @@ EDIT ON
 
 	 
 
-	       <ul class="subMain">
+	       <ul class="subMain" style="background-color:gold;">
 			<c:if test="${who =='T'}">
-			<li><a href="teacherList" class="spread-underline">마이페이지</a></li></c:if>
+			<li><a href="teacherList" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li></c:if>
 			<c:if test="${who =='P'}">
-	        <li><a href="mypage" class="spread-underline">마이페이지</a></li></c:if>
-			<li><a href="dbmSearchWriteForm">선생님구하기</a></li>
+	        <li><a href="mypage" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li></c:if>
+
+
 	      </ul>
 	 </ul>
 

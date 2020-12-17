@@ -45,7 +45,7 @@
 </video>
  <div class="jb-text">
         <p>사업소개</p>
-        <h5 style="color:white;">아이돌봄 웹 서비스</h5>
+        <h5 style="color:white;">Services</h5>
         <br/><br/><br/><br/>
 	   <h2 style="color:white">놀이부터 배움까지 선생님 매칭 웹</h2>
 	   <h2 style="font-weight:bold; color:white;">아이돌봄 웹 서비스</h2>
