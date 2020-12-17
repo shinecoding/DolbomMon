@@ -103,6 +103,7 @@ var charge; //총결제금액
 							tag += "<input type='hidden' name='apply_num' value='"+ rsp.apply_num +"'>";//카드승인번호
 							tag += "<input type='hidden' name='teacherid' value='${teacherid}'>";//카드승인번호
 							tag += "<input type='hidden' name='pay_no' value='${rbVO.job_board_no}' >"; 
+							tag += "<input type='hidden' name='origin_no' value='${rbVO.origin_no}' >"; 
 							tag += "</form>";
 						$("#hiddenDiv").html(tag);
 						hiddenForm.submit();
