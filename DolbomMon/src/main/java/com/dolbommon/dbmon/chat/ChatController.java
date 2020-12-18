@@ -30,7 +30,7 @@ public class ChatController {
 		String userid = (String) session.getAttribute("userid");
 		String anotherId = (String)req.getParameter("userid");
 		if(anotherId==null || anotherId.equals("")) {
-			anotherId="test001";
+			anotherId="DBMmanager";
 		}
 		mav.addObject("roomList", chatdao.selectAllRoom(userid)); // 방정보..
 		mav.addObject("myId", userid);
@@ -64,7 +64,7 @@ public class ChatController {
 		String userid2 = (String)req.getParameter("userid");
 		
 		if(userid2==null || userid2.equals("")) {
-			userid2="test001";
+			userid2="DBMmanager";
 		}
 		room.setUserid(userid2); // 글, 프로필 대상
 		
