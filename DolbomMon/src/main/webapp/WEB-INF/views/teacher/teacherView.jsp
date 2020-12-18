@@ -565,7 +565,7 @@ border-radius:10px;
    <ul class="list-group">
    		
    		<li class="list-group-item align-middle">
-   		<span  style="font-size:1.4em; font-weight:bold">${mvo.username}</span>
+   		<span  style="font-size:1.4em; font-weight:bold">${mvo.username} (${userid})</span>
    		<span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.teacher_type=='선생님'}">선생님 돌봄몬</c:if><c:if test="${vo.teacher_type=='대학생'}">대학생 돌봄몬</c:if><c:if test="${vo.teacher_type=='엄마'}">엄마 돌봄몬</c:if><c:if test="${vo.teacher_type=='일반'}">일반 돌봄몬</c:if></span>
    		<c:if test="${mvo.userid!=paramid}">
    		<input type="button" class="btn btn-warning cBtn" id="${userid }" value="협의하기" style="float:right; margin:0 5px;"/>

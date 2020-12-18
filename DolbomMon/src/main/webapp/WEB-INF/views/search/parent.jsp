@@ -626,7 +626,7 @@ function mapResize(){
 	</div>
 	
 <!-- ------------------------------------ -->
-	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px;">
+	<div id="cardBox" class="d-inline-block" style="width:100%; min-height:700px; margin-left:20px;">
 		<c:forEach var="vo" items="${list2}">
 			
 				<div class="card" data-aos="fade-up">
