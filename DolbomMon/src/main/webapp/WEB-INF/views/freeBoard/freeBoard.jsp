@@ -24,7 +24,7 @@
 		text-align: center;
 	}
 	.subject{
-		width: 400px;
+		width: 380px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;		
@@ -40,6 +40,7 @@
 	#searchDiv{
 		width: 180px;
 	}
+	
 </style>
 </head>
 <body>
@@ -101,7 +102,8 @@
 					<td scope="row" align="center"></td>
 					<td scope="row" align="center"></td>
 				</c:if>
-					<td scope="row" class="subject">
+					<td scope="row" id="sub" class="subject">
+						<div class="subject">						
 						<!-- 공백을 step만큼 띄어주기 -->
 						<c:forEach var="s" begin="1" end="${vo.step}">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -110,6 +112,7 @@
 							➥
 						</c:if>
 						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
+						</div>
 					<td scope="row" align="center">${vo.userid}</td>
 					<td scope="row" align="center">${vo.writedate}</td>
 					<td scope="row" align="center">${vo.hit}</td>
