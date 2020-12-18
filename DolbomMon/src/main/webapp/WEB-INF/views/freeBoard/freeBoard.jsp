@@ -66,7 +66,7 @@
 			</div>
 		</div>
 	</form>
-	<div style="float: right; margin: 15px; padding: 15px;">
+	<div style="float: right; margin-top: 15px;">
 		<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>
 	</div>
 	<div style="font-size: bold; "><br/><br/>총 게시물 수 : ${totalRecord}</div>
