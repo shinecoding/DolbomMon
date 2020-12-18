@@ -12,6 +12,7 @@
 <style>
 	.container{
 		width: 900px;	
+		font-family:'Noto Sans KR', sans-serif!important;
 	}
 	#head{
 		text-align: center;
@@ -48,6 +49,22 @@
 	    	<img src="img/141.png" style="width:100%; height:400px; "/>
 	    	
 <div class="container">
+<br/><br/><br/>
+<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
+		<div class="input-group mb-3">
+			<div id="searchDiv">
+				<select class="custom-select" name="searchKey" id="searchKey">
+					<option value="subject">제목</option>
+					<option value="content">글내용</option>
+					<option value="userid">작성자</option>
+				</select>
+			</div>
+				<input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"/>
+			<div class="input-group-append">
+					<input type="submit" class="btn btn-warning" value="검색"/>
+			</div>
+		</div>
+	</form>
 <div style="float: right; margin: 15px;
 		padding: 15px;">
 	<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
@@ -116,22 +133,11 @@
 			</ul>
 		</nav>
 	<br/>
-	<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
-		<div class="input-group mb-3">
-			<div id="searchDiv">
-				<select class="custom-select" name="searchKey" id="searchKey">
-					<option value="subject">제목</option>
-					<option value="content">글내용</option>
-					<option value="userid">작성자</option>
-				</select>
-			</div>
-				<input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"/>
-			<div class="input-group-append">
-					<input type="submit" class="btn btn-warning" value="검색"/>
-			</div>
-		</div>
-	</form>
+	
 </div>
 </div>
 </body>
 </html>
+<!-- ------------------footer------------- -->
+
+<jsp:include page="../footer.jsp"/>
