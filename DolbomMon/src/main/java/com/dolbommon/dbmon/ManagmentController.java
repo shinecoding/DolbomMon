@@ -62,10 +62,8 @@ public class ManagmentController {
 			mav.setViewName("redirect:management");
 			session.setAttribute("managerStatus", "Y");
 			session.setAttribute("userid", vo.getUserid());
-			
+			session.setAttribute("username", "관리자");
 			session.setAttribute("logStatus", "Y");
-			System.out.println(vo.getUserid());
-			System.out.println(session.getAttribute("username"));
 			session.setAttribute("managerId", vo.getUserid());
 		}else {
 			mav.setViewName("redirect:management");
