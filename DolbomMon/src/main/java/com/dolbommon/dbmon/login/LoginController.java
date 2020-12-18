@@ -97,8 +97,11 @@ public class LoginController {
 
 		vo.setUserid((String)ses.getAttribute("userid"));
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
+		try {
 		dao.cookieReset(vo.getUserid());
-			
+		}catch(Exception e) {
+			System.out.println("로그아웃 에러 = "+e.getMessage());
+		}
 		Cookie cookie = new Cookie("loginCookie", null);
 		cookie.setMaxAge(0);
 		res.addCookie(cookie);

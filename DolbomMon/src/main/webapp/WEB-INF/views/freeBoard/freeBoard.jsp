@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${logStatus==null || logStatus!='Y'}">
+	<script>
+		alert('로그인 후 이용이 가능한 서비스입니다.');
+		location.href="/dbmon/login";
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +18,7 @@
 <style>
 	.container{
 		width: 900px;	
+		font-family:'Noto Sans KR', sans-serif!important;
 	}
 	#head{
 		text-align: center;
@@ -33,7 +40,6 @@
 	#searchDiv{
 		width: 180px;
 	}
-
 </style>
 </head>
 <body>
@@ -43,13 +49,27 @@
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
 	    	<a href="#"></a></div>
 	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
-
-
 <div class="container">
+<br/><br/><br/>
+<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
+		<div class="input-group mb-3">
+			<div id="searchDiv">
+				<select class="custom-select" name="searchKey" id="searchKey">
+					<option value="subject">제목</option>
+					<option value="content">글내용</option>
+					<option value="userid">작성자</option>
+				</select>
+			</div>
+				<input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"/>
+			<div class="input-group-append">
+				<input type="submit" class="btn btn-warning" value="검색"/>
+			</div>
+		</div>
+	</form>
 	<div style="float: right; margin: 15px; padding: 15px;">
 		<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>
 	</div>
-	<div style="font-size: 0.9em;"><br/><br/>총 게시물 수 : ${totalRecord}</div>
+	<div style="font-size: bold; "><br/><br/>총 게시물 수 : ${totalRecord}</div>
 	<div id="board" style="font-size: 0.9em;">
 	<br/>
 	<table class="table table-hover">
@@ -134,22 +154,11 @@
 			</ul>
 		</nav>
 	<br/>
-	<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
-		<div class="input-group mb-3">
-			<div id="searchDiv">
-				<select class="custom-select" name="searchKey" id="searchKey">
-					<option value="subject">제목</option>
-					<option value="content">글내용</option>
-					<option value="userid">작성자</option>
-				</select>
-			</div>
-				<input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요"/>
-			<div class="input-group-append">
-				<input type="submit" class="btn btn-warning" value="검색"/>
-			</div>
-		</div>
-	</form>
+	
 </div>
 </div>
 </body>
 </html>
+<!-- ------------------footer------------- -->
+
+<jsp:include page="../footer.jsp"/>

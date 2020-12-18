@@ -7,11 +7,14 @@
 <title>게시글 보기</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
    .container{
-      width: 900px;   
+      width: 900px;
+      font-family: 'Noto Sans KR', sans-serif;   
    }
    #top{
       margin: 15px;
@@ -47,7 +50,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
    <div class="container">
       <div id="top">
          <b>공지사항 보기</b>
@@ -113,7 +116,7 @@
       <br/>
       <div>
       <br/>
-         <c:if test="${userid==vo.userid}">
+         <c:if test="${managerStatus == 'Y'}">
             <a class="btn btn-warning" href="/dbmon/noticeBoardDel?no=${vo.no}" role="button" id="delBtn">삭제</a>
             <a class="btn btn-warning" href="/dbmon/noticeBoardEdit?no=${vo.no}" role="button">수정</a>
          </c:if>
@@ -122,3 +125,4 @@
    </div>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

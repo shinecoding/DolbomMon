@@ -653,7 +653,7 @@ function mapResize(){
 	
 	
 	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top:50px; margin-bottom:50px;" class="btn btn-warning" id="countTest">더보기</button></div>
-</div>
+</div></div>
 <!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
 <script>
@@ -669,7 +669,7 @@ function mapResize(){
 	var positions = [
 		<c:forEach var="vo" items="${hash}">
 	    {
-	        content: '<div style="padding:5px;">${vo.username.substring(0,1)}O${vo.username.substring(2)}<br/><a href="teacherView?userid=${vo.userid}">프로필보기</a></div>', 
+	        content: '<div style="padding:5px;">${vo.username.substring(0,1)}O${vo.username.substring(2)}<br/></div>', 
 	        latlng: new kakao.maps.LatLng("${vo.lat}", "${vo.lng}")
 	    },
 	    </c:forEach>
