@@ -49,14 +49,6 @@
 	    	<img src="img/141.png" style="width:100%; height:400px; "/>
 	    	
 <div class="container">
-
-<c:if test="${managerStatus == 'Y'}">
-	<div style="float: right; margin: 15px;
-			padding: 15px;">
-		<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
-	</div>
-</c:if>
-
 <br/><br/><br/>
 <form method="get" action="/dbmon/noticeBoard" id="searchFrm">
 		<div class="input-group mb-3">
@@ -73,7 +65,11 @@
 			</div>
 		</div>
 	</form>
-
+<c:if test="${managerStatus == 'Y'}">
+	<div style="float: right; margin-top: 15px;">
+		<a id="writeBtn" class="btn btn-warning" href="noticeBoardWrite" role="button">글쓰기</a>
+	</div>
+</c:if>
 <div style="font-size: 0.9em;"><br/><br/>총 게시물 수 : ${totalRecord}</div>
 <div id="board" style="font-size: 0.9em;">
 <br/>
