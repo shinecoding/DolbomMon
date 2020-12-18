@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:if test="${logStatus==null || logStatus!='Y'}">
-	<script>
-		alert('로그인 후 이용이 가능한 서비스입니다.');
-		location.href="/dbmon/login";
-	</script>
-</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +54,7 @@ $(function(){
 </head>
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
 <div class="container">
 <div id="top">
 <b>게시판 글쓰기</b>

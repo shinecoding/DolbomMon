@@ -21,10 +21,17 @@
 	<mvc:interceptors>
 	    <mvc:interceptor>
 			<mvc:mapping path="/"/>
-			<bean class="com.dolbommon.dbmon.Interceptor.LoginInterceptor"/>
+			<bean class="com.dolbommon.dbmon.Interceptor.AutoLoginInterceptor"/>
 	    </mvc:interceptor>
 	</mvc:interceptors>
 	
-	
+	<!-- 로그인 인터셉터 -->
+	<mvc:interceptors>
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/parentView"/>
+	 		<mvc:mapping path="/teacherView"/> 		
+	 		<bean class="com.dolbommon.dbmon.Interceptor.LoginInterceptor"/>
+	 	</mvc:interceptor> 
+	 </mvc:interceptors>
 	
 </beans>

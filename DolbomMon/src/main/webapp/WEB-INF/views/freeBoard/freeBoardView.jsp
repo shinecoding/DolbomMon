@@ -147,7 +147,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
 	<div class="container">
 		<div id="top">
 			<b>게시글 보기</b>

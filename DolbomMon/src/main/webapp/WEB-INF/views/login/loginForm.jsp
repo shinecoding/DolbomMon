@@ -13,6 +13,7 @@
 
 	.container{
 		width: 700px;
+		min-height: 603px;
 	}
 	#top{
 		margin: 15px;
@@ -92,5 +93,5 @@ $(function(){
 	</form>
 </div>
 </body>
-<jsp:include page="../footer.jsp"/>
 </html>
+<jsp:include page="../footer.jsp"/>

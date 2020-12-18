@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${logStatus==null || logStatus!='Y'}">
+	<script>
+		alert('로그인 후 이용이 가능한 서비스입니다.');
+		location.href="/dbmon/login";
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +39,6 @@
 	#searchDiv{
 		width: 180px;
 	}
-
 </style>
 </head>
 <body>
@@ -43,8 +48,6 @@
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
 	    	<a href="#"></a></div>
 	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
-
-
 <div class="container">
 	<div style="float: right; margin: 15px; padding: 15px;">
 		<a id="writeBtn" class="btn btn-warning" href="freeBoardWrite" role="button">글쓰기<br/></a>

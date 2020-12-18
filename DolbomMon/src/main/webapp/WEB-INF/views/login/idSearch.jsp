@@ -12,6 +12,7 @@
 <style>
 	.container{
 		width: 800px;
+		min-height: 773px;
 	}	
 	#top{
 		margin: 15px;
@@ -22,7 +23,6 @@
 	}
 	#inputBox{
 		margin-top: 30px;
-		margin-bottom: 10px;
 		height: 190px;
 		padding: 20px;
 		border: 1px solid lightgray;
@@ -94,5 +94,5 @@ $(function(){
 	</form>
 </div>
 </body>
-<jsp:include page="../footer.jsp"/>
 </html>
+<jsp:include page="../footer.jsp"/>
