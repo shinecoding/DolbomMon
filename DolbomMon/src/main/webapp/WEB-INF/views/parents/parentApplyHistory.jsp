@@ -306,7 +306,10 @@
 												<c:if test="${list.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</div>
 											<div style="height:1px;">
+					
 												<input class="btn btn-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
+											
+											
 											</div>
 											<div style="height:1px;">
 											<c:if test="${list.tcnt!='0'}">
@@ -327,6 +330,7 @@
 													<span style="color:red; right:-470px;" class="msg" id="msg">선생님이 제안을 거절하였습니다.</span>
 												</c:if>
 											</c:if>
+											
 										</div>
 										</div>
 									<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>
