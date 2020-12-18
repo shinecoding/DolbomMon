@@ -550,7 +550,7 @@ border-radius:10px;
 
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/>
+
 <div class="container">
 	
 	

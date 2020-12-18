@@ -11,7 +11,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	*{margin:0; padding:0;}
-	.container{width:600px;}
+	.container{width:600px; margin-bottom:100px;}
 	.container>div{width:100%;overflow:hidden;}
 	.container>div>div * {float:left;}
 	
@@ -66,7 +66,7 @@
 				<img src="<%=request.getContextPath() %>/img/dbmJoinImg.png" style="width:150px;" />
 
 				<div style="width:200px;font-size:17px;margin-top:10px;padding:10px;">아이를 돌볼 돌봄몬으로 활동하고 싶어요.</div>
-				<div style="width:200px;font-size:23px;padding:10px;color:rgb(243,127,87)">돌봄몬회원 가입</div>
+				<div style="width:200px;font-size:23px;padding:10px;color:rgb(243,127,87); font-weight:bold;">돌봄몬회원 가입</div>
 
 			</div>
 		</div>
@@ -76,3 +76,4 @@
 	</form>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

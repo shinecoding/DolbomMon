@@ -1028,5 +1028,5 @@
  
 </script>
 </body>
-</html>
+</html><jsp:include page="../footer.jsp"/>
 <jsp:include page="../footer.jsp"/>

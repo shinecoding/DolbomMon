@@ -62,7 +62,7 @@ $(function(){
 <style>
 	.container{
 		width: 800px;
-		margin: 0 auto;	
+		margin: 0 auto;
 	}
 	#top{
 		margin: 15px;
@@ -92,11 +92,9 @@ $(function(){
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
-	<hr/>
 	<div id="top">
 		<b>회원정보 수정</b>
 	</div>
-
 	<form method="post" id="editFrm" action="identityEditOk">
 		<c:forEach var="vo" items="${list}">
 			<div class="form-group row">
@@ -157,4 +155,5 @@ $(function(){
 	</form>
 </div>
 </body>
+<jsp:include page="../footer.jsp"/>
 </html>

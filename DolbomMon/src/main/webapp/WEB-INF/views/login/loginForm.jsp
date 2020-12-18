@@ -13,6 +13,8 @@
 
 	.container{
 		width: 700px;
+		min-height: 603px;
+		margin-bottom:100px;
 	}
 	#top{
 		margin: 15px;
@@ -66,7 +68,7 @@ $(function(){
 <%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
 	<div id="top">
-	<b>로그인</b>
+		<b>로그인</b>
 	</div>
 	<div id="loginInfo">로그인을 하시면 더욱 편리하게 돌봄몬 서비스를 이용하실 수 있습니다.</div>
 	<form method="post" action="loginOk" id="loginFrm">
@@ -92,5 +94,5 @@ $(function(){
 	</form>
 </div>
 </body>
-<jsp:include page="../footer.jsp"/>
 </html>
+<jsp:include page="../footer.jsp"/>
