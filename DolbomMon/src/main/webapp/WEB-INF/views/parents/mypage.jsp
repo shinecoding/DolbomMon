@@ -142,10 +142,6 @@
    <div id="title">
    		<div id="titlefont"></div>
    		<div class="rightlog">   
-			   <a id="lgt">로그아웃</a>
-			   <div id="dividebar">|</div>
-			   <a id="pwdchg">비밀번호 변경</a>
-			   <i class="fas fa-pen"></i>
 	   </div>
 	</div>   
  <br/>
@@ -165,7 +161,6 @@
    		<li class="list-group-item list-group-item-action"><a href="#ex7" rel="modal:open">결제/환불 계좌등록</a></li>
    		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="dbmSearchWriteForm">선생님구하기</a></li>
    </ul>
    
 </div>

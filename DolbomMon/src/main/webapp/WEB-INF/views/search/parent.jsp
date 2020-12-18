@@ -237,7 +237,13 @@ $(function(){
 		               }
 		               tag += '</span><br/>';
 		               tag += '<span class="loc"><i class="fas fa-map-marker-alt"></i>'+vo.care_addr+'</span><br/>';
-		               tag += '<span><b>'+vo.start_date+'</b> 시작</span><br/>';
+		               var startDate = vo.start_date;
+		               console.log("start_date => " + startDate);
+		               if(startDate!=null){
+		                	tag += '<span><b>'+startDate+'</b> 시작</span><br/>';
+		               }else{
+		            	   tag += '<span>특정일 시작</span><br/>';
+		               }
 		               tag += '<span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 		               if(vo.consultation=="Y"){
 		                  tag += ' | <b>협의가능</b></span></p>';
@@ -340,7 +346,13 @@ $(function(){
 	               }
 	               tag += '</span><br/>';
 	               tag += '<span class="loc"><i class="fas fa-map-marker-alt"></i>'+vo.care_addr+'</span><br/>';
-	               tag += '<span><b>'+vo.start_date+'</b> 시작</span><br/>';
+	               var startDate = vo.start_date;
+	               console.log("start_date => " + startDate);
+	               if(startDate!=null){
+	                	tag += '<span><b>'+startDate+'</b> 시작</span><br/>';
+	               }else{
+	            	   tag += '<span>특정일 시작</span><br/>';
+	               }
 	               tag += '<span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 	               if(vo.consultation=="Y"){
 	                  tag += ' | <b>협의가능</b></span></p>';
@@ -434,7 +446,12 @@ $(function(){
 		               }
 		               tag += '</span><br/>';
 		               tag += '<span class="loc"><i class="fas fa-map-marker-alt"></i>'+vo.care_addr+'</span><br/>';
-		               tag += '<span><b>'+vo.start_date+'</b> 시작</span><br/>';
+		               var startDate = vo.start_date;
+		               if(startDate!=null){
+		                	tag += '<span><b>'+startDate+'</b> 시작</span><br/>';
+		               }else{
+		            	   tag += '<span>특정일 시작</span><br/>';
+		               }
 		               tag += '<span style="color: orange;">희망시급 '+vo.wish_wage+'원';
 		               if(vo.consultation=="Y"){
 		                  tag += ' | <b>협의가능</b></span></p>';
