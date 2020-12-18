@@ -15,7 +15,7 @@ import org.springframework.web.util.WebUtils;
 import com.dolbommon.dbmon.login.LoginDaoImp;
 import com.dolbommon.dbmon.login.LoginVO;
 
-public class LoginInterceptor implements HandlerInterceptor {
+public class AutoLoginInterceptor implements HandlerInterceptor {
 
 	SqlSession sqlSession;
 
@@ -30,23 +30,20 @@ public class LoginInterceptor implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		
-		//로그인 인터셉터
+		//자동 로그인 인터셉터
 		HttpSession ses = request.getSession();
-		String logStatus = (String)ses.getAttribute("logStatus");
-	
-		if(logStatus==null || !logStatus.equals("Y")) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return false;
-		}
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		
+		if (loginCookie != null) {		
+			LoginVO vo = dao.checkLoginBefore(loginCookie.getValue());
+				
+			if (vo!=null)
+				ses.setAttribute("userid", vo.getUserid());
+				ses.setAttribute("username", vo.getUsername());
+				ses.setAttribute("logStatus", "Y");		
+		}		
 		return true;
-		
-		
-		
-		
-		
-		
 	}
 	
 	//컨트롤러가 실행된 후 view 페이지로 이동하기 전에 호출된다.
