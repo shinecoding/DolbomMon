@@ -70,7 +70,7 @@
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
 <div class="container">
-	<hr/>
+
 	<div id="top">
 		<h5><b>회원탈퇴 전 꼭 확인해주세요!</b></h5>
 		<h6 style="color: gray";><br/><b>아래의 사유로 탈퇴를 원하시는 경우<br/>‘문의하기’버튼을 통해 먼저 연락주시기 바랍니다.</b></h6>
@@ -120,3 +120,4 @@
 </div>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

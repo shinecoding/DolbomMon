@@ -653,7 +653,7 @@ function mapResize(){
 	
 	
 	<div><button style="position:relative; width:250px; left:38%; font-size:2em; margin-top:50px; margin-bottom:50px;" class="btn btn-warning" id="countTest">더보기</button></div>
-</div>
+</div></div>
 <!-- ================================지도======================================== -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d236a21d1724aae6ae65ed16423e6d4f"></script>
 <script>

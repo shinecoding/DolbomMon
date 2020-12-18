@@ -73,7 +73,7 @@ EDIT ON
 
       #fixed-menu {
         width: 100%;
-        height:120px;
+        height:130px;
 	 	position: fixed;
 	  	top: 0px;
 	  	left: 0px;
@@ -124,7 +124,7 @@ EDIT ON
 		width: calc(80%/6);
 		height:50px;
 		line-height:50px;
-		
+		font-family: 'Noto Sans KR', sans-serif!important;
 		
 		}
 	  ul.mainTopmenu ul.subMain li {
@@ -132,7 +132,7 @@ EDIT ON
 	    -webkit-padding-start:0px;
 	    height:50px;
 	    background-color:#fd7e14;
-	    
+	    font-family: 'Noto Sans KR', sans-serif!important;
 	    }
 	  
 	  
@@ -145,12 +145,12 @@ EDIT ON
 		 }
       ul.mainTopmenu li ul.subMain{
 	     position: absolute;
-	     
+	     font-family: 'Noto Sans KR', sans-serif!important;
 		 }
       ul.mainTopmenu{
 	     zoom: 1;
 	     margin-bottom:0;
-	     
+	     font-family: 'Noto Sans KR', sans-serif!important;
 		 }
       ul.mainTopmenu:after{
 	     height: 0;
@@ -208,15 +208,18 @@ EDIT ON
 		  
 		}
 		.ml-1, .mx-1 {
-  		  margin-left: 100px;
+  		  margin-left: 10px!important;
+  		  font-weight:bold;
+  		  font-size:11px;
+  		  margin-top:0px!important;
 		}
 
    </style>
 </head>
 <body>
-<div style="height:130px;">
- <div id="fixed-menu" >
-	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1295px;">
+<div style="height:130px; font-family:'Noto Sans KR', sans-serif!important;">
+ <div id="fixed-menu" style="height:130px;margin-bottom:0px;">
+	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1295px; height:80px;">
 	    <header id="topHeader">
 	    <img src="<%=request.getContextPath()%>/img/mylogo.png" 
 	           class="logo" alt="Logo" src="home" style="margin-top:20px; float:left;" 
@@ -226,13 +229,13 @@ EDIT ON
 	           <span style="float:right;" class="row">
 	           <span id="groupchat1" class="col" style="width:70px; height:80px; margin-right:5px;">
 	           <img class="btn ppp ccBtn" src="icon/chat6.png" style="height:55px; width:65px;margin-rignt:0px;">
-	           <div class="badge badge-warning badge-pill ml-1" style="margin-right:0px;">채팅하기</div></img>
+	           <div class="badge badge-warning badge-pill ml-1" >채팅하기</div></img>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	           </span>
 	           <span style="float:right" class="row">
 	           <span id="groupchat2" class="col" style="width:90px;height:80px; margin-left:15px;">
 	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-left:0px; "></img>
-	           <div class="badge badge-warning badge-pill ml-1" >쪽지</div></a>
+	           <div class="badge badge-warning badge-pill ml-1">쪽지</div></a>
 	           </span>
 	           </span>
 	          <!-- <a href="/dbmon/temporaryLogin">
