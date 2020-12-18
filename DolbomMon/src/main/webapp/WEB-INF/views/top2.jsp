@@ -291,12 +291,16 @@ EDIT ON
 
 	 
 
-	       <ul class="subMain">
+	      <ul class="subMain">
 			<c:if test="${who =='T'}">
-			<li><a href="teacherList" class="spread-underline">마이페이지</a></li></c:if>
+			<li><a href="teacherList" class="spread-underline">마이페이지</a></li>
+			<li><a href="/dbmon/identityForm" class="spread-underline" >계정관리</a></li>
+			</c:if>
 			<c:if test="${who =='P'}">
-	        <li><a href="mypage" class="spread-underline">마이페이지</a></li></c:if>
-
+	        <li><a href="mypage" class="spread-underline">마이페이지</a></li>
+			<li><a href="dbmSearchWriteForm" class="spread-underline" >선생님구하기</a></li>
+	        <li><a href="/dbmon/identityForm" class="spread-underline" >계정관리</a></li>
+	        </c:if>
 	      </ul>
 	 </ul>
 

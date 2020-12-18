@@ -298,9 +298,14 @@ EDIT ON
 
 	       <ul class="subMain" style="background-color:gold;">
 			<c:if test="${who =='T'}">
-			<li><a href="teacherList" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li></c:if>
+			<li><a href="teacherList" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li>
+			<li><a href="/dbmon/identityForm" class="spread-underline introcss12" style="background-color:#ffc107;">계정관리</a></li>
+			</c:if>
 			<c:if test="${who =='P'}">
-	        <li><a href="mypage" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li></c:if>
+	        <li><a href="mypage" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li>
+	        <li><a href="dbmSearchWriteForm" class="spread-underline introcss12" style="background-color:#ffc107;">선생님구하기</a></li>
+	        <li><a href="/dbmon/identityForm" class="spread-underline introcss12" style="background-color:#ffc107;">계정관리</a></li>
+	        </c:if>
 
 	      </ul>
 	 </ul>
