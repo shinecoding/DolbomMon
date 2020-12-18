@@ -261,7 +261,8 @@ $(function(){
 	$(document).on("change", "#selectType", function(){
 		count=12;
 		tabType=2;
-		care_type = $(this).val();
+		care_type = $(this).val().trim();
+		console.log("test"+care_type);
 		dropdownAjax(care_type)
 	});//ajax
 	function dropdownAjax(care_type){
