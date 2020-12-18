@@ -7,11 +7,14 @@
 <title>게시글 보기</title>
 <meta name="viewport" content="width=device, initial-scale=1" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
    .container{
-      width: 900px;   
+      width: 900px;
+      font-family: 'Noto Sans KR', sans-serif;   
    }
    #top{
       margin: 15px;
@@ -122,3 +125,4 @@
    </div>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

@@ -367,14 +367,14 @@
 			
 			$("input[name=title]").val(subjectSel.value);
 						
-			if(subjectSel.selectedIndex==5){
+			if(subjectSel.selectedIndex==0){
 				$("input[name=title]").val("");
 			}
 		});
 		
 		$("input[name=title]").keyup(function(){
 			var subjectSel = document.getElementById("subjectSelect");
-			subjectSel.selectedIndex = 5;
+			subjectSel.selectedIndex = 1;
 		});
 		
 		/////////////////////////// 등록하기 버튼 누를 시 ////////////////////////
@@ -1028,5 +1028,5 @@
  
 </script>
 </body>
-</html>
+</html><jsp:include page="../footer.jsp"/>
 <jsp:include page="../footer.jsp"/>

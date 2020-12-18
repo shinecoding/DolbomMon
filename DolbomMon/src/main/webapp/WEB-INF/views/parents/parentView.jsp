@@ -64,6 +64,11 @@
 	    top: 0px;
 	    right: 0px;
 	}
+	#noneEvent{
+		pointer-events: none;
+	}
+	
+	
 </style>
 
 <script>
@@ -860,7 +865,7 @@
 	      			<span style="color:orange;">아래 표시된 날짜만 돌봐주세요.</span>
 	      		</c:if>
 	      	</li>
-      	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;;">
+      	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;" id="noneEvent">
       		<c:if test="${rbVO.time_type=='S' }" >
 				<div id="specificDate">
 					
@@ -999,16 +1004,16 @@
 									<h6 class="mb-3"><i class="fas fa-hands-helping" style="color:orange"></i><c:if test="${tlist.discussion=='Y' }" >협의 <b>가능</b></c:if><c:if test="${tlist.discussion=='N' }" >협의 <b>불가능</b></c:if></h6>
 									
 									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='T' and checkVo.payment!='Y'}">
-										<span style="color:orange; font-size:1.2em;position:relative; top:10px;"><b>-계약이 진행중입니다-</b></span>
+										<span style="color:orange; font-size:1em;position:relative; top:10px;"><b>계약이 진행중입니다</b></span>
 									</c:if>
 									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='Y' and checkVo.payment!='Y'}">
-										<span style="color:orange; font-size:1em;position:relative; top:10px;"><b>선생님이 계약을 수락하였습니다. <br/>계약서에서 결제를 진행해주세요.</b></span>
+										<span style="color:orange; font-size:1em;position:relative; top:10px;"><b>돌봄몬이 계약을 수락하였습니다. <br/>계약서에서 결제를 진행해주세요.</b></span>
 									</c:if>
 									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='N' and checkVo.payment!='Y'}">
-										<span style="color:red; font-size:1.2em; position:relative; top:10px;"><b>-계약이 거절되었습니다-</b></span>
+										<span style="color:red; font-size:1em; position:relative; top:10px;"><b>계약이 거절되었습니다.</b></span>
 									</c:if>
 									<c:if test="${checkVo.teacherid==tlist.userid and checkVo.agree=='Y' and checkVo.payment=='Y'}">
-										<span style="color:orange; font-size:1em; position:relative; top:10px;"><b>결제가 완료되었습니다.<br/>마이페이지 활동내역을 확인하세요.</b></span>
+										<span style="color:green; font-size:1em; position:relative; top:10px;"><b>결제가 완료되었습니다.<br/>마이페이지 활동내역을 확인하세요.</b></span>
 									</c:if>
 								</li>
 								<li class="list-group-item border-0 col-4" style="height:100%;text-align:right;">
@@ -1077,7 +1082,6 @@
 									<li class="list-group-item border-0 col-9" id="applyDbmList">
 										<h4><b>${tlist.username }</b></h4> 
 										<h6>나이 - ${tlist.birth }세</h6>
-										<h6>지원시간 | ${tlist.apply_date}</h6>
 										<h6><c:if test="${tlist.cctv == 'Y'}">CCTV가 있어도 당당히 일할 수 있습니다.</c:if><c:if test="${tlist.cctv == 'N'}">CCTV촬영을 원하지 않습니다.</c:if></h6><br/>
 										<h6><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
 										<input class="btn btn-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />

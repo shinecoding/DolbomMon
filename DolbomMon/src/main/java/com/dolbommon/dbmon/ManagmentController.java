@@ -61,6 +61,9 @@ public class ManagmentController {
 			mav.addObject("type", "memberManage");
 			mav.setViewName("redirect:management");
 			session.setAttribute("managerStatus", "Y");
+			session.setAttribute("userid", vo.getUserid());
+			session.setAttribute("username", "관리자");
+			session.setAttribute("logStatus", "Y");
 			session.setAttribute("managerId", vo.getUserid());
 		}else {
 			mav.setViewName("redirect:management");
@@ -96,6 +99,7 @@ public class ManagmentController {
 	@RequestMapping("/managerLogout")
 	public String managerLogout(HttpSession session) {
 		session.setAttribute("managerStatus", "N");
+		
 		return "management/managerLogin";
 	}
 	

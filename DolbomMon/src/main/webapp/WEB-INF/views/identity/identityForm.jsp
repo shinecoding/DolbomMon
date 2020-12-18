@@ -14,7 +14,7 @@
 		width: 800px;
 		margin: 0 auto;	
 	}
-	#top{
+	#topidenty123{
 		margin: 15px;
 		margin-top: 40px;
 		padding: 15px;
@@ -55,13 +55,18 @@
 		margin: 0 auto;	
 		width: 800px;
 		height: 15px;
-		background-color: lightgray;
+		background-color: gold;
 		position: absolute;
 		top: 440px;
 	}
+
 	.list-group{
 		margin-top: 30px;
 		margin-bottom: 140px;
+
+	.list-group1234{
+		position: absolute;
+		top: 494px;
 		width: 800px;
 	}
 	#logoLink{
@@ -70,17 +75,27 @@
 		display: block;
 		margin: 0 auto;
 	}
+	.ml-1, .mx-1 {
+		  margin-left: 10px!important;
+		  font-weight:bold;
+		  font-size:11px;
+		  margin-top:0px!important;
+	}
 
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/top.jsp"%>
+
+<div id="top">
+	<%@include file="/WEB-INF/views/top.jsp"%>
+</div>
 <div class="container">
-	<div id="top">
+	
+	<div id="topidenty123">
 		<b>계정관리</b>
 	</div>
 	<c:forEach var="vo" items="${list}">
-		<div id="userBox">		
+		<div id="userBox"  style="border:3px solid gold; border-radius:18px;">		
 		 	<div id="typeBox">
 		 		<div class="typeDiv">회원 유형</div>
 		 		<div class="typeDiv">사용중인 아이디</div>
@@ -99,12 +114,16 @@
 		</div>
 	</c:forEach>
 	<div id="space"></div>
-	<div class="list-group">
+	<div class="list-group1234">
 		<a href="identityEdit" class="list-group-item list-group-item-action"><b>회원정보 수정</b></a>
 		<a href="withdrawForm" class="list-group-item list-group-item-action"><b>회원 탈퇴 신청</b></a>
 		<a href="#" class="list-group-item list-group-item-action"><b>돌봄몬 서비스 이용동의</b></a>
 	</div>
 </div>
+<div id="footer123123">
+
+</div>
 </body>
 <jsp:include page="../footer.jsp"/>
 </html>
+

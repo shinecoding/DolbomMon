@@ -28,6 +28,12 @@
 	#endDateDiv>input[name=end_date]{height:38px;vertical-align:bottom;text-align:center;}
 	/* ===================== =====================*/
 	#selectDayDiv{width:100%; overflow:hidden; height:auto; border-bottom:1px solid gray; padding-bottom:20px; margin-bottom:30px;}
+	#selectDayDiv ul{
+		display:table;
+		width:100%;
+		margin:0;
+		padding:0;
+	}
 	#selectDayDiv li>label{
 		display:block; 
 		width:100%; height:100%; 
@@ -42,6 +48,7 @@
 		border-radius:50%; 
 		text-align:center; 
 		float:left; margin:1%; 
+		list-style:none;
 	}	
 	/* ===================== =====================*/
 	
