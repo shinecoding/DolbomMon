@@ -125,11 +125,11 @@
 		
 		$("#userid").keyup(function(){
 			var userid = $(this).val();
-			var useridReg = /^[A-Za-z]{1}\w{7,11}$/;
+			var useridReg = /^[A-Za-z]{1}\w{5,11}$/;
 			$("#idStatus").val("N");
 			if(!useridReg.test(userid)){
-				$("#useridRegChk").html("시작문자는 영문자, 아이디는 8~14글자의 영문,숫자,_만 입력가능").css("color", "#ff0000");
-				$("#idChkBtn").attr("disabled", true);
+				$("#useridRegChk").html("시작문자는 영문자, 아이디는 6~12글자의 영문,숫자,_만 입력가능").css("color", "#ff0000");
+				$("#idChkBtn").attr("disabled", true); 	
 			}else{
 				$("#useridRegChk").html("사용가능한 아이디 입니다.").css("color", "green");
 				$("#idChkBtn").attr("disabled", false);
