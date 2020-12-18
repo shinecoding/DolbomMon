@@ -29,9 +29,11 @@ public class ChatController {
 
 		String userid = (String) session.getAttribute("userid");
 		String anotherId = (String)req.getParameter("userid");
+		//System.out.println("어나더아이디"+anotherId);
 		if(anotherId==null || anotherId.equals("")) {
 			anotherId="DBMmanager";
 		}
+		
 		mav.addObject("roomList", chatdao.selectAllRoom(userid)); // 방정보..
 		mav.addObject("myId", userid);
 		mav.addObject("anotherId", anotherId);
@@ -42,16 +44,19 @@ public class ChatController {
 	//방 시간 갱신 최상단에오게.
 	@RequestMapping(value="/newRoom")
 	@ResponseBody
-	public String newRoom(ChatRoomDTO room, HttpSession session) {
+	public String newRoom(ChatRoomDTO room, HttpSession session, HttpServletRequest req) {
 		String userid = (String) session.getAttribute("userid");
 		room.setUserid(userid); // 글, 프로필 대상
-		chatdao.roomTimeUpdate(userid, room.getUserid());
-		
+		String anotherid = (String)req.getParameter("anotherId");
+		//System.out.println(anotherid);
+		//System.out.println(room.getUserid());
+		chatdao.roomTimeUpdate(anotherid, room.getUserid());
+		//System.out.println("test");
 		return "ok";
 	}
 	
 	
-	
+	int count = 1;
 	//////////////
 	// 방만들기 and 채팅방열기
 	@RequestMapping(value = "/makeRoom", method = RequestMethod.POST)
@@ -73,9 +78,12 @@ public class ChatController {
 		List<ChatRoomDTO> resultRoomDTO = null;
 		if(userid!=null && !userid.equals("")) {
 			if (result >= 1) {
-				chatdao.roomTimeUpdate(userid, room.getUserid());
-				System.out.println("내아이디"+userid);
-				System.out.println("선생아이디"+room.getUserid());
+				if(count==1) {
+					chatdao.roomTimeUpdate(userid, room.getUserid());
+					count++;
+				}
+				//System.out.println("내아이디"+userid);
+				//System.out.println("선생아이디"+room.getUserid());
 				resultRoomDTO = chatdao.selectAllRoom(userid);
 				return resultRoomDTO;
 			}
@@ -109,7 +117,6 @@ public class ChatController {
 			// 새로운 채팅 업데이트
 			room.setRoomseq(roomseq);
 			ChatRoomDTO resultDTO = chatdao.selectNewchat(room);
-			
 			if(resultDTO.getUserid().equals(userid)) {
 				String userCheck ="N";
 				chatdao.updateNewChat(roomseq, chat.getMessage(), userCheck); 

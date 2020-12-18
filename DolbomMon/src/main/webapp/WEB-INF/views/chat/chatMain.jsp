@@ -104,15 +104,6 @@
 		
 		
 		
-		//해당 게시글 대상 아이디로 방목록 최상단 갱신
-		function newRoom(){
-			$.ajax({
-				url : "newRoom",
-				success : function(result){
-					
-				}
-			})
-		}
 		
 		
 		
@@ -156,12 +147,13 @@
 								tag+="<div class='col-md-6 offset-md-6'>";
 								tag+="<div class='chat-bubble chat-bubble--right'>";
 								tag+=mVo.message;
-								tag+="</div></div></div>";
+								//tag+=""
+								tag+="</div><div style='float:right; font-size:12px; margin-right:30px;'><"+mVo.indate+"></div></div></div>";
 							}else{
 								tag+="<div class='col-md-6'>";
 								tag+="<div class='chat-bubble chat-bubble--left'>";
 								tag+=mVo.message;
-								tag+="</div></div></div>";
+								tag+="</div><div style='float:left; font-size:12px; margin-left:30px;'><"+mVo.indate+"></div></div></div></div>";
 							}
 							
 						});					
@@ -244,7 +236,19 @@
 		
 	
 	});
-
+	//해당 게시글 대상 아이디로 방목록 최상단 갱신
+	function newRoom(){
+		$.ajax({
+			url : "newRoom",
+			data : {
+				anotherId:"${anotherId}"
+			},
+			success : function(result){
+				
+			}
+		})
+	}
+	
 </script>
 <style>
 	body {
@@ -455,9 +459,14 @@
 	.chatPage{
 		margin:0 auto;
 	}
+	.downimg{
+		width:15px;
+		height:15px;
+		padding-bottom:4px;
+	}
 </style>
 </head>
-<body>
+<body onload="newRoom()">
 
 <!-- <input type="button" value="방만들기" class="btn btn-info" id="room2" style="margin-bottom:15px;"> -->
 <div class="chatPage" style="display:block">
