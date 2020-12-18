@@ -164,7 +164,7 @@
 		var popupY= (window.screen.height / 2) - (popupHeight / 2);
 		$(document).on("click",".cBtn",function(){
 			popupWidth = 1060;
-			popupHeight = 656;
+			popupHeight = 596;
 			var userid = $(this).attr('id');
 			window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
