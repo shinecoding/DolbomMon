@@ -29,7 +29,7 @@
 		<a style="margin-left:100px!important;">소재지 : 서울시 마포구 백범로 비트캠프 3층 | 사업자 등록번호 : 11111222000<br/></a>
 		<a style="margin-left:100px!important;">Copyright © 2020 Dolbommon.co.,Ltd. All rights reserved.<br/></a>
 		<a style="margin-left:100px!important;">Contact Dolbommon for more information.<br/></a>
-		<a style="margin-left:100px!important;">02-1234-5678 | dolbommon00@gmail.com</a>
+		<a style="margin-left:220px!important;">02-1234-5678 | dolbommon00@gmail.com</a>
 		</div>
 	
 	</div>
