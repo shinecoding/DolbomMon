@@ -72,6 +72,7 @@
 	<div style="font-size: bold; "><br/><br/>총 게시물 수 : ${totalRecord}</div>
 	<div id="board" style="font-size: 0.9em;">
 	<br/>
+	<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
 	<table class="table table-hover">
 		<thead>	
 			<tr id="head">
@@ -128,6 +129,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<br/>
 	
 	<!-- paging -->
