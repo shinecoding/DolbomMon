@@ -669,7 +669,7 @@ function mapResize(){
 	var positions = [
 		<c:forEach var="vo" items="${hash}">
 	    {
-	        content: '<div style="padding:5px;">${vo.username.substring(0,1)}O${vo.username.substring(2)}<br/><a href="teacherView?userid=${vo.userid}">프로필보기</a></div>', 
+	        content: '<div style="padding:5px;">${vo.username.substring(0,1)}O${vo.username.substring(2)}<br/></div>', 
 	        latlng: new kakao.maps.LatLng("${vo.lat}", "${vo.lng}")
 	    },
 	    </c:forEach>
