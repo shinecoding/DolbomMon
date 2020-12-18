@@ -33,7 +33,7 @@
 	#headerDiv>h4{width:70%; margin:0 auto;}
 	
 	.container>div>div>label{display:inline-block;width:auto;float:left; margin:0px;}
-	.container>div>div>span{display:inline-block; width:auto;height:20px;float:left;font-size:16px; margin-top:5px; margin-left:5px;}
+	.container>div>div>span{display:inline-block; width:auto;height:20px;float:left;font-size:13px; margin:0 0 0 5px; padding-bottom:2px;}
 	.container>div>input{height:40px; padding:5px 10px; float:left;}
 	
 	#genderDiv label{width:19%; height:40px; line-height:40px; text-align:center; border:none; border-radius:20px; background-color:#EFEFEF; cursor:pointer; margin: 3px;}
@@ -171,9 +171,9 @@
 		$("#email1").keyup(function(){
 			
 			var email1 = $(this).val();
-			var email1Reg = /^[A-Za-z]{1}\w{7,11}$/;
+			var email1Reg = /^[A-Za-z]{1}\w{4,11}$/;
 			if(!email1Reg.test(email1)){
-				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 8~12자의 영문, 숫자, _ 만 가능 ").css("color", "red");
+				$("#emailChk").html("첫 번째 글자는 영문자만 가능, 5~12자의 영문, 숫자, _ 만 가능 ").css("color", "red");
 			}else{
 				$("#emailChk").html("").css("color", "green");
 			}
