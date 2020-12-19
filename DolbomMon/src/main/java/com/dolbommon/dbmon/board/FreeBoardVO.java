@@ -10,7 +10,7 @@ public class FreeBoardVO {
 	private String writedate;
 	private String ip;
 	private String head;
-	
+	private int replyCnt;
 	private String filename1;
 	private String filename2;
 	
@@ -160,6 +160,12 @@ public class FreeBoardVO {
 	}
 	public void setHead(String head) {
 		this.head = head;
+	}
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int reply_cnt) {
+		this.replyCnt = reply_cnt;
 	}
 	public String getFilename1() {
 		return filename1;

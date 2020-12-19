@@ -111,7 +111,9 @@
 						<c:if test="${vo.step>0}">
 							➥
 						</c:if>
-						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}</a></td>
+						<a href="/dbmon/freeBoardView?no=${vo.no}">${vo.subject}&nbsp;
+						<span style="color:orange;"><c:if test="${vo.replyCnt>0}">
+						[${vo.replyCnt}]</c:if></span></a></td>
 						</div>
 					<td scope="row" align="center">${vo.userid}</td>
 					<td scope="row" align="center">${vo.writedate}</td>

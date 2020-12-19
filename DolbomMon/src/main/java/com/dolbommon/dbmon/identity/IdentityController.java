@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.board.FreeBoardVO;
 import com.dolbommon.dbmon.login.LoginVO;
 
@@ -64,7 +65,13 @@ public class IdentityController {
 		
 		vo.setUserid((String)ses.getAttribute("userid"));
 		IdentityDaoImp dao = sqlSession.getMapper(IdentityDaoImp.class);
+		
+		//암호화
+		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
+		vo.setUserpwd(encryPassword);
+			    
 		int result = dao.indentityEdit(vo);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		if(result>0) {	//회원정보 수정 성공
@@ -74,6 +81,7 @@ public class IdentityController {
 		}
 		return mav;
 	}
+	
 	//회원탈퇴 폼으로 이동
 	@RequestMapping("/withdrawForm")
 	public String withdrawform() {
