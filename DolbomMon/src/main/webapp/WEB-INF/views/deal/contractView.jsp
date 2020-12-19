@@ -950,11 +950,13 @@ var charge; //총결제금액
 			<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment=='Y'}">
 			<span class="conFont" style="color:red">결제가 완료되었습니다.</span>
 			<!-- 745행 환불버튼 -->
-			<input type="text" value="${rbVO.userid }" name="userid"/>
-			<input type="text" value="${rbVO.teacherid }" name="userid_t" />
-			<input type="text" value="${sdVO.select_date }" name="workdate"/>
-			<input type="text" name="pay"/>
-			<input class="btn btn-warning" type="button" id="refund" value="환불하기" style="margin-top:5px; margin-left:10px;" />
+			<form method="post" id="refundFrm">
+				<input type="hidden" value="${rbVO.userid }" name="userid"/>
+				<input type="hidden" value="${rbVO.teacherid }" name="userid_t" />
+				<input type="hidden" value="${sdVO.select_date }" name="workdate"/>
+				<input type="hidden" name="pay"/>
+				<input class="btn btn-warning" type="button" id="refund" value="환불하기" style="margin-top:5px; margin-left:10px;" />
+			</form>
 		</c:if>
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
 			<span class="conFont" style="color:red">선생님이 거절한 계약서입니다.</span>
