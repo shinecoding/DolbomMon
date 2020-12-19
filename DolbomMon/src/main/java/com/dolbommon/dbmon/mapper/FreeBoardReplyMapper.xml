@@ -19,4 +19,7 @@
 		delete from replyBoard where re_no=${param1}
 	</delete>
 
+	<select id="getReplyCount" resultType="int">
+		select count(*) as replyCnt from replyBoard where no=${no}
+	</select>
 </mapper>

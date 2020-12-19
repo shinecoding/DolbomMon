@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.board.FreeBoardDaoImp">
 	<select id="freeBoardList" resultType="com.dolbommon.dbmon.board.FreeBoardVO">
-		select * from (select * from (select no, head, subject, userid, hit, writedate, ref, step, lvl, filename1, filename2 
+		select * from (select * from (select no, head, subject, userid, hit, writedate, ref, step, lvl, (select count(*) from replyBoard where replyBoard.no = freeBoard.no) as replyCnt, filename1, filename2 
 		from freeBoard 
 		<choose>
 			<when test="searchKey!=null and searchWord!=null">
@@ -104,7 +104,7 @@
 	</delete>
 	
 	<update id="freeBoardEditOk" parameterType="com.dolbommon.dbmon.board.FreeBoardVO">
-		update freeBoard set subject=#{subject}, content=#{content} 	
+		update freeBoard set subject=#{subject}, content=#{content}, head=#{head}	
 			<choose>
 				<when test='filename1 neq null and !filename1.equals("")'>
 				, filename1=#{filename1}
