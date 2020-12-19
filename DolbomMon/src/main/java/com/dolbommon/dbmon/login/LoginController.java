@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
 import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.member.MemberVO;
@@ -50,7 +49,7 @@ public class LoginController {
 	@RequestMapping(value = "/loginOk", method = RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
 
-	      //암호화
+	     //암호화
 		 String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
 	      vo.setUserpwd(encryPassword);
 	    

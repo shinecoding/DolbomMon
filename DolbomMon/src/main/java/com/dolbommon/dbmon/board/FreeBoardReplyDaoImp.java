@@ -12,5 +12,6 @@ public interface FreeBoardReplyDaoImp {
 	public int replyUpdate(FreeBoardReplyVO vo);
 	//댓글 삭제
 	public int replyDelete(int re_no);
-
+	//댓글 수
+	public int getReplyCount(int no);
 }
