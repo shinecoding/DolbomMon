@@ -325,7 +325,7 @@ var value;
 						activity_type:activity_type,
 						count:count, 
 				} 
-				console.log("파람="+params);
+				console.log("파람="+params[0] + "파람="+params[1]);
 				$.ajax({
 					url:url,
 					data:params,
@@ -600,7 +600,7 @@ var value;
 				});
     	}
 	    if(${activity_type=='등하원 돕기'}){
-	    	activity_type='등하원 돕기'
+	    	activity_type='등하원돕기'
 	    	actBoxAjax(activity_type);
 	    }else if(${activity_type=='실내놀이'}){
 	    	activity_type='실내놀이'
@@ -615,7 +615,7 @@ var value;
 	    	activity_type='영어놀이'
 			    actBoxAjax(activity_type);
 		}else if(${activity_type=='가사돌봄'}){
-	    	activity_type='간단 청소'
+	    	activity_type='간단청소'
 			    actBoxAjax(activity_type);
 		}else{
 	    	testAjax(gender);
@@ -774,10 +774,10 @@ var value;
 	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>등하원 돕기
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>등하원돕기
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>책 읽기
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>책읽기
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>야외활동
@@ -795,13 +795,13 @@ var value;
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>체육놀이
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단 청소
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단청소
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>밥 챙겨주기
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>밥챙겨주기
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단 설거지
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단설거지
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>장기입주
