@@ -308,4 +308,9 @@ public class ManagmentController {
 	    session.setMaxInactiveInterval(incTime);
 	    return incTime;
 	}
+	
+	@RequestMapping("/deposit")
+	public String deposit() {
+		return "deal/deposit";
+	}
 }
