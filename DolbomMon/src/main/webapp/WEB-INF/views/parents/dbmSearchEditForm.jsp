@@ -159,7 +159,7 @@
 			console.log("wish_wage => " + getWish_wage);
 			$("#wish_wage").val(getWish_wage);
 			
-			var getContent = "${vo.content}";
+			var getContent = '${vo.content}';
 			console.log("getContent => " + getContent);
 			$("#content").val(getContent);
 			

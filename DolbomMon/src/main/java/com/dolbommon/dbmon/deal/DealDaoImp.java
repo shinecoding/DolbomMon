@@ -63,5 +63,7 @@ public interface DealDaoImp {
 	public String selectOrigin_no(String pay_no);
 	public int updateStatusP(String origin_no);
 	
+	public int insertTotalPay(String userid, String userid_t, int pay, String workdate);
+	
 }
 
