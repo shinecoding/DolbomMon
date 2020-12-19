@@ -51,6 +51,7 @@
 	    width: 310px;
 	    padding: 3px;
 	    left: 180px;
+	    float:left;
 	}
 	#offerTitle{
 		font-size: 1.1em;
@@ -61,12 +62,12 @@
 		background-color:white;
 		margin:0 auto;
 	}
-	.viewContract{
+	/* .viewContract{
 		position: relative;
 	    margin: 0 5px;
 	    top: -40px;
 	    right: -620px;
-	}
+	} */
 	.cancel{
 		position: relative;
 	    margin: 0 5px;
@@ -117,21 +118,22 @@
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
-										<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
+										<div id="imgBox" style="text-align:center;">
+											<img <c:if test="${vo.pic==null || vo.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${vo.pic!=null || vo.pic != '' }" >src="upload/${vo.pic}"</c:if>class="rounded-circle" style="height:110px; width:110px;"/>
+											</br><div style="font-size:15px;" class="badge badge-warning badge-pill ml-1" >${vo.username }</div>
+										</div>
 										<div id="offerBox" >
-											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
-											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-											<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
-											<br/><span>${vo.care_addr } </span>
-											<br/><span>12/12 시작</span>
-											<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
-											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+											<p class="card-text" style="line-height: 1.8em;">돌봄몬 아이디 | <span style="color:orange;">${vo.teacherid }</span>
+											<br/><span>등록일 | <b style="color:orange;">${vo.writedate }</b></span>
+											<br/><span>결제일 | <b style="color:orange;">${vo.pay_date }</b></span>
+											<br/><span>돌봄장소 | <b style="color:orange;">${vo.care_addr }</b></span>
+											<br/>총 예상 결제 금액 | <span style="color: orange;"> ${vo.wish_wage }원</span>
 											</p>
 										</div>
-										
-										<div style="height:1px;">
-											<input class="btn btn-warning viewContract" type="button" value="후기 작성" id="${vo.teacherid}" style="margin:0 5px;" />
+										<div style="float:right;">
+											<input class="btn btn-warning viewContract" type="button" value="후기작성" id="${vo.teacherid}" style="float:left;margin-top:10px;" />
+											<br/><input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left; margin:10px 0;" value="도망가기"/>
+											<br/><input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left;" value="도망가기"/>
 										</div>
 										<!-- 
 										<div style="height:1px;">

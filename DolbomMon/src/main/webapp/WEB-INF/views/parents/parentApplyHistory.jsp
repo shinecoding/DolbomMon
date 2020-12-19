@@ -251,7 +251,7 @@
 												<script>
 													$(function(){
 														var cb = '${list.child_birth}';
-														var child_age1;
+														var child_age1; 
 														var child_age2;
 														
 														function getAge(a){
