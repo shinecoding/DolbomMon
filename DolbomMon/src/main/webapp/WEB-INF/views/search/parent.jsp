@@ -572,7 +572,7 @@ function mapResize(){
 	<div id="btnBox" class="btn-group btn-group-toggle" data-toggle="buttons">
 	  
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
+	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1"  class="actBtnClass"/>실내놀이
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>등하원돕기
