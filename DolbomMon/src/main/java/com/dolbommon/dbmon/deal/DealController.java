@@ -13,6 +13,8 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.deal.MemberVO;
@@ -354,4 +356,38 @@ public class DealController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/reqRefund", method = RequestMethod.POST)
+	@ResponseBody
+	public int reqRefund(@RequestParam("workdate") String workdate,
+			@RequestParam("userid") String userid,
+			@RequestParam("userid_t") String userid_t,
+			@RequestParam("pay") int pay
+			) {
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		String[] workdateArr = workdate.split(", ");
+		
+		int result = 0;
+		for(int i=0;i<workdateArr.length;i++) {
+			System.out.println("날짜 출력 => " + workdateArr[i]);
+			result = dao.insertTotalPay(userid, userid_t, pay, workdateArr[i]);
+		}
+		
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -98,4 +98,9 @@
 	<update id="cancelContract">
 		update parent_list set status='X', origin_no='', teacherid='', agree='', payment=''  where job_board_no=#{no}
 	</update>
+	
+	<insert id="insertTotalPay">
+		insert into totalpay(no, userid, userid_t, pay, workdate) 
+			values(pay.nextval, #{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
 </mapper>
