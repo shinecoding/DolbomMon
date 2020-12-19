@@ -16,7 +16,7 @@
 
 		 //채팅창 오픈
 			var popupWidth = 1060;
-			var popupHeight = 656;
+			var popupHeight = 596;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
 			var popupY= (window.screen.height / 2) - (popupHeight / 2);
 			$(document).on("click",".ccBtn",function(){
