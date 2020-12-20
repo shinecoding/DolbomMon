@@ -57,6 +57,8 @@ public interface DealDaoImp {
 	//계약서의 존재유무 확인 - 돌봄몬찾기 계약서신청
 	public RecruitBoardVO checkContract(@Param("userid")String userid, @Param("teacherid")String teacherid);
 	
+	public int cancelContract2(String origin_no); 
+	
 	public com.dolbommon.dbmon.deal.MemberVO selectMemberDeal(String parent_id);
 	public int insertPayment(PaymentVO vo);
 	public int updatePayment(String pay_no);
