@@ -53,7 +53,7 @@ public class JobSearchController {
 		TeacherVO mvo = null;
 		if(ses.getAttribute("userid")==null) {
 			//로그인 안 했을 때 지도 위치 지정 >test1계정의 위치 띄워줌
-			mvo = dao.selectTTMap("sitter61");
+			mvo = dao.selectTTMap("sitter0");
 		} else {
 		mvo = dao.selectTTMap(userid); //내 위치
 		}
