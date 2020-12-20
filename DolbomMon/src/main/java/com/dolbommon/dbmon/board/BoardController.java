@@ -49,7 +49,7 @@ public class BoardController {
 	@Autowired
 	DataSourceTransactionManager transactionManager;	
 	
-	//게시판 리스트로 이동ok
+	//게시판 리스트로 이동
 	@RequestMapping("/freeBoard")
 	public ModelAndView freeBoard(FreeBoardVO vo, HttpServletRequest req) {
 		
@@ -131,7 +131,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	//게시판 글쓰기 폼으로 이동ok
+	//게시판 글쓰기 폼으로 이동
 	@RequestMapping("/freeBoardWrite")
 	public String freeBoardWrite() {
 		
@@ -247,7 +247,7 @@ public class BoardController {
         }
     }
 	
-	//게시판 글쓰기ok
+	//게시판 글쓰기
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
 	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 	
@@ -325,7 +325,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	//게시글 보기ok
+	//게시글 보기
 	@RequestMapping("/freeBoardView")
 	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
@@ -350,7 +350,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	//자유게시판 글 수정폼으로 이동ok
+	//자유게시판 글 수정폼으로 이동
 	@RequestMapping("/freeBoardEdit")
 	public ModelAndView freeBoardEdit(int no) {
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
@@ -482,7 +482,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	//자유게시판 글 삭제ok
+	//자유게시판 글 삭제
 	@RequestMapping("/freeBoardDel")
 	public ModelAndView freeBoardDel(int no, HttpSession ses) {
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
@@ -542,7 +542,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	//공지사항 게시판으로 이동ok
+	//공지사항 게시판으로 이동
 	@RequestMapping("/noticeBoard")
 	public ModelAndView noticeBoard(NoticeBoardVO vo, HttpServletRequest req) {
 		
@@ -587,14 +587,14 @@ public class BoardController {
 		return mav;
 	}
 	
-	//공지사항 글쓰기 폼으로 이동ok
+	//공지사항 글쓰기 폼으로 이동
 	@RequestMapping("/noticeBoardWrite")
 	public String noticeBoardWrite() {
 		
 		return "freeBoard/noticeBoardWrite";
 	}
 	
-	//공지사항 게시판 글쓰기ok
+	//공지사항 게시판 글쓰기
 	@RequestMapping(value="/noticeBoardWriteOk", method=RequestMethod.POST)
 	public ModelAndView noticeBoardWriteOk(NoticeBoardVO vo, HttpServletRequest req, HttpSession ses) {
 	
@@ -731,7 +731,7 @@ public class BoardController {
 		return mav;
 	}
 		
-	//공지사항 게시판 글 삭제ok
+	//공지사항 게시판 글 삭제
 	@RequestMapping("/noticeBoardDel")
 	public ModelAndView noticeBoardDel(int no, HttpSession ses) {
 		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
@@ -746,7 +746,7 @@ public class BoardController {
 		return mav;
 	}
 		
-	//공지사항 글 수정폼으로 이동ok
+	//공지사항 글 수정폼으로 이동
 	@RequestMapping("/noticeBoardEdit")
 	public ModelAndView noticeBoardEdit(int no) {
 		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);

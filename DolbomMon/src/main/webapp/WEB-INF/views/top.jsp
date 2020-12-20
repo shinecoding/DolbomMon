@@ -303,7 +303,7 @@ EDIT ON
 			</c:if>
 			<c:if test="${who =='P'}">
 	        <li><a href="mypage" class="spread-underline introcss12" style="background-color:#ffc107;">마이페이지</a></li>
-	        <li><a href="dbmSearchWriteForm" class="spread-underline introcss12" style="background-color:#ffc107;">선생님구하기</a></li>
+	        <li><a href="dbmSearchWriteForm" class="spread-underline introcss12" style="background-color:#ffc107;">선생님 구하기</a></li>
 	        <li><a href="/dbmon/identityForm" class="spread-underline introcss12" style="background-color:#ffc107;">계정관리</a></li>
 	        </c:if>
 
