@@ -23,50 +23,50 @@
 		font-size: 30px;
 	}
    #userBox{
-      margin: 0 auto;
-      width: 800px;
-      float: left;
+		margin: 0 auto;
+		width: 800px;
+		float: left;
    }
    #typeBox{
-      float: left;
-      margin-left: 140px;
-      width: 230px;
-      padding: 5px;
+		float: left;
+		margin-left: 140px;
+		width: 230px;
+		padding: 5px;
    }
    #catego{
-      float: right;
-      margin-right: 100px;
-      width: 230px;
-      padding: 5px;
+		float: right;
+		margin-right: 100px;
+		width: 230px;
+		padding: 5px;
    }
    .categoDiv{
-      width: 300px;
-      padding: 5px;
+		width: 300px;
+		padding: 5px;
    }
    .typeDiv{
-      position: relative;
-      width: 300px;
-      padding: 5px;
-      color: gray;
+		position: relative;
+		width: 300px;
+		padding: 5px;
+		color: gray;
    }
    #space{
-      margin: 0 auto;   
-      width: 800px;
-      height: 15px;
-      background-color: gold;
-      position: absolute;
-      top: 480px;
+		margin: 0 auto;   
+		width: 800px;
+		height: 15px;
+		background-color: gold;
+		position: absolute;
+		top: 480px;
    }
    .list-group1234{
-      position: absolute;
-      top: 494px;
-      width: 800px;
+		position: absolute;
+		top: 494px;
+		width: 800px;
    }
    #logoLink{
-      padding: 30px;
-      width: 50%;
-      display: block;
-      margin: 0 auto;
+		padding: 30px;
+		width: 50%;
+		display: block;
+		margin: 0 auto;
    }
    .ml-1, .mx-1 {
         margin-left: 10px!important;
