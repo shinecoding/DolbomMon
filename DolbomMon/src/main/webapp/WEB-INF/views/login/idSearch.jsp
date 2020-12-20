@@ -37,14 +37,14 @@ $(function(){
 	
 	//데이터 입력유무 확인
 	$("#searchFrm").submit(function(){
+
 		if($("#username").val()==""){
 			alert("가입하신 계정의 이름을 입력하세요.");
 			$("#username").focus();
-			return false;
-			
+			return false;		
 		}
 		if($("#birth").val()==""){
-			alert("생년월일을 입력하세요.");
+			alert("가입하신 계정의 생년월일을 입력하세요.");
 			$("#birth").focus();
 			return false;
 		}
@@ -52,6 +52,16 @@ $(function(){
 			alert("가입하신 계정의 전화번호를 입력하세요.");
 			$("#tel1").focus();
 			return false;	
+		}
+		if ($("#birth").val().length<8) {
+			alert("생년월일 여덟자리를 입력해주세요.");
+			$("#birth").focus();
+			return false;
+		}
+		if ($("#tel1").val().length<10) {
+			alert("전화번호를 확인해주세요.");
+			$("#tel1").focus();
+			return false;
 		}
 		return true;
 	});
