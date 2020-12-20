@@ -307,6 +307,7 @@ public class DealController {
 	
 	@RequestMapping("/paymentSuccess")
 	public ModelAndView paymentSuccess(HttpSession ses, HttpServletRequest req) {
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
 		String parent_id = (String)ses.getAttribute("userid");
 		String pay_id = req.getParameter("pay_id");
 		String merchant_id = req.getParameter("merchant_id");
@@ -325,7 +326,7 @@ public class DealController {
 		pvo.setApply_num(apply_num);
 		pvo.setTeacher_id(teacherid);
 		pvo.setPay_no(pay_no);
-		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+
 		
 		com.dolbommon.dbmon.deal.MemberVO mvo = dao.selectMemberDeal(parent_id);
 		pvo.setParent_name(mvo.getUsername());
@@ -342,6 +343,35 @@ public class DealController {
 		if(origin_no!=pay_no && !origin_no.equals(pay_no)) {
 			dao.updateStatusP(origin_no); 
 		}
+		String workdate;
+		String userid;
+		String userid_t;		
+		int pay;
+		String time_type = (String)req.getParameter("time_type");
+		System.out.println("time_type"+time_type);
+		if(time_type=="S" || time_type.equals("S")) {
+		workdate = (String)req.getParameter("workdate");
+		userid = (String)req.getParameter("userid");
+		userid_t = (String)req.getParameter("userid_t");
+		pay = Integer.parseInt(req.getParameter("pay"));
+		System.out.println(userid);
+		System.out.println(userid_t);
+		System.out.println(pay);
+		System.out.println(time_type);
+		
+		String[] workdateArr = workdate.split(", ");
+		System.out.println(workdateArr[0]);
+		System.out.println(userid);
+		System.out.println(userid_t);
+		System.out.println(pay);
+		int pay_no2 = Integer.parseInt(pay_no);
+		int result = 0;
+		for(int i=0;i<workdateArr.length;i++) {
+			System.out.println("날짜 출력 => " + workdateArr[i]);
+			result = dao.insertTotalPay(userid, userid_t, pay, workdateArr[i], pay_no2);
+			}
+		}
+		
 		//origin_no = dao.selectOrigin_no(pay_no);
 		//dao.updatePayment(origin_no);
 		//dao.updateStatusP(origin_no); 
@@ -376,7 +406,7 @@ public class DealController {
 		int result = 0;
 		for(int i=0;i<workdateArr.length;i++) {
 			System.out.println("날짜 출력 => " + workdateArr[i]);
-			result = dao.insertTotalPay(userid, userid_t, pay, workdateArr[i]);
+			//result = dao.insertTotalPay(userid, userid_t, pay, workdateArr[i]);
 		}
 		
 		return result;
