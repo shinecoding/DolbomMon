@@ -127,13 +127,12 @@
 											<br/><span>등록일 | <b style="color:orange;">${vo.writedate }</b></span>
 											<br/><span>결제일 | <b style="color:orange;">${vo.pay_date }</b></span>
 											<br/><span>돌봄장소 | <b style="color:orange;">${vo.care_addr }</b></span>
-											<br/>총 예상 결제 금액 | <span style="color: orange;"> ${vo.wish_wage }원</span>
+											<br/>시급 | <span style="color: orange;"> ${vo.wish_wage }원</span>
 											</p>
 										</div>
 										<div style="float:right;">
-											<input class="btn btn-warning viewContract" type="button" value="후기작성" id="${vo.teacherid}" style="float:left;margin-top:10px;" />
-											<br/><input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left; margin:10px 0;" value="도망가기"/>
-											<br/><input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left;" value="도망가기"/>
+											<input type="button" class="btn btn-outline-warning" style="float:left;margin-top:10px; " value="돌봄몬 프로필 보기"/><br/>
+											<input class="btn btn-outline-warning viewContract" type="button" value="후기작성" id="${vo.teacherid}" style="float:right;margin:10px 0;" />
 										</div>
 										<!-- 
 										<div style="height:1px;">

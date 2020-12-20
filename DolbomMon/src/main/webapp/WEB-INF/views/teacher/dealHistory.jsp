@@ -118,11 +118,6 @@
 											<br/>시급 | <span style="color: orange;">${vo.wish_wage }원</span>
 											</p>
 										</div>
-										<div style="float:right;">
-											<input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left; margin-top:10px;" value="도망가기"/>
-											<br/><input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left; margin:10px 0;" value="도망가기"/>
-											<br/><input type="button" class="btn" style="background-color:white;border:1px solid orange;color:gray; float:left;" value="도망가기"/>
-										</div>
 										<!-- 
 										<div style="height:1px;">
 											<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${vo.job_board_no}" style="margin:0 5px;" />
