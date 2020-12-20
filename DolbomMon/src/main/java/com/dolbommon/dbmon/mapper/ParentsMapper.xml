@@ -63,7 +63,7 @@
 	
 	</select>
 	<select id="parentDealHistory" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.payment, p.teacherid, p.job_board_no ,p.userid ,p.care_addr ,p.time_type ,p.pw_activity ,p.wish_wage ,p.consultation ,p.wish_age ,p.wish_gender ,p.content ,to_char(p.writedate, 'YYYY-MM-DD HH:MI') as writedate ,p.status 
+		select p.review_status, p.payment, p.teacherid, p.job_board_no ,p.userid ,p.care_addr ,p.time_type ,p.pw_activity ,p.wish_wage ,p.consultation ,p.wish_age ,p.wish_gender ,p.content ,to_char(p.writedate, 'YYYY-MM-DD HH:MI') as writedate ,p.status 
 			,p.agree ,p.who ,p.reject ,p.origin_no ,p.payment ,a.pay_no ,a.parent_id ,a.teacher_id , a.refund_status, a.reimburse, to_char(a.pay_date, 'YYYY-MM-DD HH:MI') as pay_date, t.pic as pic, m.username, p.charge
 	        from parent_list p join payment a on p.job_board_no=a.pay_no join teacher t on p.teacherid=t.userid join member m on m.userid = p.teacherid
 			where payment='Y' and p.userid=#{param1} and agree = 'Y'  and status = 'C' order by a.pay_date desc
