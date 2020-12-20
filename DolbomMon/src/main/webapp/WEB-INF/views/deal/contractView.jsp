@@ -952,9 +952,7 @@ var charge; //총결제금액
 			<input class="btn btn-warning cancelBtn" type="button" value="계약서 취소" id="" style="margin-left:10px;" />
 			
 		</c:if>
-			<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment=='Y'}">
-			<span class="conFont" style="color:red">결제가 완료되었습니다.</span>
-			<!-- 745행 환불버튼 -->
+					<!-- 745행 환불버튼 -->
 			<form method="post" id="refundFrm">
 				<input type="hidden" value="${rbVO.userid }" name="userid"/>
 				<input type="hidden" value="${rbVO.teacherid }" name="userid_t" />
@@ -962,6 +960,9 @@ var charge; //총결제금액
 				<input type="hidden" name="pay"/>
 				<input class="btn btn-warning" type="button" id="refund" value="환불하기" style="margin-top:5px; margin-left:10px;" />
 			</form>
+			<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment=='Y'}">
+			<span class="conFont" style="color:red">결제가 완료되었습니다.</span>
+
 		</c:if>
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
 			<span class="conFont" style="color:red">선생님이 거절한 계약서입니다.</span>
