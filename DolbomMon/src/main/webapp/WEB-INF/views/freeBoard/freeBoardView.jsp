@@ -99,8 +99,8 @@
 					url: url,
 					data: params,
 					success: function(result){
-						replyListSelect();
 						replyCount();
+						replyListSelect();
 					}, error: function(){
 						console.log("댓글 삭제 에러 발생");
 					}				

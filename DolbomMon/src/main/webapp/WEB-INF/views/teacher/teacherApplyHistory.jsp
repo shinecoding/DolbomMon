@@ -296,10 +296,18 @@
 											<c:if test="${list2.agree=='Y' }">
 												<span style="color:orange" class="msg" id="msg">제안을 수락하였습니다.</span>
 											</c:if>
+											<c:if test="${list2.agree=='N' }">
+												<span style="color:red" class="msg" id="msg">제안을 거절하였습니다.</span>
+											</c:if>
 											<!-- <input class="btn btn-warning cancel" type="button" value="거절" id="cancel" style="margin:0 5px;" /> -->
 										</div>
 									</div>
+								<c:if test="${list2.agree!='N' }">
 								<div class="card-footer btn" onclick="contractOpen('${list2.job_board_no}', '${list2.teacherid }')">제안서 보기</div>
+								</c:if>
+								<c:if test="${list2.agree=='N' }">
+								<div class="card-footer btn" style="">거절한 제안서입니다.</div>
+								</c:if>
 								</div>
 							</div>
 						</c:forEach>
