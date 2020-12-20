@@ -64,7 +64,7 @@
 	    top: 0px;
 	    right: 0px;
 	}
-	#noneEvent{
+	#specificDate{
 		pointer-events: none;
 	}
 	
@@ -865,7 +865,7 @@
 	      			<span style="color:orange;">아래 표시된 날짜만 돌봐주세요.</span>
 	      		</c:if>
 	      	</li>
-      	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;" id="noneEvent">
+      	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;">
       		<c:if test="${rbVO.time_type=='S' }" >
 				<div id="specificDate">
 					

@@ -123,6 +123,7 @@
   <textarea class="form-control" placeholder="돌봄 선생님에 대한 후기를 남겨주세요" id="review_content" name="review_content"></textarea>
 </div><br/>
 	<input type="hidden" name="userid" value="${userid}"/>
+	<input type="hidden" name="no" value="${no}"/>
 <div>
 <input type="submit" class="btn btn-warning" id="commentConfirm" value="작성하기"/>
 </div>

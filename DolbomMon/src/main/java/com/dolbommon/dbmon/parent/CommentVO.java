@@ -9,7 +9,14 @@ public class CommentVO {
 	private String review_date;
 	private String pic;
 	private String addr;
+	private String review_status;
 	
+	public String getReview_status() {
+		return review_status;
+	}
+	public void setReview_status(String review_status) {
+		this.review_status = review_status;
+	}
 	public String getUserid() {
 		return userid;
 	}
