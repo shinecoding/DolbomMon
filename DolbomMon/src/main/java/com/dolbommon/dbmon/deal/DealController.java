@@ -335,10 +335,15 @@ public class DealController {
 		
 		dao.updatePayment(pay_no);
 		dao.insertPayment(pvo);
+		System.out.println("원글번호"+origin_no);
+		System.out.println("현글번호"+pay_no);
+		if(origin_no!=pay_no && !origin_no.equals(pay_no)) {
+			dao.updateStatusP(origin_no); 
+		}
 		//origin_no = dao.selectOrigin_no(pay_no);
 		//dao.updatePayment(origin_no);
-		//dao.updateStatusP(origin_no);
-		
+		//dao.updateStatusP(origin_no); 
+		//오리진넘버와 job번호가 같으면 P로 안바꾸고. 다르면 job을 P로 바꾸고
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mss", "결제 성공하였습니다.");
 		mav.setViewName("deal/contractResult");
