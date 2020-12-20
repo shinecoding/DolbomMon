@@ -11,61 +11,62 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
    .container{
-      width: 800px;
-      margin: 0 auto;   
+		width: 800px;
+		margin: 0 auto;
+		min-height: 530px; 
    }
-   #topidenty123{
-      margin: 15px;
-      padding: 15px;
-      text-align: center;
-      font-size: 30px;
-      position: relative;
-   }
+	#topidenty123{
+		margin: 15px;
+		margin-top: 40px;
+		padding: 15px;
+		text-align: center;
+		font-size: 30px;
+	}
    #userBox{
-      margin: 0 auto;
-      width: 800px;
-      float: left;
+		margin: 0 auto;
+		width: 800px;
+		float: left;
    }
    #typeBox{
-      float: left;
-      margin-left: 140px;
-      width: 230px;
-      padding: 5px;
+		float: left;
+		margin-left: 140px;
+		width: 230px;
+		padding: 5px;
    }
    #catego{
-      float: right;
-      margin-right: 100px;
-      width: 230px;
-      padding: 5px;
+		float: right;
+		margin-right: 100px;
+		width: 230px;
+		padding: 5px;
    }
    .categoDiv{
-      width: 300px;
-      padding: 5px;
+		width: 300px;
+		padding: 5px;
    }
    .typeDiv{
-      position: relative;
-      width: 300px;
-      padding: 5px;
-      color: gray;
+		position: relative;
+		width: 300px;
+		padding: 5px;
+		color: gray;
    }
    #space{
-      margin: 0 auto;   
-      width: 800px;
-      height: 15px;
-      background-color: gold;
-      position: absolute;
-      top: 480px;
+		margin: 0 auto;   
+		width: 800px;
+		height: 15px;
+		background-color: gold;
+		position: absolute;
+		top: 480px;
    }
    .list-group1234{
-      position: absolute;
-      top: 494px;
-      width: 800px;
+		position: absolute;
+		top: 494px;
+		width: 800px;
    }
    #logoLink{
-      padding: 30px;
-      width: 50%;
-      display: block;
-      margin: 0 auto;
+		padding: 30px;
+		width: 50%;
+		display: block;
+		margin: 0 auto;
    }
    .ml-1, .mx-1 {
         margin-left: 10px!important;
@@ -111,8 +112,6 @@
       <a href="#" class="list-group-item list-group-item-action"><b>돌봄몬 서비스 이용동의</b></a>
    </div>
 </div>
-<div id="footer123123">
-
-</div>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>

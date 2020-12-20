@@ -24,7 +24,7 @@
 <script>
 $(function(){
 	
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 		// 팝업 창 크기를 HTML 크기에 맞추어 자동으로 크기를 조정하는 함수.
 		var strWidth;
 		var strHeight;
@@ -49,30 +49,29 @@ $(function(){
 		
 		//resize 
 		window.resizeTo( strWidth-110, strHeight-20 );
-	});
+	}); */
 	//$('#sub').click(function() { $('#memoFrom').submit(); });
 
 	
-	$('#memoFrom').submit(
-		function ajaxMemo(){	
-			var params = $("#memoFrom").serialize();
-			$.ajax({
-				url:"/dbmon/memoInsert",
-				data:params,
-				success : function(){
-			    	opener.location.reload();
-			        window.close();
-				}
-			})
-		}
-		)
+	$('#memoFrom').submit(function(){
+		var params = $("#memoFrom").serialize();
+		$.ajax({
+			url:"/dbmon/memoInsert",
+			data:params,
+			success : function(){
+		    	opener.location.reload();
+		        window.close();
+			}
+		})
+		return false;
+	});
 		
 });
 </script>
 </head>
 <body>
 	<div class="mainP" style="width:450px; margin:0 auto;">
-		<form method="post" name="memoForm" id="memoFrom" action="/dbmon/memoInsert">
+		<form method="post" name="memoForm" id="memoFrom">
 			<input type="hidden" name="no" value="${no }"/>
 			<textarea name="memo" class="form-control" style="width:100%; height:300px;" placeholder="회원 메모입니다.">${memo}</textarea>
 			<input type="submit" id="sub" value="메모 등록" class="btn btn-info" style="width:100%">

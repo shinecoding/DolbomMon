@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
 import com.dolbommon.dbmon.PwdSha256;
 import com.dolbommon.dbmon.member.MemberVO;
@@ -50,15 +49,15 @@ public class LoginController {
 	@RequestMapping(value = "/loginOk", method = RequestMethod.POST)
 	public ModelAndView loginOk(LoginVO vo, HttpSession ses, HttpServletRequest req, HttpServletResponse res) {
 
-	      //암호화
-		 String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
-	      vo.setUserpwd(encryPassword);
+	    //암호화
+		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
+	    vo.setUserpwd(encryPassword);
 	    
 		//기존 세션값 제거	
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	
-
 		}
+		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
@@ -105,8 +104,10 @@ public class LoginController {
 		Cookie cookie = new Cookie("loginCookie", null);
 		cookie.setMaxAge(0);
 		res.addCookie(cookie);
-		ses.invalidate();
 		
+		if(ses.getAttribute("logStatus")!=null) {
+			ses.invalidate();
+		}
 		
 		return "home";
 	}
@@ -125,12 +126,6 @@ public class LoginController {
 		vo.setUsername((String) req.getParameter("username"));
 		vo.setBirth((String) req.getParameter("birth"));
 		vo.setTel1((String) req.getParameter("tel1"));
-
-		StringBuffer sb1 = new StringBuffer(vo.getTel1());
-		StringBuffer sbTel = sb1.insert(3, "-");
-		sbTel = sb1.insert(8, "-");
-		String strTel = sbTel.toString(); // 010-1111-2222
-		vo.setTel1(strTel);
 
 		StringBuffer sb2 = new StringBuffer(vo.getBirth());
 		StringBuffer sbBirth = sb2.insert(4, "-");
@@ -155,12 +150,12 @@ public class LoginController {
 	// 임시비밀번호 발급 및 변경
 	@RequestMapping(value = "/temporaryPwd", method = RequestMethod.POST)
 	public ModelAndView temporaryPwd(LoginVO vo, HttpServletRequest req) throws AddressException, MessagingException {
-
-		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10));
-		vo.setUsername((String) req.getParameter("username"));
-		vo.setBirth((String) req.getParameter("birth"));
-		vo.setTel1((String) req.getParameter("tel1"));
-		vo.setEmail((String) req.getParameter("email"));
+		
+		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 6));
+		vo.setUsername((String)req.getParameter("username"));
+		vo.setBirth((String)req.getParameter("birth"));
+		vo.setTel1((String)req.getParameter("tel1"));
+		vo.setEmail((String)req.getParameter("email"));
 
 		StringBuffer sbBirth = new StringBuffer(vo.getBirth());
 		sbBirth.delete(10, 22);
@@ -169,6 +164,8 @@ public class LoginController {
 
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		int result = dao.pwdChange(vo);
+		String userEmail = vo.getEmail();
+		
 		ModelAndView mav = new ModelAndView();
 
 		// 메일 보내기
@@ -178,9 +175,10 @@ public class LoginController {
 		int port = 465; // 포트번호
 
 		// 메일 내용
-		String recipient = "seulgi4229@naver.com"; // 받는 사람의 이메일 주소
-		String subject = "맘시터가 보내드리는 임시 비밀번호입니다."; // 메일 제목
-		String body = "임시 비밀번호는 " + vo.getUserpwd() + "입니다.\n임시 비밀번호로 로그인 해주세요."; // 메일 내용
+		String recipient = userEmail; // 받는 사람의 이메일 주소
+		String subject = "돌봄몬이 보내드리는 임시 비밀번호입니다."; // 메일 제목
+		String body = "돌봄몬이 보내드리는 임시 비밀번호입니다.\n임시 비밀번호는 " + vo.getUserpwd() + "입니다.\n임시 비밀번호로 로그인 해주세요."
+				+ "\n로그인 하신 후에는 비밀번호를 변경해주세요."; // 메일 내용
 
 		Properties props = System.getProperties();
 
@@ -211,7 +209,12 @@ public class LoginController {
 		Transport.send(mimeMessage); // javax.mail.Transport.send() 이용
 
 		//////////////////////////////////////////////////////
-
+		
+		//암호화
+		String encryPassword = PwdSha256.encrypt(vo.getUserpwd());
+		vo.setUserpwd(encryPassword);
+		dao.changePwd(vo);
+		
 		if (result > 0) { // 성공
 			mav.setViewName("login/temporaryPwdResult");
 		} else { // 실패

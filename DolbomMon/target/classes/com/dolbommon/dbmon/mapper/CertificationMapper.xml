@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.certification.CertificationDaoImp">
 <select id="findId" parameterType="com.dolbommon.dbmon.certification.CertificationVO" resultType="int">
-	select count(#{userid}) from certification
+	select count(userid) from certification where userid = #{userid}
 </select>
 <insert id="insertIdenti" parameterType="com.dolbommon.dbmon.certification.CertificationVO">
 	insert into certification(userid, no, identi, identi_date, identi_addr, identi_status) values(#{userid}, certi_sq.nextval, #{identi}, #{identi_date}, #{identi_addr}, 'S')

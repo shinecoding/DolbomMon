@@ -86,6 +86,9 @@
 					<c:if test="${cvo.identi_status=='Y'}">
 					<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
+					<c:if test="${cvo.identi_status=='X'}">
+					<button class="btn btn-warning float-right">보충요청</button>
+					</c:if>
 				</form>
 				</div>
 				
@@ -130,6 +133,9 @@
 					</c:if>
 					<c:if test="${cvo.school_status=='Y'}">
 						<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
+					<c:if test="${cvo.school_status=='X'}">
+					<button class="btn btn-warning float-right">보충요청</button>
 					</c:if>
 				</form>
 				</div>
@@ -217,6 +223,9 @@
 					<c:if test="${cvo.crime_status=='Y'}">
 						<div class="badge badge-secondary float-right p-3">인증완료</div>
 					</c:if>
+					<c:if test="${cvo.crime_status=='X'}">
+					<button class="btn btn-warning float-right">보충요청</button>
+					</c:if>
 				</form>
 				</div>
 			</div>
@@ -257,6 +266,9 @@
 					</c:if>
 					<c:if test="${cvo.privacy_status=='Y'}">
 						<div class="badge badge-secondary float-right p-3">인증완료</div>
+					</c:if>
+					<c:if test="${cvo.privacy_status=='X'}">
+					<button class="btn btn-warning float-right">보충요청</button>
 					</c:if>
 				</form>
 				</div>

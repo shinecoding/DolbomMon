@@ -13,6 +13,8 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dolbommon.dbmon.deal.MemberVO;
@@ -313,6 +315,7 @@ public class DealController {
 		String teacherid = req.getParameter("teacherid");
 		String pay_no = req.getParameter("pay_no");
 		String origin_no = req.getParameter("origin_no");
+		String charge = req.getParameter("charge");
 		
 		PaymentVO pvo = new PaymentVO();
 		pvo.setParent_id(parent_id);
@@ -330,13 +333,19 @@ public class DealController {
 		pvo.setEmail(mvo.getEmail());
 		System.out.println("어플라이 넘="+pvo.getApply_num());
 		System.out.println("이멜="+pvo.getEmail());
-		
+		System.out.println("결제금액 총액"+charge);
 		dao.updatePayment(pay_no);
+		dao.updatePayCharge(pay_no, charge);
 		dao.insertPayment(pvo);
+		System.out.println("원글번호"+origin_no);
+		System.out.println("현글번호"+pay_no);
+		if(origin_no!=pay_no && !origin_no.equals(pay_no)) {
+			dao.updateStatusP(origin_no); 
+		}
 		//origin_no = dao.selectOrigin_no(pay_no);
 		//dao.updatePayment(origin_no);
-		//dao.updateStatusP(origin_no);
-		
+		//dao.updateStatusP(origin_no); 
+		//오리진넘버와 job번호가 같으면 P로 안바꾸고. 다르면 job을 P로 바꾸고
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mss", "결제 성공하였습니다.");
 		mav.setViewName("deal/contractResult");
@@ -354,4 +363,38 @@ public class DealController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/reqRefund", method = RequestMethod.POST)
+	@ResponseBody
+	public int reqRefund(@RequestParam("workdate") String workdate,
+			@RequestParam("userid") String userid,
+			@RequestParam("userid_t") String userid_t,
+			@RequestParam("pay") int pay
+			) {
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		String[] workdateArr = workdate.split(", ");
+		
+		int result = 0;
+		for(int i=0;i<workdateArr.length;i++) {
+			System.out.println("날짜 출력 => " + workdateArr[i]);
+			result = dao.insertTotalPay(userid, userid_t, pay, workdateArr[i]);
+		}
+		
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -27,25 +27,6 @@
 
 	
 	<!-- 액션 캡슐 버튼 -->
-
-	.btn1{
-	    color: #434343;
-	    padding: 10px 14px;
-	    border-radius: 16px;
-	    border: 1px solid #ddd;
-	    margin: 5px 6px 10px 0;
-	    display: inline-block;
-	    cursor: pointer;
-	    font-size: 13px;
-	    font-weight: 400;
-	    line-height: 12px;
-	    text-align: center;
-	    width:90px;
-	    background-color:white;
-	    border-color:orange;
-	    font-family: 'Jua', sans-serif;
-	}
-	
 	#actBox{
 	width: 100%; 
 	white-space: nowrap; 
@@ -55,24 +36,12 @@
   	font-family: 'Jua', sans-serif;
   	
   	}
-  	
-  	
-
-	 .list-group-item {
-	 	width:1000px;
-	 	margin:10px auto;
-	 }
-	   
 
 
 	 input[type=text]{
 	  width:100%;
 	 }
-	 /*#mapBox{
-	 width:100%;
-	 height: 610px;
-	   display:none;
-	 }*/
+	 
 	#map{
 	width:100%;
 	height:500px;
@@ -82,13 +51,10 @@
 	}
 	
 	.card>.profilepic {
-	width:100%; 
+	width:99%; 
 	height:300px;
 	border-top-left-radius:20px; 
 	border-top-right-radius:20px;
-	cursor:pointer;
-	}
-	.card{
 	cursor:pointer;
 	}
 	
@@ -101,6 +67,7 @@
 	float:left; 
 	display:block;
 	font-family: 'Jua', sans-serif;
+	cursor:pointer;
 	}
 	.iconColor i{
 	color:orange;
@@ -115,6 +82,11 @@
 	height:30px;
 	width:30px;
 	float:right;
+	}
+	.loc{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
 	}
 	
 </style>
@@ -287,11 +259,14 @@ var value;
 							}
 							if(vo.identi_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-							} else if(vo.license_status == "Y"){
+							}
+							if(vo.license_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-							} else if(vo.school_status == "Y"){
+							}
+							if(vo.school_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-							} else if(vo.crime_status == "Y"){
+							}
+							if(vo.crime_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 							}
 							
@@ -325,7 +300,7 @@ var value;
 						activity_type:activity_type,
 						count:count, 
 				} 
-				console.log("파람="+params);
+				console.log("파람="+params[0] + "파람="+params[1]);
 				$.ajax({
 					url:url,
 					data:params,
@@ -385,11 +360,14 @@ var value;
 								}
 								if(vo.identi_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-								} else if(vo.license_status == "Y"){
+								} 
+								if(vo.license_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-								} else if(vo.school_status == "Y"){
+								} 
+								if(vo.school_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-								} else if(vo.crime_status == "Y"){
+								}
+								if(vo.crime_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 								}
 								
@@ -450,7 +428,8 @@ var value;
 						tag += '<span class="ml-2" style="font-size:0.7em">';
 						if(vo.last_edit>525600){
 							tag += Math.round(vo.last_edit/525600)+'년';
-						} else if(vo.last_edit>43200){
+						} 
+						if(vo.last_edit>43200){
 							tag += Math.round(vo.last_edit/43200) +'달';
 						} else if(vo.last_edit>1440){
 							tag += Math.round(vo.last_edit/1440) +'일';
@@ -483,11 +462,14 @@ var value;
 						}
 						if(vo.identi_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-						} else if(vo.license_status == "Y"){
+						}
+						if(vo.license_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-						} else if(vo.school_status == "Y"){
+						}
+						if(vo.school_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-						} else if(vo.crime_status == "Y"){
+						}
+						if(vo.crime_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 						}
 						
@@ -579,11 +561,14 @@ var value;
 							}
 							if(vo.identi_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-							} else if(vo.license_status == "Y"){
+							} 
+							if(vo.license_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-							} else if(vo.school_status == "Y"){
+							}
+							if(vo.school_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-							} else if(vo.crime_status == "Y"){
+							}
+							if(vo.crime_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 							}
 							
@@ -600,7 +585,7 @@ var value;
 				});
     	}
 	    if(${activity_type=='등하원 돕기'}){
-	    	activity_type='등하원 돕기'
+	    	activity_type='등하원돕기'
 	    	actBoxAjax(activity_type);
 	    }else if(${activity_type=='실내놀이'}){
 	    	activity_type='실내놀이'
@@ -615,7 +600,7 @@ var value;
 	    	activity_type='영어놀이'
 			    actBoxAjax(activity_type);
 		}else if(${activity_type=='가사돌봄'}){
-	    	activity_type='간단 청소'
+	    	activity_type='간단청소'
 			    actBoxAjax(activity_type);
 		}else{
 	    	testAjax(gender);
@@ -740,7 +725,7 @@ var value;
     <option selected>돌봄 유형을 선택하시면, 맞춤 돌봄몬을 보여드려요</option>
     
     <optgroup label="2~10세 정기 돌봄"></optgroup>
-    <option value="등하원">주 5일 등하원</option>
+    <option value="등하원">주5일등하원</option>
     <option value="놀이/학습">놀이/학습</option>
     
     
@@ -771,13 +756,13 @@ var value;
 
    <div id="actBox" class="btn-group btn-group-toggle" data-toggle="buttons">
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1" />실내놀이
+	  	<input type="radio" name="options"  data-toggle="button" autocomplete="off"  id="act1"  class="actBtnClass"/>실내놀이
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>등하원 돕기
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>등하원돕기
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>책 읽기
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>책읽기
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>야외활동
@@ -795,13 +780,13 @@ var value;
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>체육놀이
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단 청소
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단청소
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>밥 챙겨주기
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>밥챙겨주기
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
-	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단 설거지
+	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>간단설거지
 	  </label>
 	  <label class="btn btn-outline-warning btn-sm rounded-pill pb-1" style="padding:13px; padding-top:7px; color: black;">
 	  	<input type="radio" name="options" data-toggle="button" autocomplete="off" id="act2" class="actBtnClass"/>장기입주

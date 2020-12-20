@@ -104,6 +104,7 @@ var charge; //총결제금액
 							tag += "<input type='hidden' name='teacherid' value='${teacherid}'>";//카드승인번호
 							tag += "<input type='hidden' name='pay_no' value='${rbVO.job_board_no}' >"; 
 							tag += "<input type='hidden' name='origin_no' value='${rbVO.origin_no}' >"; 
+							tag += "<input type='hidden' name='charge' value='"+$("#totalPay").text()+"' >"; 
 							tag += "</form>";
 						$("#hiddenDiv").html(tag);
 						hiddenForm.submit();
@@ -634,6 +635,8 @@ var charge; //총결제금액
 		console.log("주 => " + weeek);
 		console.log("지불 예상 금액 => " + (endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
 		$("#charge").val((endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
+		$("#totalPay").html((endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
+		
 		console.log("두 날짜 사이의 일 수 => " + edl);
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
@@ -694,9 +697,14 @@ var charge; //총결제금액
 			var money = "${rbVO.wish_wage}";
 			console.log("시급 => " + money);
 			console.log("일할 날의 수 => " + selectedDatelength);
+			var ildang = hour*money;
+			$("input[name=pay]").val(ildang);
+			console.log("일당 1당=> " + ildang);
+			
 			charge = money * hour * selectedDatelength;
 			console.log("예상 결제 금액 => " + charge);
 			$("#charge").val(charge);
+			$("#totalPay").html(charge);
 			console.log("sdsdsd sd => " + sd);
 			
 			$(function(){
@@ -739,10 +747,43 @@ var charge; //총결제금액
 		//////////////////////////////////////////////////////////////////////////
 		
 	});
-
+	
+	$(function(){
+		
+		// 환불하기 버튼 클릭 시
+		$("#refund").click(function(){
+			var refundqna = confirm("정말 환불하시겠습니까?");
+			if(refundqna){
+				var time_type = "${rbVO.time_type}";
+				console.log("time_type => " + time_type);
+				if(time_type=='S'){
+					console.log("특정날에만 환불 버튼 클릭 => ");
+					params = $("#refundFrm").serialize();
+					$.ajax({
+						url : "reqRefund",
+						type : 'post',
+						data : params,
+						success:function(result){
+							if(result > 0){
+								alert("환불 요청이 완료되었습니다.");
+							}else {
+								console.log("에러발생");
+							}
+						}, error:function(e){
+							console.log(e);
+						}
+					});
+				}else {
+					console.log("정기적으로 환불 버튼 클릭 => ");
+				}
+			}
+		});
+		
+	});
 
 	
-	
+	console.log("dddddddddddd"+$("#charge").val());
+	console.log("dddddddddddd"+charge);
 </script>
 </head>
 <body>
@@ -762,12 +803,13 @@ var charge; //총결제금액
          <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span id="jobNo" class="ml-2">${rbVO.job_board_no }</span></li>
    </ul>
    </div>
+      <!-- 
    <br/>
    <ul class="list-group list-group-horizontal-sm">
          <li class="list-group-item col-6" style="text-align:center"><i class="fas fa-search mr-2"></i>지원자 수<br/><div>${rbVO.tcnt }</div></li>
          <li class="list-group-item col-6" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/>3일 전</li>
    </ul>
-      
+       -->
     <h5>신청 내용</h5>
     <li class="list-group-item p-5" style="text-align:center"><c:if test="${rbVO.content==null || rbVO.content=='' }" >아직 작성하지 않았습니다.</c:if><c:if test="${rbVO.content!=null || rbVO.content!='' }">${rbVO.content }</c:if></li>
     <h5>돌봄 장소</h5>
@@ -888,12 +930,6 @@ var charge; //총결제금액
          </ul>
       </li> 
       
-      
-        <h5>그 외에 요청사항</h5>
-        <li class="list-group-item p-4">
-        	<b>희망 돌봄몬 성별 : <c:if test="${rbVO.wish_gender=='F'}">여자</c:if><c:if test="${rbVO.wish_gender=='M'}">남자</c:if><c:if test="${rbVO.wish_gender=='A'}">무관</c:if></b><br/>
-            
-        </li>
 </div>
 <div class="container" style="height:80px;">
 	<div style=" float:right; height:43px; line-height:43px;">
@@ -918,6 +954,14 @@ var charge; //총결제금액
 		</c:if>
 			<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment=='Y'}">
 			<span class="conFont" style="color:red">결제가 완료되었습니다.</span>
+			<!-- 745행 환불버튼 -->
+			<form method="post" id="refundFrm">
+				<input type="hidden" value="${rbVO.userid }" name="userid"/>
+				<input type="hidden" value="${rbVO.teacherid }" name="userid_t" />
+				<input type="hidden" value="${sdVO.select_date }" name="workdate"/>
+				<input type="hidden" name="pay"/>
+				<input class="btn btn-warning" type="button" id="refund" value="환불하기" style="margin-top:5px; margin-left:10px;" />
+			</form>
 		</c:if>
 		<c:if test="${rbVO.userid == userid and rbVO.agree=='N'}">
 			<span class="conFont" style="color:red">선생님이 거절한 계약서입니다.</span>
@@ -926,6 +970,7 @@ var charge; //총결제금액
 </div>
 <div style="width:100%; height:300px;" id="hiddenDiv">
 </div>
+<span style="display:none;" id="totalPay"></span>
 </body>
 </html>
 

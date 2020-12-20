@@ -219,7 +219,7 @@
 		<li class="nav-item" id="send"><a class="nav-link" href="/dbmon/message?tabType=2">보낸쪽지</a></li>
 		<li class="nav-item" id="storage"><a class="nav-link" href="/dbmon/message?tabType=3">쪽지보관</a></li>
 		<li class="nav-item" id="spam"><a class="nav-link" href="/dbmon/message?tabType=4">스팸쪽지</a></li>
-		<li class="nav-item" id="searchTab"><a class="nav-link" href="/dbmon/messageMemberSearch?tabType=5">회원검색</a></li>
+		<!-- <li class="nav-item" id="searchTab"><a class="nav-link" href="/dbmon/messageMemberSearch?tabType=5">회원검색</a></li> -->
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane fade show active" id="message">
@@ -254,8 +254,8 @@
 					<!-- 공지사항 반복문 돌리기? 인크루드로 가져와서 넣는게 편할듯 -->
 						<td class="note_info note_notice" colspan="4">
 							<p class="note_new">
-								<a href="/dbmon/messageContent&no= " target="_blank" class="btn_show">
-									<img src="icon/message/icon_notice_new.png" border="0" alt="notice" class="icon-notice"> <span>돌봄몬 운영자 사칭 쪽지 주의</span> 
+								<a href="http://localhost:9090/dbmon/noticeBoardView?no=521" target="_blank" class="btn_show">
+									<img src="icon/message/icon_notice_new.png" border="0" alt="notice" class="icon-notice"> <span>	[공지] 이용약관 및 개인정보 취급방침 개정</span> 
 								</a>
 							</p>
 						</td>

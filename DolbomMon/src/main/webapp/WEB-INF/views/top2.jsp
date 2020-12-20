@@ -16,7 +16,7 @@
 
 		 //채팅창 오픈
 			var popupWidth = 1060;
-			var popupHeight = 656;
+			var popupHeight = 596;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
 			var popupY= (window.screen.height / 2) - (popupHeight / 2);
 			$(document).on("click",".ccBtn",function(){
@@ -298,7 +298,7 @@ EDIT ON
 			</c:if>
 			<c:if test="${who =='P'}">
 	        <li><a href="mypage" class="spread-underline">마이페이지</a></li>
-			<li><a href="dbmSearchWriteForm" class="spread-underline" >선생님구하기</a></li>
+			<li><a href="dbmSearchWriteForm" class="spread-underline" >선생님 구하기</a></li>
 	        <li><a href="/dbmon/identityForm" class="spread-underline" >계정관리</a></li>
 	        </c:if>
 	      </ul>

@@ -372,6 +372,13 @@ var certiTable;
 			})
 		}
 	});
+	
+	$(document).on('click','.button-page-length',function(){
+		console.log($(this).children().text());
+		var text=$(this).children().text();
+		$('.buttons-page-length').text(text+"개의 레코드");
+	})
+	
 	$(document).on("click",".selectId",function(){
 		$('tr').css("background-color","#fff");
 		$(this).closest('tr').css("background-color","antiquewhite");

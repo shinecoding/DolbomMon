@@ -373,26 +373,6 @@
 				return false;
 			}
 			
-			var wish_genderCnt = $("input[name=wish_gender]:checked").length;
-			if(wish_genderCnt==0){
-				swal({
-					title : "선생님 성별",
-					text : "원하는 선생님 성별을 입력해주세요",
-					icon : "info"
-				});
-				return false;
-			}
-			
-			var wish_ageCnt = $("input[name=wish_age]:checked").length;
-			if(wish_ageCnt==0){
-				swal({
-					title : "선생님 나이",
-					text : "원하는 선생님 나이대를 입력해주세요",
-					icon : "info"
-				});
-				return false;
-			}
-			
 			var child_cnt = $("input[name=childrenCnt]:checked").length;
 			if(childCnt < 1) {
 				swal({
@@ -633,6 +613,8 @@
 <body>
 	<div class="container" style="font-family: 'Poor Story', cursive !important;">
 		<form id="writeFrm" method="post" action="contractWriteT">
+			<input type="hidden" value="C" name="wish_age" />
+			<input type="hidden" value="C" name="wish_gender"/>
 			<div id="header">
 				<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/img/mylogo.png"/></a>
 			</div>
@@ -681,36 +663,6 @@
 					<div><label for="pa13"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-shortperide-n.svg"/><br/><span>단기입주</span></label></div>
 				</div>
 			</div>
-			
-			<div class="title"><label class="divOnOff" for="ageAndGenderDiv">원하는 돌봄몬의 나이대와 성별을 알려주세요</label></div>
-			<div id="ageAndGenderDiv" class="mainDiv">
-				<div id="genderDiv">
-					<div>
-						<img src="<%=request.getContextPath()%>/img/genderImg.png" style="width:200px;height:150px; margin:30px 0"/>
-					</div>
-					<input type="radio" id="g1" name="wish_gender" value="F" />
-					<input type="radio" id="g2" name="wish_gender" value="M"/>
-					<input type="radio" id="g3" name="wish_gender" value="A"/>
-					<label class="label" for="g1">여자</label>
-					<label for="g2">남자</label>
-					<label for="g3">무관</label>
-				</div>
-				<div id="ageDiv">
-					<input type="checkbox" id="20" name="wish_age" value="20" checked="checked"/>
-					<input type="checkbox" id="30" name="wish_age" value="30" checked="checked"/>
-					<input type="checkbox" id="40" name="wish_age" value="40" checked="checked"/>
-					<input type="checkbox" id="50" name="wish_age" value="50" />
-					<input type="checkbox" id="60" name="wish_age" value="60" />
-					<ul>
-						<li><label for="20">20대</label></li>
-						<li><label for="30">30대</label></li>
-						<li><label for="40">40대</label></li>
-						<li><label for="50">50대</label></li>
-						<li><label for="60">60대</label></li>
-					</ul>
-				</div>
-			</div>
-			
 			<div class="title" ><label class="divOnOff" for="childrenInfoDiv">자녀의 정보를 입력해주세요</label></div>
 			<div id="childrenInfoDiv" class="mainDiv">
 				<div id="childrenInfo">

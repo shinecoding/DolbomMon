@@ -20,6 +20,8 @@ public class ApplyToTeacher {
 	private int tcnt;
 	private String t_userid;
 	private String agree;
+	private String title;
+	private int cont_no;
 	
 	public String getAgree() {
 		return agree;
@@ -134,6 +136,18 @@ public class ApplyToTeacher {
 	}
 	public void setT_userid(String t_userid) {
 		this.t_userid = t_userid;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public int getCont_no() {
+		return cont_no;
+	}
+	public void setCont_no(int cont_no) {
+		this.cont_no = cont_no;
 	}
 	
 	

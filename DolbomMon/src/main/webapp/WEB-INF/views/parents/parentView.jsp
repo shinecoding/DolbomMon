@@ -64,7 +64,7 @@
 	    top: 0px;
 	    right: 0px;
 	}
-	#noneEvent{
+	#specificDate{
 		pointer-events: none;
 	}
 	
@@ -164,7 +164,7 @@
 		var popupY= (window.screen.height / 2) - (popupHeight / 2);
 		$(document).on("click",".cBtn",function(){
 			popupWidth = 1060;
-			popupHeight = 656;
+			popupHeight = 596;
 			var userid = $(this).attr('id');
 			window.open('/dbmon/chat?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
@@ -806,6 +806,15 @@
 		$("#writedate").text(writedatee);
 	});
 	
+	$(function(){
+		var parentName = "${rbVO.username}";
+		var pname = parentName.substr(1,1);
+		var pname = replaceAt(parentName, 1, 'O');
+		$("#pname").text(pname);
+	});
+	var replaceAt = function(input, index, character){
+	     return input.substr(0, index) + character + input.substr(index+character.length);
+	}
 	
 </script>
 <style>
@@ -829,7 +838,7 @@
    	</div>
    	<div>
    	<ul class="list-group">
-         <li class="list-group-item align-middle"><span  style="font-size:1.4em; font-weight:bold">${rbVO.username }</span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">학부모</span><br/>
+         <li class="list-group-item align-middle"><span id="pname" style="font-size:1.4em; font-weight:bold"></span><span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2">학부모</span><br/>
          <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span id="jobNo" class="ml-2">${rbVO.job_board_no }</span></li>
    	</ul>
    	</div>
@@ -865,7 +874,7 @@
 	      			<span style="color:orange;">아래 표시된 날짜만 돌봐주세요.</span>
 	      		</c:if>
 	      	</li>
-      	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;" id="noneEvent">
+      	<div style="display:inline-block; border:1px solid #EFEFEF;border-top:none; height:auto; width:100%;">
       		<c:if test="${rbVO.time_type=='S' }" >
 				<div id="specificDate">
 					

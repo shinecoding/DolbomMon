@@ -58,6 +58,7 @@
 				data: params,
 				success: function(result){
 					replyListSelect();
+					replyCount();
 					$("#content").val("");
 				}, error: function(){
 					console.log("댓글 쓰기 에러 발생");			
@@ -98,6 +99,7 @@
 					url: url,
 					data: params,
 					success: function(result){
+						replyCount();
 						replyListSelect();
 					}, error: function(){
 						console.log("댓글 삭제 에러 발생");
@@ -140,9 +142,32 @@
 		});
 	}
 	
+	function replyCount(){
+		var url = "/dbmon/replyCount";
+		var data = "no=${vo.no}";
+		
+		$.ajax({
+			url: url,
+			data: data,
+			success: function(result){
+				var $result = $(result);
+				var tag = "";;
+				$result.each(function(i, r){
+					if(r>0){
+						tag += "댓글 수 <b>"+r+"개</b>";	
+					}
+				});
+				$("#replyCount").html(tag);
+			}, error: function(){
+				console.log("댓글 수 선택 에러 발생");
+			}		
+		});
+	}
+	
 	//글내용보기 댓글 표시
+	replyCount();
 	replyListSelect();
-
+	
 </script>
 </head>
 <body>
@@ -215,21 +240,18 @@
 		</table>
 		<hr/>
 		
+		<br/><div id="replyCount"></div><br/>
+		
 		<!-- 댓글 쓰기 -->
 		<div id="reply">
-			<c:if test="${logStatus=='Y'}">
-				<form method="post" id="replyForm">
-					<input type="hidden" name="no" value="${vo.no}"/>	<!-- 원글번호 -->
-					<textarea name="content" class="form-control" id="content" style="width: 720px; height: 60px;"></textarea>
-					<input type="submit" id="replyBtn" class="btn btn-outline-warning" value="등록"/>
-				</form>
-			</c:if>
+			<form method="post" id="replyForm">
+				<input type="hidden" name="no" value="${vo.no}"/>	<!-- 원글번호 -->
+				<textarea name="content" class="form-control" id="content" style="width: 720px; height: 60px;"></textarea>
+				<input type="submit" id="replyBtn" class="btn btn-outline-warning" value="등록"/>
+			</form>
 		</div>
 			<br/>
 			<ul id="replyList" class="list-group">
-				<li class="list-group-item">gamja (2020-10-10)&nbsp;<a href="">수정</a> <a href="">삭제</a><br/>
-					댓글내용2
-				</li>
 			</ul>
 		<div>
 		<br/>
@@ -243,3 +265,4 @@
 	</div>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
