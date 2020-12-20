@@ -24,13 +24,6 @@
 	
 	img{ height:110px; width:110px;}
 
-    .form-control{
-    	background-color:white;
-    }
-  
-	 .list-group-item {
-	 	width:1000px;
-	 }
 	.review_rate {
 	    display: flex;
 	    font-size: 12px;
