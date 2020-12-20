@@ -127,7 +127,7 @@
 											<br/><span>등록일 | <b style="color:orange;">${vo.writedate }</b></span>
 											<br/><span>결제일 | <b style="color:orange;">${vo.pay_date }</b></span>
 											<br/><span>돌봄장소 | <b style="color:orange;">${vo.care_addr }</b></span>
-											<br/>시급 | <span style="color: orange;"> ${vo.wish_wage }원</span>
+											<br/>시급 | <span style="color: orange;"> ${vo.charge }원</span>
 											</p>
 										</div>
 										<div style="float:right;">
