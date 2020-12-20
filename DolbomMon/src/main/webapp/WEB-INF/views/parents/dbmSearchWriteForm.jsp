@@ -732,7 +732,7 @@
 	}
 </script>
 <style>
-	*{ font-family: 'Poor Story', cursive;
+	*{ 
 		list-style:none;
 	}
  	.ui-datepicker:nth-of-type(1){width:100%;}
@@ -756,7 +756,7 @@
 	<div id="top">
 		<%@include file="/WEB-INF/views/top.jsp"%>
 	</div>
-	<div class="container">
+	<div class="container" style="font-family: 'Poor Story', cursive;">
 		<form id="writeFrm" method="post" action="dbmSearchWriteFormOk">
 			<div class="title222" style="margin-bottom:80px;">
 			<img src="<%=request.getContextPath() %>/img/iii11.svg" style="width:300px;height:200px; margin:0 auto;"/><br/><br/>
