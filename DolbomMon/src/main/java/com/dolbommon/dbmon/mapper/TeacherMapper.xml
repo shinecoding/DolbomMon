@@ -80,14 +80,14 @@
 		select to_char(start_date,'YYYY-MM-DD') as start_date, to_char(end_date, 'YYYY-MM-DD') as end_date, yoil, start_time, end_time from regular_date where userid = #{param1}
 	</select>
 	<select id="applyToParent" resultType="com.dolbommon.dbmon.Teacher.ApplyToTeacher">
-		select p.status, p.job_board_no, p.userid, tp.t_userid, c.child_birth, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, m.pic, 
-		    (select count(tpt.t_userid) from t_p_table tpt where tpt.job_board_no = p.job_board_no) as tcnt
+		select p.status, p.job_board_no, p.userid, tp.t_userid, c.child_birth, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage, m.pic, p.title,
+		    (select count(tpt.t_userid) from t_p_table tpt where tpt.job_board_no = p.job_board_no) as tcnt, (select pp.job_board_no from parent_list pp where pp.origin_no = p.job_board_no and pp.teacherid=#{param1}) as cont_no
 		    from parent_list p, t_p_table tp, add_child c, member m
 		    where p.userid = tp.p_userid and tp.t_userid = #{param1} and p.job_board_no = tp.job_board_no and c.job_board_no = p.job_board_no and m.userid = p.userid and p.status != 'C'
 		    order by p.job_board_no desc
 	</select>
 	<select id="applyToMe" resultType="com.dolbommon.dbmon.Teacher.ApplyToTeacher">
-select p.who, p.agree, p.status, p.job_board_no, p.userid, p.teacherid, m.pic, c.child_birth, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage
+			select p.who, p.agree, p.status, p.job_board_no, p.userid, p.teacherid, m.pic, c.child_birth, to_char(p.writedate, 'YYYY-MM-DD HH:MI') writedate, p.care_addr, p.wish_wage
 		    from parent_list p, member m, add_child c
 		    where p.teacherid = #{param1} and p.status = 'C' and p.who='T' and p.userid = m.userid and c.job_board_no = p.job_board_no
 		    order by p.job_board_no desc

@@ -44,6 +44,7 @@ public class RecruitBoardVO {
 		private String reimburse;
 		private String refund_status;
 		private String reject;
+		private int charge;
 		private String review_status;
 		
 		
@@ -298,6 +299,12 @@ public class RecruitBoardVO {
 		}
 		public void setReject(String reject) {
 			this.reject = reject;
+		}
+		public int getCharge() {
+			return charge;
+		}
+		public void setCharge(int charge) {
+			this.charge = charge;
 		}		
 		
 		

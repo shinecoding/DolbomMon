@@ -202,7 +202,7 @@
 											</p>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
+											<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 										</div>
 										<div style="height:1px;">
 											<c:if test="${list2.agree=='T'}">
@@ -311,10 +311,7 @@
 												<c:if test="${list.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</div>
 											<div style="height:1px;">
-					
-												<input class="btn btn-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
-											
-											
+												<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 											</div>
 											<div style="height:1px;">
 											<c:if test="${list.tcnt!='0'}">
