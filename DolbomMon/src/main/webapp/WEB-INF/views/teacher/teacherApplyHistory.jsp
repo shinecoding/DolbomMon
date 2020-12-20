@@ -145,9 +145,9 @@
 										<div id="imgBox"><img <c:if test="${list.pic==null || list.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${list.pic!=null || list.pic != '' }" >src="upload/${list.pic}"</c:if>class="rounded-circle" style="height:110px; width:110px;"/></div>
 										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>${list.tcnt }</span>명 지원</div>
 										<div id="offerBox" >
-											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
+											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>${list.title }</b></span>
 											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${list.job_board_no} | ${list.userid }</span>
-											<br/><span style="float:left;">자녀 정보 : </span><span id="${list.job_board_no }" ></span> 
+											<br/><span style="float:left;">자녀 정보 | </span><span id="${list.job_board_no }" ></span> 
 												<script>
 													$(function(){
 														var cb = '${list.child_birth}';
@@ -189,27 +189,28 @@
 															getAge(child_birth);
 															
 															if(child_age2 == "초등학생"){
-																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}else if(child_age2 == "유아"){
-																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}else if(child_age2 == "영아"){
-																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}else if(child_age2 == "신생아"){
-																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}
 														}
 													});
 												</script>
-											<br/><span>${list.writedate }</span>
-											<br/><span>${list.care_addr } </span>
+											<br/>작성날짜 | <span style="color:orange;">${list.writedate }</span>
+											<br/>돌봄 장소 | <span style="color:orange;">${list.care_addr } </span>
 											<br/><span style="color: orange;">희망시급 ${list.wish_wage }원</span>
 											</p>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-warning viewContract" type="button" value="계약서 확인" id="${list.job_board_no}" style="margin:0 5px;" />
+											<c:if test="${list.cont_no != 0}" ><input class="btn btn-outline-warning viewContract" type="button" value="계약서 확인" id="${list.job_board_no}" style="margin:0 5px;" /></c:if>
+											<c:if test="${list.cont_no == 0}" ><span style="float:right;color:orange;">부모님의 답변을 기다리는 중입니다."</span></c:if>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
+											<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
 										</div>
 									</div>
 								<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>
@@ -232,7 +233,7 @@
 										<div id="imgBox"><img <c:if test="${list2.pic==null || list2.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${list2.pic!=null || list2.pic != '' }" >src="upload/${list2.pic}"</c:if>class="rounded-circle" style="height:110px; width:110px;"/></div>
 										<div id="offerBox" >
 											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${list2.job_board_no} | ${list2.userid }</span>
-											<br/><span style="float:left;">자녀 정보 : </span><span id="${list2.job_board_no }" ></span> 
+											<br/><span style="float:left;">자녀 정보 | </span><span id="${list2.job_board_no }" ></span> 
 												<script>
 													$(function(){
 														var cb = '${list2.child_birth}';
@@ -274,20 +275,20 @@
 															getAge(child_birth);
 															
 															if(child_age2 == "초등학생"){
-																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}else if(child_age2 == "유아"){
-																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}else if(child_age2 == "영아"){
-																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}else if(child_age2 == "신생아"){
-																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;">'+child_age2+"-"+child_age1+" "+'</b></div>');
+																$("#${list2.job_board_no}").append('<div style="float:left; margin-right:5px;"><b style="color:orange;"> '+child_age2+"-"+child_age1+" "+'</b></div>');
 															}
 														}
 													});
 												</script>
-											<br/><span>${list2.care_addr } </span>
-											<br/><span>${list2.writedate }</span>
-											<br/><span style="color: orange;">희망시급 ${list2.wish_wage }원</span>
+											<br/>돌봄 장소 | <span style="color:orange;">${list2.care_addr } </span>
+											<br/>신청날짜 | <span style="color:orange;">${list2.writedate }</span>
+											<br/>희망시급 | <span style="color: orange;">${list2.wish_wage }원</span>
 										</div>
 										<div style="height:1px;">
 											<c:if test="${list2.agree=='T'}">
