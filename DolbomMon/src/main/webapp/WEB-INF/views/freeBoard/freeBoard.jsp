@@ -24,7 +24,7 @@
 		text-align: center;
 	}
 	.subject{
-		width: 380px;
+		width: 365px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;		

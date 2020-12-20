@@ -284,8 +284,10 @@ public class ParentController {
 	@RequestMapping("/commentWrite")
 	public ModelAndView commentWrite(HttpServletRequest req, String userid) {
 		userid = (String)req.getParameter("userid");
+		String no = (String)req.getParameter("no");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userid", userid);
+		mav.addObject("no", no);
 		mav.setViewName("parents/commentWrite");
 		
 		return mav;
@@ -295,8 +297,9 @@ public class ParentController {
 	public ModelAndView commentWriteOk(CommentVO vo, HttpServletRequest req, HttpSession ses, String userid) {
 		vo.setUserid((String)req.getParameter("userid"));	//선생님 아이디
 		vo.setReviewid((String)ses.getAttribute("userid"));	//작성자(학부모) 아이디
+		String no = req.getParameter("no");	//작성자(학부모) 아이디
 		ParentDaoImp dao = sqlSession.getMapper(ParentDaoImp.class);
-	
+		
 		String star = vo.getReview_star();
 		System.out.println(star);
 		String starArr[] = star.split(",");
@@ -306,7 +309,10 @@ public class ParentController {
 		
 		int result = dao.insertComment(vo);
 		if(result>0) {	//레코드 추가 성공
+			System.out.println("데이터 확인"+no);
+			dao.updatereview_status(no);
 			mav.setViewName("parents/commentResult");
+			
 		}else {	//레코드 추가 실패
 			mav.setViewName("parents/commentFailResult");	
 		}

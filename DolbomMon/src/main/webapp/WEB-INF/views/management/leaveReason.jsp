@@ -24,7 +24,7 @@
 <script>
 $(function(){
 	
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 		// 팝업 창 크기를 HTML 크기에 맞추어 자동으로 크기를 조정하는 함수.
 		var strWidth;
 		var strHeight;
@@ -49,7 +49,7 @@ $(function(){
 		
 		//resize 
 		window.resizeTo( strWidth-110, strHeight-20 );
-	});
+	}); */
 	//$('#sub').click(function() { $('#memoFrom').submit(); });
 
 	

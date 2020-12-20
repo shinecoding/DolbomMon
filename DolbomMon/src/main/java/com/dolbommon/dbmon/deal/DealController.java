@@ -315,6 +315,7 @@ public class DealController {
 		String teacherid = req.getParameter("teacherid");
 		String pay_no = req.getParameter("pay_no");
 		String origin_no = req.getParameter("origin_no");
+		String charge = req.getParameter("charge");
 		
 		PaymentVO pvo = new PaymentVO();
 		pvo.setParent_id(parent_id);
@@ -332,8 +333,9 @@ public class DealController {
 		pvo.setEmail(mvo.getEmail());
 		System.out.println("어플라이 넘="+pvo.getApply_num());
 		System.out.println("이멜="+pvo.getEmail());
-		
+		System.out.println("결제금액 총액"+charge);
 		dao.updatePayment(pay_no);
+		dao.updatePayCharge(pay_no, charge);
 		dao.insertPayment(pvo);
 		System.out.println("원글번호"+origin_no);
 		System.out.println("현글번호"+pay_no);

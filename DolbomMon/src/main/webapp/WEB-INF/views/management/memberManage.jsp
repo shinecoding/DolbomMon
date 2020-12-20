@@ -33,7 +33,7 @@ var memberTable;
 	    	"order"        : [[ 0, "desc" ]], //정렬을 indate로 바꿔야한다. 업데이트 할때마다 indate sysdate 등록하게 해야함.
 	    	"destroy" : true,
 	    	"scrollX" : true,
-	    	"lengthMenu": [10, 25, 50],
+	    	"lengthMenu": [[10, 25, 50],[10, 25, 50]],
 		    "autoWidth" : "false",
 		    "bStateSave" : "true", //쿠키저장
 		    orderMulti: true,
@@ -115,9 +115,9 @@ var memberTable;
 						if ( data == null ) {
 						 return '';
 						}else if( data == 'Y'){
-							data = '<span style="color:green">활동회원</span> <a class="xBtn" href="#" id="activity"><img src="/dbmon/icon/ybutton.png" title="활동정지"></a>';
+							data = '<span style="color:green">활동회원</span><a class="xBtn" href="#" id="activity"><img src="/dbmon/icon/ybutton.png" title="활동정지"></a>';
 						}else if( data == 'N'){
-							data = '<span style="color:red">정지회원</span> <a class="yBtn" href="#" id="activity"><img src="/dbmon/icon/returnicon.png" title="정지해제"></a>';
+							data = '<a href="#" id="rea"><span style="color:red">정지회원</span></a>  <a class="yBtn" href="#" id="activity"><img src="/dbmon/icon/returnicon.png" title="정지해제"></a>';
 						}
 						return data;
 				}},
@@ -131,7 +131,8 @@ var memberTable;
 	        	{"data" : "memo",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
-						 return '';
+							data = '<a class="mBtn" href="#")><img src="/dbmon/icon/memo.png" title="회원메모"></a> 메모'
+						// return '';
 						}else{
 							data = '<a class="mBtn" href="#")><img src="/dbmon/icon/memo.png" title="회원메모"></a> 메모'
 						}
@@ -280,6 +281,10 @@ var memberTable;
 	    window.open('/dbmon/messageWrite?receiveId='+userid,'message','width=1200,height=1000,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120');  
 	}  
 	
+	$(document).on("click","#rea",function(){
+		var no = $(this).closest('tr').find('td:eq(0)').text();
+		reason(no);
+		});	
 	//재업로드 하면 상태가 S로 바뀌게 만들기.
 	$(document).on("click",".xBtn",function(){
 		if(confirm("이 회원을 활동 정지시키겠습니까?")){
@@ -320,9 +325,32 @@ var memberTable;
 			})
 		}
 	});
+	
+	$(document).on('click','.button-page-length',function(){
+		console.log($(this).children().text());
+		var text=$(this).children().text();
+		$('.buttons-page-length').text(text+"개의 레코드");
+	})
+	
+	var popupWidth = 1060;
+	var popupHeight = 596;
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	$(document).on("click", ".shinchung", function(){
+		console.log('test');
+		popupWidth = 1060;
+		popupHeight = 1600;
+		var userid = $(this).attr('id');
+		console.log(userid);
+		window.open('/dbmon/contractOpenT?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	})
+	
 	function reason(no){
 		console.log("test")
-		var win = window.open("/dbmon/inactivityReason?no="+no, '', '_blank'); 
+		popupWidth = 450;
+		popupHeight = 339;
+		//var win = window.open("/dbmon/inactivityReason?no="+no, '', '_blank');
+		var win = window.open('/dbmon/inactivityReason?no='+no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 	}
 	
 	$(document).on("click","tr",function(){
@@ -332,7 +360,11 @@ var memberTable;
 	
 	$(document).on("click",".mBtn",function(){
 		var no = $(this).closest('tr').find('td:eq(0)').text();
-		var win = window.open("/dbmon/memberMemo?no="+no, '', '_blank'); 
+		popupWidth = 450;
+		popupHeight = 339;
+		//var win = window.open("/dbmon/inactivityReason?no="+no, '', '_blank');
+		var win = window.open('/dbmon/memberMemo?no='+no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		//var win = window.open("/dbmon/memberMemo?no="+no, '', '_blank'); 
 		//location.href="/dbmon/memberMemo?no="+no;
 
 	});
@@ -340,7 +372,11 @@ var memberTable;
 	$(document).on("click",".lBtn",function(){
 		var no = $(this).closest('tr').find('td:eq(0)').text();
 		console.log(no)
-		var win = window.open("/dbmon/leaveReason?no="+no, '', '_blank'); 
+		
+		popupWidth = 450;
+		popupHeight = 339;
+		//var win = window.open("/dbmon/inactivityReason?no="+no, '', '_blank');
+		var win = window.open('/dbmon/leaveReason?no='+no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		//location.href="/dbmon/memberMemo?no="+no;
 
 	});

@@ -25,6 +25,8 @@ public interface ParentDaoImp {
 	
 	public List<RecruitBoardVO> parentDealHistory(String userid);
 	
+	public int updatereview_status(String no);
+	
 	public List<ApplyToParentInfoVO> applyDbmSelect(String userid);
 	
 	public RecruitBoardVO getParentProfile(String userid);
