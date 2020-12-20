@@ -210,7 +210,9 @@
 											<c:if test="${list.cont_no == 0}" ><span style="float:right;color:orange;">부모님의 답변을 기다리는 중입니다."</span></c:if>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
+											<c:if test="${list.payment != 'Y' }" >
+												<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
+											</c:if>
 										</div>
 									</div>
 								<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>

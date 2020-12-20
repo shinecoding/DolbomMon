@@ -22,6 +22,8 @@ public class ApplyToTeacher {
 	private String agree;
 	private String title;
 	private int cont_no;
+	private String status;
+	private String payment;
 	
 	public String getAgree() {
 		return agree;
@@ -148,6 +150,18 @@ public class ApplyToTeacher {
 	}
 	public void setCont_no(int cont_no) {
 		this.cont_no = cont_no;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 	
 	

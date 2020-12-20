@@ -363,6 +363,16 @@ public class DealController {
 		return mav;
 	}
 	
+	@RequestMapping("/contractCancel2")
+	public ModelAndView contractCancel2(int no) {
+		ModelAndView mav = new ModelAndView();
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		dao.cancelContract(no);
+		mav.addObject("result6", 7);
+		mav.setViewName("deal/writeResult");
+		return mav;
+	}
+	
 	@RequestMapping(value="/reqRefund", method = RequestMethod.POST)
 	@ResponseBody
 	public int reqRefund(@RequestParam("workdate") String workdate,

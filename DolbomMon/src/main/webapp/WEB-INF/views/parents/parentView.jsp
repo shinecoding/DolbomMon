@@ -1093,7 +1093,7 @@
 										<h6>나이 - ${tlist.birth }세</h6>
 										<h6><c:if test="${tlist.cctv == 'Y'}">CCTV가 있어도 당당히 일할 수 있습니다.</c:if><c:if test="${tlist.cctv == 'N'}">CCTV촬영을 원하지 않습니다.</c:if></h6><br/>
 										<h6><i class="fas fa-coins mr-1" style="color:orange;"></i>희망 시급 ${tlist.desired_wage } | <b>협의가능</b></h6>
-										<input class="btn btn-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />
+										<input class="btn btn-outline-warning" type="button" value="취소하기" id="cancleBtn" style="float:right;" />
 									</li>
 								</ul>
 							</li>
@@ -1105,7 +1105,7 @@
 	<br/>
    	<c:if test="${userid == rbVO.userid}">
    		<div style="margin:50px 0; text-align:right;">
-			<input type="button" class="btn btn-warning ed" id="editBtn" value="수정하기" style="margin-right:10px;"/><input type="button" id="deleteBtn" class="btn btn-warning ed" value="삭제하기"/>
+			<input type="button" class="btn btn-outline-warning ed" id="editBtn" value="수정하기" style="margin-right:10px;"/><input type="button" id="deleteBtn" class="btn btn-outline-warning ed" value="삭제하기"/>
 		</div>
  	</c:if>
 </div>

@@ -569,11 +569,11 @@ border-radius:10px;
    		<span  style="font-size:1.4em; font-weight:bold">${mvo.username} (${userid})</span>
    		<span class="badge badge-warning badge-pill align-middle p-2 ml-2 mb-2"><c:if test="${vo.teacher_type=='선생님'}">선생님 돌봄몬</c:if><c:if test="${vo.teacher_type=='대학생'}">대학생 돌봄몬</c:if><c:if test="${vo.teacher_type=='엄마'}">엄마 돌봄몬</c:if><c:if test="${vo.teacher_type=='일반'}">일반 돌봄몬</c:if></span>
    		<c:if test="${mvo.userid!=paramid}">
-   		<input type="button" class="btn btn-warning cBtn" id="${userid }" value="협의하기" style="float:right; margin:0 5px;"/>
+   		<input type="button" class="btn btn-outline-warning cBtn" id="${userid }" value="협의하기" style="float:right; margin:0 5px;"/>
    		<c:if test="${checkVo.agree=='T' or checkVo.agree=='Y'}">
    		<input type="hidden" name="idcheck" id="${checkVo.teacherid }">
-   		<button name="" id="${checkVo.job_board_no}" class="btn btn-warning float-right viewContract">계약서 확인</button></c:if>
-   		<c:if test="${checkVo.agree!='T' and checkVo.agree!='Y'}"><button name="shinchung" id="${userid }" class="btn btn-warning float-right shinchung">신청</button></c:if></c:if><br/>
+   		<button name="" id="${checkVo.job_board_no}" class="btn btn-outline-warning float-right viewContract">계약서 확인</button></c:if>
+   		<c:if test="${checkVo.agree!='T' and checkVo.agree!='Y'}"><button name="shinchung" id="${userid }" class="btn btn-outline-warning float-right shinchung">신청</button></c:if></c:if><br/>
    		<c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2">20세</span> | <span class="mx-2"><c:if test="${mvo.gender=='F'}"><i class="fas fa-venus"></i></c:if><c:if test="${mvo.gender=='M'}"><i class="fas fa-mars"></i></c:if></span>| <span class="ml-2">no.${mvo.no}</span></li>
    		
    </ul>
