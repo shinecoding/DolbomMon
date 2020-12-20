@@ -42,7 +42,7 @@
 	</select>
 	
 	<select id="recruitBoardSelect2" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
-		select p.teacherid ,p.agree ,p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
+		select p.origin_no, p.teacherid ,p.agree ,p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender, p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
 			(select count(t_userid) from t_p_table where job_board_no = #{param1}) tcnt
 			from parent_list p, member m 
 			where p.job_board_no=#{param1} and p.userid = m.userid
@@ -96,7 +96,7 @@
 		update parent_list set payment = 'Y' where job_board_no = #{pay_no}
 	</update>
 	<update id="updateStatusP">
-		update parent_list set status = 'P' where origin_no = #{origin_no}
+		update parent_list set status = 'P' where job_board_no = #{origin_no}
 	</update>
 	
 	<update id="cancelContract">

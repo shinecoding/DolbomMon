@@ -209,7 +209,12 @@
 												<span style="color:orange" class="msg" id="msg">제안 수락 대기중입니다.</span>
 											</c:if>
 											<c:if test="${list2.agree=='Y' }">
-												<span style="color:orange; right:-470px;" class="msg" id="msg">선생님이 제안을 수락하였습니다.</span>
+												<c:if test="${list2.payment!='Y' }">	
+													<span style="color:orange; right:-470px;" class="msg" id="msg">선생님이 제안을 수락하였습니다.</span>
+												</c:if>
+												<c:if test="${list2.payment=='Y' }">	
+													<span style="color:orange; right:-570px;" class="msg" id="msg">성사된 제안입니다.</span>
+												</c:if>
 											</c:if>
 											<c:if test="${list2.agree=='N' }">
 												<span style="color:red; right:-470px;" class="msg" id="msg">선생님이 제안을 거절하였습니다.</span>
@@ -318,10 +323,10 @@
 												</c:if>
 											</c:if>
 											<c:if test="${list.tcnt=='0'}">
-												<span style="color:orange; right:-470px;" class="msg" id="msg">지원자를 기다리는 중입니다.</span>
+												<span style="color:orange; right:-500px;" class="msg" id="msg">지원자를 기다리는 중입니다.</span>
 											</c:if>
 											<c:if test="${list.tcnt!='0'}">
-												<c:if test="${list.agree=='Y' }">
+												<c:if test="${list.agree=='Y'}">
 													<span style="color:orange; right:-470px;" class="msg" id="msg">선생님이 제안을 수락하였습니다.</span>
 												</c:if>
 											</c:if>
@@ -333,7 +338,13 @@
 											
 										</div>
 										</div>
+									<c:if test="${list.status!='P'}">										
 									<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>
+									</c:if>
+									<c:if test="${list.status=='P'}">										
+									<div class="card-footer btn" style="background-color:#ffc107" onclick="location.href='parentView?no=${list.job_board_no}'">성사된 계약입니다.</div>
+									</c:if>
+									
 									</div>
 									
 								</div>
