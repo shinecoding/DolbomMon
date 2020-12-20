@@ -95,6 +95,9 @@
 	<update id="updatePayment">
 		update parent_list set payment = 'Y' where job_board_no = #{pay_no}
 	</update>
+	<update id="updatePayCharge">
+		update parent_list set charge = #{charge} where job_board_no = #{pay_no}
+	</update>
 	<update id="updateStatusP">
 		update parent_list set status = 'P' where job_board_no = #{origin_no}
 	</update>

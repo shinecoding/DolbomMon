@@ -68,6 +68,10 @@
 	        from parent_list p join payment a on p.job_board_no=a.pay_no join teacher t on p.teacherid=t.userid join member m on m.userid = p.teacherid
 			where payment='Y' and p.userid=#{param1} and agree = 'Y'  and status = 'C' order by a.pay_date desc
 	</select>
+	
+	<update id="updatereview_status">
+		update parent_list set review_status='Y' where job_board_no = #{no}
+	</update>
 </mapper>
 
 

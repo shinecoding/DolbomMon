@@ -45,7 +45,15 @@ public class RecruitBoardVO {
 		private String refund_status;
 		private String reject;
 		private int charge;
+		private String review_status;
 		
+		
+		public String getReview_status() {
+			return review_status;
+		}
+		public void setReview_status(String review_status) {
+			this.review_status = review_status;
+		}
 		public String getChild_birth() {
 			return child_birth;
 		}

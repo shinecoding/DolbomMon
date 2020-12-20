@@ -551,6 +551,7 @@ border-radius:10px;
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
 
+<div style="height:15px;"></div>
 <div class="container">
 	
 	
@@ -590,7 +591,7 @@ border-radius:10px;
    			<span class="fa-stack fa-2x">
    			<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.identi_status=='Y'}">style="color:orange" </c:if> ></i>
 		   	
-		   	<c:if test="${cvo.identi_status=='N' || cvo.identi_status=='S' || cvo.identi_status==null}">
+		   	<c:if test="${cvo.identi_status=='N' || cvo.identi_status=='S' || cvo.identi_status=='X' || cvo.identi_status==null}">
 		   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 		   	</c:if>
 		   	<c:if test="${cvo.identi_status=='Y'}">
@@ -611,7 +612,7 @@ border-radius:10px;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.license_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.license_status=='N' || cvo.license_status=='S' || cvo.license_status==null}">
+	   	<c:if test="${cvo.license_status=='N' || cvo.license_status=='S' ||cvo.license_status=='X' || cvo.license_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.license_status=='Y'}">
@@ -623,7 +624,7 @@ border-radius:10px;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'|| cvo.school_status==null}">
+	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'|| cvo.school_status=='X'||cvo.school_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.school_status=='Y'}">
@@ -635,7 +636,7 @@ border-radius:10px;
 	   	<span class="fa-stack fa-2x">
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.crime_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
-	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S' || cvo.crime_status==null}">
+	   	<c:if test="${cvo.crime_status=='N' || cvo.crime_status=='S' || cvo.crime_status=='X' || cvo.crime_status==null}">
 	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.crime_status=='Y'}">
@@ -643,7 +644,7 @@ border-radius:10px;
 	   	</c:if>
 	   	
 	   	</span>성범죄 경력 조회 인증</li>
-	   	
+	   	 
    	</ul>
    	
    	<h5>간단 자기소개</h5>

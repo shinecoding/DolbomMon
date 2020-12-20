@@ -79,12 +79,20 @@
 	$(function(){
 		$(document).on("click",".viewContract",function(){
 			var userid = $(this).attr('id');
+			var no = $(this).next().attr('id');
 			var popupWidth = 800;
 			var popupHeight = 796;
 			var popupX = (window.screen.width / 2) - (popupWidth / 2);
 			var popupY= (window.screen.height / 2) - (popupHeight / 2);
 			console.log(userid);
-			window.open('/dbmon/commentWrite?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+			window.open('/dbmon/commentWrite?userid='+userid+'&no='+no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+		});
+		
+		
+		$(document).on("click",".pBtn",function(){
+			var userid = $(this).attr('id');
+			console.log(userid);
+			location.href='/dbmon/parentProfile?userid='+userid;
 		});
 	})
 	
@@ -131,8 +139,12 @@
 											</p>
 										</div>
 										<div style="float:right;">
-											<input type="button" class="btn btn-outline-warning" style="float:left;margin-top:10px; " value="돌봄몬 프로필 보기"/><br/>
+											<input type="button" class="btn btn-outline-warning pBtn" style="float:left;margin-top:10px; " id="${vo.teacherid }" value="돌봄몬 프로필 보기"/><br/>
+											<c:if test="${vo.review_status!='Y'}">
 											<input class="btn btn-outline-warning viewContract" type="button" value="후기작성" id="${vo.teacherid}" style="float:right;margin:10px 0;" />
+											</c:if>
+											<input type="hidden" id="${vo.job_board_no}"/>
+											
 										</div>
 										<!-- 
 										<div style="height:1px;">
