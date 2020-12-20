@@ -152,10 +152,10 @@ public class LoginController {
 	public ModelAndView temporaryPwd(LoginVO vo, HttpServletRequest req) throws AddressException, MessagingException {
 
 		vo.setUserpwd(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10));
-		vo.setUsername((String) req.getParameter("username"));
-		vo.setBirth((String) req.getParameter("birth"));
-		vo.setTel1((String) req.getParameter("tel1"));
-		vo.setEmail((String) req.getParameter("email"));
+		vo.setUsername((String)req.getParameter("username"));
+		vo.setBirth((String)req.getParameter("birth"));
+		vo.setTel1((String)req.getParameter("tel1"));
+		vo.setEmail((String)req.getParameter("email"));
 
 		StringBuffer sbBirth = new StringBuffer(vo.getBirth());
 		sbBirth.delete(10, 22);
@@ -164,6 +164,7 @@ public class LoginController {
 
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		int result = dao.pwdChange(vo);
+		String userEmail = vo.getEmail();
 		ModelAndView mav = new ModelAndView();
 
 		// 메일 보내기
@@ -173,7 +174,7 @@ public class LoginController {
 		int port = 465; // 포트번호
 
 		// 메일 내용
-		String recipient = "seulgi4229@naver.com"; // 받는 사람의 이메일 주소
+		String recipient = userEmail; // 받는 사람의 이메일 주소
 		String subject = "맘시터가 보내드리는 임시 비밀번호입니다."; // 메일 제목
 		String body = "임시 비밀번호는 " + vo.getUserpwd() + "입니다.\n임시 비밀번호로 로그인 해주세요."; // 메일 내용
 

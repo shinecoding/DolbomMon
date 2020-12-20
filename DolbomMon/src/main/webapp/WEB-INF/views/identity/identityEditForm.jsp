@@ -66,10 +66,10 @@ $(function(){
 	}
 	#top{
 		margin: 15px;
+		margin-top: 40px;
 		padding: 15px;
 		text-align: center;
 		font-size: 30px;
-		position: relative;
 	}
 	#tel1{
 		position: relative;
