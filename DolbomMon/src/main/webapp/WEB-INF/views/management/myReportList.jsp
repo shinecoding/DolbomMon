@@ -45,7 +45,7 @@
 	}
 	.mainDiv{
 		background-color: #fff;
-		min-height: 100vh;
+		min-height: 500px;
 		max-width: 600px;
     	margin: 50px auto 0;
 	}
@@ -272,3 +272,5 @@
 </div>
 </body>
 </html>
+
+<jsp:include page="../footer.jsp"/>

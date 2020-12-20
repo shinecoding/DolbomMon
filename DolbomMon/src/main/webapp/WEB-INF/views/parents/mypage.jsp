@@ -159,7 +159,7 @@
    <br/>
    <ul class="list-group">
    		<li class="list-group-item list-group-item-action"><a href="#ex7" rel="modal:open">결제/환불 계좌등록</a></li>
-   		<li class="list-group-item list-group-item-action"><a href="#">결제내역</a></li>
+   		<li class="list-group-item list-group-item-action"><a href="parentDealHistory">결제내역</a></li>
    		<li class="list-group-item list-group-item-action"><a href="/dbmon/identityForm">계정관리</a></li>
    </ul>
    

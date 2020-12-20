@@ -66,24 +66,24 @@ $('#dataList').DataTable().ajax.reload(null, false);
 				{
 					extend: 'copy',
 					text: '복사',
-					title: '관리자 데이터베이스입니다.',
+					title: '회계 데이터베이스입니다.',
 					//className: 'btn btn-sm btn-primary' 
 				},
 				{
 					extend: 'excel',
 					text: '엑셀',
-					filename: '관리자 EXCEL',
-					title: '관리자 데이터베이스입니다.'
+					filename: '회계 EXCEL',
+					title: '회계 데이터베이스입니다.'
 				},
 				{
 					extend: 'csv',
 					text: 'CSV',
-					filename: '관리자 CSV(UTF-8->MS엑셀에서 바로 열면 인코딩문제가 생깁니다. CSV불러오기로 가져오세요.)'
+					filename: '회계 CSV(UTF-8->MS엑셀에서 바로 열면 인코딩문제가 생깁니다. CSV불러오기로 가져오세요.)'
 				},
 				{
 					extend: 'pdf',
 					text: 'PDF',
-					filename: '관리자 데이터베이스 PDF입니다.'
+					filename: '회계 데이터베이스 PDF입니다.'
 				}
 			],createdRow: function (row, data, dataIndex) {
 			    $(row).addClass('clickTr');
@@ -249,6 +249,11 @@ $('#dataList').DataTable().ajax.reload(null, false);
 		    
 
 	});
+	$(document).on('click','.button-page-length',function(){
+		console.log($(this).children().text());
+		var text=$(this).children().text();
+		$('.buttons-page-length').text(text+"개의 레코드");
+	})
 	
 	//마우스 휠 방향전환
 	$("#accountTable").on('mousewheel',function(e){

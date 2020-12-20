@@ -189,6 +189,13 @@ var test='<%=(String)session.getAttribute("userid")%>';
 			window.open('/dbmon/updateManager?userid='+userid, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		}
 	});
+	
+	$(document).on('click','.button-page-length',function(){
+		console.log($(this).children().text());
+		var text=$(this).children().text();
+		$('.buttons-page-length').text(text+"개의 레코드");
+	})
+	
 </script>
 </head>
 <body>
