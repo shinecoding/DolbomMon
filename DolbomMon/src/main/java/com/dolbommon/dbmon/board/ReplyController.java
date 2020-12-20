@@ -45,13 +45,13 @@ public class ReplyController {
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
 		return dao.replyAllSelect(no);
 	}
+	
 	//댓글 수
 	@RequestMapping("/replyCount")
 	@ResponseBody
 	public int getReplyCount(int no) {
 		FreeBoardReplyDaoImp dao = sqlSession.getMapper(FreeBoardReplyDaoImp.class);
-		int replyCnt = dao.getReplyCount(no);
-		return replyCnt;
+		return dao.getReplyCount(no);
 	}
 	
 	//댓글 수정

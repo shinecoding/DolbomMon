@@ -46,7 +46,7 @@ public class RecruitBoardController {
 	@RequestMapping("/parent_list") 
 	public ModelAndView parent(HttpSession ses, HttpServletRequest req) {
 		String userid = (String)ses.getAttribute("userid");
-		String testId = "parent1";
+		String testId = "sitter0";
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList(99999);
