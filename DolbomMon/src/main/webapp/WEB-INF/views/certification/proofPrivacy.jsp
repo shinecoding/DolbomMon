@@ -142,7 +142,7 @@
 					<i class="fas fa-upload"></i>사진 추가하기
 					<input type="file" name="filename" id="proofFile" accept="image/*,application/pdf">
 				</label>
-				<img src="img/ex-cert-privacy.jpg" />
+				<img src="img/ex-cert-privacy.png" />
 				
 				<div class="badge badge-warning">2번째</div>
 				<div>올리신 증명서에 적혀있는<br/>
