@@ -31,8 +31,8 @@
 	}
 	a:link, a:visited, a:hover{
 	 	color: black;
-	 }
-	 ul, li{
+	}
+	ul, li{
 		margin: 0px;
 		padding: 0px;
 		list-style-type: none;
@@ -46,13 +46,12 @@
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
 <div class="in_box" style="position:absolute; margin-left:700px; margin-top:150px; ">
-
             <h1 class="tit wow fadeIn animated" style="visibility: visible; animation-name: fadeIn; font-weight:bold; color:white;">자유게시판</h1>
 	    	<a href="#"></a></div>
 	    	<img src="img/pop1.png" style="width:100%; height:400px; "/>
 <div class="container">
 <br/><br/><br/>
-<form method="get" action="/dbmon/noticeBoard" id="searchFrm">
+<form method="get" action="/dbmon/freeBoard" id="searchFrm">
 		<div class="input-group mb-3">
 			<div id="searchDiv">
 				<select class="custom-select" name="searchKey" id="searchKey">
