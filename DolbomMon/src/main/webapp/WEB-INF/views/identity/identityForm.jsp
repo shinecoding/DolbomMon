@@ -12,7 +12,8 @@
 <style>
    .container{
       width: 800px;
-      margin: 0 auto;   
+      margin: 0 auto;
+      min-height: 530px; 
    }
    #topidenty123{
       margin: 15px;
@@ -111,8 +112,6 @@
       <a href="#" class="list-group-item list-group-item-action"><b>돌봄몬 서비스 이용동의</b></a>
    </div>
 </div>
-<div id="footer123123">
-
-</div>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
