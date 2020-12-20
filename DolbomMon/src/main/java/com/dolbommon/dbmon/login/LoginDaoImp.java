@@ -15,6 +15,8 @@ public interface LoginDaoImp {
 	public LoginVO findUserid(LoginVO vo);
 	//비밀번호 변경
 	public int pwdChange(LoginVO vo);
+	//암호화 된 비빌번호로 변경
+	public int changePwd(LoginVO vo);
 	//로그인 유형 (선생님, 학부모)
 	public MemberVO getMemberType(String userid);
 }
