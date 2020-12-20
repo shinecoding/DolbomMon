@@ -27,25 +27,6 @@
 
 	
 	<!-- 액션 캡슐 버튼 -->
-
-	.btn1{
-	    color: #434343;
-	    padding: 10px 14px;
-	    border-radius: 16px;
-	    border: 1px solid #ddd;
-	    margin: 5px 6px 10px 0;
-	    display: inline-block;
-	    cursor: pointer;
-	    font-size: 13px;
-	    font-weight: 400;
-	    line-height: 12px;
-	    text-align: center;
-	    width:90px;
-	    background-color:white;
-	    border-color:orange;
-	    font-family: 'Jua', sans-serif;
-	}
-	
 	#actBox{
 	width: 100%; 
 	white-space: nowrap; 
@@ -55,24 +36,12 @@
   	font-family: 'Jua', sans-serif;
   	
   	}
-  	
-  	
-
-	 .list-group-item {
-	 	width:1000px;
-	 	margin:10px auto;
-	 }
-	   
 
 
 	 input[type=text]{
 	  width:100%;
 	 }
-	 /*#mapBox{
-	 width:100%;
-	 height: 610px;
-	   display:none;
-	 }*/
+	 
 	#map{
 	width:100%;
 	height:500px;
@@ -82,13 +51,10 @@
 	}
 	
 	.card>.profilepic {
-	width:100%; 
+	width:99%; 
 	height:300px;
 	border-top-left-radius:20px; 
 	border-top-right-radius:20px;
-	cursor:pointer;
-	}
-	.card{
 	cursor:pointer;
 	}
 	
@@ -101,6 +67,7 @@
 	float:left; 
 	display:block;
 	font-family: 'Jua', sans-serif;
+	cursor:pointer;
 	}
 	.iconColor i{
 	color:orange;
@@ -740,7 +707,7 @@ var value;
     <option selected>돌봄 유형을 선택하시면, 맞춤 돌봄몬을 보여드려요</option>
     
     <optgroup label="2~10세 정기 돌봄"></optgroup>
-    <option value="등하원">주 5일 등하원</option>
+    <option value="등하원">주5일등하원</option>
     <option value="놀이/학습">놀이/학습</option>
     
     
