@@ -555,7 +555,7 @@ function mapResize(){
 	
 	<select class="custom-select border-warning mt-2" id="selectType" style="width: 100%;">
 	<option selected>돌봄 유형을 선택하시면, 맞춤 일자리를 보여드려요</option>
-	<option value="정기 돌봄">2~10세 정기 돌봄</option>
+	<option value="정기돌봄">2~10세 정기 돌봄</option>
 	<option value="신생아/영아">신생아/영아 정기 돌봄</option>
 	<option value="긴급">긴급 돌봄</option>
 	<option value="all">모든 돌봄 유형 보기</option>

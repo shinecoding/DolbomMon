@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <style>
 	
-	.container{width:800px;
-}
+	.container{
+		width:800px;
+		min-height: 530px;
+	}
 
 	img{ height:110px; width:110px;}
 	
@@ -321,6 +323,6 @@
 		</div>
 	</div>
 </div>
-<jsp:include page="../footer.jsp"/>
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
