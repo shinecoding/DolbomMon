@@ -103,7 +103,15 @@ var charge; //총결제금액
 							tag += "<input type='hidden' name='apply_num' value='"+ rsp.apply_num +"'>";//카드승인번호
 							tag += "<input type='hidden' name='teacherid' value='${teacherid}'>";//카드승인번호
 							tag += "<input type='hidden' name='pay_no' value='${rbVO.job_board_no}' >"; 
-							tag += "<input type='hidden' name='origin_no' value='${rbVO.origin_no}' >"; 
+							tag += "<input type='hidden' name='origin_no' value='${rbVO.origin_no}' >";
+							var time_type = "${rbVO.time_type}";
+							tag +='<input type="hidden" value="'+time_type+'" name="time_type"/>'
+							if(time_type=='S'){
+								tag +='<input type="hidden" value="${rbVO.userid }" name="userid"/>'
+								tag +='<input type="hidden" value="${rbVO.teacherid }" name="userid_t" />'
+								tag +='<input type="hidden" value="${sdVO.select_date }" name="workdate"/>'
+								tag +='<input type="hidden" value="'+$("#hiddenPay").text()+'" name="pay"/>'
+							}
 							tag += "<input type='hidden' name='charge' value='"+$("#totalPay").text()+"' >"; 
 							tag += "</form>";
 						$("#hiddenDiv").html(tag);
@@ -119,7 +127,7 @@ var charge; //총결제금액
 			});
 			
 		}
-	
+
 	
 	function getAge(a){
 		var today = new Date();
@@ -698,6 +706,7 @@ var charge; //총결제금액
 			console.log("시급 => " + money);
 			console.log("일할 날의 수 => " + selectedDatelength);
 			var ildang = hour*money;
+			$("#hiddenPay").html(ildang);
 			$("input[name=pay]").val(ildang);
 			console.log("일당 1당=> " + ildang);
 			
@@ -958,7 +967,7 @@ var charge; //총결제금액
 				<input type="hidden" value="${rbVO.teacherid }" name="userid_t" />
 				<input type="hidden" value="${sdVO.select_date }" name="workdate"/>
 				<input type="hidden" name="pay"/>
-				<input class="btn btn-warning" type="button" id="refund" value="환불하기" style="margin-top:5px; margin-left:10px;" />
+				<!-- <input class="btn btn-warning" type="button" id="refund" value="환불하기" style="margin-top:5px; margin-left:10px;" /> -->
 			</form>
 			<c:if test="${rbVO.userid == userid and rbVO.agree=='Y' and payment=='Y'}">
 			<span class="conFont" style="color:red">결제가 완료되었습니다.</span>
@@ -972,6 +981,10 @@ var charge; //총결제금액
 <div style="width:100%; height:300px;" id="hiddenDiv">
 </div>
 <span style="display:none;" id="totalPay"></span>
+<span style="display:none;" id="hiddenPay">43000</span>
+<script>
+console.log("testete"+$('#hiddenPay').text());
+</script>
 </body>
 </html>
 
