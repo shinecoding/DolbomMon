@@ -58,6 +58,7 @@
 				data: params,
 				success: function(result){
 					replyListSelect();
+					 replyCount();
 					$("#content").val("");
 				}, error: function(){
 					console.log("댓글 쓰기 에러 발생");			
@@ -98,7 +99,9 @@
 					url: url,
 					data: params,
 					success: function(result){
+						replyCount();
 						replyListSelect();
+						
 					}, error: function(){
 						console.log("댓글 삭제 에러 발생");
 					}				

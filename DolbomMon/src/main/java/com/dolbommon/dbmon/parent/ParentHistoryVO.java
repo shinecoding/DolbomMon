@@ -22,8 +22,15 @@ public class ParentHistoryVO {
 	private String agree;
 	private String title;
 	private String payment;
+	private String status;
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getPayment() {
 		return payment;
 	}
