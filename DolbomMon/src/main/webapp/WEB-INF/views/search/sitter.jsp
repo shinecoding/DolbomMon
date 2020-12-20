@@ -83,6 +83,11 @@
 	width:30px;
 	float:right;
 	}
+	.loc{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	}
 	
 </style>
 
@@ -254,11 +259,14 @@ var value;
 							}
 							if(vo.identi_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-							} else if(vo.license_status == "Y"){
+							}
+							if(vo.license_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-							} else if(vo.school_status == "Y"){
+							}
+							if(vo.school_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-							} else if(vo.crime_status == "Y"){
+							}
+							if(vo.crime_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 							}
 							
@@ -352,11 +360,14 @@ var value;
 								}
 								if(vo.identi_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-								} else if(vo.license_status == "Y"){
+								} 
+								if(vo.license_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-								} else if(vo.school_status == "Y"){
+								} 
+								if(vo.school_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-								} else if(vo.crime_status == "Y"){
+								}
+								if(vo.crime_status == "Y"){
 									tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 								}
 								
@@ -417,7 +428,8 @@ var value;
 						tag += '<span class="ml-2" style="font-size:0.7em">';
 						if(vo.last_edit>525600){
 							tag += Math.round(vo.last_edit/525600)+'년';
-						} else if(vo.last_edit>43200){
+						} 
+						if(vo.last_edit>43200){
 							tag += Math.round(vo.last_edit/43200) +'달';
 						} else if(vo.last_edit>1440){
 							tag += Math.round(vo.last_edit/1440) +'일';
@@ -450,11 +462,14 @@ var value;
 						}
 						if(vo.identi_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-						} else if(vo.license_status == "Y"){
+						}
+						if(vo.license_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-						} else if(vo.school_status == "Y"){
+						}
+						if(vo.school_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-						} else if(vo.crime_status == "Y"){
+						}
+						if(vo.crime_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 						}
 						
@@ -546,11 +561,14 @@ var value;
 							}
 							if(vo.identi_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-							} else if(vo.license_status == "Y"){
+							} 
+							if(vo.license_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-							} else if(vo.school_status == "Y"){
+							}
+							if(vo.school_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-							} else if(vo.crime_status == "Y"){
+							}
+							if(vo.crime_status == "Y"){
 								tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 							}
 							
