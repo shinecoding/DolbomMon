@@ -11,17 +11,17 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
    .container{
-      width: 800px;
-      margin: 0 auto;
-      min-height: 530px; 
+		width: 800px;
+		margin: 0 auto;
+		min-height: 530px; 
    }
-   #topidenty123{
-      margin: 15px;
-      padding: 15px;
-      text-align: center;
-      font-size: 30px;
-      position: relative;
-   }
+	#topidenty123{
+		margin: 15px;
+		margin-top: 40px;
+		padding: 15px;
+		text-align: center;
+		font-size: 30px;
+	}
    #userBox{
       margin: 0 auto;
       width: 800px;
