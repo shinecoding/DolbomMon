@@ -104,6 +104,7 @@ var charge; //총결제금액
 							tag += "<input type='hidden' name='teacherid' value='${teacherid}'>";//카드승인번호
 							tag += "<input type='hidden' name='pay_no' value='${rbVO.job_board_no}' >"; 
 							tag += "<input type='hidden' name='origin_no' value='${rbVO.origin_no}' >"; 
+							tag += "<input type='hidden' name='charge' value='"+$("#totalPay").text()+"' >"; 
 							tag += "</form>";
 						$("#hiddenDiv").html(tag);
 						hiddenForm.submit();
@@ -634,6 +635,8 @@ var charge; //총결제금액
 		console.log("주 => " + weeek);
 		console.log("지불 예상 금액 => " + (endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
 		$("#charge").val((endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
+		$("#totalPay").html((endDivLoc - startDivLoc)*weeek*yoilCnt*money/2);
+		
 		console.log("두 날짜 사이의 일 수 => " + edl);
 		console.log("두 날짜 사이의 나머지 일 수 => " + edlll);
 		console.log("마지막 날짜 => " + edd);
@@ -701,6 +704,7 @@ var charge; //총결제금액
 			charge = money * hour * selectedDatelength;
 			console.log("예상 결제 금액 => " + charge);
 			$("#charge").val(charge);
+			$("#totalPay").html(charge);
 			console.log("sdsdsd sd => " + sd);
 			
 			$(function(){
@@ -778,7 +782,8 @@ var charge; //총결제금액
 	});
 
 	
-	
+	console.log("dddddddddddd"+$("#charge").val());
+	console.log("dddddddddddd"+charge);
 </script>
 </head>
 <body>
@@ -798,12 +803,13 @@ var charge; //총결제금액
          <c:forEach var="s" begin="1" end="5"><i class="fas fa-star"></i></c:forEach> <span class="mx-2"></span> | <span id="jobNo" class="ml-2">${rbVO.job_board_no }</span></li>
    </ul>
    </div>
+      <!-- 
    <br/>
    <ul class="list-group list-group-horizontal-sm">
          <li class="list-group-item col-6" style="text-align:center"><i class="fas fa-search mr-2"></i>지원자 수<br/><div>${rbVO.tcnt }</div></li>
          <li class="list-group-item col-6" style="text-align:center"><i class="far fa-clock mr-2"></i>프로필 작성<br/>3일 전</li>
    </ul>
-      
+       -->
     <h5>신청 내용</h5>
     <li class="list-group-item p-5" style="text-align:center"><c:if test="${rbVO.content==null || rbVO.content=='' }" >아직 작성하지 않았습니다.</c:if><c:if test="${rbVO.content!=null || rbVO.content!='' }">${rbVO.content }</c:if></li>
     <h5>돌봄 장소</h5>
@@ -965,6 +971,7 @@ var charge; //총결제금액
 </div>
 <div style="width:100%; height:300px;" id="hiddenDiv">
 </div>
+<span style="display:none;" id="totalPay"></span>
 </body>
 </html>
 
