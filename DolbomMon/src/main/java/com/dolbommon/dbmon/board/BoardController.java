@@ -51,14 +51,11 @@ public class BoardController {
 	
 	//게시판 리스트로 이동
 	@RequestMapping("/freeBoard")
-	public ModelAndView freeBoard(FreeBoardVO vo, HttpServletRequest req) {
-		
-		String nowPageTxt = req.getParameter("nowPage");
-		
+	public ModelAndView freeBoard(FreeBoardVO vo, HttpServletRequest req) {	
+		String nowPageTxt = req.getParameter("nowPage");	
 		if(nowPageTxt!=null) {
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
-		
+		}	
 		String sWord = req.getParameter("searchWord");
 		if(!(sWord == null || sWord.equals(""))) {	//검색어가 있을 때
 			vo.setSearchKey(req.getParameter("searchKey"));
@@ -77,16 +74,13 @@ public class BoardController {
 		SimpleDateFormat fomat = new SimpleDateFormat("yy-MM-dd");
 		String dateStr = fomat.format(now.getTime());
 		for(int i=0; i<list.size(); i++) {
-			FreeBoardVO dateVo = list.get(i);
-			
+			FreeBoardVO dateVo = list.get(i);		
 			if(dateStr.equals(dateVo.getWritedate().substring(2, 10))) {
 				dateVo.setWritedate((String)dateVo.getWritedate().subSequence(11, 16));	
-			}else {
-				
+			}else {			
 				dateVo.setWritedate((String)dateVo.getWritedate().subSequence(2, 10));
 			}
-		}
-		
+		}		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("list2", list2);
@@ -99,8 +93,7 @@ public class BoardController {
 	
 	//이전글 선택
 	@RequestMapping("/preContentView")
-	public ModelAndView preContentView(int no, HttpServletRequest req, HttpServletResponse res) {
-		
+	public ModelAndView preContentView(int no, HttpServletRequest req, HttpServletResponse res) {		
 		FreeBoardVO vo = new FreeBoardVO();
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
@@ -116,8 +109,7 @@ public class BoardController {
 	
 	//다음글 선택
 	@RequestMapping("/nextContentView")
-	public ModelAndView nextContentView(int no, HttpServletRequest req, HttpServletResponse res) {
-		
+	public ModelAndView nextContentView(int no, HttpServletRequest req, HttpServletResponse res) {		
 		FreeBoardVO vo = new FreeBoardVO();
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
@@ -133,8 +125,7 @@ public class BoardController {
 	
 	//게시판 글쓰기 폼으로 이동
 	@RequestMapping("/freeBoardWrite")
-	public String freeBoardWrite() {
-		
+	public String freeBoardWrite() {	
 		return "freeBoard/freeBoardWrite";
 	}
 	
@@ -144,8 +135,7 @@ public class BoardController {
             HttpServletResponse response, MultipartHttpServletRequest multiFile
             , @RequestParam MultipartFile upload) throws Exception{
 		// 랜덤 문자 생성
-        UUID uid = UUID.randomUUID();
-        
+		UUID uid = UUID.randomUUID();    
         OutputStream out = null;
         PrintWriter printWriter = null;
         
@@ -153,8 +143,7 @@ public class BoardController {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         
-        try{
-            
+        try{   
             //파일 이름 가져오기
             String fileName = upload.getOriginalFilename();
             byte[] bytes = upload.getBytes();
@@ -187,8 +176,7 @@ public class BoardController {
             
         }catch(IOException e){
             e.printStackTrace();
-        } finally {
-        
+        } finally {      
         try {
         	if(out != null) { out.close(); }
         	if(printWriter != null) {
@@ -207,9 +195,7 @@ public class BoardController {
     					 throws ServletException, IOException{
         //서버에 저장된 이미지 경로
         String path = "/DolbomMon/src/main/webapp/img";
-    
-        String sDirPath = path + uid + "_" + fileName;
-    
+        String sDirPath = path + uid + "_" + fileName;   
         File imgFile = new File(sDirPath);
         
         //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
@@ -235,10 +221,8 @@ public class BoardController {
                 imgBuf = outputStream.toByteArray();
                 length = imgBuf.length;
                 out.write(imgBuf, 0, length);
-                out.flush();
-                
-            }catch(IOException e){
-            	
+                out.flush();             
+            }catch(IOException e){         	
             }finally {
                 outputStream.close();
                 fileInputStream.close();
@@ -249,8 +233,7 @@ public class BoardController {
 	
 	//게시판 글쓰기
 	@RequestMapping(value="/freeBoardWriteOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
-	
+	public ModelAndView freeBoardWriteOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {	
 		//파일을 저장할 위치
 		String path = ses.getServletContext().getRealPath("/upload");
 		System.out.println(path);
@@ -327,10 +310,8 @@ public class BoardController {
 	
 	//게시글 보기
 	@RequestMapping("/freeBoardView")
-	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+	public ModelAndView freeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {	
 		FreeBoardVO vo = new FreeBoardVO();
-		
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
 		
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
@@ -353,8 +334,7 @@ public class BoardController {
 	//자유게시판 글 수정폼으로 이동
 	@RequestMapping("/freeBoardEdit")
 	public ModelAndView freeBoardEdit(int no) {
-		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
-		
+		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);	
 		FreeBoardVO vo = dao.freeBoardSelect(no);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("vo", vo);
@@ -416,8 +396,7 @@ public class BoardController {
 					fileNames[idx++] = fName;
 				}	//if
 			}	//for
-		}
-		
+		}	
 		System.out.println(fileNames[0]);
 		System.out.println(fileNames[1]);
 		
@@ -507,8 +486,7 @@ public class BoardController {
 	
 	//자유게시판 답글 쓰기
 	@RequestMapping(value="/freeBoardReplyOk", method=RequestMethod.POST)
-	public ModelAndView freeBoardReplyOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {
-		
+	public ModelAndView freeBoardReplyOk(FreeBoardVO vo, HttpServletRequest req, HttpSession ses) {	
 		vo.setIp(req.getRemoteAddr());	//ip 구하기	
 		vo.setUserid((String)ses.getAttribute("userid"));
 		
@@ -520,8 +498,7 @@ public class BoardController {
 		FreeBoardDaoImp dao = sqlSession.getMapper(FreeBoardDaoImp.class);
 		
 		//원글의 ref, step, lvl 선택하기
-		FreeBoardVO optVo = dao.optionSelect(vo.getNo());
-		
+		FreeBoardVO optVo = dao.optionSelect(vo.getNo());	
 		try {
 			dao.levelUpdate(optVo);
 			
@@ -530,8 +507,7 @@ public class BoardController {
 			vo.setStep(optVo.getStep()+1);
 			vo.setLvl(optVo.getLvl()+1);
 			
-			dao.replyBoardInsert(vo);
-			
+			dao.replyBoardInsert(vo);		
 			transactionManager.commit(status);
 		}catch(Exception e) {
 			transactionManager.rollback(status);
@@ -544,14 +520,11 @@ public class BoardController {
 	
 	//공지사항 게시판으로 이동
 	@RequestMapping("/noticeBoard")
-	public ModelAndView noticeBoard(NoticeBoardVO vo, HttpServletRequest req) {
-		
-		String nowPageTxt = req.getParameter("nowPage");
-		
+	public ModelAndView noticeBoard(NoticeBoardVO vo, HttpServletRequest req) {	
+		String nowPageTxt = req.getParameter("nowPage");	
 		if(nowPageTxt!=null) {
 			vo.setNowPage(Integer.parseInt(nowPageTxt));
-		}
-		
+		}	
 		String sWord = req.getParameter("searchWord");
 		if(!(sWord == null || sWord.equals(""))) {	//검색어가 있을 때
 			vo.setSearchKey(req.getParameter("searchKey"));
@@ -597,7 +570,6 @@ public class BoardController {
 	//공지사항 게시판 글쓰기
 	@RequestMapping(value="/noticeBoardWriteOk", method=RequestMethod.POST)
 	public ModelAndView noticeBoardWriteOk(NoticeBoardVO vo, HttpServletRequest req, HttpSession ses) {
-	
 		//파일을 저장할 위치
 		String path = ses.getServletContext().getRealPath("/upload");
 		//파일 업로드를 하기 위해 req에서 MultipartHttpServletRequest를 생성한다.
@@ -674,8 +646,7 @@ public class BoardController {
 	
 	//공지사항 게시글 보기
 	@RequestMapping("/noticeBoardView")
-	public ModelAndView NoticeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+	public ModelAndView NoticeBoardView(int no, HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {	
 		NoticeBoardVO vo = new NoticeBoardVO();
 		
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
@@ -699,11 +670,10 @@ public class BoardController {
 	
 	//이전글 선택
 	@RequestMapping("/preNoticeView")
-	public ModelAndView preNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {
-			
+	public ModelAndView preNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {	
 		NoticeBoardVO vo = new NoticeBoardVO();
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
-			
+		
 		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
 		NoticeBoardVO preVo = dao.preNoticeSelect(vo.getNo());
 		System.out.println(preVo.getNo());
@@ -716,11 +686,10 @@ public class BoardController {
 		
 	//다음글 선택
 	@RequestMapping("/nextNoticeView")
-	public ModelAndView nextNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {
-			
+	public ModelAndView nextNoticeView(int no, HttpServletRequest req, HttpServletResponse res) {			
 		NoticeBoardVO vo = new NoticeBoardVO();
 		vo.setNo(Integer.parseInt(req.getParameter("no")));
-			
+		
 		NoticeBoardDaoImp dao = sqlSession.getMapper(NoticeBoardDaoImp.class);
 		NoticeBoardVO nextVo = dao.nextNoticeSelect(vo.getNo());
 			
