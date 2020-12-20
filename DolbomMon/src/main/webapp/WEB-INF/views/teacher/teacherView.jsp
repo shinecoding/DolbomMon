@@ -783,23 +783,23 @@ border-radius:10px;
    		</ul>
    		<ul class="list-group list-group-horizontal-sm" >
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src=
-				<c:if test = "${!fn:contains(str, '간단청소')}">
+				<c:if test = "${!fn:contains(str, '간단 청소')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-n.svg"</c:if>
-				<c:if test = "${fn:contains(str, '간단청소')}">
+				<c:if test = "${fn:contains(str, '간단 청소')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-s.svg"</c:if>
 				/><br/>간단 청소</li>
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src=
-				<c:if test = "${!fn:contains(str, '밥챙겨주기')}">
+				<c:if test = "${!fn:contains(str, '밥 챙겨주기')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-n.svg"</c:if>
-				<c:if test = "${fn:contains(str, '밥챙겨주기')}">
+				<c:if test = "${fn:contains(str, '밥 챙겨주기')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-s.svg"</c:if>
-				/><br/>밥챙겨주기</li>
+				/><br/>밥 챙겨주기</li>
    			<li class="list-group-item col-3" style="text-align:center; border:none;"><img src=
-				<c:if test = "${!fn:contains(str, '간단설거지')}">
+				<c:if test = "${!fn:contains(str, '간단 설거지')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-n.svg" </c:if>
-				<c:if test = "${fn:contains(str, '간단설거지')}">
+				<c:if test = "${fn:contains(str, '간단 설거지')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-s.svg" </c:if>						
-				/><br/>간단설거지</li>
+				/><br/>간단 설거지</li>
    		
    		</ul>
    		<ul class="list-group list-group-horizontal-sm" >

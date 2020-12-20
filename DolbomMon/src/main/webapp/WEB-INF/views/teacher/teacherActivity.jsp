@@ -135,9 +135,9 @@ width:55px;
 				<input type="checkbox" name="activity_type" value="영어놀이" id="act6" alt="1" <c:if test = "${fn:contains(str, '영어놀이')}" > checked </c:if>/>
 				<input type="checkbox" name="activity_type" value="학습지도" id="act7" alt="1" <c:if test = "${fn:contains(str, '학습지도')}" > checked </c:if>/>
 				<input type="checkbox" name="activity_type" value="체육놀이" id="act8" alt="1" <c:if test = "${fn:contains(str, '체육놀이')}" > checked </c:if>/>
-				<input type="checkbox" name="activity_type" value="간단청소" id="act9" alt="1" <c:if test = "${fn:contains(str, '간단청소')}" > checked </c:if>/>
-				<input type="checkbox" name="activity_type" value="밥챙겨주기" id="act10" alt="1" <c:if test = "${fn:contains(str, '밥챙겨주기')}" > checked </c:if>/>
-				<input type="checkbox" name="activity_type" value="간단설거지" id="act11" alt="1" <c:if test = "${fn:contains(str, '간단설거지')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="간단 청소" id="act9" alt="1" <c:if test = "${fn:contains(str, '간단 청소')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="밥 챙겨주기" id="act10" alt="1" <c:if test = "${fn:contains(str, '밥 챙겨주기')}" > checked </c:if>/>
+				<input type="checkbox" name="activity_type" value="간단 설거지" id="act11" alt="1" <c:if test = "${fn:contains(str, '간단 설거지')}" > checked </c:if>/>
 				<input type="checkbox" name="activity_type" value="장기입주" id="act12" alt="1" <c:if test = "${fn:contains(str, '장기입주')}" > checked </c:if>/>
 				<input type="checkbox" name="activity_type" value="단기입주" id="act13" alt="1" <c:if test = "${fn:contains(str, '단기입주')}" > checked </c:if>/>
 			</div>
@@ -202,21 +202,21 @@ width:55px;
 	   			
 				<div class="row">   		
 				<label for="act9"><img src=
-				<c:if test = "${!fn:contains(str, '간단청소')}">
+				<c:if test = "${!fn:contains(str, '간단 청소')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-n.svg"</c:if>
-				<c:if test = "${fn:contains(str, '간단청소')}">
+				<c:if test = "${fn:contains(str, '간단 청소')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cleaning-s.svg"</c:if>
 				/><br/>간단 청소</label>
 				<label for="act10" ><img src=
-				<c:if test = "${!fn:contains(str, '밥챙겨주기')}">
+				<c:if test = "${!fn:contains(str, '밥 챙겨주기')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-n.svg"</c:if>
-				<c:if test = "${fn:contains(str, '밥챙겨주기')}">
+				<c:if test = "${fn:contains(str, '밥 챙겨주기')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-cook-s.svg"</c:if>
 				/><br/>밥 챙겨주기</label>
 				<label for="act11" ><img src=
-				<c:if test = "${!fn:contains(str, '간단설거지')}">
+				<c:if test = "${!fn:contains(str, '간단 설거지')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-n.svg" </c:if>
-				<c:if test = "${fn:contains(str, '간단설거지')}">
+				<c:if test = "${fn:contains(str, '간단 설거지')}">
 				"https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/form/join-washing-s.svg" </c:if>						
 				/><br/>간단 설거지</label><br/>
 				<label></label>
