@@ -58,7 +58,7 @@
 				data: params,
 				success: function(result){
 					replyListSelect();
-					 replyCount();
+					replyCount();
 					$("#content").val("");
 				}, error: function(){
 					console.log("댓글 쓰기 에러 발생");			
@@ -101,7 +101,6 @@
 					success: function(result){
 						replyCount();
 						replyListSelect();
-						
 					}, error: function(){
 						console.log("댓글 삭제 에러 발생");
 					}				
@@ -152,9 +151,9 @@
 			data: data,
 			success: function(result){
 				var $result = $(result);
-				var tag = "";
+				var tag = "";;
 				$result.each(function(i, r){
-					if(r!=0){
+					if(r>0){
 						tag += "댓글 수 <b>"+r+"개</b>";	
 					}
 				});
