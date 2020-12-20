@@ -935,9 +935,8 @@ var charge; //총결제금액
 	<div style=" float:right; height:43px; line-height:43px;">
 
 		<c:if test="${rbVO.agree=='T' and rbVO.teacherid == userid}">
-		 
-		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		<input class="btn btn-warning cBtn" type="button" value="계약서 수락" id="Y" style="margin-top:5px; margin-left:10px;" />
+		<input class="btn btn-warning cBtn" type="button" value="계약서 거절" id="N" style="margin-top:5px; margin-left:10px;" />
 		</c:if>
 		<c:if test="${rbVO.teacherid == userid and rbVO.agree=='Y'}">
 			<span class="conFont" style="color:green">수락한 계약서입니다.</span>
