@@ -46,7 +46,7 @@ public class RecruitBoardController {
 	@RequestMapping("/parent_list") 
 	public ModelAndView parent(HttpSession ses, HttpServletRequest req) {
 		String userid = (String)ses.getAttribute("userid");
-		String testId = "test1";
+		String testId = "parent1";
 		RecruitBoardDaoImp dao = sqlSession.getMapper(RecruitBoardDaoImp.class);
 		
 		List<RecruitBoardVO> list2 = dao.recruitBoardList(99999);
@@ -54,7 +54,7 @@ public class RecruitBoardController {
 		
 		HashSet<RecruitBoardVO> hash = dao.selectAllParent();//지도의 모든 선생/부모 위치
 		RecruitBoardVO mvo = null;
-		if(req.getParameter("userid")==null) {
+		if(ses.getAttribute("userid")==null) {
 			//로그인 안 했을 때 지도 위치 지정>test1계정의 위치 띄워줌
 			mvo = dao.selectMyMap(testId);
 		} else {

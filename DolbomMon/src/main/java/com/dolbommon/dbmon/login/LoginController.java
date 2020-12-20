@@ -56,8 +56,8 @@ public class LoginController {
 		//기존 세션값 제거	
 		if(ses.getAttribute("logStatus")!=null) {
 			ses.removeAttribute("logStatus");	
+
 		}
-		
 		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
 		LoginVO resultVO = dao.loginOk(vo);
 		ModelAndView mav = new ModelAndView();
@@ -104,10 +104,8 @@ public class LoginController {
 		Cookie cookie = new Cookie("loginCookie", null);
 		cookie.setMaxAge(0);
 		res.addCookie(cookie);
+		ses.invalidate();
 		
-		if(ses.getAttribute("logStatus")!=null) {
-			ses.invalidate();
-		}
 		
 		return "home";
 	}
@@ -126,6 +124,12 @@ public class LoginController {
 		vo.setUsername((String) req.getParameter("username"));
 		vo.setBirth((String) req.getParameter("birth"));
 		vo.setTel1((String) req.getParameter("tel1"));
+
+		StringBuffer sb1 = new StringBuffer(vo.getTel1());
+		StringBuffer sbTel = sb1.insert(3, "-");
+		sbTel = sb1.insert(8, "-");
+		String strTel = sbTel.toString(); // 010-1111-2222
+		vo.setTel1(strTel);
 
 		StringBuffer sb2 = new StringBuffer(vo.getBirth());
 		StringBuffer sbBirth = sb2.insert(4, "-");
