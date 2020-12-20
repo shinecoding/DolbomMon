@@ -40,6 +40,10 @@ public class RecruitBoardVO {
 		private String age;
 		private String payment;
 		private String child_birth;
+		private String pay_date;
+		private String reimburse;
+		private String refund_status;
+		private String reject;
 		
 		
 		public String getChild_birth() {
@@ -263,6 +267,30 @@ public class RecruitBoardVO {
 		}
 		public void setAge(String age) {
 			this.age = age;
+		}
+		public String getPay_date() {
+			return pay_date;
+		}
+		public void setPay_date(String pay_date) {
+			this.pay_date = pay_date;
+		}
+		public String getReimburse() {
+			return reimburse;
+		}
+		public void setReimburse(String reimburse) {
+			this.reimburse = reimburse;
+		}
+		public String getRefund_status() {
+			return refund_status;
+		}
+		public void setRefund_status(String refund_status) {
+			this.refund_status = refund_status;
+		}
+		public String getReject() {
+			return reject;
+		}
+		public void setReject(String reject) {
+			this.reject = reject;
 		}		
 		
 		

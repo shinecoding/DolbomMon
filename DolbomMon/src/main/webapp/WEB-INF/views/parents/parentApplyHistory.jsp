@@ -195,9 +195,9 @@
 														}
 													});
 												</script>
-											<br/><span>${list2.care_addr } </span>
-											<br/><span>${list2.writedate }</span>
-											<br/><span style="color: orange;">희망시급 ${list2.wish_wage }원
+											<br/>돌봄 장소 | <span style="color:orange;">${list2.care_addr } </span>
+											<br/>지원한 날짜 | <span style="color:orange;">${list2.writedate }</span>
+											<br/>시급  | <span style="color: orange;">${list2.wish_wage }원
 											<c:if test="${list2.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</p>
 										</div>
@@ -256,7 +256,7 @@
 												<script>
 													$(function(){
 														var cb = '${list.child_birth}';
-														var child_age1;
+														var child_age1; 
 														var child_age2;
 														
 														function getAge(a){

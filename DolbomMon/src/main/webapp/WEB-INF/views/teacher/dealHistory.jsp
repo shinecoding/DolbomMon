@@ -51,6 +51,7 @@
 	    width: 310px;
 	    padding: 3px;
 	    left: 180px;
+	    float:left;
 	}
 	#offerTitle{
 		font-size: 1.1em;
@@ -75,19 +76,16 @@
 	}
 </style>
 <script>
-$(function(){
 	var popupWidth = 1060;
 	var popupHeight = 596;
 	var popupX = (window.screen.width / 2) - (popupWidth / 2);
 	var popupY= (window.screen.height / 2) - (popupHeight / 2);
-	$(document).on("click",".viewContract",function(){
+	function contractOpen(no, id, payment){
 		popupWidth = 1060;
 		popupHeight = 1600;
-		var origin_no = $(this).attr('id');
-		window.open('/dbmon/contractView?origin_no='+origin_no, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
-	});
+		window.open('/dbmon/contractView?origin_no='+no+'&teacherid='+id+'&payment='+payment, '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
+	}
 	
-})
 </script>
 
 </head>
@@ -108,16 +106,16 @@ $(function(){
 							<div class="col-sm-12" style="padding: 20px;">
 								<div class="card">
 									<div class="card-body">
-										<div id="imgBox"><img src="img/ch1.PNG" class="rounded-circle"></div>
-										<div class="badge badge-warning badge-pill ml-1" style="position: absolute; top: 170px; left: 53px;"><span>0</span>명 지원</div>
+										<div id="imgBox" style="text-align:center;">
+											<img <c:if test="${vo.pic==null || vo.pic=='' }" >src="img/profilepic.png" </c:if><c:if test="${vo.pic!=null || vo.pic != '' }" >src="upload/${vo.pic}"</c:if>class="rounded-circle" style="height:110px; width:110px;"/>
+											</br><div style="font-size:15px;" class="badge badge-warning badge-pill ml-1" >${vo.username }</div>
+										</div>
 										<div id="offerBox" >
-											<span class="card-title" id="offerTitle" style="line-height: 2em;"><b>충북에서 돌봄몬을 찾습니다</b></span>
-											<p class="card-text" style="line-height: 1.8em;"><span style="color: gray;">no. ${vo.job_board_no} | ${vo.userid }</span>
-											<br/><span><b>신생아 1명, 유아 1명</b> | ${vo.writedate }</span>
-											<br/><span>${vo.care_addr } </span>
-											<br/><span>12/12 시작</span>
-											<br/><span style="color: orange;">희망시급 ${vo.wish_wage }원
-											<c:if test="${vo.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+											<p class="card-text" style="line-height: 1.8em;">학부모 아이디 | <span style="color:orange;">${vo.userid }</span>
+											<br/>등록일 | <span style="color:orange;">${vo.writedate }</span>
+											<br/>결제일 | <span style="color:orange;">${vo.writedate }</span>
+											<br/>돌봄 장소 | <span style="color:orange;">${vo.care_addr } </span>
+											<br/>시급 | <span style="color: orange;">${vo.wish_wage }원</span>
 											</p>
 										</div>
 										<!-- 
@@ -129,7 +127,7 @@ $(function(){
 										</div>
 										 -->
 									</div>
-								<div class="card-footer btn" onclick="location.href='parentView?no=${vo.job_board_no}'">계약서 자세히 보기</div>
+								<div class="card-footer btn" onclick="contractOpen('${vo.origin_no}', '${vo.teacherid }', '${vo.payment }')">계약서 자세히 보기</div>
 								</div>
 							</div>
 						</c:forEach>
