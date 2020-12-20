@@ -105,13 +105,7 @@
 	border-radius:3px;
 	border-color: gray;
 	}
-</style>
-<script>
-	$(function(){
-		console.log.("identi=="+$("identi").val());
-		
-	});
-</script>	
+</style>	
 </head>
 <body>
 <div id="top">
