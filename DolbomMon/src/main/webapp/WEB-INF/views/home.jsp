@@ -195,7 +195,7 @@
    .jb-text p { 
       margin-top: -24px; 
       text-align: center; 
-      font-size: 48px; color: #ffffff; 
+      font-size:56px; color: #ffffff; 
       font-family: 'Noto Sans KR', sans-serif;
 
    }
@@ -234,8 +234,7 @@
 </video>
 
    <div class="jb-text">
-      <p style="font-family:'Noto Sans KR', sans-serif;">돌봄몬</p>
-      <h3 style="color:white;">Services</h3>
+      <p style="font-family:'Noto Sans KR', sans-serif; font-size:56px;">돌봄몬</p>
       <br/><br/><br/><br/>
       <h2 style="color:white">육아에 도움이 필요할 땐 언제 어디서나</h2>
       <h2 style="font-weight:bold; color:gold;">돌봄몬이 해결하겠습니다.</h2>
