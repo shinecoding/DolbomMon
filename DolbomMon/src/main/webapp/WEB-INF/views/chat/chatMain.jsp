@@ -34,6 +34,8 @@
 		    selectRoom(roomNo);
 		    var anotherId = $(this).children('div.text').children('h6').children('span.anotherUser').text();
 		    $("#insertId").html(anotherId+"님과 채팅중입니다."); 
+		    var inum = $(this).children().attr("alt")
+		    $(".imgc").attr("src","upload/tmdgus ("+inum+").png");
 		    //$(this).children('div.imgChange').html('<img src="icon/message/chaticon2.png" class="imgResize"/>');
 		});
 		/*
@@ -189,18 +191,22 @@
 								}
 								console.log(rVo.num);
 								tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
-								tag+='<img class="profile-image" src="upload/dsdds (24).png" alt="">';
+								tag+='<img class="profile-image imgt" src="upload/tmdgus ('+rVo.num+').png" alt="'+rVo.num+'">';
 								tag+='<div class="text">';
 								tag+='<h6>'+rVo.roomseq+' : ';
 								if(rVo.userid=="${myId}"){
 									if(startChatRoom==0){
 										$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
+										$(".imgc").attr("src","upload/tmdgus ("+rVo.num+").png");
+										console.log("---"+rVo.num);
 										startChatRoom++;
 									}
 									tag+="<span class='anotherUser'>"+rVo.userid_t;
 								}else{
 									if(startChatRoom==0){
 										$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
+										$(".imgc").attr("src","upload/tmdgus ("+rVo.num+").png");
+										console.log("----"+rVo.num);
 										startChatRoom++;
 									}
 									tag+="<span class='anotherUser'>"+rVo.userid
@@ -476,7 +482,21 @@
 	  <div class="col-md-4 border-right userBox">
 		<div class="settings-tray">
 		<div class="friend-drawer no-gutters friend-drawer--grey">
-			<img class="profile-image" src="https://mblogthumb-phinf.pstatic.net/MjAxNzA0MDNfMjEx/MDAxNDkxMTc1MTc3MDU2._c0rnvCrPIVJUFdB40z-tR3eUTv2aC9CMmm9b57lgmUg.FGaQd94-twbynMnhrvYW1gIdijL1vAbXcXQEzsT3WGYg.JPEG.eungee_e/se3_image_570625329.jpg?type=w800" alt="Profile img">
+			<c:choose>
+				<c:when test='${myId=="parent1000"}'>
+					<img class="profile-image imgt" src="upload/tmdgus (20).png" alt="20">
+				</c:when>
+				<c:when test='${myId=="sitter1000"}'>
+					<img class="profile-image imgt" src="upload/tmdgus (20).png" alt="20">
+				</c:when>
+				<c:when test='${myId=="sitter1001"}'>
+					<img class="profile-image imgt" src="upload/tmdgus (9).png" alt="20">
+				</c:when>
+				<c:otherwise>
+					<img class="profile-image imgt" src="upload/tmdgus (5).png" alt="20">
+				</c:otherwise>
+			</c:choose>
+			
 			<!-- 본인 프로필 이미지 -->
 			<div class="text">
 			  <h4 style="line-height:45px;">${myId}</h4>
@@ -505,7 +525,7 @@
 	  <div class="col-md-8 chatBox">
 		<div class="settings-tray">
 			<div class="friend-drawer no-gutters friend-drawer--grey">
-			<img class="profile-image" src="https://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg" alt="">
+			<img class="profile-image imgc" src="upload/tmdgus (20).png" alt="">
 			<div class="text">
 			  <h6 id="insertId"></h6>
 			  <p class="text-muted">상태창</p>
