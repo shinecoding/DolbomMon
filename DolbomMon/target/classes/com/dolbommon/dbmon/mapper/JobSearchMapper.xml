@@ -101,7 +101,7 @@
 		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
 		 l.userid=#{userid} and m.who = 'T' order by t.last_edit asc)
 		 where <![CDATA[rownum <=${currentPageRecord}]]> order by last_edit desc)
-		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by last_edit asc
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by last_edit asc nulls last
 		
 		
 	</select>
@@ -120,7 +120,7 @@
 		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
 		 l.userid=#{userid} and m.who = 'T' order by c.certi_cnt desc)
 		 where <![CDATA[rownum <=${currentPageRecord}]]> order by certi_cnt asc)
-		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by certi_cnt desc
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by certi_cnt desc nulls last
 		
 	</select>
 	<select id="likeWageLow" resultType="com.dolbommon.dbmon.search.TeacherVO">
@@ -138,7 +138,7 @@
 		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
 		 l.userid=#{userid} and m.who = 'T' order by t.desired_wage asc)
 		 where <![CDATA[rownum <=${currentPageRecord}]]> order by desired_wage desc)
-		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by desired_wage asc
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by desired_wage asc nulls last
 	</select>
 	<select id="likeWageHigh" resultType="com.dolbommon.dbmon.search.TeacherVO">
 		select * from
@@ -155,7 +155,7 @@
 		 on t.userid= c.userid join liket l on t.userid=l.cardid where 
 		 l.userid=#{userid} and m.who = 'T' order by t.desired_wage desc)
 		 where <![CDATA[rownum <=${currentPageRecord}]]> order by desired_wage asc)
-		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by desired_wage desc	
+		 where <![CDATA[rownum <=${lastPageRecordCount}]]> order by desired_wage desc nulls last	
 	</select>
 	<!-- 지도 -->
 	<select id="selectAllTeacher" resultType="com.dolbommon.dbmon.search.TeacherVO">
