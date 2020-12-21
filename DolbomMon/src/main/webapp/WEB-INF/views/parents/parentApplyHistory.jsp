@@ -71,7 +71,7 @@
 	.cancel{
 		position: relative;
 	    margin: 0 5px;
-	    top: -41px;
+	    top: -70px;
 	    right: -620px;
 	}
 	.msg{
@@ -201,6 +201,7 @@
 											<c:if test="${list2.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</p>
 										</div>
+										<div><input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" /></div>
 										<div style="height:1px;">
 											<c:if test="${list2.agree!='N' }">
 											</c:if>
@@ -253,7 +254,7 @@
 											<div id="offerBox" >
 												<div class="card-title wordCut" id="offerTitle" style="line-height: 2em;width:410px;">${list.title }</div>
 												<p class="card-text" style="width:400px;line-height:1.8em;"><span style="color: gray;">no. ${list.job_board_no} | ${list.userid }</span>
-												<br/><span style="float:left;">자녀 정보 : </span><span id="${list.job_board_no }" ></span> 
+												<br/><span style="float:left;">자녀 정보 | </span><span id="${list.job_board_no }" ></span> 
 												<script>
 													$(function(){
 														var cb = '${list.child_birth}';
@@ -306,10 +307,13 @@
 														}
 													});
 												</script>
-												<br/><span>${list.care_addr } </span>
-												<br/><span>등록일 - ${list.writedate }</span>
-												<br/><span style="color: orange;">희망시급 ${list.wish_wage }원
+												<br/>돌봄 장소 | <span style="color:orange">${list.care_addr } </span>
+												<br/>등록 날짜 | <span style="color:orange">${list.writedate }</span>
+												<br/>희망시급 | <span style="color: orange;"> ${list.wish_wage }원
 												<c:if test="${list.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
+											</div>
+											<div style="float:left;">
+												<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
 											</div>
 											<div style="height:1px;">
 											</div>

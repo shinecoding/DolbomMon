@@ -294,6 +294,7 @@
 											<br/>신청날짜 | <span style="color:orange;">${list2.writedate }</span>
 											<br/>희망시급 | <span style="color: orange;">${list2.wish_wage }원</span>
 										</div>
+										<div><input class="btn btn-outline-warning cancel" type="button" value="거절하기" id="cancel" style="margin:0 10px;" /></div>
 										<div style="height:1px;">
 											<c:if test="${list2.agree=='T'}">
 												<span style="color:orange" class="msg" id="msg">제안 수락 대기중입니다.</span>
