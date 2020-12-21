@@ -169,11 +169,14 @@ $(function(){
 						}
 						if(vo.identi_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-						} else if(vo.license_status == "Y"){
+						} 
+						if(vo.license_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-						} else if(vo.school_status == "Y"){
+						} 
+						if(vo.school_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-						} else if(vo.crime_status == "Y"){
+						} 
+						if(vo.crime_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 						}
 						tag += '<span class="trash"><i class="far fa-trash-alt float-right"></i></span>';
@@ -292,11 +295,14 @@ $(function(){
 						}
 						if(vo.identi_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">등초본</div>';
-						} else if(vo.license_status == "Y"){
+						} 
+						if(vo.license_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">선생님</div>';
-						} else if(vo.school_status == "Y"){
+						}
+						if(vo.school_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">학교</div>';
-						} else if(vo.crime_status == "Y"){
+						}
+						if(vo.crime_status == "Y"){
 							tag += '<div class="badge badge-pill badge-warning align-top mr-1">성범죄안심</div>';
 						}
 						tag += '<span class="trash"><i class="far fa-trash-alt float-right"></i></span>';

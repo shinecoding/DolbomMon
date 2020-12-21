@@ -14,6 +14,22 @@ public class PaymentVO {
 	private String apply_num;
 	private String tel;
 	private String email;
+	private String refund;
+	private String deposit;
+	
+	
+	public String getRefund() {
+		return refund;
+	}
+	public void setRefund(String refund) {
+		this.refund = refund;
+	}
+	public String getDeposit() {
+		return deposit;
+	}
+	public void setDeposit(String deposit) {
+		this.deposit = deposit;
+	}
 	public String getPay_no() {
 		return pay_no;
 	}

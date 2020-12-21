@@ -625,7 +625,7 @@ border-radius:10px;
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
 	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'|| cvo.school_status=='X'||cvo.school_status==null}">
-	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+	  	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.school_status=='Y'}">
 	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>
@@ -832,14 +832,13 @@ border-radius:10px;
 		<div style="font:0.8em gray; text-align:center; width:100%;" >※돌봄몬의 개인정보보호를 위해 대략적인 위치만 표시됩니다.</div>
 		</c:if>
 				
+		<c:if test="${list!='[]'}">
    		<h5>관련 경험</h5>
    		<ul class="list-group">
    		<li class="list-group-item p-4">
-   		<c:if test="${list==null}">
-   		작성 시 부모로부터<br/>
-		4배 더 많은 선택을 받게 됩니다!
-   		</c:if>
-   		<c:if test="${list!=null }">
+   		
+   		
+   		<c:if test="${list!=null}">
 	   		<c:forEach var="evo" items="${list}">
 	   			<b>${evo.exp_content}</b><br/>
 	   			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
@@ -847,13 +846,17 @@ border-radius:10px;
    		</c:if>
    		</li>
    		</ul>
+   		</c:if>
+ 
    		
-   		<c:if test="${review!=null}">
+   		<c:if test="${review!='[]'}">
    		<h5>후기</h5>
    		<ul class="list-group">
    		<li class="list-group-item">
    		<div style="overflow:scroll; overflow-x:hidden; width:100%; max-height:400px;"> 
+   		
    		<c:forEach var="rvo" items="${review}">
+   		
    			<ul class="list-group list-group-horizontal" style="margin:0; padding:0;">
 	   			<li class="list-group-item" style="border:none; margin-top:5px;padding-left:0;">
 	   				<img src="upload/${rvo.pic}" style="width:60px; height:60px; border-radius:10px;margin-left:10px;"/>
@@ -895,8 +898,10 @@ border-radius:10px;
    		</ul>
    		</c:if>
    		
+
    <br/>
-   <br/>
+</div>
+
    	
    
    
@@ -937,7 +942,7 @@ marker.setMap(map);
 
 
    
-</div>
+
 
 
 

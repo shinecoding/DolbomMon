@@ -546,7 +546,7 @@
 </video>
 <form class="form-card" name="form-card" id="managerForm" > <!--  method="post" action="/dbmon/managerInsert" -->
     <fieldset class="form-fieldset">
-        <legend class="form-legend">관리자 등록</legend>
+        <legend class="form-legend">관리자 수정</legend>
         <div class="form-checkbox form-checkbox-inline">
             <div class="form-checkbox-legend"><h5 style="margin-left:1px;">권한 설정</h5></div>
             <label class="form-checkbox-label">
