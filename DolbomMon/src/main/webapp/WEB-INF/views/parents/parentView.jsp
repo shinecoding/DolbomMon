@@ -830,7 +830,6 @@
 <body>
 
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/>
 <div class="container">
 	<div style="margin:20px 0;">
   	 	<img class="rounded-circle mx-auto d-block " id="profimg" <c:if test="${rbVO.pic==null || rbVO.pic==''}" >src="img/profilepic.png" </c:if><c:if test="${rbVO.pic!=null || rbVO.pic != '' }" >src="upload/${rbVO.pic}"</c:if>/>

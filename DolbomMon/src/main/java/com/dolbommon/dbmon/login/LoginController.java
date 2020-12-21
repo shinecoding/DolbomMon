@@ -112,7 +112,6 @@ public class LoginController {
 		return "home";
 	}
 
-	
 	// 계정찾기 폼으로 이동
 	@RequestMapping("/searchId")
 	public String searchId() {
@@ -222,27 +221,6 @@ public class LoginController {
 		}
 		return mav;
 	}
-
-	// 임시로그인버튼 작동.. 추후 삭제 요망
-	@RequestMapping("/temporaryLogin")
-	public ModelAndView temporaryLogin(LoginVO vo, HttpSession ses) {
-		LoginDaoImp dao = sqlSession.getMapper(LoginDaoImp.class);
-		vo.setUserid("test1212");
-		vo.setUserpwd("03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4");
-
-		LoginVO resultVO = dao.loginOk(vo);
-		ModelAndView mav = new ModelAndView();
-		
-		if(resultVO==null) {
-			mav.setViewName("redirect:login");			
-		}else {
-			ses.setAttribute("userid", resultVO.getUserid());
-			ses.setAttribute("username", resultVO.getUsername());
-			ses.setAttribute("logStatus", "Y");
-			mav.setViewName("redirect:/");	
-		}
-		return mav;
-	}
 	
 	@RequestMapping("/temporaryLoginP")
 	public ModelAndView temporaryLoginP(LoginVO vo, HttpSession ses) {
@@ -263,5 +241,4 @@ public class LoginController {
 		}
 		return mav;
 	}
-
 }

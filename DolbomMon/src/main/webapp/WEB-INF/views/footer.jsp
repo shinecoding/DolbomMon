@@ -24,7 +24,7 @@
 	<div id="footer_textarea123" style=" width: 800px; margin: auto;">
 	<div style="float:left; margin: 0px; margin-top:27px; margin-left:50px;">
 	<img src="<%=request.getContextPath()%>/img/mylogogray.png" 
-	         class="logo147" alt="Logo" src="home" style=" width:150px;" 
+	         class="logo147" alt="Logo" src="home" style=" width:150px; height: 70px;" 
 	         Onclick="location.href='/dbmon'"/></div>
 	   <div id="footer_TEXTarea" style="position: relative;">
 		<a style="margin-left:100px;">돌봄몬<br/></a>
