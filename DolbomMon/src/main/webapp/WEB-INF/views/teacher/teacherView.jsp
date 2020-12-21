@@ -898,10 +898,10 @@ border-radius:10px;
    		</ul>
    		</c:if>
    		
-   <br/>
+
    <br/>
 </div>
-   <br/>
+
    	
    
    
@@ -942,7 +942,7 @@ marker.setMap(map);
 
 
    
-</div>
+
 
 
 
