@@ -18,9 +18,11 @@
 	h1{text-align:center;}
 	i{color:orange;}
 	#title{
-		margin:20px 5px;
-		display:block;
-	width:100%;
+		margin: 15px;
+		margin-top: 40px;
+		padding: 15px;
+		text-align: center;
+		font-size: 30px;
 	}
 	#titlefont{
 		font-size: 25px;
@@ -345,8 +347,10 @@ $(function(){
 </script>
 </head>
 <body>
+<div id="top">
+   <%@include file="/WEB-INF/views/top.jsp"%>
+</div>
 	<div class="container">
-	
 	<div id="title">
    		<div id="titlefont">찜한 돌봄몬</div>
 	</div>
@@ -471,11 +475,9 @@ $(function(){
 				</c:if>
 			</li>
 		</ul>
-	</nav>
-	
-		
+	</nav>	
 	<br/>
-	</div><!-- Container -->
-	
+	</div><!-- Container -->	
 </body>
 </html>
+<jsp:include page="../footer.jsp"/>
