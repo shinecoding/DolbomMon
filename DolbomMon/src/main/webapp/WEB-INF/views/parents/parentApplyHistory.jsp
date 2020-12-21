@@ -201,8 +201,9 @@
 											<c:if test="${list2.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</p>
 										</div>
-										<div><input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" /></div>
+										
 										<div style="height:1px;">
+											<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 											<c:if test="${list2.agree!='N' }">
 											</c:if>
 										</div>
@@ -312,10 +313,9 @@
 												<br/>희망시급 | <span style="color: orange;"> ${list.wish_wage }원
 												<c:if test="${list.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</div>
-											<div style="float:left;">
-												<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
-											</div>
+
 											<div style="height:1px;">
+												<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 											</div>
 											<div style="height:1px;">
 											<c:if test="${list.tcnt!='0'}">
