@@ -233,13 +233,14 @@
 <video class="redution" src='img/video.mp4' width='100%' muted="muted" autoplay loop>
 </video>
 
-   <div class="jb-text">
-      <p style="font-family:'Noto Sans KR', sans-serif;">돌봄몬</p>
-      <h3 style="color:white;">Services</h3>
+<div class="jb-text">
+      <p style="font-family:'Noto Sans KR', sans-serif; font-size:58px;">돌봄몬</p>
+      <h3 style="color:white;"></h3>
       <br/><br/><br/><br/>
       <h2 style="color:white">육아에 도움이 필요할 땐 언제 어디서나</h2>
       <h2 style="font-weight:bold; color:gold;">돌봄몬이 해결하겠습니다.</h2>
    </div>
+
 
  </div>
 <!-- -------------------bx슬라이더------------- -->
