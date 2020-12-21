@@ -343,6 +343,8 @@ public class DealController {
 		if(origin_no!=pay_no && !origin_no.equals(pay_no)) {
 			dao.updateStatusP(origin_no); 
 		}
+		
+		/*
 		String workdate;
 		String userid;
 		String userid_t;		
@@ -370,7 +372,7 @@ public class DealController {
 			System.out.println("날짜 출력 => " + workdateArr[i]);
 			result = dao.insertTotalPay(userid, userid_t, pay, workdateArr[i], pay_no2);
 			}
-		}
+		}*/
 		
 		//origin_no = dao.selectOrigin_no(pay_no);
 		//dao.updatePayment(origin_no);
