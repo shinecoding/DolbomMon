@@ -132,7 +132,7 @@ public class BoardController {
 	//이미지 업로드	
 	@RequestMapping(value="/imageUpload.do", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request,
-            HttpServletResponse response, MultipartHttpServletRequest multiFile
+            HttpServletResponse response, HttpSession ses, MultipartHttpServletRequest multiFile
             , @RequestParam MultipartFile upload) throws Exception{
 		// 랜덤 문자 생성
 		UUID uid = UUID.randomUUID();    
@@ -149,7 +149,7 @@ public class BoardController {
             byte[] bytes = upload.getBytes();
             
             //이미지 경로 생성
-            String path = "/DolbomMon/src/main/webapp/img";// fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다.
+            String path = ses.getServletContext().getRealPath("/upload/upload");// fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다.
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
             
@@ -191,10 +191,10 @@ public class BoardController {
 	
 	@RequestMapping("/ckImgSubmit.do")
     public void ckSubmit(@RequestParam(value="uid") String uid, 
-    					 @RequestParam(value="fileName") String fileName, HttpServletRequest request, HttpServletResponse response) 
+    					 @RequestParam(value="fileName") String fileName, HttpServletRequest request, HttpServletResponse response, HttpSession ses) 
     					 throws ServletException, IOException{
         //서버에 저장된 이미지 경로
-        String path = "/DolbomMon/src/main/webapp/img";
+        String path = ses.getServletContext().getRealPath("/upload/upload");
         String sDirPath = path + uid + "_" + fileName;   
         File imgFile = new File(sDirPath);
         
