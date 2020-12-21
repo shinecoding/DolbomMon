@@ -4,29 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.QnA.QnaDaoImp">
 	<select id ="QnaList" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, userid, writedate from qna where type=1
+		select seq, subject, userid, to_char(writedate, 'YYYY-MM-DD') as writedate from qna where type=1
 		order by seq desc 
 	</select>
 	<select id ="QnaList2" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, userid, writedate from qna where type=2
+		select seq, subject, userid, to_char(writedate, 'YYYY-MM-DD') as writedate from qna where type=2
 		order by seq desc 
 	</select>
 	<select id ="QnaList3" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, userid, writedate from qna where type=3
+		select seq, subject, userid, to_char(writedate, 'YYYY-MM-DD') as writedate from qna where type=3
 		order by seq desc 
 	</select>
 	
 	<select id="qnaBoardView" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, content, userid, writedate
+		select seq, subject, content, userid, to_char(writedate, 'YYYY-MM-DD') as writedate
 		from qna where seq=#{param1}
 	</select> 
 	
 	<select id="qnaBoardView2" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, content, userid, writedate
+		select seq, subject, content, userid, to_char(writedate, 'YYYY-MM-DD') as writedate
 		from qna where seq=#{param1}
 	</select> 
 	<select id="qnaBoardView3" parameterType="int" resultType="com.dolbommon.dbmon.QnA.QnAVO">
-		select seq, subject, content, userid, writedate
+		select seq, subject, content, userid, to_char(writedate, 'YYYY-MM-DD') as writedate
 		from qna where seq=#{param1}
 	</select> 
 </mapper> 

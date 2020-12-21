@@ -38,7 +38,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/top.jsp"%>
-<hr/><br/>
+<br/>
 	<div class="container">
 		<div id="top">
 			<b>Q&A 게시글 보기</b>
@@ -47,11 +47,11 @@
 		
 			<tbody>
 				<tr>
-					<th scope="col" width="130px">글번호</th>
+					<th scope="col" width="130px">글 번호</th>
 					<td>${qna_vo.seq}</td>
 				</tr>
 				<tr>
-					<th scope="col" width="130px">글제목</th>
+					<th scope="col" width="130px">자주 묻는 질문</th>
 					<td>${qna_vo.subject}</td>
 				</tr>
 				<tr>
@@ -61,10 +61,10 @@
 				<tr>
 					<th scope="col">등록일</th>
 					
-					<td><fmt:formatDate value="${qna_vo.writedate}" pattern="yyyy-MM-dd"/></td>
+					<td>${qna_vo.writedate}</td>
 				</tr>
 				<tr>
-					<th scope="col">자주 묻는 질문 게시글 내용</th>
+					<th scope="col">답변 내용</th>
 					<td>
 					<br/>${qna_vo.content}<br/>
 					</td>
