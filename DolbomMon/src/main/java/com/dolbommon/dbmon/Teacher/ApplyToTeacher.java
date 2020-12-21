@@ -23,15 +23,8 @@ public class ApplyToTeacher {
 	private String status;
 	private String title;
 	private int cont_no;
-	private String status;
 	private String payment;
 	
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	public String getAgree() {
 		return agree;
 	}
