@@ -630,7 +630,7 @@ font-weight:bold;
 	   	<i class="fas fa-pen"><a class="editBtn" href="teacherIntro"></a></i>
 	   <c:if test="${vo.intro!=null }">	${vo.intro }</c:if>
 	   <c:if test="${vo.intro==null }">작성 시 부모로부터<br/>
-			<span class="boldFont">4배 더 많은 선택<span>을 받게 됩니다!</c:if>
+			<span class="boldFont">4배 더 많은 선택</span>을 받게 됩니다!</c:if>
    	</li>
    	<h5>선호하는 돌봄유형</h5>
    	<li class="list-group-item" style="text-align:center">
@@ -652,8 +652,9 @@ font-weight:bold;
    			${evo.exp_start} ~ ${evo.exp_end}<br/><br/>
    		</c:forEach>	
    		</c:if>
-   		<c:if test="${hash==null}">
-   		작성 시 부모로부터<br/>3배 더 많은 선택을 받게 됩니다!
+   		
+   		<c:if test="${hash=='[]'}">
+   		작성 시 부모로부터<br/><span class="boldFont">3배 더 많은 선택</span>을 받게 됩니다!
    		</c:if>
    	</li>
    	<h5>활동 가능 시간</h5>
