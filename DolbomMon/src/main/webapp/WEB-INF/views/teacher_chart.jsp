@@ -150,8 +150,8 @@ p{
 	<div class="col-sm">
 		<div class="card" style="width: 22.4rem;  margin-bottom: 20px;">
 		<div class="card-body" style="height: 230px;">
-		<div style="float:left; width: 60px; height: 60px;"><img src=<c:if test="${vo.pic==null}">"img/profilepic.png"</c:if><c:if test="${vo.pic!=null}">"upload/${vo.pic}"</c:if> class="rounded-circle" style="width:55px;"></div>
-		<div style="font-size:1.1em; position: relative; text-align: left; float: right; width: 250px; overflow: hidden; text-overflow: ellipsis; margin: 3px;"><b>&nbsp;${cList.addr}</b><br/>
+		<div style="float:left; width: 60px; height: 60px;"><img src=<c:if test="${cList.pic==null}">"img/profilepic.png"</c:if><c:if test="${cList.pic!=null}">"upload/${cList.pic}"</c:if> class="rounded-circle" style="width:55px;"></div>
+		<div style="font-size:1.1em; position: relative; text-align: left; float: right; width: 250px; overflow: hidden; text-overflow: ellipsis; margin: 3px;"><b style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">&nbsp;${cList.addr}</b><br/>
 		<c:if test="${cList.review_star==1}">
 		<img src="img/star.jpg" style="width:30px;"></c:if>
 		<c:if test="${cList.review_star==2}">

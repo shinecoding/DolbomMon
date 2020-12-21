@@ -121,29 +121,19 @@
 				minDate = dateText;
 				$("#start_date").val(dateText);
 				$("#startDateBtn").val("활동 시작일 선택");
-				$("input[name=period]").each(function(){
-					$(this).prop("checked", false);
-					$(this).parent("label").css("background-color", "#EFEFEF").css("color", "black");
-					$(this).parent("label").fadeOut(300);
-					$(this).parent("label").fadeIn(250);
-					$(this).parent("label").fadeOut(200);
-					$(this).parent("label").fadeIn(150);
-					$(this).parent("label").fadeOut(100);
-					$(this).parent("label").fadeIn(50);
-					$(this).parent("label").fadeOut(10);
-					$(this).parent("label").fadeIn(300);
-				});
+				$("#endDateBtn").val("활동 종료일 선택");
+				$("#endDateBtn").datepicker("option", "minDate", dateText);
 			},
 			altFormat:"yyyy-mm-dd"
 		});
 		
-		var todayday = new Date(minDate);
+		var start_date2 = $("#start_date");
+		var todayday = new Date(start_date2);
 		$("#endDateBtn").datepicker({
 			showAnim : "show",
 			changeMonth : true,
+			minDate : todayday,
 			changeYear : true,
-			minDate : new Date(todayday.getFullYear(), todayday.getMonth(), todayday.getDate()+15),
-			maxDate : new Date(todayday.getFullYear(), todayday.getMonth()+5, todayday.getDate()),
 			dateFormat : "yy-mm-dd",
 			onSelect:function(dateText){
 				$("#end_date").val(dateText);

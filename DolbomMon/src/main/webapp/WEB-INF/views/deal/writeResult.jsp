@@ -56,3 +56,9 @@
 		window.close();
 	</script>
 </c:if>
+<c:if test="${result6==7}">
+	<script>
+		alert("계약서를 삭제하였습니다.");
+		location.href="<%=request.getContextPath()%>/parentApplyHistory";
+	</script>
+</c:if>

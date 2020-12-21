@@ -134,7 +134,7 @@
 			}else {
 			//////////////////////sd //////////////////////
 				var getSelect_date = "${sdVO.select_date}";
-				
+				var selectedDate = getSelect_date.split(", ");
 				var getStart_time = "${sdVO.start_time}";
 				$("#start_time").val(getStart_time);
 				
@@ -149,6 +149,41 @@
 						}
 					}
 				});
+				
+				$(function(){
+					
+					function available(date) {
+						
+						var thismonth = date.getMonth()+1;
+						var thisday = date.getDate();
+						if(thismonth<10){
+							thismonth = "0"+thismonth;
+						}
+						if(thisday<10){
+							thisday = "0"+thisday;
+						}
+					    ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
+					    if ($.inArray(ymd, selectedDate) >= 0) {
+					        return [true,"",""];
+					    } else {
+					        return [false,"",""];
+					    }
+					    
+					}
+			
+					$("#specificD").multiDatesPicker({ // 고정 데이트피커
+						numberOfMonths : [1, 2],
+						maxDate : "+30d",
+						minDate : "0",
+						format : "yy-mm-dd",
+						beforeShowDay: available
+					});
+					
+					$("#specificD .ui-state-disabled>span").css("text-align", "center");
+					$("#specificD a").parent("td").addClass("ui-state-highlight ui-datepicker-current-day");
+					$("#specificD td a").addClass('ui-state-active');
+					$("#specificD a").parent("td").css("background-color", "orange");
+				});
 			}
 			//////////////////////sd //////////////////////
 			
@@ -159,9 +194,6 @@
 			console.log("wish_wage => " + getWish_wage);
 			$("#wish_wage").val(getWish_wage);
 			
-			var getContent = '${vo.content}';
-			console.log("getContent => " + getContent);
-			$("#content").val(getContent);
 			
 			var getTimeCon = "${vo.time_consultation}";
 			if(getTimeCon=="Y"){
@@ -984,6 +1016,8 @@
 				
 				<div id="specificDateDiv">
 					<div id="title">특정날에만</div>
+					<div id="specificD"></div>
+					<div>날짜를 입력해주세요</div>
 					<div id="specificDateCal"></div>
 					<br/><input type="hidden" id="select_date" name="select_date" />
 				</div>
@@ -1082,7 +1116,7 @@
 					</select>
 					<input type="text" name="title" class="form-control spread-underline" value="${vo.title }" placeholder="직접 입력" style="display:inline-block;padding-left:10px;border:none;border-bottom:1px solid gray;border-radius:0;margin-top:5px;">
 				</div>
-				<textarea name="content" id="content" placeholder="아이의  성격, 특이사항 등을 적어주세요."></textarea>
+				<textarea name="content" id="content" placeholder="아이의  성격, 특이사항 등을 적어주세요.">${vo.content}</textarea>
 				<div id="warningDiv"><img src="https://s3.ap-northeast-2.amazonaws.com/momsitter-service/momsitter-app/static/public/joinNew/s-membership-09-nono-icon.svg"/><p>자기소개 내용에 연락처, 이메일, 카카오ID 등을 작성할 경우 회원 자격을 영구적으로 잃게 됩니다.</p></div>
 			</div>
 			

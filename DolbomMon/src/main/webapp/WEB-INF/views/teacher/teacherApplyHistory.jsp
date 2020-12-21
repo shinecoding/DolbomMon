@@ -212,7 +212,9 @@
 											<c:if test="${list.cont_no == 0}" ><span style="float:right;color:orange;">부모님의 답변을 기다리는 중입니다."</span></c:if>
 										</div>
 										<div style="height:1px;">
-											<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
+											<c:if test="${list.payment != 'Y' }" >
+												<input class="btn btn-outline-warning cancel" type="button" value="지원 취소" id="cancel" style="margin:0 5px;" />
+											</c:if>
 										</div>
 									</div>
 								<div class="card-footer btn" onclick="location.href='parentView?no=${list.job_board_no}'">자세히 보기</div>
@@ -292,6 +294,7 @@
 											<br/>신청날짜 | <span style="color:orange;">${list2.writedate }</span>
 											<br/>희망시급 | <span style="color: orange;">${list2.wish_wage }원</span>
 										</div>
+										<div><input class="btn btn-outline-warning cancel" type="button" value="거절하기" id="cancel" style="margin:0 10px;" /></div>
 										<div style="height:1px;">
 											<c:if test="${list2.agree=='T'}">
 												<span style="color:orange" class="msg" id="msg">제안 수락 대기중입니다.</span>

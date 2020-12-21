@@ -32,7 +32,7 @@
 
 	<select id="recruitBoardSelect" parameterType="int" resultType="com.dolbommon.dbmon.search.RecruitBoardVO">
 		select p.status, p.job_board_no, p.userid, m.username, p.care_addr, p.dong_addr, p.time_type, p.pw_activity, p.wish_wage, p.consultation, p.wish_age, p.wish_gender,p.title , p.content, p.lat, p.lng, p.hit, p.writedate, p.time_consultation,
-		(select count(t_userid) from t_p_table where job_board_no = #{param1}) as tcnt
+		(select count(t_userid) from t_p_table where job_board_no = #{param1}) as tcnt, m.pic
 		from parent_list p, member m 
 		where p.job_board_no=#{param1} and p.userid = m.userid
 	</select>
