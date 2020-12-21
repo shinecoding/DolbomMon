@@ -6,7 +6,7 @@ public class QnAVO {
 	private int seq;
 	private String subject;
 	private String userid;
-	private Date writedate;
+	private String writedate;
 	private String content;
 	private int hit;
 	public int getSeq() {
@@ -27,10 +27,10 @@ public class QnAVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public Date getWritedate() {
+	public String getWritedate() {
 		return writedate;
 	}
-	public void setWritedate(Date writedate) {
+	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
 	public String getContent() {
