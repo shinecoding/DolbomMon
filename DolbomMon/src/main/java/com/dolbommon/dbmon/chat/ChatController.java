@@ -87,7 +87,11 @@ public class ChatController {
 				resultRoomDTO = chatdao.selectAllRoom(userid);
 				return resultRoomDTO;
 			}
-			room.setUserid_t((String) session.getAttribute("userid")); // 접속한 사람
+			try {
+			room.setUserid_t((String)session.getAttribute("userid")); // 접속한 사람
+			}catch(Exception e) {
+				room.setUserid_t("sitter1000");
+			}
 			//룸 중복확인후 생성
 			//서버실행시 쿼리문 반복수행되는 에러때문에 밑에서 다시한번 방갯수구함
 			int result2 = chatdao.roomCheck(userid, room.getUserid());
