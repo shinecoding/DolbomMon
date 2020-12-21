@@ -74,6 +74,12 @@
 	    top: -70px;
 	    right: -620px;
 	}
+	.cancel2{
+		position: relative;
+	    margin: 0 5px;
+	    top: -40px;
+	    right: -620px;
+	}
 	.msg{
 		position: relative;
 	    margin: 0 5px;
@@ -203,7 +209,7 @@
 										</div>
 										
 										<div style="height:1px;">
-											<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
+											<input class="btn btn-outline-warning cancel2" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 											<c:if test="${list2.agree!='N' }">
 											</c:if>
 										</div>
