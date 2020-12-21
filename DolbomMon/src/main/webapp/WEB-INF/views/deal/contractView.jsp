@@ -94,7 +94,7 @@ var charge; //총결제금액
 			           msg += '상점 거래ID : ' + rsp.merchant_uid;
 			           msg += '결제 금액 : ' + rsp.paid_amount;
 			           msg += '카드 승인번호 : ' + rsp.apply_num;
-						alert(msg);	
+						//alert(msg);	
 						
 						var tag = "<form name='hiddenForm' id='hiddenForm' action='/dbmon/paymentSuccess'>";
 							tag += "<input type='hidden' name='pay_id' value='"+ rsp.imp_uid +"'>";//고유id
