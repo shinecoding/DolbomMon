@@ -11,8 +11,15 @@ public class ChatRoomDTO {
 	private String newchat_t;
 	private String indate;
 	private String lastChat;
+	private String num;
 	
 	
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
 	public String getRoomseq() {
 		return roomseq;
 	}

@@ -625,7 +625,7 @@ border-radius:10px;
 	   	<i class="fas fa-circle fa-stack-2x"  <c:if test="${cvo.school_status=='Y'}">style="color:orange" </c:if> ></i>
 	   	
 	   	<c:if test="${cvo.school_status=='N' || cvo.school_status=='S'|| cvo.school_status=='X'||cvo.school_status==null}">
-	   	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+	  	<i class="fas fa-lock fa-stack-1x fa-inverse"></i>
 	   	</c:if>
 	   	<c:if test="${cvo.school_status=='Y'}">
 	   		<i class="fas fa-shield-alt fa-stack-1x fa-inverse"></i>

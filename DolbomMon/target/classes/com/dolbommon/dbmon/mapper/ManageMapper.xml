@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="selectMember" resultType="com.dolbommon.dbmon.member.MemberVO">
-		select NO, USERID, USERNAME, GENDER, to_char(BIRTH, 'YYYY-MM-DD') BIRTH, TEL1, TEL2, EMAIL, ADDR,  ADDRDETAIL, ZIPCODE, to_char(REGDATE, 'YYYY-MM-DD') REGDATE, MEMO, activity, BANK_NAME, BANK_ACCOUNT_NO, LAT, LNG, WHO, REASONTOLEAVE, to_char(leavedate, 'YYYY-MM-DD') leavedate from member
+		select cash, NO, USERID, USERNAME, GENDER, to_char(BIRTH, 'YYYY-MM-DD') BIRTH, TEL1, TEL2, EMAIL, ADDR,  ADDRDETAIL, ZIPCODE, to_char(REGDATE, 'YYYY-MM-DD') REGDATE, MEMO, activity, BANK_NAME, BANK_ACCOUNT_NO, LAT, LNG, WHO, REASONTOLEAVE, to_char(leavedate, 'YYYY-MM-DD') leavedate from member
 	</select>
 	
 	<select id="selectManager" resultType="com.dolbommon.dbmon.ManagerVO">

@@ -187,8 +187,9 @@
 									selectRoom(rVo.roomseq);
 									roomNo=rVo.roomseq;
 								}
+								console.log(rVo.num);
 								tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
-								tag+='<img class="profile-image" src="https://c.pxhere.com/photos/d5/31/background_cat_red_white_background_image_attention-611858.jpg!d" alt="">';
+								tag+='<img class="profile-image" src="upload/dsdds (24).png" alt="">';
 								tag+='<div class="text">';
 								tag+='<h6>'+rVo.roomseq+' : ';
 								if(rVo.userid=="${myId}"){
