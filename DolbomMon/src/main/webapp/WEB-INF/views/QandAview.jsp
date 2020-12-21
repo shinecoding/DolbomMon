@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
   <style>
 	a.nav-link:hover{
@@ -76,7 +74,7 @@
 				<a href="/dbmon/qnaBoardView?seq=${qna_vo.seq}">
 				<c:out value="${qna_vo.subject}"/></a></td>
 				<td><c:out value="${qna_vo.userid}"/></td>
-				<td><fmt:formatDate value="${qna_vo.writedate}" pattern="yyyy-MM-dd"/></td>
+				<td>${qna_vo.writedate}</td>
 				
 			</tr>
 			</c:forEach>
@@ -114,7 +112,7 @@
 				<a href="/dbmon/qnaBoardView?seq=${qna_vo.seq}">
 				<c:out value="${qna_vo.subject}"/></a></td>
 				<td><c:out value="${qna_vo.userid}"/></td>
-				
+				<td>${qna_vo.writedate}</td>
 				
 			</tr>
 			</c:forEach>
@@ -137,7 +135,6 @@
 				<th scope="col" style="font-weight:bold;">글제목</th>
 				<th scope="col" style="font-weight:bold;">작성자</th>
 				<th scope="col" style="font-weight:bold;">등록일</th>
-			
 				
 				
 			</tr>
@@ -150,7 +147,7 @@
 				<a href="/dbmon/qnaBoardView?seq=${qna_vo.seq}">
 				<c:out value="${qna_vo.subject}"/></a></td>
 				<td><c:out value="${qna_vo.userid}"/></td>
-				
+				<td>${qna_vo.writedate}</td>
 				
 			</tr>
 			</c:forEach>
