@@ -191,13 +191,23 @@
 								}
 								console.log(rVo.num);
 								tag+='<div class="friend-drawer friend-drawer--onhover" id="'+rVo.roomseq+'">';
-								tag+='<img class="profile-image imgt" src="upload/tmdgus ('+rVo.num+').png" alt="'+rVo.num+'">';
+								console.log(rVo.roomseq+"dd"+rVo.userid_t)
+								if(rVo.roomseq==5810 && rVo.userid_t=="parent1000" && "${myId}"!=rVo.userid_t){
+									tag+='<img class="profile-image imgt" src="upload/tmdgus (20).png" alt="'+rVo.num+'">';
+								}else{
+									tag+='<img class="profile-image imgt" src="upload/tmdgus ('+rVo.num+').png" alt="'+rVo.num+'">';
+								}
+								
 								tag+='<div class="text">';
 								tag+='<h6>'+rVo.roomseq+' : ';
 								if(rVo.userid=="${myId}"){
 									if(startChatRoom==0){
 										$("#insertId").html(rVo.userid_t+"님과 채팅중입니다.");
-										$(".imgc").attr("src","upload/tmdgus ("+rVo.num+").png");
+										if(rVo.roomseq==5810 && rVo.userid_t=="parent1000"){
+											$(".imgc").attr("src","upload/tmdgus (20).png");
+										}else{
+											$(".imgc").attr("src","upload/tmdgus ("+rVo.num+").png");
+										}
 										console.log("---"+rVo.num);
 										startChatRoom++;
 									}
@@ -205,7 +215,11 @@
 								}else{
 									if(startChatRoom==0){
 										$("#insertId").html(rVo.userid+"님과 채팅중입니다.");
-										$(".imgc").attr("src","upload/tmdgus ("+rVo.num+").png");
+										if(rVo.roomseq==5810 && rVo.userid_t=="parent1000"){
+											$(".imgc").attr("src","upload/tmdgus (20).png");
+										}else{
+											$(".imgc").attr("src","upload/tmdgus ("+rVo.num+").png");
+										}
 										console.log("----"+rVo.num);
 										startChatRoom++;
 									}
@@ -487,10 +501,10 @@
 					<img class="profile-image imgt" src="upload/tmdgus (20).png" alt="20">
 				</c:when>
 				<c:when test='${myId=="sitter1000"}'>
-					<img class="profile-image imgt" src="upload/tmdgus (20).png" alt="20">
+					<img class="profile-image imgt" src="upload/tmdgus (9).png" alt="20">
 				</c:when>
 				<c:when test='${myId=="sitter1001"}'>
-					<img class="profile-image imgt" src="upload/tmdgus (9).png" alt="20">
+					<img class="profile-image imgt" src="upload/tmdgus (22).png" alt="20">
 				</c:when>
 				<c:otherwise>
 					<img class="profile-image imgt" src="upload/tmdgus (5).png" alt="20">
