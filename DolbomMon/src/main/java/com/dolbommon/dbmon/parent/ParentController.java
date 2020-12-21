@@ -345,6 +345,20 @@ public class ParentController {
 		
 		return result;
 	}
+	
+	@RequestMapping("/cancelContract2")
+	public ModelAndView cancelContract(HttpServletRequest req) {
+		String origin_no = (String)req.getParameter("origin_no");
+		DealDaoImp dao = sqlSession.getMapper(DealDaoImp.class);
+		
+		dao.cancelContract2(dao.selectOrigin_no(origin_no));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("no", origin_no);
+		mav.setViewName("redirect:parentView");
+		return mav;
+		
+	}
 }
 
 

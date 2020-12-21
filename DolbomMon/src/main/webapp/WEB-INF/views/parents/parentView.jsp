@@ -182,7 +182,12 @@
 			var teacherid = $(this).prev().attr('id'); //아래 버튼 위치 수정하면 이것도 수정
 			window.open('/dbmon/contractView?origin_no='+origin_no+'&teacherid='+teacherid+'&payment=${checkVo.payment}', '', 'status=no, height=' + popupHeight + ', width=' + popupWidth + ', left='+ popupX + ', top='+ popupY);
 		});
-		
+		$(document).on("click",".cancelBtn",function(){
+			if(confirm("제안을 취소하시겠습니까?")){
+				var origin_no = $(this).attr('id');
+				location.href="/dbmon/cancelContract2?origin_no="+origin_no+"&job_board_no=${rbVO.job_board_no}";
+			}
+		});
 		
 		
 		$("#testBtn").click(function(){
@@ -1031,6 +1036,8 @@
 										<c:when test="${checkVo.teacherid==tlist.userid and (checkVo.agree=='T' or checkVo.agree=='Y') and checkVo.payment!='Y'}">
 												<input type="hidden" name="idcheck" id="${tlist.userid}">
 												<input class="btn btn-outline-warning mb-2 viewContract" type="button" value="계약서 확인" id="${rbVO.job_board_no}" style="margin:0;"><br/>
+												<input type="button" class="btn btn-outline-warning mb-2 cancelBtn" id="${rbVO.job_board_no}" value="제안취소" /><br/>
+												<input type="hidden" name="idcheck2" id="${tlist.userid}">
 												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
 										</c:when>
 										
@@ -1042,9 +1049,13 @@
 										
 										<c:otherwise>
 											<c:if test="${checkVo.payment!='Y'}">
+											<c:if test="${checkVo.agree!='T'}">
+											<c:if test="${checkVo.agree!='Y'}">
 												<input type="button" class="btn btn-outline-warning mb-2 contractOpen" id="${tlist.userid }" value="계약하기" /><br/>
 												<input type="button" class="btn btn-outline-warning mb-2 cBtn" id="${tlist.userid }" value="협의하기" /><br/>
 												<input class="btn btn-outline-warning mb-2" type="button" value="거절하기" id="refusalBtn"  /><br/>
+											</c:if>
+											</c:if>
 											</c:if>
 											<c:if test="${checkVo.payment=='Y'}">
 												<input class="btn btn-outline-danger mb-2" type="button" value="계약이 완료된 페이지 입니다." id=""  /><br/>

@@ -128,6 +128,13 @@ var memberTable;
 		                    }
 		                    return data;	
 				}},
+	        	{"data" : "cash",
+					"render":  function (data, type, row) {
+						if ( data == null ) {
+						 return '0';
+						}
+						return data;
+					}},
 	        	{"data" : "memo",
 					"render":  function (data, type, row) {
 						if ( data == null ) {
@@ -265,11 +272,12 @@ var memberTable;
 				{ targets: 13, width: 70 },
 				{ targets: 14, width: 70 },
 				{ targets: 15, width: 70 },
-				{ targets: 16, width: 120 },
-				{ targets: 17, width: 70 },
+				{ targets: 16, width: 70 },
+				{ targets: 17, width: 120 },
 				{ targets: 18, width: 70 },
 				{ targets: 19, width: 70 },
 				{ targets: 20, width: 70 },
+				{ targets: 21, width: 70 },
 			] 
 	    });
 	   $('.dt-button').addClass('btn btn-outline-info');
@@ -413,6 +421,7 @@ var memberTable;
             <th>회원탈퇴<br/>신청일자</th>
             <th>활동허용</th>
             <th>아이디</th>
+            <th>잔고</th>
             <th>회원메모</th>
             <th>이름</th>
             <th>성별</th>

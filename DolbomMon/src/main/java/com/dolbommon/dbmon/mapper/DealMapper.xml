@@ -108,6 +108,10 @@
 	
 	<insert id="insertTotalPay">
 		insert into totalpay(no, userid, userid_t, pay, workdate) 
-			values(pay.nextval, #{param1}, #{param2}, #{param3}, #{param4})
+			values(#{param5}, #{param1}, #{param2}, #{param3}, #{param4})
 	</insert>
+	<update id="cancelContract2">
+		update parent_list set status='X', teacherid='null' where job_board_no=#{origin_no}
+	</update>
+
 </mapper>

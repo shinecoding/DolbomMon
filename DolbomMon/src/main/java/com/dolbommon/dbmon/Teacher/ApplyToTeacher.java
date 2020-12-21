@@ -20,9 +20,16 @@ public class ApplyToTeacher {
 	private int tcnt;
 	private String t_userid;
 	private String agree;
+	private String status;
 	private String title;
 	private int cont_no;
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getAgree() {
 		return agree;
 	}
