@@ -11,7 +11,7 @@
 <script src="<%=request.getContextPath()%>/css/bootstrap.js"></script>
 <style>
 	*{margin:0; padding:0;}
-	.container{width:600px; margin-bottom:100px;}
+	.container{width:600px; margin-bottom:100px;min-height:500px;}
 	.container>div{width:100%;overflow:hidden;}
 	.container>div>div * {float:left;}
 	

@@ -12,7 +12,7 @@
 <style>
 	.container{
 		width: 800px;
-		min-height: 773px;
+		min-height: 700px;
 	}	
 	#top{
 		margin: 15px;
