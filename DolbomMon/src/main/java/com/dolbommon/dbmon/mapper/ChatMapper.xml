@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dolbommon.dbmon.chat.ChatDaoImp">
 	<insert id="insertRoom" parameterType="com.dolbommon.dbmon.chat.ChatRoomDTO">
-		insert into chatroom(roomseq, userid, userid_t, indate) values(chatseq.nextval,#{userid}, #{userid_t}, sysdate)
+		insert into chatroom(roomseq, userid, userid_t, indate, num) values(chatseq.nextval,#{userid}, #{userid_t}, sysdate, (SELECT  ROUND(DBMS_RANDOM.VALUE(1, 31),0) from dual))
 	</insert>
 	
 	<select id="selectAllRoom" resultType="com.dolbommon.dbmon.chat.ChatRoomDTO" parameterType="String">
-		select roomseq, userid, userid_t, to_char(indate ,'MM"월"DD"일" HH24:MI:SS') indate, newchat, newchat_t, lastchat from chatroom where userid=#{userid} or userid_t=#{userid} order by indate desc
+		select num, roomseq, userid, userid_t, to_char(indate ,'MM"월"DD"일" HH24:MI:SS') indate, newchat, newchat_t, lastchat from chatroom where userid=#{userid} or userid_t=#{userid} order by indate desc
 	</select>
 	
 	<select id="selectRoom" resultType="com.dolbommon.dbmon.chat.ChatDTO" parameterType="int">
