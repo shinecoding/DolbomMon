@@ -219,7 +219,7 @@ EDIT ON
 <body>
 <div style="height:130px; font-family:'Noto Sans KR', sans-serif!important;">
  <div id="fixed-menu" style="height:130px;margin-bottom:0px;">
-	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1330px; height:80px;">
+	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1530px; height:80px;">
 	    <header id="topHeader">
 	    <img src="<%=request.getContextPath()%>/img/mylogo.png" 
 	           class="logo" alt="Logo" src="home" style="margin-top:20px; float:left;" 
