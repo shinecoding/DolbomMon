@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <%@ include file="/WEB-INF/views/top.jsp" %>
 <style>
-	.container{width:800px;}
+	.container{width:800px; min-height:400px;}
 	img { width: 50px; height:50px;}
 	
 	#title{
@@ -24,7 +24,10 @@
 		font-size: 25px;
 		font-weight: 700;
 		vertical-align: bottom;
-		text-align:center;
+		margin: 15px;
+		margin-top: 40px;
+		padding: 15px;
+		text-align: center;
 	}
 	.nav-item>a {
 	color:black;
@@ -71,13 +74,7 @@
 	.cancel{
 		position: relative;
 	    margin: 0 5px;
-	    top: -70px;
-	    right: -620px;
-	}
-	.cancel2{
-		position: relative;
-	    margin: 0 5px;
-	    top: -40px;
+	    top: -41px;
 	    right: -620px;
 	}
 	.msg{
@@ -207,11 +204,8 @@
 											<c:if test="${list2.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</p>
 										</div>
-										
 										<div style="height:1px;">
-											<input class="btn btn-outline-warning cancel2" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
-											<c:if test="${list2.agree!='N' }">
-											</c:if>
+											<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 										</div>
 										<div style="height:1px;">
 											<c:if test="${list2.agree=='T'}">
@@ -261,7 +255,7 @@
 											<div id="offerBox" >
 												<div class="card-title wordCut" id="offerTitle" style="line-height: 2em;width:410px;">${list.title }</div>
 												<p class="card-text" style="width:400px;line-height:1.8em;"><span style="color: gray;">no. ${list.job_board_no} | ${list.userid }</span>
-												<br/><span style="float:left;">자녀 정보 | </span><span id="${list.job_board_no }" ></span> 
+												<br/><span style="float:left;">자녀 정보 : </span><span id="${list.job_board_no }" ></span> 
 												<script>
 													$(function(){
 														var cb = '${list.child_birth}';
@@ -314,12 +308,11 @@
 														}
 													});
 												</script>
-												<br/>돌봄 장소 | <span style="color:orange">${list.care_addr } </span>
-												<br/>등록 날짜 | <span style="color:orange">${list.writedate }</span>
-												<br/>희망시급 | <span style="color: orange;"> ${list.wish_wage }원
+												<br/><span>${list.care_addr } </span>
+												<br/><span>등록일 - ${list.writedate }</span>
+												<br/><span style="color: orange;">희망시급 ${list.wish_wage }원
 												<c:if test="${list.consultation=='Y'}"> | <b>협의가능</b></c:if></span>
 											</div>
-
 											<div style="height:1px;">
 												<input class="btn btn-outline-warning cancel" type="button" value="취소하기" id="cancel" style="margin:0 5px;" />
 											</div>
