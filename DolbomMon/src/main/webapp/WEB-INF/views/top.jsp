@@ -229,13 +229,13 @@ EDIT ON
 	           <span style="float:right;" class="row">
 	           <span id="groupchat1" class="col" style="width:70px; height:80px; margin-right:5px;">
 	           <img class="btn ppp ccBtn" src="icon/chat6.png" style="height:55px; width:65px;margin-rignt:0px;">
-	           <div class="badge badge-warning badge-pill ml-1" >채팅하기</div></img>
+	           <div class="badge badge-warning badge-pill ml-1" style="position: absolute;">채팅하기</div></img>
 	           <a href="javascript:void(window.open('/dbmon/message','message','width=482,height=600,status=no,toolbar=no,resizable=yes,scrollbars=no, left=500, top=120'))">
 	           </span>
 	           <span style="float:right" class="row">
 	           <span id="groupchat2" class="col" style="width:90px;height:80px; margin-left:15px;">
 	           <img class="btn ppp" src="icon/chatbot5.PNG" style="height:55px; width:65px; margin-left:0px; "></img>
-	           <div class="badge badge-warning badge-pill ml-1">쪽지</div></a>
+	           <div class="badge badge-warning badge-pill ml-1" style="position: absolute;">쪽지</div></a>
 	           </span>
 	           </span>
 	          <!-- <a href="/dbmon/temporaryLogin">
