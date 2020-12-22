@@ -214,7 +214,7 @@ EDIT ON
 <body>
 <div style="height:130px;">
  <div id="fixed-menu" >
-	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1295px;">
+	 <div class="clearfix" id="topMenuMainItem" style="-webkit-padding-start:250px; width:1330px;">
 	    <header id="topHeader">
 	    <img src="<%=request.getContextPath()%>/img/mylogo.png" 
 	           class="logo" alt="Logo" src="home" style="margin-top:20px; float:left;" 
